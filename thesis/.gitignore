@@ -1,0 +1,28 @@
+Thesis.pdf
+
+# Auxiliar latex compilation files
+*.aux
+*.auxlock
+*.loa
+*.bbl
+*.blg
+*.glg
+*.glo
+*.gls
+*.ilg
+*.ist
+*.lof
+*.log
+*.lot
+*.nlo
+*.nls
+*.out
+*.toc
+
+
+paper.fdb_latexmk
+paper.fls
+*.f*
+
+# temp files
+*~
