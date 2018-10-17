@@ -18,6 +18,7 @@ Thesis.pdf
 *.nls
 *.out
 *.toc
+*.synctex.gz
 
 
 paper.fdb_latexmk
