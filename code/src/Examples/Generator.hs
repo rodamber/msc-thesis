@@ -15,14 +15,17 @@ Portability: ???
 module Examples.Generator where
 
 import           Control.Applicative
-import           Data.Maybe                             ( fromJust )
-import           GHC.Generics
 
 import qualified Data.ByteString.Lazy.Char8     as BSL
 import           Data.Text                      as T    ( Text )
 
 import qualified Codec.Compression.GZip         as GZip
-import           Data.Aeson                             ( FromJSON(..), decode )
+import           Data.Aeson                             ( FromJSON(..)
+                                                        , Value(..)
+                                                        , decode
+                                                        , withObject
+                                                        , (.:)
+                                                        )
 
 
 data Expression = Expression {
@@ -32,14 +35,22 @@ data Expression = Expression {
   , exprType      :: Text
   , exprFunctions :: [Text]
   , exprOmlKey    :: Text
-  } deriving (Show, Eq, Generic)
+  } deriving (Show, Eq)
 
-instance FromJSON Expression
+-- Generics don't seem to work here.
+instance FromJSON Expression where
+  parseJSON = withObject "Expression" $ \v -> Expression
+    <$> v .: "text"
+    <*> v .: "exprKey"
+    <*> v .: "refs"
+    <*> v .: "type"
+    <*> v .: "functions"
+    <*> v .: "omlKey"
 
 
-readExpressionsGZ :: FilePath -> IO [Expression]
-readExpressionsGZ file = do 
+-- | Decodes a compressed gzip file in jsonlines format.
+decodeJSONLinesGZ :: FromJSON a => FilePath -> IO (Maybe [a])
+decodeJSONLinesGZ file = do
     content <- GZip.decompress <$> BSL.readFile file
-    return $ fromJust . decode <$> BSL.lines content
-    
+    return $ traverse decode $ BSL.lines content
 
