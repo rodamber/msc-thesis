@@ -1,13 +1,10 @@
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE RecordWildCards     #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeOperators       #-}
 
 module Examples.Parser where
 
 import           Control.Applicative
 import           Control.Monad                  ( forM_
-                                                , join
                                                 , mzero
                                                 )
 import           Data.Aeson                     ( FromJSON(..)
@@ -30,9 +27,6 @@ import           System.Exit                    ( exitFailure
 import           System.IO                      ( hPutStrLn
                                                 , stderr
                                                 )
-
--- | Workaround for https://github.com/bos/aeson/issues/287.
---o .:?? val = fmap join (o .:? val)
 
 
 data TopLevel = TopLevel {
@@ -65,6 +59,7 @@ instance ToJSON TopLevel where
     , "functions" .= topLevelFunctions
     , "omlKey"    .= topLevelOmlKey
     ]
+
   toEncoding TopLevel {..} = pairs (
       "text"      .= topLevelText      <>
       "exprKey"   .= topLevelExprKey   <>
