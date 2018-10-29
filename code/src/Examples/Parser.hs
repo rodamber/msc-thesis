@@ -29,55 +29,56 @@ import           System.IO                      ( hPutStrLn
                                                 )
 
 
-data TopLevel = TopLevel {
-    topLevelText      :: Text,
-    topLevelExprKey   :: Text,
-    topLevelRefs      :: [Text],
-    topLevelType      :: Text,
-    topLevelFunctions :: [Text],
-    topLevelOmlKey    :: Text
+data Expression = Expression {
+    exprText      :: Text
+  , exprExprKey   :: Text
+  , exprRefs      :: [Text]
+  , exprType      :: Text
+  , exprFunctions :: [Text]
+  , exprOmlKey    :: Text
   } deriving (Show, Eq)
 
 
-instance FromJSON TopLevel where
-  parseJSON (Object v) = TopLevel <$>
+instance FromJSON Expression where
+  parseJSON (Object v) = Expression <$>
         v .:   "text"
     <*> v .:   "exprKey"
     <*> v .:   "refs"
     <*> v .:   "type"
     <*> v .:   "functions"
     <*> v .:   "omlKey"
+
   parseJSON _          = mzero
 
 
-instance ToJSON TopLevel where
-  toJSON     TopLevel {..} = object [
-      "text"      .= topLevelText
-    , "exprKey"   .= topLevelExprKey
-    , "refs"      .= topLevelRefs
-    , "type"      .= topLevelType
-    , "functions" .= topLevelFunctions
-    , "omlKey"    .= topLevelOmlKey
+instance ToJSON Expression where
+  toJSON     Expression {..} = object [
+      "text"      .= exprText
+    , "exprKey"   .= exprExprKey
+    , "refs"      .= exprRefs
+    , "type"      .= exprType
+    , "functions" .= exprFunctions
+    , "omlKey"    .= exprOmlKey
     ]
 
-  toEncoding TopLevel {..} = pairs (
-      "text"      .= topLevelText      <>
-      "exprKey"   .= topLevelExprKey   <>
-      "refs"      .= topLevelRefs      <>
-      "type"      .= topLevelType      <>
-      "functions" .= topLevelFunctions <>
-      "omlKey"    .= topLevelOmlKey
+  toEncoding Expression {..} = pairs (
+      "text"      .= exprText      <>
+      "exprKey"   .= exprExprKey   <>
+      "refs"      .= exprRefs      <>
+      "type"      .= exprType      <>
+      "functions" .= exprFunctions <>
+      "omlKey"    .= exprOmlKey
     )
 
 
-parse :: FilePath -> IO TopLevel
+parse :: FilePath -> IO Expression
 parse filename = do
   input <- BSL.readFile filename
   case decode input of
     Nothing -> fatal $ case (decode input :: Maybe Value) of
       Nothing -> "Invalid JSON file: " ++ filename
       Just _  -> "Mismatched JSON value from file: " ++ filename
-    Just r -> return (r :: TopLevel)
+    Just r -> return (r :: Expression)
  where
   fatal :: String -> IO a
   fatal msg = do
