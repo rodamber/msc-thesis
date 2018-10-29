@@ -1,5 +1,15 @@
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE RecordWildCards     #-}
+{- |
+Module:      Examples.Parser
+Description: (Will, at some point) Generate I/O examples from OutSystems expressions
+Copyright:   (c) Rodrigo Bernardo, 2018
+License:     ???
+Maintainer:  rodrigo.bernardo@tecnico.ulisboa.pt
+Stability:   ??? Doesn't work yet
+Portability: ???
+-} 
+
 
 module Examples.Parser where
 
