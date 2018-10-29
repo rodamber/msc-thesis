@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings   #-}
 
 {- |
-Module:      Examples.Parser
+Module:      Examples.Generator
 Description: (Will, at some point) Generate I/O examples from OutSystems expressions
 Copyright:   (c) Rodrigo Bernardo, 2018
 License:     ???
@@ -12,7 +12,7 @@ Portability: ???
 -} 
 
 
-module Examples.Parser where
+module Examples.Generator where
 
 import           Control.Applicative
 import           Control.Monad                  ( mzero )
@@ -29,7 +29,6 @@ import           Data.Aeson                     ( FromJSON(..)
 import qualified Data.ByteString.Lazy.Char8    as BSL
 import           Data.Monoid
 import           Data.Text                      ( Text )
-
 import GHC.Generics
 
 data Expression = Expression {
