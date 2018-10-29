@@ -14,6 +14,7 @@ Portability: ???
 
 module Examples.Generator where
 
+import qualified Codec.Compression.GZip         as GZip
 import           Control.Applicative
 import           Control.Monad                  ( mzero )
 import           Data.Aeson                     ( FromJSON(..)
@@ -26,10 +27,13 @@ import           Data.Aeson                     ( FromJSON(..)
                                                 , (.:?)
                                                 , (.=)
                                                 )
-import qualified Data.ByteString.Lazy.Char8    as BSL
+import qualified Data.ByteString.Lazy.Char8     as BSL
+import           Data.Maybe
 import           Data.Monoid
-import           Data.Text                      ( Text )
+import           Data.Text                      as T ( Text )
+import           Data.Text.Encoding             as T
 import GHC.Generics
+
 
 data Expression = Expression {
     exprText      :: Text
@@ -39,4 +43,13 @@ data Expression = Expression {
   , exprFunctions :: [Text]
   , exprOmlKey    :: Text
   } deriving (Show, Eq, Generic)
+
+instance FromJSON Expression
+
+
+readExpressionsGZ :: FilePath -> IO [Expression]
+readExpressionsGZ file = do 
+    content <- GZip.decompress <$> BSL.readFile file
+    return $ fromJust . decode <$> BSL.lines content
+    
 

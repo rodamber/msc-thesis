@@ -28,6 +28,7 @@ library:
     - aeson
     - bytestring
     - text
+    - zlib
 
 executables:
   code-exe:
