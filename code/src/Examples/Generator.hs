@@ -1,31 +1,25 @@
-{-# LANGUAGE DeriveGeneric       #-}
 {-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 {- |
-Module:      Examples.Generator
-Description: (Will, at some point) Generate I/O examples from OutSystems expressions
-Copyright:   (c) Rodrigo Bernardo, 2018
-License:     ???
-Maintainer:  rodrigo.bernardo@tecnico.ulisboa.pt
-Stability:   ??? Doesn't work yet
-Portability: ???
--} 
+ - Module:      Examples.Generator
+ - Description: (Will, at some point) Generate I/O examples from OutSystems expressions
+ - Copyright:   (c) Rodrigo Bernardo, 2018
+ - License:     ???
+ - Maintainer:  rodrigo.bernardo@tecnico.ulisboa.pt
+ - Stability:   ??? Doesn't work yet
+ - Portability: ???
+ -}
 
 
 module Examples.Generator where
 
-import           Control.Applicative
+import qualified Data.ByteString.Lazy.Char8 as BSL
+import           Data.Text                  as T (Text)
 
-import qualified Data.ByteString.Lazy.Char8     as BSL
-import           Data.Text                      as T    ( Text )
-
-import qualified Codec.Compression.GZip         as GZip
-import           Data.Aeson                             ( FromJSON(..)
-                                                        , Value(..)
-                                                        , decode
-                                                        , withObject
-                                                        , (.:)
-                                                        )
+import qualified Codec.Compression.GZip     as GZip
+import           Data.Aeson                 (FromJSON (..), decode, withObject,
+                                             (.:))
 
 
 data Expression = Expression {
@@ -35,7 +29,7 @@ data Expression = Expression {
   , exprType      :: Text
   , exprFunctions :: [Text]
   , exprOmlKey    :: Text
-  } deriving (Show, Eq)
+  } deriving (Show, Eq, Ord)
 
 -- Generics don't seem to work here.
 instance FromJSON Expression where
@@ -53,4 +47,3 @@ decodeJSONLinesGZ :: FromJSON a => FilePath -> IO (Maybe [a])
 decodeJSONLinesGZ file = do
     content <- GZip.decompress <$> BSL.readFile file
     return $ traverse decode $ BSL.lines content
-
