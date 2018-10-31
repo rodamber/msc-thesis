@@ -24,7 +24,9 @@ dependencies:
 
 library:
   source-dirs: src
-  exposed-modules: Examples.Generator
+  exposed-modules:
+    - Examples.Generator
+    - Examples.Expressions
   dependencies:
     - aeson
     - bytestring

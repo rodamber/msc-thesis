@@ -5,7 +5,7 @@ module Main where
 
 import           Examples.Generator
 
-import           Control.Arrow ((&&&))
+import           Control.Arrow      ((&&&))
 import           Data.Function
 import           Data.List
 import           Data.Maybe
@@ -19,15 +19,10 @@ exprsIO :: IO [Expression]
 exprsIO = fromJust <$> decodeJSONLinesGZ "view-expressions.jsonlines.gz"
 
 
-textFuns :: S.Set Text
-textFuns = S.fromList ["Chr", "Concat", "Index", "Length", "NewLine", "Replace", "Substr",
-  "ToLower", "ToUpper", "Trim", "TrimEnd", "TrimStart"]
-  -- Missing: "EncodeHtml", "EncodeJavaScript", "EncodeSql", "EncodeUrl",
-
-
 hist :: Ord a => [a] -> [(a, Int)]
 hist xs = let xss = group xs
           in map (head &&& length) xss -- zip (map head xss) (map length xss)
+
 
 analytics :: [Expression] -> IO ()
 analytics es = do
@@ -42,6 +37,7 @@ analytics es = do
     printf "There are %d different types (%d%%)\n" typesCount typesPercentage
 
     printf ""
+
 
 main :: IO ()
 main = exprsIO >>= analytics
