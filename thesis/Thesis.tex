@@ -1,54 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Thesis.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                                                      %
-%  ---------- Master of Science Dissertation template ----------       %
-%                                                                      %
-%  Template for the Master Thesis according to the regulations         %
-%  published by the Academic Board (Direcção Académica) at IST.        %
-%                                                                      %
-%  For up-to-date guide, please refer to the offical website           %
-%  http://da.tecnico.ulisboa.pt/dissertacao-de-mestrado/               %
-%                                                                      %
-%       Andre C. Marta                                                 %
-%       Area Cientifica de Mecanica Aplicada e Aeroespacial            %
-%       Departamento de Engenharia Mecanica                            %
-%       Instituto Superior Tecnico                                     %
-%       Av. Rovisco Pais                                               %
-%       1049-001 Lisboa                                                %
-%       Portugal                                                       %
-
-%       Tel: +351 21 841 9469                                          %
-%                        3469 (extension)                              %
-%       Email: andre.marta@tecnico.ulisboa.pt                          %
-%                                                                      %
-%  Created:       Jan 20, 2011                                         %
-%  Last Modified: May  7, 2014                                         %
-%                                                                      %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Revision history                                                    %
-%  v1 - 2011/01/24 - original template                                 %
-%  v2 - 2012/10/30 - new IST image and glossary support                %
-%  v3 - 2013/12/10 - update according to 2012/13 official guide        %
-%  v4 - 2014/02/28 - new default for bibliography style                %
-%  v5 - 2014/05/07 - update according to 2013/14 official guide        %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                                                      %
-% To generate the PDF file, type "make" at the terminal prompt.        %
-%                                                                      %
-% The IST template LaTeX package was created by the author             %
-% and it can be downloaded from:                                       %
-% https://fenix.ist.utl.pt/homepage/ist31052/                          %
-%                                                                      %
-% The external packages can be downloaded from                         %
-% the Comprehensive TeX Archive Network at http://www.ctan.org/        %
-%                                                                      %
-% List of LaTex symbols:                                               %
-% http://www.ctan.org/tex-archive/info/symbols/comprehensive/          %
-%                                                                      %
-% Help with LaTex can be found at                                      %
-% http://www.giss.nasa.gov/tools/latex/ltx-2.html                      %
-% http://en.wikibooks.org/wiki/LaTeX                                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Preamble                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,12 +5,12 @@
 % ----------------------------------------------------------------------
 %  Set the document class
 % ----------------------------------------------------------------------
-\documentclass[10pt,a4paper,twoside,draft]{report}
+\documentclass[10pt,a4paper,twoside]{report}
 
 % ----------------------------------------------------------------------
 % Define external packages, language, margins, fonts and new commands
 %
-\input{Thesis_Preamble} % file "Thesis_Preamble.tex"
+\input{Preamble}
 
 % *** DEFINITION OF ACRONYMS ***
 
@@ -94,7 +43,6 @@
 \acrodef{PA}{Program Analysis}
 \acrodef{RC}{Relational Classification}
 
-% \acrodef{PS}{Program Synthesis}
 \acrodef{PBE}{Programming by Examples}
 
 
@@ -115,23 +63,23 @@
 % ----------------------------------------------------------------------
 %  Cover page
 % ----------------------------------------------------------------------
-\input{Thesis_FrontCover} % file "Thesis_FrontCover.tex"
+\input{FrontCover}
 
 % ----------------------------------------------------------------------
 % Dedication page (optional)
 % ----------------------------------------------------------------------
-% \input{Thesis_Dedication} % file "Thesis_Dedication.tex"
+% \input{Dedication}
 
 % ----------------------------------------------------------------------
 %  Acknowledgments (optional)
 % ----------------------------------------------------------------------
-\input{Thesis_Acknowledgements} % file "Thesis_Acknowledgements.tex"
+\input{Acknowledgements}
 
 % ----------------------------------------------------------------------
 %  Abstract (both in English and Portuguese)
 % ----------------------------------------------------------------------
-\input{Thesis_Resumo} % file "Thesis_Resumo.tex"
-\input{Thesis_Abstract} % file "Thesis_Abstract.tex"
+\input{Resumo}
+\input{Abstract}
 
 % ----------------------------------------------------------------------
 %  Table of contents, list of tables, list of figures and nomenclature
@@ -170,7 +118,7 @@
 % % Nomenclature
 % %
 % % entries of nomenclature list
-% \input{Thesis_Nomenclature} % file "Thesis_Nomenclature.tex"
+% \input{Nomenclature}
 % %
 % % Insert glossary/nomenclature section produced by MakeIndex
 % \printnomenclature
@@ -179,7 +127,7 @@
 % \cleardoublepage
 
 % % entries of glossary list
-% \input{Thesis_Glossary} % file "Thesis_Glossary.tex"
+% \input{Glossary}
 
 % % Insert glossary section produced by MakeIndex
 % \printglossary
@@ -196,19 +144,19 @@
 %  Chapters
 % ----------------------------------------------------------------------
 
-\input{Thesis_Introduction} % file "Thesis_Introduction.tex"
+\input{Introduction}
 
-\input{Thesis_Preliminaries} % file "Thesis_Preliminaries.tex"
+\input{Preliminaries}
 
-\input{Thesis_RelatedWork} % file "Thesis_RelatedWork.tex"
+\input{RelatedWork}
 
-\input{Thesis_Software} % file "Thesis_Software.tex"
+\input{Software}
 
-\input{Thesis_Evaluation} % file "Thesis_Evaluation.tex"
+\input{Evaluation}
 
-\input{Thesis_Conclusions} % file "Thesis_Conclusions.tex"
+\input{Conclusions}
 
-%\input{Thesis_FutureWork} % file "Thesis_FutureWork.tex"
+%\input{FutureWork}
 
 
 % ----------------------------------------------------------------------
@@ -255,17 +203,9 @@
 %  Appendix (optional)
 % ----------------------------------------------------------------------
 %\appendix
-%\input{Thesis_Appendix} % file "Thesis_Appendix.tex"
+%\input{Appendix}
 
 
 % ----------------------------------------------------------------------
 \end{document}
 % ----------------------------------------------------------------------
-
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "Thesis"
-%%% End:
-
