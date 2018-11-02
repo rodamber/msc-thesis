@@ -8,30 +8,27 @@
 \chapter{Related Work}
 \label{chapter:relatedWork}
 
+% Note that the reader might not read the document in the order it is presented.
 
-\section{Program Synthesis in General}
+\todo{Should ``program synthesis'' be capitalized?}
+This chapter discusses the state of the art of the field of program synthesis.
+Section~\ref{sec:challenges} presents the inherent challenges of the problem,
+such as resolving ambiguity or the size of the search space;
+\todo{Very ugly...}section~\ref{sec:specifications} presents the various forms
+that specifications can take;
+section~\ref{sec:applications} presents applications of the problem;
+section~\ref{sec:search-techniques} presents techniques to prune the search
+space;
+section~\ref{sec:inductive-programming} presents program synthesis with
+approximate specifications;
+section~\ref{sec:pbe} refers to work done specifically in the area of
+\ac{PBE}.
 
+\section{Challenges}
+\label{sec:challenges}
 
-\subsection{Challenges and General Principles}
-
-% Overview: ch.1, pages 7-13
-% user intent
-% search space
-% search technique
-
-% % DSL design
-% expressivity
-% choice of operators
-% naturalness
-% efficiency
-
-% % Program ranking
-% Program speed - superopt
-% Robustness - pbe
-% Naturalness and readability
-
-
-\subsection{Specifications}
+\section{Specifications}
+\label{sec:specifications}
 
 % syntactic bias, sketches, metasketches (sketch generation), templates, skeleton,
 %   grammar, dsls, holes, SyGuS
@@ -40,13 +37,14 @@
 % another program
 % logical relation
 
-
-\subsection{Applications}
+\section{Applications}
+\label{sec:applications}
 
 % flash fill, superoptimization, etc
+% data wrangling, filling incomplete programs
 
-
-\subsection{Search Techniques}
+\section{Search Techniques}
+\label{sec:search-techniques}
 
 % deductive search
 % transformation-based search
@@ -55,6 +53,7 @@
 % constraint-based search (component based, sketch generation/completion, solver-aided programming, ILP, )
 % statistical search (machine learning, genetic programming, MCMC, sampling, probabilistic inference)
 % Neural-guided search
+% Graph neural networks
 % PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 % Active learning, interaction, distinguishing inputs
 
@@ -62,16 +61,18 @@
 
 % ranking approaches: MCMC, VSA, ML, Metasketches
 
+\section{Inductive Programming}
+\label{sec:inductive-programming}
 
-\section{Programming by Examples}
+This refers to any kind of program synthesis problem where the constraints are
+under-specified. \todo{TODO}
 
+\subsection{Programming by Examples}
+\label{sec:pbe}
 % PBE (inductive programming), examples, inverse semantics, VSA
 
-
 \section{Synthesis of Data Transformation Programs}
-
-% \subsection{How does it differ from Machine Learning?}
-
+\label{sec:data-trans-synth}
 
 %%% Local Variables:
 %%% mode: latex
