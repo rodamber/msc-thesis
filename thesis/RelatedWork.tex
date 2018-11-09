@@ -4,6 +4,7 @@
 % Note that the reader might not read the document in the order it is presented.
 
 \todo{Should ``program synthesis'' be capitalized?}
+\marginpar[Left margin text]{Should ``program synthesis'' be capitalized?}
 This chapter discusses the state of the art of the field of program synthesis.
 Section~\ref{sec:challenges} presents the inherent challenges of the problem,
 such as resolving ambiguity or the size of the search space;
@@ -20,49 +21,96 @@ section~\ref{sec:pbe} refers to work done specifically in the area of
 \section{Challenges}
 \label{sec:challenges}
 
+\begin{itemize}
+\item Search space
+\item User intent
+  \item 
+\end{itemize}
+
 \section{Specifications}
 \label{sec:specifications}
 
-% syntactic bias, sketches, metasketches (sketch generation), templates, skeleton,
-%   grammar, dsls, holes, SyGuS
-% programming by example, input-output examples/constraints, inductive programming
-% from execution traces
-% another program
-% logical relation
+\begin{itemize}
+\item syntactic bias, sketches, metasketches (sketch generation), templates, skeleton,
+\item   grammar, dsls, holes, SyGuS
+\item programming by example, input-output examples/constraints, inductive programming
+\item from execution traces
+\item another program
+\item logical relation
+\end{itemize}
 
 \section{Applications}
 \label{sec:applications}
 
-% flash fill, super-optimization, reverse engineering, etc
-% data wrangling, filling incomplete programs
+\begin{itemize}
+\item flash fill
+\item super-optimization
+\item reverse engineering
+\item data wrangling
+\item filling incomplete programs
+\end{itemize}
 
-\section{Search Techniques}
+\todo{Search space?}\section{Search Techniques}
 \label{sec:search-techniques}
 
-% deductive search
-% transformation-based search
-% enumerative search (top-down, bottom-up, bidirectional, offline exhaustive enumeration and composition)
-% oracles (validation, correction, programs), CEGIS, OGIS, (universal) distinguishing inputs
-% constraint-based search (component based, sketch generation/completion, solver-aided programming, ILP, )
-% statistical search (machine learning, genetic programming, MCMC, sampling, probabilistic inference)
-% Neural-guided search
-% Graph neural networks
-% PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
-% Active learning, interaction, distinguishing inputs
+\todo{Ref. is Ras Bodik ICFP15 talk} Derivation (deductive search?) applies
+semantics-preserving rewrite rules... correctness by construction.
+Search (enumerative search?) sidesteps this, but the program space can be too large.
+One way to tackle this issue is to syntactically restrict the space of valid
+programs. We can do this by restricting the programs to those expressible in a
+small DSL:
+\marginpar{Check more recent research} Gulwani and Sumit \cite{Gulwani:2011}
+used FlashFill to automate string processing in the context of spreadsheet
+applications using input-output examples;
+Cheung et al. \cite{Cheung:2013} used a subset of SQL to synthesize optimized
+database-backed applications;
+the FlashExtract DSL \cite{Le:2014} includes programs that take semi-structured
+text files and a data structure definition as input, and return an instance of
+that data structure;\todo{How comprehensive should I be?}.
 
-% meta-synthesis, rosette, prose, sketch, solver-aided programming, domain separation
+Another approach is to let the user provide a partial program, hinting the
+structure of the intended implementation, while leaving holes for the
+synthesizer to fill:
 
-% ranking approaches: MCMC, VSA, ML, Metasketches
+templates \cite{Srivastava:2012},
+holes (like SIMD magic constants) \cite{Solar-Lezama:2008}
+
+
+\begin{itemize}
+\item deductive search
+\item transformation-based search
+\item enumerative search (top-down, bottom-up, bidirectional, offline exhaustive enumeration and composition)
+\item oracles (validation, correction, programs), CEGIS, OGIS, (universal) distinguishing inputs
+\item constraint-based search (component based, sketch generation/completion, solver-aided programming, ILP, )
+\item statistical search (machine learning, genetic programming, MCMC, sampling, probabilistic inference)
+\item Neural-guided search
+\item Graph neural networks
+\item PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
+\item Active learning, interaction, distinguishing inputs
+\item meta-synthesis, rosette, prose, sketch, solver-aided programming, domain separation
+\item ranking: MCMC, VSA, ML, Metasketches
+\end{itemize}
 
 \section{Inductive Programming}
 \label{sec:inductive-programming}
 
 This refers to any kind of program synthesis problem where the constraints are
-under-specified. \todo{TODO}
+under-specified.
 
 \subsection{Programming by Examples}
 \label{sec:pbe}
-% PBE (inductive programming), examples, inverse semantics, VSA
+
+\begin{itemize}
+\item PBE (inductive programming)
+\item examples
+\item inverse semantics
+\item VSA
+\end{itemize}
 
 \section{Synthesis of Data Transformation Programs}
 \label{sec:data-trans-synth}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Thesis"
+%%% End:
