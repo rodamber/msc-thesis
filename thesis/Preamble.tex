@@ -2,60 +2,17 @@
 % Define document language.
 % ----------------------------------------------------------------------
 
-% 'inputenc' package
-%
-% Accept different input encodings.
-% http://www.ctan.org/tex-archive/macros/latex/base/
-%
-% > allows typing non-english text in LaTeX sources.
-%
-% ******************************* SELECT *******************************
-%\usepackage[latin1]{inputenc} % <<<<< Windows
-\usepackage[utf8]{inputenc}   % <<<<< Linux
-% ******************************* SELECT *******************************
+\usepackage[utf8]{inputenc}
 
+\usepackage[english]{babel}
+\newcommand{\acknowledgments}{@undefined}
 
-% 'babel' package
-%
-% Multilingual support for Plain TeX or LaTeX.
-% http://www.ctan.org/tex-archive/macros/latex/required/babel/
-%
-% > sets the variable names according to the language selected
-%
-% ******************************* SELECT *******************************
-%\usepackage[portuguese]{babel} % <<<<< Portuguese
-\usepackage[english]{babel} % <<<<< English
-% ******************************* SELECT *******************************
-
-
-% List of LaTeX variable names: \abstractname, \appendixname, \bibname,
-%   \chaptername, \contentsname, \listfigurename, \listtablename, ...)
-% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=fixnam
-%
-% Changing the words babel uses (uncomment and redefine as necessary...)
-%
-\newcommand{\acknowledgments}{@undefined} % new LaTeX variable name
-%
-% > English
-%
+% English
 \addto\captionsenglish{\renewcommand{\acknowledgments}{Acknowledgments}}
-%\addto\captionsenglish{\renewcommand{\listtablename}{List of Tables}}
-%\addto\captionsenglish{\renewcommand{\listfigurename}{List of Figures}}
-%\addto\captionsenglish{\renewcommand{\nomname}{Nomenclature}}
-%\addto\captionsenglish{\renewcommand{\glossaryname}{Glossary}}
-%\addto\captionsenglish{\renewcommand{\acronymname}{List of Acronyms}}
-%\addto\captionsenglish{\renewcommand{\bibname}{References}} % Bibliography
-%\addto\captionsenglish{\renewcommand{\appendixname}{Appendix}}
-% > Portuguese
-%
+
+% Portuguese
 \addto\captionsportuguese{\renewcommand{\acknowledgments}{Agradecimentos}}
-%\addto\captionsportuguese{\renewcommand{\listtablename}{Lista de Figuras}}
-%\addto\captionsportuguese{\renewcommand{\listfigurename}{Lista de Tabelas}}
 \addto\captionsportuguese{\renewcommand{\nomname}{Lista de S\'{i}mbolos}} % Nomenclatura
-%\addto\captionsportuguese{\renewcommand{\glossary}{Gloss\'{a}rio}}
-%\addto\captionsportuguese{\renewcommand{\acronymname}{Lista de Abrevia\c{c}\~{o}es}}
-%\addto\captionsportuguese{\renewcommand{\bibname}{Refer\^{e}ncias}} % Bibliografia
-%\addto\captionsportuguese{\renewcommand{\appendixname}{Anexo}} % Apendice
 
 \usepackage[printonlyused]{acronym}
 
@@ -64,19 +21,10 @@
 % ----------------------------------------------------------------------
 
 % Use Arial font as default
-%
 \renewcommand{\rmdefault}{phv}
 \renewcommand{\sfdefault}{phv}
 
 % Define cover page fonts
-%
-%         encoding     family       series      shape
-%  \usefont{T1}     {phv}=helvetica  {b}=bold    {n}=normal
-%                   {ptm}=times      {m}=normal  {sl}=slanted
-%                                                {it}=italic
-% see more examples at
-% http://julien.coron.free.fr/languages/latex/fonts/
-%
 \def\FontLn{% 16 pt normal
   \usefont{T1}{phv}{m}{n}\fontsize{16pt}{16pt}\selectfont}
 \def\FontLb{% 16 pt bold
@@ -93,180 +41,41 @@
 % Define page margins and line spacing.
 % ----------------------------------------------------------------------
 
-% 'geometry' package
-%
-% Flexible and complete interface to document dimensions.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/geometry/
-%
 % > set the page margins (2.5cm minimum in every side, as per IST rules)
-%
-\usepackage{geometry}	
-\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
-
-% 'setspace' package
-%
-% Set space between lines.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/setspace/
-%
 % > allow setting line spacing (line spacing of 1.5, as per IST rules)
-%
-\usepackage{setspace}
-%\renewcommand{\baselinestretch}{1.5}
-%\usepackage{setspace}
-\setstretch{1.5}
+% \usepackage{geometry}	
+% \geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+% \usepackage{setspace}
+% \setstretch{1.5}
 
-% ----------------------------------------------------------------------
-% Include external packages.
-% Note that not all of these packages may be available on all system
-% installations. If necessary, include the .sty files locally in
-% the <jobname>.tex file directory.
-% ----------------------------------------------------------------------
+% FIXME: Workaround to that todonotes fit in the margins.
+\usepackage[paperwidth=275.9mm, paperheight=279.4mm]{geometry}
+\setlength{\marginparwidth}{4cm}
+\usepackage[textwidth=4cm]{todonotes}
 
-% 'graphicx' package
-%
-% Enhanced support for graphics.
-% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
-%
-% > extends arguments of the \includegraphics command
-%
+
 \usepackage{graphicx}
-\usepackage{pdflscape}
-\usepackage{lscape}
-\usepackage{float}		%to add
-%\floatstyle{boxed}		%box around
-\restylefloat{figure}		%figure
+% \usepackage{pdflscape}
+% \usepackage{lscape}
+% \usepackage{float}
+% \restylefloat{figure}
 
-% 'color' package
-%
-% Colour control for LaTeX documents.
-% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
-%
-% > defines color macros: \color{<color name>}
-%
-%\usepackage{color}
-
-
-% 'amsmath' package
-%
-% Mathematical enhancements for LaTeX.
-% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/
-%
-% > American Mathematical Society plain Tex macros
-%
-\usepackage{amsmath}  % AMS mathematical facilities for LaTeX.
-\usepackage{amsthm}   % Typesetting theorems (AMS style).
-\usepackage{amsfonts} %
+% \usepackage{amsmath}
+% \usepackage{amsthm}
+% \usepackage{amsfonts}
 \usepackage{amssymb}
 
-% ----------------------------- some useful packages -------------------------------------
+% \usepackage{subfigure}
+% \usepackage{caption}
+% \usepackage{url}
 
-%definitions on subsections
-\newtheorem{theorem1}{Theorem}[section]
-\numberwithin{theorem1}{section}
-\newtheorem{subdef}[theorem1]{Definition}
-
-%examples on subsections
-\newtheorem{theorem2}{Theorem}[section]
-\numberwithin{theorem2}{section}
-\newtheorem{subexmp}[theorem2]{Example}
-
-%propositions on subsections
-\newtheorem{theorem3}{Theorem}[section]
-\numberwithin{theorem3}{section}
-\newtheorem{subprop}[theorem3]{Proposition} 
-
-%
-% ---------------------------------- subfigure ---------------------------------------
-\usepackage{subfigure}
-
-
-% 'wrapfig' package
-%
-% Produces figures which text can flow around.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/wrapfig/
-%
-% > wrap figures/tables in text (i.e., Di Vinci style)
-%
-% \usepackage{wrapfig}
-
-
-% 'subfigure' package -> deprecated
-%
-% Deprecated: Figures divided into subfigures.
-% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
-%
-% > subcaptions for subfigures
-%
-%\usepackage{subfigure}
-
-
-% 'subfigmat' package
-%
-% Automates layout when using the subfigure package.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/subfigmat/
-%
-% > matrices of similar subfigures
-%
-%\usepackage{subfigmat}
-
-\usepackage{caption}
-
-% 'url' package
-%
-% Verbatim with URL-sensitive line breaks.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/url/
-%
-% > URLs in BibTex
-%
-\usepackage{url}
-
-
-% 'varioref' package
-%
-% Intelligent page references.
-% http://www.ctan.org/tex-archive/macros/latex/required/tools/
-%
-% > smart page, figure, table and equation referencing
-%
-%\usepackage{varioref}
-
-
-% 'dcolumn' package
-%
-% Align on the decimal point of numbers in tabular columns.
-% http://www.ctan.org/tex-archive/macros/latex/required/tools/
-%
-% > decimal-aligned tabular math columns
-%
-\usepackage{dcolumn}
-\newcolumntype{d}{D{.}{.}{-1}} % column aligned by the point separator '.'
-\newcolumntype{e}{D{E}{E}{-1}} % column aligned by the exponent 'E'
-
-
-% '' package
-%
-% Reimplementation of and extensions to LaTeX verbatim.
-% http://www.ctan.org/tex-archive/macros/latex/required/tools/
-%
-% > provides the verbatim environment (\begin{verbatim},\end{verbatim})
-%   and a comment environment (\begin{comment},  \end{comment})
-%
-% \usepackage{verbatim}
-
-
-% 'moreverb' package
-%
-% Extended verbatim.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/moreverb/
-%
-% > supports tab expansion and line numbering
-%
-% \usepackage{moreverb}
-
+% \usepackage{dcolumn}
+% \newcolumntype{d}{D{.}{.}{-1}} % column aligned by the point separator '.'
+% \newcolumntype{e}{D{E}{E}{-1}} % column aligned by the exponent 'E'
 
 %Appendix package
-\usepackage{appendix}
-\usepackage{longtable}
+% \usepackage{appendix}
+% \usepackage{longtable}
 
 % 'nomencl' package
 %
@@ -321,390 +130,66 @@
     }%
 
 
-% 'glossary' package
-%
-% Create a glossary.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/glossary/
-%
-% Glossary (produces *.glo *.ist files)
+% Create a glossary (produces *.glo *.ist files).
 \usepackage[number=none]{glossary}
-% (remove blank line between groups)
-\setglossary{gloskip={}}
-% (redefine glossary style file)
-%\renewcommand{\istfilename}{myGlossaryStyle.ist}
+\setglossary{gloskip={}} % Remove blank line between groups
 \makeglossary
 
+% % Rotation tools, including rotated full-page floats.
+% % > show wide figures and tables in landscape format:
+% %   use \begin{sidewaystable} and \begin{sidewaysfigure}
+% %   instead of 'table' and 'figure', respectively.
+% \usepackage{rotating}
 
-% 'rotating' package
-%
-% Rotation tools, including rotated full-page floats.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/rotating/
-%
-% > show wide figures and tables in landscape format:
-%   use \begin{sidewaystable} and \begin{sidewaysfigure}
-%   instead of 'table' and 'figure', respectively.
-%
-\usepackage{rotating}
-
-
-% 'hyperref' package
-%
-% Extensive support for hypertext in LaTeX.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/hyperref/
-%
-% > Extends the functionality of all the LATEX cross-referencing
-%   commands (including the table of contents, bibliographies etc) to
-%   produce \special commands which a driver can turn into hypertext
-%   links; Also provides new commands to allow the user to write adhoc
-%   hypertext links, including those to external documents and URLs.
-%
-\usepackage[pdftex]{hyperref} % enhance documents that are to be
-                              % output as HTML and PDF
-\hypersetup{colorlinks,       % color text of links and anchors,
-                              % eliminates borders around links
-%            linkcolor=red,    % color for normal internal links
-            linkcolor=black,  % color for normal internal links
-            anchorcolor=black,% color for anchor text
-%            citecolor=green,  % color for bibliographical citations
-            citecolor=black,  % color for bibliographical citations
-%            filecolor=magenta,% color for URLs which open local files
-            filecolor=black,  % color for URLs which open local files
-%            menucolor=red,    % color for Acrobat menu items
-            menucolor=black,  % color for Acrobat menu items
-%            pagecolor=red,    % color for links to other pages
-            pagecolor=black,  % color for links to other pages
-%            urlcolor=cyan,    % color for linked URLs
-            urlcolor=black,   % color for linked URLs
-	          %bookmarks=true,         % create PDF bookmarks
+\usepackage[pdftex]{hyperref}       % enhance documents that are to be
+                                    % output as HTML and PDF
+\hypersetup{colorlinks,             % color text of links and anchors,
+                                    % eliminates borders around links
+            linkcolor=black,        % color for normal internal links
+            anchorcolor=black,      % color for anchor text
+            citecolor=black,        % color for bibliographical citations
+            filecolor=black,        % color for URLs which open local files
+            menucolor=black,        % color for Acrobat menu items
+            pagecolor=black,        % color for links to other pages
+            urlcolor=black,         % color for linked URLs
 	          bookmarksopen=false,    % don't expand bookmarks
 	          bookmarksnumbered=true, % number bookmarks
 	          pdftitle={Thesis},
-            pdfauthor={Fernando César Silva Teixeira dos Santos},
-            pdfsubject={Automatic Generation of Exercises for Massive Open Online Courses (MOOCs)},
-            pdfkeywords={algorithm, graph, graph generator, education, MOOC},
+            pdfauthor={Rodrigo André Moreira Bernardo},
             pdfstartview=FitV,
-            pdfdisplaydoctitle=true}
+            pdfdisplaydoctitle=true,
+            pdfpagemode=UseOutlines
+}
 
-
-% 'hypcap' package
-%
-% Adjusting the anchors of captions.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/
-%
-% > fixes the problem with hyperref, that links to floats points
-%   below the caption and not at the beginning of the float.
-%
-\usepackage[figure,table]{hypcap}
-
-
-% 'natbib' package
-%
 % Flexible bibliography support.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/natbib/
-%
-% > produce author-year style citations
-%
-% \citet  and \citep  for textual and parenthetical citations, respectively
-% \citet* and \citep* that print the full author list, and not just the abbreviated one
-% \citealt is the same as \citet but without parentheses. Similarly, \citealp is \citep without parentheses
-% \citeauthor
-% \citeyear
-% \citeyearpar
-%
-% ******************************* SELECT *******************************
-%\usepackage{natbib}          % <<<<< References in alphabetical list Correia, Silva, ...
-\usepackage[numbers]{natbib} % <<<<< References in numbered list [1],[2],...
-% ******************************* SELECT *******************************
+\usepackage[numbers]{natbib}
 
-
-% ----------------------------------------------------------------------
-% Define new commands to assure consistent treatment throughout document
-% ----------------------------------------------------------------------
-
-\newcommand{\ud}{\mathrm{d}}                % total derivative
-\newcommand{\degree}{\ensuremath{^\circ\,}} % degrees
-
-% Abbreviations
-
-\newcommand{\mcol}{\multicolumn}            % table format
-\newcommand{\eqnref}[1]{(\ref{#1})}
-\newcommand{\class}[1]{\texttt{#1}}
-\newcommand{\package}[1]{\texttt{#1}}
-\newcommand{\file}[1]{\texttt{#1}}
-\newcommand{\BibTeX}{\textsc{Bib}\TeX}
-\usepackage{multirow}
-
-% Typefaces ( example: {\bf Bold text here} )
-%
-% > pre-defined
-%   \bf % bold face
-%   \it % italic
-%   \tt % typewriter
-%
-% > newly defined
-\newcommand{\tr}[1]{{\ensuremath{\textrm{#1}}}}   % text roman
-\newcommand{\tb}[1]{{\ensuremath{\textbf{#1}}}}   % text bold face
-\newcommand{\ti}[1]{{\ensuremath{\textit{#1}}}}   % text italic
-\newcommand{\mc}[1]{{\ensuremath{\mathcal{#1}}}}  % math calygraphy
-\newcommand{\mco}[1]{{\ensuremath{\mathcalold{#1}}}}% math old calygraphy
-\newcommand{\mr}[1]{{\ensuremath{\mathrm{#1}}}}   % math roman
-\newcommand{\mb}[1]{{\ensuremath{\mathbf{#1}}}}   % math bold face
-\newcommand{\bs}[1]{\ensuremath{\boldsymbol{#1}}} % math symbol
-\def\bm#1{\mathchoice                             % math bold
-  {\mbox{\boldmath$\displaystyle#1$}}%
-  {\mbox{\boldmath$#1$}}%
-  {\mbox{\boldmath$\scriptstyle#1$}}%
-  {\mbox{\boldmath$\scriptscriptstyle#1$}}}
-\newcommand{\boldcal}[1]{{\ensuremath{\boldsymbol{\mathcal{#1}}}}}% math bold calygraphy
-
-
-
-% ----------------------------- some useful packages -------------------------------------
 % to mark math mode use \( and \) because is latex and provides better error message than $..$, which is tex
 
-\usepackage{listings}           % for displaying code
-\usepackage{enumerate}
-%\usepackage{fixltx2e}           % allow \( inside headings and captions
+% \usepackage{listings}           % for displaying code
+% \usepackage{enumerate}
 
-\usepackage{pifont}             % some symbols from fonts
-\usepackage{nameref}
-\usepackage{soul}               % to striketrhourhg text
-%\usepackage{subcaption}
-%\usepackage{pdfpages}           % to include pfd files  
-% -----------------------------  hyperref -------------------------------------
-\usepackage[pdftex]{color}
-\definecolor{citeblue}{rgb}{0.1,0,.4}
-\definecolor{refcolor}{rgb}{0,0,0.4}
-\definecolor{midgreen}{RGB}{0,150,0}
-\definecolor{darkgreen}{RGB}{0,128,0}
-\definecolor{darkblue}{RGB}{0,0,128}
-\definecolor{darkred}{RGB}{192,0,0}
-% \usepackage[pdftex%
-% ,colorlinks=true%
-% ,bookmarks=true%
-% ,linkcolor=citeblue%
-% ,citecolor=citeblue%
-% ,urlcolor=blue%
-% ,plainpages=false]{hyperref}
+% \usepackage{pifont}             % some symbols from fonts
+% \usepackage{nameref}
+% \usepackage{soul}               % to striketrhourhg text
 
-%
-% -----------------------------  algorithm2e -------------------------------------
+% \usepackage[pdftex]{color}
+% \definecolor{citeblue}{rgb}{0.1,0,.4}
+% \definecolor{refcolor}{rgb}{0,0,0.4}
+% \definecolor{midgreen}{RGB}{0,150,0}
+% \definecolor{darkgreen}{RGB}{0,128,0}
+% \definecolor{darkblue}{RGB}{0,0,128}
+% \definecolor{darkred}{RGB}{192,0,0}
+
 % This package lets us display pseudocode in various fashions
 \usepackage[linesnumbered,ruled,vlined,algochapter]{algorithm2e}
-\DontPrintSemicolon
-\newcommand{\originalMathStyle}{\itshape\fontfamily{lmr}\selectfont}
-\SetDataSty{originalMathStyle}
-\SetArgSty{originalMathStyle}
-% hack to have normal space in algorithms
-\SetAlFnt{\setstretch{1.2}}
-%
-% Local Keywords
-\SetKw{And}{and}
-\SetKw{Break}{break}
-\SetKw{Continue}{continue}
-\SetKw{False}{false}
-\SetKw{In}{in}
-\SetKw{Make}{Make}
-\SetKw{Nil}{NIL}
-\SetKw{Or}{or}
-\SetKw{Range}{range}
-\SetKw{True}{true}
 
-\SetKwData{AddableVertices}{addableVertices}
-\SetKwData{Both}{both}
-\SetKwData{CorrectOutput}{correct output}
-\SetKwData{Cycle}{cycle}
-\SetKwData{Density}{density}
-\SetKwData{Graph}{graph}
-\SetKwData{HasCycles}{has-cycles}
-\SetKwData{Maxsp}{maxSp}
-\SetKwData{Maxw}{maxW}
-\SetKwData{Minsp}{minSp}
-\SetKwData{Minw}{minW}
-\SetKwData{Mvar}{m}
-\SetKwData{Ncycles}{nc}
-\SetKwData{Nc}{nc}
-\SetKwData{NewPath}{newPath}
-\SetKwData{Next}{Next}
-\SetKwData{NoCycles}{no-cycles}
-\SetKwData{Nvar}{n}
-\SetKwData{Previous}{Previous}
-\SetKwData{Random}{random-cycles}
-\SetKwData{Reachability}{reachability}
-\SetKwData{Reach}{reach}
-\SetKwData{Rw}{rw}
-\SetKwData{SavedV}{savedV}
-\SetKwData{Seed}{seed}
-\SetKwData{Sp}{sp}
-\SetKwData{Status}{status}
-\SetKwData{WeightCycles}{weight\&cycles}
-
-\SetKwFunction{AssociateRandomWeights}{associateRandomWeights}
-\SetKwFunction{AttributeWeights}{assignWeights}
-\SetKwFunction{BFS}{BFS}
-\SetKwFunction{BellmanFord}{Bellman-Ford}
-\SetKwFunction{CreateNegativeCycle}{createNegativeCycle}
-\SetKwFunction{DFS}{DFS}
-\SetKwFunction{GraphGenerator}{GraphGenerator}
-\SetKwFunction{IncrementalBFS}{incrementalBFS}
-\SetKwFunction{Length}{length}
-\SetKwFunction{NegativeValue}{negativeValue}
-\SetKwFunction{NotEmpty}{!empty}
-\SetKwFunction{Pushfront}{push-front}
-\SetKwFunction{RandomBool}{randomBool}
-\SetKwFunction{RandomDirection}{randomDirection}
-\SetKwFunction{RandomEdge}{randomEdge}
-\SetKwFunction{RandomReachableVertex}{randomReachableVertex}
-\SetKwFunction{RandomSelect}{randomSelect}
-\SetKwFunction{RandomVertex}{randomVertex}
-\SetKwFunction{RandomWeight}{randomWeight}
-\SetKwFunction{RandowReachableVertex}{randomReachableVertex}
-\SetKwFunction{ReferenceSolution}{ReferenceSolution}
-\SetKwFunction{Register}{register}
-\SetKwFunction{StudentsSolution}{StudentsSolution}
-\SetKwFunction{TransformCycle}{transformCycle}
-%
-% ---------------------------------- tikz ---------------------------------------
-\usepackage{tikz}
-\usetikzlibrary{arrows,automata,backgrounds,calc,chains,external,fit,graphs,patterns,positioning,shapes}
-
-% predefining some styles for nodes and edges
-%nodes
-%\tikzstyle{bn}=[circle,fill=blue!10,draw=blue,thick,inner sep=1pt,%
-%                minimum height=.5cm,minimum width=.5cm]
-%\tikzstyle{gn}=[circle,fill=green!10,draw=green,thick,inner sep=1pt,%
-%                minimum height=.5cm,minimum width=.5cm]
-%\tikzstyle{on}=[circle,fill=orange!10,draw=orange,thick,inner sep=1pt,%
-%                minimum height=.5cm,minimum width=.5cm]
-%\tikzstyle{yn}=[circle,fill=yellow!10,draw=yellow,thick,inner sep=1pt,%
-%                minimum height=.5cm,minimum width=.5cm]
-    	
-%edges
-%\tikzstyle{be}=[very thick,blue!90]
-%\tikzstyle{ge}=[very thick,green!90]
-%\tikzstyle{oe}=[very thick,orange!90]
-%\tikzstyle{ye}=[very thick,yellow!90]
-
-%
-%\tikzstyle{gns}=[rectangle,fill=green!10,draw=gray,thick,inner sep=2pt]
-\tikzset{fancy/.style={rectangle,
-		rounded corners=1mm,
-		ultra thin,
-		draw=white,
-		top color=white,
-		bottom color=black!20,
-%		minimum height=.5cm,
-%		minimum width=.5cm,
-%		inner sep=2pt,
-%		anchor=base,
-		draw}}
-
-% % Styles for graphs
-\definecolor{highClr}{rgb}{1.0, 1.0, 0.0}
-
-
-\colorlet{edgeClr}{orange!80!black}
-% edges styles
-\tikzset{sandEdge/.style={
-		>=stealth,
-		shorten >=1pt,
-		thick,
-		bend left,
-		text=black,
-		edgeClr,
-	}}
-
-\tikzset{fadedEdge/.style={
-		->,
-		>=stealth,
-		shorten >=1pt,
-		thick,
-		edgeClr!20,
-	}}
-
-% labels styles
-\tikzset{weigthLabel/.style={
-		text=black,
-		sloped,
-		midway,
-		}}
-
-\tikzset{fadedWeigth/.style={
-		text=lightgray!40,
-		sloped,
-		midway,
-		anchor=south,
-		}}
-
-\tikzset{blueVertex/.style={
-		% The shape:
-		rectangle,minimum size=6mm,rounded corners=3mm,
-		% The rest
-		top color=white,bottom color=blue!35!cyan!25!,
-		font=\ttfamily,
-		text=black,
-	}}
-
-\tikzset{blueVertexG/.style={
-		% The shape:
-		rectangle,minimum size=6mm,rounded corners=3mm,
-		% The rest
-		top color=white,bottom color=blue!35!cyan!25!,
-		font=\ttfamily,
-		text=black,
-		draw=green,
-		thick,
-	},
-	blueVertexY/.style={
-		% The shape:
-		rectangle,minimum size=6mm,rounded corners=3mm,
-		% The rest
-		top color=white,bottom color=blue!35!cyan!25!,
-		font=\ttfamily,
-		text=black,
-		draw=yellow,
-		thick,
-	},
-	blueVertexO/.style={
-		% The shape:
-		rectangle,minimum size=6mm,rounded corners=3mm,
-		% The rest
-		top color=white,bottom color=blue!35!cyan!25!,
-		font=\ttfamily,
-		text=black,
-		draw=orange,
-		thick,
-	}}
-	
-
-\colorlet{noteClr}{lightgray!30!white!50}
-
-\tikzset{noteBckg/.style={
-		rounded corners=8pt,fill=noteClr,
-	},
-	noteStl/.style={
-		font=\scriptsize,
-		align=center,
-		text=black
-	}}
-
-
-
-
-% save tikz images to files (faster compilation)
-%\tikzexternalize
-% Default all images in the subfolder `temp/`
-%\tikzsetexternalprefix{temp/}
-%
-% -------------------
-\usepackage{pgfplots}          % to print charts
-\pgfplotsset{compat=1.9}
-\usepackage{pgfplotstable}     % to print tables
-\usepackage{booktabs,colortbl} %needed by pgfplotstable
-\usepackage{hhline}
-%
-% ------------------------------------------------------------------------------
+% ----------------------------- Other -------------------------------------
 
 \usepackage{lipsum}
+\usepackage{outlines}
 
-\usepackage{todonotes}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Thesis"
+%%% End:
