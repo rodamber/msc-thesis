@@ -10,7 +10,7 @@ PDF_VIEWER ?= xdg-open
 
 .PHONY: r clean veryclean v
 
-all: Thesis_*.tex
+all: *.tex
 	pdflatex  -shell-escape ${FILE}
 # 	makeindex $(FILE).nlo -s nomencl.ist -o $(FILE).nls
 # 	makeindex $(FILE).glo -s $(FILE).ist -o $(FILE).gls -t $(FILE).glg
