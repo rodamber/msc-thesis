@@ -5,6 +5,7 @@ import           Prelude                    hiding (concat, length)
 import           Examples.Expressions
 
 import           Control.Monad.Combinators
+import qualified Data.Bool                  as B (bool)
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
 import           Data.Void
@@ -14,7 +15,6 @@ import qualified Text.Megaparsec.Char.Lexer as L
 
 
 -- FIXME: Handle escaped characters
--- FIXME: Signeds
 -- FIXME: (true/false) Are data constructors in lower or upper case?
 
 type Parser = Parsec Void Text
@@ -33,9 +33,6 @@ symbol = L.symbol spaceConsumer
 
 int :: Parser Int
 int = lexeme L.decimal
-
-signed :: Parser Int
-signed = L.signed spaceConsumer int
 
 true :: Parser Bool
 true = True <$ symbol "True"
@@ -58,26 +55,42 @@ comma p = symbol "," >> lexeme p
 --------------------------------------------------------------------------------
 -- Parser
 
-expr :: Parser Expr
-expr = lit <|> chr <|> concat  <|> index <|> length  <|> newLine <|> replace <|>
-    substr <|> toLower  <|> toUpper <|> trim  <|> trimEnd <|> trimStart
+template :: Text -> Parser a -> Parser a
+template name p = symbol name >> parens p
+
+textExpr :: Parser TextExpr
+textExpr = lit <|> chr <|> concat <|> newLine <|> replace <|> substr <|>
+    toLower <|> toUpper <|> trim <|> trimEnd <|> trimStart
   where
-    lit = Lit . T.pack <$> (char '"' >> manyTill L.charLiteral (char '"'))
+    lit = TLit . T.pack <$> (char '"' >> manyTill L.charLiteral (char '"'))
 
-    template :: Text -> Parser Expr -> Parser Expr
-    template name p = symbol name >> parens p
+    chr     = template "Chr"     (Chr     <$> intExpr)
+    concat  = template "Concat"  (Concat  <$> textExpr <*> comma textExpr)
+    newLine = template "NewLine" (NewLine <$ empty)
+    replace = template "Replace" $ Replace
+      <$> textExpr
+      <*> comma textExpr
+      <*> comma textExpr
+    substr    = template "Substr" $ Substr
+      <$> textExpr
+      <*> comma intExpr
+      <*> comma intExpr
+    toLower   = template "ToLower"   (ToLower   <$> textExpr)
+    toUpper   = template "ToUpper"   (ToUpper   <$> textExpr)
+    trim      = template "Trim"      (Trim      <$> textExpr)
+    trimEnd   = template "TrimEnd"   (TrimEnd   <$> textExpr)
+    trimStart = template "TrimStart" (TrimStart <$> textExpr)
 
-    chr       = template "Chr"       (Chr       <$> int)
-    concat    = template "Concat"    (Concat    <$> expr <*> comma expr)
-    index     = template "Index"
-        (Index <$> expr <*> comma expr <*> comma int <*> comma bool <*> comma bool)
-    length    = template "Length"    (Length    <$> expr)
-    newLine   = template "NewLine"   (NewLine   <$  empty)
-    replace   = template "Replace"   (Replace   <$> expr <*> comma expr <*> comma expr)
-    substr    = template "Substr"    (Substr    <$> expr <*> comma int  <*> comma int)
-    toLower   = template "ToLower"   (ToLower   <$> expr)
-    toUpper   = template "ToUpper"   (ToUpper   <$> expr)
-    trim      = template "Trim"      (Trim      <$> expr)
-    trimEnd   = template "TrimEnd"   (TrimEnd   <$> expr)
-    trimStart = template "TrimStart" (TrimStart <$> expr)
+intExpr :: Parser IntExpr
+intExpr = index <|> length
+  where
+    index = template "Index" $ Index
+      <$> textExpr
+      <*> comma textExpr
+      <*> comma intExpr
+      <*> (B.bool FromStart   FromEnd   <$> comma bool)
+      <*> (B.bool Insensitive Sensitive <$> comma bool)
+    length = template "Length" (Length    <$> textExpr)
 
+parser :: Parser Expr
+parser = (TExpr <$> textExpr) <|> (IExpr <$> intExpr)

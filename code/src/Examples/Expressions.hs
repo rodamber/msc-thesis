@@ -19,6 +19,8 @@ import           Data.Text (Text)
 
 -- FIXME: Doesn't handle optional/default values (AFAIK only occurs in Index).
 
+data Expr = TExpr TextExpr | IExpr IntExpr deriving (Show)
+
 data TextExpr
   = TLit      Text
   | Chr       IntExpr
