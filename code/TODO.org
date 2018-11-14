@@ -1,12 +1,14 @@
-- [-] Examples:
-  - [ ] Pretty-print expressions
-  - [ ] Evaluate expressions
+- [-] Expressions:
+  - [-] Evaluator
+    - [X] implementation
     - [ ] test
-  - [ ] Generate inputs using QuickCheck.
-  - [-] Data:
-    - [-] Filter valid expressions
-      - [-] Parse expressions
-        - [X] implementation
-        - [ ] test
-    - [ ] Generate outputs
+  - [-] Parser
+    - [X] implementation
+    - [ ] test
+  - [ ] Pretty-printer
+  - [ ] Input generator
+  - [ ] Output generator
+  - [ ] Data:
+    - [ ] Filter and parse the interesting expressions
+    - [ ] Run them to obtain input-output pairs
     - [ ] Save the results

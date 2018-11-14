@@ -31,8 +31,9 @@ ghc-options:
 library:
   source-dirs: src
   exposed-modules:
-  - Examples.Generator
+  - Examples.Evaluator
   - Examples.Expressions
+  - Examples.Generator
   - Examples.Parser
   dependencies:
   - aeson

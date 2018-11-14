@@ -1,24 +1,50 @@
-module Examples.Expressions where
+module Examples.Expressions
+  -- ( TextExpr(..)
+  -- , IntExpr(..)
+  -- , evalT
+  -- , evalI
+  -- )
+where
 
 import           Data.Text (Text)
---------------------------------------------------------------------------------
--- | Language Grammar
 
--- FIXME: Should probably expect arithmetic expressions where Int is specified.
--- FIXME: Doesn't handle optional values
-data Expr
-  = Lit                Text
-  | Chr       { _c  :: Int }
-  | Concat    { _t1 :: Expr, _t2     :: Expr }
-  | Index     { _t  :: Expr, _search :: Expr, _startIndex :: Int, _searchFromEnd :: Bool, _ignoreCase :: Bool }
-  | Length    { _t  :: Expr }
+--------------------------------------------------------------------------------
+-- | DSL Grammar
+
+-- NOTE: Consider applying recursion schemes.
+-- NOTE: Should probably expect arithmetic expressions where Int is specified.
+-- NOTE: Consider expressing a diferent language than this one. In particular,
+-- consider separating monolithic functions (like Index) into sub functions
+-- (that don't necessarily exist in the OutSystems library).
+
+-- FIXME: Doesn't handle optional/default values (AFAIK only occurs in Index).
+
+data TextExpr
+  = TLit      Text
+  | Chr       IntExpr
+  -- ^        charcode
+  | Concat    TextExpr TextExpr
   | NewLine
-  | Replace   { _t  :: Expr, _search :: Expr, _replace    :: Expr }
-  | Substr    { _t  :: Expr, _start  :: Int,  _length     :: Int  }
-  | ToLower   { _t  :: Expr }
-  | ToUpper   { _t  :: Expr }
-  | Trim      { _t  :: Expr }
-  | TrimEnd   { _t  :: Expr }
-  | TrimStart { _t  :: Expr }
+  | Replace   TextExpr TextExpr TextExpr
+  -- ^        t        search   replace
+  | Substr    TextExpr IntExpr  IntExpr
+  -- ^        t        start    length
+  | ToLower   TextExpr
+  | ToUpper   TextExpr
+  | Trim      TextExpr
+  | TrimEnd   TextExpr
+  | TrimStart TextExpr
+  deriving (Show)
+
+data CaseSensitivity = Sensitive | Insensitive deriving (Eq, Ord, Show)
+data SearchDirection = FromStart | FromEnd     deriving (Eq, Ord, Show)
+
+data IntExpr
+  = ILit   Int
+  | Index  TextExpr TextExpr IntExpr SearchDirection CaseSensitivity
+  -- ^     t        search   startIndex
+  -- ^ FIXME: There is a corner case related to aggregates.
+  -- ^ FIXME: There is a corner case related to the search direction.
+  | Length TextExpr
   deriving (Show)
 
