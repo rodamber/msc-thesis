@@ -22,20 +22,29 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 
+default-extensions:
+- OverloadedStrings
+
+ghc-options:
+- -freverse-errors
+
 library:
   source-dirs: src
   exposed-modules:
-    - Examples.Generator
-    - Examples.Expressions
+  - Examples.Generator
+  - Examples.Expressions
+  - Examples.Parser
   dependencies:
-    - aeson
-    - bytestring
-    - text
-    - zlib
+  - aeson
+  - bytestring
+  - megaparsec
+  - parser-combinators
+  - text
+  - zlib
 
 executables:
   code-repl:
-    main: Main.hs
+    main:                Main.hs
     source-dirs: repl
     ghc-options:
     - -threaded

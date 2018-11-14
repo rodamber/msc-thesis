@@ -1,16 +1,11 @@
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-
-{- |
- - Module:      Examples.Generator
- - Description: (Will, at some point) Generate I/O examples from OutSystems expressions
- - Copyright:   (c) Rodrigo Bernardo, 2018
- - License:     ???
- - Maintainer:  rodrigo.bernardo@tecnico.ulisboa.pt
- - Stability:   ??? Doesn't work yet
- - Portability: ???
- -}
-
+-- |
+-- Module:      Examples.Generator
+-- Description: (Will, at some point) Generate I/O examples from OutSystems expressions
+-- Copyright:   (c) Rodrigo Bernardo, 2018
+-- License:     ???
+-- Maintainer:  rodrigo.bernardo@tecnico.ulisboa.pt
+-- Stability:   ??? Doesn't work yet
+-- Portability: ???
 
 module Examples.Generator where
 
@@ -22,8 +17,8 @@ import           Data.Aeson                 (FromJSON (..), decode, withObject,
                                              (.:))
 
 
-data Expression = Expression {
-    exprText      :: Text
+data Expression = Expression
+  { exprText      :: Text
   , exprExprKey   :: Text
   , exprRefs      :: [Text]
   , exprType      :: Text
