@@ -1,0 +1,12 @@
+- [-] Examples:
+  - [ ] Pretty-print expressions
+  - [ ] Evaluate expressions
+    - [ ] test
+  - [ ] Generate inputs using QuickCheck.
+  - [-] Data:
+    - [-] Filter valid expressions
+      - [-] Parse expressions
+        - [X] implementation
+        - [ ] test
+    - [ ] Generate outputs
+    - [ ] Save the results
