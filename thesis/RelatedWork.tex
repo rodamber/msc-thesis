@@ -3,7 +3,6 @@
 
 % Note that the reader might not read the document in the order it is presented.
 
-\todo{Should ``program synthesis'' be capitalized?}
 \marginpar[Left margin text]{Should ``program synthesis'' be capitalized?}
 This chapter discusses the state of the art of the field of program synthesis.
 Section~\ref{sec:challenges} presents the inherent challenges of the problem,
@@ -13,10 +12,7 @@ that specifications can take;
 section~\ref{sec:applications} presents applications of the problem;
 section~\ref{sec:search-techniques} presents techniques to prune the search
 space;
-section~\ref{sec:inductive-programming} presents program synthesis with
-approximate specifications;
-section~\ref{sec:pbe} refers to work done specifically in the area of
-\ac{PBE}.
+section~\ref{sec:pbe} refers to work done specifically in the area of \ac{PBE}.
 
 \section{Challenges}
 \label{sec:challenges}
@@ -66,7 +62,7 @@ Cheung et al. \cite{Cheung:2013} used a subset of SQL to synthesize optimized
 database-backed applications;
 the FlashExtract DSL \cite{Le:2014} includes programs that take semi-structured
 text files and a data structure definition as input, and return an instance of
-that data structure;\todo{How comprehensive should I be?}.
+that data structure;.
 
 Another approach is to let the user provide a partial program, hinting the
 structure of the intended implementation, while leaving holes for the
@@ -91,24 +87,119 @@ holes (like SIMD magic constants) \cite{Solar-Lezama:2008}
 \item ranking: MCMC, VSA, ML, Metasketches
 \end{itemize}
 
-\section{Inductive Programming}
-\label{sec:inductive-programming}
-
-This refers to any kind of program synthesis problem where the constraints are
-under-specified.
-
-\subsection{Programming by Examples}
+\section{Programming by Examples}
 \label{sec:pbe}
 
+% TODO: this section needs rewriting
+
+\ac{PBE} is an instance of the program synthesis problem where the specification
+is given by \ac{IO} examples. \todo{this should likely be in the introduction
+instead} Examples are generally easier to read and write than other kinds of
+specifications, such as logical formulas or program sketches. Typically they are
+preferred due to their ease of use, especially by non-programmers. However,
+sometimes it can be cumbersome or even impractical to specify the examples
+concretely, particularly if they are too large. \todo{Add an example here}
+\ac{PBE} can then be relaxed to allow incomplete outputs. \todo{is this
+necessary?} On the other hand, \todo{why?} inputs are tipically easier to come
+by.
+
 \begin{itemize}
-\item PBE (inductive programming)
-\item examples
-\item inverse semantics
-\item VSA
+\item applications (data wrangling [FlashFill, Morpheus])
 \end{itemize}
+
+\subsection{Version Space Algebra}
+\todo{The chapter structure might be following too much the survey...}
+\todo{I don't know this should be here, this seems to be applicable to other
+  kinds of program synthesis problems}
+
+\ac{VSA} is a data structure that allows for an efficient representation of a
+very large space of program sets by exploiting sharing among program
+subexpressions. It also allows for efficient operations on these sets such as:
+\todo{list and explain the operations}.
+
+They were introduced by Lau et al. in \cite{Lau:2000} and applied in ... for ...
+. In particular, they were used in FlashFill \todo{expand on this}...
+
+% \ac{VSA} is a data structure which allows for a \todo{on the size of
+% what?} polynomial space representation of sets of programs of exponential size.
+
+\subsection{Specialized Search Techniques}
+\label{sec:pbe-search-techniques}
+
+\todo{rewrite this}
+Typically, they fall inside a \textit{divide-and-conquer} deductive approach. 
+
+\begin{itemize}
+\item inverse semantics (constraint backpropagation) used in FlashFill
+(traditionally using \ac{VSA}): backpropagates constraints down the grammar of
+the \ac{DSL}; may not be feasible or can be expensive in practice (?);
+\item type-theoretic interpretation of \ac{PBE} and refinement types used, resp.,
+in Myth and Synquid. Can be very efficient when the \ac{DSL} carries expressive
+refinements (when ill-typed terms outnumber the well-typed ones).
+\end{itemize}
+
+\subsection{Disambiguation}
+\label{sec:resolving-ambiguity}
+
+Examples are, fundamentally, an \textit{under-specification}. There might be
+multiple consistent programs, but we must find the \textit{desired} one.
+
+\subsubsection{Ranking}
+
+\todo{rewrite the whole section} By ranking the set of programs consistent with
+examples according to their likelihood (better score, more likely to be the
+desired program). Requires domain expertise, it is time-consuming and
+error-prone, and is fragile because it depends too much on the underlying
+\ac{DSL}. There have been approaches to define such functions manually
+\todo{refs on page 110 of the survey}, but a more automated approach was
+proposed by Singh and Gulwani in \cite{Singh:ranking:2015}. There, they present
+a supervised machine learning approach for learning a \todo{explain what
+hierarchical means and realtion to VSAs} hierarchical ranking function which
+they applied to \todo{have we referenced flash fill before?} FlashFill. Some
+challenges of this are:
+\begin{itemize}
+\item needs large set of labeled training data;
+\item needs appropriate machine learning models and cost functions;
+  % basically needs ML expertise, duh
+\item the ranking function should allow for efficient identification of the
+  top-ranked program.
+\end{itemize}
+
+\todo{expand on this} A key insight is that in program synthesis it is sufficient
+to rank any correct program higher than all incorrect programs.
+
+\subsubsection{Active Learning}
+
+Active learning is an interactive approach between the user and the synthesizer.
+Typically, this happens by asking the user for (a small set of) additional
+\ac{IO} examples. Another idea, \todo{verify this} introduced by Jha et
+al.\cite{Jha:oracle:2010}, works by finding a \ref{explain what this
+is}\textit{distinguishing input} and query the user what the expected output
+should be for it. This way it is possible to disambiguate between two programs
+whose outputs differ on that particular input.
+
+Other types of active learning exist such as:
+\begin{itemize}
+\item displaying the program to the user;
+\item paraphrasing the program in natural language;
+\item accepting negative examples; 
+  % isto e algo que nao parece ter sido muito explorado
+\end{itemize}
+
+\todo{expand} Ambiguity resolution may depend a lot on corner case coverage.
 
 \section{Synthesis of Data Transformation Programs}
 \label{sec:data-trans-synth}
+
+\todo{Data Wrangling?}
+
+\section{Other}
+\label{sec:other}
+
+\begin{itemize}
+\item smt theory of strings
+\item SyGuS
+\end{itemize}
 
 %%% Local Variables:
 %%% mode: latex
