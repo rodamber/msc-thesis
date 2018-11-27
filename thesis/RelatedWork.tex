@@ -3,16 +3,15 @@
 
 % Note that the reader might not read the document in the order it is presented.
 
-\marginpar[Left margin text]{Should ``program synthesis'' be capitalized?}
 This chapter discusses the state of the art of the field of program synthesis.
 Section~\ref{sec:challenges} presents the inherent challenges of the problem,
 such as resolving ambiguity or the size of the search space;
-\todo{Very ugly...}section~\ref{sec:specifications} presents the various forms
-that specifications can take;
-section~\ref{sec:applications} presents applications of the problem;
-section~\ref{sec:search-techniques} presents techniques to prune the search
-space;
-section~\ref{sec:pbe} refers to work done specifically in the area of \ac{PBE}.
+section~\ref{sec:specifications} \pdfmarkupcomment[color=yellow]{presents the
+various forms that specifications can take}{Huh, ugly.};
+section~\ref{sec:applications}
+presents applications of the problem; section~\ref{sec:search-techniques}
+presents techniques to prune the search space; section~\ref{sec:pbe} refers to
+work done specifically in the area of \ac{PBE}.
 
 \section{Challenges}
 \label{sec:challenges}
@@ -46,23 +45,21 @@ section~\ref{sec:pbe} refers to work done specifically in the area of \ac{PBE}.
 \item filling incomplete programs
 \end{itemize}
 
-\todo{Search space?}\section{Search Techniques}
+\section{Search Techniques}
 \label{sec:search-techniques}
 
-\todo{Ref. is Ras Bodik ICFP15 talk} Derivation (deductive search?) applies
-semantics-preserving rewrite rules... correctness by construction.
-Search (enumerative search?) sidesteps this, but the program space can be too large.
-One way to tackle this issue is to syntactically restrict the space of valid
-programs. We can do this by restricting the programs to those expressible in a
-small DSL:
-\marginpar{Check more recent research} Gulwani and Sumit \cite{Gulwani:2011}
-used FlashFill to automate string processing in the context of spreadsheet
-applications using input-output examples;
-Cheung et al. \cite{Cheung:2013} used a subset of SQL to synthesize optimized
-database-backed applications;
-the FlashExtract DSL \cite{Le:2014} includes programs that take semi-structured
-text files and a data structure definition as input, and return an instance of
-that data structure;.
+\pdfmargincomment{Ref. is Ras Bodik ICFP15 talk} Derivation (deductive search?)
+applies semantics-preserving rewrite rules... correctness by construction.
+Search (enumerative search?) sidesteps this, but the program space can be too
+large. One way to tackle this issue is to syntactically restrict the space of
+valid programs. We can do this by restricting the programs to those expressible
+in a small DSL: \pdfmargincomment{Check out more recent research.} Gulwani and
+Sumit \cite{Gulwani:2011} used FlashFill to automate string processing in the
+context of spreadsheet applications using input-output examples; Cheung et al.
+\cite{Cheung:2013} used a subset of SQL to synthesize optimized database-backed
+applications; the FlashExtract DSL \cite{Le:2014} includes programs that take
+semi-structured text files and a data structure definition as input, and return
+an instance of that data structure;.
 
 Another approach is to let the user provide a partial program, hinting the
 structure of the intended implementation, while leaving holes for the
@@ -90,44 +87,50 @@ holes (like SIMD magic constants) \cite{Solar-Lezama:2008}
 \section{Programming by Examples}
 \label{sec:pbe}
 
-% TODO: this section needs rewriting
+\pdffreetextcomment{This section needs rewriting.}
 
-\ac{PBE} is an instance of the program synthesis problem where the specification
-is given by \ac{IO} examples. \todo{this should likely be in the introduction
-instead} Examples are generally easier to read and write than other kinds of
-specifications, such as logical formulas or program sketches. Typically they are
-preferred due to their ease of use, especially by non-programmers. However,
+\pdfmargincomment{I wonder if most of this paragraph should not be in the
+introduction instead.} \ac{PBE} is an instance of the program synthesis problem
+where the specification is given by \ac{IO} examples.
+\pdfmarkupcomment[color=yellow]{Examples are generally easier to read and write
+than other kinds of specifications, such as logical formulas or program
+sketches}{Not entirely correct; it depends on the application}. Typically they
+are preferred due to their ease of use, especially by non-programmers. However,
 sometimes it can be cumbersome or even impractical to specify the examples
-concretely, particularly if they are too large. \todo{Add an example here}
-\ac{PBE} can then be relaxed to allow incomplete outputs. \todo{is this
-necessary?} On the other hand, \todo{why?} inputs are tipically easier to come
-by.
+concretely, particularly if they are too large. \pdfmargincomment{Add an example
+here} \ac{PBE} can then be relaxed to allow incomplete outputs. On the other
+hand, \pdfmarkupcomment[color=yellow]{inputs are tipically easier to come
+by.}{Why? And is this necessary?}
 
 \begin{itemize}
 \item applications (data wrangling [FlashFill, Morpheus])
 \end{itemize}
 
 \subsection{Version Space Algebra}
-\todo{The chapter structure might be following too much the survey...}
-\todo{I don't know this should be here, this seems to be applicable to other
-  kinds of program synthesis problems}
+
+\pdffreetextcomment{The chapter structure might be following too much the survey...}
+
+\pdffreetextcomment{I don't know this should be here, this seems to be
+applicable to other kinds of program synthesis problems}
 
 \ac{VSA} is a data structure that allows for an efficient representation of a
 very large space of program sets by exploiting sharing among program
-subexpressions. It also allows for efficient operations on these sets such as:
-\todo{list and explain the operations}.
+subexpressions. \pdfmarkupcomment[color=yellow]{It also allows for efficient
+operations on these sets such as:} {list and explain the operations}.
 
+\pdfmargincomment{expand on this}
 They were introduced by Lau et al. in \cite{Lau:2000} and applied in ... for ...
-. In particular, they were used in FlashFill \todo{expand on this}...
+In particular, they were used in FlashFill...
 
-% \ac{VSA} is a data structure which allows for a \todo{on the size of
+% \ac{VSA} is a data structure which allows for a \pdfcomment{on the size of
 % what?} polynomial space representation of sets of programs of exponential size.
 
 \subsection{Specialized Search Techniques}
 \label{sec:pbe-search-techniques}
 
-\todo{rewrite this}
-Typically, they fall inside a \textit{divide-and-conquer} deductive approach. 
+\pdfmarkupcomment[color=yellow]{Typically, they fall inside a
+\textit{divide-and-conquer} deductive approach. }{rewrite this}
+
 
 \begin{itemize}
 \item inverse semantics (constraint backpropagation) used in FlashFill
@@ -146,17 +149,18 @@ multiple consistent programs, but we must find the \textit{desired} one.
 
 \subsubsection{Ranking}
 
-\todo{rewrite the whole section} By ranking the set of programs consistent with
-examples according to their likelihood (better score, more likely to be the
-desired program). Requires domain expertise, it is time-consuming and
-error-prone, and is fragile because it depends too much on the underlying
-\ac{DSL}. There have been approaches to define such functions manually
-\todo{refs on page 110 of the survey}, but a more automated approach was
-proposed by Singh and Gulwani in \cite{Singh:ranking:2015}. There, they present
-a supervised machine learning approach for learning a \todo{explain what
-hierarchical means and realtion to VSAs} hierarchical ranking function which
-they applied to \todo{have we referenced flash fill before?} FlashFill. Some
-challenges of this are:
+\pdfmargincomment{rewrite the whole section} By ranking the set of programs
+consistent with examples according to their likelihood (better score, more
+likely to be the desired program). Requires domain expertise, it is
+time-consuming and error-prone, and is fragile because it depends too much on
+the underlying \ac{DSL}. \pdfmarkupcomment[color=yellow]{There have been
+approaches to define such functions manually} {refs on page 110 of the survey},
+but a more automated approach was proposed by Singh and Gulwani in
+\cite{Singh:ranking:2015}. There, they present a supervised machine learning
+approach for learning a \pdfmarkupcomment[color=yellow]{hierarchical ranking
+function }{explain what hierarchical means and their relation to VSAs} which
+they applied to \pdfmarkupcomment[color=yellow]{FlashFill}{have we referenced
+flash fill before?}. Some challenges of this are:
 \begin{itemize}
 \item needs large set of labeled training data;
 \item needs appropriate machine learning models and cost functions;
@@ -165,18 +169,18 @@ challenges of this are:
   top-ranked program.
 \end{itemize}
 
-\todo{expand on this} A key insight is that in program synthesis it is sufficient
-to rank any correct program higher than all incorrect programs.
+\pdfmargincomment{expand on this} A key insight is that in program synthesis it
+is sufficient to rank any correct program higher than all incorrect programs.
 
 \subsubsection{Active Learning}
 
 Active learning is an interactive approach between the user and the synthesizer.
 Typically, this happens by asking the user for (a small set of) additional
-\ac{IO} examples. Another idea, \todo{verify this} introduced by Jha et
-al.\cite{Jha:oracle:2010}, works by finding a \ref{explain what this
-is}\textit{distinguishing input} and query the user what the expected output
-should be for it. This way it is possible to disambiguate between two programs
-whose outputs differ on that particular input.
+\ac{IO} examples. \pdfmarkupcomment[color=yellow]{Another idea}{verify this},
+introduced by Jha et al.\cite{Jha:oracle:2010}, works by finding a \ref{explain
+what this is}\textit{distinguishing input} and query the user what the expected
+output should be for it. This way it is possible to disambiguate between two
+programs whose outputs differ on that particular input.
 
 Other types of active learning exist such as:
 \begin{itemize}
@@ -186,12 +190,12 @@ Other types of active learning exist such as:
   % isto e algo que nao parece ter sido muito explorado
 \end{itemize}
 
-\todo{expand} Ambiguity resolution may depend a lot on corner case coverage.
+\pdffreetextcomment{expand} Ambiguity resolution may depend a lot on corner case coverage.
 
 \section{Synthesis of Data Transformation Programs}
 \label{sec:data-trans-synth}
 
-\todo{Data Wrangling?}
+\pdffreetextcomment{Data Wrangling?}
 
 \section{Other}
 \label{sec:other}
