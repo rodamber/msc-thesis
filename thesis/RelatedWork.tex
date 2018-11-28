@@ -34,6 +34,17 @@ work done specifically in the area of \ac{PBE}.
 \item logical relation
 \end{itemize}
 
+\subsection{Sketching}
+
+Introduced in \cite{Solar-Lezama:2008}.
+
+Some specs are difficult to master (tricky or involved, the formalism may be
+hard, etc) and/or ``far removed from traditional programming models'' (Solar-Lezama).
+
+Insight is given by incomplete programs which express the high-level structure
+of the procedures while leaving missing parts, called holes, for the synthesizer
+to fill.
+
 \section{Applications}
 \label{sec:applications}
 
@@ -68,6 +79,16 @@ synthesizer to fill:
 templates \cite{Srivastava:2012},
 holes (like SIMD magic constants) \cite{Solar-Lezama:2008}
 
+\ac{CEGIS}, introduced by Solar-Lezama \cite{Solar-Lezama:2008},
+\pdfmarkupcomment[color=red]{``which combines the inductive synthesizer with a validation procedure to
+automatically generate test inputs and ensure that the generated program
+satisfies its specification.''}{Copied from the his abstract.}
+
+\subsection{Deductive Search}
+\label{sec:deductive-search}
+
+\pdfmarkupcomment[color=red]{``Deductive systems rely on derivation, but this makes it hard to take advantage
+of partial information about the solution.''}{From Solar-Lezama thesis, p.25}
 
 \begin{itemize}
 \item deductive search
@@ -90,17 +111,20 @@ holes (like SIMD magic constants) \cite{Solar-Lezama:2008}
 \pdffreetextcomment{This section needs rewriting.}
 
 \pdfmargincomment{I wonder if most of this paragraph should not be in the
-introduction instead.} \ac{PBE} is an instance of the program synthesis problem
-where the specification is given by \ac{IO} examples.
+introduction instead.}
+\ac{PBE} is an instance of the program synthesis problem where the specification
+is given by \ac{IO} examples.
 \pdfmarkupcomment[color=yellow]{Examples are generally easier to read and write
 than other kinds of specifications, such as logical formulas or program
-sketches}{Not entirely correct; it depends on the application}. Typically they
-are preferred due to their ease of use, especially by non-programmers. However,
-sometimes it can be cumbersome or even impractical to specify the examples
-concretely, particularly if they are too large. \pdfmargincomment{Add an example
-here} \ac{PBE} can then be relaxed to allow incomplete outputs. On the other
-hand, \pdfmarkupcomment[color=yellow]{inputs are tipically easier to come
-by.}{Why? And is this necessary?}
+sketches}{Not entirely correct; it depends on the application}.
+Typically they are preferred due to their ease of use, especially by
+non-programmers.
+However, sometimes it can be cumbersome or even impractical to specify the
+examples concretely, particularly if they are too large.
+\pdfmargincomment{Add an example here} \ac{PBE} can then be relaxed to allow
+incomplete outputs.
+On the other hand, \pdfmarkupcomment[color=yellow]{inputs are tipically easier
+to come by.}{Why? And is this necessary?}
 
 \begin{itemize}
 \item applications (data wrangling [FlashFill, Morpheus])
