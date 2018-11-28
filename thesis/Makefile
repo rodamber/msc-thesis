@@ -1,34 +1,21 @@
-# ---------------------------------------------------------
-# type "make" command in Unix to create the PDF file 
-# ---------------------------------------------------------
-
-# Main filename
 FILE=Thesis
 
-# ---------------------------------------------------------
-PDF_VIEWER ?= xdg-open
+.PHONY: all i r clean veryclean v
 
-.PHONY: r clean veryclean v
+all:
+	latexmk
 
-all: *.tex
-	pdflatex  -shell-escape ${FILE}
-# 	makeindex $(FILE).nlo -s nomencl.ist -o $(FILE).nls
-# 	makeindex $(FILE).glo -s $(FILE).ist -o $(FILE).gls -t $(FILE).glg
-	pdflatex  -shell-escape ${FILE}
-	bibtex ${FILE}
-	pdflatex  -shell-escape ${FILE}
-	pdflatex  -shell-escape ${FILE}
+i:
+	latexmk -pvc
 
 clean:
-	(rm -rf *.aux *.bbl *.blg *.glg *.glo *.gls *.ilg *.ist *.lof *.log *.lot *.nlo *.nls *.out *.toc *.loa *.auxlock)
-	rm -f ./temp/*.*
-	rm -f *~
+	latexmk -c
 
 veryclean:
 	make clean
-	rm -f *~
-	rm -f $(FILE).pdf $(FILE).ps
+	latexmk -C
+	(rm -rf *.bbl *.glo *.ist *.nlo *.upa *.upb)
 
 v: all
-	$(PDF_VIEWER) $(FILE).pdf 2>/dev/null &
+	open -a Skim $(FILE).pdf
 	grep 'LaTeX Warning' $(FILE).log || true
