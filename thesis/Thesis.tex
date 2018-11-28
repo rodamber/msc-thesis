@@ -2,6 +2,8 @@
 
 \input{Preamble}
 
+\includeonly{Introduction,Preliminaries,RelatedWork}
+
 \begin{document}
 
 % Set plain page style (no headers, footer with centered page number)
@@ -10,39 +12,37 @@
 % Set roman numbering (i,ii,...) before the start of chapters
 \pagenumbering{roman}
 
-% \input{FrontCover}
+\include{FrontCover}
 
-% Optional.
-% \input{Dedication}
+% \include{Dedication}
 
-% Optional
-% \input{Acknowledgements}
+\include{Acknowledgements}
 
-% \input{Resumo}
-% \input{Abstract} % Both in English and Portuguese
+\include{Resumo}
+\include{Abstract} % Both in English and Portuguese
 
 \tableofcontents
-% \cleardoublepage 
+\cleardoublepage
 
-% Lists of algorithms, figures and tables: Generate lists and add entries in the
-% table of contents as sections.
+Lists of algorithms, figures and tables: Generate lists and add entries in the
+table of contents as sections.
 
-% \listofalgorithms
-% \addcontentsline{toc}{section}{List of Algorithms}
-% \cleardoublepage 
+\listofalgorithms
+\addcontentsline{toc}{section}{List of Algorithms}
+\cleardoublepage
 
-% \listoffigures
-% \addcontentsline{toc}{section}{\listfigurename}
-% \cleardoublepage 
+\listoffigures
+\addcontentsline{toc}{section}{\listfigurename}
+\cleardoublepage
 
-% \listoftables
-% \addcontentsline{toc}{section}{\listtablename}
-% \cleardoublepage 
+\listoftables
+\addcontentsline{toc}{section}{\listtablename}
+\cleardoublepage
 
 % % Nomenclature
 % %
 % % entries of nomenclature list
-% \input{Nomenclature}
+% \include{Nomenclature}
 % %
 % % Insert glossary/nomenclature section produced by MakeIndex
 % \printnomenclature
@@ -51,7 +51,7 @@
 % \cleardoublepage
 
 % % entries of glossary list
-% \input{Glossary}
+% \include{Glossary}
 
 % % Insert glossary section produced by MakeIndex
 % \printglossary
@@ -66,19 +66,19 @@
 % ----------------------------------------------------------------------
 %  Chapters
 
-\input{Introduction}
+\include{Introduction}
 
-\input{Preliminaries}
+\include{Preliminaries}
 
-\input{RelatedWork}
+\include{RelatedWork}
 
-% \input{Software}
+\include{Software}
 
-% \input{Evaluation}
+\include{Evaluation}
 
-% \input{Conclusions}
+\include{Conclusions}
 
-%\input{FutureWork}
+\include{FutureWork}
 
 
 % ----------------------------------------------------------------------
@@ -124,7 +124,7 @@
 %  Appendix (optional)
 % ----------------------------------------------------------------------
 %\appendix
-%\input{Appendix}
+%\include{Appendix}
 
 
 % ----------------------------------------------------------------------
