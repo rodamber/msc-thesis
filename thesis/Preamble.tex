@@ -184,13 +184,28 @@
 % This package lets us display pseudocode in various fashions
 \usepackage[linesnumbered,ruled,vlined,algochapter]{algorithm2e}
 
-% ----------------------------- Other -------------------------------------
+% ----------------------------------------------------------------------
+% Other Packages
+% ----------------------------------------------------------------------
 
-\usepackage{lipsum}
-\usepackage{outlines}
-
+% Support for highlighting and popup notes (works with Adobe Acrobat Reader).
 \usepackage{pdfcomment}
+
 \usepackage{xcolor}
+
+% ----------------------------------------------------------------------
+% Acronyms
+% ----------------------------------------------------------------------
+
+% FIXME: Does not automatically capitalize the first word at the start of the
+% sentence.
+
+\acrodef{CEGIS}{counterexample guided inductive search}
+\acrodef{DSL}{Domain Specific Language}
+\acrodef{IO}{\textit{input-output}}
+\acrodef{PBE}{Programming by Examples}
+\acrodef{VSA}{\textit{version space algebra}}
+
 
 %%% Local Variables:
 %%% mode: latex
