@@ -19,6 +19,8 @@ Thesis.pdf
 *.out
 *.toc
 *.synctex.gz
+*.upa
+*.upb
 
 
 paper.fdb_latexmk
