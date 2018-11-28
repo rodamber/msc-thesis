@@ -1,0 +1,54 @@
+\section{Search Techniques}
+\label{sec:search-techniques}
+
+\pdfmargincomment{Ref. is Ras Bodik ICFP15 talk} Derivation (deductive search?)
+applies semantics-preserving rewrite rules... correctness by construction.
+Search (enumerative search?) sidesteps this, but the program space can be too
+large. One way to tackle this issue is to syntactically restrict the space of
+valid programs. We can do this by restricting the programs to those expressible
+in a small DSL: \pdfmargincomment{Check out more recent research.} Gulwani and
+Sumit \cite{Gulwani:2011} used FlashFill to automate string processing in the
+context of spreadsheet applications using input-output examples; Cheung et al.
+\cite{Cheung:2013} used a subset of SQL to synthesize optimized database-backed
+applications; the FlashExtract DSL \cite{Le:2014} includes programs that take
+semi-structured text files and a data structure definition as input, and return
+an instance of that data structure;.
+
+Another approach is to let the user provide a partial program, hinting the
+structure of the intended implementation, while leaving holes for the
+synthesizer to fill:
+
+templates \cite{Srivastava:2012},
+holes (like SIMD magic constants) \cite{Solar-Lezama:2008}
+
+\ac{CEGIS}, introduced by Solar-Lezama \cite{Solar-Lezama:2008},
+\pdfmarkupcomment[color=red]{``which combines the inductive synthesizer with a validation procedure to
+automatically generate test inputs and ensure that the generated program
+satisfies its specification.''}{Copied from the his abstract.}
+
+\subsection{Deductive Search}
+\label{sec:deductive-search}
+
+\pdfmarkupcomment[color=red]{``Deductive systems rely on derivation, but this makes it hard to take advantage
+of partial information about the solution.''}{From Solar-Lezama thesis, p.25}
+
+\begin{itemize}
+\item deductive search
+\item transformation-based search
+\item enumerative search (top-down, bottom-up, bidirectional, offline exhaustive enumeration and composition)
+\item oracles (validation, correction, programs), CEGIS, OGIS, (universal) distinguishing inputs
+\item constraint-based search (component based, sketch generation/completion, solver-aided programming, ILP, )
+\item statistical search (machine learning, genetic programming, MCMC, sampling, probabilistic inference)
+\item Neural-guided search
+\item Graph neural networks
+\item PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
+\item Active learning, interaction, distinguishing inputs
+\item meta-synthesis, rosette, prose, sketch, solver-aided programming, domain separation
+\item ranking: MCMC, VSA, ML, Metasketches
+\end{itemize}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../Thesis"
+%%% End:
