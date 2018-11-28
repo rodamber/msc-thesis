@@ -1,17 +1,7 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     Preamble                                                         %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \documentclass[10pt,a4paper,twoside]{report}
 
 \input{Preamble}
 
-% 
-% ------------------------------------------------------------------------------
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     Begin Document                                                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 % Set plain page style (no headers, footer with centered page number)
@@ -20,60 +10,34 @@
 % Set roman numbering (i,ii,...) before the start of chapters
 \pagenumbering{roman}
 
-% ----------------------------------------------------------------------
-%  Cover page
-% ----------------------------------------------------------------------
 \input{FrontCover}
 
-% ----------------------------------------------------------------------
-% Dedication page (optional)
-% ----------------------------------------------------------------------
+% Optional.
 % \input{Dedication}
 
-% ----------------------------------------------------------------------
-%  Acknowledgments (optional)
-% ----------------------------------------------------------------------
+% Optional
 \input{Acknowledgements}
 
-% ----------------------------------------------------------------------
-%  Abstract (both in English and Portuguese)
-% ----------------------------------------------------------------------
 \input{Resumo}
-\input{Abstract}
+\input{Abstract} % Both in English and Portuguese
 
-% ----------------------------------------------------------------------
-%  Table of contents, list of tables, list of figures and nomenclature
-% ----------------------------------------------------------------------
-
-% Table of contents
-%
 \tableofcontents
 \cleardoublepage 
 
-% List of algorithms
-%
-% Generate list
+% Lists of algorithms, figures and tables: Generate lists and add entries in the
+% table of contents as sections.
+
 \listofalgorithms
-% Add entry in the table of contents as section
 \addcontentsline{toc}{section}{List of Algorithms}
 \cleardoublepage 
 
-% List of figures
-%
-% Generate list
 \listoffigures
-% Add entry in the table of contents as section
 \addcontentsline{toc}{section}{\listfigurename}
 \cleardoublepage 
 
-% List of tables
-%
-% Generate list
 \listoftables
-% Add entry in the table of contents as section
 \addcontentsline{toc}{section}{\listtablename}
 \cleardoublepage 
-
 
 % % Nomenclature
 % %
@@ -95,14 +59,12 @@
 % \addcontentsline{toc}{section}{\glossaryname}
 % \cleardoublepage
 
-% Set arabic numbering (1,2,...) after preface
-%
+% Set arabic numbering (1,2,...)
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
 % ----------------------------------------------------------------------
 %  Chapters
-% ----------------------------------------------------------------------
 
 \input{Introduction}
 
@@ -121,7 +83,6 @@
 
 % ----------------------------------------------------------------------
 %  Bibliography
-% ----------------------------------------------------------------------
 
 % Include all references in .bib file, even non-cited ones...
 %\nocite{*} % this should be used carefully because it is not correct!
