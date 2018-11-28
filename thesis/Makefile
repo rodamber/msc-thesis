@@ -9,12 +9,12 @@ i:
 	latexmk -pvc
 
 clean:
+	(rm -rf *.glo *.ist *.nlo *.upa *.upb *.loa)
 	latexmk -c
 
 veryclean:
 	make clean
 	latexmk -C
-	(rm -rf *.bbl *.glo *.ist *.nlo *.upa *.upb)
 
 v: all
 	open -a Skim $(FILE).pdf
