@@ -2,7 +2,7 @@
 
 \input{Preamble}
 
-\includeonly{Introduction,Preliminaries,RelatedWork}
+% \includeonly{Introduction,Preliminaries,RelatedWork}
 
 \begin{document}
 
@@ -12,121 +12,45 @@
 % Set roman numbering (i,ii,...) before the start of chapters
 \pagenumbering{roman}
 
-\include{FrontCover}
+\subincludefrom{document/}{FrontCover}
 
 % \include{Dedication}
 
-\include{Acknowledgements}
+\subincludefrom{document/}{Acknowledgements}
 
-\include{Resumo}
-\include{Abstract} % Both in English and Portuguese
+\subincludefrom{document/}{Resumo}
+\subincludefrom{document/}{Abstract} % Both in English and Portuguese
 
 \tableofcontents
 \cleardoublepage
 
-% Lists of algorithms, figures and tables: Generate lists and add entries in the
-% table of contents as sections.
-
-\listofalgorithms
-\addcontentsline{toc}{section}{List of Algorithms}
-\cleardoublepage
-
-\listoffigures
-\addcontentsline{toc}{section}{\listfigurename}
-\cleardoublepage
-
-\listoftables
-\addcontentsline{toc}{section}{\listtablename}
-\cleardoublepage
-
-% % Nomenclature
-% %
-% % entries of nomenclature list
-% \include{Nomenclature}
-% %
-% % Insert glossary/nomenclature section produced by MakeIndex
-% \printnomenclature
-% % Add entry in the table of contents as section
-% \addcontentsline{toc}{section}{\nomname}
-% \cleardoublepage
-
-% % entries of glossary list
-% \include{Glossary}
-
-% % Insert glossary section produced by MakeIndex
-% \printglossary
-% % Add entry in the table of contents as section
-% \addcontentsline{toc}{section}{\glossaryname}
-% \cleardoublepage
+\subincludefrom{document/}{Lists}
 
 % Set arabic numbering (1,2,...)
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
-% ----------------------------------------------------------------------
-%  Chapters
+\subincludefrom{document/}{Introduction}
 
-\include{Introduction}
+\subincludefrom{document/}{Preliminaries}
 
-\include{Preliminaries}
+\subincludefrom{document/RelatedWork/}{RelatedWork}
 
-\subincludefrom{RelatedWork/}{RelatedWork}
+\subincludefrom{document/}{Software}
 
-\include{Software}
+\subincludefrom{document/}{Evaluation}
 
-\include{Evaluation}
+\subincludefrom{document/}{Conclusions}
 
-\include{Conclusions}
+\subincludefrom{document/}{FutureWork}
 
-\include{FutureWork}
-
-
-% ----------------------------------------------------------------------
-%  Bibliography
-
-% Include all references in .bib file, even non-cited ones...
-%\nocite{*} % this should be used carefully because it is not correct!
-
-% Produces the bibliography section when processed by BibTeX
-%
-% Bibliography style
-% > entries ordered alphabetically
-%\bibliographystyle{plain}
-% > unsorted with entries appearing in the order in which the citations appear.
-%\bibliographystyle{unsrt}
-% > entries ordered alphabetically, with first names and names of journals and months abbreviated
-%\bibliographystyle{abbrv}
-% > entries ordered alphabetically, with reference markers based on authors' initials and publication year
-%\bibliographystyle{alpha}
-%
-% Replacement bibliography styles provided by 'natbib' package
-% (plainnat.bst, abbrvnat.bst, unsrtnat.bst )
-% > entries ordered alphabetically
-%\bibliographystyle{plainnat}
-% > unsorted with entries appearing in the order in which the citations appear.
-%\bibliographystyle{unsrtnat}
-% > entries ordered alphabetically, with first names and names of journals and months abbreviated
 \bibliographystyle{abbrvnat}
-% > entries ordered alphabetically, with reference markers based on authors' initials and publication year
-%\bibliographystyle{alpha}
-
-
-% External bibliography database file in the BibTeX format
 \cleardoublepage
-
-%\nocite{gnuPara}
 \bibliography{References}
-% Add entry in the table of contents as chapter
 \addcontentsline{toc}{chapter}{\bibname}
-%\cleardoublepage
 
-% ----------------------------------------------------------------------
-%  Appendix (optional)
-% ----------------------------------------------------------------------
 %\appendix
 %\include{Appendix}
 
 
-% ----------------------------------------------------------------------
 \end{document}
-% ----------------------------------------------------------------------
