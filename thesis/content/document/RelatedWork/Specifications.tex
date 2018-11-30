@@ -1,26 +1,20 @@
-\section{Specifications}
+\section{High-Level Specifications}
 \label{sec:specifications}
 
-\begin{itemize}
-\item syntactic bias, sketches, metasketches (sketch generation), templates, skeleton,
-\item   grammar, dsls, holes, SyGuS
-\item programming by example, input-output examples/constraints, inductive programming
-\item from execution traces
-\item another program
-\item logical relation
-\end{itemize}
+\pdfmarkupcomment[color=red]{sic}{}
+``The user intent can be expressed in various forms including logical
+specification, examples [44], traces, natural language [28, 46, 79], partial
+programs [132], or even related programs. A particular choice may be more suited
+in a given scenario depending on the underlying task as well as on the technical
+background of the user.''
 
-\subsection{Sketching}
+\input{SyntaxGuided}
+\input{Inductive}
 
-Introduced in \cite{Solar-Lezama:2008}.
-
-Some specs are difficult to master (tricky or involved, the formalism may be
-hard, etc) and/or ``far removed from traditional programming models'' (Solar-Lezama).
-
-Insight is given by incomplete programs which express the high-level structure
-of the procedures while leaving missing parts, called holes, for the synthesizer
-to fill.
-
+\subsection{Contracts}
+\subsubsection{Logic-Based}
+Logical relations between the inputs and the outputs of the program.
+\subsubsection{Type-Based}
 
 %%% Local Variables:
 %%% mode: latex

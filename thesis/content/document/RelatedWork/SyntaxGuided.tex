@@ -1,0 +1,72 @@
+\subsection{Syntax-Guided Synthesis}
+\label{sec:sygus}
+
+\pdfmarkupcomment[color=red]{Needs rewrite}{} % sic
+
+Syntax-guided synthesis is a form of program synthesis where the program
+candidates are defined by a syntactic template \cite{Alur:sygus:2013}.
+The semantic correctness can then be provided by any other kind of high-level
+specification.
+
+The user can use the candidate set to limit the search space implementations,
+not only for its computational benefits, but also for the purpose of performance
+optimizations, e.g., by limiting the search space to implementations that only
+use a limited amount of lines of code.
+
+This approach gives the programmer the flexibility to express the desired
+artifact using a combination of syntactic and semantic constraints.
+
+Because this formulation boils down to finding a correct expression from
+the syntactic space of expressions, it lends itself to machine learning and
+inductive inference.
+
+The syntactic restrictions are typically provided in the form of a context-free
+grammar \cite{Alur:sygus:2013} or with sketches \cite{Solar-Lezama:2008}.
+
+\subsubsection{Sketching}
+\label{sec:sketching}
+
+\pdfmarkupcomment[color=red]{Incomplete}{}
+
+The idea of sketching is to provide skeletons (sketches) of the programs with
+missing details, called holes, left for the synthesizer to fill.
+The synthesizer is then directed by the high-level structure of the skeleton
+while taking care of finding the low-level details according to user-specified
+assertions.
+Sketching is an accessible form of program synthesis, as it does not require
+learning new specification languages, allowing the users to use the programming
+model with which they are already familiarized.
+
+\pdfmarkupcomment[color=red]{Expand this paragraph.}{}
+This approach was introduced in the SKETCH system by Solar-Lezama
+\cite{Solar-Lezama:2008}, allowing for the synthesis of imperative programs
+in a C-like language. ``SKETCH synthesizes integers that are bounded for each
+hole.''
+
+% \subsubsection{Language Grammar}
+% \label{sec:language-grammar}
+
+% The syntax of the programs can 
+
+\subsubsection{Metasketching}
+\label{sec:metasketching}
+
+\pdfmarkupcomment[color=red]{Needs rewrite}{} % sic
+\pdfmarkupcomment[color=red]{Expand}{}
+
+Metasketches generalize sketches, enabling a description of an infinite space of
+candidate programs with a countable, ordered set of finite sketches.
+This representation permits fine-grained control over the shape of the candidate
+space, which is critical for effective search.
+A metasketch additionally provides a means of assigning cost to programs and of
+directing the search toward lower-cost regions of the candidate space.
+
+
+ % Might be merged into sec:sketching
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../Thesis"
+%%% End:
