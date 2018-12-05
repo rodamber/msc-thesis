@@ -13,7 +13,7 @@ v:
 	latexmk -cd $(MASTER) -pv
 
 clean:
-	latexmk -cd $(MASTER) -C
+	latexmk -cd $(MASTER) -c
 
 c: clean
 
