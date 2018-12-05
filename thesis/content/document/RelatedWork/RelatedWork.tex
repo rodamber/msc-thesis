@@ -11,19 +11,17 @@ Program synthesis has been used typically to infer programs in declarative or
 functional languages.
 
 This chapter discusses the state of the art of the field of program synthesis.
-Section~\ref{sec:challenges} presents the inherent challenges of the problem,
-such as resolving ambiguity or the size of the search space;
+% Section~\ref{sec:challenges} presents the inherent challenges of the problem,
+% such as resolving ambiguity or the size of the search space;
 section~\ref{sec:specifications} \pdfmarkupcomment[color=yellow]{presents the
 various forms that specifications can take}{Huh, ugly.};
-section~\ref{sec:applications}
-presents applications of the problem; section~\ref{sec:search-techniques}
-presents techniques to prune the search space; section~\ref{sec:pbe} refers to
-work done specifically in the area of \ac{PBE}.
+% section~\ref{sec:applications} presents applications of the problem;
+section~\ref{sec:search-techniques} presents techniques to prune the search
+space;
+section~\ref{sec:pbe} refers to work done specifically in the area of \ac{PBE}.
 
-\input{Challenges}
-\input{Specifications}
-\input{Applications}
-\input{SearchTechniques}
+\subimport{Specifications/}{Specifications}
+\subimport{SearchTechniques/}{SearchTechniques}
 \input{ProgrammingByExamples}
 
 \section{Synthesis of Data Transformation Programs}

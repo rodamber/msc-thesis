@@ -4,7 +4,7 @@ $pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode';
 
 $bibtex_use = 2;
 
-$clean_ext = "bbl glo ist nlo upa upb loa";
+$clean_ext = "bbl glo ist nlo upa upb loa fls";
 
 @generated_exts = (@generated_exts, 'synctex.gz');
 @default_files = ('Thesis.tex');
