@@ -162,7 +162,7 @@
 }
 
 % Flexible bibliography support.
-\usepackage[numbers]{natbib}
+\usepackage[numbers, sort&compress]{natbib}
 
 % to mark math mode use \( and \) because is latex and provides better error message than $..$, which is tex
 
@@ -193,6 +193,10 @@
 % Support for highlighting and popup notes (works with Adobe Acrobat Reader).
 \usepackage[author={Rodrigo}]{pdfcomment}
 
+\newcommand{\note}[3]{\pdfmarkupcomment[color=#1]{#2}{#3}}
+\newcommand{\todo}[2]{\note{yellow}{#1}{#2}}
+\newcommand{\fixme}[2]{\note{red}{#1}{#2}}
+
 \usepackage{xcolor}
 
 % ----------------------------------------------------------------------
@@ -206,6 +210,7 @@
 \acrodef{DSL}{Domain Specific Language}
 \acrodef{IO}{\textit{input-output}}
 \acrodef{PBE}{Programming by Examples}
+\acrodef{PBD}{Programming by Demonstration}
 \acrodef{VSA}{\textit{version space algebra}}
 
 

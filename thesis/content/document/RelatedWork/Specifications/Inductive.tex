@@ -1,36 +1,54 @@
-% FIXME: Maybe change this to ''incomplete specifications``?
 \subsection{Inductive Synthesis}
 \label{sec:inductive}
 
 Inductive synthesis is an instance of the program synthesis problem where the
-constraints are under-specified.
-
-\subsubsection{Programming By Demonstration}
-
-\pdfmarkupcomment[color=red]{Incomplete}{}
-
-Lau et al. define it as "inferring generalized actions based on examples of the
-state changes resulting from demonstrated actions".
-
-Number of traces needed must be small in order to be practical.
-
-Lau et al. applied VSA to PBD by implementing SMARTedit, a system that induces
-repetitive text-editing programs from as few as one or two examples.
-
-\subsubsection{Execution Traces}
-
-\pdfmarkupcomment[color=red]{Incomplete}{}
-
-In \cite{Lau:traces:2003} Lau et. al apply version space algebra to infer
-procedural programs from execution traces.
-They present a language-neutral framework and implementation of a system that
-``correct programs from a remarkably short 5.1 traces on average''.
+constraints are under-specified. Sometimes the domain we want to model is too
+complex and a complete specification could be, not only as hard to produce, but
+also of size of the same order of magnitude as the program itself. In other
+cases, we might want the synthesizer to be as easy and intuitive to use as
+possible for users with myriad different backgrounds.
 
 \subsubsection{Programming By Examples}
 
-\pdfmarkupcomment[color=green]{...}{Should I put the PBE section here instead?}
+\ac{PBE} is an instance of inductive synthesis where the specification is given
+by \ac{IO} examples that the desired program must satisfy. Explicitly giving
+examples can be preferred due to their ease of use, especially by
+non-programmers, when compared to more technical kinds of specification, such as
+logical formulas. The examples may either be \todo{positive}{explain me; example
+ref} or \todo{negative}{explain me; example ref}. More generally, given some
+(implicit) \ac{IO} pair, we may include asserting properties of the output
+instead of specifying it completely \cite{Gulwani2017, Polozov:2015:FFI}. This
+can be helpful if its impractical or impossible to write the output concretely,
+e.g., if it is infinite.
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../Thesis"
-%%% End:
+\subsubsection{Programming By Demonstration}
+
+% Watch What I Do – Programming by Demonstration
+
+In \ac{PBD} the user does not write a specification \textit{per se}; instead the
+synthesizer actively records user actions on concrete examples using them to
+infer the intended program. The program must then generalize to be used with
+different inputs. \ac{PBD} can be seen as a refinement of \ac{PBE} that
+considers an entire execution trace (step-by-step instructions of the program
+behavior on a given input) instead of a single \ac{IO} example. It depicts how
+to achieve the corresponding output instead of just specifying what it should
+be.
+
+Though the concept is easy to understand, the task of the user can be tedious
+and time-consuming. Therefore, the synthesizer must be able to infer the
+intended program from a small set of user demonstrations. Ideally, it would also
+be able effectively interact with and receive feedback from the user. However,
+the concept might also be interesting when applied to non-interactive contexts,
+such as \textit{reverse engineering}.
+
+Lau et al. \cite{Lau2003} applied \ac{PBD} to the text-editing domain by
+implementing SMARTedit, a system that induces repetitive text-editing programs
+from as few as one or two examples . The system resembles familiar
+keystroke-based macro interfaces, but it generalizes to a more robust program
+that is likely to work in more situations.
+
+In \cite{Lau:traces:2003} Lau et al. present a language-neutral framework and
+implementation of a system that learns procedural programs from 5.1 traces on
+average.
+
+% ------------------------------------------------------------------------------

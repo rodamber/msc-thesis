@@ -1,24 +1,6 @@
 \section{Programming by Examples}
 \label{sec:pbe}
 
-\pdfmarkupcomment[color=red]{This section needs rewriting.}{}
-
-\pdfmargincomment{I wonder if most of this paragraph should not be in the
-introduction instead.}
-\ac{PBE} is an instance of the program synthesis problem where the specification
-is given by \ac{IO} examples.
-\pdfmarkupcomment[color=yellow]{Examples are generally easier to read and write
-than other kinds of specifications, such as logical formulas or program
-sketches}{Not entirely correct; it depends on the application}.
-Typically they are preferred due to their ease of use, especially by
-non-programmers.
-However, sometimes it can be cumbersome or even impractical to specify the
-examples concretely, particularly if they are too large.
-\pdfmargincomment{Add an example here} \ac{PBE} can then be relaxed to allow
-incomplete outputs.
-On the other hand, \pdfmarkupcomment[color=yellow]{inputs are tipically easier
-to come by.}{Why? And is this necessary?}
-
 \begin{itemize}
 \item applications (data wrangling [FlashFill, Morpheus])
 \end{itemize}
@@ -90,6 +72,7 @@ Other types of active learning exist such as:
 
 \pdfmarkupcomment[color=yellow]{Ambiguity resolution may depend a lot on corner case coverage.}{expand}
 
+\todo{Negative examples.}{\cite{Frankle:2016:EST}}
 
 %%% Local Variables:
 %%% mode: latex

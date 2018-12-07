@@ -1,22 +1,33 @@
-\section{High-Level Specifications}
+\section{Specifications}
 \label{sec:specifications}
 
-\pdfmarkupcomment[color=red]{sic}{}
-``The user intent can be expressed in various forms including logical
-specification, examples [44], traces, natural language [28, 46, 79], partial
-programs [132], or even related programs. A particular choice may be more suited
-in a given scenario depending on the underlying task as well as on the technical
-background of the user.''
+\fixme{General problems with this section}{}:
+\begin{itemize}
+\item Fails to explore the shortcomings of each approach.
+\item Lacks examples to explain the exposed ideas.
+\item Few references. I'm sure the coverage of the state of the art could be
+  better.
+\end{itemize}
+
+The first part of solving a program synthesis problem is figuring out in which
+way the users will express their intent.
+That intent may specified in many different ways, including:
+  logical \cite{Itzhaky:SIS:2010}
+  or type-based specifications \cite{Osera:2015:TPS, Frankle:2016:EST,
+    Polikarpova:2016:PSP};
+  incomplete specifications such as
+  input-output examples \cite{Frankle:2016:EST, Gulwani:2012:SDM, Leung:2015:IPS},
+  demonstrations \cite{Lau2003}
+  or program traces \cite{Lau:traces:2003};
+  or syntax-guided methods such as sketches \cite{Solar-Lezama:2008, Alur:sygus:2013}.
+The kind of specification used typically depends on the particular problem at
+hand, especially when taking into account the multitude of different users
+backgrounds, and it might also dictate the type of techniques used to solve the
+problem.
+
+% ------------------------------------------------------------------------------
 
 \input{SyntaxGuided}
 \input{Inductive}
-
-\subsection{Contracts}
-\subsubsection{Logic-Based}
-Logical relations between the inputs and the outputs of the program.
-\subsubsection{Type-Based}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../Thesis"
-%%% End:
+% \input{Contracts}
+\input{Programs}

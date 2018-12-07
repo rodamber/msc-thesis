@@ -1,72 +1,61 @@
 \subsection{Syntax-Guided Synthesis}
 \label{sec:sygus}
 
-\pdfmarkupcomment[color=red]{Needs rewrite}{} % sic
+% \fixme{Not sure if this should be the first section in the chapter.}{}
 
-Syntax-guided synthesis is a form of program synthesis where the program
-candidates are defined by a syntactic template \cite{Alur:sygus:2013}.
-The semantic correctness can then be provided by any other kind of high-level
-specification.
+% Not really a specification \textit{per se}
 
-The user can use the candidate set to limit the search space implementations,
-not only for its computational benefits, but also for the purpose of performance
-optimizations, e.g., by limiting the search space to implementations that only
-use a limited amount of lines of code.
+Syntax-guided synthesis is a form of program synthesis where the semantic
+specification is complemented with some form of syntactic restriction over the
+program candidates.
 
-This approach gives the programmer the flexibility to express the desired
-artifact using a combination of syntactic and semantic constraints.
-
-Because this formulation boils down to finding a correct expression from
-the syntactic space of expressions, it lends itself to machine learning and
-inductive inference.
+This approach was introduced in the \todo{SKETCH}{Explain its
+shortcomings} system by Solar-Lezama \cite{Solar-Lezama:2008}, which allowed the
+synthesis of imperative programs in a C-like language.
+It was then generalized and formalized in \cite{Alur:sygus:2013}, with the
+objective of ``formulating the core computational problem common to many recent
+tools for program synthesis in a canonical and logical manner''.
 
 The syntactic restrictions are typically provided in the form of a context-free
 grammar \cite{Alur:sygus:2013} or with sketches \cite{Solar-Lezama:2008}.
+These restrictions provide structure to the set of candidate programs, possibly
+resulting in more efficient search procedures, while making this problem
+suitable for \todo{machine learning and inductive inference}{missing
+references} \cite{Alur:sygus:2013}. They can also be used for the purpose of
+performance optimizations, e.g., by limiting the search space to implementations
+that only use a limited amount of lines of code.
+The learned programs also tend to be more readable and explainable.
 
-\subsubsection{Sketching}
+% ------------------------------------------------------------------------------
+
+\subsubsection{Sketching and Metasketching}
 \label{sec:sketching}
 
-\pdfmarkupcomment[color=red]{Incomplete}{}
+% \todo{This subsubsection was left kind of dull after the modifications... Maybe
+% it should be removed?}{}
 
-The idea of sketching is to provide skeletons (sketches) of the programs with
-missing details, called holes, left for the synthesizer to fill.
+The idea of sketching is to provide skeletons of the programs we want to
+synthesize, called \textit{sketches}, leaving missing details, called
+\textit{holes}, for the synthesizer to fill.
 The synthesizer is then directed by the high-level structure of the skeleton
 while taking care of finding the low-level details according to user-specified
 assertions.
+
 Sketching is an accessible form of program synthesis, as it does not require
 learning new specification languages, allowing the users to use the programming
 model with which they are already familiarized.
 
-\pdfmarkupcomment[color=red]{Expand this paragraph.}{}
-This approach was introduced in the SKETCH system by Solar-Lezama
-\cite{Solar-Lezama:2008}, allowing for the synthesis of imperative programs
-in a C-like language. ``SKETCH synthesizes integers that are bounded for each
-hole.''
+% \textit{Metasketches} \cite{Bornholt:2016:OSM} generalize sketches.
 
-% \subsubsection{Language Grammar}
-% \label{sec:language-grammar}
+% Instead of just one sketch, a metasketch represents an 
 
-% The syntax of the programs can 
+% enabling a description of an infinite space of candidate programs with a
+% countable, ordered set of finite sketches.
 
-\subsubsection{Metasketching}
-\label{sec:metasketching}
+% This representation permits fine-grained control over the shape of the candidate
+% space, which is critical for effective search.
 
-\pdfmarkupcomment[color=red]{Needs rewrite}{} % sic
-\pdfmarkupcomment[color=red]{Expand}{}
+% A metasketch additionally provides a means of assigning cost to programs and of
+% directing the search toward lower-cost regions of the candidate space.
 
-Metasketches generalize sketches, enabling a description of an infinite space of
-candidate programs with a countable, ordered set of finite sketches.
-This representation permits fine-grained control over the shape of the candidate
-space, which is critical for effective search.
-A metasketch additionally provides a means of assigning cost to programs and of
-directing the search toward lower-cost regions of the candidate space.
-
-
- % Might be merged into sec:sketching
-
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../Thesis"
-%%% End:
+% \todo{Check out PSKETCH}{\cite{Gulwani2017}: page 32}
