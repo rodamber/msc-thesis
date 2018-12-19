@@ -1,32 +1,33 @@
 \section{Specifications}
 \label{sec:specifications}
 
-\fixme{General problems with this section}{}:
-\begin{itemize}
-\item Fails to explore the shortcomings of each approach.
-\item Lacks examples to explain the exposed ideas.
-\item Few references. I'm sure the coverage of the state of the art could be
-  better.
-\item Still incomplete.
-\end{itemize}
+% \fixme{General problems with this section}{}:
+% \begin{itemize}
+% \item Fails to explore the shortcomings of each approach.
+% \item Lacks examples to explain the exposed ideas.
+% \item Few references. I'm sure the coverage of the state of the art could be
+%   better.
+% \item Still incomplete.
+% \end{itemize}
+
+% Comentário da Professora: Usar mesma ordem e mesmos métodos que vêm a seguir.
 
 The first part of solving a program synthesis problem is figuring out in which
 way the users will express their intent.
-That intent may specified in many different ways, including:
+That intent may be specified in many different ways, including:
   logical \cite{Itzhaky:SIS:2010}
   or type-based specifications \cite{Osera:2015:TPS, Frankle:2016:EST,
     Polikarpova:2016:PSP};
-  incomplete specifications such as
+  syntax-guided methods \cite{Alur:sygus:2013} such as
+  sketches \cite{Solar-Lezama:2008};
+  or incomplete specifications such as
   input-output examples \cite{Frankle:2016:EST, Gulwani:2012:SDM, Leung:2015:IPS},
   demonstrations \cite{Lau2003}
-  or program traces \cite{Lau:traces:2003};
-  or syntax-guided methods such as sketches \cite{Solar-Lezama:2008, Alur:sygus:2013}.
+  or program traces \cite{Lau:traces:2003}.
 The kind of specification used typically depends on the particular problem at
-hand, especially when taking into account the multitude of different users
+hand, especially when taking into account the multitude of different user
 backgrounds, and it might also dictate the type of techniques used to solve the
 problem.
-
-% ------------------------------------------------------------------------------
 
 \input{SyntaxGuided}
 \input{Inductive}
