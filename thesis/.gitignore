@@ -1,9 +1,11 @@
 Thesis.pdf
 
 # Auxiliar latex compilation files
+*.acn
+*.acr
+*.alg
 *.aux
 *.auxlock
-*.loa
 *.bbl
 *.blg
 *.glg
@@ -11,14 +13,15 @@ Thesis.pdf
 *.gls
 *.ilg
 *.ist
+*.loa
 *.lof
 *.log
 *.lot
 *.nlo
 *.nls
 *.out
-*.toc
 *.synctex.gz
+*.toc
 *.upa
 *.upb
 

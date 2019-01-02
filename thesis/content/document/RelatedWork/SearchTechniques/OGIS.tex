@@ -1,0 +1,120 @@
+\subsection{Oracle-Guided Inductive Synthesis}
+\label{sec:ogis}
+
+\Acrfull{ogis} is an approach to program synthesis where the synthesizer is
+split into two components: the \textit{learner} and the \textit{oracle}. The two
+components communicate in an iterative \textit{query/response} cycle, as shown
+in \fixme{Figure}{missing figure}. The learner implements the search strategy to
+find the program and is parameterized by some form of program specification
+and/or syntactic bias (see~\ref{sec:specifications}). The usefulness of the
+oracle is defined by the type of queries it can handle and the properties of its
+responses. The characteristics of these components are typically imposed by the
+\todo{application}{give an example}.
+
+% TODO: Talk about the Bounded Observation Hypothesis
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    [semithick, >=stealth, auto,
+    component/.style={rectangle, draw, rounded corners, text width=4cm,
+      align=center, minimum size=1.5cm}]
+
+    \node [component] (S)                   {Solver \\ (\textit   {search} component)};
+    \node [component] (V)  [right=4cm of S] {Verifier \\ (\textit {validation} component)}
+      ([yshift=0.2cm]S.east) edge [->] node        {Candidate program $P$}  ([yshift=0.2cm]V.west)
+      ([yshift=-.2cm]S.east) edge [<-] node [swap] {Counterexample $x^{-}$} ([yshift=-.2cm]V.west);
+
+    \node [above=of S] {Search space}
+      edge [->] (S);
+    \node [above=of V] {Specification $\phi$}
+      edge [->] (V);
+
+    \node [below=of S] {\xmark{} Fail}
+      edge [<-] (S);
+    \node [below=of V] {\checkmark{} Success}
+      edge [<-] (V);
+  \end{tikzpicture}
+  \caption{Counterexample-guided inductive synthesis.}
+  \label{fig:cegis}
+\end{figure}
+
+Common queries and response types include the following:
+
+\begin{itemize}
+\item Membership queries, where, given an I/O example $x$, the oracle responds
+  with the answer to whether $x$ is positive or not.
+\item Positive (resp. negative) witness queries, where the oracle responds with a
+  positive (resp. negative) I/O example, if it can find any, or $\bot$, otherwise.
+\item Counterexample queries, where, given a candidate program $p$, the oracle
+  responds with an I/O counterexample that $p$ does not satisfy, if it can find
+  any, or $\bot$, otherwise.
+\item Correctness queries, where, given a candidate program $p$, the oracle
+  responds with the answer to whether $p$ is correct or not. If it is not, the
+  oracle responds with an I/O counterexample.
+\item Verification queries, where, given a program $p$ and specification $\phi$,
+  the oracle responds with the answer to whether $p$ satisfies $\phi$.
+\item Distinguishing input queries, where, given a program $p$ and set of I/O
+  examples $X$ that $p$ \todo{satisfies}{did I define what satisfying a set of
+    examples means?}, the oracle responds with a new program $p'$ and a
+  counterexample $x \not\in X$ such that $p'$ satisfies $X \cup x$ and $p$ does not satisfy
+  $x$.
+\end{itemize}
+
+% TODO: Discussion on the various types of queries.
+  % The counterexample is a \textit{constructive} proof that the
+  % program is \todo{incorrect}{should I define somewhere what this means?}.
+
+  % The distinguishing input query has been found useful in scenarios where it is
+  % computationally hard to check correctness using the specificatio, such as in
+  % malware deobfuscation [30].
+
+  % semantic equivalence, see overview
+
+  % counterexample vs correctness
+  % counterexample vs distinguishing (note that $x \not\in X$, but that doesn't
+  % mean that $P'$ is the program we want)
+
+% TODO: Where did it come from?
+
+% ------------------------------------------------------------------------------
+
+% - Introduce the concept of OGIS. (Why are we talking about it? Second-order problem reduction?)
+
+% - Describe OGIS, the concept of oracles and distinguishing inputs, and comment
+% on them (e.g., counterexample -> CEGIS, validation oracles may be too
+% expensive, distinguishing inputs lend themselves to interactive program
+% synthesis, etc)
+
+% - Relate the oracles (in particular, the distinguishing oracle and relate it
+% to interactive program synthesis)
+
+% - Maybe add a note on the complexity of OGIS.
+
+% In the paper of OGIS, they describe a component-based approach, where each
+% component's specification is a set of I/O examples (TODO: check how they do this).
+% This is in contrast to the approach used in Ruben's paper, where the
+% specifications are more general.
+% Moreover, the program specification in OGIS seems to be a set of I/O examples
+% (TODO: check this).
+
+% % Bounded Observation Hypothesis
+% % \cite{Solar-Lezama:2008}
+% ``The crucial observation that makes sketch [inductive] synthesis possible is
+% that for many sketches, an implementation that works correctly for the common
+% case and for all the different corner cases is likely to work correctly for all
+% inputs.''
+% % It then gives the example of doubly-linked lists.
+
+% ------------------------------------------------------------------------------
+
+% % \cite{Solar-Lezama:2008}
+% ``Inductive synthesis is the process of generating a program from concrete
+% observations of its behavior, where an observation describes the expected
+% behavior of the program on a specific input. The inductive synthesizer uses each
+% new observation to refine its hypothesis about what the correct program should
+% be until it converges to a solution. Inductive synthesis had its origin in the
+% work by Gold [33] on language learning, and the pioneering work by Shapiro [57]
+% on inductive synthesis and its application to algorithmic debugging among
+% others.''
+

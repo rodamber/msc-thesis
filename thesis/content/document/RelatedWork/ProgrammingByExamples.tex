@@ -14,10 +14,10 @@
 
 \begin{itemize}
 \item inverse semantics (constraint backpropagation) used in FlashFill
-(traditionally using \ac{VSA}): backpropagates constraints down the grammar of
-the \ac{DSL}; may not be feasible or can be expensive in practice (?);
-\item type-theoretic interpretation of \ac{PBE} and refinement types used, resp.,
-in Myth and Synquid. Can be very efficient when the \ac{DSL} carries expressive
+(traditionally using \glspl{vsa}): backpropagates constraints down the grammar of
+the \gls{dsl}; may not be feasible or can be expensive in practice (?);
+\item type-theoretic interpretation of \gls{pbe} and refinement types used, resp.,
+in Myth and Synquid. Can be very efficient when the \gls{dsl} carries expressive
 refinements (when ill-typed terms outnumber the well-typed ones).
 \end{itemize}
 
@@ -33,7 +33,7 @@ multiple consistent programs, but we must find the \textit{desired} one.
 consistent with examples according to their likelihood (better score, more
 likely to be the desired program). Requires domain expertise, it is
 time-consuming and error-prone, and is fragile because it depends too much on
-the underlying \ac{DSL}. \pdfmarkupcomment[color=yellow]{There have been
+the underlying \gls{dsl}. \pdfmarkupcomment[color=yellow]{There have been
 approaches to define such functions manually} {refs on page 110 of the survey},
 but a more automated approach was proposed by Singh and Gulwani in
 \cite{Singh:ranking:2015}. There, they present a supervised machine learning
@@ -56,7 +56,7 @@ is sufficient to rank any correct program higher than all incorrect programs.
 
 Active learning is an interactive approach between the user and the synthesizer.
 Typically, this happens by asking the user for (a small set of) additional
-\ac{IO} examples. \pdfmarkupcomment[color=yellow]{Another idea}{verify this},
+\gls{io} examples. \pdfmarkupcomment[color=yellow]{Another idea}{verify this},
 introduced by Jha et al.\cite{Jha:oracle:2010}, works by finding a \ref{explain
 what this is}\textit{distinguishing input} and query the user what the expected
 output should be for it. This way it is possible to disambiguate between two
@@ -73,8 +73,3 @@ Other types of active learning exist such as:
 \pdfmarkupcomment[color=yellow]{Ambiguity resolution may depend a lot on corner case coverage.}{expand}
 
 \todo{Negative examples.}{\cite{Frankle:2016:EST}}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../Thesis"
-%%% End:

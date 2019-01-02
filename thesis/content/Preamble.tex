@@ -1,7 +1,3 @@
-% ----------------------------------------------------------------------
-% Define document language.
-% ----------------------------------------------------------------------
-
 \usepackage[utf8]{inputenc}
 
 \usepackage[english]{babel}
@@ -13,12 +9,6 @@
 % Portuguese
 \addto\captionsportuguese{\renewcommand{\acknowledgments}{Agradecimentos}}
 \addto\captionsportuguese{\renewcommand{\nomname}{Lista de S\'{i}mbolos}} % Nomenclatura
-
-\usepackage[printonlyused]{acronym}
-
-% ----------------------------------------------------------------------
-% Define default and cover page fonts.
-% ----------------------------------------------------------------------
 
 % Use Arial font as default
 \renewcommand{\rmdefault}{phv}
@@ -36,11 +26,6 @@
 \def\FontSn{% 12 pt normal
   \usefont{T1}{phv}{m}{n}\fontsize{12pt}{12pt}\selectfont}
 
-
-% ----------------------------------------------------------------------
-% Define page margins and line spacing.
-% ----------------------------------------------------------------------
-
 % > set the page margins (2.5cm minimum in every side, as per IST rules)
 % > allow setting line spacing (line spacing of 1.5, as per IST rules)
 \usepackage{geometry}
@@ -48,98 +33,8 @@
 \usepackage{setspace}
 \setstretch{1.5}
 
-% % FIXME: Workaround to that todonotes fit in the margins.
-% \usepackage[paperwidth=275.9mm, paperheight=279.4mm]{geometry}
-% \setlength{\marginparwidth}{4cm}
-% \usepackage[textwidth=4cm]{todonotes}
-
-
 \usepackage{graphicx}
-% \usepackage{pdflscape}
-% \usepackage{lscape}
-% \usepackage{float}
-% \restylefloat{figure}
-
-% \usepackage{amsmath}
-% \usepackage{amsthm}
-% \usepackage{amsfonts}
 \usepackage{amssymb}
-
-% \usepackage{subfigure}
-% \usepackage{caption}
-% \usepackage{url}
-
-% \usepackage{dcolumn}
-% \newcolumntype{d}{D{.}{.}{-1}} % column aligned by the point separator '.'
-% \newcolumntype{e}{D{E}{E}{-1}} % column aligned by the exponent 'E'
-
-%Appendix package
-% \usepackage{appendix}
-% \usepackage{longtable}
-
-% 'nomencl' package
-%
-% Produce lists of symbols as in nomenclature.
-% http://www.ctan.org/tex-archive/macros/latex/contrib/nomencl/
-%
-% The nomencl package makes use of the MakeIndex program
-% in order to produce the nomenclature list.
-%
-% Nomenclature
-% 1) On running the file through LATEX, the command \makenomenclature
-%    in the preamble instructs it to create/open the nomenclature file
-%    <jobname>.nlo corresponding to the LATEX file <jobname>.tex and
-%    writes the information from the \nomenclature commands to this file.
-% 2) The next step is to invoke MakeIndex in order to produce the
-%    <jobname>.nls file. This can be achieved by making use of the
-%    command: makeindex <jobname>.nlo -s nomencl.ist -o <jobname>.nls
-% 3) The last step is to invoke LATEX on the <jobname>.tex file once
-%    more. There, the \printnomenclature in the document will input the
-%    <jobname>.nls file and process it according to the given options.
-%
-% http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/nomencl.pdf
-%
-% Nomenclature (produces *.nlo *.nls files)
-\usepackage{nomencl}
-\makenomenclature
-%
-% Group variables according to their symbol type
-%
-\RequirePackage{ifthen} 
-\ifthenelse{\equal{\languagename}{english}}%
-    { % English
-    \renewcommand{\nomgroup}[1]{%
-      \ifthenelse{\equal{#1}{R}}{%
-        \item[\textbf{Roman symbols}]}{%
-        \ifthenelse{\equal{#1}{G}}{%
-          \item[\textbf{Greek symbols}]}{%
-          \ifthenelse{\equal{#1}{S}}{%
-            \item[\textbf{Subscripts}]}{%
-            \ifthenelse{\equal{#1}{T}}{%
-              \item[\textbf{Superscripts}]}{}}}}}%
-    }{% Portuguese
-    \renewcommand{\nomgroup}[1]{%
-      \ifthenelse{\equal{#1}{R}}{%
-        \item[\textbf{Simbolos romanos}]}{%
-        \ifthenelse{\equal{#1}{G}}{%
-          \item[\textbf{Simbolos gregos}]}{%
-          \ifthenelse{\equal{#1}{S}}{%
-            \item[\textbf{Subscritos}]}{%
-            \ifthenelse{\equal{#1}{T}}{%
-              \item[\textbf{Sobrescritos}]}{}}}}}%
-    }%
-
-
-% Create a glossary (produces *.glo *.ist files).
-\usepackage[number=none]{glossary}
-\setglossary{gloskip={}} % Remove blank line between groups
-\makeglossary
-
-% % Rotation tools, including rotated full-page floats.
-% % > show wide figures and tables in landscape format:
-% %   use \begin{sidewaystable} and \begin{sidewaysfigure}
-% %   instead of 'table' and 'figure', respectively.
-% \usepackage{rotating}
 
 \usepackage[pdftex]{hyperref}       % enhance documents that are to be
                                     % output as HTML and PDF
@@ -164,29 +59,19 @@
 % Flexible bibliography support.
 \usepackage[numbers, sort&compress]{natbib}
 
-% to mark math mode use \( and \) because is latex and provides better error message than $..$, which is tex
-
-% \usepackage{listings}           % for displaying code
-% \usepackage{enumerate}
-
-% \usepackage{pifont}             % some symbols from fonts
-% \usepackage{nameref}
-% \usepackage{soul}               % to striketrhourhg text
-
-% \usepackage[pdftex]{color}
-% \definecolor{citeblue}{rgb}{0.1,0,.4}
-% \definecolor{refcolor}{rgb}{0,0,0.4}
-% \definecolor{midgreen}{RGB}{0,150,0}
-% \definecolor{darkgreen}{RGB}{0,128,0}
-% \definecolor{darkblue}{RGB}{0,0,128}
-% \definecolor{darkred}{RGB}{192,0,0}
-
 % This package lets us display pseudocode in various fashions
 \usepackage[linesnumbered,ruled,vlined,algochapter]{algorithm2e}
 
-% ----------------------------------------------------------------------
-% Other Packages
-% ----------------------------------------------------------------------
+\usepackage[acronym]{glossaries} % must be after hyperref
+\makeglossaries
+
+\newacronym{cegis}{CEGIS}{counterexample-guided inductive search}
+\newacronym{dsl}{DSL}{Domain Specific Language}
+\newacronym{io}{I/O}{Input-Output}
+\newacronym{ogis}{OGIS}{oracle-guided inductive search}
+\newacronym{pbd}{PBD}{Programming by Demonstration}
+\newacronym{pbe}{PBE}{Programming by Examples}
+\newacronym{vsa}{VSA}{Version Space Algebra}
 
 \usepackage{import}
 
@@ -200,16 +85,10 @@
 
 \usepackage{xcolor}
 
-% ----------------------------------------------------------------------
-% Acronyms
-% ----------------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{arrows,backgrounds,positioning, fit,shapes}
 
-% FIXME: Does not automatically capitalize the first word at the start of the
-% sentence.
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
 
-\acrodef{CEGIS}{counterexample guided inductive search}
-\acrodef{DSL}{Domain Specific Language}
-\acrodef{IO}{\textit{input-output}}
-\acrodef{PBE}{Programming by Examples}
-\acrodef{PBD}{Programming by Demonstration}
-\acrodef{VSA}{\textit{version space algebra}}
