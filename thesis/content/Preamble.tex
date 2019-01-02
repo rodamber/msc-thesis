@@ -62,16 +62,9 @@
 % This package lets us display pseudocode in various fashions
 \usepackage[linesnumbered,ruled,vlined,algochapter]{algorithm2e}
 
-\usepackage[acronym]{glossaries} % must be after hyperref
+\usepackage[acronym,toc]{glossaries} % must be after hyperref
 \makeglossaries
-
-\newacronym{cegis}{CEGIS}{counterexample-guided inductive search}
-\newacronym{dsl}{DSL}{Domain Specific Language}
-\newacronym{io}{I/O}{Input-Output}
-\newacronym{ogis}{OGIS}{oracle-guided inductive search}
-\newacronym{pbd}{PBD}{Programming by Demonstration}
-\newacronym{pbe}{PBE}{Programming by Examples}
-\newacronym{vsa}{VSA}{Version Space Algebra}
+\loadglsentries[main]{Glossary}
 
 \usepackage{import}
 
