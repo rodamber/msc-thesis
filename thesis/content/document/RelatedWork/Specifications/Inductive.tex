@@ -31,18 +31,18 @@ synthesizer actively records user actions on concrete examples using them to
 infer the intended program. The program must be general enough to be used
 with different inputs. \gls{pbd} can be seen as a refinement of \gls{pbe} that
 considers an entire execution trace (i.e., step-by-step instructions of the
-program behavior on a given input) instead of a single gls{io} example. It
+program behavior on a given input) instead of a single \gls{io} example. It
 depicts \textit{how} to achieve the corresponding output instead of just
 specifying \textit{what} it should be.
 
-Though the concept of gls{pbd} is easy to understand, the task of the user can
+Though the concept of \gls{pbd} is easy to understand, the task of the user can
 be tedious and time-consuming. Therefore, the synthesizer must be able to infer
 the intended program from a small set of user demonstrations. Ideally, it would
 also be able to interact effectively and receive feedback from the user.
 However, the concept might also be interesting when applied to non-interactive
 contexts, such as \textit{reverse engineering}.
 
-Lau et al. applied gls{pbd} to the text-editing domain by implementing
+Lau et al. applied \gls{pbd} to the text-editing domain by implementing
 SMARTedit, a system that induces repetitive text-editing programs from as few as
 one or two examples. The system resembles familiar keystroke-based macro
 interfaces, but it generalizes to a more robust program that is likely to work
