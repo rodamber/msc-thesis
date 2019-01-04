@@ -4,46 +4,36 @@
 \textit{\Gls{ogis}} is an approach to program synthesis where the synthesizer is
 split into two components: the \textit{learner} and the \textit{oracle}. The two
 components communicate in an iterative \textit{query/response} cycle, as shown
-in \fixme{Figure}{missing figure}. The learner implements the search strategy to
+in Figure~\ref{fig:ogis}. The learner implements the search strategy to
 find the program and is parameterized by some form of program specification
 and/or syntactic bias (see~\ref{sec:specifications}). The usefulness of the
 oracle is defined by the type of queries it can handle and the properties of its
 responses. The characteristics of these components are typically imposed by the
 \todo{application}{give an example}.
 
-\fixme{Falta aqui uma figura a representar o sistema OGIS para substituir a
-  figura~\protect\ref{fig:cegis}.}{}
-
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \begin{tikzpicture}
     [semithick, >=stealth, auto,
-    component/.style={rectangle, draw, rounded corners, text width=4cm,
-      align=center, minimum size=1.5cm}]
+     rectangular/.style={rectangle, draw, rounded corners, text width=4cm,
+       align=center, minimum size=1.5cm},
+     spherical/.style={circle, draw, text width=2cm, align=center}]
 
-    \node [component] (S)                   {Solver \\ (\textit   {search} component)};
-    \node [component] (V)  [right=4cm of S] {Verifier \\ (\textit {validation} component)}
-      ([yshift=0.2cm]S.east) edge [->] node        {Candidate program $P$}  ([yshift=0.2cm]V.west)
-      ([yshift=-.2cm]S.east) edge [<-] node [swap] {Counterexample $x^{-}$} ([yshift=-.2cm]V.west);
-
-    \node [above=of S] {Search space}
+    \node [rectangular] (S)  {Learner};
+    \node [left=1.95cm of S, align=center] (I) {Specification\\and/or Syntactic Bias}
       edge [->] (S);
-    \node [above=of V] {Specification $\phi$}
-      edge [->] (V);
-
-    \node [below=of S] {\xmark{} Fail}
+    \node [below=of S, align=center] {Program $p$\\or Fail}
       edge [<-] (S);
-    \node [below=of V] {\checkmark{} Success}
-      edge [<-] (V);
+    \node [spherical] (V)  [right=3cm of S] {Oracle}
+      ([yshift=0.2cm]S.east) edge [->, bend left]  node        {Query}    ([yshift=0.2cm]V.west)
+      ([yshift=-.2cm]S.east) edge [<-, bend right] node [swap] {Response} ([yshift=-.2cm]V.west);
   \end{tikzpicture}
-  \caption{Counterexample-guided inductive synthesis. Adapted from
-    ~\protect\citeauthor{Gulwani2017}~\protect\cite{Gulwani2017}.}
-
-  \label{fig:cegis}
+  \caption{\Acrlong{ogis}. Adapted from
+    \protect\citeauthor{Jha:2017:TFS}~\protect\cite{Jha:2017:TFS}.}
+  \label{fig:ogis}
 \end{figure}
 
-
-Typical queries and response types are some of the following:
+Typical queries and response types are some of the following~\cite{Jha:2017:TFS}:
 
 \begin{itemize}
 \item \textit{Membership queries}, where given an I/O example $x$ the oracle
@@ -69,11 +59,11 @@ Typical queries and response types are some of the following:
 % FIXME: Is this ^^^ too close to the original?
 
 An \gls{ogis} system responding to counterexample queries corresponds to the
-\textit{\gls{cegis}} system, introduced by Solar-Lezama \cite{Solar-Lezama:2008}
-in the context of the SKETCH synthesizer. Correctness oracles are more powerful
-than counterexample oracles because they are guaranteed to return a
-counterexample if the program is not correct, where the counterexample oracles
-might not.
+\textit{\gls{cegis}} system, introduced by \citeauthor{Solar-Lezama:2008}
+~\cite{Solar-Lezama:2008} in the context of the SKETCH synthesizer. Correctness
+oracles are more powerful than counterexample oracles because they are
+guaranteed to return a counterexample if the program is not correct, where the
+counterexample oracles might not.
 
 The concept of \gls{ogis} and distinguishing inputs were introduced by Jha et.
 al \cite{Jha:2017:TFS} as a generalization of \gls{cegis} when they applied
