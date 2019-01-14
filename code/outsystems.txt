@@ -1,0 +1,9 @@
+- basic datatypes:  ['Boolean', 'Currency', 'Date', 'Time', 'Date Time', 'Integer', 'Long Integer', 'Decimal', 'Email', 'Phone Number', 'Text'] + identifiers
+- '+' for concat
+- apparently, some expressions use no functions at all (but they probably use something like '+')
+- Use 'If' as a conditional
+- 10 most common data types: [('Text', 226234), ('Integer', 12160), ('Decimal', 6615), ('Date', 4470), ('Date Time', 4099), ('Boolean', 1196), ('Phone Number', 533), ('Time', 309), ('Email', 211), ('Currency', 198)]
+- Example: {'exprKey': '4zZYYu+pFkalhGgdOOEKBA.#Value', 'functions': ['FormatDecimal'], 'omlKey': '1hQtBtFovEqTOlb5whICdQ', 'refs': ['JMStoreShow.Record.JMStores.Codigo', 'Site.DecimalSeparator', 'Site.GroupSeparator'], 'text': 'FormatDecimal(JMStoreShow.Record.JMStores.Codigo, 0, Site.DecimalSeparator, Site.GroupSeparator)', 'type': 'Text'}
+- 10 most common functions: [('If', 42580), ('FormatDecimal', 11404), ('GetMenuItem', 5951), ('Substr', 5460), ('NullIdentifier', 5414), ('NullDate', 5186), ('DateTime_PrettyFormat', 4483), ('FormatCurrency', 3983), ('Length', 3453), ('GetUser', 2747)]
+- 258522 expressions
+- Some expressions have no refs (what is 'Input.id'?)

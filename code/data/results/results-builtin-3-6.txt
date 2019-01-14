@@ -1,0 +1,57 @@
+There are 258522 expressions in total.
+There are 14037 expressions that use 3 or more functions:
+  + Example: <ommitted>
+  + 6171 (43.96%) use only _builtin_ functions.
+    - Example: <ommitted>
+There are 3957 expressions that use 4 or more functions:
+  + Example: <ommitted>
+  + 1608 (40.64%) use only _builtin_ functions.
+    - Example: <ommitted>
+There are 1800 expressions that use 5 or more functions:
+  + Example: <ommitted>
+  + 818 (45.44%) use only _builtin_ functions.
+    - Example: <ommitted>
+There are 670 expressions that use 6 or more functions:
+  + Example: <ommitted>
+  + 401 (59.85%) use only _builtin_ functions.
+    - Example: <ommitted>
+There are 432 expressions that use 7 or more functions:
+  + Example: <ommitted>
+  + 330 (76.39%) use only _builtin_ functions.
+    - Example: <ommitted>
+These are the top 10 most commonly used _builtin_ functions:
+	1. If: Bool -> a (42580 [40.12%])            
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Miscellaneous#If
+	2. FormatDecimal: Decimal -> Integer -> Text -> Text -> Text (11404 [10.74%]) 
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Format#FormatDecimal
+	3. Substr: Text -> Integer -> Integer -> Integer (5460 [5.14%])          
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Text#Substr
+	4. NullIdentifier: EntityReference (5414 [5.10%])  
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Data_Conversion#NullIdentifier
+	5. NullDate: Date (5186 [4.89%])        
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Data_Conversion#NullDate 
+	6. Length: Text -> Integer (3453 [3.25%])          
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Text#Length
+	7. GetUserId: UserId (2321 [2.19%])       
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Roles#GetUserId
+	8. DateTimeToDate: DateTime -> Date (2039 [1.92%])  
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Data_Conversion#DateTimeToDate
+	9. Trim: Text -> Text (1588 [1.50%])            
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Text#Trim
+	10. Replace: Text -> Text -> Text -> Text (1497 [1.41%])        
+    + https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Text#Replace
+These are the top 10 most common _builtin_ return types:
+	1. Text: 226234 (88.34%)
+	2. Integer: 12160 (4.75%)
+	3. Decimal: 6615 (2.58%)
+	4. Date: 4470 (1.75%)
+	5. Date Time: 4099 (1.60%)
+	6. Boolean: 1196 (0.47%)
+	7. Phone Number: 533 (0.21%)
+	8. Time: 309 (0.12%)
+	9. Email: 211 (0.08%)
+	10. Currency: 198 (0.08%)
+
+// Seria interessante descobrir não só os tipos de retorno mais comuns, mas
+// também os tipos de dados mais recebidos como input.
+// E, por extensão, quais as assinaturas de tipo mais frequentes?
