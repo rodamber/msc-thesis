@@ -14,15 +14,20 @@ cabal-version:       >=1.10
 extra-source-files:  README.md
 
 executable analytics
-  hs-source-dirs:      src
-  main-is:             Main.hs
-  default-language:    Haskell2010
-  build-depends:       base >= 4.7 && < 5
-                     , protolude
-                     , aeson
-                     , bytestring
-                     , containers
-  other-modules:       Counter
-                     , OutSystems
-  extensions:          NoImplicitPrelude
-                     , OverloadedStrings
+  hs-source-dirs:     src
+  main-is:            Main.hs
+  default-language:   Haskell2010
+  default-extensions: OverloadedStrings
+                    , NoImplicitPrelude
+  ghc-options:        -freverse-errors 
+                      -fno-warn-unused-imports 
+                      -fno-warn-unused-top-binds 
+
+  build-depends:      base >= 4.7 && < 5
+                    , aeson
+                    , bytestring
+                    , containers
+                    , relude
+  other-modules:      Prelude
+                    , Counter
+                    , OutSystems

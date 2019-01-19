@@ -1,8 +1,8 @@
-{-# LANGUAGE DeriveGeneric     #-}
+{-# LANGUAGE DeriveGeneric #-}
 
 module OutSystems where
 
-import Protolude
+import Prelude
 
 import Data.Aeson -- (FromJSON (..), withObject, (.:), decode)
 import qualified Data.ByteString.Lazy.Char8 as LBS8
