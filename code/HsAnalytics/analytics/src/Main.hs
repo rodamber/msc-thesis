@@ -1,6 +1,4 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-
+{-# OPTIONS_GHC -fno-warn-unused-top-binds #-}
 import Protolude
 
 import GHC.Base (String)
@@ -27,4 +25,5 @@ main = do
   es <- OS.expressions "../data/exprs.jsonl"
   howMany es 0 13
 
--- FIXME: We're not considering expressions that return identifiers
+-- -- FIXME: We're not considering expressions that return identifiers
+-- -- FIXME: We're not considering operators

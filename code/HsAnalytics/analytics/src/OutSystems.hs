@@ -1,6 +1,4 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE OverloadedStrings #-}
 
 module OutSystems where
 
@@ -8,7 +6,6 @@ import Protolude
 
 import Data.Aeson -- (FromJSON (..), withObject, (.:), decode)
 import qualified Data.ByteString.Lazy.Char8 as LBS8
-import GHC.Generics
 
 data Functions
   -- Data Conversion
