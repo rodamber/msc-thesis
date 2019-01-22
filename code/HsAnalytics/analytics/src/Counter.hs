@@ -2,14 +2,14 @@
 
 module Counter where
 
-import Prelude hiding (init)
+import Relude hiding (init)
 import qualified Data.Map as M
 
 
-type Counter k = Map k Int
+type Counter k = M.Map k Int
 
 
-init :: Map k a
+init :: Counter k
 init = M.empty
 
 

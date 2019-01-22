@@ -2,7 +2,7 @@
 
 module OutSystems where
 
-import Prelude
+import Relude
 
 import Data.Aeson -- (FromJSON (..), withObject, (.:), decode)
 import qualified Data.ByteString.Lazy.Char8 as LBS8
