@@ -6,10 +6,12 @@ import Counter
 import GHC.Base (String)
 import Text.Printf (printf)
 
+import Data.Aeson (encode)
 
-howMany :: [OS.Expression] -> Int -> Int -> IO ()
-howMany expressions lower upper = do
-  let c :: Counter Int ; c = count $ map (length . OS.funs) expressions
+
+inBetween :: (OS.Expression -> Int) -> [OS.Expression] -> Int -> Int -> IO ()
+inBetween f expressions lower upper = do
+  let c = count $ map f expressions
   let atLeast n = sum $ map (`lookup` c) [n .. upper]
 
   for_ [lower .. upper] $ \i -> do
@@ -18,14 +20,22 @@ howMany expressions lower upper = do
 
 
 printTop :: Show a => [(a, Int)] -> IO ()
-printTop xs = for_ (zip [1..] xs) $ \ (i, (x, n)) ->
+printTop xs = for_ (zip [1..] xs) $ \(i, (x, n)) ->
   printf "%d. %s (%d)\n" (i :: Int) (show x :: String) n
 
 
 main :: IO ()
 main = do
-  es <- OS.expressions "data/exprs.jsonl"
-  howMany es 0 13
+  es <- OS.expressions "../data/exprs.jsonl"
+  -- inBetween (length . OS.funs) es 0 13
+
+  for_ es $ \e -> do
+    let len = length $ OS.funs e
+    when (3 <= len && len <= 6) $
+      putLBSLn $ encode e
+    
+
+  
 
 
 -- -- FIXME: We're not considering expressions that return identifiers

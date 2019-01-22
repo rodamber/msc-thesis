@@ -65,6 +65,7 @@ data Functions
   deriving (Show, Read, Eq, Ord, Generic)
 
 instance FromJSON Functions
+instance ToJSON Functions
 
 data Types
   = BinaryData | Boolean | Currency | Date | Time | DateTime | Integer
@@ -72,18 +73,21 @@ data Types
   deriving (Show, Read, Eq, Ord, Generic)
 
 instance FromJSON Types
+instance ToJSON Types
 
 data Expression = Expression
   { text  :: Text
   , type_ :: Types
   , funs  :: [Functions]
-  } deriving (Show, Read, Eq, Ord)
+  } deriving (Show, Read, Eq, Ord, Generic)
 
 instance FromJSON Expression where
   parseJSON = withObject "Expression" $ \v -> Expression
     <$> v .: "text"
     <*> v .: "type"
     <*> v .: "functions"
+
+instance ToJSON Expression
 
 readJsonlines :: FilePath -> IO [LByteString]
 readJsonlines fp = LBS8.lines <$> LBS8.readFile fp
