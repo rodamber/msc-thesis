@@ -28,6 +28,5 @@ executable analytics
                     , bytestring
                     , containers
                     , relude
-  other-modules:      Prelude
-                    , Counter
+  other-modules:      Counter
                     , OutSystems
