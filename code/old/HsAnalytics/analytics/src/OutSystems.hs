@@ -79,7 +79,7 @@ data Expression = Expression
   { text  :: Text
   , type_ :: Types
   , funs  :: [Functions]
-  } deriving (Show, Read, Eq, Ord, Generic)
+  } deriving (Show, Read, Eq, Ord)
 
 instance FromJSON Expression where
   parseJSON = withObject "Expression" $ \v -> Expression
@@ -87,7 +87,13 @@ instance FromJSON Expression where
     <*> v .: "type"
     <*> v .: "functions"
 
-instance ToJSON Expression
+instance ToJSON Expression where
+  toJSON (Expression txt ty fs) = object
+    [ "text" .= txt
+    , "type" .= ty
+    , "functions" .= fs
+    ]
+  
 
 readJsonlines :: FilePath -> IO [LByteString]
 readJsonlines fp = LBS8.lines <$> LBS8.readFile fp

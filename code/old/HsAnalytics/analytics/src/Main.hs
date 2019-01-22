@@ -1,3 +1,4 @@
+{-# LANGUAGE TypeApplications #-}
 import Relude
 
 import qualified OutSystems as OS
@@ -6,7 +7,8 @@ import Counter
 import GHC.Base (String)
 import Text.Printf (printf)
 
-import Data.Aeson (encode)
+import Control.Exception.Base (assert)
+import Data.Aeson (decode, encode)
 
 
 inBetween :: (OS.Expression -> Int) -> [OS.Expression] -> Int -> Int -> IO ()
@@ -23,16 +25,26 @@ printTop :: Show a => [(a, Int)] -> IO ()
 printTop xs = for_ (zip [1..] xs) $ \(i, (x, n)) ->
   printf "%d. %s (%d)\n" (i :: Int) (show x :: String) n
 
+analyze36 :: IO ()
+analyze36 = do
+  es <- OS.expressions "exprs-3-6.jsonl"
+  printf "Number of expressions: %d\n" (length es)
+  inBetween (length . OS.funs) es 0 13
 
 main :: IO ()
 main = do
-  es <- OS.expressions "../data/exprs.jsonl"
-  -- inBetween (length . OS.funs) es 0 13
+  analyze36
+  -- es <- OS.expressions "../data/exprs.jsonl"
 
-  for_ es $ \e -> do
-    let len = length $ OS.funs e
-    when (3 <= len && len <= 6) $
-      putLBSLn $ encode e
+  -- let Just e = viaNonEmpty head es
+  -- print e
+  -- putLBSLn $ encode e
+  -- print $ decode @OS.Expression (encode e)
+
+  -- for_ es $ \e -> do
+  --   let len = length $ OS.funs e
+  --   when (3 <= len && len <= 6) $
+  --     putLBSLn $ encode e
     
 
   

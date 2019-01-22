@@ -111,7 +111,7 @@
 
 (define all-exprs
   (lazy
-   (with-input-from-file "exprs.jsonl"
+   (with-input-from-file "data/exprs-3-6.jsonl"
      (lambda ()
        (for/list ([l (in-lines)])
          (string->jsexpr l))))))
