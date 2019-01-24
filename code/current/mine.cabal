@@ -23,8 +23,9 @@ executable outsystems
 
   build-depends:      base >= 4.7 && < 5
                     , containers
-                    , text
+                    , pretty
                     , relude
+                    , text
 
   ghc-options:      -freverse-errors 
                     -fno-warn-unused-imports 
