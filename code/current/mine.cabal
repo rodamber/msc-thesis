@@ -23,6 +23,8 @@ executable outsystems
 
   build-depends:      base >= 4.7 && < 5
                     , containers
+                    , megaparsec
+                    , parser-combinators
                     , pretty
                     , relude
                     , text
@@ -34,6 +36,7 @@ executable outsystems
   other-modules:      Language.OutSystems.Cast
                     , Language.OutSystems.Evaluator
                     , Language.OutSystems.Lang
+                    , Language.OutSystems.Parser
                     , Language.OutSystems.Pretty
                     , Language.OutSystems.Serialize
                     , Language.OutSystems.Untyped

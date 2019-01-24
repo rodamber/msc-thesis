@@ -15,7 +15,7 @@ newtype Pretty a = Pretty { pretty :: P.Doc }
 
 fun :: String -> [P.Doc] -> Pretty a
 fun name args = Pretty $
-  P.text name <> P.parens (fold $ P.punctuate P.comma args)
+  P.text name <> P.parens (fold $ P.punctuate (P.comma <> P.space) args)
 
 binop :: String -> P.Doc -> P.Doc -> Pretty a
 binop op x y  = Pretty $ P.parens (x <+> P.text op <+> y)
