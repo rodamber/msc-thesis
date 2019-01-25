@@ -4,9 +4,8 @@
 module Language.OutSystems.Parser where
 
 import           Relude                         hiding (bool, chr, concat,
-                                                 length, or, not)
+                                                 length, not, or)
 
-import           Language.OutSystems.Lang
 import qualified Language.OutSystems.Pretty
 
 import           Control.Monad.Combinators
@@ -17,6 +16,38 @@ import           Data.Void
 import           Text.Megaparsec                as MP
 import           Text.Megaparsec.Char
 import qualified Text.Megaparsec.Char.Lexer     as L
+
+--------------------------------------------------------------------------------
+-- AST
+
+data LTExp
+  = Int Int
+  | Text Text
+  | Fun1 Fun1 LTExp
+  | Fun2 Fun2 LTExp LTExp
+  | Fun3 Fun3 LTExp LTExp LTExp
+  deriving (Show)
+
+data Fun1
+  = Length
+  | Chr
+  | Lower
+  | Upper
+  | TrimEnd
+  | TrimStart
+  | Trim
+  deriving (Show)
+
+data Fun2
+  = Concat
+  | Index0
+  deriving (Show)
+
+data Fun3
+  = Substr
+  | Index1
+  | Replace
+  deriving (Show)
 
 --------------------------------------------------------------------------------
 -- Lexemes
@@ -39,75 +70,79 @@ parens :: Parser a -> Parser a
 parens = between (symbol "(") (symbol ")")
 
 comma :: Parser a -> Parser a
-comma p = symbol "," >> p
+comma p = symbol "," *> p
+
+funname :: Text -> Parser a -> Parser a
+funname name p = string name *> parens p
+
+fun1 :: Text -> Fun1 -> Parser LTExp
+fun1 name f = funname name args1
+  where args1 = Fun1 f <$> parser
+
+fun2 :: Text -> Fun2 -> Parser LTExp
+fun2 name f = funname name args2
+  where args2 = Fun2 f <$> parser <*> comma parser
+
+fun3 :: Text -> Fun3 -> Parser LTExp
+fun3 name f = funname name args3
+  where args3 = Fun3 f <$> parser <*> comma parser <*> parser
 
 --------------------------------------------------------------------------------
 -- Operators
 
+-- operators :: OpExpr f => [[Operator Parser (f Dynamic)]]
+-- operators =
+--   [ [ prefix "-"   _UMinus ]
+--   , [ prefix "not" _Not    ]
+--   , [ binary "*"   _Mult
+--     , binary "/"   _Div    ]
+--   , [ binary "+"   _Plus
+--     , binary "-"   _BMinus ]
+--   , [ binary "<="  _Leq    ]
+--   , [ binary "="   _Eq     ]
+--   , [ binary "or"  _Or     ]
+--   ]
+
+-- binary  name f = InfixL  (f <$ symbol name)
+-- prefix  name f = Prefix  (f <$ symbol name)
+
+-- opExpr :: Parser OpExpr
+-- opExpr = makeExprParser opTerm operators
+
+-- opTerm :: Parser OpExpr
+
 --------------------------------------------------------------------------------
 -- Parser
 
-newtype Parser' f a = Parser' { getParser :: Parser (f a) }
--- newtype Parser'' e s m f a = Parser'' { runParser'' :: ParsecT e s m (f a) }
+int :: Parser LTExp
+int = Int <$> lexeme L.decimal
 
--- fun name f args = Parser' $ string name *>
---   parens (f <$> sequenceA args)
-
-instance LangText f => LangText (Parser' f) where
-  int _ = Parser' $ int <$> lexeme L.decimal
-
-  {- https://codereview.stackexchange.com/a/2572/141067
-     I'll keep this link here just in case I need it later.
-  -}
-  text _ = let quote = char '\"' in Parser' $ text . T.pack <$>
+text :: Parser LTExp
+text = let quote = char '\"' in Text . T.pack <$>
     (quote >> manyTill latin1Char quote)
 
-  length (Parser' parser) = Parser' $ string "Length" *>
-    parens (length <$> parser)
+length, chr, lower, upper, trimEnd, trimStart, trim :: Parser LTExp
+length    = fun1 "Length" Length
+chr       = fun1 "Chr" Chr
+lower     = fun1 "Lower" Lower
+upper     = fun1 "Upper" Upper
+trimEnd   = fun1 "TrimEnd" TrimEnd
+trimStart = fun1 "TrimStart" TrimStart
+trim      = fun1 "Trim" Trim
 
-  substr (Parser' p1) (Parser' p2) (Parser' p3) = Parser' $ string "Substr" *>
-    parens (substr <$> p1 <*> comma p2 <*> comma p3)
+concat, index0 :: Parser LTExp
+concat = fun2 "Concat" Concat
+index0 = fun2 "Index0" Index0
 
-  concat (Parser' p1) (Parser' p2) = Parser' $ string "Concat" *>
-    parens (concat <$> p1 <*> comma p2)
+index1, substr, replace :: Parser LTExp
+index1  = fun3 "Index1" Index1
+substr  = fun3 "Substr" Substr
+replace = fun3 "Replace" Replace
 
-  chr (Parser' p1) = Parser' $ string "Chr" *>
-    parens (chr <$> p1)
+parser :: Parser LTExp
+parser = asum
+  [ int, text
+  , length, chr, lower, upper, trimEnd, trimStart, trim
+  , concat, index0, index1, substr, replace
+  ]
 
-  index0 (Parser' p1) (Parser' p2) = Parser' $ string "Index" *>
-    parens (index0 <$> p1 <*> comma p2)
-
-  index1 (Parser' p1) (Parser' p2) (Parser' p3) = Parser' $ string "Index" *>
-    parens (index1 <$> p1 <*> comma p2 <*> comma p3)
-
-  replace (Parser' p1) (Parser' p2) (Parser' p3) = Parser' $ string "Replace" *>
-    parens (replace <$> p1 <*> comma p2 <*> comma p3)
-
-  lower (Parser' p1) = Parser' $ string "Lower" *>
-    parens (lower <$> p1)
-
-  upper (Parser' p1) = Parser' $ string "Upper" *>
-    parens (upper <$> p1)
-
-  trimEnd (Parser' p1) = Parser' $ string "TrimEnd" *>
-    parens (trimEnd <$> p1)
-
-  trimStart (Parser' p1) = Parser' $ string "TrimStart" *>
-    parens (trimStart <$> p1)
-
-  trim (Parser' p1) = Parser' $ string "Trim" *>
-    parens (trim <$> p1)
-
-instance LangBool f => LangBool (Parser' f) where
-  bool _ = Parser' $ bool <$> (true <|> false)
-    where true  = True <$ symbol "True"
-          false = False <$ symbol "False"
-
-  if_ (Parser' p1) (Parser' p2) (Parser' p3) = Parser' $ string "If" *>
-    parens (if_ <$> p1 <*> comma p2 <*> comma p3)
-
-  or (Parser' p1) (Parser' p2) = Parser' $ string "or" *>
-    parens (or <$> p1 <*> comma p2)
-
-  not (Parser' p1) = Parser' $ string "not" *>
-    parens (not <$> p1)
