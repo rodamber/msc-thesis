@@ -6,8 +6,6 @@ module Language.OutSystems.Parser where
 import           Relude                         hiding (bool, chr, concat,
                                                  length, not, or)
 
-import qualified Language.OutSystems.Pretty
-
 import           Control.Monad.Combinators
 import           Control.Monad.Combinators.Expr
 import           Data.Text                      (Text)
@@ -23,12 +21,10 @@ import qualified Text.Megaparsec.Char.Lexer     as L
 data LTExp
   = Int Int
   | Text Text
-  | Fun1 Fun1 LTExp
-  | Fun2 Fun2 LTExp LTExp
-  | Fun3 Fun3 LTExp LTExp LTExp
+  | Fun Fun [LTExp]
   deriving (Show)
 
-data Fun1
+data Fun
   = Length
   | Chr
   | Lower
@@ -36,15 +32,9 @@ data Fun1
   | TrimEnd
   | TrimStart
   | Trim
-  deriving (Show)
-
-data Fun2
-  = Concat
+  | Concat
   | Index0
-  deriving (Show)
-
-data Fun3
-  = Substr
+  | Substr
   | Index1
   | Replace
   deriving (Show)
@@ -75,17 +65,45 @@ comma p = symbol "," *> p
 funname :: Text -> Parser a -> Parser a
 funname name p = string name *> parens p
 
-fun1 :: Text -> Fun1 -> Parser LTExp
-fun1 name f = funname name args1
-  where args1 = Fun1 f <$> parser
+fun :: Text -> Fun -> Parser LTExp
+fun name f = funname name args
+  where args = Fun f <$> sepBy1 parser (char ',')
+          
 
-fun2 :: Text -> Fun2 -> Parser LTExp
-fun2 name f = funname name args2
-  where args2 = Fun2 f <$> parser <*> comma parser
+--------------------------------------------------------------------------------
+-- Parser
 
-fun3 :: Text -> Fun3 -> Parser LTExp
-fun3 name f = funname name args3
-  where args3 = Fun3 f <$> parser <*> comma parser <*> parser
+int :: Parser LTExp
+int = Int <$> lexeme L.decimal
+
+text :: Parser LTExp
+text = let quote = char '\"' in Text . T.pack <$>
+    (quote *> manyTill latin1Char quote)
+
+length, chr, lower, upper, trimEnd, trimStart, trim :: Parser LTExp
+length    = fun "Length" Length
+chr       = fun "Chr" Chr
+lower     = fun "Lower" Lower
+upper     = fun "Upper" Upper
+trimEnd   = fun "TrimEnd" TrimEnd
+trimStart = fun "TrimStart" TrimStart
+trim      = fun "Trim" Trim
+
+concat, index0 :: Parser LTExp
+concat = fun "Concat" Concat
+index0 = fun "Index0" Index0
+
+index1, substr, replace :: Parser LTExp
+index1  = fun "Index1" Index1
+substr  = fun "Substr" Substr
+replace = fun "Replace" Replace
+
+parser :: Parser LTExp
+parser = asum
+  [ int, text
+  , length, chr, lower, upper, trimEnd, trimStart, trim
+  , concat, index0, index1, substr, replace
+  ]
 
 --------------------------------------------------------------------------------
 -- Operators
@@ -110,39 +128,4 @@ fun3 name f = funname name args3
 -- opExpr = makeExprParser opTerm operators
 
 -- opTerm :: Parser OpExpr
-
---------------------------------------------------------------------------------
--- Parser
-
-int :: Parser LTExp
-int = Int <$> lexeme L.decimal
-
-text :: Parser LTExp
-text = let quote = char '\"' in Text . T.pack <$>
-    (quote >> manyTill latin1Char quote)
-
-length, chr, lower, upper, trimEnd, trimStart, trim :: Parser LTExp
-length    = fun1 "Length" Length
-chr       = fun1 "Chr" Chr
-lower     = fun1 "Lower" Lower
-upper     = fun1 "Upper" Upper
-trimEnd   = fun1 "TrimEnd" TrimEnd
-trimStart = fun1 "TrimStart" TrimStart
-trim      = fun1 "Trim" Trim
-
-concat, index0 :: Parser LTExp
-concat = fun2 "Concat" Concat
-index0 = fun2 "Index0" Index0
-
-index1, substr, replace :: Parser LTExp
-index1  = fun3 "Index1" Index1
-substr  = fun3 "Substr" Substr
-replace = fun3 "Replace" Replace
-
-parser :: Parser LTExp
-parser = asum
-  [ int, text
-  , length, chr, lower, upper, trimEnd, trimStart, trim
-  , concat, index0, index1, substr, replace
-  ]
 
