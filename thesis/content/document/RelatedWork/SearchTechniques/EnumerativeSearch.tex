@@ -1,14 +1,14 @@
 \subsection{Enumerative Search}
 \label{sec:enumerative-search}
 
-In the context of program synthesis an enumerative search consists of
+In the context of program synthesis, enumerative search consists of
 enumerating programs by working the intrinsic structure of the program space to
 guide the search. The programs can be ordered using many different program
 metrics, the simplest one being program size~\cite{Alur:sygus:2013}, and pruned
 by means of \todo{semantic equivalence checks}{Missing an example to explain
 what I mean. Maybe add a simple example such as, how by associativity of
 addition, x+y is the same as y+x} with respect to the specification.
-Synthesizers based on enumerative search haven been some of the most effective
+Synthesizers based on enumerative search have been some of the most effective
 to synthesize short programs in complex program spaces~\cite{Gulwani2017}.
 
 A simple enumerative search algorithm is described in Figure \fixme{???}{ainda
@@ -31,19 +31,23 @@ as, e.g., partial programs.
 The first algorithm, shown in Figure \fixme{?}{ainda tenho que produzir esta
 figura.}, takes as input a \gls{cfg} $G = (V, \Sigma{}, R, S)$ and a
 specification $\phi{}$, and works by exploring the derivations of $G$ in a
-top-down fashion. The algorithm stores the current programs in a priority queue,
-$P$, and stores all the programs found so far in the set $P'$. Both $P$ and $P'$
-are initialized with the partial program that corresponds to the start symbol
-$S$ of $G$. The algorithm runs until it finds a program $p$ that matches the
-specification $\phi{}$ or there are no more programs waiting in the queue
-(meaning that the algorithm fails). At every iteration, we take the highest
-priority program $p$ from the queue and check whether it satisfies $\phi{}$. If
-yes, we return $p$. Otherwise, the algorithm finds new (possibly partial)
-programs by applying the production rules of the grammar to $p$. The program
-space is pruned in the next step by ignoring programs that are semantically
-equivalent with respect to $\phi{}$ to programs already considered in the past
-($P'$).
+best-first top-down fashion. The algorithm stores the current programs in a
+priority queue, $P$, and stores all the programs found so far in the set $P'$.
+Both $P$ and $P'$ are initialized with the partial program that corresponds to
+the start symbol $S$ of $G$. The algorithm runs until it finds a program $p$
+that matches the specification $\phi{}$ or there are no more programs waiting in
+the queue (meaning that the algorithm fails). At every iteration, we take the
+highest priority program $p$ from the queue and check whether it satisfies
+$\phi{}$. If yes, we return $p$. Otherwise, the algorithm finds new (possibly
+partial) programs by applying the production rules of the grammar to $p$. The
+program space is pruned in the next step by ignoring programs that are
+semantically equivalent with respect to $\phi{}$ to programs already considered
+in the past ($P'$).
 
+% FIXME: Adicionar ref. ao facto de que estes algoritmos geralmente consideram o
+% tamanho das expressões que estão a gerar. Ver a overview do Gulwani. Sem dizer
+% isso, a descrição fica algo inconsistente com os dois algoritmos que vem a
+% seguir.
 % TODO: Adicionar (possivelmente) um exemplo de um traço de execução do
 % algoritmo.
 

@@ -1,0 +1,80 @@
+\subsection{Stochastic Search}
+\label{sec:stochastic-search}
+
+Stochastic search is an approach to program synthesis where the synthesizer uses
+probabilistic reasoning to learn a program conditioned on the specification. Two
+typical approaches to applying stochastic search in synthesizers are as follows.
+One is to learn an \textit{guiding function} that works on top of an enumerative
+search algorithm to help it predict which program from the search space is most
+likely to meet the desired specification. Another one is to learn a probability
+distribution over the search space in order to sample programs that are more
+promising. Below, we can find high-level descriptions of specific instances of
+these kinds of synthesis.
+
+% TODO: Missing refs. LEE_ASP_2018, DeepCoder, Ruben, for the first approach and
+% STOKE for % the second one, for example.
+
+\subsubsection{Guiding the Search}
+\label{sec:guiding-the-search}
+
+They describe their \gls{dsl} by a \gls{cfg}.
+
+``Our algorithm is essentially the same as the existing enumerative algorithm
+except that it enumerates programs in order of likelihood instead of size.
+Therefore, instead of enumerating all the smallest expressions (e.g., “.”, “-”,
+x), it first proposes x + “.”, which is found only in the third iteration by the
+existing enumerative search. ''
+
+``The first key contribution of our approach is an efficient algorithm based on
+A* search to enumerate programs in order of decreasing probability.''
+It works with wide range of different probabilistic models. One of them is pcfg,
+which takes a sentential form and returns a probability for each production rule.
+
+``Our algorithm conceptually works on a directed weighted graph—constructed on
+demand—of sentential forms derived from the given model.''
+
+``However, as our evaluation in Section 5 shows, uniform cost search performs
+poorly in practice by expanding a huge number of paths before reaching the
+solution node. We address this problem by employing A* search [14] instead of
+uniform cost search.''
+
+They apply a slightly tweaked version of $A*$. The heuristic function is a
+statistical model.
+
+
+% LEE_ASP_2018
+% DeepCoder style synthesis
+
+\subsubsection{Sampling the Search Space}
+\label{sec:sygus-stochastic-solver}
+
+In this section we describe the stochastic synthesizer used by
+\citeauthor{Alur:sygus:2013} in their syntax-guided synthesis
+paper~\cite{Alur:sygus:2013}. Their synthesizer learns from examples and is
+adapted from work on superoptimization of loop-free binary
+programs~\cite{Schkufza:2013:SS}. They define a score function, $Score$, that
+measures the extent which a given program is consistent with the specification.
+Then they perform a probabilistic walk over the search space while maximizing
+this score function. The algorithm works by first picking a program $p$ of fixed
+size $n$ uniformly at random. They then pick a node from its parse tree
+uniformly at random and consider the subprogram rooted at that node. They then
+substitute it with another subprogram of same size and type, chosen uniformly at
+random, obtaining a new program $p'$. The probability of discarding $p$ for $p'$
+is given by the formula $min(1, Score(p')/Score(p))$. It remains to say how to
+pick the value of $n$. Typically we do not know the size of the desired program
+from the start. In order to tackle this problem, they start by fixing its value
+at $n = 1$ and at each iteration change its value to $min(1, n\pm{}1)$ with with
+some small probability (default is 0.01).
+
+
+% This method of sampling is called the Metropolis-Hastings algorithm.
+
+% ==============================================================================
+
+%% Others
+% I don't have the necessary background to understand this, so I'll just point
+% the user to work done here.
+% - Genetic Programming
+% - Neural Program Synthesis
+% - Graph neural networks
+% - ... check Polozov's overview on the web for work done since 2017
