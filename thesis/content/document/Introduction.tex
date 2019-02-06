@@ -1,58 +1,68 @@
 \chapter{Introduction}
 \label{chapter:introduction}
 
-$\exists P \ldotp \phi(P) $
+% $\exists P \ldotp \phi(P) $
 
-Program synthesis is the task of automatically generating implementations from
-semantic specifications while also being efficient according to some cost metric.
+\todo{Program synthesis is the problem of automatically generating
+implementations from high-level specifications.}{add ref} \todo{Amir Pnuelli,
+former computer scientist and Turing Award, described it as ``one of the most
+central problems in the theory of programming''}{add ref}, and it has been
+\todo{portrayed as one of the holy grails of computer science}{solar-lezama phd
+thesis, gulwani et al overview}.
 
-Pnuelli in [Solar-Lezama ref. \#50] ``one of the most central problems in the
-theory of programming''.
+It is easy to understand why: if only we could tell the computer \textit{what to
+do} and let it figure out \textit{how to do} it, the task of programming would
+be so much easier!
 
-\textit{Holy grail}: tell the computer \textit{what to do} and let it figure out
-\textit{how to do} it and not in any way, but in an efficient way (according to
-some metric).
+Program synthesis is a hard problem, though. \todo{Programming is a task that is
+hard for humans}{add ref 45 solar-lezama thesis} and, given its generality,
+there is no reason to believe it should be any easier for computers. Computers
+lack algorithmic insight and domain expertise. Moreover, the challenge is
+actually twofold: we need to find out both how to tackle the intractibility of
+the program space, and how to accurately capture user intent \cite{Gulwani2017}.
 
-This is a hard problem. Synthesizers lack algorithmic insight and domain
-expertise.
+% 1. explicar porque que o espaco de procura e grande
 
-Compromise:
+It is important to have in mind that program synthesis is not a panacea for
+solving problems in computer programming. For example, while we are interested
+in properties besides functional correctness, such as efficiency or
+succinctness, it is impossible for program synthesis to eliminate all sources of
+bugs. Particularly, it cannot solve problems originating from bad specifications
+that come from a bad understanding of the problem domain.
 
-\begin{itemize}
-\item reducing the scope or domain of application
-\item make the synthesizers domain-specific and less general (embed the insights
-  directly into the synthesizers)
-\end{itemize}
+Writing specifications is a delicate process. This is better understood with an
+\todo{example}{adicionar o exemplo}.
+% 2. explicar porque que especificar a intencao do utilizador e uma tarefa delicada
+%    (colocar o exemplo da apresentacao)
 
-Solutions are:
+% ------------------------------------------------------------------------------
+% Questions left to answer?
+% - Extend the motivation.
+% - In practice where can this be applied (present/future)?
+% - How does prog. synth. compare to other kinds of automatic programming? In
+% particular, how does it compare to ML?
+% - Can you give an example?
+% - What does this thesis introduce? Give a summary of the work done in the rest
+% of the thesis.
 
-\begin{itemize}
-\item solver-aided programming: human provides high-level insights while the
-synthesizer takes care of the low-level details.
-\item human-computer working together (interaction through active learning)
-\end{itemize}
+% Other questions that will be answered in the following sections include:
+% - How to provide user intent?
+% - How to solve the problem efficiently?
 
+% ------------------------------------------------------------------------------
+% Compromise:
+% - reducing the scope or domain of application
+% - make the synthesizers domain-specific and less general (embed the insights
+%   directly into the synthesizers)
 
-
-% Some kinds of specifications are:
-% -
-
-% Applications/goals are:
-% -
+% Solutions are:
+% - solver-aided programming: human provides high-level insights while the
+% synthesizer takes care of the low-level details.
+% - human-computer working together (interaction through active learning)
 
 % Automating this work is good because:
 % - code is correct by construction
-% - 
 
-% % \cite{Solar-Lezama:2008}
-% ``Inductive synthesis is the process of generating a program from concrete
-% observations of its behavior, where an observation describes the expected
-% behavior of the program on a specific input. The inductive synthesizer uses each
-% new observation to refine its hypothesis about what the correct program should
-% be until it converges to a solution. Inductive synthesis had its origin in the
-% work by Gold [33] on language learning, and the pioneering work by Shapiro [57]
-% on inductive synthesis and its application to algorithmic debugging among
-% others.''
+% - sintetizadores altamente especializados e calibrados para dominios particulares
+% - bugs enviados para a camada de abstraccao acima
 
-
-\pdffreetextcomment{Check p. 92 of the overview for the pros and cons of \gls{PBE}}
