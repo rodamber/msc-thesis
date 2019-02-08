@@ -1,23 +1,20 @@
 \section{\textit{How to ask it}: Specifications and Syntactic Bias}
 \label{sec:specifications}
 
-% \fixme{General problems with this section}{}:
-% \begin{itemize}
-% \item Fails to explore the shortcomings of each approach.
-% \item Lacks examples to explain the exposed ideas.
-% \item Few references. I'm sure the coverage of the state of the art could be
+% General problems with this section:
+% - Fails to explore the shortcomings of each approach.
+% - Lacks examples to explain the exposed ideas.
+% - Few references. I'm sure the coverage of the state of the art could be
 %   better.
-% \item Still incomplete.
-% \end{itemize}
+% - Still incomplete.
 
 % Comentário da Professora: Usar mesma ordem e mesmos métodos que vêm a seguir.
 
-The first part of solving a program synthesis problem is figuring out in which
-way the users will express their intent.
+The first part of solving a program synthesis problem is figuring out which
+method will use to express our intent to the sinthesizer.
 That intent may be specified in many different ways, including:
-  logical \cite{Itzhaky:SIS:2010}
-  or type-based specifications \cite{Osera:2015:TPS, Frankle:2016:EST,
-    Polikarpova:2016:PSP};
+  logical specifications \cite{Itzhaky:SIS:2010};
+  type signatures \cite{Osera:2015:TPS, Frankle:2016:EST, Polikarpova:2016:PSP};
   syntax-guided methods \cite{Alur:sygus:2013} such as
   sketches \cite{Solar-Lezama:2008};
   or incomplete specifications such as
@@ -29,7 +26,7 @@ hand, especially when taking into account the multitude of different user
 backgrounds, and it might also dictate the type of techniques used to solve the
 problem.
 
+\input{Contracts}
 \input{SyntaxGuided}
 \input{Inductive}
-% \input{Contracts}
 \input{Programs}

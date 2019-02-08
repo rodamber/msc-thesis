@@ -1,26 +1,33 @@
-% FIXME: This should be the first subsection and should be composed mainly of
-% examples. Maybe it doesn't even need to be a subsection by itself and could be
-% the beginning of the specifications section
+% This should be the first subsection and should be composed mainly of examples.
+% Maybe it doesn't even need to be a subsection by itself and could be the
+% beginning of the specifications section.
 
-\subsection{Contracts}
-\pdfmarkupcomment[color=red]{Do we really need to subdivide this section?}{}
+\subsection{Logical Specifications}
 
-\subsubsection{Logic-Based}
-Logical relations between the inputs and the outputs of the program.
+Logical specifications are the canonical way of introducing specifications. In
+the sorting example from the introduction (\ref{sec:sorting-example}) we already
+saw an example of this where the specifications were given as
+pre/post-conditions over the inputs/outputs of the program. In that case, the
+specifications were written as predicates on the host programming language.
+Logical specifications \todo{may also be given as loop invariants or general
+assertions in the code}{refs. leon?}, in order to give more hints to the
+synthesizer.
 
-\pdfmarkupcomment[color=red]{almost sic: page 8}{\cite{Gulwani2017}}
-``precise and succinct, but complete ones are often quite tricky to write''
+\fixme{Colocar aqui um exemplo.Ideias: Leon, POPL'19 Polikarpova. Talvez ambos
+porque é uma ideia fundamental que pode valer a pena explorar com detalhe.}{}
 
-\begin{enumerate}
-\item expert-oriented
-\end{enumerate}
+\fixme{Acho que estão em falta referências para trabalhos em concreto.}{}
 
-\subsubsection{Type-Based}
+% - sygus (nao queria introduzir aqui, ate porque provavelmente merece uma
+% seccao propria)
+% - leon
+% - rosette
 
+% Almost sic, page 8, \cite{Gulwani2017}:
+% ``precise and succinct, but complete ones are often quite tricky to write''
+
+% - expert-oriented
+% - poder do sintetizador vs tipo de logica que suporta (primeira-ordem, etc)
+
+% Type-based:
 % synquid, lifty
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../../Thesis"
-%%% End:
