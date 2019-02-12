@@ -50,7 +50,7 @@ integers.
 \begin{figure}[h]
   \centering
 \begin{verbatim}
-sort: (xs: List) -> (xs': List)
+sort: (xs: List Int) -> (xs': List Int)
 sort([])    = []
 sort(x::xs) = insert(x, sort(xs))
 
