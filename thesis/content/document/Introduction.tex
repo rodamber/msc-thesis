@@ -44,113 +44,95 @@ understood with a simple, non-trivial, example.
 
 In order to exemplify how the interaction between the user and the computer
 (from now on referred to as the ``synthesizer'') might occur, let us suppose we
-are interested in developing a sorting procedure, \verb|sort|, for lists of
-integers.
+are interested in developing a sorting procedure, \lstinline{sort}, for lists of
+integers:
 
-\begin{figure}[h]
-  \centering
-\begin{verbatim}
-sort: (xs: List Int) -> (xs': List Int)
-sort([])    = []
-sort(x::xs) = insert(x, sort(xs))
+% \begin{lstlisting}[language=Haskell]
+%   sort :: [Int] -> [Int]
+%   sort [] = []
+%   sort (x:xs) = insert x (sort xs)
 
-insert: (x: Int, xs: List Int) -> (xs': List Int)
-insert(x, [])    = [x]
-insert(x, y::ys) = if x <= y then (x::y::ys)
-                             else y::insert(x, ys)
-\end{verbatim}
-  \caption{Possible implementation for a list sorting procedure.}
-  \label{fig:sort-impl}
-\end{figure}
+%   insert :: Int -> [Int] -> [Int]
+%   insert x [] = [x]
+%   insert x (y::ys) = if x <= y then (x:y:ys) else (y:insert x ys)
+% \end{lstlisting}
 
-The function \verb|sort| should take a list of integers as input and return it
-sorted in ascending order. One approach to implement \verb|sort| is to resort to
-an auxiliary function \verb|insert|, taking an element \verb|x| and a list
-\verb|xs| as inputs and returning a new list \verb|xs'|, as described in
-Figure~\ref{fig:sort-impl}. Assuming that \verb|xs| is sorted, \verb|insert|
-guarantees that \verb|xs'| is also sorted by placing \verb|x| in the ``right
-place''. It is easy to see, by induction, that sort is correctly defined.
+\begin{lstlisting}
+  sort: (xs: List Int) -> (xs': List Int)
+  sort([])    = []
+  sort(x::xs) = insert(x, sort(xs))
 
-\begin{figure}[h]
-  \centering
-\begin{verbatim}
-isSorted: List Int -> Bool
-isSorted([])       = True
-isSorted([x])      = True
-isSorted(x::y::ys) = x <= y and isSorted(y::ys)
-\end{verbatim}
-  \cprotect\caption{Predicate \verb|isSorted|. Given a list, the predicate
-    outputs whether its elements are arranged in ascending order.}
-  \label{fig:is-sorted-pred}
-\end{figure}
+  insert: (x: Int, xs: List Int) -> (xs': List Int)
+  insert(x, [])    = [x]
+  insert(x, y::ys) = if x <= y then (x::y::ys)
+                               else y::insert(x, ys)
+\end{lstlisting}
 
-\begin{figure}[h]
-  \centering
-\begin{verbatim}
-sort: (xs: List Int) -> (xs': List Int)
-sortSpec: isSorted(xs')
-
-insert: (x: Int, xs: List Int) -> (xs': List Int)
-insertSpec: isSorted(xs) ==> isSorted(xs')
-\end{verbatim}
-  \caption{First attempt at a specification for the sorting procedure.}
-  \label{fig:sort-spec-1}
-\end{figure}
+The function \lstinline{sort} would take a list of integers as input and return
+it sorted in ascending order. One approach to implement \lstinline{sort} is to
+resort to an auxiliary function, \lstinline{insert}, taking an element
+\lstinline{x} and a list \lstinline{xs} as inputs, and returning a new list
+\lstinline{xs'}. Assuming that \lstinline{xs} is sorted, \lstinline{insert}
+guarantees that \lstinline{xs'} is also sorted by placing \lstinline{x} in the
+``right place''. It is easy to see, by induction, that \lstinline{sort} is
+correctly defined.
 
 Nevertheless, it would be nicer if we could just give the synthesizer a
 specification of what it means for a list to be sorted and let it figure out the
-implementation. For example, the synthesizer could support type signatures and
-predicates as specifications, as in Figure~\ref{fig:sort-spec-1}. We could also
-hint the structure of the implementation to the synthesizer by giving a
-specification for another function, \verb|insert|, which we could believe to be
-useful to implement \verb|sort|.
+implementation. For example, the synthesizer could support using type signatures
+and predicates as specifications. We could also hint the structure of the
+implementation to the synthesizer by giving a specification for another
+function, \lstinline{insert}, which we could believe to be useful to implement
+\lstinline{sort}:
 
-\begin{figure}[h!]
-  \centering
-\begin{verbatim}
-sort: (xs: List Int) -> (xs': List Int)
-sort(xs) = []
+\begin{lstlisting}
+  isSorted: List Int -> Bool
+  isSorted([])       = True
+  isSorted([x])      = True
+  isSorted(x::y::ys) = x <= y and isSorted(y::ys)
 
-insert: (x: Int, xs: List Int) -> (xs': List Int)
-insert(x, xs) = []
-\end{verbatim}
-  \cprotect\caption{First attempt at synthesizing \verb|sort|. The specification
-    was not sufficiently precise and failed to capture our intent.}
-  \label{fig:sort-synth-1}
-\end{figure}
+  sort: (xs: List Int) -> (xs': List Int)
+  sortSpec: isSorted(xs')
 
-There is a problem, however: the synthesizer does not output a sorting
-procedure! Indeed, \verb|sort| meets the specification, as an empty list is
-sorted, by the definition of \verb|isSorted| (\ref{fig:is-sorted-pred}).
+  insert: (x: Int, xs: List Int) -> (xs': List Int)
+  insertSpec: isSorted(xs) ==> isSorted(xs')
+\end{lstlisting}
 
-\begin{figure}[h!]
-  \centering
-\begin{verbatim}
-sort: (xs: List Int) -> (xs': List Int)
-sortSpec: isSorted(xs') and sameContents(xs, xs')
+There is a problem with our specification, however, as there are many unwanted
+programs that satisfy it. The program that ignores its input and simply outputs
+the empty list is one such example.
 
-insert: (x: Int, xs: List Int) -> (xs': List Int)
-insertSpec: isSorted(xs) ==>
-  isSorted(xs') and sameContents(xs', x::xs)
-\end{verbatim}
-  \caption{Second attempt at a specification for the sorting procedure.}
-  \label{fig:sort-spec-2}
-\end{figure}
+% \begin{lstlisting}
+%   sort: (xs: List Int) -> (xs': List Int)
+%   sort(xs) = []
+
+%   insert: (x: Int, xs: List Int) -> (xs': List Int)
+%   insert(x, xs) = []
+% \end{lstlisting}
 
 The problem is that the specification does not model our intent precisely. It
-should be clear that the output \verb|xs'| should be in some way related to the
-input \verb|xs|, but the current specification does not capture that relation.
-We must require that \verb|xs'| has exactly the same contents as those of
-\verb|xs|, meaning that every element of \verb|xs| should appear in \verb|xs'|
-in the same amount. We could express that requirement as a binary predicate
-\verb|sameContents| over lists and add it to specification as in
-Figure~\ref{fig:sort-spec-2}. The implementation of \verb|sameContents| is left
-as an exercise for the reader.
+should be clear that the output \lstinline{xs'} should be in some way related to
+the input \lstinline{xs}, but the current specification does not capture that
+relation. We must require that \lstinline{xs'} has exactly the same contents as
+those of \lstinline{xs}, meaning that every element of \lstinline{xs} should
+appear in \lstinline{xs'} in the same amount. We could express that requirement
+as a binary predicate \lstinline{sameContents} over lists (whose implementation
+is omitted) and add it to specification:
+
+\begin{lstlisting}
+  sort: (xs: List Int) -> (xs': List Int)
+  sortSpec: isSorted(xs') and sameContents(xs, xs')
+
+  insert: (x: Int, xs: List Int) -> (xs': List Int)
+  insertSpec: isSorted(xs) ==>
+    isSorted(xs') and sameContents(xs', x::xs)
+\end{lstlisting}
 
 It should be clear by now why writing specifications can be tricky, even in
 simple cases. What might be less clear is that the specification as it is might
 still not be fully specified. There are countless other properties that we might
-want our procedure to satisfy, such as stability, complexity or adaptability.
+want our sorting procedure to satisfy, such as stability, complexity or
+adaptability.
 
 % ------------------------------------------------------------------------------
 % Questions left to answer?
