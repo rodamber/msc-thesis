@@ -1,0 +1,21 @@
+
+|-----------------------------------+--------------------------------------------------+-------------------------------------|
+| Secção                            | O quê                                            | Quando                              |
+|-----------------------------------+--------------------------------------------------+-------------------------------------|
+| Preliminaries                     | -                                                | Á medida que for escrevendo o resto |
+| Constraint Solving                | Conteúdo, sem exemplo                            | Sábado 16                           |
+| Stochastic Search                 | Conteúdo, sem exemplo                            | Domingo 17                          |
+| Enumerative Search                | Adicionar exemplo                                | Segunda 18                          |
+| Deductive Search                  | Adicionar exemplo                                | Terça 19                            |
+| Component-Based Synthesis         | Conteúdo, sem exemplo                            | Quarta 20                           |
+| Logical Specifications            | Exemplo                                          | Quinta 21                           |
+| Syntax-Guided Synthesis           | Limpar conteúdo + adicionar exemplo              | Sexta 22                            |
+| Programs                          | Limpar conteúdo + adicionar exemplo              | Sábado 23                           |
+| Oracle-Guided Inductive Synthesis | Adicionar exemplo (distinguishing inputs)        | Domingo 24                          |
+| Constraint Solving                | Conteúdo, sem exemplo                            | Segunda 25                          |
+| Stochastic Search                 | Conteúdo, sem exemplo                            | Terça 26                            |
+| Component-Based Synthesis         | Adicionar exemplo                                | Quarta 27                           |
+| SyGuS                             | Pequena nova subsecção (a seguir á procura, 3.2) | Quinta 28                           |
+| Programming by Examples           | Limpar + related work de PBE                     | Terça 5                             |
+| "Trabalho em concreto"            | Abordagem para resolver o problema (início)      | Quinta 7                            |
+|-----------------------------------+--------------------------------------------------+-------------------------------------|
