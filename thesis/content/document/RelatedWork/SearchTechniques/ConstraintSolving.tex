@@ -27,9 +27,9 @@ We consider an expression to be the input variable $x$ or an 8-bit constant. A
 program consists of additions and multiplications between expressions, or of
 shift left/right operations over an expression by a constant.
 
-Imagine we are interested in a program \todo{<insert interesting bit
+Imagine we are interested in a program that \todo{<insert interesting bit
   twiddling hack>}{check Hacker's Delight}. In the theory of
-\todo{bitvectors}{missing ref} the program we are interested in can be encoded
+\todo{bitvectors}{missing ref}, the program we are interested in can be encoded
 by the formula \todo{<insert formula here>}{add formula correspondent to the
 hack}. To find the program we can write the constraints in the SMT-LIB format
 and feed them to an SMT solver:
@@ -42,15 +42,23 @@ and feed them to an SMT solver:
 \end{figure}
 
 This example shows an end-to-end constraint solving approach to program
-synthesis. An alternative method is to...
+synthesis. However, enconding the problem this way can sometimes be non-trivial
+or time-consuming. This idea led to the appearance of the concept of
+\textit{solver-aided programming}, where programming languages are enlarged with
+high-level constructs that give the user access to synthesis without having to
+deal with the constraint solvers directly.
 
-% \citeauthor{Gulwani2017} describe the SKETCH system as a ``compiler [that]
-% relies on a SAT solver to materialize some language constructs''.
+For example, \citeauthor{Gulwani2017} describe the SKETCH system as a ``compiler
+[that] relies on a SAT solver to materialize some language constructs''.
+ROSETTE~\cite{Torlak:2013:GSL} is a framework for developing solver-aided
+programming languages embedded in Racket that provides constructs not only for
+synthesis, but also for verification, debugging and angelic execution.
+% SMTEN?
 
 \subsubsection{Component-Based Synthesis}
 \label{sec:components}
 
-% TODO: Check 12, 13, 22, 34
+% TODO Check 12, 13, 22, 34
 
 One area of program synthesis where constraint solving techniques have seen
 considerable use is that of \textit{component-based
@@ -58,16 +66,13 @@ synthesis}~\cite{Shi:2019:FCS,Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Jha:orac
 In component-based synthesis we are interested in finding a loop-free program
 made out of a combination of fundamental building blocks called
 \textit{components}. These components could be, for example, methods in a
-library API, and they form the syntactic bias for the programs we want to find.
-They may also be supplemented by additional constraints in the form of logical
-formulas.
+library \gls{api}~\cite{Shi:2019:FCS,Feng:2017:CSC}, and they form the syntactic
+bias for the programs we want to find. They may also be supplemented by
+additional constraints in the form of logical formulas~\cite{Feng:2018:PSU}.
 
-% TODO: SyPet and FrAngel
+% TODO Examples: SyPet and FrAngel
 
-% Conflict-driven, distinguishing inputs
-
-% Solver-Aided Program Synthesis: Reference Rosette and SMTEN
-
-% Highlights and drawbacks; comparison between high level approaches such as
-% solver aided synthesizers and enconding the problem in sat/smt
+% TODO
+% - Conflict-driven, distinguishing inputs
+% - Inductive Logic Programming
 
