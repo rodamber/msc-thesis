@@ -1,0 +1,77 @@
+# ------------------------------------------------------------------------------
+# Types
+
+value text;
+value bool;
+value int;
+value Empty; # dummy
+
+enum Char {
+  # Probably a lot of characters too handle, there must be a better way to
+  # encode this.
+  # "0", "1", "2", "3" #, "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~", "\t", "\n", "\r", "\x0b", "\x0c", "'", "\\", "\""
+
+  ".", "-", "_", "/", "(", ")"
+}
+
+enum SmallInt {
+  "-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5"
+}
+
+# ------------------------------------------------------------------------------
+# Program signature
+
+program ExampleProgram(text, text) -> text;
+
+# ------------------------------------------------------------------------------
+# Production Rules
+
+func const_char: text -> Char;
+func const_int: int -> SmallInt;
+
+# Conditionals
+# In the absence of parametric polymorphism, we create a different if for each
+# supported type.
+# func if_text: text -> bool, text, text;
+
+# Boolean operators.
+func or: bool -> bool, bool;
+func not: bool -> bool;
+func eq_bool: bool -> bool, bool;
+
+# Text manipulation functions.
+# Check: https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions/Text
+# func substr: text -> text, int, int;
+func concat: text -> text, text;
+# func replace: text -> text, text, text;
+
+func lower: text -> text;
+func upper: text -> text;
+
+func index0: int -> text, text;
+# func index1: int -> text, text, int;
+
+func length: int -> text;
+
+func trim: text -> text;
+func ltrim: text -> text;
+func rtrim: text -> text;
+
+func text_eq: bool -> text, text;
+func text_leq: bool -> text, text;
+
+# Dummy
+func empty: Empty -> Empty;
+
+# ------------------------------------------------------------------------------
+# Domain Knowledge
+
+predicate occurs(concat, 300);
+predicate occurs(lower, 100);
+# predicate occurs(substr, 40);
+predicate occurs(trim, 100);
+predicate occurs(trim, 100);
+# predicate occurs(replace, 0);
+
+# predicate is_parent(lower, concat, 100);
+# predicate is_parent(concat, trim, 100);
