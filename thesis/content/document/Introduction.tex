@@ -1,14 +1,6 @@
 \chapter{Introduction}
 \label{chapter:introduction}
 
-% This chapter should:
-% - open the thesis with a page or two that sells the work to a general audience
-% (e.g., a science reporter);
-% - tie the work together and highlight the novel contributions;
-% - advertise the organization of the rest of the document;
-
-% $\exists P \ldotp \phi(P) $
-
 \todo{Program synthesis is the problem of automatically generating
 implementations from high-level specifications.}{add ref} \todo{Amir Pnuelli,
 former computer scientist and Turing Award, described it as ``one of the most
@@ -27,7 +19,7 @@ lack algorithmic insight and domain expertise. Moreover, the challenge is
 actually twofold: we need to find out both how to tackle the intractibility of
 the program space, and how to accurately capture user intent~\cite{Gulwani2017}.
 
-% 1. explicar porque que o espaco de procura e grande
+% 1. Missing an explanation of why the search space is big.
 
 It is important to have in mind that program synthesis is not a panacea for
 solving problems in computer programming. For example, while we are interested
@@ -133,35 +125,3 @@ simple cases. What might be less clear is that the specification as it is might
 still not be fully specified. There are countless other properties that we might
 want our sorting procedure to satisfy, such as stability, complexity or
 adaptability.
-
-% ------------------------------------------------------------------------------
-% Questions left to answer?
-% - Extend the motivation.
-% - In practice where can this be applied (present/future)?
-% - How does prog. synth. compare to other kinds of automatic programming? In
-% particular, how does it compare to ML?
-% - Can you give an example?
-% - What does this thesis introduce? Give a summary of the work done in the rest
-% of the thesis.
-
-% Other questions that will be answered in the following sections include:
-% - How to provide user intent?
-% - How to solve the problem efficiently?
-
-% ------------------------------------------------------------------------------
-% Compromise:
-% - reducing the scope or domain of application
-% - make the synthesizers domain-specific and less general (embed the insights
-%   directly into the synthesizers)
-
-% Solutions are:
-% - solver-aided programming: human provides high-level insights while the
-% synthesizer takes care of the low-level details.
-% - human-computer working together (interaction through active learning)
-
-% Automating this work is good because:
-% - code is correct by construction
-
-% - sintetizadores altamente especializados e calibrados para dominios particulares
-% - bugs enviados para a camada de abstraccao acima
-

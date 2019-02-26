@@ -1,41 +1,399 @@
-* All tasks
-** TODO Component-Based Synthesis
-
+* Chapters
+** TODO Introduction
 :PROPERTIES:
-:CONTENT:  REVIEW
+:CONTENT:  ONGOING
+:EXAMPLES: REVIEW
+:RELWORK:  TODO
+:END:
+
+$\exists P \ldotp \phi(P) $
+
+This chapter should:
+
+- open the thesis with a page or two that sells the work to a general audience
+(e.g., a science reporter);
+- tie the work together and highlight the novel contributions;
+- advertise the organization of the rest of the document.
+
+Things to (maybe) talk about:
+
+# Overview: ch.1, pages 7-13
+- user intent
+- search space
+- search technique
+# DSL design
+- expressiveness
+- choice of operators
+- naturalness
+- efficiency
+# Program ranking
+- Program speed - superopt
+- Robustness - pbe
+- Naturalness and readability
+# Artificial intelligence
+- Machine Learning (check Jha:2017:TFS)
+- Explainable AI
+- Reverse engineering of black-box models
+
+Missing an explanation of why the search space is big.
+
+Maybe rewrite the example in haskell or a similar language to improve the
+typography?
+
+
+% ------------------------------------------------------------------------------
+% Questions left to answer?
+% - Extend the motivation.
+% - In practice where can this be applied (present/future)?
+% - How does prog. synth. compare to other kinds of automatic programming? In
+% particular, how does it compare to ML?
+% - Can you give an example?
+% - What does this thesis introduce? Give a summary of the work done in the rest
+% of the thesis.
+
+% Other questions that will be answered in the following sections include:
+% - How to provide user intent?
+% - How to solve the problem efficiently?
+
+% ------------------------------------------------------------------------------
+% Compromise:
+% - reducing the scope or domain of application
+% - make the synthesizers domain-specific and less general (embed the insights
+%   directly into the synthesizers)
+
+% Solutions are:
+% - solver-aided programming: human provides high-level insights while the
+% synthesizer takes care of the low-level details.
+% - human-computer working together (interaction through active learning)
+
+% Automating this work is good because:
+% - code is correct by construction
+
+% - sintetizadores altamente especializados e calibrados para dominios particulares
+% - bugs enviados para a camada de abstraccao acima
+
+** TODO Background
+:PROPERTIES:
+:CONTENT:  TODO
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
 
-** TODO Constraint Solving
+Rename to preliminaries. May be added as an appendix? Well, it's not like I'm
+lacking space, but usually that's how they do it in books (not sure about
+theses, though).
+
+Things that might be missing:
+
+- SAT, SMT, LIA, QF_S and encodings (with examples)
+  - maybe give sudoku as an example
+- VSAs, although I think this should actually go to "RW/PBE" and described only in
+  high-level.
+- Context-free grammars.
+- Definitions such as:
+  - Ahat does it mean for a program to satisfy a specification, an example, a
+    set of examples, etc.
+
+** TODO Related Work
+   DEADLINE: <2019-03-13 Wed>
 :PROPERTIES:
-:CONTENT:  REVIEW
+:CONTENT:  ONGOING
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
+:END:
+
+Rename to background.
+
+*** TODO Specifications
+:PROPERTIES:
+:CONTENT:  ONGOING
 :EXAMPLES: TODO
 :RELWORK:  ONGOING
 :END:
 
-** TODO Deductive Search
+General problems with this section:
+
+- Fails to discuss the pros and cons of each approach
+- Incomplete (?)
+
+Separate between semantic and syntactic specifications/restrictions (a
+specification is a restriction over the space of all possible programs).
+
+**** TODO Logical Specifications
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
 
-** TODO Enumerative Search
+This should be the first subsection and should be composed mainly of examples.
+
+Maybe it doesn't even need to be a subsection by itself and could be the
+beginning of the specifications section.
+
+Add an example. Ideas:
+- Leon
+- POPL'19 Polikarpova, swap.
+
+Maybe add both examples because this is a basic idea that may be worth
+exploring with detail. Maybe a first-order logic and another based on type
+signatures?
+
+Almost sic, page 8, \cite{Gulwani2017}:
+``precise and succinct, but complete ones are often quite tricky to write''
+
+% - expert-oriented
+% - poder do sintetizador vs tipo de logica que suporta (primeira-ordem, etc)
+
+% Type-based:
+% synquid, lifty
+
+**** TODO Component-Based Synthesis
+:PROPERTIES:
+:EXAMPLES: TODO
+:CONTENT:  TODO
+:RELWORK:  TODO
+:END:
+
+We already speak about this on the constraint-solving section. Decide whether to
+put it here, there or split it.
+
+**** TODO Syntax-Guided Synthesis
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  ONGOING
+:END:
+
+Rename to avoid confusion with SyGuS. Maybe call it something like "syntactic
+bias".
+
+Clean this section and add a subsection on SyGuS.
+
+
+Maybe from here on, refer to "specifications and syntactic bias" simply as
+"specifications."
+
+Check out PSKETCH: overview, page 32.
+
+***** Sketching and Metasketching
+      :PROPERTIES:
+      :CONTENT:  ONGOING
+      :EXAMPLES: TODO
+      :RELWORK:  TODO
+      :END:
+
+Needs cleaning and rewriting. Was left kind of dull after updates.
+
+Decide whether to speak or not of metasketching. I think we should speak about
+[[https://alexpolozov.com/blog/program-synthesis-2018/][sketch generation]] somewhere, but I'm not sure if metasketching is really what we
+want. Maybe metasketching makes more sense to stay next to SyGuS.
+
+**** TODO Inductive Synthesis
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+# \cite{Solar-Lezama:2008}
+``Inductive synthesis is the process of generating a program from concrete
+observations of its behavior, where an observation describes the expected
+behavior of the program on a specific input. The inductive synthesizer uses each
+new observation to refine its hypothesis about what the correct program should
+be until it converges to a solution. Inductive synthesis had its origin in the
+work by Gold [33] on language learning, and the pioneering work by Shapiro [57]
+on inductive synthesis and its application to algorithmic debugging among
+others.''
+
+Check p. 92 of the overview for the pros and cons of \gls{PBE}.
+
+***** TODO Programming By Examples
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+***** TODO Programming By Demonstration
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+**** TODO Programs
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+Needs cleaning.
+
+*** TODO Searching
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
+:END:
+
+**** TODO Deductive Search
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+Expand on this.
+
+References: Polikarpova:2019:SSH, Manna:1971:TAP, Green:1969:ATP
+# These last two refs. are old!
+
+**** TODO Enumerative Search
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: ONGOING
 :RELWORK:  TODO
 :END:
 
-** TODO Logical Specifications
+Missing figures.
+Check out Professor's notes on my figures from Jan 8 2019.
+
+Professor says to give more detail of the (first?) algorithm (?)
+
+***** TODO Top-Down Tree Search
 :PROPERTIES:
 :CONTENT:  REVIEW
+:EXAMPLES: ONGOING
+:RELWORK:  TODO
+:END:
+
+Adicionar ref. ao facto de que estes algoritmos geralmente consideram o tamanho
+das expressões que estão a gerar. Ver a overview do Gulwani. Sem dizer isso, a
+descrição fica algo inconsistente com os dois algoritmos que vem a seguir.
+
+Adicionar (possivelmente) um exemplo de um traço de execução do algoritmo.
+
+***** TODO Bottom-Up Tree Search
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: ONGOING
+:RELWORK:  TODO
+:END:
+
+Check out references [4, 141] of Gulwani2017.
+
+This algorithm is shown in Figure \fixme{???}{ainda tenho que produzir esta
+figura}, using program size as the metric of program complexity.
+
+***** TODO Bidirectional Tree Search
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: ONGOING
+:RELWORK:  TODO
+:END:
+
+Explicar porque que isto e bom: Note that instructions _ and _ may be
+parallelizable.
+
+**** TODO Stochastic Search
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
+:END:
+
+Missing stuff on:
+
+- Genetic Programming
+- Neural Program Synthesis
+- Graph neural networks
+- ... check [[https://alexpolozov.com/blog/program-synthesis-2018/][Polozov's overview]] for work done since 2017
+
+Missing refs: LEE_ASP_2018, DeepCoder, Ruben, for the first approach and STOKE
+for the second one, for example.
+
+***** Guiding the Search
+:PROPERTIES:
+:CONTENT:  TODO
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
 
-** TODO Oracle-Guided Inductive Synthesis
+They describe their \gls{dsl} by a \gls{cfg}.
+
+``Our algorithm is essentially the same as the existing enumerative algorithm
+except that it enumerates programs in order of likelihood instead of size.
+Therefore, instead of enumerating all the smallest expressions (e.g., “.”, “-”,
+x), it first proposes x + “.”, which is found only in the third iteration by the
+existing enumerative search. ''
+
+``The first key contribution of our approach is an efficient algorithm based on
+A* search to enumerate programs in order of decreasing probability.''
+It works with wide range of different probabilistic models. One of them is pcfg,
+which takes a sentential form and returns a probability for each production rule.
+
+``Our algorithm conceptually works on a directed weighted graph—constructed on
+demand—of sentential forms derived from the given model.''
+
+``However, as our evaluation in Section 5 shows, uniform cost search performs
+poorly in practice by expanding a huge number of paths before reaching the
+solution node. We address this problem by employing A* search [14] instead of
+uniform cost search.''
+
+They apply a slightly tweaked version of $A*$. The heuristic function is a
+statistical model.
+
+
+% LEE_ASP_2018
+% DeepCoder style synthesis
+
+***** Sampling the Search Space
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
+:END:
+
+**** TODO Constraint Solving
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
+:END:
+
+% TODO: Check out 132, 133, 134 of the overview
+
+Examples are still missing.
+
+Things that might be missing:
+
+- SMTEN? PROSE?
+- concept of domain separation
+- Metasketching, symbolic profiling?
+- Conflict-driven (example)
+- Distinguishing inputs (example)
+- Inductive Logic Programming (subsubsection)
+
+***** TODO Component-Based Synthesis
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  ONGOING
+:END:
+
+Check:
+
+- 12, 13, 22, 34 of Gulwani2017
+- 9, 16, 17 of Feng:2017:CSC
+
+Add examples:
+
+- SyPet
+- FrAngel: Also, it adds control structures to the problem
+
+**** TODO Oracle-Guided Inductive Synthesis
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: TODO
@@ -44,58 +402,60 @@
 
 Example could be Jha's distinguishing inputs from the OGIS paper.
 
-** TODO Preliminaries
-:PROPERTIES:
-:CONTENT:  TODO
-:EXAMPLES: TODO
-:END:
+Note that there might be some ambiguity about what we mean about distinguishing
+inputs depending on the context (interactivity, etc).
 
-** TODO Programming by Examples
-:PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK: ONGOING
-:END:
+Figures should come at the top of the page and before the text that references
+it, when possible.
 
-Clean 
+Wonder if some parts are too close to the original.
 
-** TODO Programs
-:PROPERTIES:
-:CONTENT:  REVIEW
-:EXAMPLES: TODO
-:RELWORK:  TODO
-:END:
-
-Needs cleaning.
-
-** TODO Stochastic Search
+*** TODO Programming by Examples
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: TODO
 :RELWORK:  ONGOING
 :END:
 
-** TODO Stochastic Search
+Specifics of PBE. Needs cleaning.
+
+PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
+
+**** Specialized Search Techniques
 :PROPERTIES:
-:CONTENT:  REVIEW
-:EXAMPLES: ONGOING
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
 
-** TODO Syntax-Guided Synthesis
+**** Disambiguation
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: TODO
 :RELWORK:  ONGOING
 :END:
 
-- Change name to avoid confusion with SyGuS? Maybe call it something like
-"syntactic bias".
-- Clean this section and add a subsection on SyGuS.
-- Maybe even speak about metasketching?
+***** Ranking
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  ONGOING
+:END:
+
+***** Active Learning
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  ONGOING
+:END:
+
+** TODO Bibliography
+   :PROPERTIES:
+   :CONTENT:  ONGOING
+   :END:
 
 * config :noexport:
-#+COLUMNS: %35ITEM %7CONTENT %7EXAMPLES %7RELWORK %10Deadline
+#+COLUMNS: %35ITEM %7CONTENT %7EXAMPLES %7RELWORK
 #+PROPERTY: CONTENT_ALL  TODO ONGOING REVIEW DONE
 #+PROPERTY: EXAMPLES_ALL TODO ONGOING REVIEW DONE
 #+PROPERTY: RELWORK_ALL  TODO ONGOING REVIEW DONE

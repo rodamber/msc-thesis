@@ -1,8 +1,6 @@
 \subsection{Inductive Synthesis}
 \label{sec:inductive}
 
-% FIXME: Few references
-
 Inductive synthesis is an instance of the program synthesis problem where the
 constraints are under-specified. Sometimes the domain we want to model is
 complex enough that a complete specification could be as hard to produce as the
@@ -23,8 +21,6 @@ can be helpful if it is impractical or impossible to write the output concretely
 e.g., if it is infinite.
 
 \subsubsection{Programming By Demonstration}
-
-% Watch What I Do – Programming by Demonstration
 
 In \gls{pbd} the user does not write a specification \textit{per se}; instead the
 synthesizer actively records user actions on concrete examples using them to
@@ -49,15 +45,3 @@ interfaces, but it generalizes to a more robust program that is likely to work
 in more situations \cite{Lau2003}. They have also presented a language-neutral
 framework and an implementation of a system that learns procedural programs from
 just 5.1 traces on average \cite{Lau:traces:2003}.
-
-% % \cite{Solar-Lezama:2008}
-% ``Inductive synthesis is the process of generating a program from concrete
-% observations of its behavior, where an observation describes the expected
-% behavior of the program on a specific input. The inductive synthesizer uses each
-% new observation to refine its hypothesis about what the correct program should
-% be until it converges to a solution. Inductive synthesis had its origin in the
-% work by Gold [33] on language learning, and the pioneering work by Shapiro [57]
-% on inductive synthesis and its application to algorithmic debugging among
-% others.''
-
-% \pdffreetextcomment{Check p. 92 of the overview for the pros and cons of \gls{PBE}}

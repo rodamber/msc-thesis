@@ -1,7 +1,5 @@
 \subsection{Syntax-Guided Synthesis}
-\label{sec:sygus}
-
-% \fixme{Not sure if this should be the first section in the chapter.}{}
+\label{sec:syntax-guided}
 
 Syntax-guided synthesis is an instance of program synthesis where the semantic
 specification is complemented with some form of syntactic restriction over the
@@ -25,13 +23,8 @@ the purpose of performance optimizations, e.g., by limiting the search space to
 implementations that only use a limited amount of lines of code. The learned
 programs also tend to be more readable and explainable.
 
-% ------------------------------------------------------------------------------
-
 \subsubsection{Sketching and Metasketching}
 \label{sec:sketching}
-
-% \todo{This subsubsection was left kind of dull after the modifications... Maybe
-% it should be removed?}{}
 
 The idea of sketching is to provide skeletons of the programs we want to
 synthesize, called \textit{sketches}, leaving missing details, called
@@ -43,21 +36,3 @@ assertions.
 Sketching is an accessible form of program synthesis, as it does not require
 learning new specification languages, allowing the users to use the programming
 model with which they are already familiarized.
-
-% \textit{Metasketches} \cite{Bornholt:2016:OSM} generalize sketches.
-
-% Instead of just one sketch, a metasketch represents an 
-
-% enabling a description of an infinite space of candidate programs with a
-% countable, ordered set of finite sketches.
-
-% This representation permits fine-grained control over the shape of the candidate
-% space, which is critical for effective search.
-
-% A metasketch additionally provides a means of assigning cost to programs and of
-% directing the search toward lower-cost regions of the candidate space.
-
-% \todo{Check out PSKETCH}{\cite{Gulwani2017}: page 32}
-
-% TODO: From now on, refer to ''specifications and syntactic bias`' simply as
-% ''specifications.`'
