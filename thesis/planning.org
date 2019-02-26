@@ -1,21 +1,101 @@
+* All tasks
+** TODO Component-Based Synthesis
 
-|-----------------------------------+--------------------------------------------------+-------------------------------------|
-| Secção                            | O quê                                            | Quando                              |
-|-----------------------------------+--------------------------------------------------+-------------------------------------|
-| Preliminaries                     | -                                                | Á medida que for escrevendo o resto |
-| Constraint Solving                | Conteúdo, sem exemplo                            | Sábado 16                           |
-| Stochastic Search                 | Conteúdo, sem exemplo                            | Domingo 17                          |
-| Enumerative Search                | Adicionar exemplo                                | Segunda 18                          |
-| Deductive Search                  | Adicionar exemplo                                | Terça 19                            |
-| Component-Based Synthesis         | Conteúdo, sem exemplo                            | Quarta 20                           |
-| Logical Specifications            | Exemplo                                          | Quinta 21                           |
-| Syntax-Guided Synthesis           | Limpar conteúdo + adicionar exemplo              | Sexta 22                            |
-| Programs                          | Limpar conteúdo + adicionar exemplo              | Sábado 23                           |
-| Oracle-Guided Inductive Synthesis | Adicionar exemplo (distinguishing inputs)        | Domingo 24                          |
-| Constraint Solving                | Conteúdo, sem exemplo                            | Segunda 25                          |
-| Stochastic Search                 | Conteúdo, sem exemplo                            | Terça 26                            |
-| Component-Based Synthesis         | Adicionar exemplo                                | Quarta 27                           |
-| SyGuS                             | Pequena nova subsecção (a seguir á procura, 3.2) | Quinta 28                           |
-| Programming by Examples           | Limpar + related work de PBE                     | Terça 5                             |
-| "Trabalho em concreto"            | Abordagem para resolver o problema (início)      | Quinta 7                            |
-|-----------------------------------+--------------------------------------------------+-------------------------------------|
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+** TODO Constraint Solving
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  ONGOING
+:END:
+
+** TODO Deductive Search
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+** TODO Enumerative Search
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: ONGOING
+:RELWORK:  TODO
+:END:
+
+** TODO Logical Specifications
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+** TODO Oracle-Guided Inductive Synthesis
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  REVIEW
+:END:
+
+Example could be Jha's distinguishing inputs from the OGIS paper.
+
+** TODO Preliminaries
+:PROPERTIES:
+:CONTENT:  TODO
+:EXAMPLES: TODO
+:END:
+
+** TODO Programming by Examples
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK: ONGOING
+:END:
+
+Clean 
+
+** TODO Programs
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+Needs cleaning.
+
+** TODO Stochastic Search
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  ONGOING
+:END:
+
+** TODO Stochastic Search
+:PROPERTIES:
+:CONTENT:  REVIEW
+:EXAMPLES: ONGOING
+:RELWORK:  TODO
+:END:
+
+** TODO Syntax-Guided Synthesis
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  ONGOING
+:END:
+
+- Change name to avoid confusion with SyGuS? Maybe call it something like
+"syntactic bias".
+- Clean this section and add a subsection on SyGuS.
+- Maybe even speak about metasketching?
+
+* config :noexport:
+#+COLUMNS: %35ITEM %7CONTENT %7EXAMPLES %7RELWORK %10Deadline
+#+PROPERTY: CONTENT_ALL  TODO ONGOING REVIEW DONE
+#+PROPERTY: EXAMPLES_ALL TODO ONGOING REVIEW DONE
+#+PROPERTY: RELWORK_ALL  TODO ONGOING REVIEW DONE
