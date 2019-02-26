@@ -19,8 +19,7 @@ Some interesting character constants to consider are:
 
 We need to consider basic arithmetic and integer constants:
 
-- addition, subtraction
-- 0, 1, 2, 3, 4, 5
+-- +1, -1
 
 This are nice, but maybe we'll leave them for later:
 
