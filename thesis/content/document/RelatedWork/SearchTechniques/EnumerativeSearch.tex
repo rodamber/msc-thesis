@@ -1,26 +1,42 @@
 \subsection{Enumerative Search}
 \label{sec:enumerative-search}
 
+% FIXME missing figures
+% FIXME check Professor's notes on my figures (Jan 8 2019)
+
+% TODO
 In the context of program synthesis, enumerative search consists of
 enumerating programs by working the intrinsic structure of the program space to
 guide the search. The programs can be ordered using many different program
 metrics, the simplest one being program size~\cite{Alur:sygus:2013}, and pruned
 by means of \todo{semantic equivalence checks}{Missing an example to explain
 what I mean. Maybe add a simple example such as, how by associativity of
-addition, x+y is the same as y+x} with respect to the specification.
-Synthesizers based on enumerative search have been some of the most effective
-to synthesize short programs in complex program spaces~\cite{Gulwani2017}.
+addition, x+y is the same as y+x. Symmetry breaking.} with respect to the
+specification. Synthesizers based on enumerative search have been some of the
+most effective to synthesize short programs in complex program
+spaces~\cite{Gulwani2017}.
 
-A simple enumerative search algorithm is described in Figure \fixme{???}{ainda
-tenho que produzir esta figura}. The algorithm is parameterized by the
-specification $\phi{}$ and two procedures, $next$, that given a set of programs
-generates a new set of programs, and $prune$, that given a set of programs
-filters out the \todo{unwanted ones}{Isto poderia ser dito de uma outra
-forma...}. The algorithm works by iteratively calling the given procedures until
-it finds a program that matches the specification.
+% FIXME
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{assets/enum-01.png}
+  \caption{FIXME: This is a placeholder.}
+  \label{fig:enum-01}
+\end{figure}
 
+A simple enumerative search algorithm is described in Figure~\ref{fig:enum-01}. The
+algorithm is parameterized by the specification $\phi{}$ and two procedures,
+$next$, that given a set of programs generates a new set of programs, and
+$prune$, that given a set of programs filters out the \todo{unwanted ones}{Isto
+poderia ser dito de uma outra forma...}. The algorithm works by iteratively
+calling the given procedures until it finds a program that matches the
+specification.
+
+% TODO
+% Professor says to give more detail of the algorithm (?)
 In their overview of the field of program synthesis~\cite{Gulwani2017},
-\citeauthor{Gulwani2017} present some simple enumerative search algorithms for
+\citeauthor{Gulwani2017} \todo{present}{Professor asks if the algorithms are
+  presented as original work} some simple enumerative search algorithms for
 finding programs in program spaces defined by a \gls{cfg}, which we describe
 next. The algorithms can be generalized to other types of program spaces such
 as, e.g., partial programs.
@@ -28,27 +44,35 @@ as, e.g., partial programs.
 \subsubsection{Top-Down Tree Search}
 \label{sec:top-down-tree-search}
 
-The first algorithm, shown in Figure \fixme{?}{ainda tenho que produzir esta
-figura.}, takes as input a \gls{cfg} $G = (V, \Sigma{}, R, S)$ and a
-specification $\phi{}$, and works by exploring the derivations of $G$ in a
-best-first top-down fashion. The algorithm stores the current programs in a
-priority queue, $P$, and stores all the programs found so far in the set $P'$.
-Both $P$ and $P'$ are initialized with the partial program that corresponds to
-the start symbol $S$ of $G$. The algorithm runs until it finds a program $p$
-that matches the specification $\phi{}$ or there are no more programs waiting in
-the queue (meaning that the algorithm fails). At every iteration, we take the
-highest priority program $p$ from the queue and check whether it satisfies
-$\phi{}$. If yes, we return $p$. Otherwise, the algorithm finds new (possibly
-partial) programs by applying the production rules of the grammar to $p$. The
-program space is pruned in the next step by ignoring programs that are
-semantically equivalent with respect to $\phi{}$ to programs already considered
-in the past ($P'$).
+% FIXME
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{assets/enum-top-down.png}
+  \caption{FIXME: This is a placeholder.}
+  \label{fig:enum-top-down}
+\end{figure}
 
-% FIXME: Adicionar ref. ao facto de que estes algoritmos geralmente consideram o
+The first algorithm, shown in Figure~\ref{fig:enum-top-down}, takes as input a
+\gls{cfg} $G = (V, \Sigma{}, R, S)$ and a specification $\phi{}$, and works by
+exploring the derivations of $G$ in a best-first top-down fashion. The algorithm
+stores the current programs in a priority queue, $P$, and stores all the
+programs found so far in the set $P'$. Both $P$ and $P'$ are initialized with
+the partial program that corresponds to the start symbol $S$ of $G$. The
+algorithm runs until it finds a program $p$ that matches the specification
+$\phi{}$ or there are no more programs waiting in the queue (meaning that the
+algorithm fails). At every iteration, we take the program $p$ with the highest
+priority from the queue and check whether it satisfies $\phi{}$. If yes, we
+return $p$. Otherwise, the algorithm finds new (possibly partial) programs by
+applying the production rules of the grammar to $p$. The program space is pruned
+in the next step by ignoring programs that are semantically equivalent (with
+respect to $\phi{}$) to programs already considered in the past ($P'$).
+
+% FIXME Adicionar ref. ao facto de que estes algoritmos geralmente consideram o
 % tamanho das expressões que estão a gerar. Ver a overview do Gulwani. Sem dizer
 % isso, a descrição fica algo inconsistente com os dois algoritmos que vem a
 % seguir.
-% TODO: Adicionar (possivelmente) um exemplo de um traço de execução do
+
+% TODO Adicionar (possivelmente) um exemplo de um traço de execução do
 % algoritmo.
 
 \subsubsection{Bottom-Up Tree Search}

@@ -11,6 +11,8 @@ oracle is defined by the type of queries it can handle and the properties of its
 responses. The characteristics of these components are typically imposed by the
 \todo{application}{give an example}.
 
+% TODO figures should come at the top of the page and before the text that
+% references it, when possible.
 \begin{figure}[htb]
   \centering
   \begin{tikzpicture}
@@ -60,29 +62,27 @@ Typical queries and response types are some of the following~\cite{Jha:2017:TFS}
 % FIXME: Is this ^^^ too close to the original?
 
 An \gls{ogis} system responding to counterexample queries corresponds to the
-\textit{\gls{cegis}} system, introduced by \citeauthor{Solar-Lezama:2008}
-~\cite{Solar-Lezama:2008} in the context of the SKETCH synthesizer. Correctness
-oracles are more powerful than counterexample oracles because they are
-guaranteed to return a counterexample if the program is not correct, where the
-counterexample oracles might not.
+\textit{\gls{cegis}} system, introduced by
+\citeauthor{Solar-Lezama:2008}~\cite{Solar-Lezama:2008} in the context of the
+SKETCH synthesizer. Correctness oracles are more powerful than counterexample
+oracles because they are guaranteed to return a counterexample if the program is
+not correct, where the counterexample oracles might not.
 
-The concept of \gls{ogis} and distinguishing inputs were introduced by Jha et.
-al \cite{Jha:2017:TFS} as a generalization of \gls{cegis} when they applied
-this idea in a example-based synthesizer in order to deobfuscate malware and to
-generate bit-manipulating programs. Jha et al. further developed this idea by
-presenting a new theoretical framework for inductive synthesis
-\cite{Jha:2017:TFS}.
+The concepts of \gls{ogis} was introduced by
+\citeauthor{Jha:2017:TFS}~\cite{Jha:2017:TFS} as a generalization of \gls{cegis}
+when they applied this idea to a \gls{pbe} synthesizer based on distinguishing
+inputs in order to deobfuscate malware and to generate bit-manipulating
+programs. Jha et al. further developed this idea by presenting a new theoretical
+framework for inductive synthesis \cite{Jha:2017:TFS}.
 
-\fixme{Aqui tenho dúvida se devo ou não colocar pseudocódigo do algoritmo deles
-(Como na figura 3.3. da overview) Ou se já é aprofundar demais. Note que eles
-\textbf{não} fazem queries ao utilizador}{}
+% TODO Add example based on the last paragraph.
 
+% FIXME This paragraph is confusing. What do I mean by ''not necessarily positive`'?
 In general, the higher the capabilities of the oracles, the more expensive they
 are to run. Distinguishing oracles are (typically) not as strong as
 counterexample or correctness oracles as the returned counterexample is not
-necessarily positive. To see why they might by such effectives tools we can
-recur to the \todo{Bounded Observation Hypothesis}{caps?} \fixme{first
-introduced}{as far as I know} by Solar-Lezama \cite{Solar-Lezama:2008}, which
+necessarily positive. To understand why they might be effectives tools we can
+turn to the Bounded Observation Hypothesis \cite{Solar-Lezama:2008}, which
 asserts that ``an implementation that works correctly for the common case and
 for all the different corner cases is likely to work correctly for all inputs.''
 
