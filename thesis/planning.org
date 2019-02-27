@@ -240,7 +240,7 @@ Check p. 92 of the overview for the pros and cons of \gls{PBE}.
 
 Needs cleaning.
 
-*** TODO Searching
+*** TODO Search Techniques
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: ONGOING
