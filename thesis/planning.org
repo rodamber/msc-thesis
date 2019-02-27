@@ -152,7 +152,7 @@ Maybe add a subsection (or just a paragraph speaking about type signatures).
 % - expert-oriented
 % - poder do sintetizador vs tipo de logica que suporta (primeira-ordem, etc)
 
-**** TODO Syntax-Guided Synthesis
+**** TODO Syntactic Bias
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: DONE
