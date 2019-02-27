@@ -1,25 +1,23 @@
-\section{\textit{How to ask it}: Specifications and Syntactic Bias}
+\section{Specifications}
 \label{sec:specifications}
 
-The first part of solving a program synthesis problem is figuring out which
-method will use to express our intent to the sinthesizer.
-That intent may be specified in many different ways, including:
-  logical specifications \cite{Itzhaky:SIS:2010};
-  type signatures \cite{Osera:2015:TPS, Frankle:2016:EST, Polikarpova:2016:PSP};
-  components \cite{Feng:2017:CST, Feng:2017:CSC, Feng:2018:PSU, Shi:2019:FCS};
-  syntax-guided methods \cite{Alur:sygus:2013} such as
-  sketches \cite{Solar-Lezama:2008};
-  or incomplete specifications such as
-  input-output examples \cite{Frankle:2016:EST, Gulwani:2012:SDM, Leung:2015:IPS},
-  demonstrations \cite{Lau2003}
-  or program traces \cite{Lau:traces:2003}.
-The kind of specification used typically depends on the particular problem at
-hand, especially when taking into account the multitude of different user
-backgrounds, and it might also dictate the type of techniques used to solve the
-problem.
+The first part of solving a program synthesis problem is figuring out how the
+user will communicate their intention to the synthesizer. An intention is
+communicated by a \textit{specification}, and may be given in many different
+ways, including: logical specifications~\cite{Itzhaky:SIS:2010} \todo{such
+as}{maybe add first-order logic?} type signatures~\cite{Osera:2015:TPS,
+Frankle:2016:EST, Polikarpova:2016:PSP}; \todo{syntax-guided methods}{add more
+refs}~\cite{Alur:sygus:2013} such as sketches~\cite{Solar-Lezama:2008}, or
+components~\cite{Feng:2017:CST, Feng:2017:CSC, Feng:2018:PSU, Shi:2019:FCS};
+inductive specifications such as input-output examples~\cite{Frankle:2016:EST,
+Gulwani:2012:SDM, Leung:2015:IPS}, demonstrations~\cite{Lau2003}, or program
+traces~\cite{Lau:traces:2003}; or even \todo{other programs}{add ref}. The kind
+of specification should be chosen according to the particular use case and to
+the background of the user, and it might dictate the type of techniques used to
+solve the problem (section~\ref{sec:search-techniques}).
 
 \input{Logical}
-\input{Components}
 \input{SyntaxGuided}
+\input{Components}
 \input{Inductive}
 \input{Programs}

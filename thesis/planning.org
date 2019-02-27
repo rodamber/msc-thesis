@@ -96,9 +96,9 @@ Things that might be missing:
 ** TODO Background
    DEADLINE: <2019-03-13 Wed>
 :PROPERTIES:
-:CONTENT:  ONGOING
+:CONTENT:  REVIEW
 :EXAMPLES: DONE
-:RELWORK:  ONGOING
+:RELWORK:  REVIEW
 :END:
 
 Should I add references here (before the sections)?
@@ -110,9 +110,9 @@ Should I add references here (before the sections)?
 
 *** TODO Specifications
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: DONE
+:RELWORK:  REVIEW
 :END:
 
 General problems with this section:
@@ -130,27 +130,27 @@ specification is a restriction over the space of all possible programs).
 :RELWORK:  TODO
 :END:
 
-This should be the first subsection and should be composed mainly of examples.
+#+BEGIN_QUOTE
+precise and succinct, but complete ones are often quite tricky to write --
+Almost sic, page 8, \cite{Gulwani2017}
+#+END_QUOTE
 
-Maybe it doesn't even need to be a subsection by itself and could be the
-beginning of the specifications section.
+There seems to be no reference to any specific logic (like FOL), which seems
+kind of dumb.
 
 Add an example. Ideas:
 - Leon
-- POPL'19 Polikarpova, swap.
+- POPL'19 Polikarpova, swap. This one is good because it can serve as an example
+  for the subsection on deductive synthesis.
 
 Maybe add both examples because this is a basic idea that may be worth
 exploring with detail. Maybe a first-order logic and another based on type
-signatures?
+signatures (synquid, lifty)?
 
-Almost sic, page 8, \cite{Gulwani2017}:
-``precise and succinct, but complete ones are often quite tricky to write''
+Maybe add a subsection (or just a paragraph speaking about type signatures).
 
 % - expert-oriented
 % - poder do sintetizador vs tipo de logica que suporta (primeira-ordem, etc)
-
-% Type-based:
-% synquid, lifty
 
 **** TODO Component-Based Synthesis
 :PROPERTIES:
@@ -161,6 +161,11 @@ Almost sic, page 8, \cite{Gulwani2017}:
 
 We already speak about this on the constraint-solving section. Decide whether to
 put it here, there or split it.
+^ _Put it here_
+
+Refer that some methods (like sypet and frangel) rely on type signatures.
+
+Maybe move this section to the syntactic bias one.
 
 **** TODO Syntax-Guided Synthesis
 :PROPERTIES:
