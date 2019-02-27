@@ -72,16 +72,15 @@ typography?
 % - sintetizadores altamente especializados e calibrados para dominios particulares
 % - bugs enviados para a camada de abstraccao acima
 
-** TODO Background
+** TODO Preliminaries
 :PROPERTIES:
 :CONTENT:  TODO
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
 
-Rename to preliminaries. May be added as an appendix? Well, it's not like I'm
-lacking space, but usually that's how they do it in books (not sure about
-theses, though).
+May be added as an appendix? Well, it's not like I'm lacking space, but I guess
+that's how they usually do it in books. Not sure about theses, though.
 
 Things that might be missing:
 
@@ -94,15 +93,20 @@ Things that might be missing:
   - Ahat does it mean for a program to satisfy a specification, an example, a
     set of examples, etc.
 
-** TODO Related Work
+** TODO Background
    DEADLINE: <2019-03-13 Wed>
 :PROPERTIES:
 :CONTENT:  ONGOING
-:EXAMPLES: ONGOING
+:EXAMPLES: DONE
 :RELWORK:  ONGOING
 :END:
 
-Rename to background.
+Should I add references here (before the sections)?
+
+% Section~\ref{sec:challenges} presents the inherent challenges of the problem,
+% such as resolving ambiguity or the size of the search space;
+
+% section~\ref{sec:applications} presents applications of the problem;
 
 *** TODO Specifications
 :PROPERTIES:
