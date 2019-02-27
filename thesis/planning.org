@@ -115,13 +115,9 @@ Should I add references here (before the sections)?
 :RELWORK:  REVIEW
 :END:
 
-General problems with this section:
+Fails to discuss the pros and cons of each approach.
 
-- Fails to discuss the pros and cons of each approach
-- Incomplete (?)
-
-Separate between semantic and syntactic specifications/restrictions (a
-specification is a restriction over the space of all possible programs).
+Should I add ref links to each subsection?
 
 **** TODO Logical Specifications
 :PROPERTIES:
@@ -161,6 +157,9 @@ Maybe add a subsection (or just a paragraph speaking about type signatures).
 
 Rename to avoid confusion with SyGuS. Maybe call it something like "syntactic
 bias".
+
+Separate between semantic and syntactic specifications/restrictions (a
+specification is a restriction over the space of all possible programs).
 
 Clean this section and add a subsection on SyGuS.
 
