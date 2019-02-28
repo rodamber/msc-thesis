@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from parsy import char_from, generate, regex, string, string_from, whitespace
+from parsy import char_from, generate, regex, string, string_from  #, whitespace
 from typing import Any
 
 
@@ -24,7 +24,8 @@ class Op(Token):
     pass
 
 
-lexeme = lambda p: p << whitespace.optional()
+whitespace = regex(r'\s*')
+lexeme = lambda p: p << whitespace
 
 identifier = lexeme(
     regex(r'[_A-Za-z][_A-Za-z0-9]*')).desc('identifier').map(Var)
@@ -49,7 +50,7 @@ string_esc = string("\"\"").result('"')
 def quoted():
     yield string('"')
     val = yield (string_part | string_esc).many().concat()
-    yield string('"') << whitespace.optional()
+    yield string('"') << whitespace
     return String(val)
 
 
@@ -60,5 +61,5 @@ def dotted():
     return Var(base + field)
 
 
-lexer = whitespace.optional() >> (quoted | number | op | dotted | lparen
-                                  | rparen | comma).many()
+lexer = whitespace >> (quoted | number | op | dotted | lparen
+                       | rparen | comma).many()

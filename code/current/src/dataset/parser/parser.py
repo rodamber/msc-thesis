@@ -5,25 +5,6 @@ from parsy import fail, generate, match_item, Parser, Result, test_item
 
 from lexer import lexer, Token, Var, String, Number, Op
 
-
-def except_(*items):
-    @generate
-    def parser():
-        func = lambda y: y not in items
-        desc = 'anything but any of \'{}\''.format(items)
-        return (yield test_item(func, desc))
-
-    return parser
-
-
-@Parser
-def peek(stream, index):
-    try:
-        return Result.success(index, stream[index])
-    except:
-        return Result.success(index, None)
-
-
 any_ = test_item(lambda _: True, 'anything')
 
 lparen = match_item('(')
@@ -35,6 +16,14 @@ var = test_item(lambda x: isinstance(x, Var), 'var')
 string = test_item(lambda x: isinstance(x, String), 'string')
 number = test_item(lambda x: isinstance(x, Number), 'number')
 op = test_item(lambda x: isinstance(x, Op), 'op')
+
+
+@Parser
+def peek(stream, index):
+    try:
+        return Result.success(index, stream[index])
+    except:
+        return Result.success(index, None)
 
 
 @generate
@@ -148,4 +137,4 @@ def parse_partial(stream):
 
 def pt(tree):
     for pre, _, node in RenderTree(tree, style=DoubleStyle):
-        print('%s%s (%s)' % (pre, node.name, node.tag))
+        print('%s%s (%s)' % (pre, node.name.val, node.tag))

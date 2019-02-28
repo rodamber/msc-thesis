@@ -46,9 +46,10 @@ def test_expr():
 def dataset():
     import jsonlines
 
-    with jsonlines.open('../../dataset/exprs-3-6.jsonl') as reader:
+    with jsonlines.open('../../../dataset/exprs-3-6.jsonl') as reader:
         for obj in reader:
             try:
-                helper(obj['text'])
+                if not helper(obj['text']):
+                    return obj['text']
             except:
                 return obj['text']
