@@ -41,16 +41,22 @@ op = test_item(lambda x: isinstance(x, Op), 'op')
 
 @generate
 def atom():
-    return (yield token.map(Node))
+    # import pdb; pdb.set_trace();
+    # print('Peek: {}'.format((yield peek)))
+    return (yield token.map(lambda x: Node(x, tag='atom')))
 
 
 @generate
 def func():
+    # import pdb; pdb.set_trace();
+    # print('Peek: {}'.format((yield peek)))
     name = yield var
     yield lparen
     args = yield expr.sep_by(comma)
+    # import pdb; pdb.set_trace();
+    # print('Peek: {}'.format((yield peek)))
     yield rparen
-    return Node(name, children=args)
+    return Node(name, children=args, tag='func')
 
 
 def test_func():
@@ -63,11 +69,13 @@ def test_func():
 
 @generate
 def unop():
+    # import pdb; pdb.set_trace();
+    # print('Peek: {}'.format((yield peek)))
     name = yield op | keyword
 
     if name.val in ['-', 'not']:
         child = yield expr
-        return Node(name, children=[child])
+        return Node(name, children=[child], tag='unop')
     else:
         return fail("unary op must be 'not'")
 
@@ -107,6 +115,8 @@ def binop():
     def prec_parse(lhs, lvl):
         @generate
         def helper():
+            # import pdb; pdb.set_trace();
+            # print('Peek: {}'.format((yield peek)))
             lookahead = yield peek
 
             while isinstance(lookahead, Op) and prec(lookahead) >= lvl:
@@ -122,12 +132,14 @@ def binop():
                     lookahead = yield peek
 
                 nonlocal lhs
-                lhs = Node(op, children=[lhs, rhs])
+                lhs = Node(op, children=[lhs, rhs], tag='binop')
             return lhs
 
         return helper
 
-    lhs = yield (paren | func | unop | atom)
+    # import pdb; pdb.set_trace();
+    # print('Peek: {}'.format((yield peek)))
+    lhs = yield (paren | unop | func | atom)
     return (yield prec_parse(lhs, lvl=0))
 
 
@@ -148,8 +160,10 @@ def test_binop_complex():
 
 @generate
 def paren():
+    # import pdb; pdb.set_trace();
+    # print('Peek: {}'.format((yield peek)))
     yield lparen
-    res = expr
+    res = yield expr
     yield rparen
 
     return res
@@ -157,7 +171,9 @@ def paren():
 
 @generate
 def expr():
-    return (yield paren | func | binop | unop | atom)
+    # import pdb; pdb.set_trace();
+    # print('Peek: {}'.format((yield peek)))
+    return (yield paren | binop | unop | func | atom)
 
 
 def test_expr():
@@ -166,17 +182,25 @@ def test_expr():
     assert parse_(expr, 'Concat(Concat(\"Hello\", \" \"), \"world!\")')
     assert parse_(expr, 'Plus(1, -2)')
     assert parse_(expr, 'Plus(1, 2 * 3)')
-    assert parse_(expr, 'x + y')
-    # assert parse_(expr, 'x + (y)')
-    # assert parse_(expr, 'x * (-y)')
-    # assert parse_(expr, '1 + 1 / n + n')
-    # assert parse_(expr, '-x')
-    # assert parse_(expr, 'not true')
 
+    assert parse_(expr, '-x')
+    assert parse_(expr, 'not true')
+
+    assert parse_(expr, 'x + y')
+    assert parse_(expr, 'x + (y)')
+    assert parse_(expr, 'x * (-y)')
+    assert parse_(expr, '1 + 1 / n + n')
+
+    assert parse_(expr, 'Sqrt(x) + 1')
+    assert parse_(expr, 'Sqrt(x) + 1 - 2')
+    assert parse_(expr, 'Sqrt(x) + 1 -2')
+
+    assert parse_(expr, 'FormatText(FormatDecimal(IntegerToDecimal(AuditList.List.Current.AUDIT.Duration)/1000-60*Trunc(AuditList.List.Current.AUDIT.Duration/60000),3,"."," "),6,6,True,"0")')
 
 parse_ = lambda p, x: p.parse(lexer.parse(x))
 
 
 def pt(tree):
     for pre, _, node in RenderTree(tree, style=DoubleStyle):
-        print('%s%s' % (pre, node.name))
+        print('%s%s (%s)' % (pre, node.name, node.tag))
+

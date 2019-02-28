@@ -33,9 +33,8 @@ lexeme = lambda p: p << whitespace
 
 identifier = lexeme(
     regex(r'[_A-Za-z][_A-Za-z0-9]*')).desc('identifier').map(Var)
-number = lexeme(
-    regex(r'-?(0|[1-9][0-9]*)([.][0-9]+)?([eE][+-]?[0-9]+)?')).desc(
-        'number').map(Number)
+number = lexeme(regex(r'(0|[1-9][0-9]*)([.][0-9]+)?([eE][+-]?[0-9]+)?')).desc(
+    'number').map(Number)
 
 lparen = lexeme(string('('))
 rparen = lexeme(string(')'))
