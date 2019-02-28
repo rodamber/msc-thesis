@@ -1,5 +1,5 @@
 from anytree import DoubleStyle, Node, RenderTree
-from collections import deque, namedtuple
+from collections import namedtuple
 from enum import Enum
 from parsy import fail, generate, match_item, Parser, Result, test_item
 
@@ -26,7 +26,6 @@ def peek(stream, index):
 
 any_ = test_item(lambda _: True, 'anything')
 
-# TODO Careful: check if this doesn't override anything in the lexer module.
 lparen = match_item('(')
 rparen = match_item(')')
 comma = match_item(',')
@@ -41,36 +40,20 @@ op = test_item(lambda x: isinstance(x, Op), 'op')
 
 @generate
 def atom():
-    # import pdb; pdb.set_trace();
-    # print('Peek: {}'.format((yield peek)))
     return (yield token.map(lambda x: Node(x, tag='atom')))
 
 
 @generate
 def func():
-    # import pdb; pdb.set_trace();
-    # print('Peek: {}'.format((yield peek)))
     name = yield var
     yield lparen
     args = yield expr.sep_by(comma)
-    # import pdb; pdb.set_trace();
-    # print('Peek: {}'.format((yield peek)))
     yield rparen
     return Node(name, children=args, tag='func')
 
 
-def test_func():
-    assert parse_(func, 'Plus(1, 2)')
-    assert parse_(func, 'Concat(\"Hello \", \"world!\")')
-    assert parse_(func, 'Concat(Concat(\"Hello\", \" \"), \"world!\")')
-    assert parse_(func, 'Plus(1, -2)')
-    assert parse_(func, 'Plus(1, 2 * 3)')
-
-
 @generate
 def unop():
-    # import pdb; pdb.set_trace();
-    # print('Peek: {}'.format((yield peek)))
     name = yield op | keyword
 
     if name.val in ['-', 'not']:
@@ -78,11 +61,6 @@ def unop():
         return Node(name, children=[child], tag='unop')
     else:
         return fail("unary op must be 'not'")
-
-
-def test_unop():
-    assert parse_(unop, '-x')
-    assert parse_(unop, 'not true')
 
 
 # FIXME
@@ -115,8 +93,6 @@ def binop():
     def prec_parse(lhs, lvl):
         @generate
         def helper():
-            # import pdb; pdb.set_trace();
-            # print('Peek: {}'.format((yield peek)))
             lookahead = yield peek
 
             while isinstance(lookahead, Op) and prec(lookahead) >= lvl:
@@ -137,31 +113,12 @@ def binop():
 
         return helper
 
-    # import pdb; pdb.set_trace();
-    # print('Peek: {}'.format((yield peek)))
     lhs = yield (paren | unop | func | atom)
     return (yield prec_parse(lhs, lvl=0))
 
 
-def test_binop_unary():
-    assert parse_(binop, 'x')
-    assert parse_(binop, '-x')
-
-
-def test_binop_simple():
-    assert parse_(binop, 'x + y')
-    assert parse_(binop, 'x + (y)')
-    assert parse_(binop, 'x * (-y)')
-
-
-def test_binop_complex():
-    assert parse_(binop, '1 + 1 / n + n')
-
-
 @generate
 def paren():
-    # import pdb; pdb.set_trace();
-    # print('Peek: {}'.format((yield peek)))
     yield lparen
     res = yield expr
     yield rparen
@@ -171,36 +128,9 @@ def paren():
 
 @generate
 def expr():
-    # import pdb; pdb.set_trace();
-    # print('Peek: {}'.format((yield peek)))
     return (yield paren | binop | unop | func | atom)
-
-
-def test_expr():
-    assert parse_(expr, 'Plus(1, 2)')
-    assert parse_(expr, 'Concat(\"Hello \", \"world!\")')
-    assert parse_(expr, 'Concat(Concat(\"Hello\", \" \"), \"world!\")')
-    assert parse_(expr, 'Plus(1, -2)')
-    assert parse_(expr, 'Plus(1, 2 * 3)')
-
-    assert parse_(expr, '-x')
-    assert parse_(expr, 'not true')
-
-    assert parse_(expr, 'x + y')
-    assert parse_(expr, 'x + (y)')
-    assert parse_(expr, 'x * (-y)')
-    assert parse_(expr, '1 + 1 / n + n')
-
-    assert parse_(expr, 'Sqrt(x) + 1')
-    assert parse_(expr, 'Sqrt(x) + 1 - 2')
-    assert parse_(expr, 'Sqrt(x) + 1 -2')
-
-    assert parse_(expr, 'FormatText(FormatDecimal(IntegerToDecimal(AuditList.List.Current.AUDIT.Duration)/1000-60*Trunc(AuditList.List.Current.AUDIT.Duration/60000),3,"."," "),6,6,True,"0")')
-
-parse_ = lambda p, x: p.parse(lexer.parse(x))
 
 
 def pt(tree):
     for pre, _, node in RenderTree(tree, style=DoubleStyle):
         print('%s%s (%s)' % (pre, node.name, node.tag))
-
