@@ -1,11 +1,41 @@
-from parsy import *
+from dataclasses import dataclass
+from parsy import alt, char_from, generate, regex, string, string_from
+from typing import Any
+
+
+@dataclass
+class Token():
+    val: Any
+
+
+class Var(Token):
+    pass
+
+
+class String(Token):
+    pass
+
+
+class Number(Token):
+    pass
+
+
+class Keyword(Token):
+    pass
+
+
+class Op(Token):
+    pass
+
 
 whitespace = regex(r'\s*')
 lexeme = lambda p: p << whitespace
 
-identifier = lexeme(regex(r'[_A-Za-z][_A-Za-z0-9]+')).desc('identifier')
+identifier = lexeme(
+    regex(r'[_A-Za-z][_A-Za-z0-9]+')).desc('identifier').map(Var)
 number = lexeme(
-    regex(r'-?(0|[1-9][0-9]*)([.][0-9]+)?([eE][+-]?[0-9]+)?')).desc('number')
+    regex(r'-?(0|[1-9][0-9]*)([.][0-9]+)?([eE][+-]?[0-9]+)?')).desc(
+        'number').map(Number)
 
 lparen = lexeme(string('('))
 rparen = lexeme(string(')'))
@@ -13,8 +43,9 @@ rparen = lexeme(string(')'))
 comma = lexeme(string(','))
 dot = lexeme(string('.'))
 
-op = lexeme(char_from('+-*/='))
-keyword = lexeme(string_from('not', 'or', 'and') << char_from(' '))
+op = lexeme(char_from('+-*/=')).map(Op)
+keyword = lexeme(string_from('not', 'or', 'and') << char_from(' ')).map(
+    Keyword)
 
 string_part = regex(r'[^"\\]+')
 string_esc = string('\\') >> (
@@ -32,9 +63,9 @@ string_esc = string('\\') >> (
 @generate
 def quoted():
     yield string('"')
-    res = yield (string_part | string_esc).many().concat()
+    val = yield (string_part | string_esc).many().concat()
     yield string('"') << whitespace
-    return res
+    return String(val)
 
 
 def test_quoted():
@@ -43,9 +74,9 @@ def test_quoted():
 
 @generate
 def dotted():
-    base = yield identifier
-    field = (yield (dot + dotted).optional()) or ''
-    return base + field
+    base = (yield identifier).val
+    field = (yield (dot + dotted.map(lambda t: t.val)).optional()) or ''
+    return Var(base + field)
 
 
 def test_dotted():
@@ -53,5 +84,4 @@ def test_dotted():
     assert dotted.parse('this  . should.succeed  ')
 
 
-lexer = (quoted | number | dotted | lparen | rparen | comma | op
-         | keyword).many()
+lexer = alt(quoted, number, dotted, lparen, rparen, comma, op, keyword).many()
