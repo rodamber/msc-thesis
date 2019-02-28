@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from parsy import alt, char_from, generate, regex, string, string_from
+from parsy import char_from, generate, regex, string, string_from, whitespace
 from typing import Any
 
 
@@ -20,16 +20,11 @@ class Number(Token):
     pass
 
 
-class Keyword(Token):
-    pass
-
-
 class Op(Token):
     pass
 
 
-whitespace = regex(r'\s*')
-lexeme = lambda p: p << whitespace
+lexeme = lambda p: p << whitespace.optional()
 
 identifier = lexeme(
     regex(r'[_A-Za-z][_A-Za-z0-9]*')).desc('identifier').map(Var)
@@ -42,33 +37,20 @@ rparen = lexeme(string(')'))
 comma = lexeme(string(','))
 dot = lexeme(string('.'))
 
-op = lexeme(char_from('+-*/=')).map(Op)
-keyword = lexeme(string_from('not', 'or', 'and') << char_from(' ')).map(
-    Keyword)
+op = lexeme(
+    string_from('+', '-', '*', '/', '=', '<>', '>', '<', '>=', '<=', 'not',
+                'or', 'and')).map(Op)
 
-string_part = regex(r'[^"\\]+')
-string_esc = string('\\') >> (
-    string('\\')
-    | string('/')
-    | string('"')
-    | string('b').result('\b')
-    | string('f').result('\f')
-    | string('n').result('\n')
-    | string('r').result('\r')
-    | string('t').result('\t')
-    | regex(r'u[0-9a-fA-F]{4}').map(lambda s: chr(int(s[1:], 16))))
+string_part = regex(r'[^"]+')
+string_esc = string("\"\"").result('"')
 
 
 @generate
 def quoted():
     yield string('"')
     val = yield (string_part | string_esc).many().concat()
-    yield string('"') << whitespace
+    yield string('"') << whitespace.optional()
     return String(val)
-
-
-def test_quoted():
-    assert quoted.parse('\"hello\"')
 
 
 @generate
@@ -78,9 +60,5 @@ def dotted():
     return Var(base + field)
 
 
-def test_dotted():
-    assert dotted.parse('this.should.succeed')
-    assert dotted.parse('this  . should.succeed  ')
-
-
-lexer = alt(quoted, number, keyword, dotted, lparen, rparen, comma, op).many()
+lexer = whitespace.optional() >> (quoted | number | op | dotted | lparen
+                                  | rparen | comma).many()

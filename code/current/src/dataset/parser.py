@@ -3,7 +3,7 @@ from collections import namedtuple
 from enum import Enum
 from parsy import fail, generate, match_item, Parser, Result, test_item
 
-from lexer import lexer, Token, Var, String, Number, Keyword, Op
+from lexer import lexer, Token, Var, String, Number, Op
 
 
 def except_(*items):
@@ -34,7 +34,6 @@ token = test_item(lambda x: isinstance(x, Token), 'token')
 var = test_item(lambda x: isinstance(x, Var), 'var')
 string = test_item(lambda x: isinstance(x, String), 'string')
 number = test_item(lambda x: isinstance(x, Number), 'number')
-keyword = test_item(lambda x: isinstance(x, Keyword), 'keyword')
 op = test_item(lambda x: isinstance(x, Op), 'op')
 
 
@@ -47,14 +46,14 @@ def atom():
 def func():
     name = yield var
     yield lparen
-    args = yield expr.sep_by(comma)
+    args = yield expr.sep_by(comma).optional()
     yield rparen
     return Node(name, children=args, tag='func')
 
 
 @generate
 def unop():
-    name = yield op | keyword
+    name = yield op
 
     if name.val in ['-', 'not']:
         child = yield expr
@@ -65,7 +64,6 @@ def unop():
 
 # FIXME
 # [ ] Arbitrary expressions as arguments, not just atoms
-# [ ] Keywords ('or', 'and')
 @generate
 def binop():
     '''
@@ -76,10 +74,19 @@ def binop():
     Assoc = Enum('Assoc', 'Left Right')
 
     ops = {
-        '*': Operator(3, Assoc.Left),
-        '/': Operator(3, Assoc.Left),
-        '+': Operator(2, Assoc.Left),
-        '-': Operator(2, Assoc.Left),
+        'not': Operator(8, Assoc.Left),
+        '*': Operator(7, Assoc.Left),
+        '/': Operator(7, Assoc.Left),
+        '+': Operator(6, Assoc.Left),
+        '-': Operator(6, Assoc.Left),
+        '<': Operator(5, Assoc.Left),
+        '>': Operator(5, Assoc.Left),
+        '<=': Operator(5, Assoc.Left),
+        '<=': Operator(5, Assoc.Left),
+        '=': Operator(4, Assoc.Left),
+        '<>': Operator(4, Assoc.Left),
+        'and': Operator(2, Assoc.Left),
+        'or': Operator(1, Assoc.Left),
     }
 
     def prec(op):
@@ -128,7 +135,15 @@ def paren():
 
 @generate
 def expr():
-    return (yield paren | binop | unop | func | atom)
+    return (yield paren | unop | binop | func | atom)
+
+
+def parse(stream):
+    return expr.parse(lexer.parse(stream))
+
+
+def parse_partial(stream):
+    return expr.parse_partial(lexer.parse(stream))
 
 
 def pt(tree):
