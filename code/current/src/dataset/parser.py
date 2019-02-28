@@ -1,14 +1,9 @@
 from anytree import DoubleStyle, Node, RenderTree
 from collections import deque, namedtuple
 from enum import Enum
-from parsy import generate, match_item, Parser, Result, test_item
+from parsy import fail, generate, match_item, Parser, Result, test_item
 
 from lexer import lexer, Token, Var, String, Number, Keyword, Op
-
-
-def pt(tree):
-    for pre, _, node in RenderTree(tree, style=DoubleStyle):
-        print('%s%s' % (pre, node.name))
 
 
 def except_(*items):
@@ -43,7 +38,10 @@ number = test_item(lambda x: isinstance(x, Number), 'number')
 keyword = test_item(lambda x: isinstance(x, Keyword), 'keyword')
 op = test_item(lambda x: isinstance(x, Op), 'op')
 
-atom = token.map(Node)
+
+@generate
+def atom():
+    return (yield token.map(Node))
 
 
 @generate
@@ -56,25 +54,27 @@ def func():
 
 
 def test_func():
-    parse = lambda x: func.parse(lexer.parse(x))
-    assert parse('Plus(1, 2)')
-    assert parse('Concat(\"Hello \", \"world!\")')
-    assert parse('Concat(Concat(\"Hello\", \" \"), \"world!\")')
-    assert parse('Plus(1, -2)')
-    assert parse('Sum(xs) / Length(xs)')
+    assert parse_(func, 'Plus(1, 2)')
+    assert parse_(func, 'Concat(\"Hello \", \"world!\")')
+    assert parse_(func, 'Concat(Concat(\"Hello\", \" \"), \"world!\")')
+    assert parse_(func, 'Plus(1, -2)')
+    assert parse_(func, 'Plus(1, 2 * 3)')
 
 
 @generate
 def unop():
-    import pdb
-    pdb.set_trace()
     name = yield op | keyword
-    if (isinstance(name, Op) and name.val == '-') or \
-       (isinstance(name, Keyword) and name.val == 'not'):
+
+    if name.val in ['-', 'not']:
         child = yield expr
         return Node(name, children=[child])
     else:
-        return fail('unary operators must be ')
+        return fail("unary op must be 'not'")
+
+
+def test_unop():
+    assert parse_(unop, '-x')
+    assert parse_(unop, 'not true')
 
 
 # FIXME
@@ -102,7 +102,7 @@ def binop():
     def assoc(op):
         return ops[op.val].assoc
 
-    parse_primary = atom  # FIXME
+    parse_primary = expr  # FIXME
 
     def prec_parse(lhs, lvl):
         @generate
@@ -115,8 +115,8 @@ def binop():
                 rhs = yield parse_primary
                 lookahead = yield peek
 
-                while lookahead and \
-                      (isinstance(lookahead, Op) and prec(lookahead) > prec(op) or \
+                while lookahead and isinstance(lookahead, Op) and \
+                      (prec(lookahead) > prec(op) or \
                        assoc(lookahead) == Assoc.Right and prec(lookahead) == prec(op)):
                     rhs = yield prec_parse(rhs, lvl=prec(lookahead))
                     lookahead = yield peek
@@ -127,11 +127,56 @@ def binop():
 
         return helper
 
-    lhs = (yield parse_primary)
+    lhs = yield (paren | func | unop | atom)
     return (yield prec_parse(lhs, lvl=0))
+
+
+def test_binop_unary():
+    assert parse_(binop, 'x')
+    assert parse_(binop, '-x')
+
+
+def test_binop_simple():
+    assert parse_(binop, 'x + y')
+    assert parse_(binop, 'x + (y)')
+    assert parse_(binop, 'x * (-y)')
+
+
+def test_binop_complex():
+    assert parse_(binop, '1 + 1 / n + n')
+
+
+@generate
+def paren():
+    yield lparen
+    res = expr
+    yield rparen
+
+    return res
 
 
 @generate
 def expr():
-    paren = (lparen >> expr) << rparen
     return (yield paren | func | binop | unop | atom)
+
+
+def test_expr():
+    assert parse_(expr, 'Plus(1, 2)')
+    assert parse_(expr, 'Concat(\"Hello \", \"world!\")')
+    assert parse_(expr, 'Concat(Concat(\"Hello\", \" \"), \"world!\")')
+    assert parse_(expr, 'Plus(1, -2)')
+    assert parse_(expr, 'Plus(1, 2 * 3)')
+    assert parse_(expr, 'x + y')
+    # assert parse_(expr, 'x + (y)')
+    # assert parse_(expr, 'x * (-y)')
+    # assert parse_(expr, '1 + 1 / n + n')
+    # assert parse_(expr, '-x')
+    # assert parse_(expr, 'not true')
+
+
+parse_ = lambda p, x: p.parse(lexer.parse(x))
+
+
+def pt(tree):
+    for pre, _, node in RenderTree(tree, style=DoubleStyle):
+        print('%s%s' % (pre, node.name))
