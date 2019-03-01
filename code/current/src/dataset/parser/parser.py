@@ -1,9 +1,18 @@
+# Basic parser for outsystems expressions.
+#
+# Notes
+# -----
+# 1. Does not support indexer declarations.
+#
+# These are not problems for our use case because (1) we're discarding the
+# variables anyway.
+
 from anytree import DoubleStyle, Node, RenderTree
 from collections import namedtuple
 from enum import Enum
 from parsy import fail, generate, match_item, Parser, Result, test_item
 
-from lexer import lexer, Token, Var, String, Number, Op
+from lexer import lex, Token, Var, String, Number, Op, Keyword
 
 any_ = test_item(lambda _: True, 'anything')
 
@@ -13,9 +22,10 @@ comma = match_item(',')
 
 token = test_item(lambda x: isinstance(x, Token), 'token')
 var = test_item(lambda x: isinstance(x, Var), 'var')
-string = test_item(lambda x: isinstance(x, String), 'string')
+# string = test_item(lambda x: isinstance(x, String), 'string')
 number = test_item(lambda x: isinstance(x, Number), 'number')
 op = test_item(lambda x: isinstance(x, Op), 'op')
+keyword = test_item(lambda x: isinstance(x, Keyword), 'keyword')
 
 
 @Parser
@@ -35,9 +45,16 @@ def atom():
 def func():
     name = yield var
     yield lparen
-    args = yield expr.sep_by(comma).optional()
+    args = yield (kwarg | expr).sep_by(comma).optional()
     yield rparen
     return Node(name, children=args, tag='func')
+
+
+@generate
+def kwarg():
+    name = yield keyword
+    arg = yield expr.optional()
+    return Node(name, children=[arg] if arg else (), tag='kwarg')
 
 
 @generate
@@ -51,8 +68,6 @@ def unop():
         return fail("unary op must be 'not'")
 
 
-# FIXME
-# [ ] Arbitrary expressions as arguments, not just atoms
 @generate
 def binop():
     '''
@@ -71,7 +86,7 @@ def binop():
         '<': Operator(5, Assoc.Left),
         '>': Operator(5, Assoc.Left),
         '<=': Operator(5, Assoc.Left),
-        '<=': Operator(5, Assoc.Left),
+        '>=': Operator(5, Assoc.Left),
         '=': Operator(4, Assoc.Left),
         '<>': Operator(4, Assoc.Left),
         'and': Operator(2, Assoc.Left),
@@ -84,8 +99,6 @@ def binop():
     def assoc(op):
         return ops[op.val].assoc
 
-    parse_primary = expr  # FIXME
-
     def prec_parse(lhs, lvl):
         @generate
         def helper():
@@ -94,9 +107,9 @@ def binop():
             while isinstance(lookahead, Op) and prec(lookahead) >= lvl:
                 op = lookahead
                 yield any_  # advance to the next token
-                rhs = yield parse_primary
-                lookahead = yield peek
+                rhs = yield expr
 
+                lookahead = yield peek
                 while lookahead and isinstance(lookahead, Op) and \
                       (prec(lookahead) > prec(op) or \
                        assoc(lookahead) == Assoc.Right and prec(lookahead) == prec(op)):
@@ -109,7 +122,12 @@ def binop():
 
         return helper
 
-    lhs = yield (paren | unop | func | atom)
+    lhs = yield unop | func | paren | atom
+
+    lookahead = yield peek
+    if not isinstance(lookahead, Op):
+        return fail('binary operator')
+
     return (yield prec_parse(lhs, lvl=0))
 
 
@@ -124,15 +142,17 @@ def paren():
 
 @generate
 def expr():
-    return (yield paren | unop | binop | func | atom)
+    return (yield binop | paren | unop | func | atom)
 
 
 def parse(stream):
-    return expr.parse(lexer.parse(stream))
+    tks = lex(stream)
+    return expr.parse(tks)
 
 
 def parse_partial(stream):
-    return expr.parse_partial(lexer.parse(stream))
+    tks = lex(stream)
+    return expr.parse_partial(tks)
 
 
 def pt(tree):
