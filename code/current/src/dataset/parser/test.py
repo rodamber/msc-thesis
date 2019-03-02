@@ -1,19 +1,14 @@
 import pytest
 
-from lexer import lex, string_lit, dotted
-from parser import atom, func, unop, binop, expr, parse, parse_partial, pt
-
-
-def test_string_lit():
-    assert string_lit.parse('\"hello\"')
-
-
-def test_dotted():
-    assert dotted.parse('this.should.succeed')
-    assert dotted.parse('this  . should.succeed  ')
+from parser import parse
 
 
 def test_expr():
+    assert parse('\"hello\"')
+
+    assert parse('this.should.succeed')
+    assert parse('this  . should.succeed  ')
+
     assert parse('Null()')
     assert parse('Plus(1, 2)')
     assert parse('Concat(\"Hello \", \"world!\")')
@@ -50,20 +45,3 @@ def test_expr():
     assert parse('((x) + 1)')
     assert parse('(f(x))')
     assert parse('f((x))')
-
-
-def dataset():
-    import jsonlines
-    import re
-
-    with jsonlines.open('../../../dataset/exprs.jsonl') as reader:
-        for i, obj in enumerate(reader):
-            try:
-                if not re.search(r'[.*]', obj['text']) and \
-                   not parse(obj['text']):
-                    return obj['text']
-            except:
-                print(f"{i}: {obj['text']}")
-                return obj['text']
-        else:
-            print('Success!')
