@@ -1,21 +1,35 @@
-import collections
 import jsonlines
-import outsystems
+import sys
 
-allowed = set(['Concat', 'Lenght', 'Substr', 'Replace', 'Index'])
+import parser
 
-
-def write_():
-    with jsonlines.open('../../dataset/exprs-01.jsonl') as reader:
-        with jsonlines.open(
-                '../../dataset/exprs-01-tmp.jsonl', mode='w') as writer:
-            for obj in reader:
-                if set(obj['functions']) <= allowed:
-                    writer.write(obj)
+dataset = '../../dataset/exprs.jsonl'
 
 
-def print_():
-    with jsonlines.open('../../dataset/exprs-3-6.jsonl') as reader:
-        for obj in reader:
-            if set(obj['functions']) <= allowed:
-                print(obj)
+def write():
+    with jsonlines.open(dataset) as reader:
+        outfile = '../../dataset/exprs-small.jsonl'
+        fp = open(outfile, 'w')
+        writer = jsonlines.Writer(fp)
+
+        try:
+            for line, obj in enumerate(reader, 1):
+                if line % 500 == 0:
+                    print(line)
+
+                parser.parse(obj['text'])
+                writer.write(obj)
+        except Exception as err:
+            print(
+                f"Unexpected {type(err).__name__} (line {line}): {obj['text']}",
+                file=sys.stderr)
+        finally:
+            writer.close()
+            fp.close()
+
+
+def read_line(n):
+    with jsonlines.open(dataset) as reader:
+        for line, obj in enumerate(reader, 1):
+            if line == n:
+                return obj['text']

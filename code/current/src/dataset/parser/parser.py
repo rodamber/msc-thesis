@@ -1,160 +1,274 @@
-# Basic parser for outsystems expressions.
-#
-# Notes
-# -----
-# 1. Does not support indexer declarations.
-#
-# These are not problems for our use case because (1) we're discarding the
-# variables anyway.
+from abc import ABC, abstractmethod
+import anytree
+from dataclasses import dataclass
+import datetime
+import parsy
 
-from anytree import DoubleStyle, Node, RenderTree
-from collections import namedtuple
-from enum import Enum
-from parsy import fail, generate, match_item, Parser, Result, test_item
-
-from lexer import lex, Token, Var, String, Number, Op, Keyword
-
-any_ = test_item(lambda _: True, 'anything')
-
-lparen = match_item('(')
-rparen = match_item(')')
-comma = match_item(',')
-
-token = test_item(lambda x: isinstance(x, Token), 'token')
-var = test_item(lambda x: isinstance(x, Var), 'var')
-# string = test_item(lambda x: isinstance(x, String), 'string')
-number = test_item(lambda x: isinstance(x, Number), 'number')
-op = test_item(lambda x: isinstance(x, Op), 'op')
-keyword = test_item(lambda x: isinstance(x, Keyword), 'keyword')
+from typing import *
 
 
-@Parser
-def peek(stream, index):
+# Parse Tree
+class Node(ABC):
+    @abstractmethod
+    def to_anytree(self):
+        pass
+
+    def render(self):
+        for pre, _, node in anytree.RenderTree(self.to_anytree()):
+            print(f"{pre}{node.name}")
+
+
+@dataclass
+class Variable(Node):
+    name: str
+
+    def to_anytree(self):
+        return anytree.Node(self.name, tag=type(self).__name__)
+
+
+@dataclass
+class Literal(Node):
+    value: Any
+
+    def to_anytree(self):
+        return anytree.Node(self.value, tag=type(self).__name__)
+
+
+@dataclass
+class KWArg(Node):
+    keyword: str
+    arg: Optional[Node]
+
+    def to_anytree(self):
+        c = [self.arg.to_anytree()] if self.arg else ()
+        return anytree.Node(self.keyword, children=c, tag=type(self).__name__)
+
+
+@dataclass
+class Func(Node):
+    name: str
+    parameters: List[Union[Node, KWArg]]
+
+    def to_anytree(self):
+        c = [p.to_anytree() for p in self.parameters]
+        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+
+
+@dataclass
+class Unop(Node):
+    name: str
+    parameter: Node
+
+    def to_anytree(self):
+        c = [self.parameter.to_anytree()]
+        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+
+
+@dataclass
+class Binop(Node):
+    name: str
+    left: Node
+    right: Node
+
+    def to_anytree(self):
+        c = [self.left.to_anytree(), self.right.to_anytree()]
+        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+
+
+class Dot(Binop):
+    pass
+
+
+class Indexer(Binop):
+    pass
+
+
+# Lexemes
+whitespace = parsy.regex(r'\s*')
+
+
+def lexeme(p):
+    if isinstance(p, str):
+        p = parsy.string(p)
+    return p << whitespace
+
+
+def test_lexeme():
+    assert lexeme('abc').parse_partial('abc  def') == ('abc', 'def')
+
+
+LPAREN = lexeme('(')
+RPAREN = lexeme(')')
+LBRACK = lexeme('[')
+RBRACK = lexeme(']')
+COMMA = lexeme(',')
+DOT = lexeme('.')
+COLON = lexeme(':')
+POUND = lexeme('#')
+DASH = lexeme('-')
+
+# Identifier
+identifier = lexeme(parsy.regex(r'[_A-Za-z][_A-Za-z0-9]*')).desc('identifier')
+
+# Number
+number_lit = lexeme(
+    parsy.regex(r'(0|[1-9][0-9]*)([.][0-9]+)?([eE][+-]?[0-9]+)?')).map(
+        Literal).desc('number')
+
+# Boolean
+boolean_lit = (lexeme('true')
+               | lexeme('false')).map(bool).map(Literal).desc('boolean')
+
+# String
+string_part = parsy.regex(r'[^"]+')
+string_esc = parsy.string('""').result('"')
+string_lit = (
+    parsy.string('"') >>
+    (string_part
+     | string_esc).many().concat() << lexeme('"')).map(Literal).desc('string')
+
+
+def test_string_lit():
+    assert string_lit.parse('"hello"')
+
+
+# Date and Time
+def datetime_helper(digit_num, desc):
+    return parsy.regex(f'[0-9]{{{digit_num}}}').map(int).desc(
+        f'{digit_num} digit {desc}')
+
+
+year = datetime_helper(4, 'year')
+month = datetime_helper(2, 'month')
+day = datetime_helper(2, 'day')
+hour = datetime_helper(2, 'hour')
+minute = datetime_helper(2, 'minute')
+second = datetime_helper(2, 'second')
+
+date_lit = parsy.seq(POUND >> year, DASH >> month << DASH,
+                     day << POUND).combine(
+                         datetime.date).map(Literal).desc('date')
+time_lit = parsy.seq(POUND >> hour, COLON >> minute << COLON,
+                     second << POUND).combine(
+                         datetime.time).map(Literal).desc('time')
+datetime_lit = parsy.seq(POUND >> year, DASH >> month << DASH, lexeme(day),
+                         hour, COLON >> minute << COLON,
+                         second << POUND).combine(
+                             datetime.datetime).map(Literal).desc('datetime')
+
+
+def test_dates():
+    assert date_lit.parse('#1988-08-28#')
+    assert time_lit.parse('#12:20:56#')
+    assert datetime_lit.parse('#1988-08-28 23:59:59#')
+
+
+# Operators
+op_prec_table = {
+    '[]': 10,
+    '.': 9,
+    'not': 8,
+    '*': 7,
+    '/': 7,
+    '+': 6,
+    '-': 6,
+    '<': 5,
+    '>': 5,
+    '<=': 5,
+    '>=': 5,
+    '=': 4,
+    '<>': 4,
+    'and': 2,
+    'or': 1,
+}
+prec = lambda op: op_prec_table[op]
+
+operator = lexeme(parsy.string_from(*op_prec_table))
+
+unary_op_list = ['-', 'not']
+unary_op = lexeme(parsy.string_from(*unary_op_list))
+
+symbol_op_list = [
+    '[]', '.', '+', '-', '*', '/', '=', '<>', '>', '<', '>=', '<='
+]
+ascii_op_list = ['and', 'or', 'not']
+
+
+def test_op_table():
+    assert set(symbol_op_list) | set(ascii_op_list) == set(op_prec_table)
+    assert set(unary_op_list) < set(op_prec_table)
+
+
+# Parser
+@parsy.generate
+def expr():
+    yield whitespace
+    return (yield binop | paren | unop | func | literal | variable)
+
+
+@parsy.Parser
+def peek_op(stream, index):
     try:
-        return Result.success(index, stream[index])
-    except:
-        return Result.success(index, None)
+        res, _ = operator.parse_partial(stream[index:])
+        return parsy.Result.success(index, res)
+    except parsy.ParseError:
+        return parsy.Result.success(index, None)
 
 
-@generate
-def atom():
-    return (yield token.map(lambda x: Node(x, tag='atom')))
-
-
-@generate
-def func():
-    name = yield var
-    yield lparen
-    args = yield (kwarg | expr).sep_by(comma).optional()
-    yield rparen
-    return Node(name, children=args, tag='func')
-
-
-@generate
-def kwarg():
-    name = yield keyword
-    arg = yield expr.optional()
-    return Node(name, children=[arg] if arg else (), tag='kwarg')
-
-
-@generate
-def unop():
-    name = yield op
-
-    if name.val in ['-', 'not']:
-        child = yield expr
-        return Node(name, children=[child], tag='unop')
-    else:
-        return fail("unary op must be 'not'")
-
-
-@generate
+@parsy.generate
 def binop():
-    '''
-    Implementation of the precedence climbing algorithm for operator-precedence parsing.
-    https://en.wikipedia.org/wiki/Operator-precedence_parser#Precedence_climbing_method
-    '''
-    Operator = namedtuple('Operator', 'prec assoc')
-    Assoc = Enum('Assoc', 'Left Right')
-
-    ops = {
-        'not': Operator(8, Assoc.Left),
-        '*': Operator(7, Assoc.Left),
-        '/': Operator(7, Assoc.Left),
-        '+': Operator(6, Assoc.Left),
-        '-': Operator(6, Assoc.Left),
-        '<': Operator(5, Assoc.Left),
-        '>': Operator(5, Assoc.Left),
-        '<=': Operator(5, Assoc.Left),
-        '>=': Operator(5, Assoc.Left),
-        '=': Operator(4, Assoc.Left),
-        '<>': Operator(4, Assoc.Left),
-        'and': Operator(2, Assoc.Left),
-        'or': Operator(1, Assoc.Left),
-    }
-
-    def prec(op):
-        return ops[op.val].prec
-
-    def assoc(op):
-        return ops[op.val].assoc
-
     def prec_parse(lhs, lvl):
-        @generate
+        @parsy.generate
         def helper():
-            lookahead = yield peek
+            lookahead = yield peek_op
 
-            while isinstance(lookahead, Op) and prec(lookahead) >= lvl:
-                op = lookahead
-                yield any_  # advance to the next token
+            while lookahead and prec(lookahead) >= lvl:
+                op = yield operator
                 rhs = yield expr
 
-                lookahead = yield peek
-                while lookahead and isinstance(lookahead, Op) and \
-                      (prec(lookahead) > prec(op) or \
-                       assoc(lookahead) == Assoc.Right and prec(lookahead) == prec(op)):
+                lookahead = yield peek_op
+                while lookahead and prec(lookahead) > prec(op):
                     rhs = yield prec_parse(rhs, lvl=prec(lookahead))
-                    lookahead = yield peek
+                    lookahead = yield peek_op
 
                 nonlocal lhs
-                lhs = Node(op, children=[lhs, rhs], tag='binop')
+                lhs = Binop(name=op, left=lhs, right=rhs)
             return lhs
 
         return helper
 
-    lhs = yield unop | func | paren | atom
+    lhs = yield unop | func | paren | literal | variable
 
-    lookahead = yield peek
-    if not isinstance(lookahead, Op):
-        return fail('binary operator')
+    lookahead = (yield peek_op)
+    if not lookahead:
+        return parsy.fail('binary operator')
 
     return (yield prec_parse(lhs, lvl=0))
 
 
-@generate
-def paren():
-    yield lparen
-    res = yield expr
-    yield rparen
-
-    return res
+indexer = (LBRACK >> expr << RBRACK)
 
 
-@generate
-def expr():
-    return (yield binop | paren | unop | func | atom)
+@parsy.generate('variable')
+def variable():
+    var = yield identifier.map(Variable)
+    ix = yield indexer.optional()
+
+    return Indexer(name='[]', left=var, right=ix) if ix else var
 
 
-def parse(stream):
-    tks = lex(stream)
-    return expr.parse(tks)
+literal = number_lit | boolean_lit | string_lit | date_lit | time_lit | datetime_lit
 
+paren = (LPAREN >> expr << RPAREN)  #.desc('parenthesized expression')
 
-def parse_partial(stream):
-    tks = lex(stream)
-    return expr.parse_partial(tks)
+kwarg = parsy.seq(identifier << COLON,
+                  expr.optional()).combine(KWArg)  #.desc('kwarg')
 
+func = parsy.seq(identifier,
+                 LPAREN >> (kwarg | expr).sep_by(COMMA) << RPAREN).combine(
+                     Func)  #.desc('function')
 
-def pt(tree):
-    for pre, _, node in RenderTree(tree, style=DoubleStyle):
-        print('%s%s (%s)' % (pre, node.name.val, node.tag))
+unop = parsy.seq(unary_op, expr).combine(Unop)  #.desc('unary operator')
+
+parse = lambda stream: expr.parse(stream)
+parse_partial = lambda stream: expr.parse_partial(stream)
