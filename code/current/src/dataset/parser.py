@@ -153,7 +153,7 @@ def binop():
 
                 nonlocal lhs
                 if op == '.':
-                    lhs = Dot(name=op, left=lhs, right=rhs)
+                    lhs = Dot(left=lhs, right=rhs)
                 else:
                     lhs = Binop(name=op, left=lhs, right=rhs)
             return lhs
@@ -177,7 +177,7 @@ def variable():
     var = yield identifier.map(Variable)
     ix = yield indexer.optional()
 
-    return Indexer(name='[]', left=var, right=ix) if ix else var
+    return Indexer(list=var, index=ix) if ix else var
 
 
 literal = number_lit | boolean_lit | string_lit | date_lit | time_lit | datetime_lit
