@@ -1,87 +1,7 @@
-from abc import ABC, abstractmethod
-import anytree
-from dataclasses import dataclass
 import datetime
+
+from expr_ast import Variable, Literal, KWArg, Func, Unop, Binop, Indexer
 import parsy
-
-from typing import *
-
-
-# Parse Tree
-class Node(ABC):
-    @abstractmethod
-    def to_anytree(self):
-        pass
-
-    def render(self):
-        for pre, _, node in anytree.RenderTree(self.to_anytree()):
-            print(f"{pre}{node.name}")
-
-
-@dataclass
-class Variable(Node):
-    name: str
-
-    def to_anytree(self):
-        return anytree.Node(self.name, tag=type(self).__name__)
-
-
-@dataclass
-class Literal(Node):
-    value: Any
-
-    def to_anytree(self):
-        return anytree.Node(self.value, tag=type(self).__name__)
-
-
-@dataclass
-class KWArg(Node):
-    keyword: str
-    arg: Optional[Node]
-
-    def to_anytree(self):
-        c = [self.arg.to_anytree()] if self.arg else ()
-        return anytree.Node(self.keyword, children=c, tag=type(self).__name__)
-
-
-@dataclass
-class Func(Node):
-    name: str
-    parameters: List[Union[Node, KWArg]]
-
-    def to_anytree(self):
-        c = [p.to_anytree() for p in self.parameters]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
-
-
-@dataclass
-class Unop(Node):
-    name: str
-    parameter: Node
-
-    def to_anytree(self):
-        c = [self.parameter.to_anytree()]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
-
-
-@dataclass
-class Binop(Node):
-    name: str
-    left: Node
-    right: Node
-
-    def to_anytree(self):
-        c = [self.left.to_anytree(), self.right.to_anytree()]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
-
-
-class Dot(Binop):
-    pass
-
-
-class Indexer(Binop):
-    pass
-
 
 # Lexemes
 whitespace = parsy.regex(r'\s*')
@@ -259,16 +179,65 @@ def variable():
 
 literal = number_lit | boolean_lit | string_lit | date_lit | time_lit | datetime_lit
 
-paren = (LPAREN >> expr << RPAREN)  #.desc('parenthesized expression')
+paren = (LPAREN >> expr << RPAREN).desc('parenthesized expression')
 
 kwarg = parsy.seq(identifier << COLON,
-                  expr.optional()).combine(KWArg)  #.desc('kwarg')
+                  expr.optional()).combine(KWArg).desc('kwarg')
 
-func = parsy.seq(identifier,
-                 LPAREN >> (kwarg | expr).sep_by(COMMA) << RPAREN).combine(
-                     Func)  #.desc('function')
+func = parsy.seq(
+    identifier, LPAREN >>
+    (kwarg | expr).sep_by(COMMA) << RPAREN).combine(Func).desc('function')
 
-unop = parsy.seq(unary_op, expr).combine(Unop)  #.desc('unary operator')
+unop = parsy.seq(unary_op, expr).combine(Unop).desc('unary operator')
 
 parse = lambda stream: expr.parse(stream)
 parse_partial = lambda stream: expr.parse_partial(stream)
+
+
+def test_expr():
+    assert parse('"hello ""friend"""""')
+
+    assert parse('a.b.c')
+    assert parse('a  . b.c  ')
+
+    assert parse('a[0].b.c')
+    assert parse('a.b[0].c')
+    assert parse('a.b.c[0]')
+    assert parse('a.b[1].c[0]')
+
+    assert parse('f()')
+    assert parse('f(1, 2)')
+    assert parse('f("Hello ", "world!")')
+    assert parse('f(f("Hello", " "), "world!")')
+    assert parse('f(1, -2)')
+    assert parse('f(1, 2 * 3)')
+
+    assert parse('-x')
+    assert parse('not true')
+
+    assert parse('x + y')
+    assert parse('x + (y)')
+    assert parse('(x) + (y)')
+    assert parse('(x) + y')
+    assert parse('x * (-y)')
+
+    assert parse('1 + 1 / n + n')
+    assert parse('f(x) + 1')
+    assert parse('f(x) + 1 - 2')
+    assert parse('f(x) + 1 -2')
+
+    x = 'f(g(h(a.b.c.d.e)/1000-60*f(a.b.c.d.e/60000),3,"."," "),6,6,True,"0")'
+    assert parse(x)
+
+    x = 'a(b(c.d.e.f.g) >= 236, h(i.j.k.l.m, 0, 230), n.o.p.q.r)'
+    assert parse(x)
+
+    assert parse('(x - 1)')
+    assert parse('(x - (1))')
+    assert parse('(x) - 1')
+
+    assert parse('f((g(x)-1)/7)')
+    assert parse('f(g(x) + "abc" + "def")')
+    assert parse('((x) + 1)')
+    assert parse('(f(x))')
+    assert parse('f((x))')
