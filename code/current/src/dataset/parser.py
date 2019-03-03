@@ -144,7 +144,7 @@ def binop():
 
             while lookahead and prec(lookahead) >= lvl:
                 op = yield operator
-                rhs = yield expr
+                rhs = yield paren | unop | func | literal | variable
 
                 lookahead = yield peek_op
                 while lookahead and prec(lookahead) > prec(op):
@@ -223,6 +223,12 @@ def test_expr():
     assert parse('(x) + (y)')
     assert parse('(x) + y')
     assert parse('x * (-y)')
+
+    assert parse('a * b + c') == Binop(
+        '+', Binop('*', Variable('a'), Variable('b')), Variable('c'))
+
+    assert parse('c + a * b') == Binop(
+        '+', Variable('c'), Binop('*', Variable('a'), Variable('b')))
 
     assert parse('1 + 1 / n + n')
     assert parse('f(x) + 1')
