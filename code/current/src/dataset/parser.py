@@ -187,9 +187,8 @@ paren = (LPAREN >> expr << RPAREN).desc('parenthesized expression')
 kwarg = parsy.seq(identifier << COLON,
                   expr.optional()).combine(KWArg).desc('kwarg')
 
-func = parsy.seq(
-    identifier, LPAREN >>
-    (kwarg | expr).sep_by(COMMA) << RPAREN).combine(Func).desc('function')
+func = parsy.seq(identifier, LPAREN >> (kwarg | expr).sep_by(COMMA).map(tuple)
+                 << RPAREN).combine(Func).desc('function')
 
 unop = parsy.seq(unary_op, expr).combine(Unop).desc('unary operator')
 

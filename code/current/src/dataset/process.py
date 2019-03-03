@@ -1,29 +1,41 @@
-import jsonlines
-import parser
+import itertools
+
+from utils import LineError
+from parser import parse
 
 
-def select_long_expressions(infile, outfile, cutoff):
+def select(infile, outfile, count, predicate):
     '''
-    Selects each expression from infile whose text length is less than cutoff,
-    and writes them to outfile.
+    Selects at most count expressions from infile that satisfy predicate, and
+    writes them to outfile.
     '''
-    with jsonlines.open(infile, 'r') as reader:
-        with jsonlines.open(outfile, 'w') as writer:
-            for obj in reader:
-                if len(obj['text']) < cutoff:
-                    writer.write(obj)
+    import jsonlines
+
+    def json():
+        with jsonlines.open(infile, 'r') as reader:
+            for line, elem in enumerate(reader, 1):
+                try:
+                    if predicate(elem):
+                        yield elem
+                except Exception as e:
+                    raise LineError(line) from e
+
+    with jsonlines.open(outfile, 'w') as writer:
+        writer.write_all(itertools.islice(json(), count))
 
 
-def select_random(infile, outfile, p):
-    '''
-    Selects each expression from infile with probability p, and writes them to
-    outfile.
-    '''
-    assert 0 <= p <= 1
-    from random import random
+def main(infile, outfile, cutoff=500, count=300, size=3):
+    assert cutoff > 0 and size > 0
 
-    with jsonlines.open(infile, 'r') as reader:
-        with jsonlines.open(outfile, 'w') as writer:
-            for obj in reader:
-                if random() <= p:
-                    writer.write(obj)
+    def predicate(x):
+        text = x['text']
+        template = parse(text).templatify()
+        return len(text) < cutoff and template.size == size
+
+    select(infile, outfile, count, predicate)
+
+
+if __name__ == '__main__':
+    # TODO import argparse
+    import sys
+    main(infile=sys.argv[1], outfile=sys.argv[2])

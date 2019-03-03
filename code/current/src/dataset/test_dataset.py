@@ -1,9 +1,8 @@
 import jsonlines
 import parsy
-import pytest
-import re
 
 from parser import parse
+from utils import LineError
 
 
 def test_dataset():
@@ -11,6 +10,5 @@ def test_dataset():
         for line, obj in enumerate(reader, 1):
             try:
                 parse(obj['text'])
-            except parsy.ParseError:
-                pytest.fail(
-                    f"Unexpected ParseError (line {line}): {obj['text']}")
+            except Exception as e:
+                raise LineError(line) from e
