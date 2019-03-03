@@ -1,6 +1,6 @@
 import datetime
 
-from expr_ast import Variable, Literal, KWArg, Func, Unop, Binop, Indexer
+from expr_ast import Variable, Literal, KWArg, Func, Unop, Binop, Dot, Indexer
 import parsy
 
 # Lexemes
@@ -152,7 +152,10 @@ def binop():
                     lookahead = yield peek_op
 
                 nonlocal lhs
-                lhs = Binop(name=op, left=lhs, right=rhs)
+                if op == '.':
+                    lhs = Dot(name=op, left=lhs, right=rhs)
+                else:
+                    lhs = Binop(name=op, left=lhs, right=rhs)
             return lhs
 
         return helper

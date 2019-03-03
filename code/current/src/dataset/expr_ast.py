@@ -12,6 +12,9 @@ class Node(ABC):
     def to_anytree(self):
         pass
 
+    def height(self):
+        return self.to_anytree().height
+
     def render(self):
         for pre, _, node in anytree.RenderTree(self.to_anytree()):
             print(f"{pre}{node.name}")
@@ -72,6 +75,10 @@ class Binop(Node):
     def to_anytree(self):
         c = [self.left.to_anytree(), self.right.to_anytree()]
         return anytree.Node(self.name, children=c, tag=type(self).__name__)
+
+
+class Dot(Binop):
+    pass
 
 
 class Indexer(Binop):
