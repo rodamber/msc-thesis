@@ -123,7 +123,8 @@ def test_op_table():
 @parsy.generate
 def expr():
     yield whitespace
-    return (yield binop | paren | unop | func | literal | variable)
+    return (yield
+            binop | paren(expr) | unop | indexer | func | literal | variable)
 
 
 @parsy.Parser
@@ -144,7 +145,8 @@ def binop():
 
             while lookahead and prec(lookahead) >= lvl:
                 op = yield operator
-                rhs = yield paren | unop | func | literal | variable
+                rhs = yield paren(
+                    expr) | unop | indexer | func | literal | variable
 
                 lookahead = yield peek_op
                 while lookahead and prec(lookahead) > prec(op):
@@ -160,7 +162,7 @@ def binop():
 
         return helper
 
-    lhs = yield unop | func | paren | literal | variable
+    lhs = yield unop | indexer | func | paren(expr) | literal | variable
 
     lookahead = (yield peek_op)
     if not lookahead:
@@ -169,20 +171,11 @@ def binop():
     return (yield prec_parse(lhs, lvl=0))
 
 
-indexer = (LBRACK >> expr << RBRACK)
-
-
-@parsy.generate('variable')
-def variable():
-    var = yield identifier.map(Variable)
-    ix = yield indexer.optional()
-
-    return Indexer(list=var, index=ix) if ix else var
-
+variable = identifier.map(Variable).desc('variable')
 
 literal = number_lit | boolean_lit | string_lit | date_lit | time_lit | datetime_lit
 
-paren = (LPAREN >> expr << RPAREN).desc('parenthesized expression')
+paren = lambda x: (LPAREN >> x << RPAREN).desc('parenthesized expression')
 
 kwarg = parsy.seq(identifier << COLON,
                   expr.optional()).combine(KWArg).desc('kwarg')
@@ -192,17 +185,29 @@ func = parsy.seq(identifier, LPAREN >> (kwarg | expr).sep_by(COMMA).map(tuple)
 
 unop = parsy.seq(unary_op, expr).combine(Unop).desc('unary operator')
 
+indexer = parsy.seq(
+    func | variable,
+    LBRACK >> expr << RBRACK).combine(Indexer).desc('indexed expression')
+
 parse = lambda stream: expr.parse(stream)
 parse_partial = lambda stream: expr.parse_partial(stream)
 
 
 def test_expr():
+    # Quote escape
     assert parse('"hello ""friend"""""')
 
+    # Dot
     assert parse('a.b.c')
     assert parse('a  . b.c  ')
 
-    assert parse('a[0].b.c')
+    # Indexer
+    assert parse('x[0]') == Indexer(Variable('x'), Literal('0'))
+    assert parse('f(x)[0]') == Indexer(
+        Func('f', (Variable('x'), )), Literal('0'))
+
+    # Dot + Indexer
+    assert parse('a[0].b')
     assert parse('a.b[0].c')
     assert parse('a.b.c[0]')
     assert parse('a.b[1].c[0]')
@@ -249,3 +254,8 @@ def test_expr():
     assert parse('((x) + 1)')
     assert parse('(f(x))')
     assert parse('f((x))')
+
+    assert parse('f(x)[0]')
+    assert parse('f(x)[0].c')
+    assert parse('f(x).b[0].c')
+    assert parse('h(g(f(x).b[0]).c)[i(j)]')
