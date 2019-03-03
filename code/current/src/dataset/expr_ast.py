@@ -7,7 +7,7 @@ import anytree
 
 
 # Parse Tree
-class Node(ABC):
+class Expr(ABC):
     @abstractmethod
     def to_anytree(self):
         pass
@@ -15,66 +15,70 @@ class Node(ABC):
     def height(self):
         return self.to_anytree().height
 
+    def size(self):
+        return len(
+            [d for d in self.to_anytree().descendants if not d.is_leaf()])
+
     def render(self):
         for pre, _, node in anytree.RenderTree(self.to_anytree()):
             print(f"{pre}{node.name}")
 
 
 @dataclass
-class Variable(Node):
+class Variable(Expr):
     name: str
 
     def to_anytree(self):
-        return anytree.Node(self.name, tag=type(self).__name__)
+        return anytree.Expr(self.name, tag=type(self).__name__)
 
 
 @dataclass
-class Literal(Node):
+class Literal(Expr):
     value: Any
 
     def to_anytree(self):
-        return anytree.Node(self.value, tag=type(self).__name__)
+        return anytree.Expr(self.value, tag=type(self).__name__)
 
 
 @dataclass
-class KWArg(Node):
+class KWArg(Expr):
     keyword: str
-    arg: Optional[Node]
+    arg: Optional[Expr]
 
     def to_anytree(self):
         c = [self.arg.to_anytree()] if self.arg else ()
-        return anytree.Node(self.keyword, children=c, tag=type(self).__name__)
+        return anytree.Expr(self.keyword, children=c, tag=type(self).__name__)
 
 
 @dataclass
-class Func(Node):
+class Func(Expr):
     name: str
-    parameters: List[Union[Node, KWArg]]
+    parameters: List[Union[Expr, KWArg]]
 
     def to_anytree(self):
         c = [p.to_anytree() for p in self.parameters]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+        return anytree.Expr(self.name, children=c, tag=type(self).__name__)
 
 
 @dataclass
-class Unop(Node):
+class Unop(Expr):
     name: str
-    parameter: Node
+    parameter: Expr
 
     def to_anytree(self):
         c = [self.parameter.to_anytree()]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+        return anytree.Expr(self.name, children=c, tag=type(self).__name__)
 
 
 @dataclass
-class Binop(Node):
+class Binop(Expr):
     name: str
-    left: Node
-    right: Node
+    left: Expr
+    right: Expr
 
     def to_anytree(self):
         c = [self.left.to_anytree(), self.right.to_anytree()]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+        return anytree.Expr(self.name, children=c, tag=type(self).__name__)
 
 
 class Dot(Binop):
