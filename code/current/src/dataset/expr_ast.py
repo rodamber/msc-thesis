@@ -15,6 +15,7 @@ from utils import ilen
 
 # Parse Tree
 class Expr(ABC):
+    # FIXME Separate this into a visitor
     @abstractmethod
     def to_anytree(self):
         pass
