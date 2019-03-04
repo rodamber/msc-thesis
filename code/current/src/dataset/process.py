@@ -25,7 +25,7 @@ def select(infile, outfile, count, predicate):
 
 
 def main(infile, outfile, cutoff=500, count=300, size=3):
-    assert cutoff > 0 and size > 0
+    assert cutoff > 0 and size >= 0
 
     def predicate(x):
         text = x['text']

@@ -5,6 +5,8 @@ from typing import *
 
 import anytree
 
+from utils import ilen
+
 # FIXME: It seems like having only functions, kwargs, variables and literals
 # would make
 # the code much simpler.
@@ -33,8 +35,12 @@ class Expr(ABC):
         return self.to_anytree().height
 
     def size(self):
-        return 1 + len(
-            [d for d in self.to_anytree().descendants if not d.is_leaf])
+        node = self.to_anytree()
+
+        if not node.descendants:
+            return 0
+        else:
+            return 1 + ilen(filter(lambda d: not d.is_leaf, node.descendants))
 
     def render(self):
         for pre, _, node in anytree.RenderTree(self.to_anytree()):
