@@ -13,10 +13,6 @@ def lexeme(p):
     return p << whitespace
 
 
-def test_lexeme():
-    assert lexeme('abc').parse_partial('abc  def') == ('abc', 'def')
-
-
 LPAREN = lexeme('(')
 RPAREN = lexeme(')')
 LBRACK = lexeme('[')
@@ -26,6 +22,8 @@ DOT = lexeme('.')
 COLON = lexeme(':')
 POUND = lexeme('#')
 DASH = lexeme('-')
+
+# Literals
 
 # Identifier
 identifier = lexeme(parsy.regex(r'[_A-Za-z][_A-Za-z0-9]*')).desc('identifier')
@@ -46,10 +44,6 @@ string_lit = (
     parsy.string('"') >>
     (string_part
      | string_esc).many().concat() << lexeme('"')).map(Literal).desc('string')
-
-
-def test_string_lit():
-    assert string_lit.parse('"hello"')
 
 
 # Date and Time
@@ -75,13 +69,6 @@ datetime_lit = parsy.seq(POUND >> year, DASH >> month << DASH, lexeme(day),
                          hour, COLON >> minute << COLON,
                          second << POUND).combine(
                              datetime.datetime).map(Literal).desc('datetime')
-
-
-def test_dates():
-    assert date_lit.parse('#1988-08-28#')
-    assert time_lit.parse('#12:20:56#')
-    assert datetime_lit.parse('#1988-08-28 23:59:59#')
-
 
 # Operators
 op_prec_table = {
@@ -114,9 +101,17 @@ symbol_op_list = [
 ascii_op_list = ['and', 'or', 'not']
 
 
-def test_op_table():
-    assert set(symbol_op_list) | set(ascii_op_list) == set(op_prec_table)
-    assert set(unary_op_list) < set(op_prec_table)
+# Parser helper combinators
+def peek(parser):
+    @parsy.Parser
+    def helper(stream, index):
+        try:
+            res, _ = operator.parse_partial(stream[index:])
+            return parsy.Result.success(index, res)
+        except parsy.ParseError:
+            return parsy.Result.success(index, None)
+
+    return helper
 
 
 # Parser
@@ -127,45 +122,36 @@ def expr():
             binop | paren(expr) | unop | indexer | func | literal | variable)
 
 
-@parsy.Parser
-def peek_op(stream, index):
-    try:
-        res, _ = operator.parse_partial(stream[index:])
-        return parsy.Result.success(index, res)
-    except parsy.ParseError:
-        return parsy.Result.success(index, None)
-
-
 @parsy.generate
 def binop():
     def prec_parse(lhs, lvl):
         @parsy.generate
         def helper():
-            lookahead = yield peek_op
+            lookahead = yield peek(operator)
 
             while lookahead and prec(lookahead) >= lvl:
                 op = yield operator
-                rhs = yield paren(
-                    expr) | unop | indexer | func | literal | variable
+                rhs = yield indexer | func | unop | paren(
+                    expr) | literal | variable
 
-                lookahead = yield peek_op
+                lookahead = yield peek(operator)
                 while lookahead and prec(lookahead) > prec(op):
                     rhs = yield prec_parse(rhs, lvl=prec(lookahead))
-                    lookahead = yield peek_op
+                    lookahead = yield peek(operator)
 
                 nonlocal lhs
                 if op == '.':
                     lhs = Dot(left=lhs, right=rhs)
                 else:
                     lhs = Binop(name=op, left=lhs, right=rhs)
+
             return lhs
 
         return helper
 
-    lhs = yield unop | indexer | func | paren(expr) | literal | variable
+    lhs = yield indexer | func | unop | paren(expr) | literal | variable
 
-    lookahead = (yield peek_op)
-    if not lookahead:
+    if not (yield peek(operator)):
         return parsy.fail('binary operator')
 
     return (yield prec_parse(lhs, lvl=0))
@@ -194,12 +180,26 @@ parse_partial = lambda stream: expr.parse_partial(stream)
 
 
 def test_expr():
+    # Lexeme
+    assert lexeme('abc').parse_partial('abc  def') == ('abc', 'def')
+
     # Quote escape
-    assert parse('"hello ""friend"""""')
+    assert parse('"hello ""friend"""') == Literal('hello "friend"')
+
+    # Date and Time
+    assert date_lit.parse('#1988-08-28#')
+    assert time_lit.parse('#12:20:56#')
+    assert datetime_lit.parse('#1988-08-28 23:59:59#')
+
+    # Operator table
+    assert set(symbol_op_list) | set(ascii_op_list) == set(op_prec_table)
+    assert set(unary_op_list) < set(op_prec_table)
 
     # Dot
-    assert parse('a.b.c')
-    assert parse('a  . b.c  ')
+    assert parse('a.b.c') == Dot(
+        Dot(Variable('a'), Variable('b')), Variable('c'))
+    assert parse('a(x).b.c') == Dot(
+        Dot(Func('a', (Variable('x'), )), Variable('b')), Variable('c'))
 
     # Indexer
     assert parse('x[0]') == Indexer(Variable('x'), Literal('0'))
@@ -208,9 +208,9 @@ def test_expr():
 
     # Dot + Indexer
     assert parse('a[0].b')
-    assert parse('a.b[0].c')
+    assert parse('a.b()[0].c')
     assert parse('a.b.c[0]')
-    assert parse('a.b[1].c[0]')
+    assert parse('a(x).b[1].c()[0]')
 
     assert parse('f()')
     assert parse('f(1, 2)')
