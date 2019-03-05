@@ -15,7 +15,7 @@ The following constructs appear a lot together:
 
 Some interesting character constants to consider are:
 
-- './-_@\n'
+- './-_@\n '
 
 We need to consider basic arithmetic and integer constants:
 
