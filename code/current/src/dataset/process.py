@@ -1,10 +1,14 @@
 import itertools
 
-from utils import LineError
+import jsonlines
+
+import expr_ast as ast
 from parser import parse
+from templatify import templatify
+from utils import LineError
 
 
-def select(infile, outfile, count, predicate):
+def select(infile, outfile, predicate, count=None):
     '''
     Selects at most count expressions from infile that satisfy predicate, and
     writes them to outfile.
@@ -24,18 +28,44 @@ def select(infile, outfile, count, predicate):
         writer.write_all(itertools.islice(json(), count))
 
 
-def main(infile, outfile, cutoff=500, count=300, size=3):
-    assert cutoff > 0 and size >= 0
-
-    def predicate(x):
-        text = x['text']
-        template = parse(text).templatify()
-        return len(text) < cutoff and template.size == size
-
-    select(infile, outfile, count, predicate)
+def templates(infile, outfile, count=None):
+    with jsonlines.open(infile) as reader:
+        with open(outfile, 'w') as f:
+            for x in itertools.islice(reader, count):
+                template = templatify(parse(x['text']))
+                f.write(f'{template}\n')
 
 
-if __name__ == '__main__':
-    # TODO import argparse
-    import sys
-    main(infile=sys.argv[1], outfile=sys.argv[2])
+# Main
+
+
+def short_pred(cutoff=300):
+    return lambda x: len(x['text']) < cutoff
+
+
+# FIXME XXX
+# Doesn't support '+' for concatenation yet
+def in_dsl(dsl):
+    def iter_(e):
+        from anytree import LevelOrderIter
+        return (node.name for node in LevelOrderIter(e.to_anytree()))
+
+    def pred(x):
+        if x['functions'] and (set(x['functions']) <= set(dsl)):
+            template = templatify(parse(x['text']))
+
+            # Filter unwanted operations
+
+            no_binops = not any(
+                isinstance(x, ast.Binop) for x in iter_(template))
+            if no_binops:
+                no_unops = not any(
+                    isinstance(x, ast.Unop) for x in iter_(template))
+                return no_unops
+        return False
+
+    return pred
+
+
+def ast_size(size):
+    return lambda x: templatify(parse(x['text'])).size() == size
