@@ -15,11 +15,6 @@ from utils import ilen
 
 # Parse Tree
 class Expr(ABC):
-    # FIXME Separate this into a visitor
-    @abstractmethod
-    def to_anytree(self):
-        pass
-
     def height(self):
         return self.to_anytree().height
 
@@ -31,9 +26,15 @@ class Expr(ABC):
         else:
             return 1 + ilen(filter(lambda d: not d.is_leaf, node.descendants))
 
-    def render(self):
+    # FIXME Separate this into a visitor
+    @abstractmethod
+    def to_anytree(self):
+        pass
+
+    # FIXME Separate this into a visitor
+    def render(self, simple=True):
         for pre, _, node in anytree.RenderTree(self.to_anytree()):
-            print(f"{pre}{node.name}")
+            print(f"{pre}{node.simple}")
 
 
 @dataclass(frozen=True)
@@ -41,7 +42,7 @@ class Variable(Expr):
     name: str
 
     def to_anytree(self):
-        return anytree.Node(self.name, tag=type(self).__name__)
+        return anytree.Node(self, simple=self.name)
 
 
 @dataclass(frozen=True)
@@ -49,7 +50,7 @@ class Literal(Expr):
     value: Any  # FIXME: Subclass this into string, number, date, etc.
 
     def to_anytree(self):
-        return anytree.Node(self.value, tag=type(self).__name__)
+        return anytree.Node(self, simple=self.value)
 
 
 @dataclass(frozen=True)
@@ -59,7 +60,7 @@ class KWArg(Expr):
 
     def to_anytree(self):
         c = [self.arg.to_anytree()] if self.arg else ()
-        return anytree.Node(self.keyword, children=c, tag=type(self).__name__)
+        return anytree.Node(self, children=c, simple=self.keyword)
 
 
 @dataclass(frozen=True)
@@ -69,7 +70,7 @@ class Func(Expr):
 
     def to_anytree(self):
         c = [p.to_anytree() for p in self.parameters]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+        return anytree.Node(self, children=c, simple=self.name)
 
 
 @dataclass(frozen=True)
@@ -79,7 +80,7 @@ class Unop(Expr):
 
     def to_anytree(self):
         c = [self.parameter.to_anytree()]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+        return anytree.Node(self, children=c, simple=self.name)
 
 
 @dataclass(frozen=True)
@@ -90,9 +91,10 @@ class Binop(Expr):
 
     def to_anytree(self):
         c = [self.left.to_anytree(), self.right.to_anytree()]
-        return anytree.Node(self.name, children=c, tag=type(self).__name__)
+        return anytree.Node(self, children=c, simple=self.name)
 
 
+# FIXME Binary expression
 @dataclass(frozen=True)
 class Dot(Expr):
     left: Expr
@@ -100,9 +102,10 @@ class Dot(Expr):
 
     def to_anytree(self):
         c = [self.left.to_anytree(), self.right.to_anytree()]
-        return anytree.Node('.', children=c, tag=type(self).__name__)
+        return anytree.Node(self, children=c, simple='.')
 
 
+# FIXME Binary expression
 @dataclass(frozen=True)
 class Indexer(Expr):
     list: Expr
@@ -110,4 +113,4 @@ class Indexer(Expr):
 
     def to_anytree(self):
         c = [self.list.to_anytree(), self.index.to_anytree()]
-        return anytree.Node('[]', children=c, tag=type(self).__name__)
+        return anytree.Node(self, children=c, simple='[]')
