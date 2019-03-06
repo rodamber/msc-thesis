@@ -6,7 +6,7 @@ from typing import Any, Dict, Tuple, Type, Union
 from anytree import Node, RenderTree
 from hypothesis import assume, strategies as st
 
-import expr_ast as ast
+import utils
 from visitor import visitor
 
 
@@ -18,16 +18,21 @@ class Component:
         self.slots = tuple(slots)
 
 
-@dataclass(frozen=True)
+fresh_gen = utils.fresh()
+
+
+@dataclass(frozen=True, init=False)
 class Hole:
-    name: str
+    name: str = field(default_factory=lambda: next(fresh_gen), init=False)
 
 
+@dataclass(frozen=True)
 class StrHole(Hole):
     def __post_init__(self):
         assert isinstance(self.name, str)
 
 
+@dataclass(frozen=True)
 class IntHole(Hole):
     def __post_init__(self):
         assert isinstance(self.name, int)
@@ -78,11 +83,11 @@ class Run():
 
     @visitor(StrHole)
     def visit(self, c):
-        return self.env[c.name]
+        return self.env[c]
 
     @visitor(IntHole)
     def visit(self, c):
-        return self.env[c.name]
+        return self.env[c]
 
     @visitor(StrConst)
     def visit(self, c):
@@ -134,12 +139,12 @@ def run(prog, input_source):
 
 
 def test_run():
-    x0 = StrHole('x0')
-    x1 = StrHole('x1')
+    x0 = StrHole()
+    x1 = StrHole()
     zero = IntConst(0)
 
     prog = Substr(x0, zero, Index(x0, x1))
-    env = {'x0': 'outsystems.com', 'x1': '.'}
+    env = {x0: 'outsystems.com', x1: '.'}
 
     assert run(prog, env) == 'outsystems'
 
@@ -201,97 +206,15 @@ def holes(prog):
 
 
 def test_holes():
-    x0 = StrHole('x0')
-    x1 = StrHole('x1')
+    x0 = StrHole()
+    x1 = StrHole()
     zero = IntConst(0)
     prog = Substr(x0, zero, Index(x0, x1))
 
     assert holes(prog) == set([x0, x1])
 
 
-# def input_gen(prog):
-#     from hypothesis import strategies as st
-
-#     inputs = (st.from_type(type(h.name)).example() for h in holes(prog))
-#     return {x.name: input_ for x, input_ in zip(holes(prog), inputs)}
-
-# def test_input_gen():
-#     x0 = StrHole('x0')
-#     x1 = StrHole('x1')
-
-#     zero = IntConst(0)
-
-#     prog = Substr(x0, zero, Index(x0, x1))
-#     env = input_gen(prog)
-
-#     run(prog, env)
-
-x0 = StrHole('x0')
-x1 = StrHole('x1')
+x0 = StrHole()
+x1 = StrHole()
 zero = IntConst(0)
 prog = Substr(x0, zero, Index(x0, x1))
-
-
-@dataclass
-class InputStrategy():
-
-    hole_strategies: Dict[Hole, st.SearchStrategy[Any]] = field(
-        default_factory=dict, init=False)
-
-    @visitor(StrHole)
-    def visit(self, c):
-        if c not in self.hole_strategies:
-            self.hole_strategies[c] = st.text(
-                alphabet=string.ascii_lowercase, min_size=1, max_size=10)
-        return st.shared(self.hole_strategies[c], key=c.name)
-
-    @visitor(IntHole)
-    def visit(self, c):
-        if c not in self.hole_strategies:
-            self.hole_strategies[c] = st.integers()
-        return st.shared(self.hole_strategies[c], key=c.name)
-
-    @visitor(StrConst)
-    def visit(self, c):
-        return st.just(c.value)
-
-    @visitor(IntConst)
-    def visit(self, c):
-        return st.just(c.value)
-
-    @visitor(Concat)
-    def visit(self, c):
-        x, y = visit_all(self, c)
-        return st.tuples(x, y)
-
-    @visitor(Index)
-    def visit(self, c):
-        @st.composite
-        def strat(draw):
-            x, y = visit_all(self, c)
-            assume(draw(y) in draw(x))
-            return draw(st.tuples(x, y))
-
-        return strat()
-
-    @visitor(Length)
-    def visit(self, c):
-        return next(visit_all(self, c))
-
-    @visitor(Replace)
-    def visit(self, c):
-        text, old, new = visit_all(self, c)
-        return st.tuples(text, old, new)
-
-    @visitor(Substr)
-    def visit(self, c):
-        @st.composite
-        def strat(draw):
-            text, i, j = visit_all(self, c)
-            assume(0 <= draw(i) <= draw(j) <= len(draw(text)) - 1)
-            return draw(st.tuples(text, i, j))
-
-        return strat()
-
-
-input_strategy = lambda prog: InputStrategy().visit(prog)

@@ -20,3 +20,9 @@ def ilen(it):
 
     # Since count 0 based, the next value is the count
     return next(cnt)
+
+
+def fresh():
+    for i in count():
+        x = f'x{i}'
+        yield x

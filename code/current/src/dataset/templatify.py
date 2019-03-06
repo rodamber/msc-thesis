@@ -2,24 +2,20 @@ from dataclasses import dataclass, field
 import itertools
 from typing import Generator, Dict
 
-from visitor import visitor
 from expr_ast import Variable, Literal, KWArg, Func, Unop, Binop, Dot, Indexer
+import utils
+from visitor import visitor
 
 # FIXME By having Expr implementing accept we could have the same benefits of a
 # recursion schemes approach in fp.
 
 
-def fresh():
-    for i in itertools.count():
-        x = f'x{i}'
-        yield Variable(x)
-
-
 @dataclass
 class Templatify:
     gen: Generator[Variable, None, None] = field(
-        default_factory=fresh, init=False, repr=False)
-
+        default_factory=lambda: map(Variable, utils.fresh()),
+        init=False,
+        repr=False)
     vars_: Dict[Variable, Variable] = field(default_factory=dict)
 
     @visitor(Variable)
