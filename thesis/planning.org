@@ -108,6 +108,9 @@ Should I add references here (before the sections)?
 
 % section~\ref{sec:applications} presents applications of the problem;
 
+I guess, at the end of this section there should probably be a discussion
+comparing the different approaches to the problem.
+
 *** TODO Specifications
 :PROPERTIES:
 :CONTENT:  REVIEW
@@ -150,30 +153,22 @@ Maybe add a subsection (or just a paragraph speaking about type signatures).
 
 **** TODO Syntactic Bias
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: DONE
+:CONTENT:  REVIEW
+:EXAMPLES: TODO
 :RELWORK:  ONGOING
 :END:
-
-Rename to avoid confusion with SyGuS. Maybe call it something like "syntactic
-bias".
-
-Separate between semantic and syntactic specifications/restrictions (a
-specification is a restriction over the space of all possible programs).
-
-Clean this section and add a subsection on SyGuS.
-
 
 Maybe from here on, refer to "specifications and syntactic bias" simply as
 "specifications."
 
-Check out PSKETCH: overview, page 32.
+- Check out PSKETCH: overview, page 32.
+- Metasketching
 
 ***** TODO Sketching and Metasketching
       :PROPERTIES:
-      :CONTENT:  ONGOING
+      :CONTENT:  REVIEW
       :EXAMPLES: TODO
-      :RELWORK:  TODO
+      :RELWORK:  ONGOING
       :END:
 
 Needs cleaning and rewriting. Was left kind of dull after updates.
@@ -185,7 +180,7 @@ want. Maybe metasketching makes more sense to stay next to SyGuS.
 ***** TODO Component-Based Synthesis
       :PROPERTIES:
       :EXAMPLES: TODO
-      :CONTENT:  ONGOING
+      :CONTENT:  REVIEW
       :RELWORK:  ONGOING
       :END:
 
@@ -206,6 +201,15 @@ Add examples:
 - FrAngel: Also, it adds control structures to the problem
 
 Maybe move this section to the syntactic bias one.
+
+***** TODO Syntax-Guided Synthesis
+      :PROPERTIES:
+      :CONTENT:  REVIEW
+      :RELWORK:  ONGOING
+      :EXAMPLES: TODO
+      :END:
+
+I think it would make sense to compare it to the work done by the SMT community.
 
 **** TODO Inductive Synthesis
 :PROPERTIES:
@@ -456,7 +460,7 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
    :END:
 
 * config :noexport:
-#+COLUMNS: %36ITEM %7CONTENT %7EXAMPLES %7RELWORK
+#+COLUMNS: %36ITEM %7CONTENT %7RELWORK %7EXAMPLES
 #+PROPERTY: CONTENT_ALL  TODO ONGOING REVIEW DONE
 #+PROPERTY: EXAMPLES_ALL TODO ONGOING REVIEW DONE
 #+PROPERTY: RELWORK_ALL  TODO ONGOING REVIEW DONE

@@ -1,41 +1,39 @@
-\subsection{Syntactic Bias}
-\label{sec:syntactic-bias}
+\subsection{Syntactic Specifications}
+\label{sec:syntactic-specifications}
 
-Syntax-guided synthesis is an instance of program synthesis where the semantic
-specification is complemented with some form of syntactic restriction over the
-program candidates.
+A specification can be seen as a constraint over the space of all possible
+programs. We have already seen one type of specification, logical
+specifications, which are a kind of \textit{semantic} specification, meaning
+that they constrain the program space over \textit{behaviour}. Syntactic
+specifications are a method of specifying intent in program synthesis where a
+semantic specification (like logical specifications) is complemented with some
+form of \textit{syntactic} constraints on the shape that the desired program can
+take.
 
-This approach was introduced in the \todo{SKETCH}{Explain its
-shortcomings} system by Solar-Lezama \cite{Solar-Lezama:2008}, which allowed the
-synthesis of imperative programs in a C-like language.
-It was then generalized and formalized with the objective of ``formulating the
-core computational problem common to many recent tools for program synthesis in
-a canonical and logical manner'' \cite{Alur:sygus:2013}.
+Syntactic specifications are typically provided in the form of a context-free
+grammar \cite{Alur:sygus:2013}, or with sketches \cite{Solar-Lezama:2008}. These
+restrictions provide structure to the set of candidate programs, possibly
+resulting in more efficient search procedures. They can also be used for the
+purpose of performance optimizations (of the desired program), e.g., by limiting
+the search space to implementations that only use a limited amount of lines of
+code. The learned programs also tend to be more readable and explainable.
 
-The syntactic \todo{restrictions}{Professor asks if this is the term used in the
-literature and whether I mean ``constraints'' instead} are typically provided
-in the form of a context-free grammar \cite{Alur:sygus:2013} or with sketches
-\cite{Solar-Lezama:2008}. These restrictions provide structure to the set of
-candidate programs, possibly resulting in more efficient search procedures,
-while making this problem suitable for \todo{machine learning and inductive
-inference}{missing references} \cite{Alur:sygus:2013}. They can also be used for
-the purpose of performance optimizations, e.g., by limiting the search space to
-implementations that only use a limited amount of lines of code. The learned
-programs also tend to be more readable and explainable.
-
-\subsubsection{Sketching and Metasketching}
+\subsubsection{Sketching}
 \label{sec:sketching}
 
 The idea of sketching is to provide skeletons of the programs we want to
 synthesize, called \textit{sketches}, leaving missing details, called
-\textit{holes}, for the synthesizer to fill.
-The synthesizer is then directed by the high-level structure of the skeleton
-while taking care of finding the low-level details according to user-specified
-assertions.
+\textit{holes}, for the synthesizer to fill. The synthesizer is then directed by
+the high-level structure of the skeleton while taking care of finding the
+low-level details according to user-specified assertions.
 
 Sketching is an accessible form of program synthesis, as it does not require
-learning new specification languages, allowing the users to use the programming
-model with which they are already familiarized.
+learning new specification languages and formalizations, allowing the users to
+use the programming model with which they are already familiarized.
+
+This approach was introduced in the SKETCH system by
+Solar-Lezama~\cite{Solar-Lezama:2008}, which allowed the synthesis of imperative
+programs in a C-like language.
 
 \subsubsection{Component-Based Synthesis}
 \label{sec:components}
@@ -45,8 +43,25 @@ synthesis~\cite{Shi:2019:FCS,Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Jha:oracl
 we are interested in finding a loop-free program made out of a combination of
 fundamental building blocks called \textit{components}. These components could
 be, for example, methods in a library
-\gls{api}~\cite{Shi:2019:FCS,Feng:2017:CSC}, and they form the syntactic bias
-for the programs we want to find. They may also be supplemented by additional
-constraints in the form of logical formulas~\cite{Feng:2018:PSU}.
+\gls{api}~\cite{Shi:2019:FCS,Feng:2017:CSC}, and the way in which they can be
+combined forms the syntactic specification for the programs we want to find.
+They may also be supplemented by additional constraints in the form of logical
+formulas~\cite{Feng:2018:PSU}.
 
-They have been applied...
+\subsubsection{Syntax-Guided Synthesis}
+\label{sec:sygus}
+
+The problem of program synthesis with syntactic specifications was generalized
+and formalized in the work on
+\gls{sygus}~\cite{Alur:sygus:2013}\footnote{\url{https://sygus.org}}.
+\gls{sygus} is a community effort with the objective of ``formulating the core
+computational
+problem common to many recent tools for program synthesis in a canonical and
+logical manner''. The input to this problem consists of a background theory,
+that defines the language, a semantic correctness specification defined by a
+logical formula in that theory, and a syntactic specification in the form of a
+\gls{cfg}.
+
+This effort has helped to create a common format for the definition of program
+synthesis problems and a growing repository of benchmarks. It has also led to
+the creation of the SyGuS-Comp annual competition.
