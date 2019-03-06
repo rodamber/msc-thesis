@@ -1,5 +1,8 @@
 from dataclasses import dataclass
-from typing import Any, Callable, Tuple, Union
+import itertools
+from typing import Any, Dict, Tuple, Type, Union
+
+from anytree import Node, RenderTree
 
 import expr_ast as ast
 from visitor import visitor
@@ -7,7 +10,9 @@ from visitor import visitor
 
 @dataclass(init=False)
 class Component:
-    slots: Tuple[Union['Hole', 'Component'], ...]
+    slots: Tuple[Union['Hole', 'Component', int,
+                       str  # Right now, these are the types our DSL supports
+                       ], ...]
 
     def __init__(self, *slots, parent=None):
         self.slots = tuple(slots)
@@ -16,10 +21,12 @@ class Component:
 @dataclass(frozen=True)
 class Hole:
     name: str
+    type: Type
 
 
-class Const(Component):
-    pass
+@dataclass(frozen=True)
+class Const():
+    value: Any
 
 
 class Concat(Component):
@@ -48,39 +55,50 @@ def visit_all(v, c):
 
 @dataclass
 class Run():
-    input_src: Callable[[Hole], Any]
+    env: Dict[str, Any]
 
     @visitor(Hole)
     def visit(self, c):
-        return self.input_src(c)
+        return self.env[c.name]
 
     @visitor(Const)
     def visit(self, c):
-        return c.slots[0]
+        return c.value
 
     @visitor(Concat)
     def visit(self, c):
         x, y = visit_all(self, c)
+        assert isinstance(x, str)
+        assert isinstance(y, str)
         return x + y
 
     @visitor(Index)
     def visit(self, c):
         text, s = visit_all(self, c)
+        assert isinstance(text, str)
+        assert isinstance(s, str)
         return text.find(s)
 
     @visitor(Length)
     def visit(self, c):
         x = visit_all(self, c)
+        assert isinstance(x, str)
         return len(x)
 
     @visitor(Replace)
     def visit(self, c):
         text, old, new = visit_all(self, c)
+        assert isinstance(text, str)
+        assert isinstance(old, str)
+        assert isinstance(new, str)
         return text.replace(old, new)
 
     @visitor(Substr)
     def visit(self, c):
         text, i, j = visit_all(self, c)
+        assert isinstance(text, str)
+        assert isinstance(i, int)
+        assert isinstance(j, int)
         return text[i:j]
 
 
@@ -88,106 +106,94 @@ def run(prog, input_source):
     return Run(input_source).visit(prog)
 
 
-# We want the following:
-#
-# x0 = Hole('x0', str)
-# x1 = Hole('x1', int)
-#
-# dot = Literal('.')
-#
-# index = Component(domain=(str, str), ret_type=int, run=...)
-# substr = Component(domain=(str, int, int), ret_type=str, run=...)
-#
-# program = substr(x0, x1, index(x0, dot))
-# program('google.com', 0) == 'google'
+def test_run():
+    x0 = Hole('x0', str)
+    x1 = Hole('x1', str)
+    zero = Const(0)
 
-# TODO It would be nice to write new components like this:
-# substr = Component('Substr', domain, impl)
+    prog = Substr(x0, zero, Index(x0, x1))
+    env = {'x0': 'outsystems.com', 'x1': '.'}
 
-# @dataclass
-# class Component(ABC):
-#     domain: Tuple[Type, ...] = field(init=False)
-#     ret_type: Type = field(init=False)
+    assert run(prog, env) == 'outsystems'
 
-#     # TODO Maybe include return type checks?
-#     def typecheck(self, *args):
-#         for arg, type_ in zip(args, self.domain):
-#             assert isinstance(arg, Component)  # FIXME exception?
-#             assert arg.ret_type == type_
 
-#     @abstractmethod
-#     def __call__(self, *args):
-#         self.typecheck(*args)
-#         assert len(args) == len(self.domain)  # FIXME exception?
+@dataclass
+class Anytree():
+    def to_node(self, c):
+        return Node(name=c, children=visit_all(self, c), tag=type(c).__name__)
 
-# @dataclass
-# class Literal(Component):
-#     value: Any  # FIXME TypeVar?
+    @visitor(Hole)
+    def visit(self, c):
+        return Node(name=c, tag=c)
 
-#     def __post_init__(self):
-#         self.domain = ()
-#         self.ret_type = type(self.value)
+    @visitor(Const)
+    def visit(self, c):
+        return Node(name=c, tag=c)
 
-#     def __call__(self):
-#         return self.value
+    @visitor(Concat)
+    def visit(self, c):
+        return self.to_node(c)
 
-# period = Literal('.')
-# slash = Literal('/')
-# dash = Literal('-')
-# underscore = Literal('_')
-# at = Literal('@')
-# newline = Literal('\n')
+    @visitor(Index)
+    def visit(self, c):
+        return self.to_node(c)
 
-# @dataclass
-# class Concat(Component):
-#     def __post_init__(self):
-#         self.domain = (str, str)
-#         self.ret_type = str
+    @visitor(Length)
+    def visit(self, c):
+        return self.to_node(c)
 
-#     def __call__(self, *args):
-#         super().__call__(*args)
-#         return args[0]() + args[1]()
+    @visitor(Replace)
+    def visit(self, c):
+        return self.to_node(c)
 
-# @dataclass
-# class Length(Component):
-#     def __post_init__(self):
-#         self.domain = (str, )
-#         self.ret_type = int
+    @visitor(Substr)
+    def visit(self, c):
+        return self.to_node(c)
 
-#     def __call__(self, *args):
-#         super().__call__(*args)
-#         return len(args[0]())
 
-# @dataclass
-# class Substr(Component):
-#     def __post_init__(self):
-#         self.domain = (str, int, int)
-#         self.ret_type = str
+def to_anytree(prog):
+    return Anytree().visit(prog)
 
-#     def __call__(self, *args):
-#         super().__call__(*args)
-#         text, i, j = args
-#         return text()[i():j()]
 
-# @dataclass
-# class Replace(Component):
-#     def __post_init__(self):
-#         self.domain = (str, str, str)
-#         self.ret_type = str
+def render(prog):
+    for pre, _, node in RenderTree(to_anytree(prog)):
+        print(f'{pre}{node.tag}')
 
-#     def __call__(self, *args):
-#         super().__call__(*args)
-#         text, old, new = args
-#         return text().replace(old(), new())
 
-# # TODO Support for optional arguments
-# @dataclass
-# class Index(Component):
-#     def __post_init__(self):
-#         self.domain = (str, str)
-#         self.ret_type = int
+def holes(prog):
+    return set(
+        x.name for x in to_anytree(prog).leaves if isinstance(x.name, Hole))
 
-#     def __call__(self, *args):
-#         super().__call__(*args)
-#         text, s = args
-#         return text().find(s())
+
+def test_holes():
+    x0 = Hole('x0', str)
+    x1 = Hole('x1', str)
+    zero = Const(0)
+    prog = Substr(x0, zero, Index(x0, x1))
+
+    assert holes(prog) == set([x0, x1])
+
+
+def input_gen(prog):
+    from hypothesis import strategies as st
+
+    inputs = (st.from_type(h.type).example() for h in holes(prog))
+    return {x.name: input_ for x, input_ in zip(holes(prog), inputs)}
+
+
+def test_input_gen():
+    x0 = Hole('x0', str)
+    x1 = Hole('x1', str)
+
+    zero = Const(0)
+
+    prog = Substr(x0, zero, Index(x0, x1))
+    env = input_gen(prog)
+
+    run(prog, env)
+
+
+x0 = Hole('x0', str)
+x1 = Hole('x1', str)
+zero = Const(0)
+prog = Substr(x0, zero, Index(x0, x1))
