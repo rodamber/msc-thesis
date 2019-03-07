@@ -1,9 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any, List, Generator
+import string
+from typing import Generator, Dict
 
-import pysmt.shortcuts as smt
-
-from pysmt.typing import STRING, INT
+import z3
 
 from component import (visit_all, StrHole, IntHole, StrConst, IntConst, Concat,
                        Index, Length, Replace, Substr)
@@ -11,83 +10,129 @@ import utils
 from visitor import visitor
 
 
-# TODO This may still not give small enough examples. Let's see.
+# FIXME Bias!!
 @dataclass
 class InputGenSMT():
     fresh: Generator[str, None, None] = field(
         default_factory=utils.fresh, init=False, repr=False)
+    solver: z3.Solver = field(default_factory=z3.Solver, repr=False)
+    holes_z3: Dict = field(default_factory=dict)
+
+    def fresh_z3(self, z3cons):
+        return z3cons(next(self.fresh))
 
     @visitor(StrHole)
     def visit(self, hole):
-        return smt.Symbol(hole.name, STRING), smt.TRUE()
+        x = z3.String(hole.name)
+        self.holes_z3[hole] = x
+
+        lowercase_word = z3.Star(
+            z3.Union(*(z3.Re(letter) for letter in string.ascii_lowercase)))
+
+        self.solver.add(z3.Length(x) >= 10)
+        self.solver.add(z3.Length(x) <= 20)
+        self.solver.add(z3.InRe(x, lowercase_word))
+
+        return x
 
     @visitor(IntHole)
     def visit(self, hole):
-        return smt.Symbol(hole.name, INT), smt.TRUE()
+        x = z3.Int(hole.name)
+        self.holes_z3[hole] = x
+        return x
 
-    def make_const(self, const, type_, cons):
-        x = smt.Symbol(next(self.fresh), type_)
-        formula = smt.Equals(x, cons(const.value))
-        return x, formula
+    def visit_const(self, const, z3cons, z3val):
+        x = fresh_z3(z3cons)
+        self.solver.add(x == z3val(const.value))
+        return x
 
     @visitor(StrConst)
     def visit(self, const):
-        return self.make_const(const, STRING, smt.String)
+        return self.visit_const(const, z3.String, z3.StringVal)
 
     @visitor(IntConst)
     def visit(self, const):
-        return self.make_const(const, INT, smt.Int)
+        return self.visit_const(const, z3.Int, z3.IntVal)
+
+    def visit_component(self, component, z3cons, z3fun):
+        z = self.fresh_z3(z3cons)
+        self.solver.add(z == z3fun(*visit_all(self, component)))
+        return z
 
     @visitor(Concat)
-    def visit(self, concat):
-        (x, fx), (y, fy) = visit_all(self, concat)
-
-        z = smt.FreshSymbol(STRING)
-        fz = smt.And(fx, fy, smt.Equals(z, smt.StrConcat(x, y)))
-
-        return z, fz
+    def visit(self, c):
+        return self.visit_component(c, z3.String, z3.Concat)
 
     @visitor(Index)
-    def visit(self, index):
-        (x, fx), (y, fy) = visit_all(self, index)
+    def visit(self, c):
+        x, y = visit_all(self, c)
 
-        z = smt.FreshSymbol(INT)
-        fz = smt.And(fx, fy, smt.Equals(z, smt.StrIndexOf(x, y, smt.Int(0))))
+        z = self.fresh_z3(z3.Int)
 
-        return z, fz
+        self.solver.add(z == z3.IndexOf(x, y, 0))
+        self.solver.add(z3.Contains(x, y))
+
+        return z
 
     @visitor(Length)
-    def visit(self, length):
-        x, fx = next(visit_all(self, length))
-
-        z = smt.FreshSymbol(INT)
-        fz = smt.And(fx, smt.Equals(z, smt.StrLength(x)))
-
-        return z, fz
+    def visit(self, c):
+        return self.visit_component(c, z3.Int, z3.Length)
 
     @visitor(Replace)
-    def visit(self, replace):
-        (text, f_text), (old, f_old), (new, f_new) = visit_all(self, replace)
+    def visit(self, c):
+        text, old, new = visit_all(self, c)
 
-        res = smt.FreshSymbol(STRING)
-        f_res = smt.And(f_text, f_old, f_new,
-                        smt.Equals(res, smt.StrReplace(text, old, new)))
+        z = self.fresh_z3(z3.String)
 
-        return res, f_res
+        self.solver.add(z == z3.Replace(text, old, new))
+        self.solver.add(z3.Contains(text, old))
+
+        return z
 
     @visitor(Substr)
-    def visit(self, substr):
-        (text, f_text), (i, f_i), (j, f_j) = visit_all(self, substr)
+    def visit(self, c):
+        text, i, j = visit_all(self, c)
 
-        offset = smt.Minus(j, i)
+        z = self.fresh_z3(z3.String)
 
-        res = smt.FreshSymbol(STRING)
-        f_res = smt.And(f_text, f_i, f_j,
-                        smt.Equals(res, smt.StrSubstr(text, i, offset)))
+        self.solver.add(z == z3.SubString(text, i, j - i))
+        self.solver.add(0 <= i)
+        self.solver.add(i <= j)
+        self.solver.add(j <= z3.Length(text))
 
-        return res, f_res
+        return z
 
 
-def input_gen(prog):
-    _, formula = InputGenSMT().visit(prog)
-    return smt.simplify(formula)
+def cast_z3(x):
+    if z3.is_int_value(x):
+        return x.as_long()
+    elif z3.is_string_value(x):
+        return x.as_string()
+    else:
+        raise ValueError(f'Input Gen: Unsupported type: {type(x)}')
+
+
+def enumerate_models(solver):
+    while solver.check() == z3.sat:
+        model = solver.model()
+        yield model
+        solver.add(z3.Or(*(x != model[x] for x in model)))
+
+
+def input_gen(prog, count=None):
+    def helper():
+        ig = InputGenSMT()
+        ig.visit(prog)
+
+        model = enumerate_models(ig.solver)
+
+        while True:
+            try:
+                yield {
+                    hole: cast_z3(next(model).eval(x))
+                    for hole, x in ig.holes_z3.items()
+                }
+            except StopIteration:
+                break
+
+    return itertools.islice(helper(), count)

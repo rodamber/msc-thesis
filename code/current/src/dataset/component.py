@@ -23,7 +23,7 @@ fresh_gen = utils.fresh()
 
 @dataclass(frozen=True, init=False)
 class Hole:
-    name: str = field(default_factory=lambda: next(fresh_gen), init=False)
+    name: str = field(default_factory=lambda: next(fresh_gen))
 
 
 @dataclass(frozen=True)
