@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+import itertools
 import string
 from typing import Generator, Dict
 
@@ -23,22 +24,29 @@ class InputGenSMT():
 
     @visitor(StrHole)
     def visit(self, hole):
+        if hole in self.holes_z3:
+            return self.holes_z3[hole]
+
         x = z3.String(hole.name)
         self.holes_z3[hole] = x
 
+        # Bias
         lowercase_word = z3.Star(
             z3.Union(*(z3.Re(letter) for letter in string.ascii_lowercase)))
-
-        self.solver.add(z3.Length(x) >= 10)
-        self.solver.add(z3.Length(x) <= 20)
+        self.solver.add(z3.Length(x) >= 3)
+        self.solver.add(z3.Length(x) <= 8)
         self.solver.add(z3.InRe(x, lowercase_word))
 
         return x
 
     @visitor(IntHole)
     def visit(self, hole):
+        if hole in self.holes_z3:
+            return self.holes_z3[hole]
+
         x = z3.Int(hole.name)
         self.holes_z3[hole] = x
+
         return x
 
     def visit_const(self, const, z3cons, z3val):
@@ -72,6 +80,10 @@ class InputGenSMT():
         self.solver.add(z == z3.IndexOf(x, y, 0))
         self.solver.add(z3.Contains(x, y))
 
+        # Bias
+        self.solver.add(z3.Length(x) > z3.Length(y))
+        self.solver.add(z3.Not(z3.SuffixOf(y, x)))
+
         return z
 
     @visitor(Length)
@@ -97,7 +109,7 @@ class InputGenSMT():
 
         self.solver.add(z == z3.SubString(text, i, j - i))
         self.solver.add(0 <= i)
-        self.solver.add(i <= j)
+        self.solver.add(i < j)
         self.solver.add(j <= z3.Length(text))
 
         return z
@@ -112,28 +124,22 @@ def cast_z3(x):
         raise ValueError(f'Input Gen: Unsupported type: {type(x)}')
 
 
-def enumerate_models(solver):
-    while solver.check() == z3.sat:
-        model = solver.model()
-        yield model
-        solver.add(z3.Or(*(x != model[x] for x in model)))
-
-
 def input_gen(prog, count=None):
     def helper():
         ig = InputGenSMT()
         ig.visit(prog)
 
-        model = enumerate_models(ig.solver)
+        while ig.solver.check() == z3.sat:
+            model = ig.solver.model()
+            env = {
+                hole: cast_z3(model.eval(x))
+                for hole, x in ig.holes_z3.items()
+            }
 
-        while True:
-            try:
-                yield {
-                    hole: cast_z3(next(model).eval(x))
-                    for hole, x in ig.holes_z3.items()
-                }
-            except StopIteration:
-                break
+            yield env
+
+            ig.solver.add(
+                z3.And(*(x != model[x] for x in ig.holes_z3.values())))
 
     return itertools.islice(helper(), count)
 
