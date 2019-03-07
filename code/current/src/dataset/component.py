@@ -28,14 +28,12 @@ class Hole:
 
 @dataclass(frozen=True)
 class StrHole(Hole):
-    def __post_init__(self):
-        assert isinstance(self.name, str)
+    pass
 
 
 @dataclass(frozen=True)
 class IntHole(Hole):
-    def __post_init__(self):
-        assert isinstance(self.name, int)
+    pass
 
 
 @dataclass(frozen=True)
@@ -212,9 +210,3 @@ def test_holes():
     prog = Substr(x0, zero, Index(x0, x1))
 
     assert holes(prog) == set([x0, x1])
-
-
-x0 = StrHole()
-x1 = StrHole()
-zero = IntConst(0)
-prog = Substr(x0, zero, Index(x0, x1))
