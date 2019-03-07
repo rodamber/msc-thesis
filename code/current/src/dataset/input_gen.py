@@ -42,7 +42,7 @@ class InputGenSMT():
         return x
 
     def visit_const(self, const, z3cons, z3val):
-        x = fresh_z3(z3cons)
+        x = self.fresh_z3(z3cons)
         self.solver.add(x == z3val(const.value))
         return x
 
@@ -136,3 +136,13 @@ def input_gen(prog, count=None):
                 break
 
     return itertools.islice(helper(), count)
+
+
+x0 = StrHole()
+x1 = StrHole()
+
+zero = IntConst(0)
+
+prog = Substr(x0, zero, Index(x0, x1))
+
+envit = input_gen(prog)
