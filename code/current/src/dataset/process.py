@@ -1,8 +1,12 @@
 import itertools
+import os
 
 import jsonlines
 
+from ast2component import ast2comp
+from component import render, run
 import expr_ast as ast
+from input_gen import input_gen
 from parser import parse
 from templatify import templatify
 from utils import LineError
@@ -51,21 +55,63 @@ def in_dsl(dsl):
         return (node.name for node in LevelOrderIter(e.to_anytree()))
 
     def pred(x):
-        if x['functions'] and (set(x['functions']) <= set(dsl)):
-            template = templatify(parse(x['text']))
+        functions = set(x['functions'])
+        text = x['text']
+
+        if functions and set(functions) <= set(dsl):
+            # print(f'Hey!\nfunctions: {functions}\ndsl: {dsl}')
+            template = templatify(parse(text))
 
             # Filter unwanted operations
 
             no_binops = not any(
                 isinstance(x, ast.Binop) for x in iter_(template))
-            if no_binops:
-                no_unops = not any(
-                    isinstance(x, ast.Unop) for x in iter_(template))
-                return no_unops
-        return False
+            no_unops = not any(
+                isinstance(x, ast.Unop) for x in iter_(template))
+            no_ternary_index = not any(
+                isinstance(x, ast.Func) and x.name == 'Index'
+                and len(x.parameters) > 2 for x in iter_(template))
+
+            return no_binops and no_unops and no_ternary_index
+        else:
+            return False
 
     return pred
 
 
 def ast_size(size):
     return lambda x: templatify(parse(x['text'])).size() == size
+
+
+# FIXME Some programs become equal after templatification
+def process(n):
+    dataset = '../../dataset/exprs-short300.jsonl'
+    dsl = ['Length', 'Concat', 'Substr', 'Replace', 'Index']
+
+    def pred0(x):
+        return in_dsl(dsl)(x) and ast_size(n)(x)
+
+    infile = f'../../dataset/dsl01/exprs-short300-dsl01-size{n}.jsonl'
+    select(dataset, infile, pred0, count=10)
+
+    with jsonlines.open(infile, 'r') as reader:
+        for line, x in itertools.islice(enumerate(reader), None):
+            outfile = f'../../dataset/dsl01/size0{n}/{line}.benchmark'
+            os.makedirs(os.path.dirname(outfile), exist_ok=True)
+
+            with open(outfile, 'w+') as f:
+                text = x['text']
+                prog = ast2comp(templatify(parse(text)))
+
+                envit = input_gen(prog, 5)
+                examples = ((env, run(prog, env)) for env in envit)
+
+                f.writelines(map(lambda x: str(x) + '\n', examples))
+
+                f.write('\n=== Solution ===\n')
+                f.write(render(prog) + '\n')
+
+
+# TODO
+# Assert that the benchmarks are correct
+# Number of files, number of lines, etc

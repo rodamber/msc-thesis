@@ -194,8 +194,8 @@ def to_anytree(prog):
 
 
 def render(prog):
-    for pre, _, node in RenderTree(to_anytree(prog)):
-        print(f'{pre}{node.tag}')
+    return '\n'.join(
+        f'{pre}{node.tag}' for pre, _, node in RenderTree(to_anytree(prog)))
 
 
 def holes(prog):

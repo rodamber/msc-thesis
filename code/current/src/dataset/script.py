@@ -2,7 +2,14 @@ import itertools
 import jsonlines
 import sys
 
-dataset = '../../dataset/__exprs.jsonl'
+from parser import *
+from expr_ast import *
+from templatify import *
+from component import *
+from ast2component import *
+from input_gen import *
+
+dataset = '../../dataset/dsl01/exprs-short300-dsl01-size2.jsonl'
 
 
 def read_line(n, dataset=dataset, field='text'):
@@ -19,35 +26,24 @@ def simplify(src=dataset, dst='simplify'):
                 writer.write({'text': x['text'], 'functions': x['functions']})
 
 
-# Demonstration
+def experiment(n):
+    line = read_line(n)
+    expr = parse(line)
+    temp = templatify(expr)
+    prog = ast2comp(temp)
+    env = gen(prog)
 
-import expr_ast as ast
-from parser import parse
-from templatify import templatify
+    print('Program:')
+    print(render(prog))
 
-expr = parse(read_line(15))
-template = templatify(expr)
+    print('Environment:')
+    for k, v in env.items():
+        print(f'{k}: {v}')
 
-# components = to_components(template)
+    print('Output:')
+    print(run(prog, env))
 
-# inputs = {component: gen_inputs(component, 10) for component in components}
-# outputs = {
-#     component: ((input_, component(input_)) for input_ in inputs[component])
-#     for component in components
-# }
-
-# Hypothesis demonstration
-
-from hypothesis import assume, strategies as st
-from string import ascii_letters
+    return prog, env
 
 
-@st.composite
-def substr(draw, alphabet=ascii_letters):
-    text = draw(st.text(alphabet, min_size=1))
-
-    middle = draw(st.integers(0, len(text) - 1))
-    left = draw(st.integers(0, middle))
-    right = draw(st.integers(middle, len(text) - 1))
-
-    return (text, left, right)
+# def benchmarks()

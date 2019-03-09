@@ -33,8 +33,10 @@ class Expr(ABC):
 
     # FIXME Separate this into a visitor
     def render(self, simple=True):
-        for pre, _, node in anytree.RenderTree(self.to_anytree()):
-            print(f"{pre}{node.simple}")
+        return '\n'.join([
+            f"{pre}{node.simple}"
+            for pre, _, node in anytree.RenderTree(self.to_anytree())
+        ])
 
 
 @dataclass(frozen=True)

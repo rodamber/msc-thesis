@@ -7,15 +7,28 @@ import z3
 
 from component import (visit_all, StrHole, IntHole, StrConst, IntConst, Concat,
                        Index, Length, Replace, Substr)
-import utils
 from visitor import visitor
+
+# Problemas com z3:
+# - inputs nao sao naturais
+# - inputs nao variam o suficiente
+# - muitas vezes lento ou nao consegue encontrar solucao
+# Problemas com hypothesis:
+# - nao da como forcar as constraints e acaba por demorar demasiado tempo
+
+
+# XXX FIXME copy
+def fresh():
+    for i in itertools.count():
+        x = f'y{i}'
+        yield x
 
 
 # FIXME Bias!!
 @dataclass
 class InputGenSMT():
     fresh: Generator[str, None, None] = field(
-        default_factory=utils.fresh, init=False, repr=False)
+        default_factory=fresh, init=False, repr=False)
     solver: z3.Solver = field(default_factory=z3.Solver, repr=False)
     holes_z3: Dict = field(default_factory=dict)
 
@@ -31,10 +44,10 @@ class InputGenSMT():
         self.holes_z3[hole] = x
 
         # Bias
+        pool = string.ascii_letters + string.digits + './-_@\n <>'
         lowercase_word = z3.Star(
             z3.Union(*(z3.Re(letter) for letter in string.ascii_lowercase)))
-        self.solver.add(z3.Length(x) >= 3)
-        self.solver.add(z3.Length(x) <= 8)
+        self.solver.add(z3.Length(x) >= 4)
         self.solver.add(z3.InRe(x, lowercase_word))
 
         return x
@@ -99,6 +112,9 @@ class InputGenSMT():
         self.solver.add(z == z3.Replace(text, old, new))
         self.solver.add(z3.Contains(text, old))
 
+        # Bias
+        self.solver.add(z3.Length(text) > z3.Length(old))
+
         return z
 
     @visitor(Substr)
@@ -131,6 +147,13 @@ def input_gen(prog, count=None):
 
         while ig.solver.check() == z3.sat:
             model = ig.solver.model()
+
+            # FIXME
+            # We need to map the environment too because the interpretation of
+            # some components is not mirrored exactly by z3. For example,
+            # if x = 'johndoe@email.com', then
+            # Substr(x, 4, Index(x, '@')) = 'doe',
+            # but (str.substr x 4 (str.indexof x '@' 0)) == 'doe@ema'
             env = {
                 hole: cast_z3(model.eval(x))
                 for hole, x in ig.holes_z3.items()
@@ -138,17 +161,14 @@ def input_gen(prog, count=None):
 
             yield env
 
+            # FIXME Or vs And
+            # ig.solver.add(
+            #     z3.Or(*(x != model[x] for x in ig.holes_z3.values())))
             ig.solver.add(
                 z3.And(*(x != model[x] for x in ig.holes_z3.values())))
 
     return itertools.islice(helper(), count)
 
 
-x0 = StrHole()
-x1 = StrHole()
-
-zero = IntConst(0)
-
-prog = Substr(x0, zero, Index(x0, x1))
-
-envit = input_gen(prog)
+def gen(prog):
+    return next(input_gen(prog))
