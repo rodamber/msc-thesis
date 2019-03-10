@@ -35,11 +35,11 @@ identifier = lexeme(parsy.regex(r'[_A-Za-z][_A-Za-z0-9]*')).desc('identifier')
 # Number
 number_lit = lexeme(
     parsy.regex(r'(0|[1-9][0-9]*)([.][0-9]+)?([eE][+-]?[0-9]+)?')).map(
-        ast.Literal).desc('number')
+        ast.lit).desc('number')
 
 # Boolean
 boolean_lit = (lexeme('true')
-               | lexeme('false')).map(bool).map(ast.Literal).desc('boolean')
+               | lexeme('false')).map(bool).map(ast.lit).desc('boolean')
 
 # String
 string_part = parsy.regex(r'[^"]+')
@@ -47,7 +47,7 @@ string_esc = parsy.string('""').result('"')
 string_lit = (parsy.string('"') >>
               (string_part
                | string_esc).many().concat() << lexeme('"')).map(
-                   ast.Literal).desc('string')
+                   ast.lit).desc('string')
 
 
 # Date and Time
@@ -65,14 +65,14 @@ second = datetime_helper(2, 'second')
 
 date_lit = parsy.seq(POUND >> year, DASH >> month << DASH,
                      day << POUND).combine(datetime.date).map(
-                         ast.Literal).desc('date')
+                         ast.lit).desc('date')
 time_lit = parsy.seq(POUND >> hour, COLON >> minute << COLON,
                      second << POUND).combine(datetime.time).map(
-                         ast.Literal).desc('time')
+                         ast.lit).desc('time')
 datetime_lit = parsy.seq(POUND >> year, DASH >> month << DASH, lexeme(day),
                          hour, COLON >> minute << COLON,
                          second << POUND).combine(datetime.datetime).map(
-                             ast.Literal).desc('datetime')
+                             ast.lit).desc('datetime')
 
 # Operators
 op_prec_table = {
@@ -145,9 +145,9 @@ def binop():
 
                 nonlocal lhs
                 if op == '.':
-                    lhs = ast.Dot(left=lhs, right=rhs)
+                    lhs = ast.dot(lhs, rhs)
                 else:
-                    lhs = ast.Binop(name=op, left=lhs, right=rhs)
+                    lhs = ast.func(op, lhs, rhs)
 
             return lhs
 
@@ -161,23 +161,23 @@ def binop():
     return (yield prec_parse(lhs, lvl=0))
 
 
-variable = identifier.map(ast.Variable).desc('variable')
+variable = identifier.map(ast.var).desc('variable')
 
 literal = number_lit | boolean_lit | string_lit | date_lit | time_lit | datetime_lit
 
 paren = lambda x: (LPAREN >> x << RPAREN).desc('parenthesized expression')
 
 kwarg = parsy.seq(identifier << COLON,
-                  expr.optional()).combine(ast.KWArg).desc('kwarg')
+                  expr.optional()).combine(ast.kwarg).desc('kwarg')
 
-func = parsy.seq(identifier, LPAREN >>
-                 (kwarg | expr).sep_by(COMMA).map(tuple) << RPAREN).combine(
-                     ast.Func).desc('function')
+func = parsy.seq(
+    identifier, LPAREN >> (kwarg | expr).sep_by(COMMA) <<
+    RPAREN).combine(lambda x, ys: ast.func(x, *ys)).desc('function')
 
-unop = parsy.seq(unary_op, expr).combine(ast.Unop).desc('unary operator')
+unop = parsy.seq(unary_op, expr).combine(ast.func).desc('unary operator')
 
 indexer = parsy.seq(func | variable, LBRACK >> expr << RBRACK).combine(
-    ast.Indexer).desc('indexed expression')
+    ast.indexer).desc('indexed expression')
 
 parse = lambda stream: expr.parse(stream)
 parse_partial = lambda stream: expr.parse_partial(stream)
@@ -188,7 +188,7 @@ def test_expr():
     assert lexeme('abc').parse_partial('abc  def') == ('abc', 'def')
 
     # Quote escape
-    assert parse('"hello ""friend"""') == ast.Literal('hello "friend"')
+    assert parse('"hello ""friend"""') == ast.lit('hello "friend"')
 
     # Date and Time
     assert date_lit.parse('#1988-08-28#')
@@ -199,17 +199,19 @@ def test_expr():
     assert set(symbol_op_list) | set(ascii_op_list) == set(op_prec_table)
     assert set(unary_op_list) < set(op_prec_table)
 
-    # ast.Dot
-    assert parse('a.b.c') == ast.Dot(
-        ast.Dot(ast.Variable('a'), ast.Variable('b')), ast.Variable('c'))
-    assert parse('a(x).b.c') == ast.Dot(
-        ast.Dot(ast.Func('a', (ast.Variable('x'), )), ast.Variable('b')),
-        ast.Variable('c'))
+    # ast.lit
+    assert parse('0') == ast.lit('0')
 
-    # ast.Indexer
-    assert parse('x[0]') == ast.Indexer(ast.Variable('x'), ast.Literal('0'))
-    assert parse('f(x)[0]') == ast.Indexer(
-        ast.Func('f', (ast.Variable('x'), )), ast.Literal('0'))
+    # ast.dot
+    assert parse('a.b.c') == ast.dot(
+        ast.dot(ast.var('a'), ast.var('b')), ast.var('c'))
+    assert parse('a(x).b.c') == ast.dot(
+        ast.dot(ast.func('a', ast.var('x')), ast.var('b')), ast.var('c'))
+
+    # ast.indexer
+    assert parse('x[0]') == ast.indexer(ast.var('x'), ast.lit('0'))
+    assert parse('f(x)[0]') == ast.indexer(
+        ast.func('f', ast.var('x')), ast.lit('0'))
 
     # ast.Dot + ast.Indexer
     assert parse('a[0].b')
@@ -233,13 +235,11 @@ def test_expr():
     assert parse('(x) + y')
     assert parse('x * (-y)')
 
-    assert parse('a * b + c') == Binop(
-        '+', Binop('*', ast.Variable('a'), ast.Variable('b')),
-        ast.Variable('c'))
+    assert parse('a * b + c') == ast.func(
+        '+', ast.func('*', ast.var('a'), ast.var('b')), ast.var('c'))
 
-    assert parse('c + a * b') == Binop(
-        '+', ast.Variable('c'), Binop('*', ast.Variable('a'),
-                                      ast.Variable('b')))
+    assert parse('c + a * b') == ast.func(
+        '+', ast.var('c'), ast.func('*', ast.var('a'), ast.var('b')))
 
     assert parse('1 + 1 / n + n')
     assert parse('f(x) + 1')
@@ -268,7 +268,7 @@ def test_expr():
     assert parse('h(g(f(x).b[0]).c)[i(j)]')
 
 
-def test_dataset():
+def _test_dataset():
     # Track how many recursion error we get
     recursion_errors_count = 0
 
