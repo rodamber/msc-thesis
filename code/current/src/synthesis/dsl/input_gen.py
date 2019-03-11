@@ -5,30 +5,51 @@ from typing import Dict, Generator
 
 import z3
 
-from ..visitor import visitor
-from .component import (Concat, Index, IntConst, IntHole, Length, Replace,
-                        StrConst, StrHole, Substr, visit_all)
-
-# Problemas com z3:
-# - inputs nao sao naturais
-# - inputs nao variam o suficiente
-# - muitas vezes lento ou nao consegue encontrar solucao
-# Problemas com hypothesis:
-# - nao da como forcar as constraints e acaba por demorar demasiado tempo
+from ..dsl import component
+from ..utils import fresh_gen
+from .component import (Component, Hole, Type, UnsupportedComponent,
+                        UnsupportedType, component)
 
 
-# XXX FIXME copy
-def fresh():
-    for i in itertools.count():
-        x = f'y{i}'
-        yield x
+def smt_input_gen(fresh, solver, prog):
+    def z3fresh(self, z3):
+        return z3(next(fresh))
+
+    z3holes = {}
+
+    if isinstance(component(prog), Hole):
+        if type(component(prog)) == Type.TEXT:
+            pass
+        if type(component(prog)) == Type.INTEGER:
+            pass
+        else:
+            raise UnsupportedType(str(type(component(prog))))
+    elif isinstance(component(prog), Const):
+        pass
+    elif isinstance(component(prog), Component):
+        pass
+
+        if component(prog) == Component.CONCAT:
+            pass
+        elif component(prog) == Component.INDEX:  # FIXME Binary index
+            pass
+        elif component(prog) == Component.LENGTH:
+            pass
+        elif component(prog) == Component.REPLACE:
+            pass
+        elif component(prog) == Component.SUBSTR:
+            pass
+        elif component(prog) == Component.ADD1:
+            pass
+        elif component(prog) == Component.SUB1:
+            pass
 
 
 # FIXME Bias!!
 @dataclass
 class InputGenSMT():
     fresh: Generator[str, None, None] = field(
-        default_factory=fresh, init=False, repr=False)
+        default_factory=fresh_gen, init=False, repr=False)
     solver: z3.Solver = field(default_factory=z3.Solver, repr=False)
     holes_z3: Dict = field(default_factory=dict)
 
