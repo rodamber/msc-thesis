@@ -35,3 +35,7 @@ def test_templatify():
         'f(a.c[0] + b, -c)',
         ast.func('f', ast.func('+', ast.var('x0'), ast.var('x1')),
                  ast.func('-', ast.var('x2'))))
+
+    text = 'f(a.c[0] + b, -c)'
+    assert templatify(parse(text)) == templatify(parse(text))
+    assert templatify(templatify(parse(text))) == templatify(parse(text))

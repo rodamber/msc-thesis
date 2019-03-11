@@ -1,213 +1,108 @@
-import itertools
-import string
-from dataclasses import dataclass, field
-from typing import Any, Dict, Tuple, Type, Union
+from collections import namedtuple
+from enum import Enum
 
-from anytree import Node, RenderTree
-from hypothesis import assume
-from hypothesis import strategies as st
+import pyrsistent as p
+from toolz import compose, curry
 
-from .. import utils
-from ..visitor import visitor
+from .. import tree, utils
+from ..outsystems.templatify import templatify
+from ..tree import children, tag
 
+Component = Enum('Component', 'CONCAT INDEX LENGTH REPLACE SUBSTR')
 
-@dataclass(init=False)
-class Component:
-    slots: Tuple[Union['Hole', 'Component'], ...]
+Hole = namedtuple('Hole', 'id')
+Const = namedtuple('Const', 'val')
 
-    def __init__(self, *slots, parent=None):
-        self.slots = tuple(slots)
+program = tree.tree
 
+hole = compose(program, Hole)
+const = compose(program, Const)
 
-fresh_gen = utils.fresh()
+concat = lambda x, y: program(Component.CONCAT)
+index = lambda x, y: program(Component.INDEX, x, y)
+length = lambda x, y: program(Component.LENGTH, x, y)
+replace = lambda x, y, z: program(Component.REPLACE, x, y, z)
+substr = lambda x, y, z: program(Component.SUBSTR, x, y, z)
 
-
-@dataclass(frozen=True, init=False)
-class Hole:
-    name: str = field(default_factory=lambda: next(fresh_gen))
-
-
-@dataclass(frozen=True)
-class StrHole(Hole):
-    pass
+render = tree.render
 
 
-@dataclass(frozen=True)
-class IntHole(Hole):
-    pass
+@curry
+def run(env, prog):
+    if isinstance(tag(prog), Hole):
+        return env[prog]
+    elif isinstance(tag(prog), Const):
+        return tag(prog).val
+    elif isinstance(tag(prog), Component):
+        vals = children(prog).transform([p.ny], run(env))
 
-
-@dataclass(frozen=True)
-class Const():
-    value: Any
-
-
-class StrConst(Const):
-    def __post_init__(self):
-        assert isinstance(self.value, str)
-
-
-class IntConst(Const):
-    def __post_init__(self):
-        assert isinstance(self.value, int)
-
-
-class Concat(Component):
-    pass
-
-
-class Index(Component):
-    pass
-
-
-class Length(Component):
-    pass
-
-
-class Replace(Component):
-    pass
-
-
-class Substr(Component):
-    pass
-
-
-def visit_all(v, c):
-    return (v.visit(s) for s in c.slots)
-
-
-@dataclass
-class Run():
-    env: Dict[str, Any]
-
-    @visitor(StrHole)
-    def visit(self, c):
-        return self.env[c]
-
-    @visitor(IntHole)
-    def visit(self, c):
-        return self.env[c]
-
-    @visitor(StrConst)
-    def visit(self, c):
-        return c.value
-
-    @visitor(IntConst)
-    def visit(self, c):
-        return c.value
-
-    @visitor(Concat)
-    def visit(self, c):
-        x, y = visit_all(self, c)
-        assert isinstance(x, str)
-        assert isinstance(y, str)
-        return x + y
-
-    @visitor(Index)
-    def visit(self, c):
-        text, s = visit_all(self, c)
-        assert isinstance(text, str)
-        assert isinstance(s, str)
-        return text.find(s)
-
-    @visitor(Length)
-    def visit(self, c):
-        x = next(visit_all(self, c))
-        assert isinstance(x, str)
-        return len(x)
-
-    @visitor(Replace)
-    def visit(self, c):
-        text, old, new = visit_all(self, c)
-        assert isinstance(text, str)
-        assert isinstance(old, str)
-        assert isinstance(new, str)
-        return text.replace(old, new)
-
-    @visitor(Substr)
-    def visit(self, c):
-        text, i, j = visit_all(self, c)
-        assert isinstance(text, str)
-        assert isinstance(i, int)
-        assert isinstance(j, int)
-        return text[i:j]
-
-
-def run(prog, input_source):
-    return Run(input_source).visit(prog)
+        if tag(prog) == Component.CONCAT:
+            return sum(vals)
+        elif tag(prog) == Component.INDEX:  # FIXME Binary index
+            return vals[0].find(vals[1])
+        elif tag(prog) == Component.LENGTH:
+            return len(vals[0])
+        elif tag(prog) == Component.REPLACE:
+            return vals[0].replace(vals[1], vals[2])
+        elif tag(prog) == Component.SUBSTR:
+            return vals[0][vals[1]:vals[2]]
 
 
 def test_run():
-    x0 = StrHole()
-    x1 = StrHole()
-    zero = IntConst(0)
+    fresh = utils.fresh_gen()
 
-    prog = Substr(x0, zero, Index(x0, x1))
+    x0 = hole(next(fresh))
+    x1 = hole(next(fresh))
+
+    zero = const(0)
+
     env = {x0: 'outsystems.com', x1: '.'}
+    prog = substr(x0, zero, index(x0, x1))
 
-    assert run(prog, env) == 'outsystems'
-
-
-@dataclass
-class Anytree():
-    def to_node(self, c):
-        return Node(name=c, children=visit_all(self, c), tag=type(c).__name__)
-
-    @visitor(StrHole)
-    def visit(self, c):
-        return Node(name=c, tag=c)
-
-    @visitor(IntHole)
-    def visit(self, c):
-        return Node(name=c, tag=c)
-
-    @visitor(StrConst)
-    def visit(self, c):
-        return Node(name=c, tag=c)
-
-    @visitor(IntConst)
-    def visit(self, c):
-        return Node(name=c, tag=c)
-
-    @visitor(Concat)
-    def visit(self, c):
-        return self.to_node(c)
-
-    @visitor(Index)
-    def visit(self, c):
-        return self.to_node(c)
-
-    @visitor(Length)
-    def visit(self, c):
-        return self.to_node(c)
-
-    @visitor(Replace)
-    def visit(self, c):
-        return self.to_node(c)
-
-    @visitor(Substr)
-    def visit(self, c):
-        return self.to_node(c)
-
-
-def to_anytree(prog):
-    return Anytree().visit(prog)
-
-
-def render(prog):
-    return '\n'.join(
-        f'{pre}{node.tag}' for pre, _, node in RenderTree(to_anytree(prog)))
+    assert run(env, prog) == 'outsystems'
 
 
 def holes(prog):
     return set(
-        x.name for x in to_anytree(prog).leaves if isinstance(x.name, Hole))
+        x.tag for x in tree.tree2anynode(prog).leaves
+        if isinstance(x.tag, Hole))
 
 
 def test_holes():
-    x0 = StrHole()
-    x1 = StrHole()
-    zero = IntConst(0)
-    prog = Substr(x0, zero, Index(x0, x1))
+    fresh = utils.fresh_gen()
 
-    assert holes(prog) == set([x0, x1])
+    x0 = hole(next(fresh))
+    x1 = hole(next(fresh))
+
+    zero = const(0)
+
+    prog = substr(x0, zero, index(x0, x1))
+
+    assert holes(prog) == set(map(tag, [x0, x1]))
+
+
+def from_ast(ast):
+    template = templatify(ast)
+
+    children = children(template)\
+        .transform([p.ny], from_ast)
+
+    if expr(template) == ast.Expr.Var:
+        return hole(val(template))
+    elif expr(template) == ast.Expr.Lit:
+        return const(val(template))
+    elif expr(template) == ast.Expr.Func:
+        return match_component(val(template))
+    elif expr(template) == ast.Expr.KwArg:
+        raise Exception('keyword args are not supported yet')
+
+
+class UnsupportedComponent(Exception):
+    pass
+
+
+def match_component(name: str) -> Component:
+    try:
+        return Component[name]
+    except KeyError as e:
+        raise UnsupportedComponent from e

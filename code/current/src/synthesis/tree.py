@@ -12,15 +12,17 @@ class Tree(PRecord):
             (all(isinstance(c, Tree) for c in cs), 'expected pvector of Trees')))
 
 
-def tree(tag, children=pvector()):
-    return Tree(tag=tag, children=children)
+tree = lambda tag, *children: Tree(tag=tag, children=pvector(children))
+
+tag = lambda tree: tree.tag
+children = lambda tree: tree.children
 
 
 def tree2anynode(tree):
     children = ()
     if tree.children:
         children = tuple(tree.children.transform([ny], tree2anynode))
-    return AnyNode(tag=str(tree.tag), children=children)
+    return AnyNode(tag=tree.tag, children=children)
 
 
 def render(tree):

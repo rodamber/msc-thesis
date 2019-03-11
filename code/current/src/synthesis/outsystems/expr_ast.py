@@ -3,7 +3,8 @@ from enum import Enum
 import pyrsistent as p
 from toolz import curry
 
-from ..tree import tree
+from .. import tree
+from ..tree import tag
 
 Expr = Enum('Expr', 'Var, Lit, Func, KwArg')
 
@@ -11,24 +12,28 @@ Expr = Enum('Expr', 'Var, Lit, Func, KwArg')
 class ASTRec(p.PRecord):
     expr = p.field(mandatory=True, type=Expr)
     val = p.field(mandatory=True, initial=None)  # type=optional[str]
-    type = p.field(mandatory=True, initial=None)  # type=optional[type]
 
 
 @curry
-def ast(expr, val, children=p.pvector()):
-    return tree(ASTRec(expr=expr, val=val), children=children)
+def ast(expr, val, *children):
+    return tree.tree(ASTRec(expr=expr, val=val), children=p.pvector(children))
 
+
+expr = lambda ast: tag(ast).expr
+val = lambda ast: tag(ast).val
 
 var = ast(Expr.Var)
 lit = ast(Expr.Lit)
 
-_ref = curry(lambda t, x, *ys: ast(t, x, p.pvector(ys)))
+_ref = curry(lambda t, x, *ys: ast(t, x, *ys))
 
 func = _ref(Expr.Func)
 kwarg = _ref(Expr.KwArg)
 
 dot = lambda *ys: func('.', *ys)
 indexer = lambda *ys: func('[]', *ys)
+
+render = tree.render
 
 
 def test_ast():

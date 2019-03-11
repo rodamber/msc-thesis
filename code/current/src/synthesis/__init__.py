@@ -1,1 +1,1 @@
-from . import dataset, dsl, outsystems, tree, tyrell, utils, visitor
+from . import dataset, dsl, outsystems, tree, tyrell, utils
