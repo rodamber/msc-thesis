@@ -1,0 +1,565 @@
+<!-- NOTE: Keep this synchronized with HubServer\compiler\Languages\LanguageCode.cs -->
+<Functions scopeTreeFolder="Built-in Functions">
+    <Group name="Math" helpId="15021">
+        <Function name="Abs" retType="Decimal" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the absolute value (unsigned magnitude) of the decimal number 'n'.">
+            <Parameter type="Decimal" name="n" description="The number to extract the absolute value from."/>
+            <Examples><![CDATA[<code>Abs(-10.89) = 10.89</code>]]></Examples>
+        </Function>
+        <Function name="Mod" retType="Decimal" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the remainder of decimal division of 'n' by 'm'.">
+            <Parameter type="Decimal" name="n" description="The dividend in the modulo operation."/>
+            <Parameter type="Decimal" name="m" description="The divisor in the modulo operation."/>
+            <Examples><![CDATA[<code>Mod(10, 3) = 1<br/>Mod(4, 3.5) = 0.5</code>]]></Examples>
+        </Function>
+        <Function name="Power" retType="Decimal" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns 'n' raised to the power of 'm'.">
+            <Parameter type="Decimal" name="n" description="The base value."/>
+            <Parameter type="Decimal" name="m" description="The exponent value."/>
+            <Examples><![CDATA[<code>Power(100, 2) = 10000<br/>Power(-10.89, 2.3) = 0<br/>Power(-10.89, -5) = -6.52920946044017E-06</code>]]></Examples>
+        </Function>
+        <Function name="Round" retType="Decimal" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Decimal" name="n" description="The Decimal number to round"/>
+            <Parameter type="Integer" name="fractionalDigits" isOptional="true" description="Use it to specify the number of fractional digits that n has to be rounded to. The default value is 0. Note: In aggregates this parameter is not specified."/>
+            <Description><![CDATA[Returns the Decimal number 'n' rounded to a specific number of 'fractional digits'.<br/>The round method applied depends on where the function is used:<br/>- In <b>expressions in client-side and server-side logic</b>, applies the method round half to even (rounds to the nearest integer, 0.5 rounds to the nearest even integer).<br/>- In aggregates that query <b>SQL Server or Oracle databases</b>, applies the method round half away from 0 (rounds to the nearest integer, 0.5 rounds the number further away from 0).<br/>- In aggregates that query <b>MySQL or iDB2 databases</b>, applies the method round half up (rounds to the nearest integer, 0.5 rounds up).]]></Description>
+            <Examples><![CDATA[When used in expressions in client-side and server-side logic:<br/><code>Round(-10.89) = -11<br/>Round(-5.5) = -6<br/>Round(9.3) = 9<br/>Round(2.5) = 2<br/>Round(3.5) = 4<br/>Round(9.123456789, 5) = 9.12346</code><br/><br/>When used in aggregates that query SQL Server or Oracle database:<br/><code>Round(-10.89) = -11<br/>Round(-5.5) = -6<br/>Round(9.3) = 9<br/>Round(2.5) = 3<br/>Round(3.5) = 4</code><br/><br/>When used in aggregates that query iDB2 database:<br/><code>Round(-10.89) = -11<br/>Round(-5.5) = -5<br/>Round(9.3) = 9<br/>Round(2.5) = 3<br/>Round(3.5) = 4</code>]]></Examples>
+        </Function>
+        <Function name="Sqrt" retType="Decimal" isVisibleInServerQueries="true" isVisibleInClientQueries="false" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the square root of the Decimal number 'n'.">
+            <Parameter type="Decimal" name="n" description="The number to calculate the square root from."/>
+            <Examples><![CDATA[<code>Sqrt(2.3) = 1.51657508881031</code>]]></Examples>
+        </Function>
+        <Function name="Trunc" retType="Decimal" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the Decimal number 'n' truncated to integer removing the decimal part of 'n'.">
+            <Parameter type="Decimal" name="n" description="The number to truncate."/>
+            <Examples><![CDATA[<code>Trunc(-10.89) = -10<br/>Trunc(7.51) = 7</code>]]></Examples>
+        </Function>
+    </Group>
+    <Group name="Numeric" helpId="15023">
+        <Function name="Max" retType="Decimal" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the largest number of 'n' and 'm'.">
+            <Parameter type="Decimal" name="n" />
+            <Parameter type="Decimal" name="m" />
+            <Examples><![CDATA[<code>Max(-10.89, -2.3) = -2.3<br/>Max(10.89, 2.3) = 10.89</code>]]></Examples>
+        </Function>
+        <Function name="Min" retType="Decimal" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the smallest number of 'n' and 'm'.">
+            <Parameter type="Decimal" name="n" />
+            <Parameter type="Decimal" name="m" />
+            <Examples><![CDATA[<code>Min(-10.89, -2.3) = -10.89<br/>Min(10.89, 2.3) = 2.3</code>]]></Examples>
+        </Function>
+        <Function name="Sign" retType="Integer" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns -1 if 'n' is negative; 1 if 'n' is positive; 0 if 'n' is 0.">
+            <Parameter type="Decimal" name="n" description="The number from which to calculate the sign value."/>
+            <Examples><![CDATA[<code>Sign(-10.89) = -1<br/>Sign(2.3) = 1<br/>Sign(0.0) = 0</code>]]></Examples>
+        </Function>
+    </Group>
+    <Group name="Text" helpId="15024">
+        <Function name="Chr" retType="Text" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a single-character string corresponding to the 'c' character code.">
+            <Parameter type="Integer" name="c" description="The ASCII code value to be converted to a character."/>
+            <Examples><![CDATA[<code>Chr(88) = ""X""</code>]]></Examples>
+        </Function>
+        <Function name="Concat" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the concatenation of two Texts: 't1' and 't2'.">
+            <Parameter type="Text" name="t1" description="The first string."/>
+            <Parameter type="Text" name="t2" description="The string that will be appended to the first string in the output."/>
+            <Examples><![CDATA[<code>Concat(""First string"", ""last string"") = ""First stringlast string""<br/>Concat("""", """") = """"</code>]]></Examples>
+        </Function>
+        <Function name="EncodeHtml" retType="Text" isVisibleInClientSide="true">
+            <Parameter type="Text" name="text" description="The Text to be encoded."/>
+            <Description><![CDATA[Returns a string with all the reserved characters translated in order to be used in HTML literals.<br/><br/>Using un-escaped expressions without encoding distrusted variables (e.g. user input) compromises the end-user security by allowing HTML and JavaScript injection as well as cross-scripting. You should use this function when managing un-escaped expressions.]]></Description>
+            <Examples><![CDATA[<code>EncodeHtml(""&lt;&gt;"") = ""&amp;lt;&amp;gt;""<br/>EncodeHtml(""another ' test"") = ""another &amp;#39; test""<br/>EncodeHtml(""another """" test"") = ""another &amp;quot; test""<br/>EncodeHtml(""Hello"" + NewLine() + ""World!"") = ""Hello&lt;br/&gt;World!""</code>]]></Examples>
+        </Function>
+        <Function name="EncodeJavaScript" retType="Text" isVisibleInClientSide="true">
+            <Parameter type="Text" name="text" description="The Text to be encoded."/>
+            <Description><![CDATA[Returns a string with all reserved characters translated in order to be use in JavaScript literals.<br/><br/>Using un-escaped expressions without encoding distrusted variables (e.g. user input) compromises the end-user security by allowing JavaScript injection as well as cross-scripting.<br/>You should use this function when managing un-escaped expressions.]]></Description>
+            <Examples><![CDATA[<code>EncodeJavascript(""another ' test"") = ""another \x27 test""<br/>EncodeJavascript(""&lt;&gt;"") = ""\x3c\x3e""</code>]]></Examples>
+        </Function>
+        <Function name="EncodeSql" retType="Text">
+            <Parameter type="Text" name="text" description="The Text to be encoded."/>
+            <Description><![CDATA[Returns a string where certain characters (for example single quotes ') are escaped.<br/>To prevent the injection of malicious SQL statements use the EncodeSql() built-in function whenever you are using expanded inline Parameters that contain distrusted Variables (for example user input) that evaluate to string literals.<br/>Do not forget to wrap the EncodeSql() function in single quotes, ', otherwise your query will still be vulnerable to SQL injection.]]></Description>
+            <Examples><![CDATA[<code>""'"" + EncodeSql(""another ' test"") + ""'"" = ""'another '' test'""</code>]]></Examples>
+        </Function>
+        <Function name="EncodeUrl" retType="Text" isVisibleInClientSide="true">
+            <Parameter type="Text" name="text" description="The Text to be encoded."/>
+            <Description><![CDATA[Returns a string with all non-alphanumeric characters coded in order to be used in URL parameter values. Only alphanumeric characters [0-9a-zA-Z] can be un-encoded in the URL. For a matter of security, you should use this encoding function when managing URLs in your application. For example, when you want to add a dynamic URL to an external site.]]></Description>
+            <Examples><![CDATA[<code>EncodeUrl("" test"") = ""+test""<br/>EncodeUrl(""another ' test"") = ""another+%27+test""<br/>EncodeUrl(""&lt;&gt;"") = ""%3c%3e""<br/>EncodeUrl(""1+2"") = ""1%2b2""<br/>EncodeUrl(""Company A&amp;A"") = ""Company+A%26A""</code>]]></Examples>
+        </Function>
+        <Function name="Index" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Text" name="t" description="The Text where the search Text can be found."/>
+            <Parameter type="Text" name="search" description="The Text string to be found."/>
+            <Parameter type="Integer" name="startIndex" isOptional="true" description="Indicates the (zero-based) index where the search starts. In case of searching from the end to the start, a startIndex different from 0 (zero) indicates the end of the text. The default value is 0 (zero). When used in Aggregates this parameter is not present."/>
+            <Parameter type="Boolean" name="searchFromEnd" isOptional="true" description="Indicates the direction of the search. In case of searching from the end to the start, a startIndex different from 0 (zero) indicates the end of the text. The default value is False. When used in Aggregates this parameter is not present."/>
+            <Parameter type="Boolean" name="ignoreCase" isOptional="true" desription="If set to True, uppercase and lowercase characters are considered to be the same. The default value is False. When used in Aggregates this parameter is not present."/>
+            <Description><![CDATA[Returns the zero-based position in Text 't' where 'search' Text can be found. Returns -1 if 'search' is not found or if 'search' is empty.]]></Description>
+            <Examples><![CDATA[<code>Index(""First string"", ""F"") = 0<br/>Index(""First string"", ""st"") = 3<br/>Index(""First string"", ""xx"") = -1<br/>Index(""First string"", ""F"", startIndex: 5) = -1<br/>Index(""First string"", ""st"", startIndex: 5) = 6<br/>Index(""First string"", ""xx"", startIndex: 5) = -1<br/>Index(""First string"", ""F"", searchFromEnd: True) = 0<br/>Index(""First string"", ""st"", searchFromEnd: True) = 6<br/>Index(""First string"", ""xx"", searchFromEnd: True) = -1<br/>Index(""First string"", ""f"") = -1<br/>Index(""First string"", ""f"", ignoreCase: True) = 0<br/>Index("""", ""xx"") = -1<br/>Index(""First string"", """") = -1<br/>Index("""", """") = -1</code>]]></Examples>
+        </Function>
+        <Function name="Length" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the number of characters in Text 't'.">
+            <Parameter type="Text" name="t" description="The Text to calculate the length of." />
+            <Examples><![CDATA[<code>Length(""First string"") = 12<br/>Length("""") = 0</code>]]></Examples>
+        </Function>
+        <Function name="NewLine" retType="Text" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a string containing the New Line (Return) character." useAsLiteral="true"/>
+        <Function name="Replace" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns Text 't' after replacing all Text occurrences of 'search' with 'replace'.">
+            <Parameter type="Text" name="t" description="The Text where the search and replace operation is performed."/>
+            <Parameter type="Text" name="search" description="The Text to be replaced."/>
+            <Parameter type="Text" name="replace" description="The Text that replaces the search Text."/>
+            <Examples><![CDATA[<code>Replace(""First string"", ""xx"", """") = ""First string""<br/>Replace(""First string"", ""First"", ""Second"") = ""Second string""<br/>Replace(""First string"", ""First"", """") = "" string""</code>]]></Examples>
+        </Function>
+        <Function name="Substr" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a sub-string of 't' beginning at 'start' zero-based position and with 'length' characters.">
+            <Parameter type="Text" name="t" description="The Text where the operation is performed."/>
+            <Parameter type="Integer" name="start" description="The zero-based position to start the Text extraction from."/>
+            <Parameter type="Integer" name="length" description="The number of characters to include in the output Text."/>
+            <Examples><![CDATA[<code>Substr(""First string"", 2, 4) = ""rst ""<br/>Substr(""First string"", 0, 100) = ""First string""<br/>Substr(""First string"", 11, 3) = ""g""<br/>Substr(""First string"", Length(""First string""), 0) = """"<br/>Substr(""First string"", 2, 0) = """"</code>]]></Examples>
+        </Function>
+        <Function name="ToLower" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Text 't' to the equivalent lowercase text.">
+            <Parameter type="Text" name="t" description="Thet Text to transform into lowercase."/>
+            <Examples><![CDATA[<code>ToLower(""First string"") = ""first string""</code>]]></Examples>
+        </Function>
+        <Function name="ToUpper" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Text 't' to the equivalent uppercase text.">
+            <Parameter type="Text" name="t" description="The Text to transform into uppercase."/>
+            <Examples><![CDATA[<code>ToUpper(""First string"") = ""FIRST STRING""</code>]]></Examples>
+        </Function>
+        <Function name="Trim" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Removes all leading and trailing space characters (' ') from Text 't'.">
+            <Parameter type="Text" name="t" description="The Text to trim."/>
+            <Examples><![CDATA[<code>Trim("" First string "") = ""First string""<br/>Trim(""First string "") = ""First string""</code>]]></Examples>
+        </Function>
+        <Function name="TrimEnd" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Removes all trailing space characters (' ') from Text 't'.">
+            <Parameter type="Text" name="t" description="The Text to remove trailing space characters from."/>
+            <Examples><![CDATA[<code>TrimEnd("" First string "") = "" First string""<br/>TrimEnd(""First string "") = ""First string""</code>]]></Examples>
+        </Function>
+        <Function name="TrimStart" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Removes all leading space characters (' ') from Text 't'.">
+            <Parameter type="Text" name="t" description="The Text to remove leading space characters from."/>
+            <Examples><![CDATA[<code>TrimStart("" First string "") = ""First string ""<br/>TrimStart(""First string "") = ""First string ""</code>]]></Examples>
+        </Function>
+    </Group>
+    <Group name="Date and Time" helpId="15019">
+        <Function name="AddDays" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Adds 'n' days to 'dt' and returns a valid Date Time.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to add days to."/>
+            <Parameter type="Integer" name="n" description="The number of days to add."/>
+            <Examples><![CDATA[<code>AddDays(#2015-09-14#, 15) = #2015-09-29 00:00:00#<br/>AddDays(#2015-12-31#, 1) = #2016-01-01 00:00:00#<br/>AddDays(#2015-02-28#, 1) = #2015-03-01 00:00:00#<br/>AddDays(#2016-02-28#, 1) = #2016-02-29 00:00:00#</code>]]></Examples>
+        </Function>
+        <Function name="AddHours" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Adds 'n' hours to 'dt' and returns a valid Date Time.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to add hours to."/>
+            <Parameter type="Integer" name="n" description="The number of hours do add."/>
+            <Examples><![CDATA[<code>AddHours(#1982-05-21 22:20:30#, 1) = #1982-05-21 23:20:30#<br/>AddHours(#2001-10-12 23:20:00#, 5) = #2001-10-13 04:20:00#</code>]]></Examples>
+        </Function>
+        <Function name="AddMinutes" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Adds 'n' minutes to 'dt' and returns a valid Date Time.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to add minutes to."/>
+            <Parameter type="Integer" name="n" description="The number of minutes to add."/>
+            <Examples><![CDATA[<code>AddMinutes(#1982-05-21 22:20:30#, 1) = #1982-05-21 22:21:30#<br/>AddMinutes(#2001-10-12 23:55:00#, 5) = #2001-10-13 00:00:00#</code>]]></Examples>
+        </Function>
+        <Function name="AddMonths" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Adds 'n' months to 'dt' and returns a valid Date Time.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to add months to."/>
+            <Parameter type="Integer" name="n" description="The number of months to add."/>
+            <Examples><![CDATA[<code>AddMonths(#2001-09-14#, 2) = #2001-11-14 00:00:00#<br/>AddMonths(#2001-12-14#, 2) = #2002-02-14 00:00:00#<br/>AddMonths(#2003-01-31#, 1) = #2003-02-28#<br/>AddMonths(#2004-01-31#, 1) = #2004-02-29#</code>]]></Examples>
+        </Function>
+        <Function name="AddSeconds" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Adds 'n' seconds to 'dt' and returns a valid Date Time.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to add seconds to."/>
+            <Parameter type="Integer" name="n" description="The number of seconds to add."/>
+            <Examples><![CDATA[<code>AddSeconds(#2015-05-21 22:20:30#, 60) = #2015-05-21 22:21:30#<br/>AddSeconds(#2003-10-21 23:59:50#, 11) = #2003-10-22 00:00:01#</code>]]></Examples>
+        </Function>
+        <Function name="AddYears" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Adds 'n' years to 'dt' and returns a valid Date Time.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to add years to."/>
+            <Parameter type="Integer" name="n" description="The number of years to add."/>
+            <Examples><![CDATA[<code>AddYears(#2001-09-14#, 3) = #2004-09-14 00:00:00#<br/>AddYears(#2004-02-29#, 1) = #2005-02-28 00:00:00#<br/>AddYears(#2004-02-29#, 4) = #2008-02-29 00:00:00#</code>]]></Examples>
+        </Function>
+        <Function name="BuildDateTime" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a Date Time made up of the Date 'd' and Time 't'.">
+            <Parameter type="Date" name="d" description="The Date to build the Date Time from."/>
+            <Parameter type="Time" name="t" descriptino="The Time to build the Date Time from."/>
+            <Examples><![CDATA[<code>BuildDateTime(#2015-07-14#, #12:30:34#) = #2015-07-14 12:30:34#</code>]]></Examples>
+        </Function>
+        <!-- CurrDate, CurrDateTime and CurrTime behavior in client-side is achieved by calculating them in-memory, hence the isVisibleInClientQueries="false" -->
+        <Function name="CurrDate" retType="Date" isVisibleInServerQueries="true" isVisibleInClientQueries="false" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" useAsLiteral="true" sqlFormat="{function:TextToDate}(&quot;{0}&quot;, &quot;yyyy-MM-dd&quot;)">
+          <Description><![CDATA[In client-side calls, it returns the device date.<br/>In server-side calls, it returns the platform server date.<br/>In query calls, it returns the platform server date.]]></Description>
+        </Function>
+        <Function name="CurrDateTime" retType="DateTime" isVisibleInServerQueries="true" isVisibleInClientQueries="false" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" useAsLiteral="true" sqlFormat="{function:TextToDateTime}(&quot;{0}&quot;, &quot;yyyy-MM-dd&quot;)">
+          <Description><![CDATA[In client-side calls, it returns the device date and time.<br/>In server-side calls, it returns the platform server date and time.<br/>In query calls, it returns the platform server date and time.<br/><br/>Date times in the device are converted in the server to the server time zone.<br/>Conversely, date times in the server are converted in the device to the device time zone.]]></Description>
+        </Function>
+        <Function name="CurrTime" retType="Time" isVisibleInServerQueries="true" isVisibleInClientQueries="false" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" useAsLiteral="true" sqlFormat="{function:TextToTime}(&quot;{0}&quot;)">
+          <Description><![CDATA[In client-side calls, it returns the device time.<br/>In server-side calls, it returns the platform server time.<br/>In query calls, it returns the platform server time.]]></Description>
+        </Function>
+        <Function name="Day" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the day of 'dt'.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to calculate the day from."/>
+            <Examples><![CDATA[<code>Day(#2015-07-14#) = 14</code>]]></Examples>
+        </Function>
+        <Function name="DayOfWeek" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the week day of 'dt', ranging from 0 (Sunday) to 6 (Saturday).">
+            <Parameter type="DateTime" name="dt" description="The Date Time to calculate the day of the week from."/>
+            <Examples><![CDATA[<code>DayOfWeek(#2001-09-14#) = 5</code>]]></Examples>
+        </Function>
+        <Function name="DiffDays" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="DateTime" name="dt1" description="The first Date Time."/>
+            <Parameter type="DateTime" name="dt2" description="The second Date Time."/>
+            <Description><![CDATA[Returns the difference in days between 'dt1' and 'dt2'; i.e. how many days have passed between these two dates:<br/><br/>- Returns a positive number if 'dt1' is smaller than 'dt2';<br/>- Returns a negative number if 'dt1' is bigger than 'dt2';<br/>- Returns 0 if the two dates are equal.<br/><br/>The Time component you provide in the parameters is ignored. The DiffDays function receives two Date Time parameters, and then replaces the Time component with 00:00:00. It calculates the elapsed time in milliseconds from the first date at 00:00:00 to the second date at 00:00:00, and then converts the difference in milliseconds into days.<br/><br/>Daylight Saving Time (DST) is ignored. The time zone considered for evaluating this function is always the time zone of the Platform Server, regardless of the regional settings of the end-user.<br/><br/>The maximum supported value is (2^31)-1 days. This corresponds to approximately 5879489.8 years. If DiffDays(dt1, dt2) is bigger than (2^31)-1, you will get an unexpected value.]]></Description>
+          <Examples><![CDATA[<code>DiffDays(#1982-05-19#, #1982-05-21#) = 2<br/>DiffDays(#1982-05-21#, #1982-05-19#) = -2<br/>DiffDays(#2005-05-11 00:00:00#, #2005-05-11 23:59:59#) = 0<br/>DiffDays(#2004-09-01#, #2004-10-01#) = 31<br/>DiffDays(#2004-09-01 23:00:00#, #2004-09-02 00:10:00#) = 1<br/>DiffDays(#2004-09-01 23:00:00#, #2004-09-02 23:30:00#) = 1<br/>DiffDays(#2014-03-30 00:00:00#, #2014-03-31 00:00:00#) = 1, assuming the GMT+1 time zone (2014 Daylight Saving Time starts in Europe on March 30 of 2014). If your server is in a different time zone, you will get different results.<br/>DiffDays(#2014-10-25 00:00:00#, #2014-10-26 00:00:00#) = 1, assuming the GMT+1 time zone (2014 Daylight Saving Time ends in Europe on October 26 of 2014). If your server is in a different time zone, you will get different results.</code>]]></Examples>
+        </Function>
+      <Function name="DiffHours" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true">
+        <Parameter type="DateTime" name="dt1" description="The first Date Time."/>
+        <Parameter type="DateTime" name="dt2" description="The second Date Time."/>
+        <Description><![CDATA[Returns the difference in hours between 'dt1' and 'dt2'; i.e. how many hours have passed between these two dates:<br/><br/>- Returns a positive number if 'dt1' is smaller than 'dt2';<br/>- Returns a negative number if 'dt1' is bigger than 'dt2'.<br/>- Returns 0 if the two dates are equal.<br/><br/>Daylight Saving Time (DST) is ignored. The time zone considered for evaluating this function is always the time zone of the Platform Server, regardless of the regional settings of the end-user.<br/><br/>The maximum supported value is (2^31)-1 hours. This corresponds to approximately 244978.74 years. If DiffHours(dt1, dt2) is bigger than (2^31)-1, you will get an unexpected value.]]></Description>
+        <Examples><![CDATA[<code>DiffHours(#1982-05-21 22:20:30#, #1982-05-22 02:00:00#) = 4<br/>DiffHours(#1982-05-22 02:00:00#, #1982-05-21 22:20:30#) = -4<br/>DiffHours(#2005-05-11 10:59:00#, #2005-05-11 10:00:00#) = 0<br/>DiffHours(#2005-05-11 10:00:00#, #2005-05-12 10:00:00#) = 24<br/>DiffHours(#2005-05-11 10:59:00#, #2005-05-12 15:00:00#) = 29<br/>DiffHours(#2006-03-25 15:00:00#, #2006-03-26 15:00:00#) = 24, assuming the GMT+1 time zone (2006 Daylight Saving Time starts in Europe on March 26 of 2006). If your server is in a different time zone, you will get different results.<br/>DiffHours(#2006-10-28 15:00:00#, #2006-10-29 15:00:00#) = 24, assuming the GMT+1 time zone (2006 Daylight Saving Time ends in Europe on October 29 of 2006). If your server is in a different time zone, you will get different results.</code>]]></Examples>
+      </Function>
+        <Function name="DiffMinutes" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the difference in minutes between 'dt1' and 'dt2'; i.e. how many minutes have between these two dates. Returns a positive number if 'dt1' is smaller than 'dt2'; and returns a negative number if 'dt1' is bigger than 'dt2'.">
+          <Parameter type="DateTime" name="dt1" description="The first Date Time."/>
+          <Parameter type="DateTime" name="dt2" description="The second Date Time."/>
+          <Description>
+            <![CDATA[Returns the difference in minutes between 'dt1' and 'dt2'; i.e. how many minutes have passed between these two dates:<br/><br/>- Returns a positive number if 'dt1' is smaller than 'dt2';<br/>- Returns a negative number if 'dt1' is bigger than 'dt2'.<br/>- Returns 0 if the two dates are equal.<br/><br/>Daylight Saving Time (DST) is ignored. The time zone considered for evaluating this function is always the time zone of the Platform Server, regardless of the regional settings of the end-user.<br/><br/>The maximum supported value is (2^31)-1 minutes. This corresponds to approximately 4085.78 years. If DiffMinutes(dt1, dt2) is bigger than (2^31)-1, you will get an unexpected value.]]></Description>
+          <Examples><![CDATA[<code>DiffMinutes(#1982-05-21 22:20:30#, #1982-05-21 22:26:00#) = 6<br/>DiffMinutes(#1982-05-21 22:26:00#, #1982-05-21 22:20:30#) = -6<br/>DiffMinutes(#1982-05-21 22:26:00#, #1982-05-21 22:26:59#) = 0<br/>DiffMinutes(#1982-05-21 22:26:30#, #1982-05-21 22:27:20#) = 1<br/>DiffMinutes(#1982-05-21 22:26:30#, #1982-05-21 22:27:40#) = 1<br/>DiffMinutes(#2006-05-21 15:00:00#, #2006-05-22 15:00:00#) = 1440<br/>DiffMinutes(#2006-03-25 15:00:00#, #2006-03-26 15:00:00#) = 1440, assuming the GMT+1 time zone (2006 Daylight Saving Time starts in Europe on March 26 of 2006). If your server is in a different time zone, you will get different results.<br/>DiffMinutes(#2006-10-28 15:00:00#, #2006-10-29 15:00:00#) = 1440, assuming the GMT+1 time zone (2006 Daylight Saving Time ends in Europe on October 29 of 2006). If your server is in a different time zone, you will get different results.</code>]]></Examples>
+        </Function>
+        <Function name="DiffSeconds" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the difference in seconds between 'dt1' and 'dt2'; i.e. how many seconds have passed between these two dates. Returns a positive number if 'dt1' is smaller than 'dt2'; and returns a negative number if 'dt1' is bigger than 'dt2'.">
+          <Parameter type="DateTime" name="dt1" description="The first Date Time."/>
+          <Parameter type="DateTime" name="dt2" description="The second Date Time."/>
+          <Description>
+            <![CDATA[Returns the difference in seconds between 'dt1' and 'dt2'; i.e. how many seconds have passed between these two dates:<br/><br/>- Returns a positive number if 'dt1' is smaller than 'dt2';<br/>- Returns a negative number if 'dt1' is bigger than 'dt2'.<br/>- Returns 0 if the two dates are equal.<br/><br/>Daylight Saving Time (DST) is ignored. The time zone considered for evaluating this function is always the time zone of the Platform Server, regardless of the regional settings of the end-user.<br/><br/>The maximum supported value is (2^31)-1 seconds. This corresponds to approximately 68.10 years. If DiffSeconds(dt1, dt2) is bigger than (2^31)-1, you will get an unexpected value.]]></Description>
+          <Examples><![CDATA[<code>DiffSeconds(#1982-05-21 22:20:30#, #1982-05-21 22:21:05#) = 35<br/>DiffSeconds(#1982-05-21 22:21:05#, #1982-05-21 22:20:30#) = -35<br/>DiffSeconds(#2006-05-21 15:00:00#, #2006-05-22 15:00:00#) = 86400<br/>DiffSeconds(#2006-03-25 15:00:00#, #2006-03-26 15:00:00# ) = 86400, assuming the GMT+1 time zone (2006 Daylight Saving Time starts in Europe on March 26 of 2006). If your server is in a different time zone, you will get different results.<br/>DiffSeconds(#2006-10-28 15:00:00#, #2006-10-29 15:00:00#) = 86400, assuming the GMT+1 time zone (2006 Daylight Saving Time ends in Europe on October 29 of 2006). If your server is in a different time zone, you will get different results.</code>]]></Examples>
+        </Function>
+        <Function name="Hour" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the hour of 'dt'.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to extract the hours from."/>
+            <Examples><![CDATA[<code>Hour(#1982-05-21 22:20:30#) = 22</code>]]></Examples>
+        </Function>
+        <Function name="Minute" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the minute of 'dt'.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to extract the minutes from."/>
+            <Examples><![CDATA[<code>Minute(#1982-05-21 22:20:30#) = 20</code>]]></Examples>
+        </Function>
+        <Function name="Month" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the month of 'dt'.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to extract the month from."/>
+            <Examples><![CDATA[<code>Month(#2001-09-14#) = 9</code>]]></Examples>
+        </Function>
+        <Function name="NewDate" retType="Date" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a Date made up of year 'y', month 'm' and day 'd'.">
+            <Parameter type="Integer" name="y" description="The year of the Date."/>
+            <Parameter type="Integer" name="m" description="The month of the Date."/>
+            <Parameter type="Integer" name="d" description="The day of the Date."/>
+            <Examples><![CDATA[<code>NewDate(2002, 6, 3) = #2002-06-03#</code>]]></Examples>
+        </Function>
+        <Function name="NewDateTime" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a Date Time made up of year 'y', month 'mo', day 'd', hour 'h', minute 'mi' and second 's'.">
+            <Parameter type="Integer" name="y" description="The year of the Date Time."/>
+            <Parameter type="Integer" name="mo" description="The month of the Date Time."/>
+            <Parameter type="Integer" name="d" description="The day of the Date Time."/>
+            <Parameter type="Integer" name="h" description="The hours of the Date Time."/>
+            <Parameter type="Integer" name="mi" description="The minutes of the Date Time."/>
+            <Parameter type="Integer" name="s" description="The seconds of the Date Time."/>
+            <Examples><![CDATA[<code>NewDateTime(2002, 6, 3, 22, 0, 59) = #2002-06-03 22:00:59#</code>]]></Examples>
+        </Function>
+        <Function name="NewTime" retType="Time" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a Time made up of hour 'h', minute 'm' and second 's'.">
+            <Parameter type="Integer" name="h" description="The hours of the Time."/>
+            <Parameter type="Integer" name="m" description="The minutes of the Time."/>
+            <Parameter type="Integer" name="s" description="The seconds of the Time."/>
+            <Examples><![CDATA[<code>NewTime(22, 0, 59) = #22:00:59#</code>]]></Examples>
+        </Function>
+        <Function name="Second" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the seconds of 'dt'.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to extract the seconds from."/>
+          <Examples><![CDATA[<code>Second(#2015-05-21 22:20:30#) = 30</code>]]></Examples>
+        </Function>
+        <Function name="Year" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns the year of 'dt'.">
+            <Parameter type="DateTime" name="dt" description="The Date Time to extract the year from."/>
+          <Examples><![CDATA[<code>Year(#2015-07-14#) = 2015</code>]]></Examples>
+        </Function>
+    </Group>
+    <Group name="Data Conversion" helpId="15018">
+        <Function name="BooleanToInteger" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Boolean 'b' to an Integer value, either 1 if 'b' is True or 0 if 'b' is False.">
+            <Parameter type="Boolean" name="b" description="The value to be converted"/>
+            <Examples><![CDATA[<code>BooleanToInteger(True) = 1<br/>BooleanToInteger(False) = 0</code>]]></Examples>
+        </Function>
+        <Function name="BooleanToText" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Boolean 'b' to a Text value, either &quot;True&quot; or &quot;False&quot;.">
+            <Parameter type="Boolean" name="b" description="The value to be converted"/>
+            <Examples><![CDATA[<code>BooleanToText(True) = ""True"" <br/>BooleanToText(False) = ""False""</code>]]></Examples>
+        </Function>
+        <Function name="DateTimeToDate" retType="Date" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Date Time 'dt' to a Date value dropping the Time component.">
+            <Parameter type="DateTime" name="dt" description="The value to be converted"/>
+            <Examples><![CDATA[<code>DateTimeToDate(#2013-11-30 22:20:30#) = #2013-11-30#</code>]]></Examples>
+        </Function>
+        <Function name="DateTimeToText" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Date Time 'dt' to a Text value in the format specified in the environment configuration (by default, &quot;yyyy-MM-dd HH:mm:ss&quot;).">
+            <Parameter type="DateTime" name="dt" description="The value to be converted"/>
+            <Examples><![CDATA[<code>DateTimeToText(#2015-05-21 22:20:30#) = ""2015-05-21 22:20:30""<br/>DateTimeToText(#2015-05-21#) = ""2015-05-21 00:00:00""<br/>DateTimeToText(#22:20:30#) = ""1900-01-01 22:20:30""</code>]]></Examples>
+        </Function>
+        <Function name="DateTimeToTime" retType="Time" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Date Time 'dt' to a Time value dropping the Date component.">
+            <Parameter type="DateTime" name="dt" description="The value to be converted"/>
+            <Examples><![CDATA[<code>DateTimeToTime(#1982-05-21 22:20:30#) = #22:20:30#</code>]]></Examples>
+        </Function>
+        <Function name="DateToDateTime" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Date 'd' to a Date Time value, adding the Time component (#00:00:00#).">
+            <Parameter type="Date" name="d" description="The value to be converted"/>
+            <Examples><![CDATA[<code>DateToDateTime(#2001-09-14#) = #2001-09-14 00:00:00#</code>]]></Examples>
+        </Function>
+        <Function name="DateToText" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Date 'd' to a Text value in the format specified in the environment configuration (by default, &quot;yyyy-MM-dd&quot;).">
+            <Parameter type="Date" name="d" description="The value to be converted"/>
+            <Examples><![CDATA[<code>DateToText(#2010-05-17#) = ""2010-05-17""<br/>DateToText(#2010-05-17 22:30:32#) = ""2010-05-17""</code>]]></Examples>
+        </Function>
+        <Function name="DecimalToBoolean" retType="Boolean" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Decimal 'd' to a Boolean value. Decimal value of 0.0 is False. Any other value is True.">
+            <Parameter type="Decimal" name="d" description="The value to be converted"/>
+            <Examples><![CDATA[<code>DecimalToBoolean(0.0) = False<br/>DecimalToBoolean(0.05) = True</code>]]></Examples>
+        </Function>
+        <Function name="DecimalToInteger" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Decimal" name="d" description="The value to be converted"/>
+            <Description><![CDATA[Converts Decimal 'd' to an Integer value.<br/>In client-side and server-side logic, the function rounds the input using the round half to even method. In Aggregate expressions the function truncates to the integer part of the input.<br/>To check if the conversion is possible you can use the DecimalToIntegerValidate function.]]></Description>
+            <Examples><![CDATA[When used in client-side and server-side logic:<br/><code>DecimalToInteger(134.2) = 134<br/>DecimalToInteger(134.5) = 134<br/>DecimalToInteger(133.5) = 134<br/>DecimalToInteger(134.7) = 135<br/>DecimalToInteger(134) = 134<br/>DecimalToInteger(12345678999.9) = 0</code><br/><br/>When used in Aggregates:<br/><code>DecimalToInteger(134.2) = 134<br/>DecimalToInteger(134.5) = 134<br/>DecimalToInteger(133.5) = 133<br/>DecimalToInteger(134.7) = 134<br/>DecimalToInteger(134) = 134<br/>DecimalToInteger(12345678999.9) = Arithmetic Overflow Error</code>]]></Examples>
+        </Function>
+        <Function name="DecimalToIntegerValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Decimal 'd' can be converted to an Integer value.">
+          <Parameter type="Decimal" name="d" description="The value to be converted"/>
+          <Examples><![CDATA[<code>DecimalToIntegerValidate(134.2) = True<br/>DecimalToIntegerValidate(134.5) = True<br/>DecimalToIntegerValidate(133.5) = True<br/>DecimalToIntegerValidate(134.7) = True<br/>DecimalToIntegerValidate(134) = True<br/>DecimalToIntegerValidate(12345678999.9) = False</code>]]></Examples>
+        </Function>
+        <Function name="DecimalToLongInteger" retType="LongInteger" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+          <Parameter type="Decimal" name="d" description="The value to be converted"/>
+          <Description><![CDATA[Converts Decimal 'd' to a Long Integer value.<br/>In client-side and server-side logic, the function rounds the input using the round half to even method. In Aggregate expressions the function truncates to the integer part of the input.<br/>To check if the conversion is possible you can use the DecimalToLongIntegerValidate function.]]></Description>
+          <Examples><![CDATA[When used in client-side and server-side logic:<br/><code>DecimalToLongInteger(134.2) = 134<br/>DecimalToLongInteger(134.5) = 134<br/>DecimalToLongInteger(133.5) = 134<br/>DecimalToLongInteger(134.7) = 135<br/>DecimalToLongInteger(134) = 134<br/>DecimalToLongInteger(157898999999988844444.2) = 0</code><br/><br/>When used in Aggregates:<br/><code>DecimalToLongInteger(134.2) = 134<br/>DecimalToLongInteger(134.5) = 134<br/>DecimalToLongInteger(133.5) = 133<br/>DecimalToLongInteger(134.7) = 134<br/>DecimalToLongInteger(134) = 134<br/>DecimalToLongInteger(157898999999988844444.2) = Arithmetic Overflow Error</code>]]></Examples>
+        </Function>
+        <Function name="DecimalToLongIntegerValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Decimal 'd' can be converted to a Long Integer value.">
+          <Parameter type="Decimal" name="d" description="The value to be converted"/>
+          <Examples><![CDATA[<code>DecimalToLongIntegerValidate(134.2) = True<br/>DecimalToLongIntegerValidate(134.5) = True<br/>DecimalToLongIntegerValidate(133.5) = True<br/>DecimalToLongIntegerValidate(134.7) = True<br/>DecimalToLongIntegerValidate(134) = True<br/>DecimalToLongIntegerValidate(157898999999988844444.2) = False</code>]]></Examples>
+        </Function>
+        <Function name="DecimalToText" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Decimal 'd' to a Text value.">
+          <Parameter type="Decimal" name="d" description="The value to be converted"/>
+          <Examples><![CDATA[<code>DecimalToText(200.482) = ""200.482""<br/>DecimalToText(200) = ""200""</code>]]></Examples>
+        </Function>
+        <Function name="LongIntegerToInteger" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Long Integer 'l' to an Integer value. If 'l' is outside the boundaries of the Integer values, the function will return the Integer default value. To check if the conversion is possible you can use the LongIntegerToIntegerValidate function.">
+          <Parameter type="LongInteger" name="l" description="The value to be converted"/>
+          <Examples><![CDATA[<code>LongIntegerToInteger(3000) = 3000<br/>LongIntegerToInteger(5645245584135987412) = 0</code>]]></Examples>
+        </Function>
+        <Function name="LongIntegerToIntegerValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Long Integer 'l' can be converted to an Integer value.">
+          <Parameter type="LongInteger" name="l" description="The value to be converted"/>
+          <Examples><![CDATA[<code>LongIntegerToIntegerValidate(3000) = True<br/>LongIntegerToIntegerValidate(5645245584135987412) = False</code>]]></Examples>
+        </Function>
+        <Function name="LongIntegerToIdentifier" retType="EntityReferenceLongInteger" useAsLiteral="true" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Long Integer 'l' to a Long Integer Identifier.">
+          <Parameter type="LongInteger" name="l" description="The value to be converted"/>
+          <Examples><![CDATA[<code>LongIntegerToIdentifier(5090493034304) = 5090493034304</code>]]></Examples>
+        </Function>
+        <Function name="LongIntegerToText" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Long Integer 'l' to a Text value.">
+          <Parameter type="LongInteger" name="l" description="The value to be converted"/>
+          <Examples><![CDATA[<code>LongIntegerToText(5092039102) = ""5092039102""</code>]]></Examples>
+        </Function>
+        <Function name="IdentifierToInteger" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Identifier 'Id' to an Integer value.">
+          <Parameter type="EntityReference" name="id" description="The value to be converted"/>
+          <Examples><![CDATA[<code>IdentifierToInteger(GetUserId()) = 504 (the result may be different in your module)</code>]]></Examples>
+        </Function>
+        <Function name="IdentifierToLongInteger" retType="LongInteger" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Identifier 'Id' to a Long Integer value.">
+          <Parameter type="EntityReferenceLongInteger" name="id" description="The value to be converted"/>
+          <Examples><![CDATA[<code>IdentifierToLongInteger(GetUserId()) = 30 (the result may be different in your module)</code>]]></Examples>
+        </Function>
+        <Function name="IdentifierToText" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Identifier 'Id' to a Text value.">
+          <Parameter type="EntityReferenceText" name="id" description="The value to be converted"/>
+          <Examples><![CDATA[<code>IdentifierToText(GetUserId()) = ""30"" (the result may be different in your module)</code>]]></Examples>
+        </Function>
+        <Function name="IntegerToBoolean" retType="Boolean" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Integer 'i' to a Boolean value. Boolean value of 0 is False. Any other value is True.">
+          <Parameter type="Integer" name="i" description="The value to be converted"/>
+          <Examples><![CDATA[<code>IntegerToBoolean(10) = True<br/>IntegerToBoolean(-10) = True<br/>IntegerToBoolean(0) = False</code>]]></Examples>
+        </Function>
+        <Function name="IntegerToDecimal" retType="Decimal" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Integer 'i' to a Decimal value.">
+          <Parameter type="Integer" name="i" description="The value to be converted"/>
+          <Examples><![CDATA[<code>IntegerToDecimal(200) = 200</code>]]></Examples>
+        </Function>
+        <Function name="IntegerToIdentifier" retType="EntityReference" useAsLiteral="true" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInClientSide="true" isVisibleInScripts="true" description="Converts Integer 'i' to an Integer Identifier.">
+          <Parameter type="Integer" name="i" description="The value to be converted"/>
+          <Examples><![CDATA[<code>IntegerToIdentifier(5) = 5</code>]]></Examples>
+        </Function>
+        <Function name="IntegerToText" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Integer 'i' to a Text value.">
+          <Parameter type="Integer" name="i" description="The value to be converted"/>
+          <Examples><![CDATA[<code>IntegerToText(200) = ""200""</code>]]></Examples>
+        </Function>
+        <Function name="NullDate" retType="Date" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a null Date value." useAsLiteral="true">
+          <Examples><![CDATA[<code>NullDate() = #1900-01-01#</code>]]></Examples>
+        </Function>
+        <Function name="NullIdentifier" retType="EntityReference" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a null Identifier valid for Integer and Long Integer Identifiers." useAsLiteral="true">
+          <Examples><![CDATA[<code>NullIdentifier() = 0</code>]]></Examples>
+        </Function>
+        <Function name="NullObject" retType="Object" isVisibleInQueries="false" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a null Object value." useAsLiteral="true">
+          <Examples><![CDATA[<code>ObjectVariable = NullObject()</code>]]></Examples>
+        </Function>
+        <Function name="NullBinary" retType="BinaryData" isVisibleInQueries="false" isVisibleInScripts="true" description="Returns a null Binary Data value." useAsLiteral="true" isVisibleInClientSide="true">
+          <Examples><![CDATA[<code>BinaryDataVariable = NullBinary()</code>]]></Examples>
+        </Function>
+        <Function name="NullTextIdentifier" retType="EntityReferenceText" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns a null Text Identifier." useAsLiteral="true">
+          <Examples><![CDATA[<code>NullTextIdentifier() = """"</code>]]></Examples>
+        </Function>
+        <Function name="TextToDate" retType="Date" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+          <Parameter type="Text" name="t" description="The value to be converted"/>
+          <Description><![CDATA[Converts Text 't' to a Date value.<br/>If 't' can't be converted to a valid Date value, the function will return the Date default value. To check if the conversion is possible you can use the TextToDateValidate function.<br/>You should check the limits of the Date data type. You should also ensure that the date you type in the argument complies with the default date format (yyyy-mm-dd, yyyy/mm/dd, and yyyy.mm.dd) or the server’s environment configuration.]]></Description>
+          <Examples><![CDATA[<code>TextToDate(""2002-01-01"") = #2002-01-01#<br/>TextToDate(""2002/01/01"") = #2002-01-01#<br/>TextToDate(""2002.01.01"") = #2002-01-01#<br/>TextToDate(""2002-25-01"") = #1900-01-01#<br/>TextToDate(""2002/02/31"") = #1900-01-01#<br/>TextToDate(""10000.01.01"") = #1900-01-01#</code>]]></Examples>
+        </Function>
+        <Function name="TextToDateTime" retType="DateTime" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+          <Parameter type="Text" name="t" description="The value to be converted"/>
+          <Description><![CDATA[Converts Text 't' to a Date Time value.<br/>If 't' can't be converted to a valid Date Time value, the function will return a Date Time default value. To check if the conversion is possible you can use the TextToDateTimeValidate function.<br/>You should check the limits of the Date Time data type. You should also ensure that the Date Time you type in the argument complies with the default Date Time format (yyyy-mm-dd hh:mm:ss, yyyy/mm/dd hh:mm:ss, and yyyy.mm.dd hh:mm:ss) or the server’s environment configuration.]]></Description>
+          <Examples><![CDATA[<code>TextToDateTime(""2002-01-01 01:01:01"") = #2002-01-01 01:01:01#<br/>TextToDateTime(""2002/01/01 01:01:01"") = #2002-01-01 01:01:01#<br/>TextToDateTime(""2002.01.01 01:01:01"") = #2002-01-01 01:01:01#<br/>TextToDateTime(""20-01-01 01:01:01"") = #1900-01-01 00:00:00#<br/>TextToDateTime(""date time"") = #1900-01-01 00:00:00#<br/>TextToDateTime(""2002.1.1 1-1-1"") = #1900-01-01 00:00:00#<br/>TextToDateTime(""2002-01-01"") = #2002-01-01 00:00:00#<br/>TextToDateTime(""01-01-01"") = #1900-01-01 00:00:00#</code>]]></Examples>
+        </Function>
+        <Function name="TextToDateTimeValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Text 't' can be converted to a Date Time value.">
+          <Parameter type="Text" name="t" description="The value to be converted"/>
+          <Examples><![CDATA[<code>TextToDateTimeValidate(""2002-01-01 01:01:01"") = True<br/>TextToDateTimeValidate(""2002/01/01 01:01:01"") = True<br/>TextToDateTimeValidate(""2002.01.01 01:01:01"") = True<br/>TextToDateTimeValidate(""20-01-01 01:01:01"") = False<br/>TextToDateTimeValidate(""date time"") = False<br/>TextToDateTimeValidate(""2002.1.1 1-1-1"") = False<br/>TextToDateTimeValidate(""2002-01-01"") = True<br/>TextToDateTimeValidate(""01-01-01"") = False</code>]]></Examples>
+        </Function>
+        <Function name="TextToDateValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Text 't' can be converted to a Date value.">
+            <Parameter type="Text" name="t" description="The value to be converted"/>
+            <Examples><![CDATA[<code>TextToDateValidate(""2002-01-01"") = True<br/>TextToDateValidate(""2002/01/01"") = True<br/>TextToDateValidate(""2002.01.01"") = True<br/>TextToDateValidate(""2002-25-01"") = False<br/>TextToDateValidate(""2002/02/31"") = False<br/>TextToDateValidate(""10000.01.01"") = False</code>]]></Examples>
+        </Function>
+        <Function name="TextToDecimal" retType="Decimal" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Text 't' to a Decimal value. The only allowed decimal separator is the &quot;.&quot;. If 't' is outside the boundaries of the Decimal values, the function will return the Decimal default value. To check if the conversion is possible you can use the TextToDecimalValidate function.">
+            <Parameter type="Text" name="t" description="The value to be converted"/>
+            <Examples><![CDATA[<code>TextToDecimal(""200"") = 200<br/>TextToDecimal(""-200"") = -200<br/>TextToDecimal(""200.482"") = 200.482<br/>TextToDecimal(""-200.482"") = -200.482<br/>TextToDecimal(""0.99999999"") = 0.99999999<br/>TextToDecimal(""abc"") = 0</code>]]></Examples>
+        </Function>
+        <Function name="TextToDecimalValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Text 't' can be converted to a Decimal value.">
+            <Parameter type="Text" name="t" description="The value to be converted"/>
+            <Examples><![CDATA[<code>TextToDecimalValidate(""200"")	= True<br/>TextToDecimalValidate(""-200"") = True<br/>TextToDecimalValidate(""200.482"") = True<br/>TextToDecimalValidate(""-200.482"") = True<br/>TextToDecimalValidate(""0.99999999"") = True<br/>TextToDecimalValidate(""abc"") = False</code>]]></Examples>
+        </Function>
+        <Function name="TextToIdentifier" retType="EntityReferenceText" isVisibleInScripts="true" useAsLiteral="true" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInClientSide="true" description="Converts Text 't' to a Text Identifier.">
+            <Parameter type="Text" name="t" description="The value to be converted"/>
+            <Examples><![CDATA[<code>TextToIdentifier(""NEW"") = 'NEW'</code>]]></Examples>
+        </Function>
+        <Function name="TextToInteger" retType="Integer" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Text" name="t" description="The value to be converted"/>
+            <Description><![CDATA[Converts Text 't' to an Integer value.<br/>If 't' is outside the boundaries of the Integer values the function will return an Integer default value. To check if the conversion is possible you can use the TextToIntegerValidate function.]]></Description>
+            <Examples><![CDATA[<code>TextToInteger(""200"") = 200<br/>TextToInteger(""-200"") = -200<br/>TextToInteger(""200.482"") = 0<br/>TextToInteger(""not a number"") = 0</code>]]></Examples>
+        </Function>
+        <Function name="TextToLongInteger" retType="LongInteger" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+          <Parameter type="Text" name="t" description="The value to be converted"/>
+          <Description><![CDATA[Converts Text 't' to a Long Integer value.<br/>If 't' is outside the boundaries of the Long Integer values the function will return a Long Integer default value. To check if the conversion is possible you can use the TextToLongIntegerValidate function.]]></Description>
+          <Examples><![CDATA[<code>TextToLongInteger(""200"") = 200<br/>TextToLongInteger(""-200"") = -200<br/>TextToLongInteger(""56452455841359874121"") = 0<br/>TextToLongInteger(""not a number"") = 0</code>]]></Examples>
+        </Function> 
+        <Function name="TextToIntegerValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Text 't' can be converted to an Integer value.">
+          <Parameter type="Text" name="t" description="The value to be converted"/>
+          <Examples><![CDATA[<code>TextToIntegerValidate(""200"") = True<br/>TextToIntegerValidate(""-200"") = True<br/>TextToIntegerValidate(""200.482"") = False<br/>TextToIntegerValidate(""not a number"") = False</code>]]></Examples>
+        </Function>
+        <Function name="TextToLongIntegerValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Text 't' can be converted to a Long Integer value.">
+          <Parameter type="Text" name="t" description="The value to be converted"/>
+          <Examples><![CDATA[<code>TextToLongIntegerValidate(""200"") = True<br/>TextToLongIntegerValidate(""-200"") = True<br/>TextToLongIntegerValidate(""56452455841359874121"") = False<br/>TextToLongIntegerValidate(""not a number"") = False</code>]]></Examples>
+        </Function>
+        <Function name="TextToTime" retType="Time" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Text" name="t" description="The value to be converted"/>
+            <Description><![CDATA[Converts Text 't' to a Time value.<br/>If 't' can't be converted to a valid Time value, the function will return the Time default value. To check if the conversion is possible you can use the TextToTimeValidate function.<br/>You should check the limits of the Time data type. You should also ensure that the Time you type in the argument complies with the Time format (hh:mm:ss).]]></Description>
+            <Examples><![CDATA[<code>TextToTime(""12:12:12"") = #12:12:12#<br/>TextToTime(""23:68:12"") = #00:00:00#<br/>TextToTime(""0-0-0"") = #00:00:00#<br/>TextToTime(""abc"") = #00:00:00#</code>]]></Examples>
+        </Function>
+        <Function name="TextToTimeValidate" retType="Boolean" isVisibleInScripts="true" isVisibleInClientSide="true" description="Returns true if Text 't' can be converted to a Time value.">
+            <Parameter type="Text" name="t" description="The value to be converted"/>
+            <Examples><![CDATA[<code>TextToTimeValidate(""12:12:12"") = True<br/>TextToTimeValidate(""23:68:12"") = False<br/>TextToTimeValidate(""0-0-0"") = False<br/>TextToTimeValidate(""abc"") = False</code>]]></Examples>
+        </Function>
+        <Function name="TimeToText" retType="Text" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="true" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts Time 't' to a Text value in the format &quot;HH:mm:ss&quot;.">
+            <Parameter type="Time" name="t" description="The value to be converted"/>
+            <Examples><![CDATA[<code>TimeToText(#12:30:24#) = ""12:30:24""<br/>TimeToText(#2015-07-02 12:30:34#) = ""12:30:34""</code>]]></Examples>
+        </Function>
+        <Function name="ToObject" retType="Object" isVisibleInQueries="false" isVisibleInScripts="true" isVisibleInClientSide="true" description="Converts expression 'exp' to an Object value.">
+            <Parameter type="Generic" name="exp" description="The element to be converted"/>            
+        </Function>
+    </Group>
+    <Group name="Format" helpId="15020">
+        <Function name="FormatCurrency" retType="Text" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Currency" name="value" description="The Currency value to be formatted."/>
+            <Parameter type="Text" name="symbol" description="The currency symbol."/>
+            <Parameter type="Integer" name="decimal_digits" description="The number of decimal digits."/>
+            <Parameter type="Text" name="decimal_separator" description="The decimal separator symbol."/>
+            <Parameter type="Text" name="group_separator" description="The group separator symbol."/>
+            <Description><![CDATA[Builds a Text output of the specified Currency 'value', preceded by the currency 'symbol', using 'decimal_digits' after the decimal point. The decimal point is specified using 'decimal_separator', while the thousands can be separated with the 'group_separator'.<br/><br/>When rounding, the function behaves differently depending on where you use it:<br/><br/>- In the <b>application server</b>, it applies the method round half up (rounds to the nearest integer, 0.5 rounds up).<br/>- In <b>client-side logic</b>, it applies the method round half to even (rounds to the nearest integer, 0.5 rounds to the nearest even integer).]]></Description>
+            <Examples><![CDATA[<code>FormatCurrency(1.2, ""$"", 1, ""#"", ""."") = ""$1#2""<br/>FormatCurrency(1.2, ""$"", 3, "","", ""."") = ""$1,200""<br/>FormatCurrency(1.24, ""$"", 1, "","", ""."") = ""$1,2""<br/>FormatCurrency(1.25, ""$"", 1, "","", ""."") = ""$1,3"" (in the application server) or ""$1,2"" (in client-side logic)<br/>FormatCurrency(1.251, ""$"", 1, "","", ""."") = ""$1,3""<br/>FormatCurrency(1.35, ""$"", 1, "","", ""."") = ""$1,4""<br/>FormatCurrency(12345.67, ""$"", 2, "","", ""."") = ""$12.345,67""<br/>FormatCurrency(-12345.67, ""$"", 2, "","", ""."") = ""$-12.345,67""</code>]]></Examples>
+        </Function>
+        <Function name="FormatDecimal" retType="Text" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Decimal" name="value" description="The Decimal value to be formatted."/>
+            <Parameter type="Integer" name="decimal_digits" description="The number of decimal digitis."/>
+            <Parameter type="Text" name="decimal_separator" description="The decimal separator symbol."/>
+            <Parameter type="Text" name="group_separator" description="The group separator symbol."/>
+            <Description><![CDATA[Builds a Text output of the specified Decimal 'value', using 'decimal_digits' after the decimal point. The decimal point is specified using 'decimal_separator', while the thousands can be separated with the 'group_separator'.<br/><br/>When rounding, the function behaves differently depending on where you use it:<br/><br/>- In the <b>application server</b>, it applies the method round half up (rounds to the nearest integer, 0.5 rounds up).<br/>- In <b>client-side logic</b>, it applies the method round half to even (rounds to the nearest integer, 0.5 rounds to the nearest even integer).]]></Description>
+            <Examples><![CDATA[<code>FormatDecimal(1.2, 1, ""#"", ""."") = ""1#2""<br/>FormatDecimal(1.2, 3, "","", ""."") = ""1,200""<br/>FormatDecimal(1.24, 1, "","", ""."") = ""1,2""<br/>FormatDecimal(1.25, 1, "","", ""."") = ""1,3"" (in the application server) or ""1,2"" (in client-side logic)<br/>FormatDecimal(1.251, 1, "","", ""."") = ""1,3""<br/>FormatDecimal(1.35, 1, "","", ""."") = ""1,4""<br/>FormatDecimal(12345.67, 2, "","", ""."") = ""12.345,67""<br/>FormatDecimal(-12345.67, 2, "","", ""."") = ""-12.345,67""</code>]]></Examples>
+        </Function>
+        <Function name="FormatPercent" retType="Text" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Decimal" name="value" description="The Decimal value to format as a percentage."/>
+            <Parameter type="Integer" name="decimal_digits" description="The number of decimal digits to use."/>
+            <Parameter type="Text" name="decimal_separator" description="The symbol to use as decimal separator."/>
+            <Description><![CDATA[Builds a Text output of the specified Decimal 'value', followed by '%' using 'decimal_digits' after the decimal point. The decimal point is specified using 'decimal_separator'.<br/><br/>When rounding, the function behaves differently depending on where you use it:<br/><br/>- In the <b>application server</b>, it applies the method round half up (rounds to the nearest integer, 0.5 rounds up).<br/>- In <b>client-side logic</b>, it applies the method round half to even (rounds to the nearest integer, 0.5 rounds to the nearest even integer).]]></Description>
+            <Examples><![CDATA[<code>FormatPercent(0.12, 3, ""#"") = ""12#000%""<br/>FormatPercent(0.124, 0, "","") = ""12%""<br/>FormatPercent(0.125, 0, "","") = ""13%"" (in the application server) or ""12%"" (in client-side logic)<br/>FormatPercent(0.1251, 0, "","") = ""13%""<br/>FormatPercent(0.135, 0, "","") = ""14%""<br/>FormatPercent(12345.6789, 2, "","") = ""1234567,89%""<br/>FormatPercent(-12345.6789, 2, "","") = ""-1234567,89%""</code>]]></Examples>
+        </Function>
+        <Function name="FormatPhoneNumber" retType="Text" isVisibleInScripts="true" description="Builds a Text output of the specified phone number Text 'value', starting with the international separator 'int_separator', followed by the first 'int_code_digits' of 'value', then the 'area_separator', then the following 'area_code_digits' of 'value', then the 'phone_separator' and finally the following 'phone_digits' of 'value'." isVisibleInClientSide="true">
+            <Parameter type="Text" name="value" description="The phone number to be formatted."/>
+            <Parameter type="Integer" name="int_code_digits" description="The number of digits composing the international code."/>
+            <Parameter type="Integer" name="area_code_digits" description="The number of digits composing the area code."/>
+            <Parameter type="Integer" name="phone_digits" description="The number of digitis composing the phone number without international or area codes."/>
+            <Parameter type="Text" name="int_separator" description="The symbol for the international code."/>
+            <Parameter type="Text" name="area_separator" description="The symbol to use as separator between the international code and the area code."/>
+            <Parameter type="Text" name="phone_separator" description="The symbol to use as separator between the area code and the phone number."/>
+            <Examples><![CDATA[<code>FormatPhoneNumber(""351214153737"", 3, 2, 7, ""+"", ""-"", ""."") = ""+351-21.4153737""</code>]]></Examples>
+        </Function>
+        <Function name="FormatText" retType="Text" isVisibleInScripts="true" description="Builds a Text output of the specified Text 'value', by limiting it to the specified 'max_chars' count. If 'value' has less than the 'min_chars' characters limit, enough 'padding_char' characters are added to expand the length to that limit. In this case, 'left_padding' determines where the padding should be added." isVisibleInClientSide="true">
+            <Parameter type="Text" name="value" description="The Text to be formatted."/>
+            <Parameter type="Integer" name="min_chars" description="The minimum number of characters in the output."/>
+            <Parameter type="Integer" name="max_chars" description="The maximum number of characters in the output."/>
+            <Parameter type="Boolean" name="left_padding" description="Indicates in which side the Text is padded."/>
+            <Parameter type="Text" name="padding_char" description="The character to use for padding the string to the minimum length."/>
+            <Examples><![CDATA[<code>FormatText(""123456789"", 3, 9, True, ""#"") = ""123456789""<br/>FormatText(""123456789876"", 3, 9, True, ""#"") = ""456789876""<br/>FormatText(""123456789876"", 3, 9, False, ""#"") = ""123456789""<br/>FormatText(""12345"", 10, 20, True, ""#"") = ""#####12345""<br/>FormatText(""12345"", 10, 20, False, ""#"") = ""12345#####""</code>]]></Examples>
+        </Function>
+        <Function name="FormatDateTime" retType="Text" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="DateTime" name="value" description="The Date Time to be formatted."/>
+            <Parameter type="Text" name="format" description="The formatting pattern."/>
+            <Description><![CDATA[Builds a Text output of the specified Date Time 'value' using the specified 'format'. Formatting pattern can be any combination of the following:<br/>Day:<br/>- d: day without leading zero;<br/>- dd: day WITH leading zero;<br/>- ddd: abbreviated day name;<br/>- dddd: full day name;<br/>Month:<br/>- M: month without leading zero;<br/>- MM: month WITH leading zero;<br/>- MMM: abbreviated month name;<br/>- MMMM: full month name;<br/>Year:<br/>- y: last one or two digits of the year;<br/>- yy: last two digits of the year;<br/>- yyyy: year;<br/>Hour:<br/>- h: hour from 0 to 12 without leading zero;<br/>- hh: hour from 0 to 12 WITH leading zero;<br/>- H: hour from 0 to 24 without leading zero;<br/>- HH: hour from 0 to 24 WITH leading zero;<br/>Minute:<br/>- m: minutes without leading zero;<br/>- mm: minutes WITH leading zero;<br/>Second:<br/>- s: seconds without leading zero;<br/>- ss: seconds WITH leading zero;<br/>AM Designator:<br/>- t: first letter of AM or PM;<br/>- tt: AM or PM.<br/><br/>If you want to output any of these characters then precede it with '\'.<br/>Changing the environment date format does not change the way the FormatDateTime function formats the dates.]]></Description>
+            <Examples><![CDATA[<code>FormatDateTime(#2015-06-09 10:05:20#, ""ddd, dd MMM yyyy"") = ""Tue, 09 Jun 2015""<br/>FormatDateTime(CurrDateTime(),""To\da\y i\s: dddd"") = ""Today is: Tuesday""</code>]]></Examples>
+        </Function>
+    </Group>
+    <Group name="Email">
+        <Function name="EmailAddressCreate" retType="Text" isVisibleInScripts="true">
+            <Parameter type="Text" name="name" description="The display name of the email address which usually is the name of the email address owner as, for example, &quot;John Smith&quot;."/>
+            <Parameter type="Text" name="email" description="The email address itself, for example, john.smith@worldmail.com."/>
+            <Description><![CDATA[Returns a full email address string containing the display name (usually it's the name of the email address owner) and the email address itself. The resulting full email address may then be used in the Send Email element (action flows) or in the Send Email activity (process flows).<br/>To build a list of email addresses use the EmailAddressesConcatenate built-in function.]]></Description>
+            <Examples><![CDATA[<code>EmailAddressCreate(""John Smith"", ""john.smith@worldmail.com"") = ""John Smith"" &lt;john.smith@worlmail.com&gt;<br/>EmailAddressCreate(""Mary Jones"", ""mary.jones@company.com"") = ""Mary Jones"" &lt;mary.jones@company.com&gt;</code>]]></Examples>
+        </Function>
+        <Function name="EmailAddressesConcatenate" retType="Text" description="Returns the concatenation of email addresses, or list of email addresses, into a a new list of email addresses separated by a comma (','). The resulting list may then be used in the Send Email element (action flows) or in the Send Email activity (process flows)." isVisibleInScripts="true">
+            <Parameter type="Text" name="address1" description="The email address or email addresses list"/>
+            <Parameter type="Text" name="address2" description="The email address or email addresses list"/>
+            <Examples><![CDATA[<code>EmailAddressesConcatenate(EmailAddressCreate(""John Smith"", ""john.smith@worldmail.com""), EmailAddressCreate(""Mary Adams"", ""mary.adams@adamsinc.com"")) = ""John Smith"" &lt;john.smith@worldmail.com&gt;, ""Mary Adams"" &lt;mary.adams@adamsinc.com&gt;</code>]]></Examples>
+        </Function>
+        <Function name="EmailAddressValidate" retType="Boolean" isVisibleInClientSide="true" description="Returns true if Text 'address' is a valid email address" isVisibleInScripts="true">
+            <Parameter type="Text" name="address" description="The email address to validate."/>
+            <Examples><![CDATA[<code>EmailAddressValidate(EmailAddressCreate(""John Smith"", ""john.smith@worldmail.com"")) = True<br/>EmailAddressValidate(""John Smith &lt;john.smith@&gt;"") = False</code>]]></Examples>
+        </Function>
+    </Group>
+    <Group name="Environment" helpId="15022">
+        <Function name="GetApplicationServerType" retType="Text" isVisibleInClientSide="false" description="Returns &quot;.Net&quot;.">
+            <Examples><![CDATA[<code>GetApplicationServerType() = "".Net""</code>]]></Examples>
+        </Function>
+        <Function name="GetCurrentLocale" retType="Text" isVisibleInClientSide="true" description="Returns the name of the current language locale of the user session. The name of the language locale is used for presentation purposes and follows the RFC 1766 standard format.">
+            <Examples><![CDATA[<code>GetCurrentLocale() = ""en-US""</code>]]></Examples>
+        </Function>
+        <Function name="GetDatabaseProvider" retType="Text" description="Returns the type of the Platform Database (SqlServer, Oracle or MySQL) where the module is running.">
+            <Examples><![CDATA[<code>GetDatabaseProvider() = ""SqlServer""<br/>GetDatabaseProvider() = ""Oracle""<br/>GetDatabaseProvider() = ""MySQL""</code>]]></Examples>
+        </Function>
+        <Function name="GetUserAgent" retType="Text" isVisibleInClientSide="true" description="Returns the user agent, as indicated by the header of the HTTP message.">
+            <Examples><![CDATA[<code>GetUserAgent() = ""Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36""<br/>GetUserAgent() = ""Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko""</code>]]></Examples>
+        </Function>
+        <Function name="GetOwnerEspaceIdentifier" retType="EspaceId" description="Returns the identifier of the module that owns the element that is being processed.">
+            <Examples><![CDATA[<code>GetOwnerEspaceIdentifier() = 141</code>]]></Examples>
+        </Function>
+        <Function name="GetEntryEspaceName" retType="Text" isVisibleInClientSide="true" description="Returns the name of the module that is processing the web request.">
+            <Examples><![CDATA[<code>GetEntryEspaceName() = ""MyModule""</code>]]></Examples>
+        </Function>
+        <Function name="GetEntryEspaceId" retType="EspaceId" description="Returns the identifier of the module that is processing the web request.">
+            <Examples><![CDATA[<code>GetEntryEspaceId() = 70</code>]]></Examples>
+        </Function>
+        <Function name="GetObsoleteTenantId" retType="TenantId" description="Method to return a fake tenant identifier for single-tenant modules in order to mimic Site.TenantId semantic from the 6.0 version">
+            <Examples><![CDATA[<code>GetObsoleteTenantId() = 30</code>]]></Examples>
+        </Function>
+    </Group>
+    <Group name="URL" helpId="15022">
+        <Function name="AddPersonalAreaToURLPath" retType="Text">
+            <Parameter type="Text" name="url" description="The url to add the personal area path to."/>
+            <Description><![CDATA[Returns a string where the Personal Area is added (if applicable) to the URL path set in Text 't' input parameter. This function enables you to run any page (or resource) of your module in the Personal Area without having to manually change their paths.<br/>This function adds the Personal Area of the developer that is running the module to the URL path provided by the input parameter.]]></Description>
+            <Examples><![CDATA[Consider that Dave Lauper is running the Customers module in his Personal Area and that his username is 'dlauper':<br/><code>AddPersonalAreaToURLPath(""/Customers/ListCustomers.aspx"") = ""/Customers/dlauper/ListCustomers.aspx""<br/>AddPersonalAreaToURLPath(""http://myserverat.outsystemscloud.com/Customers/ListCustomers.aspx"") = ""http://myserverat.outsystemscloud.com/Customers/dlauper/ListCustomers.aspx""</code><br/><br/>In this next example the same developer is running the module in the public area:<br/><code>AddPersonalAreaToURLPath(""/Customers/ListCustomers.aspx"") = ""/Customers/ListCustomers.aspx""</code>]]></Examples>
+        </Function>
+        <Function name="GetBookmarkableURL" retType="Text" isVisibleInClientSide="true">
+            <Description><![CDATA[Returns the URL of the screen that is currently being processed.<br/>The URL returned by this function is a complete URL with the format http://server/module/personal_area/screen?param1=value&amp;param2=value... <br/>Parameters and their values aren't included when parameters are optional and their values aren't set.]]></Description>
+            <Examples><![CDATA[<code>GetBookmarkableURL() = ""http://myserverat.outsystemscloud.com/Customers/EditCustomer.aspx?CustomerId=1""</code>]]></Examples>
+        </Function>
+        <Function name="GetPersonalAreaName" retType="Text" description="Returns the name of the Personal Area where the module is currently running.">
+            <Examples><![CDATA[Consider that Dave Lauper is running the Customers module in his Personal Area and that his username is 'dlauper':<br/><code>GetPersonalAreaName() = ""dlauper""</code>]]></Examples>
+        </Function>
+        <Function name="GetOwnerURLPath" retType="Text" isVisibleInClientSide="true" description="Returns the URL path of the module that owns the element that is being processed. Note that this function does not return the complete URL but only the component containing the location of the resource within the domain and, if applicable, the personal area.">
+            <Examples><![CDATA[<code>GetOwnerURLPath() = ""/Customers/""</code>]]></Examples>
+        </Function>
+        <Function name="GetExceptionURL" retType="Text" description="Returns the absolute URL of the screen where the last exception was raised.">
+            <Examples><![CDATA[<code>GetExceptionURL() = ""http://myserverat.outsystemscloud.com/Customers/ListCustomers.aspx""</code>]]></Examples>
+        </Function>
+    </Group>
+    <Group name="Miscellaneous" helpId="15022">
+        <Function name="GeneratePassword" retType="Text" description="Generates and returns a password string of length 'l'. If 'alpha' is True the string can contain both digits and letters, if False the string can only contain digits. The generated password string is a random combination of letters and digits, or just digits, depending on 'alpha'.">
+            <Parameter type="Integer" name="l" description="The length of the Text string to be generated."/>
+            <Parameter type="Boolean" name="alpha" description="Indicates if the generated Text string can contain digits and letters or digits only."/>
+            <Examples><![CDATA[<code>GeneratePassword(10, True) = ""3fgp7lzmqt""<br/>GeneratePassword(6, False) = ""038013""</code>]]></Examples>
+        </Function>
+        <Function name="If" databaseFunctionName="IfElse" retType="Generic" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInScripts="true" isVisibleInClientSide="true">
+            <Parameter type="Boolean" name="value" description="The condition to be evaluated."/>
+            <Parameter type="Generic" name="true_return" delayEvaluation="true" description="The expression to be evaluated and returned when the condition is true."/>
+            <Parameter type="Generic" name="false_return" delayEvaluation="true" description="The expression to be evaluated and returned when the condition is false."/>
+            <Description><![CDATA[Returns 'true_return' if 'value' is True, otherwise returns 'false_return'.<br/>The return data type of the function is the type of 'true_return' unless there's an implicit conversion from 'true_return' type to 'false_return' type.<br/>When there's no implicit type conversion an invalid data type error will occur.]]></Description>
+            <Examples><![CDATA[<code>If(countVar = 0, 0, 1/countVar) = 0 when countVar is 0 or 1/countVar when countVar is different from 0.<br/>If(True, 2.34, ""xpto"") = ""2.34""<br/>If(False, ""xpto"", #2016-05-02#) = ""2016-05-02""<br/>If(False, #2015-05-02#, #2016-05-02#) = #2016-05-02#<br/>If(False, 2.34, #2016-05-02#) = Invalid Data Type error.</code>]]></Examples>
+        </Function>
+        <Function name="IsLoadingScreen" retType="Boolean" description="Returns true only when invoked within a screen Preparation execution and only if the screen is loading its content. Otherwise, if the screen is just being redrawn, i.e. posted back, it returns False.">            
+        </Function>
+        <Function name="CurrentThemeIsMobile" retType="Boolean" description="Returns true when the current web screen is using a mobile theme.">
+        </Function>
+    </Group>
+    <Group name="Roles" helpId="0">
+      <Function name="CheckRole" retType="Boolean" isVisibleInQueries="true" dbAndMemSemanticsAreEqual="false" isVisibleInPlatformQueriesOnly="true" description="Returns true when the given user has the specific role.">
+        <Parameter type="RoleId" name="RoleId" description="The identifier of the role to be validated."/>
+        <Parameter type="UserId" name="UserId" description="The identifier of the user for which to validate if role is granted."/>        
+      </Function>
+      <Function name="GetUserId" retType="UserId" isVisibleInClientSide="true" description="Returns the identifier of the user that is currently authenticated with the server or 'NullIdentifier()' if the user is not authenticated."/>
+    </Group>
+  </Functions>
