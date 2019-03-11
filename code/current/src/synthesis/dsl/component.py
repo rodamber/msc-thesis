@@ -1,5 +1,7 @@
 from collections import namedtuple
+from dataclasses import dataclass
 from enum import Enum
+from typing import Dict
 
 import pyrsistent as p
 from toolz import compose, curry
@@ -9,11 +11,18 @@ from ..outsystems.templatify import templatify
 from ..tree import children, tag
 
 Component = Enum('Component', 'CONCAT INDEX LENGTH REPLACE SUBSTR ADD1 SUB1')
+Type = Enum('Type', 'TEXT INTEGER')
 
-Hole = namedtuple('Hole', 'id')
-Const = namedtuple('Const', 'val')
+Hole = namedtuple('Hole', 'id type')
+Const = namedtuple('Const', 'val type')
+
+id = lambda x: x.id
+type = lambda x: x.type
+val = lambda x: x.val
 
 program = tree.tree
+component = tree.tag
+args = tree.children
 
 hole = compose(program, Hole)
 const = compose(program, Const)
@@ -34,7 +43,10 @@ render = tree.render
 @curry
 def run(env, prog):
     if isinstance(tag(prog), Hole):
-        return env[prog]
+        try:
+            return env[prog]
+        except KeyError:
+            raise UnboundHole(prog, env)
     elif isinstance(tag(prog), Const):
         return tag(prog).val
     elif isinstance(tag(prog), Component):
@@ -54,29 +66,35 @@ def run(env, prog):
             return vals[0] + 1
         elif tag(prog) == Component.SUB1:
             return vals[0] - 1
+    else:
+        raise InvalidProgram(prog)
 
 
 def test_run():
     fresh = utils.fresh_gen()
 
-    x0 = hole(next(fresh))
-    x1 = hole(next(fresh))
-    x2 = hole(next(fresh))
+    x0 = hole(next(fresh), Type.TEXT)
+    x1 = hole(next(fresh), Type.TEXT)
+    x2 = hole(next(fresh), Type.TEXT)
 
-    assert run({x0: 'Hello'}, concat(x0, const(' world!'))) == 'Hello world!'
-    assert run({x0: 'outsystems.com'}, index(x0, const('.'))) == 10
+    assert run({
+        x0: 'Hello'
+    }, concat(x0, const(' world!', Type.TEXT))) == 'Hello world!'
+    assert run({x0: 'outsystems.com'}, index(x0, const('.', Type.TEXT))) == 10
     assert run({x0: 'cmu'}, length(x0)) == 3
     assert run({
         x0: 'dd-mm-yyyy',
         x1: '-',
         x2: '/'
     }, replace(x0, x1, x2)) == 'dd/mm/yyyy'
-    assert run({x0: 'www.outsystems.com'}, substr(x0, const(3), const(14)))
+    assert run({
+        x0: 'www.outsystems.com'
+    }, substr(x0, const(3, Type.INTEGER), const(14, Type.INTEGER)))
 
     # Example of a complex program. Let expressions could reduce complexity here.
     env = {x0: 'www.outsystems.com', x1: '.'}
     prog = substr(
-        substr(x0, add1(index(x0, x1)), length(x0)), const(0),
+        substr(x0, add1(index(x0, x1)), length(x0)), const(0, Type.INTEGER),
         index(substr(x0, add1(index(x0, x1)), length(x0)), x1))
 
     assert run(env, prog) == 'outsystems'
@@ -91,10 +109,10 @@ def holes(prog):
 def test_holes():
     fresh = utils.fresh_gen()
 
-    x0 = hole(next(fresh))
-    x1 = hole(next(fresh))
+    x0 = hole(next(fresh), Type.TEXT)
+    x1 = hole(next(fresh), Type.TEXT)
 
-    zero = const(0)
+    zero = const(0, Type.INTEGER)
 
     prog = substr(x0, zero, index(x0, x1))
 
@@ -117,12 +135,24 @@ def from_ast(ast):
         raise Exception('keyword args are not supported yet')
 
 
+@dataclass
+class UnboundHole(Exception):
+    hole: Hole
+    env: Dict
+
+
+@dataclass
 class UnsupportedComponent(Exception):
-    pass
+    msg: str
+
+
+@dataclass
+class UnsupportedType(Exception):
+    msg: str
 
 
 def match_component(name: str) -> Component:
     try:
         return Component[name]
     except KeyError as e:
-        raise UnsupportedComponent from e
+        raise UnsupportedComponent(name) from e

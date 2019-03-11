@@ -4,8 +4,8 @@ import sys
 import jsonlines
 import parsy
 
-from ..outsystems import expr_ast as ast
 from ..utils import LineError
+from . import expr_ast as ast
 
 # Lexemes
 whitespace = parsy.regex(r'\s*')
