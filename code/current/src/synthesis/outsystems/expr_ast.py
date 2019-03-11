@@ -4,7 +4,7 @@ import pyrsistent as p
 from toolz import curry
 
 from .. import tree
-from ..tree import tag
+from ..tree import children, tag
 
 Expr = Enum('Expr', 'Var, Lit, Func, KwArg')
 
@@ -14,13 +14,12 @@ class ASTRec(p.PRecord):
     val = p.field(mandatory=True, initial=None)  # type=optional[str]
 
 
-@curry
-def ast(expr, val, *children):
-    return tree.tree(ASTRec(expr=expr, val=val), children=p.pvector(children))
-
+ast = curry(lambda expr, val, *children:
+            tree.tree(ASTRec(expr=expr, val=val), *children))
 
 expr = lambda ast: tag(ast).expr
 val = lambda ast: tag(ast).val
+children = tree.children
 
 var = ast(Expr.Var)
 lit = ast(Expr.Lit)
@@ -46,3 +45,5 @@ def test_ast():
     d = dot(xy, y)
     dd = dot(d, x)
     i = indexer(x, y)
+
+    assert all(isinstance(t, tree.Tree) for t in (x, y, z, xy, kw, d, dd, i))

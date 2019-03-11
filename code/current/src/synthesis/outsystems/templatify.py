@@ -10,13 +10,13 @@ def templatify(tree):
     variables = {}
 
     def helper(tree):
-        if tree.tag.expr == ast.Expr.Var or \
-           (tree.tag.expr == ast.Expr.Func and tree.tag.val in ['.', '[]']):
+        if ast.expr(tree) == ast.Expr.Var or \
+           (ast.expr(tree) == ast.Expr.Func and ast.val(tree) in ['.', '[]']):
             if tree not in variables:
                 variables[tree] = next(fresh)
             return ast.var(variables[tree])
 
-        children = tree.children.transform([p.ny], helper)
+        children = ast.children(tree).transform([p.ny], helper)
         return tree.set('children', children)
 
     return helper(tree)
@@ -24,6 +24,8 @@ def templatify(tree):
 
 def test_templatify():
     def helper(test, expected):
+        # from ..tree import Tree
+        # assert isinstance(parse(test), Tree)
         assert templatify(parse(test)) == expected
 
     helper('a.c[0] + b', ast.func('+', ast.var('x0'), ast.var('x1')))

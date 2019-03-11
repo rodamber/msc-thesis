@@ -8,7 +8,7 @@ from .. import tree, utils
 from ..outsystems.templatify import templatify
 from ..tree import children, tag
 
-Component = Enum('Component', 'CONCAT INDEX LENGTH REPLACE SUBSTR')
+Component = Enum('Component', 'CONCAT INDEX LENGTH REPLACE SUBSTR ADD1 SUB1')
 
 Hole = namedtuple('Hole', 'id')
 Const = namedtuple('Const', 'val')
@@ -18,15 +18,19 @@ program = tree.tree
 hole = compose(program, Hole)
 const = compose(program, Const)
 
-concat = lambda x, y: program(Component.CONCAT)
+concat = lambda x, y: program(Component.CONCAT, x, y)
 index = lambda x, y: program(Component.INDEX, x, y)
-length = lambda x, y: program(Component.LENGTH, x, y)
+length = lambda x: program(Component.LENGTH, x)
 replace = lambda x, y, z: program(Component.REPLACE, x, y, z)
 substr = lambda x, y, z: program(Component.SUBSTR, x, y, z)
+add1 = lambda x: program(Component.ADD1, x)
+sub1 = lambda x: program(Component.SUB1, x)
 
 render = tree.render
 
 
+# TODO Extend this to support binding a hole to a tree. Next step would be to
+# support partial evaluation.
 @curry
 def run(env, prog):
     if isinstance(tag(prog), Hole):
@@ -37,7 +41,7 @@ def run(env, prog):
         vals = children(prog).transform([p.ny], run(env))
 
         if tag(prog) == Component.CONCAT:
-            return sum(vals)
+            return ''.join(vals)
         elif tag(prog) == Component.INDEX:  # FIXME Binary index
             return vals[0].find(vals[1])
         elif tag(prog) == Component.LENGTH:
@@ -46,6 +50,10 @@ def run(env, prog):
             return vals[0].replace(vals[1], vals[2])
         elif tag(prog) == Component.SUBSTR:
             return vals[0][vals[1]:vals[2]]
+        elif tag(prog) == Component.ADD1:
+            return vals[0] + 1
+        elif tag(prog) == Component.SUB1:
+            return vals[0] - 1
 
 
 def test_run():
@@ -53,11 +61,23 @@ def test_run():
 
     x0 = hole(next(fresh))
     x1 = hole(next(fresh))
+    x2 = hole(next(fresh))
 
-    zero = const(0)
+    assert run({x0: 'Hello'}, concat(x0, const(' world!'))) == 'Hello world!'
+    assert run({x0: 'outsystems.com'}, index(x0, const('.'))) == 10
+    assert run({x0: 'cmu'}, length(x0)) == 3
+    assert run({
+        x0: 'dd-mm-yyyy',
+        x1: '-',
+        x2: '/'
+    }, replace(x0, x1, x2)) == 'dd/mm/yyyy'
+    assert run({x0: 'www.outsystems.com'}, substr(x0, const(3), const(14)))
 
-    env = {x0: 'outsystems.com', x1: '.'}
-    prog = substr(x0, zero, index(x0, x1))
+    # Example of a complex program. Let expressions could reduce complexity here.
+    env = {x0: 'www.outsystems.com', x1: '.'}
+    prog = substr(
+        substr(x0, add1(index(x0, x1)), length(x0)), const(0),
+        index(substr(x0, add1(index(x0, x1)), length(x0)), x1))
 
     assert run(env, prog) == 'outsystems'
 

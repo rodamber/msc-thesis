@@ -1,5 +1,6 @@
 from anytree import AnyNode, RenderTree
 from pyrsistent import PRecord, PVector, field, ny, pvector, v
+from toolz import curry
 
 
 class Tree(PRecord):
@@ -33,8 +34,8 @@ def render(tree):
 def test_tree():
     x = tree('x')
     y = tree('y')
-    z = tree('z', v(x, y))
-    w = tree('w', v(z, x))
+    z = tree('z', x, y)
+    w = tree('w', z, x)
 
     any_w = tree2anynode(w)
     assert any_w.height == 2
