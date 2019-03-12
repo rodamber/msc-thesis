@@ -142,8 +142,7 @@ def holes_and_outputs(fresh_hole, fresh_output, components):
 """
 
 class UnplugableComponents(Exception):
-    def __init__(self, components):
-        self.components = components
+    pass
 
 # Constraint 01
 def output_soundness(solver, holes_and_outputs):
@@ -157,7 +156,11 @@ def output_soundness(solver, holes_and_outputs):
 
 # Constraint 02
 # FIXME The encoding prevents holes from taking arbitrary values, which is
-# basically the whole point of doing this. I believe that in order to get this
+# basically the whole point of doing this. (Note that maybe this only makes sens
+# for some specific args of some specific functions)
+
+
+# I believe that in order to get this
 # property while allowing holes to take arbitrary values we must use a line
 # encoding. I think it would also be needed to reconstruct the program.
 def aciclicity(solver, inputs, holes_and_outputs):
@@ -189,6 +192,7 @@ def all_inputs_are_used(solver, inputs, holes_and_outputs):
         eqs = tuple(h == i for h in holes if h.sort() == i.sort())
 
         if eqs:
+            # FIXME Maybe we should throw an exception here instead?
             solver.add(z3.Or(eqs))
 
 
@@ -213,9 +217,10 @@ def all_outputs_are_used(solver, holes_and_outputs, size):
     for o in outputs:
         eqs = tuple(h == o for h in holes if h.sort() == o.sort())
 
-        if eqs:
-            # FIXME Maybe we should throw an exception here instead?
-            solver.add(z3.Or(eqs))
+        if not eqs:
+            raise UnplugableComponents()
+
+        solver.add(z3.Or(eqs))
 
 
 # Constraint 05
@@ -250,37 +255,44 @@ def synth(size, examples):
     assert all_equal(list(type(e.output) for e in examples))
 
     for components in product(size):
-        fresh_hole = itertools.count(1)
-        fresh_output = itertools.count(1)
-
         if not isinstance(examples[0].output, ret_types[components[-1][1]]):
             continue
 
+        fresh_hole = itertools.count(1)
+        fresh_output = itertools.count(1)
         solver = z3.Solver()
 
-        for example in examples:
-            is_ = inputs(solver, example)
-            hs_os = holes_and_outputs(fresh_hole, fresh_output, components)
+        with suppress(UnplugableComponents):
+            for example in examples:
+                is_ = inputs(solver, example)
+                hs_os = holes_and_outputs(fresh_hole, fresh_output, components)
 
-            # import pdb; pdb.set_trace()
-            with suppress(UnplugableComponents):
+                # import pdb; pdb.set_trace()
+
                 output_soundness(solver, hs_os)
-                aciclicity(solver, is_, hs_os)
+                correctness(solver, example, hs_os, size)
+                # aciclicity(solver, is_, hs_os)
                 all_inputs_are_used(solver, is_, hs_os)
                 all_outputs_are_used(solver, hs_os, size)
-                correctness(solver, example, hs_os, size)
 
-        if solver.check() == z3.sat:
-            model = solver.model()
+            if solver.check() == z3.sat:
+                model = solver.model()
 
-            print(solver.assertions())
-            print(model)
+                print(solver.assertions())
+                print(model)
 
-            return solver
+                return solver
 
 
 def test_synth():
-    # example = Example(inputs=('John', 'Doe'), output='John Doe')
+    print('=================================================================')
+
+    examples = [Example(inputs=('John', 'Doe'), output='John Doe'),
+                Example(inputs=('Jane', 'Doe'), output='Jane Doe'),
+                Example(inputs=('James', 'Brown'), output='James Brown')]
+    synth(2, examples)
+
+    print('=================================================================')
 
     # examples = [Example(inputs=('Hello', ' world!'), output='Hello world!')]
     # synth(1, examples)
@@ -297,17 +309,17 @@ def test_synth():
     # ]
     # synth(2, examples)
 
-    print('=================================================================')
+    # print('=================================================================')
 
-    # If the output appears directly in the input, there's a big possibility of
-    # a replacing messing everything up.
-    examples = [
-        Example(
-            inputs=('outsystems.com', 'outsystems', 'cmu', 0, '.'),
-            output='cmu.com'),
-        Example(inputs=('xyz.com', 'xyz', 'abc', 0, '.'), output=('abc.com'))
-    ]
-    # substr(replace(_1, _2, _3), _4, index(_1, _5))
-    synth(2, examples)
+    # # If the output appears directly in the input, there's a big possibility of
+    # # a replacing messing everything up.
+    # examples = [
+    #     Example(
+    #         inputs=('outsystems.com', 'outsystems', 'cmu', 0, '.'),
+    #         output='cmu.com'),
+    #     Example(inputs=('xyz.com', 'xyz', 'abc', 0, '.'), output=('abc.com'))
+    # ]
+    # # substr(replace(_1, _2, _3), _4, index(_1, _5))
+    # synth(2, examples)
 
-    print('=================================================================')
+    # print('=================================================================')
