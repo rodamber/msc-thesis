@@ -1,4 +1,5 @@
 import itertools
+from contextlib import suppress
 
 import pyrsistent as p
 import z3
@@ -85,8 +86,8 @@ def product(size):
     o2 = LENGTH(.)
     o3 = SUBSTR(.,.,.)
     """
-    for pair in itertools.product(components, repeat=size):
-        yield tuple(zip(itertools.count(1), pair))
+    return set(tuple(zip(itertools.count(1), pair))
+               for pair in itertools.product(components, repeat=size))
 
 
 def inputs(solver, example):
@@ -124,6 +125,8 @@ def holes_and_outputs(fresh_hole, fresh_output, components):
 
             yield (line, c), (holes, output)
 
+    # TODO Not sure if there's any real reason to return a map instead of a
+    # vector.
     return p.pmap(gen())
 
 
@@ -138,6 +141,9 @@ def holes_and_outputs(fresh_hole, fresh_output, components):
  5. Correctness: The last output variable must equal the output of the test case.
 """
 
+class UnplugableComponents(Exception):
+    def __init__(self, components):
+        self.components = components
 
 # Constraint 01
 def output_soundness(solver, holes_and_outputs):
@@ -150,10 +156,10 @@ def output_soundness(solver, holes_and_outputs):
 
 
 # Constraint 02
-# FIXME The enconding prevents holes from taking arbitrary values, which is
+# FIXME The encoding prevents holes from taking arbitrary values, which is
 # basically the whole point of doing this. I believe that in order to get this
 # property while allowing holes to take arbitrary values we must use a line
-# enconding.
+# encoding. I think it would also be needed to reconstruct the program.
 def aciclicity(solver, inputs, holes_and_outputs):
     """
     Make sure that no variable is used before it is defined.
@@ -187,9 +193,12 @@ def all_inputs_are_used(solver, inputs, holes_and_outputs):
 
 
 # Constraint 04
-# FIXME In the disjunction, there are some redundant assertions being generated
+# TODO In the disjunction, there are some redundant assertions being generated
 # here, namely those that would be unsatisfiable by aciclicity, like h1 == o2,
 # for example.
+# FIXME The idea of this constraint is so that no component is redundant, but if
+# there is no way to plug them together there's no point in considering them
+# anyway.
 def all_outputs_are_used(solver, holes_and_outputs, size):
     """
     All but the last of the component output variables must be used (in order to
@@ -201,10 +210,12 @@ def all_outputs_are_used(solver, holes_and_outputs, size):
     outputs = p.pvector(
         o for (line, _), (_, o) in hs_os.items() if line < size)
 
-    eqs = tuple(h == o for h in holes for o in outputs if h.sort() == o.sort())
+    for o in outputs:
+        eqs = tuple(h == o for h in holes if h.sort() == o.sort())
 
-    if eqs:
-        solver.add(z3.Or(eqs))
+        if eqs:
+            # FIXME Maybe we should throw an exception here instead?
+            solver.add(z3.Or(eqs))
 
 
 # Constraint 05
@@ -233,7 +244,6 @@ def all_equal(xs):
     return xs[1:] == xs[:-1]
 
 
-# FIXME Generalize to more than one example
 # TODO tag fresh ids with example #
 def synth(size, examples):
     assert all_equal(list(list(map(type, e.inputs)) for e in examples))
@@ -252,52 +262,52 @@ def synth(size, examples):
             is_ = inputs(solver, example)
             hs_os = holes_and_outputs(fresh_hole, fresh_output, components)
 
-            output_soundness(solver, hs_os)
-            aciclicity(solver, is_, hs_os)
-            all_inputs_are_used(solver, is_, hs_os)
-            all_outputs_are_used(solver, hs_os, size)
-            correctness(solver, example, hs_os, size)
+            # import pdb; pdb.set_trace()
+            with suppress(UnplugableComponents):
+                output_soundness(solver, hs_os)
+                aciclicity(solver, is_, hs_os)
+                all_inputs_are_used(solver, is_, hs_os)
+                all_outputs_are_used(solver, hs_os, size)
+                correctness(solver, example, hs_os, size)
 
         if solver.check() == z3.sat:
             model = solver.model()
 
-            # FIXME I think that to be able to reconstruct the program we need
-            # to use a line enconding.
-
+            print(solver.assertions())
             print(model)
-            # print(solver.assertions())
 
-            for (line, component), (holes, output) in hs_os.items():
-                print(f'{line}: {component} {tuple(holes)} {output}')
-
-            return
+            return solver
 
 
 def test_synth():
     # example = Example(inputs=('John', 'Doe'), output='John Doe')
 
-    # example = Example(inputs=('Hello', ' world!'), output='Hello world!')
-    # synth(1, example)
+    # examples = [Example(inputs=('Hello', ' world!'), output='Hello world!')]
+    # synth(1, examples)
 
     # print('=================================================================')
 
-    # example = Example(inputs=('Hello', ' ', 'world!'), output='Hello world!')
-    # synth(2, example)
+    # examples = [Example(inputs=('Hello', ' ', 'world!'), output='Hello world!')]
+    # synth(2, examples)
 
     # print('=================================================================')
 
-    # example = Example(inputs=('outsystems.com', '.', 0), output='outsystems')
-    # synth(3, example)
+    # examples = [
+    #     Example(inputs=('outsystems.com', '.', 0), output='outsystems')
+    # ]
+    # synth(2, examples)
 
     print('=================================================================')
 
+    # If the output appears directly in the input, there's a big possibility of
+    # a replacing messing everything up.
     examples = [
         Example(
             inputs=('outsystems.com', 'outsystems', 'cmu', 0, '.'),
-            output='cmu'),
-        Example(inputs=('xyz.com', 'xyz', 'abc', 0, '.'), output=('abc'))
+            output='cmu.com'),
+        Example(inputs=('xyz.com', 'xyz', 'abc', 0, '.'), output=('abc.com'))
     ]
     # substr(replace(_1, _2, _3), _4, index(_1, _5))
-    synth(3, examples)
+    synth(2, examples)
 
     print('=================================================================')
