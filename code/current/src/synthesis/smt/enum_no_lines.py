@@ -3,10 +3,7 @@ from contextlib import suppress
 
 import pyrsistent as p
 import z3
-from toolz import mapcat
 
-from ..dsl import component as comp
-from ..dsl.component import Component
 
 
 # Components
@@ -29,9 +26,6 @@ def index(text, x):
 def substr(text, i, j):
     return z3.SubString(text, i, j - i)
 
-
-# index = lambda text, x: z3.IndexOf(text, x, 0)  # OutSystems' Binary index
-# substr = lambda text, i, j: z3.SubString(text, i, j - i)
 
 components = (concat, index, length, replace, substr)
 
@@ -144,6 +138,9 @@ def holes_and_outputs(fresh_hole, fresh_output, components):
 class UnplugableComponents(Exception):
     pass
 
+class UnusableInput(Exception):
+    pass
+
 # Constraint 01
 def output_soundness(solver, holes_and_outputs):
     """
@@ -156,13 +153,12 @@ def output_soundness(solver, holes_and_outputs):
 
 # Constraint 02
 # FIXME The encoding prevents holes from taking arbitrary values, which is
-# basically the whole point of doing this. (Note that maybe this only makes sens
-# for some specific args of some specific functions)
-
-
-# I believe that in order to get this
-# property while allowing holes to take arbitrary values we must use a line
-# encoding. I think it would also be needed to reconstruct the program.
+# basically the whole point of doing this. (Note that maybe this only makes sense
+# for some specific args of some specific functions, but this is domain specific
+# knowledge).
+# I believe that in order to get this property while allowing holes to take
+# arbitrary values we must use a line encoding. I think it would also be needed
+# to reconstruct the program.
 def aciclicity(solver, inputs, holes_and_outputs):
     """
     Make sure that no variable is used before it is defined.
@@ -191,9 +187,9 @@ def all_inputs_are_used(solver, inputs, holes_and_outputs):
     for i in inputs:
         eqs = tuple(h == i for h in holes if h.sort() == i.sort())
 
-        if eqs:
-            # FIXME Maybe we should throw an exception here instead?
-            solver.add(z3.Or(eqs))
+        if not eqs:
+            raise UnusableInput()
+        solver.add(z3.Or(eqs))
 
 
 # Constraint 04
@@ -262,16 +258,14 @@ def synth(size, examples):
         fresh_output = itertools.count(1)
         solver = z3.Solver()
 
-        with suppress(UnplugableComponents):
+        with suppress(UnplugableComponents, UnusableInput):
             for example in examples:
                 is_ = inputs(solver, example)
                 hs_os = holes_and_outputs(fresh_hole, fresh_output, components)
 
-                # import pdb; pdb.set_trace()
-
                 output_soundness(solver, hs_os)
                 correctness(solver, example, hs_os, size)
-                # aciclicity(solver, is_, hs_os)
+                aciclicity(solver, is_, hs_os)
                 all_inputs_are_used(solver, is_, hs_os)
                 all_outputs_are_used(solver, hs_os, size)
 
@@ -294,32 +288,16 @@ def test_synth():
 
     print('=================================================================')
 
-    # examples = [Example(inputs=('Hello', ' world!'), output='Hello world!')]
-    # synth(1, examples)
+    # If the output appears directly in the input, there's a big possibility of
+    # a replacing messing everything up.
+    examples = [
+        Example(
+            inputs=('outsystems.com', 'outsystems', 'cmu', 0, '.'),
+            output='cmu.com'),
+        Example(inputs=('xyz.com', 'xyz', 'abc', 0, '.'), output=('abc.com'))
+    ]
 
-    # print('=================================================================')
+    # substr(replace(_1, _2, _3), _4, index(_1, _5))
+    synth(2, examples)
 
-    # examples = [Example(inputs=('Hello', ' ', 'world!'), output='Hello world!')]
-    # synth(2, examples)
-
-    # print('=================================================================')
-
-    # examples = [
-    #     Example(inputs=('outsystems.com', '.', 0), output='outsystems')
-    # ]
-    # synth(2, examples)
-
-    # print('=================================================================')
-
-    # # If the output appears directly in the input, there's a big possibility of
-    # # a replacing messing everything up.
-    # examples = [
-    #     Example(
-    #         inputs=('outsystems.com', 'outsystems', 'cmu', 0, '.'),
-    #         output='cmu.com'),
-    #     Example(inputs=('xyz.com', 'xyz', 'abc', 0, '.'), output=('abc.com'))
-    # ]
-    # # substr(replace(_1, _2, _3), _4, index(_1, _5))
-    # synth(2, examples)
-
-    # print('=================================================================')
+    print('=================================================================')
