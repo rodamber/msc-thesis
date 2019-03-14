@@ -183,8 +183,8 @@ def z3_hole(typ, x, y, z):
     return _z3_smt_const(typ, 'h', x, y, z)
 
 
-def z3_line():
-    return z3.FreshInt(prefix='l')
+def z3_line(fresh):
+    return z3.Int(f'l_{next(fresh)}')
 
 
 def z3_val(val):
@@ -193,7 +193,16 @@ def z3_val(val):
     elif isinstance(val, str):
         return z3.StringVal(val)
     else:
-        raise ValueError(f'z3_val: invalid typ ({typ})')
+        raise ValueError(f'z3_val: unsupported typ ({typ})')
+
+
+def z3_as(ref):
+    if isinstance(ref, z3.ArithRef):
+        return ref.as_long()
+    elif isinstance(ref, z3.SeqRef):
+        return ref.as_string()
+    else:
+        raise ValueError(f'z3_val: unsupported ref type ({type(ref)})')
 
 
 # ---------
@@ -202,14 +211,16 @@ def z3_val(val):
 
 
 def generate_program(components, examples):
-    consts = generate_consts(components, examples)
-    inputs = generate_inputs(examples)
-    lines = generate_program_lines(components, examples)
+    fresh = count(1)
+
+    consts = generate_consts(components, examples, fresh)
+    inputs = generate_inputs(examples, fresh)
+    lines = generate_program_lines(components, examples, fresh)
 
     return Program(consts=consts, inputs=inputs, lines=lines)
 
 
-def generate_consts(components, examples):
+def generate_consts(components, examples, fresh):
     type_counter = Counter()
 
     for c in components:
@@ -225,27 +236,28 @@ def generate_consts(components, examples):
 
         for typ, cnt in type_counter.items():
             for i in range(cnt + 1):
-                yield Const(get=z3_const(typ, x), lineno=Lineno(get=z3_line()))
+                yield Const(
+                    get=z3_const(typ, x), lineno=Lineno(get=z3_line(fresh)))
                 x += 1
 
     return p.pvector(_())
 
 
-def generate_inputs(examples):
+def generate_inputs(examples, fresh):
     def _():
         for n, i in enumerate(examples[0].inputs, 1):
-            map = p.pmap((e, z3_input(type(i), m, n))
+            map = p.pmap((e, z3_input(type(i), n, m))
                          for m, e in enumerate(examples, 1))
-            lineno = Lineno(get=z3_line())
+            lineno = Lineno(get=z3_line(fresh))
 
             yield Input(map=map, lineno=lineno)
 
     return p.pvector(_())
 
 
-def generate_program_lines(components, examples):
-    outputs = generate_outputs(components, examples)
-    holes = p.pmap((c, generate_holes(c, examples, n))
+def generate_program_lines(components, examples, fresh):
+    outputs = generate_outputs(components, examples, fresh)
+    holes = p.pmap((c, generate_holes(c, examples, n, fresh))
                    for n, c in enumerate(components, 1))
     lines = p.pvector(
         ProgramLine(output=o, component=c, holes=holes[c])
@@ -254,24 +266,24 @@ def generate_program_lines(components, examples):
     return lines
 
 
-def generate_outputs(components, examples):
+def generate_outputs(components, examples, fresh):
     def _():
         for n, c in enumerate(components, 1):
             map = p.pmap((e, z3_output(c.ret_type, n, m))
                          for m, e in enumerate(examples, 1))
-            lineno = Lineno(get=z3_line())
+            lineno = Lineno(get=z3_line(fresh))
 
             yield Output(map=map, lineno=lineno)
 
     return p.pvector(_())
 
 
-def generate_holes(component, examples, n):
+def generate_holes(component, examples, n, fresh):
     def _():
         for m, typ in enumerate(component.domain, 1):
             map = p.pmap(
-                (e, z3_hole(typ, n, m, k)) for k, e in enumerate(examples, 1))
-            lineno = Lineno(get=z3_line())
+                (e, z3_hole(typ, n, k, m)) for k, e in enumerate(examples, 1))
+            lineno = Lineno(get=z3_line(fresh))
 
             yield Hole(map=map, lineno=lineno)
 
@@ -293,6 +305,7 @@ def generate_constraints(program, examples):
     component_count = len(program.lines)
     hole_count = sum(len(l.component.domain) for l in program.lines)
 
+    yield from gen_const_line_constraints(consts)
     yield from gen_input_line_constraints(inputs, hole_count, component_count)
     yield from gen_output_line_constraints(outputs, hole_count,
                                            component_count)
@@ -305,6 +318,11 @@ def generate_constraints(program, examples):
         inputs, outputs, holes, examples)
     yield from gen_correctness_constraints(hole_count, program.lines, examples)
     yield from gen_input_value_constraints(inputs, examples)
+
+
+def gen_const_line_constraints(consts):
+    for n, c in enumerate(consts, 1):
+        yield c.lineno.get == z3_val(n)
 
 
 def gen_input_line_constraints(inputs, hole_count, component_count):
@@ -324,9 +342,8 @@ def gen_output_line_constraints(outputs, hole_count, component_count):
 def gen_hole_line_constraints(program, examples):
     for line in program.lines:
         for hole in line.holes:
-            yield z3.And(
-                z3_val(1) <= hole.lineno.get,
-                hole.lineno.get <= line.output.lineno.get)
+            yield z3_val(1) <= hole.lineno.get
+            yield hole.lineno.get <= line.output.lineno.get
 
 
 def gen_sort_line_constraints(inputs, outputs, holes):
@@ -384,7 +401,8 @@ def gen_input_output_completeness_constraints(inputs, outputs, holes,
             if not output_constraints:
                 raise UnplugableComponents()
 
-            yield z3.And(z3.Or(*input_constraints), z3.Or(*output_constraints))
+            yield z3.Or(*input_constraints)
+            yield z3.Or(*output_constraints)
 
 
 def gen_correctness_constraints(hole_count, program_lines, examples):
@@ -409,21 +427,49 @@ def gen_input_value_constraints(inputs, examples):
 # ---------
 
 
-# FIXME
 def reconstruct(program, model):
-    return None
+    consts = p.pvector(
+        Const(get=z3_as(model[c.get]),
+              lineno=Lineno(get=z3_as(model[c.lineno.get])))
+        for c in program.consts)
+
+    inputs = p.pvector(
+        Input(map=i.map,
+              lineno=Lineno(get=z3_as(model[i.lineno.get])))
+        for i in program.inputs)
+
+    def _line():
+        for line in program.lines:
+            output = Output(
+                map=line.output.map,
+                lineno=Lineno(get=z3_as(model[line.output.lineno.get])))
+
+            component = line.component
+
+            holes = p.pvector(
+                Hole(map=h.map,
+                     lineno=Lineno(get=z3_as(model[h.lineno.get])))
+                for h in line.holes)
+
+            yield ProgramLine(output=output, component=component, holes=holes)
+
+    lines = p.pvector(_line())
+
+    return Program(consts=consts, inputs=inputs, lines=lines)
 
 
 def synth(library, examples, program_size):
-    for components in combinations_with_replacement(library, program_size):
-        solver = z3.Solver()
+    # for components in combinations_with_replacement(library, program_size):
+    components = p.v(concat, replace)
+    solver = z3.Solver()
 
-        with suppress(UnplugableComponents, UnusableInput):
-            program = generate_program(components, examples)
-            solver.add(*generate_constraints(program, examples))
+    with suppress(UnplugableComponents, UnusableInput):
+        program = generate_program(components, examples)
+        solver.add(*generate_constraints(program, examples))
 
-            if solver.check() == z3.sat:
-                model = solver.model()
-                return reconstruct(program, model)
-    else:
-        print('Unable to synthesize :\'(')
+        if solver.check() == z3.sat:
+            model = solver.model()
+            return program, model, solver
+            # return reconstruct(program, model)
+    # else:
+    #     print('Unable to synthesize :\'(')
