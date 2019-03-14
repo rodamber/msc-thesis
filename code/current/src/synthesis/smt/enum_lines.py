@@ -209,11 +209,12 @@ def generate_inputs(examples, fresh):
 
 def generate_program_lines(components, examples, fresh):
     outputs = generate_outputs(components, examples, fresh)
-    holes = p.pmap((c, generate_holes(c, examples, n, fresh))
+    holes = p.pmap((n, generate_holes(c, examples, n, fresh))
                    for n, c in enumerate(components, 1))
     lines = p.pvector(
-        ProgramLine(output=o, component=c, holes=holes[c])
-        for o, c in zip(outputs, components))
+        ProgramLine(output=o, component=c, holes=holes[n])
+        for o, (n, c) in zip(outputs, enumerate(components, 1)))
+    # import pdb; pdb.set_trace()
 
     return lines
 
@@ -253,15 +254,15 @@ def generate_constraints(program, examples):
     outputs = p.pvector(l.output for l in program.lines)
     holes = p.pvector(h for l in program.lines for h in l.holes)
 
+    const_count = len(consts)
     input_count = len(examples[0].inputs)
     component_count = len(program.lines)
     hole_count = sum(len(l.component.domain) for l in program.lines)
 
     yield from gen_const_line_constraints(consts)
-    yield from gen_input_line_constraints(inputs, hole_count, component_count)
-    yield from gen_output_line_constraints(outputs, hole_count,
-                                           component_count)
-    yield from gen_hole_line_constraints(program, examples)
+    yield from gen_input_line_constraints(inputs, const_count)
+    yield from gen_output_line_constraints(outputs, const_count, input_count)
+    yield from gen_hole_line_constraints(program)
     yield from gen_sort_line_constraints(inputs, holes, outputs)
     yield from gen_well_formedness_constraints(holes, consts, inputs, outputs,
                                                examples)
@@ -277,35 +278,40 @@ def gen_const_line_constraints(consts):
         yield c.lineno.get == z3_val(n)
 
 
-def gen_input_line_constraints(inputs, hole_count, component_count):
-    start = hole_count - component_count - len(inputs) + 1
+def gen_input_line_constraints(inputs, const_count):
+    start = const_count + 1
 
     for lineno, i in enumerate(inputs, start):
-        yield i.lineno.get == lineno
+        yield i.lineno.get == z3_val(lineno)
 
 
-def gen_output_line_constraints(outputs, hole_count, component_count):
-    start = hole_count + 1 - component_count
+def gen_output_line_constraints(outputs, const_count, input_count):
+    start = const_count + input_count + 1
+    end = start + len(outputs)
 
-    for lineno, o in enumerate(outputs, start):
-        yield o.lineno.get == lineno
+    for o in outputs:
+        yield z3_val(start) <= o.lineno.get
+        # yield o.lineno.get < z3_val(end) # FIXME
+        yield o.lineno.get <= z3_val(end)
 
 
-def gen_hole_line_constraints(program, examples):
+def gen_hole_line_constraints(program):
+    # import pdb; pdb.set_trace()
     for line in program.lines:
         for hole in line.holes:
             yield z3_val(1) <= hole.lineno.get
+            # yield hole.lineno.get < line.output.lineno.get - 1 # FIXME
             yield hole.lineno.get < line.output.lineno.get
 
 
 def gen_sort_line_constraints(inputs, outputs, holes):
-    all_consts = p.pvector(
-        (l, x) for i, o, h in zip(inputs, outputs, holes)
-        for l, x in zip((i.lineno, o.lineno,
-                         h.lineno), (*i.map.values(), *o.map.values(),
-                                     *h.map.values())))
+    line_inputs = ((x.lineno.get, i) for x in inputs for i in x.map.values())
+    line_outputs = ((x.lineno.get, o) for x in outputs for o in x.map.values())
+    line_holes = ((x.lineno.get, h) for x in holes for h in x.map.values())
 
-    for (l1, c1), (l2, c2) in combinations(all_consts, r=2):
+    all_ = p.v(*line_inputs, *line_outputs, *line_holes)
+
+    for (l1, c1), (l2, c2) in combinations(all_, r=2):
         if c1.sort() != c2.sort():
             yield l1 != l2
 
@@ -337,15 +343,25 @@ def gen_output_soundness_constraints(program_lines, examples):
 
 def gen_input_output_completeness_constraints(inputs, outputs, holes,
                                               examples):
-    for i, o in zip(inputs, outputs):
-        for e in examples:
+    for e in examples:
+        for i in inputs:
             input_constraints = p.pvector(
-                i.map[e] == h.map[e] for h in holes
-                if i.map[e].sort() == h.map[e].sort())
+                i.lineno.get == h.lineno.get for h in holes
+                # if i.map[e].sort() == h.map[e].sort()
+            )
 
             if not input_constraints:
                 raise UnusableInput()
 
+            yield z3.Or(*input_constraints)
+
+        for o in outputs:
+            # output_constraints = p.pvector(
+            #     o.lineno.get == h.lineno.get for h in holes
+            #     # if o.map[e].sort() == h.map[e].sort()
+            # )
+
+            # FIXME demo
             output_constraints = p.pvector(
                 o.map[e] == h.map[e] for h in holes
                 if o.map[e].sort() == h.map[e].sort())
@@ -353,7 +369,6 @@ def gen_input_output_completeness_constraints(inputs, outputs, holes,
             if not output_constraints:
                 raise UnplugableComponents()
 
-            yield z3.Or(*input_constraints)
             yield z3.Or(*output_constraints)
 
 
@@ -381,7 +396,10 @@ def gen_input_value_constraints(inputs, examples):
 
 def synth(library, examples, program_size):
     for components in combinations_with_replacement(library, program_size):
-        components = p.v(concat, replace)
+        # components = p.v(concat, concat) # FIXME
+        components = p.v(concat, replace) # FIXME demo
+        # components = p.v(replace, concat) # BUG
+
         solver = z3.Solver()
 
         with suppress(UnplugableComponents, UnusableInput):
@@ -391,8 +409,7 @@ def synth(library, examples, program_size):
             if solver.check() == z3.sat:
                 model = solver.model()
                 return program, model, solver
-    else:
-        print('Unable to synthesize :\'(')
+        return # FIXME
 
 
 def reconstruct(program, model):
@@ -438,15 +455,15 @@ def pretty_program(program, model):
     holes = p.pvector(h for line in program.lines for h in line.holes)
 
     def eval(c):
-        return z3_as(model[c])
+        with suppress(ValueError):
+            return z3_as(model[c])
 
     line2val = p.pmap(
         (eval(c.lineno.get), c) for c in p.v(*consts, *inputs, *outputs))
 
     for c in program.consts:
-        print(
-            f'{eval(c.lineno.get)} | c{eval(c.lineno.get)} = {repr(eval(c.get))}'
-        )
+        x = f'{eval(c.lineno.get)} | c_{eval(c.lineno.get)} = {repr(eval(c.get))}'
+        print(x)
 
     for n, i in enumerate(program.inputs, 1):
         print(f'{eval(i.lineno.get)} | {i.map.values()[0]} = _{n}')
