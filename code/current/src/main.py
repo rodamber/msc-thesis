@@ -1,59 +1,35 @@
-import pdb
+from contextlib import suppress
 
 import pyrsistent as p
 from z3 import *
 
-from synthesis.smt.enum_lines import *
+from synthesis.smt.lines.pretty import *
+from synthesis.smt.lines.synth import *
 
-e1 = Example(inputs=p.v('John', 'Doe', ' '), output='John Doe')
-e2 = Example(inputs=p.v('Jane', 'Done'), output='Jane Done')
-e3 = Example(inputs=p.v('Andre', 'Moreira'), output='Andre Moreira')
-examples = p.v(e1)
+test_set = p.v(
+    p.v(Example(inputs=p.v('John', 'Doe'), output='John Doe'),
+        Example(inputs=p.v('Anne', 'Smith'), output='Anne Smith')),
 
-# library = p.v(concat)
+    p.v(Example(inputs=p.v('outsystems', 'com'), output='outsystems.com')),
 
-res = synth(library, examples, program_size=2)
+    # Problems with replace
+    p.v(Example(inputs=p.v('outsystems.com'), output='outsystems'),
+        Example(inputs=p.v('cmu.edu'), output='cmu')),
 
-if res:
-    prog, model, solver = res
-    # print(model)
-    pretty_program(prog, model)
-    # print(solver)
-else:
-    print('Unable to synthesize :\'(')
+    p.v(Example(inputs=p.v('outsystems', 'com'), output='www.outsystems.com'),
+        Example(inputs=p.v('cmu', 'edu'), output='www.cmu.edu')),
 
-# test
-# program = generate_program(p.v(concat, concat), examples)
+    p.v(Example(inputs=p.v('rodrigo', 'bernardo', 'gmail', 'com'), output='rodrigo.bernardo@gmail.com'),
+        Example(inputs=p.v('pedro', 'orvalho', 'tecnico', 'pt'), output='pedro.orvalho@tecnico.pt'))
+)
 
-# consts = program.consts
-# inputs = program.inputs
-# outputs = p.pvector(l.output for l in program.lines)
-# holes = p.pvector(h for l in program.lines for h in l.holes)
-
-# const_count = len(consts)
-# input_count = len(examples[0].inputs)
-# component_count = len(program.lines)
-# hole_count = sum(len(l.component.domain) for l in program.lines)
-
-# b = list(gen_const_line_constraints(consts))
-# c = list(gen_input_line_constraints(inputs, const_count))
-# d = list(gen_output_line_constraints(outputs, const_count, input_count))
-# e = list(gen_hole_line_constraints(program))
-# f = list(gen_sort_line_constraints(inputs, holes, outputs))
-# g = list(gen_well_formedness_constraints(holes, consts, inputs, outputs, examples))
-# h = list(gen_output_soundness_constraints(program.lines, examples))
-# i = list(gen_input_output_completeness_constraints(inputs, outputs, holes, examples))
-# j = list(gen_correctness_constraints(hole_count, program.lines, examples))
-# k = list(gen_input_value_constraints(inputs, examples))
-
-# print('=============================')
-# print(b, c, d, e, f, sep='\n')
-# print('=============================')
-# for x in g: print(x)
-# print('=============================')
-# print(h)
-# print('=============================')
-# for x in i: print(x)
-# print('=============================')
-# print(j, k, sep='\n')
-# print('=============================')
+# print('==========')
+# pretty_program(*synth(default_library, test_set[0], 2), example=test_set[0][0])
+# print('==========')
+# pretty_program(*synth(default_library, test_set[1], 2), example=test_set[1][0])
+print('==========')
+pretty_program(*synth(p.v(substr, index), test_set[2], 2), example=test_set[2][0])
+# print('==========')
+# pretty_program(*synth(default_library, test_set[3], 3), example=test_set[3][0])
+# print('==========')
+# pretty_program(*synth(default_library, test_set[4], 6), example=test_set[4][0])
