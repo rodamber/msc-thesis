@@ -1,7 +1,7 @@
 from collections import Counter, namedtuple
 from contextlib import suppress
 from dataclasses import dataclass
-from itertools import (chain, combinations, combinations_with_replacement,
+from itertools import (combinations, combinations_with_replacement, count,
                        product)
 
 import pyrsistent as p
@@ -55,7 +55,7 @@ class ProgramLine(p.PClass):
 
 
 class Program(p.PClass):
-    # consts = p.pvector_field(item_type=Const)
+    consts = p.pvector_field(item_type=Const)
     inputs = p.pvector_field(item_type=Input)
     lines = p.pvector_field(item_type=ProgramLine)
 
@@ -73,14 +73,22 @@ class UnusableInput(Exception):
 # ---------------
 
 
-# TODO This could be better.
-# FIXME It orders lines as they appear in the record, not by the value assigned
-# to z3 (duh)
+# FIXME This should print according to the model obtained from the solver.
+# - constants should be printed correctly
+# - holes should be substituted
+# - lines should be substituted
+# - program lines should be sorted
 def pretty_program(prog, example):
+    for c in prog.consts:
+        pretty_const(c)
     for pi, pj in zip(prog.inputs, example.inputs):
         pretty_input(pi, pj, example)
     for l in prog.lines:
         pretty_line(l, example)
+
+
+def pretty_const(const):
+    print(f'{const.lineno.get} | {const.get} = ?')
 
 
 def pretty_input(pi, pj, example):
@@ -154,12 +162,29 @@ def type2sort(typ):
         raise ValueError(f'Unsupported type: {typ}')
 
 
-def z3_fresh_const(typ, prefix='c'):
-    return z3.FreshConst(type2sort(typ), prefix)
+def _z3_smt_const(typ, prefix, *ix):
+    ix = '_'.join(map(str, ix))
+    return z3.Const(f'{prefix}_{ix}', type2sort(typ))
 
 
-def z3_fresh_line():
-    return z3_fresh_const(int, prefix='l')
+def z3_const(typ, x):
+    return _z3_smt_const(typ, 'c', x)
+
+
+def z3_input(typ, x, y):
+    return _z3_smt_const(typ, 'i', x, y)
+
+
+def z3_output(typ, x, y):
+    return _z3_smt_const(typ, 'o', x, y)
+
+
+def z3_hole(typ, x, y, z):
+    return _z3_smt_const(typ, 'h', x, y, z)
+
+
+def z3_line():
+    return z3.FreshInt(prefix='l')
 
 
 def z3_val(val):
@@ -177,67 +202,80 @@ def z3_val(val):
 
 
 def generate_program(components, examples):
-    # consts = generate_consts(components, examples)
+    consts = generate_consts(components, examples)
     inputs = generate_inputs(examples)
     lines = generate_program_lines(components, examples)
 
-    # return Program(consts=consts, inputs=inputs, lines=lines)
-    return Program(inputs=inputs, lines=lines)
+    return Program(consts=consts, inputs=inputs, lines=lines)
 
 
-# TODO While this doesn't seem to be strictly necessary, it is nice to have
-# for pretty printing.
-# def generate_consts(components, examples):
-#     type_counter = Counter()
+def generate_consts(components, examples):
+    type_counter = Counter()
 
-#     import pdb; pdb.set_trace()
+    for c in components:
+        for typ in c.domain:
+            type_counter[typ] += 1
+        type_counter[c.ret_type] -= 1
 
-#     for c in components:
-#         for typ in c.domain:
-#             type_counter[typ] += 1
-#         type_counter[c.ret_type] -= 1
+    for i in examples[0].inputs:
+        type_counter[type(i)] -= 1
 
-#     for i in examples[0].inputs:
-#         type_counter[type(i)] -= 1
+    def _():
+        x = 1
 
-#     return p.pvector(
-#         Const(get=z3_fresh_const(typ, prefix='c'),
-#               lineno=Lineno(get=z3_fresh_line()))
-#         for typ, cnt in type_counter.items()
-#         for _ in range(cnt + 1))
+        for typ, cnt in type_counter.items():
+            for i in range(cnt + 1):
+                yield Const(get=z3_const(typ, x), lineno=Lineno(get=z3_line()))
+                x += 1
+
+    return p.pvector(_())
 
 
 def generate_inputs(examples):
-    return p.pvector(
-        Input(
-            map=p.pmap((e, z3_fresh_const(type(i), prefix='i'))
-                       for e in examples),
-            lineno=Lineno(get=z3_fresh_line())) for i in examples[0].inputs)
+    def _():
+        for n, i in enumerate(examples[0].inputs, 1):
+            map = p.pmap((e, z3_input(type(i), m, n))
+                         for m, e in enumerate(examples, 1))
+            lineno = Lineno(get=z3_line())
+
+            yield Input(map=map, lineno=lineno)
+
+    return p.pvector(_())
 
 
 def generate_program_lines(components, examples):
     outputs = generate_outputs(components, examples)
-    holes = p.pvector(generate_holes(c, examples) for c in components)
+    holes = p.pmap((c, generate_holes(c, examples, n))
+                   for n, c in enumerate(components, 1))
     lines = p.pvector(
-        ProgramLine(output=o, component=c, holes=hs)
-        for o, c, hs in zip(outputs, components, holes))
+        ProgramLine(output=o, component=c, holes=holes[c])
+        for o, c in zip(outputs, components))
 
     return lines
 
 
 def generate_outputs(components, examples):
-    return p.pvector(
-        Output(
-            map=p.pmap((e, z3_fresh_const(c.ret_type, prefix='o'))
-                       for e in examples),
-            lineno=Lineno(get=z3_fresh_line())) for c in components)
+    def _():
+        for n, c in enumerate(components, 1):
+            map = p.pmap((e, z3_output(c.ret_type, n, m))
+                         for m, e in enumerate(examples, 1))
+            lineno = Lineno(get=z3_line())
+
+            yield Output(map=map, lineno=lineno)
+
+    return p.pvector(_())
 
 
-def generate_holes(component, examples):
-    return p.pvector(
-        Hole(
-            map=p.pmap((e, z3_fresh_const(typ, prefix='h')) for e in examples),
-            lineno=Lineno(get=z3_fresh_line())) for typ in component.domain)
+def generate_holes(component, examples, n):
+    def _():
+        for m, typ in enumerate(component.domain, 1):
+            map = p.pmap(
+                (e, z3_hole(typ, n, m, k)) for k, e in enumerate(examples, 1))
+            lineno = Lineno(get=z3_line())
+
+            yield Hole(map=map, lineno=lineno)
+
+    return p.pvector(_())
 
 
 # -----------
@@ -246,6 +284,7 @@ def generate_holes(component, examples):
 
 
 def generate_constraints(program, examples):
+    consts = program.consts
     inputs = program.inputs
     outputs = p.pvector(l.output for l in program.lines)
     holes = p.pvector(h for l in program.lines for h in l.holes)
@@ -259,9 +298,8 @@ def generate_constraints(program, examples):
                                            component_count)
     yield from gen_hole_line_constraints(program, examples)
     yield from gen_sort_line_constraints(inputs, holes, outputs)
-    yield from gen_well_formedness_constraints(holes, inputs, outputs,
+    yield from gen_well_formedness_constraints(holes, consts, inputs, outputs,
                                                examples)
-    yield from gen_constant_constraints(holes, component_count, input_count)
     yield from gen_output_soundness_constraints(program.lines, examples)
     yield from gen_input_output_completeness_constraints(
         inputs, outputs, holes, examples)
@@ -303,28 +341,19 @@ def gen_sort_line_constraints(inputs, outputs, holes):
             yield l1 != l2
 
 
-def gen_well_formedness_constraints(holes, inputs, outputs, examples):
+def gen_well_formedness_constraints(holes, consts, inputs, outputs, examples):
     for e in examples:
-        for h, c in product(holes, p.v(*inputs, *outputs)):
+        for h, c in product(holes, p.v(*consts, *inputs, *outputs)):
             h_const = h.map[e]
-            c_const = c.map[e]
+
+            if isinstance(c, Const):
+                c_const = c.get
+            else:
+                c_const = c.map[e]
 
             if h_const.sort() == c_const.sort():
                 yield z3.Implies(h.lineno.get == c.lineno.get,
                                  h_const == c_const)
-
-
-def gen_constant_constraints(holes, component_count, input_count):
-    hole_count = len(holes)
-    consts_count = hole_count - component_count - input_count
-
-    all_hole_consts = p.pvector(
-        (c, h.lineno.get) for h in holes for c in h.map.values())
-
-    for (c1, l1), (c2, l2) in combinations(all_hole_consts, r=2):
-        if c1.sort() != c2.sort() and c1 is not c2:
-            yield z3.Implies(
-                z3.And(l1 == l2, l1 <= z3_val(consts_count)), c1 == c2)
 
 
 def gen_output_soundness_constraints(program_lines, examples):
@@ -379,25 +408,22 @@ def gen_input_value_constraints(inputs, examples):
 # Synthesis
 # ---------
 
-# def reconstruct(program, model):
-#     for i in program.inputs:
-#         i.
+
+# FIXME
+def reconstruct(program, model):
+    return None
 
 
 def synth(library, examples, program_size):
     for components in combinations_with_replacement(library, program_size):
-        import pdb; pdb.set_trace()
         solver = z3.Solver()
 
         with suppress(UnplugableComponents, UnusableInput):
             program = generate_program(components, examples)
             solver.add(*generate_constraints(program, examples))
 
-            print(list(map(lambda c: c.name, components)), solver.check())
             if solver.check() == z3.sat:
                 model = solver.model()
-
-                print(f'SAT! Model:\n{model}')
-                return solver
+                return reconstruct(program, model)
     else:
         print('Unable to synthesize :\'(')
