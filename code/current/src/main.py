@@ -12,3 +12,5 @@ examples = p.v(e1)
 # library = p.v(concat)
 prog, model, solver = synth(library, examples, program_size=2)
 rec = reconstruct(prog, model)
+
+pretty_program(prog, model)

@@ -68,54 +68,6 @@ class UnusableInput(Exception):
     pass
 
 
-# ---------------
-# Pretty printing
-# ---------------
-
-
-# FIXME This should print according to the model obtained from the solver.
-# - constants should be printed correctly
-# - holes should be substituted
-# - lines should be substituted
-# - program lines should be sorted
-def pretty_program(prog, example):
-    for c in prog.consts:
-        pretty_const(c)
-    for pi, pj in zip(prog.inputs, example.inputs):
-        pretty_input(pi, pj, example)
-    for l in prog.lines:
-        pretty_line(l, example)
-
-
-def pretty_const(const):
-    print(f'{const.lineno.get} | {const.get} = ?')
-
-
-def pretty_input(pi, pj, example):
-    const = pi.map[example]
-    print(f'{pi.lineno.get} | {const} = {repr(pj)}')
-
-
-def pretty_line(l, example):
-    pretty_output(l.output, example)
-    pretty_component(l.component)
-    pretty_holes(l.holes, example)
-
-
-def pretty_output(o, example):
-    const = o.map[example]
-    print(f'{o.lineno.get} | {const}', end=' = ')
-
-
-def pretty_component(c):
-    print(c.name, end='')
-
-
-def pretty_holes(hs, example):
-    consts = map(lambda h: str(h.map[example]), hs)
-    print('(' + ', '.join(consts) + ')')
-
-
 # ----------
 # Components
 # ----------
@@ -343,7 +295,7 @@ def gen_hole_line_constraints(program, examples):
     for line in program.lines:
         for hole in line.holes:
             yield z3_val(1) <= hole.lineno.get
-            yield hole.lineno.get <= line.output.lineno.get
+            yield hole.lineno.get < line.output.lineno.get
 
 
 def gen_sort_line_constraints(inputs, outputs, holes):
@@ -427,37 +379,6 @@ def gen_input_value_constraints(inputs, examples):
 # ---------
 
 
-def reconstruct(program, model):
-    consts = p.pvector(
-        Const(get=z3_as(model[c.get]),
-              lineno=Lineno(get=z3_as(model[c.lineno.get])))
-        for c in program.consts)
-
-    inputs = p.pvector(
-        Input(map=i.map,
-              lineno=Lineno(get=z3_as(model[i.lineno.get])))
-        for i in program.inputs)
-
-    def _line():
-        for line in program.lines:
-            output = Output(
-                map=line.output.map,
-                lineno=Lineno(get=z3_as(model[line.output.lineno.get])))
-
-            component = line.component
-
-            holes = p.pvector(
-                Hole(map=h.map,
-                     lineno=Lineno(get=z3_as(model[h.lineno.get])))
-                for h in line.holes)
-
-            yield ProgramLine(output=output, component=component, holes=holes)
-
-    lines = p.pvector(_line())
-
-    return Program(consts=consts, inputs=inputs, lines=lines)
-
-
 def synth(library, examples, program_size):
     # for components in combinations_with_replacement(library, program_size):
     components = p.v(concat, replace)
@@ -473,3 +394,75 @@ def synth(library, examples, program_size):
             # return reconstruct(program, model)
     # else:
     #     print('Unable to synthesize :\'(')
+
+
+def reconstruct(program, model):
+    consts = p.pvector(
+        Const(
+            get=z3_as(model[c.get]),
+            lineno=Lineno(get=z3_as(model[c.lineno.get])))
+        for c in program.consts)
+
+    inputs = p.pvector(
+        Input(map=i.map, lineno=Lineno(get=z3_as(model[i.lineno.get])))
+        for i in program.inputs)
+
+    def _line():
+        for line in program.lines:
+            output = Output(
+                map=line.output.map,
+                lineno=Lineno(get=z3_as(model[line.output.lineno.get])))
+
+            component = line.component
+
+            holes = p.pvector(
+                Hole(map=h.map, lineno=Lineno(get=z3_as(model[h.lineno.get])))
+                for h in line.holes)
+
+            yield ProgramLine(output=output, component=component, holes=holes)
+
+    lines = p.pvector(_line())
+
+    return Program(consts=consts, inputs=inputs, lines=lines)
+
+
+# ---------------
+# Pretty printing
+# ---------------
+
+
+# XXX
+def pretty_program(program, model):
+    consts = program.consts
+    inputs = program.inputs
+    outputs = p.pvector(line.output for line in program.lines)
+    holes = p.pvector(h for line in program.lines for h in line.holes)
+
+    def eval(c):
+        return z3_as(model[c])
+
+    line2val = p.pmap(
+        (eval(c.lineno.get), c) for c in p.v(*consts, *inputs, *outputs))
+
+    for c in program.consts:
+        print(
+            f'{eval(c.lineno.get)} | c{eval(c.lineno.get)} = {repr(eval(c.get))}'
+        )
+
+    for n, i in enumerate(program.inputs, 1):
+        print(f'{eval(i.lineno.get)} | {i.map.values()[0]} = _{n}')
+
+    for l in sorted(program.lines, key=lambda l: eval(l.output.lineno.get)):
+        print(
+            f'{eval(l.output.lineno.get)} | {l.output.map.values()[0]}',
+            end=' = ')
+        print(l.component.name, end='')
+
+        def hole_ref(h):
+            c = line2val[eval(h.lineno.get)]
+            if isinstance(c, Const):
+                return c.get
+            else:
+                return c.map.values()[0]
+
+        print('(' + ', '.join(map(lambda h: str(hole_ref(h)), l.holes)) + ')')
