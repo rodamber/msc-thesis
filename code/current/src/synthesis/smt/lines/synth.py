@@ -1,3 +1,4 @@
+import itertools
 from contextlib import suppress
 from itertools import combinations_with_replacement
 
@@ -9,26 +10,34 @@ from .encoding import *
 from .types import *
 from .utils import *
 
-
-def synth(library, examples, program_size):
-    ucores = p.pmap()
-
-    for components in combinations_with_replacement(library, program_size):
-        solver = z3.Solver()
-
-        with suppress(UnplugableComponents, UnusableInput):
-            program = generate_program(components, examples)
-            solver.add(*generate_constraints(program, examples))
-
-            if solver.check() == z3.sat:
-                model = solver.model()
-                return program, model
-            else:
-                ucores = ucores.set(components, solver.unsat_core())
-    else:
-        raise SynthesisFailure(ucores)
+# Ideas:
+# - Incremental solving?
+# - OGIS loop?
+# - Active learning
+# - Distinguishing inputs (offline/online)
+# - Better sketch enumeration
+# - Partial evaluation
 
 
+# TODO Better "debugability" (ucores, for example)
+def synth(library, examples, program_size=None):
+    for size in itertools.count(program_size):
+        for components in combinations_with_replacement(library, size):
+            solver = z3.Solver()
+
+            with suppress(UnplugableComponents, UnusableInput):
+                program = generate_program(components, examples)
+                constraints = generate_constraints(program, examples)
+
+                solver.add(*constraints)
+
+                if solver.check() == z3.sat:
+                    model = solver.model()
+                    return program, model
+
+
+# TODO Should we use a different representation for symbolic and concrete
+# programs?
 def reconstruct(program, model):
     consts = p.pvector(
         Const(

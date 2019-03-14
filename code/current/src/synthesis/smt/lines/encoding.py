@@ -6,6 +6,9 @@ import pyrsistent as p
 from .types import *
 from .utils import *
 
+# TODO Wonder if a different program representation, like a tree, would give
+# itself to a better smt encoding.
+
 # ---------
 # Constants
 # ---------
@@ -137,11 +140,12 @@ def gen_output_line_constraints(outputs, const_count, input_count):
     start = const_count + input_count + 1
     end = start + len(outputs)
 
+    # Define bounds
     for o in outputs:
         yield z3_val(start) <= o.lineno.get
-        # yield o.lineno.get <= z3_val(end)
-        yield o.lineno.get < z3_val(end)  # TODO Check this again
+        yield o.lineno.get < z3_val(end)
 
+    # Each output is defined in a different line
     for (o1, o2) in itertools.combinations(outputs, r=2):
         yield o1.lineno.get != o2.lineno.get
 
@@ -159,6 +163,10 @@ def gen_sort_line_constraints(inputs, outputs, holes):
     line_holes = ((x.lineno.get, h) for x in holes for h in x.map.values())
 
     all_ = p.v(*line_inputs, *line_outputs, *line_holes)
+
+    # TODO This is probably equivalent to the above.
+    # all_ = p.pvector((x.lineno.get, y) for x in (*inputs, *outputs, *holes)
+    #                  for y in x.map.values())
 
     for (l1, c1), (l2, c2) in itertools.combinations(all_, r=2):
         if c1.sort() != c2.sort():
