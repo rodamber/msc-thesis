@@ -380,20 +380,19 @@ def gen_input_value_constraints(inputs, examples):
 
 
 def synth(library, examples, program_size):
-    # for components in combinations_with_replacement(library, program_size):
-    components = p.v(concat, replace)
-    solver = z3.Solver()
+    for components in combinations_with_replacement(library, program_size):
+        components = p.v(concat, replace)
+        solver = z3.Solver()
 
-    with suppress(UnplugableComponents, UnusableInput):
-        program = generate_program(components, examples)
-        solver.add(*generate_constraints(program, examples))
+        with suppress(UnplugableComponents, UnusableInput):
+            program = generate_program(components, examples)
+            solver.add(*generate_constraints(program, examples))
 
-        if solver.check() == z3.sat:
-            model = solver.model()
-            return program, model, solver
-            # return reconstruct(program, model)
-    # else:
-    #     print('Unable to synthesize :\'(')
+            if solver.check() == z3.sat:
+                model = solver.model()
+                return program, model, solver
+    else:
+        print('Unable to synthesize :\'(')
 
 
 def reconstruct(program, model):
