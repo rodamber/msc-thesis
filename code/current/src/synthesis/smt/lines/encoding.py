@@ -110,17 +110,20 @@ def generate_constraints(program, examples):
     component_count = len(program.lines)
     hole_count = sum(len(l.component.domain) for l in program.lines)
 
+    last_lineno = len(consts) + len(inputs) + len(outputs)
+
     yield from gen_const_line_constraints(consts)
     yield from gen_input_line_constraints(inputs, const_count)
     yield from gen_output_line_constraints(outputs, const_count, input_count)
     yield from gen_hole_line_constraints(program)
-    yield from gen_sort_line_constraints(inputs, holes, outputs)
+    yield from gen_sort_line_constraints(consts, inputs, holes, outputs)
     yield from gen_well_formedness_constraints(holes, consts, inputs, outputs,
                                                examples)
     yield from gen_output_soundness_constraints(program.lines, examples)
     yield from gen_input_output_completeness_constraints(
-        consts, inputs, outputs, holes, examples)
-    yield from gen_correctness_constraints(hole_count, program.lines, examples)
+        last_lineno, inputs, outputs, holes, examples)
+    yield from gen_correctness_constraints(last_lineno, program.lines,
+                                           examples)
     yield from gen_input_value_constraints(inputs, examples)
 
 
@@ -157,16 +160,13 @@ def gen_hole_line_constraints(program):
             yield hole.lineno.get < line.output.lineno.get
 
 
-def gen_sort_line_constraints(inputs, outputs, holes):
+def gen_sort_line_constraints(consts, inputs, outputs, holes):
     line_inputs = ((x.lineno.get, i) for x in inputs for i in x.map.values())
     line_outputs = ((x.lineno.get, o) for x in outputs for o in x.map.values())
     line_holes = ((x.lineno.get, h) for x in holes for h in x.map.values())
+    line_consts = ((x.lineno.get, x.get) for x in consts)
 
-    all_ = p.v(*line_inputs, *line_outputs, *line_holes)
-
-    # TODO This is probably equivalent to the above.
-    # all_ = p.pvector((x.lineno.get, y) for x in (*inputs, *outputs, *holes)
-    #                  for y in x.map.values())
+    all_ = p.v(*line_inputs, *line_outputs, *line_holes, *line_consts)
 
     for (l1, c1), (l2, c2) in itertools.combinations(all_, r=2):
         if c1.sort() != c2.sort():
@@ -198,9 +198,9 @@ def gen_output_soundness_constraints(program_lines, examples):
             yield output == component(*holes)
 
 
-def gen_input_output_completeness_constraints(consts, inputs, outputs, holes,
-                                              examples):
-    for e in examples:
+def gen_input_output_completeness_constraints(last_lineno, inputs, outputs,
+                                              holes, examples):
+    for e in examples:  # FIXME check if this needs to be done for every example.
         for i in inputs:
             input_constraints = p.pvector(
                 i.lineno.get == h.lineno.get for h in holes
@@ -219,17 +219,17 @@ def gen_input_output_completeness_constraints(consts, inputs, outputs, holes,
             if not output_constraints:
                 raise UnplugableComponents()
 
-            last_line = len(consts) + len(inputs) + len(outputs)
-
             # TODO Either this, or add a return hole constant
-            yield z3.Implies(o.lineno.get < z3_val(last_line),
+            yield z3.Implies(o.lineno.get < z3_val(last_lineno),
                              z3.Or(*output_constraints))
 
 
-def gen_correctness_constraints(hole_count, program_lines, examples):
-    last_lineno = z3_val(hole_count + 1)
+def gen_correctness_constraints(last_lineno, program_lines, examples):
     for e in examples:
         for l in program_lines:
+            # Outputs of the last component and the examples must have the
+            # same sort and value. If any of these conditions are not met, then
+            # this component cannot be the last component of the program.
             if l.output.map[e].sort() != type2sort(type(examples[0].output)):
                 yield l.output.lineno.get != last_lineno
             else:

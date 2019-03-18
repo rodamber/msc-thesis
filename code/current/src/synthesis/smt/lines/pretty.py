@@ -1,3 +1,5 @@
+from contextlib import suppress
+
 import pyrsistent as p
 
 from .types import Const
@@ -12,8 +14,9 @@ def pretty_program(program, model, example=None):
     holes = p.pvector(h for line in program.lines for h in line.holes)
 
     def eval(c):
-        # with suppress(ValueError):
-        return z3_as(model[c])
+        # XXX
+        with suppress(ValueError):
+            return z3_as(model[c])
 
     line2val = p.pmap(
         (eval(c.lineno.get), c) for c in p.v(*consts, *inputs, *outputs))
@@ -43,4 +46,4 @@ def pretty_program(program, model, example=None):
             end=' ' if example else '\n')
 
         if example:
-            print(f'# {eval(l.output.map[example])}')
+            print(f'# {repr(eval(l.output.map[example]))}')

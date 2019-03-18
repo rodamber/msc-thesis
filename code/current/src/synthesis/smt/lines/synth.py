@@ -1,6 +1,5 @@
-import itertools
+import itertools as it
 from contextlib import suppress
-from itertools import combinations_with_replacement
 
 import pyrsistent as p
 import z3
@@ -20,9 +19,9 @@ from .utils import *
 
 
 # TODO Better "debugability" (ucores, for example)
-def synth(library, examples, program_size=None):
-    for size in itertools.count(program_size):
-        for components in combinations_with_replacement(library, size):
+def synth(examples, library=default_library, program_size=None):
+    for size in it.islice(it.count(start=1), program_size):
+        for components in it.combinations_with_replacement(library, size):
             solver = z3.Solver()
 
             with suppress(UnplugableComponents, UnusableInput):
@@ -30,10 +29,16 @@ def synth(library, examples, program_size=None):
                 constraints = generate_constraints(program, examples)
 
                 solver.add(*constraints)
+                check = solver.check()
 
-                if solver.check() == z3.sat:
+                if check == z3.sat:
                     model = solver.model()
-                    return program, model
+
+                    from collections import OrderedDict
+                    m = OrderedDict(sorted({repr(d): model[d] for d in model}.items()))
+
+                    return True, (program, model)
+    return False, ()
 
 
 # TODO Should we use a different representation for symbolic and concrete
