@@ -33,10 +33,6 @@ def synth(examples, library=default_library, program_size=None):
 
                 if check == z3.sat:
                     model = solver.model()
-
-                    from collections import OrderedDict
-                    m = OrderedDict(sorted({repr(d): model[d] for d in model}.items()))
-
                     return True, (program, model)
     return False, ()
 
