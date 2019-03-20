@@ -6,51 +6,79 @@ from z3 import *
 from synthesis.smt.lines.components import *
 from synthesis.smt.lines.pretty import pretty_lines, pretty_oneliner
 from synthesis.smt.lines.synth import *
+from synthesis.smt.lines.types import *
 from timewith import timewith
 
-test_concat = p.v(
-    p.v(
-        # Bad: Size 2
-        Example(inputs=p.v('John', 'Doe'), output='John Doe'), ),
-    p.v(
-        # Good: Size 2
-        Example(inputs=p.v('John', 'Doe'), output='John Doe'),
-        Example(inputs=p.v('Anne', 'Smith'), output='Anne Smith')),
-    p.v(
-        # Good: Size 3
-        Example(inputs=p.v('John', 'Doe', '-Odoi'), output='John Doe-Odoi'),
-        Example(
-            inputs=p.v('Anne', 'Smith', '-Sonian'),
-            output='Anne Smith-Sonian')),
-    p.v(
-        # Bad: size 3, learning the prefix
-        Example(inputs=p.v('John', 'Doe'), output='Dr. John Doe'),
-        Example(inputs=p.v('Anne', 'Smith'), output='Dr. Anne Smith')),
-    p.v(
-        # Good: size 3, same as before
-        Example(inputs=p.v('John', 'Doe'), output='Dr. John Doe'),
-        Example(inputs=p.v('Anne', 'Smith'), output='Dr. Anne Smith')),
-    p.v(
-        # Good: size 4
-        Example(
-            inputs=p.v('John', 'Michael', 'Doe'), output='John Michael Doe'),
-        Example(
-            inputs=p.v('Anne', 'Marie', 'Smith'), output='Anne Marie Smith')),
-    p.v(
-        # Good: size 5, learning the prefix
-        Example(
-            inputs=p.v('John', 'Michael', 'Doe'), output='Dr. John Michael Doe'),
-        Example(
-            inputs=p.v('Anne', 'Marie', 'Smith'), output='Dr. Anne Marie Smith')),
-    p.v(
-        # Good: size 6
-        Example(
-            inputs=p.v('John', 'Oliver', 'Michael', 'Doe'),
-            output='John Oliver Michael Doe'),
-        Example(
-            inputs=p.v('Anne', 'Emily', 'Marie', 'Smith'),
-            output='Anne Emily Marie Smith')),
-)
+
+class TestCase(p.PClass):
+    msg = p.field(type=str)
+    examples = p.pvector_field(item_type=Example)
+
+
+class TestList(p.PClass):
+    test_cases = p.pvector_field(item_type=TestCase)
+
+
+test_concat = TestList(
+    test_cases=p.v(
+        TestCase(
+            msg='Bad: Size 2',
+            examples=p.v(
+                Example(inputs=p.v('John', 'Doe'), output='John Doe'), )),
+        TestCase(
+            msg='Good: Size 2',
+            examples=p.v(
+                Example(inputs=p.v('John', 'Doe'), output='John Doe'),
+                Example(inputs=p.v('Anne', 'Smith'), output='Anne Smith'))),
+        TestCase(
+            msg='Good: Size 3',
+            examples=p.v(
+                Example(
+                    inputs=p.v('John', 'Doe', '-Odoi'),
+                    output='John Doe-Odoi'),
+                Example(
+                    inputs=p.v('Anne', 'Smith', '-Sonian'),
+                    output='Anne Smith-Sonian'))),
+        TestCase(
+            msg='Bad: size 3, learning the prefix',
+            examples=p.v(
+                Example(inputs=p.v('John', 'Doe'), output='Dr. John Doe'),
+                Example(inputs=p.v('Anne', 'Smith'),
+                        output='Dr. Anne Smith'))),
+        TestCase(
+            msg='Good: size 3, same as before',
+            examples=p.v(
+                Example(inputs=p.v('John', 'Doe'), output='Dr. John Doe'),
+                Example(inputs=p.v('Anne', 'Smith'),
+                        output='Dr. Anne Smith'))),
+        TestCase(
+            msg='Good: size 4',
+            examples=p.v(
+                Example(
+                    inputs=p.v('John', 'Michael', 'Doe'),
+                    output='John Michael Doe'),
+                Example(
+                    inputs=p.v('Anne', 'Marie', 'Smith'),
+                    output='Anne Marie Smith'))),
+        TestCase(
+            msg='Good: size 5, learning the prefix',
+            examples=p.v(
+                Example(
+                    inputs=p.v('John', 'Michael', 'Doe'),
+                    output='Dr. John Michael Doe'),
+                Example(
+                    inputs=p.v('Anne', 'Marie', 'Smith'),
+                    output='Dr. Anne Marie Smith'))),
+        TestCase(
+            msg='Good: size 6',
+            examples=p.v(
+                Example(
+                    inputs=p.v('John', 'Oliver', 'Michael', 'Doe'),
+                    output='John Oliver Michael Doe'),
+                Example(
+                    inputs=p.v('Anne', 'Emily', 'Marie', 'Smith'),
+                    output='Anne Emily Marie Smith'))),
+    ))
 
 test_index = p.v(
     # Try to find the index of '.'
@@ -182,42 +210,40 @@ test_substr_concat = p.v(
             output='This text is also longer than ...')),
 )
 
-test_all = test_concat + test_index + test_length + test_replace + test_substr + \
-    test_substr_concat + test_substr_index
+# test_all = test_concat + test_index + test_length + test_replace + test_substr + \
+#     test_substr_concat + test_substr_index
 
 
-def main(timeout, arg):
-    test_set = eval('test_' + arg)
+def synth_test(examples, library, min_size, max_size, timeout):
+    with timewith('synthesis'):
+        is_ok, res = synth(
+            examples,
+            library=library,
+            program_min_size=min_size,
+            program_max_size=max_size,
+            timeout=timeout)
+    if is_ok:
+        return res
 
-    for examples in test_set:
-        print('Examples:')
 
-        for example in examples:
-            inputs = list(example.inputs)
-            output = example.output
+def main(test_list, library, min_size, max_size, timeout):
+    logging.basicConfig(
+        format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
-            print(f'\t{inputs} -> {repr(output)}')
+    logging.info('Started synthesis tests')
 
-        with timewith('synthesis'):
-            is_ok, res = synth(
-                examples,
-                library=default_library,
-                program_min_size=1,
-                program_max_size=6,
-                timeout=5000)
+    for test_case in test_list.test_cases:
+        res = synth_test(test_case.examples, library, min_size, max_size,
+                         timeout)
 
-        if is_ok:
+        if res:
             program, model = res
-            example = examples[0]
+            logging.info(f'Program:\t{pretty_oneliner(program, model)}')
 
-            print('Program:\n\t', end='')
-            pretty_oneliner(program, model)
-        else:
-            print('Failure to synthesize.')
+        logging.info('==================================================')
 
-        print('==================================================')
+    logging.info('Finished synthesis tests')
 
 
 if __name__ == '__main__':
-    import sys
-    main(int(sys.argv[1]), '_'.join(sys.argv[2:]))
+    raise Exception()

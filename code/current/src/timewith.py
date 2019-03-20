@@ -1,4 +1,5 @@
 # Taken from: https://zapier.com/engineering/profiling-python-boss/
+import logging
 import time
 
 
@@ -12,7 +13,7 @@ class timewith():
         return time.time() - self.start
 
     def checkpoint(self, name=''):
-        print('{timer} {checkpoint} took {elapsed:.3f} seconds'.format(
+        logging.info('{timer} {checkpoint} took {elapsed:.3f} seconds'.format(
             timer=self.name,
             checkpoint=name,
             elapsed=self.elapsed,

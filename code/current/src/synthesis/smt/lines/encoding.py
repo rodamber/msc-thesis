@@ -207,7 +207,7 @@ def gen_input_output_completeness_constraints(last_lineno, inputs, outputs,
                 if i.map[e].sort() == h.map[e].sort())
 
             if not input_constraints:
-                raise UnusableInput()
+                raise UnusableInput(i)
 
             yield z3.Or(*input_constraints)
 

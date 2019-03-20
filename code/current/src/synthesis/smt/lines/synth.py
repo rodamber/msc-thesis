@@ -1,4 +1,5 @@
 import itertools as it
+import logging
 from contextlib import suppress
 
 import pyrsistent as p
@@ -18,6 +19,7 @@ from .utils import *
 # - Partial evaluation
 
 # TODO Better "debugability" (ucores, for example)
+
 # FIXME synthesis results depend on previous runs because the solver is
 # retaining constants.
 
@@ -27,12 +29,23 @@ def synth(examples,
           program_min_size=1,
           program_max_size=None,
           timeout=None):
-    for size in it.islice(it.count(start=program_min_size), program_max_size):
+
+    synth_log_parameters(examples, library, program_min_size, program_max_size,
+                         timeout)
+
+    for size in it.islice(
+            it.count(start=program_min_size), 0,
+            program_max_size - program_min_size + 1):
+        logging.debug(f'Enumerating program size: {size}')
+
         for components in it.combinations_with_replacement(library, size):
+            components_names = tuple(c.name for c in components)
+            logging.debug(f'Enumerated components: {components_names}')
+
             solver = z3.Solver(  # ctx=z3.Context()
             )
 
-            with suppress(UnplugableComponents, UnusableInput):
+            try:
                 program = generate_program(components, examples)
                 constraints = generate_constraints(program, examples)
 
@@ -43,10 +56,48 @@ def synth(examples,
 
                 check = solver.check()
 
+                logging.debug(f'Solver result: {repr(check).upper()}')
+
                 if check == z3.sat:
                     model = solver.model()
                     return True, (program, model)
+
+            except UnplugableComponents:
+                logging.debug(f'Unplugable components')
+            except UnusableInput as e:
+                logging.debug(f'Unusable input {e.input}')
+
     return False, ()
+
+
+def synth_log_parameters(examples, library, program_min_size, program_max_size,
+                         timeout):
+    synth_log_examples(examples)
+    synth_log_library(library)
+    synth_log_program_size(program_min_size, program_max_size)
+    synth_log_timeout(timeout)
+
+
+def synth_log_examples(examples):
+    logging.debug('Examples:')
+    for ex in examples:
+        logging.debug(f'\t{tuple(ex.inputs)} --> {repr(ex.output)}')
+
+
+def synth_log_library(library):
+    logging.debug(f'Library of components:')
+
+    for name in (c.name for c in library):
+        logging.debug(f'\t{name}')
+
+
+def synth_log_program_size(program_min_size, program_max_size):
+    logging.debug(f'Min size: {program_min_size}')
+    logging.debug(f'Max size: {program_max_size}')
+
+
+def synth_log_timeout(timeout):
+    logging.debug(f'Z3 timeout: {timeout}')
 
 
 # TODO Should we use a different representation for symbolic and concrete

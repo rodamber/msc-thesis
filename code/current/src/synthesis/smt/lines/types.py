@@ -54,7 +54,8 @@ class UnplugableComponents(Exception):
 
 
 class UnusableInput(Exception):
-    pass
+    def __init__(self, input_):
+        self.input = input_
 
 
 class SynthesisFailure(Exception):

@@ -31,8 +31,8 @@ def pretty_oneliner(program, model):
         s = line.component.name + '(' + ', '.join(hs) + ')'
         show.update({eval(line.output.lineno.get, model): s})
 
-    print(f"({', '.join(inputs.values())}) \u21A6 ", end='')
-    print(show[max(show, key=show.get)])
+    return f"({', '.join(inputs.values())}) \u21A6 " + \
+        show[max(show, key=show.get)]
 
 
 # XXX
