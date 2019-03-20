@@ -216,8 +216,9 @@ def gen_input_output_completeness_constraints(last_lineno, inputs, outputs,
                 o.lineno.get == h.lineno.get for h in holes
                 if o.map[e].sort() == h.map[e].sort())
 
-            if not output_constraints:
-                raise UnplugableComponents()
+            # # FIXME
+            # if not output_constraints:
+            #     raise UnplugableComponents()
 
             # TODO Either this, or add a return hole constant
             yield z3.Implies(o.lineno.get < z3_val(last_lineno),

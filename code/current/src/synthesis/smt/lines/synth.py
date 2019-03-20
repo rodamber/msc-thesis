@@ -19,8 +19,12 @@ from .utils import *
 
 
 # TODO Better "debugability" (ucores, for example)
-def synth(examples, library=default_library, program_size=None):
-    for size in it.islice(it.count(start=1), program_size):
+def synth(examples,
+          library=default_library,
+          program_min_size=1,
+          program_max_size=None,
+          timeout=None):
+    for size in it.islice(it.count(start=program_min_size), program_max_size):
         for components in it.combinations_with_replacement(library, size):
             solver = z3.Solver()
 
@@ -29,6 +33,10 @@ def synth(examples, library=default_library, program_size=None):
                 constraints = generate_constraints(program, examples)
 
                 solver.add(*constraints)
+
+                if timeout:
+                    solver.set('timeout', timeout)
+
                 check = solver.check()
 
                 if check == z3.sat:
