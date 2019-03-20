@@ -37,12 +37,14 @@ substr = Component(
     name='substr',
     domain=(str, int, int),
     ret_type=str,
-    function=lambda text, i, j: z3.SubString(text, i, j - i))
+    function=lambda text, i, j: z3.SubString(text, i, j))
+
+default_library = p.v(concat, index, length, replace, substr)
+
+# Other components (sketches, really)
 
 replace2 = Component(
     name='replace2',
     domain=(str, str, str, str),
     ret_type=str,
     function=lambda x, y, z, w: z3.Replace(z3.Replace(x, y, z), y, w))
-
-default_library = p.v(concat, index, length, replace, substr)
