@@ -1,0 +1,210 @@
+Examples:
+	['John', 'Doe'] -> 'John Doe'
+synthesis finished took 0.174 seconds
+Program:
+	(a, b) ↦ replace('Doe Doe', b, a)
+==================================================
+Examples:
+	['John', 'Doe'] -> 'John Doe'
+	['Anne', 'Smith'] -> 'Anne Smith'
+synthesis finished took 0.228 seconds
+Program:
+	(a, b) ↦ concat(a, concat(' ', b))
+==================================================
+Examples:
+	['outsystems', 'com'] -> 'outsystems.com'
+synthesis finished took 0.120 seconds
+Program:
+	(a, b) ↦ replace('com.com', b, a)
+==================================================
+Examples:
+	['outsystems', 'com'] -> 'outsystems.com'
+	['cmu', 'edu'] -> 'cmu.edu'
+synthesis finished took 0.201 seconds
+Program:
+	(a, b) ↦ concat(a, concat('.', b))
+==================================================
+Examples:
+	['rodrigo', '.', 'bernardo', 'gmail', 'com'] -> 'rodrigo.bernardo@gmail.com'
+	['pedro', '.', 'orvalho', 'tecnico', 'pt'] -> 'pedro.orvalho@tecnico.pt'
+synthesis finished took 254.415 seconds
+Failure to synthesize.
+==================================================
+Examples:
+	['rodrigo', 'bernardo', 'gmail', 'com'] -> 'rodrigo.bernardo@gmail.com'
+	['pedro', 'orvalho', 'tecnico', 'pt'] -> 'pedro.orvalho@tecnico.pt'
+synthesis finished took 117.066 seconds
+Program:
+	(a, b, c, d) ↦ d
+==================================================
+Examples:
+	['outsystems.com'] -> 10
+synthesis finished took 0.256 seconds
+Program:
+	(a) ↦ substr('\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00outsystems.com', 0, 25)
+==================================================
+Examples:
+	['outsystems.com'] -> 10
+	['cmu.edu'] -> 3
+synthesis finished took 0.502 seconds
+Program:
+	(a) ↦ substr('\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00.', 9, 3981)
+==================================================
+Examples:
+	['outsystems.com', '.'] -> 10
+synthesis finished took 0.302 seconds
+Program:
+	(a, b) ↦ substr(a, 0, 1251)
+==================================================
+Examples:
+	['outsystems.com'] -> 10
+	['abc@gmail.com'] -> 9
+	['abc.gmail.com'] -> 3
+synthesis finished took 4.915 seconds
+Program:
+	(a) ↦ substr(a, index('.', '.'), 15)
+==================================================
+Examples:
+	['abc'] -> 3
+	['rodrigo'] -> 7
+	['pedro'] -> 5
+synthesis finished took 0.753 seconds
+Program:
+	(a) ↦ substr(a, 0, 2)
+==================================================
+Examples:
+	['John Doe'] -> 'John_Doe'
+synthesis finished took 0.084 seconds
+Program:
+	(a) ↦ replace(a, 'John ', 'John_')
+==================================================
+Examples:
+	['John Doe'] -> 'John_Doe'
+	['Michael Scott'] -> 'Michael_Scott'
+synthesis finished took 0.203 seconds
+Program:
+	(a) ↦ replace(a, ' ', '_')
+==================================================
+Examples:
+	['01/01/2000'] -> '01-01-2000'
+synthesis finished took 0.081 seconds
+Program:
+	(a) ↦ replace(a, '01/01/20', '01-01-20')
+==================================================
+Examples:
+	['01/01/2000', '/', '-'] -> '01-01-2000'
+	['01/02/2000', '/', '-'] -> '01-02-2000'
+synthesis finished took 277.218 seconds
+Failure to synthesize.
+==================================================
+Examples:
+	['01/01/2000', '/'] -> '01-01-2000'
+	['01/02/2000', '/'] -> '01-02-2000'
+synthesis finished took 45.602 seconds
+Program:
+	(a, b) ↦ substr(substr('\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0001-02-2000\\x00\\x0001-01-2000\\x00\\x00\\x00\\x00\\x00', index('\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0001/02/2000\\x00\\x0001/01/2000\\x00', a), 34), length(b), index('\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0001/02/2000\\x00\\x0001/01/2000\\x00', a))
+==================================================
+Examples:
+	['01/01/2000'] -> '01-01-2000'
+	['01/02/2000'] -> '01-02-2000'
+synthesis finished took 48.652 seconds
+Program:
+	(a) ↦ substr(substr('\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0001-01-2000\\x00\\x00\\x0001-02-2000', index('\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0001/01/2000\\x00\\x00\\x0001/02/2000', a), 5748), length('\\x00\\x00'), index('\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0001/01/2000\\x00\\x00\\x0001/02/2000', a))
+==================================================
+Examples:
+	['Text longer than thirty characters.'] -> 'Text longer than thirty charac'
+synthesis finished took 0.723 seconds
+Program:
+	(a) ↦ replace(a, 'n thirty characters.', 'n thirty charac')
+==================================================
+Examples:
+	['Text longer than thirty characters.'] -> 'Text longer than thirty charac'
+	['Small text.'] -> 'Small text.'
+synthesis finished took 0.897 seconds
+Program:
+	(a) ↦ replace(a, 'r than thirty characters.', 'r than thirty charac')
+==================================================
+Examples:
+	['Text longer than thirty characters.'] -> 'Text longer than thirty charac'
+	['Small text.'] -> 'Small text.'
+	['This text is also longer than thirty characters.'] -> 'This text is also longer than '
+synthesis finished took 1.213 seconds
+Program:
+	(a) ↦ substr(a, 0, 30)
+==================================================
+Examples:
+	['01/04/2000'] -> '01'
+synthesis finished took 0.068 seconds
+Program:
+	(a) ↦ replace(a, '1/04/2000', '1')
+==================================================
+Examples:
+	['01/04/2000'] -> '01'
+	['02/05/2000'] -> '02'
+synthesis finished took 0.228 seconds
+Program:
+	(a) ↦ substr(a, 0, 2)
+==================================================
+Examples:
+	['01/04/2000'] -> '04'
+	['02/05/2000'] -> '05'
+synthesis finished took 0.308 seconds
+Program:
+	(a) ↦ substr(a, 3, 5)
+==================================================
+Examples:
+	['01/04/2000'] -> '2000'
+	['02/05/2001'] -> '2001'
+synthesis finished took 0.496 seconds
+Program:
+	(a) ↦ substr(a, 6, 985)
+==================================================
+Examples:
+	['Text longer than thirty characters.'] -> 'Text longer than thirty charac...'
+synthesis finished took 2.228 seconds
+Program:
+	(a) ↦ substr(a, 36, 36)
+==================================================
+Examples:
+	['Text longer than thirty characters.'] -> 'Text longer than thirty charac...'
+	['Small text.'] -> 'Small text.'
+synthesis finished took 2.042 seconds
+Program:
+	(a) ↦ replace(a, 'Text longer than thirty characters', 'Text longer than thirty charac..')
+==================================================
+Examples:
+	['Text longer than thirty characters.'] -> 'Text longer than thirty charac...'
+	['Small text.'] -> 'Small text.'
+	['This text is also longer than thirty characters.'] -> 'This text is also longer than ...'
+synthesis finished took 338.654 seconds
+Failure to synthesize.
+==================================================
+Examples:
+	['outsystems.com'] -> 'outsystems'
+	['cmu.edu'] -> 'cmu'
+	['tecnico.pt'] -> 'tecnico'
+synthesis finished took 2.002 seconds
+Program:
+	(a) ↦ substr(a, 0, index(a, '.'))
+==================================================
+Examples:
+	['outsystems.com', '.'] -> 'outsystems'
+	['cmu.edu', '.'] -> 'cmu'
+synthesis finished took 1.714 seconds
+Program:
+	(a, b) ↦ substr(a, 0, index(a, b))
+==================================================
+Examples:
+	['www.outsystems.com'] -> 'outsystems'
+	['www.cmu.edu'] -> 'cmu'
+	['www.tecnico.pt'] -> 'tecnico'
+synthesis finished took 333.331 seconds
+Failure to synthesize.
+==================================================
+Examples:
+	['outsystems.com'] -> 'outsystems'
+	['cmu.edu'] -> 'cmu'
+synthesis finished took 2.380 seconds
+Program:
+	(a) ↦ substr(a, 0, index('\\x00\\x00\\x00cmu.eduoutsystems.com', a))
+==================================================
