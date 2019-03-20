@@ -17,8 +17,11 @@ from .utils import *
 # - Better sketch enumeration
 # - Partial evaluation
 
-
 # TODO Better "debugability" (ucores, for example)
+# FIXME synthesis results depend on previous runs because the solver is
+# retaining constants.
+
+
 def synth(examples,
           library=default_library,
           program_min_size=1,
@@ -26,7 +29,8 @@ def synth(examples,
           timeout=None):
     for size in it.islice(it.count(start=program_min_size), program_max_size):
         for components in it.combinations_with_replacement(library, size):
-            solver = z3.Solver()
+            solver = z3.Solver(  # ctx=z3.Context()
+            )
 
             with suppress(UnplugableComponents, UnusableInput):
                 program = generate_program(components, examples)
