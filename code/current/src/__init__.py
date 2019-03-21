@@ -1,1 +1,1 @@
-from . import synthesis, tyrell
+from . import synthesis, test_cases

@@ -4,34 +4,37 @@ from contextlib import suppress
 
 import pyrsistent as p
 import z3
+from toolz import curry
 
 from .components import *
 from .encoding import *
 from .types import *
 from .utils import *
 
-# Ideas:
-# - Incremental solving?
-# - OGIS loop?
-# - Active learning
-# - Distinguishing inputs (offline/online)
-# - Better sketch enumeration
-# - Partial evaluation
 
-# TODO Better "debugability" (ucores, for example)
-
-# FIXME synthesis results depend on previous runs because the solver is
-# retaining constants.
+def default_library():
+    return (concat, index, length, replace, substr)
 
 
-def synth(examples,
-          library=default_library,
-          program_min_size=1,
-          program_max_size=None,
-          timeout=None):
+def config(library=default_library(),
+           program_min_size=1,
+           program_max_size=None,
+           timeout=None):
+    return Config(
+        library=library,
+        program_min_size=program_min_size,
+        program_max_size=program_max_size,
+        timeout=timeout)
 
-    synth_log_parameters(examples, library, program_min_size, program_max_size,
-                         timeout)
+
+@curry
+def synth(config, examples):
+    synth_log_parameters(config)
+
+    library = config.library
+    program_min_size = config.program_min_size
+    program_max_size = config.program_max_size
+    timeout = config.timeout
 
     for size in it.islice(it.count(), program_min_size - 1, program_max_size):
         logging.debug(f'Enumerating program size: {size}')
@@ -68,18 +71,10 @@ def synth(examples,
     return False, ()
 
 
-def synth_log_parameters(examples, library, program_min_size, program_max_size,
-                         timeout):
-    synth_log_examples(examples)
-    synth_log_library(library)
-    synth_log_program_size(program_min_size, program_max_size)
-    synth_log_timeout(timeout)
-
-
-def synth_log_examples(examples):
-    logging.debug('Examples:')
-    for ex in examples:
-        logging.debug(f'\t{tuple(ex.inputs)} --> {repr(ex.output)}')
+def synth_log_parameters(config):
+    synth_log_library(config.library)
+    synth_log_program_size(config.program_min_size, config.program_max_size)
+    synth_log_timeout(config.timeout)
 
 
 def synth_log_library(library):

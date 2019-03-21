@@ -39,8 +39,6 @@ substr = Component(
     ret_type=str,
     function=lambda text, i, j: z3.SubString(text, i, j))
 
-default_library = p.v(concat, index, length, replace, substr)
-
 # Other components (sketches, really)
 
 replace2 = Component(

@@ -13,6 +13,10 @@ class Example(p.PClass):
     output = p.field(mandatory=True, type=object)
 
 
+def example(inputs, output):
+    return Example(inputs=p.pvector(inputs), output=output)
+
+
 class Lineno(p.PClass):
     get = p.field(mandatory=True, type=object)
 
@@ -61,3 +65,12 @@ class UnusableInput(Exception):
 class SynthesisFailure(Exception):
     def __init__(self, ucores=p.pmap()):
         self.ucores = ucores
+
+
+class Config(p.PRecord):
+    library = p.pvector_field(item_type=Component)
+    program_min_size = p.field(type=int)
+    program_max_size = p.field()
+    timeout = p.field()
+
+
