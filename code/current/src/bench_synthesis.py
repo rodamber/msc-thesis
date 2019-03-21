@@ -2,6 +2,7 @@ import logging
 import sys
 import time
 
+import test_cases
 from synthesis.pretty import pretty_oneliner
 from synthesis.synth import config, synth
 from test_cases import all_test_cases
@@ -35,7 +36,13 @@ def log_examples(examples):
         logging.info(f'\t{tuple(ex.inputs)} --> {repr(ex.output)}')
 
 
-if __name__ == '__main__':
-    logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
+def main(log_level=logging.INFO):
+    logging.basicConfig(
+        format='%(levelname)s:%(message)s', level=log_level)
 
-    bench(config(timeout=1000), all_test_cases())
+    examples = all_test_cases()
+    bench(config(timeout=1000), examples)
+
+
+if __name__ == '__main__':
+    main(logging.INFO)

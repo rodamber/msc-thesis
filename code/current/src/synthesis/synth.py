@@ -36,20 +36,20 @@ def synth(config, examples):
     program_max_size = config.program_max_size
     timeout = config.timeout
 
-    for size in it.islice(it.count(), program_min_size - 1, program_max_size):
+    for size in it.islice(it.count(), program_min_size, program_max_size):
         logging.debug(f'Enumerating program size: {size}')
 
         for components in it.combinations_with_replacement(library, size):
             components_names = tuple(c.name for c in components)
             logging.debug(f'Enumerated components: {components_names}')
 
-            solver = z3.Solver(  # ctx=z3.Context()
-            )
-
             try:
-                program = generate_program(components, examples)
-                constraints = generate_constraints(program, examples)
+                ctx = z3.Context()
 
+                program = generate_program(components, examples, ctx)
+                constraints = generate_constraints(program, examples, ctx)
+
+                solver = z3.Solver(ctx=ctx)
                 solver.add(*constraints)
 
                 if timeout:
