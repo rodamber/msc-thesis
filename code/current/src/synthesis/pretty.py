@@ -32,7 +32,7 @@ def pretty_oneliner(program, model):
         show.update({eval(line.output.lineno.get, model): s})
 
     return f"({', '.join(inputs.values())}) \u21A6 " + \
-        show[max(show, key=show.get)]
+        show[max(show.keys())]
 
 
 # XXX

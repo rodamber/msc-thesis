@@ -12,8 +12,8 @@ from .types import *
 from .utils import *
 
 
-def default_library():
-    return (concat, index, length, replace, substr)
+def default_library(*args):
+    return (concat, index, length, replace, substr) + tuple(args)
 
 
 def config(library=default_library(),
@@ -39,7 +39,10 @@ def synth(config, examples):
     timeout = config.timeout
     const_max_len = config.string_constant_max_len
 
-    for size in it.islice(it.count(), program_min_size, program_max_size):
+    start = program_min_size
+    stop = program_max_size + 1 if program_max_size else None
+
+    for size in it.islice(it.count(), start, stop):
         logging.debug(f'Enumerating program size: {size}')
 
         for components in it.combinations_with_replacement(library, size):

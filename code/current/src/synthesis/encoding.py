@@ -132,6 +132,8 @@ def generate_constraints(program, examples, const_max_len, ctx):
 
     # New
     yield from gen_const_size_constraints(consts, const_max_len, ctx)
+    yield from gen_input_neq_const_constraints(consts, inputs)
+    # yield from gen_const_not_contains_input_constraints(consts, inputs, ctx)
 
 
 def gen_const_line_constraints(consts, ctx):
@@ -205,6 +207,9 @@ def gen_output_soundness_constraints(program_lines, examples, ctx):
 
             yield output == component(*holes)
 
+            if line.component.spec:
+                yield line.component.spec(ctx, *holes)
+
 
 def gen_input_output_completeness_constraints(last_lineno, inputs, outputs,
                                               holes, examples, ctx):
@@ -229,7 +234,7 @@ def gen_input_output_completeness_constraints(last_lineno, inputs, outputs,
 
         # TODO Either this, or add a return hole constant
         yield z3.Implies(o.lineno.get < z3_val(last_lineno, ctx),
-                            z3.Or(*output_constraints, ctx), ctx)
+                         z3.Or(*output_constraints, ctx), ctx)
 
 
 def gen_correctness_constraints(last_lineno, program_lines, examples, ctx):
@@ -256,3 +261,23 @@ def gen_const_size_constraints(consts, max_size, ctx):
     for const in consts:
         if const.get.sort() == z3.StringSort(ctx):
             yield z3.Length(const.get) <= z3_val(max_size, ctx)
+
+
+def gen_input_neq_const_constraints(consts, inputs):
+    for i in inputs:
+        for const in consts:
+            for x in filter(lambda x: x.sort() == const.get.sort(),
+                            i.map.values()):
+                yield const.get != x
+
+
+# FIXME z3 ignores these constraints, so I'm turning them off
+# FIXME If this worked, we wouldn't need the constraints preventing string
+# constants from being equal to the inputs
+def gen_const_not_contains_input_constraints(consts, inputs, ctx):
+    for i in inputs:
+        for const in consts:
+            if const.get.sort() == i.map.values()[0].sort() \
+               == z3.StringSort(ctx):
+                for x in i.map.values():
+                    yield z3.Not(z3.Contains(const.get, x), ctx)

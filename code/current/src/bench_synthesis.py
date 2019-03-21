@@ -1,32 +1,9 @@
 import logging
-import sys
 import time
 
 import test_cases
 from synthesis.pretty import pretty_oneliner
-from synthesis.synth import config, synth
-from test_cases import all_test_cases
-
-
-def bench(config, test_cases):
-    logging.info('Started synthesis tests')
-
-    for test_case in test_cases:
-        log_examples(test_case)
-
-        start = time.time()
-        is_ok, res = synth(config, test_case)
-        end = time.time()
-
-        logging.info(f'Elapsed time: {end - start:.3f} seconds')
-
-        if is_ok:
-            program, model = res
-            logging.info(f'Program:\t{pretty_oneliner(program, model)}')
-
-        logging.info('==================================================')
-
-    logging.info('Finished synthesis tests')
+from synthesis.synth import config, default_library, synth
 
 
 def log_examples(examples):
@@ -36,13 +13,44 @@ def log_examples(examples):
         logging.info(f'\t{tuple(ex.inputs)} --> {repr(ex.output)}')
 
 
-def main(log_level=logging.INFO):
-    logging.basicConfig(
-        format='%(levelname)s:%(message)s', level=log_level)
+def bench(config, examples):
+    log_examples(examples)
 
-    examples = all_test_cases()
-    bench(config(timeout=1000), examples)
+    start = time.time()
+    is_ok, res = synth(config, examples)
+    end = time.time()
+
+    logging.info(f'Elapsed time: {end - start:.3f} seconds')
+
+    if is_ok:
+        program, model = res
+        pretty = pretty_oneliner(program, model)
+
+        logging.info(f'Program:\t{pretty}')
+
+    logging.info('==================================================')
+
+
+def main(log_level=logging.INFO):
+    logging.basicConfig(format='%(levelname)s:%(message)s', level=log_level)
+
+    logging.info('Started synthesis tests')
+
+    library = default_library()
+    timeout = 10 * 1000
+
+    for examples in test_cases.all_test_cases():
+        bench(
+            examples=examples,
+            config=config(
+                timeout=timeout,
+                program_min_size=1,
+                program_max_size=6,
+                library=library
+            ))
+
+    logging.info('Finished synthesis tests')
 
 
 if __name__ == '__main__':
-    main(logging.INFO)
+    main(logging.DEBUG)

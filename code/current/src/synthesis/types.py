@@ -6,6 +6,7 @@ class Component(p.PClass):
     domain = p.pvector_field(item_type=type)
     ret_type = p.field(mandatory=True, type=type)
     function = p.field(mandatory=True, type=object)
+    spec = p.field(initial=None, mandatory=True)
 
 
 class Example(p.PClass):
