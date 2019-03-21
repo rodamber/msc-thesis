@@ -1,1 +1,1 @@
-from . import synthesis, timewith, tyrell
+from . import synthesis, tyrell
