@@ -33,9 +33,7 @@ def synth(examples,
     synth_log_parameters(examples, library, program_min_size, program_max_size,
                          timeout)
 
-    for size in it.islice(
-            it.count(start=program_min_size), 0,
-            program_max_size - program_min_size + 1):
+    for size in it.islice(it.count(), program_min_size - 1, program_max_size):
         logging.debug(f'Enumerating program size: {size}')
 
         for components in it.combinations_with_replacement(library, size):
