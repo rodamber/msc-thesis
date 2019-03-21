@@ -1,0 +1,14 @@
+({StrHole(name='x36'): 'hcdbesx', StrHole(name='x37'): 'dbesx', StrHole(name='x38'): 'umplaa', IntHole(name='x39'): 6, IntHole(name='x40'): 7}, 'a')
+({StrHole(name='x36'): 'dudjel', StrHole(name='x37'): 'udjel', StrHole(name='x38'): 'pdyl', IntHole(name='x39'): 2, IntHole(name='x40'): 5}, 'dyl')
+({StrHole(name='x36'): 'efpadwg', StrHole(name='x37'): 'adwg', StrHole(name='x38'): 'pguh', IntHole(name='x39'): 5, IntHole(name='x40'): 6}, 'u')
+({StrHole(name='x36'): 'melmsah', StrHole(name='x37'): 'lmsa', StrHole(name='x38'): 'jjqh', IntHole(name='x39'): 0, IntHole(name='x40'): 3}, 'mej')
+({StrHole(name='x36'): 'cvhaoy', StrHole(name='x37'): 'cvha', StrHole(name='x38'): 'dtdryop', IntHole(name='x39'): 1, IntHole(name='x40'): 4}, 'tdr')
+
+=== Solution ===
+Substr
+├── Replace
+│   ├── StrHole(name='x36')
+│   ├── StrHole(name='x37')
+│   └── StrHole(name='x38')
+├── IntHole(name='x39')
+└── IntHole(name='x40')

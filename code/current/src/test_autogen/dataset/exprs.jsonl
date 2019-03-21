@@ -1,0 +1,10 @@
+{"text": "FormatDecimal(JMStoreShow.Record.JMStores.Codigo, 0, Site.DecimalSeparator, Site.GroupSeparator)", "functions": ["FormatDecimal"]}
+{"text": "GetMenuItem(Entities.MenuItem.JMStores).MenuItem.Caption", "functions": ["GetMenuItem"]}
+{"text": "GetUser(GetUserId()).User.Name", "functions": ["GetUser", "GetUserId"]}
+{"text": "TableRecords1.List.Current.File.Path + \"/\" + TableRecords1.List.Current.File.Filename", "functions": []}
+{"text": "If(HelpSectionId = NullIdentifier(), \"(New)\",\nIf(GetSectionByLanguage.List.Empty, \"(New Translation)\", GetSectionByLanguage.List.Current.HELP_SECTION_L.SectionTitle))", "functions": ["If", "NullIdentifier"]}
+{"text": "If(GetHelpConfig.List.Current.HELP_CONFIG.Tooltip_Popup, \"\",\n\"<span id='framehtml'>\" +\n\"<iframe src='\" + URL + \"' frameborder='0' width='\" + GetHelpConfig.List.Current.HELP_CONFIG.Tooltip_Width + \"' height='\" + GetHelpConfig.List.Current.HELP_CONFIG.Tooltip_Height + \"'></iframe>\" +\n\"</span>\")", "functions": ["If"]}
+{"text": "If(GetHelpConfig.List.Current.HELP_CONFIG.Tooltip_Popup = False,\"<script type='text/javascript' src='wz_tooltip.js'></script> \",\"\")", "functions": ["If"]}
+{"text": "ListRecordsHelp.List.Current.HELP_SECTION_L.SectionContent", "functions": []}
+{"text": "If(QuerySections.List.Current.HELP_SECTION.IsActive, \"\", \"Inactive\")", "functions": ["If"]}
+{"text": "ListRecordsHelp.List.Current.HELP_SECTION_L.SectionTitle", "functions": []}

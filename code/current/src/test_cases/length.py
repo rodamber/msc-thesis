@@ -1,4 +1,4 @@
-from synthesis.smt.lines.types import example
+from synthesis.types import example
 
 cases = (
     # Try to find the length of a string

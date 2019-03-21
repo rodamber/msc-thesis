@@ -1,0 +1,23 @@
+({StrHole(name='x62'): 'proxkvr', StrHole(name='x63'): 'oxkvr', StrHole(name='x64'): 'bpspp', StrHole(name='x65'): 'rbpsp', StrHole(name='x66'): 'hupvel', StrHole(name='x67'): 'upve', StrHole(name='x68'): 'bagsdz', StrHole(name='x69'): 'hbags', StrHole(name='x70'): 'jfhl', StrHole(name='x71'): 'pjfhl', StrHole(name='x72'): 'mtdh'}, 'mtdhdzlp')
+({StrHole(name='x62'): 'eoyfz', StrHole(name='x63'): 'oyfz', StrHole(name='x64'): 'hdidspb', StrHole(name='x65'): 'ehdids', StrHole(name='x66'): 'xlucyau', StrHole(name='x67'): 'ucya', StrHole(name='x68'): 'whsve', StrHole(name='x69'): 'eupb', StrHole(name='x70'): 'zptvhz', StrHole(name='x71'): 'zptvh', StrHole(name='x72'): 'ctlo'}, 'xlwhsvctloz')
+({StrHole(name='x62'): 'dksgyl', StrHole(name='x63'): 'dksg', StrHole(name='x64'): 'daigdcj', StrHole(name='x65'): 'aigd', StrHole(name='x66'): 'jxhppss', StrHole(name='x67'): 'cjyl', StrHole(name='x68'): 'wcgfo', StrHole(name='x69'): 'djxhp', StrHole(name='x70'): 'lgbl', StrHole(name='x71'): 'pssw', StrHole(name='x72'): 'crpep'}, 'lgblcrpepcgfo')
+({StrHole(name='x62'): 'tjgvbte', StrHole(name='x63'): 'vbte', StrHole(name='x64'): 'zaju', StrHole(name='x65'): 'zaju', StrHole(name='x66'): 'gqlthcw', StrHole(name='x67'): 'gqlth', StrHole(name='x68'): 'wdihjd', StrHole(name='x69'): 'tjgw', StrHole(name='x70'): 'defm', StrHole(name='x71'): 'dihj', StrHole(name='x72'): 'ctpx'}, 'defmctpxdcw')
+({StrHole(name='x62'): 'xqohofy', StrHole(name='x63'): 'qohofy', StrHole(name='x64'): 'rukqxf', StrHole(name='x65'): 'xrukq', StrHole(name='x66'): 'lobqjn', StrHole(name='x67'): 'obqjnx', StrHole(name='x68'): 'ahpx', StrHole(name='x69'): 'ahpxf', StrHole(name='x70'): 'czzjhtd', StrHole(name='x71'): 'jhtd', StrHole(name='x72'): 'abugjrt'}, 'lczzabugjrt')
+
+=== Solution ===
+Replace
+├── Replace
+│   ├── Replace
+│   │   ├── Replace
+│   │   │   ├── Replace
+│   │   │   │   ├── StrHole(name='x62')
+│   │   │   │   ├── StrHole(name='x63')
+│   │   │   │   └── StrHole(name='x64')
+│   │   │   ├── StrHole(name='x65')
+│   │   │   └── StrHole(name='x66')
+│   │   ├── StrHole(name='x67')
+│   │   └── StrHole(name='x68')
+│   ├── StrHole(name='x69')
+│   └── StrHole(name='x70')
+├── StrHole(name='x71')
+└── StrHole(name='x72')

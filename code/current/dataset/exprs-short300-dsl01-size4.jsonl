@@ -1,0 +1,1 @@
+{"text": "Replace(Replace(Replace(Replace(Site.BodyMessage_EndorsementMessage,\"$Endorser$\",\"Endorser\"),\"$RoleName$\",RoleName),\"$URLEndorsementBox$\",Endorsement_Box_URL),\"$UserName$\",GetUserToEndorse.List.Current.USER_MASTER.Name)\n\n\n\n\n", "functions": ["Replace"]}

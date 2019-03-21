@@ -1,0 +1,20 @@
+({StrHole(name='x53'): 'ggfgxm', StrHole(name='x54'): 'ggfgx', StrHole(name='x55'): 'admblfj', StrHole(name='x56'): 'dmblf', StrHole(name='x57'): 'snxebn', StrHole(name='x58'): 'nxebnj', StrHole(name='x59'): 'kbap', StrHole(name='x60'): 'skbap', StrHole(name='x61'): 'etxv'}, 'aetxvm')
+({StrHole(name='x53'): 'trknhl', StrHole(name='x54'): 'trkn', StrHole(name='x55'): 'ztticpi', StrHole(name='x56'): 'ztti', StrHole(name='x57'): 'eptja', StrHole(name='x58'): 'jacpihl', StrHole(name='x59'): 'nkpw', StrHole(name='x60'): 'ptnkp', StrHole(name='x61'): 'owwk'}, 'eowwkw')
+({StrHole(name='x53'): 'kuuhl', StrHole(name='x54'): 'kuuh', StrHole(name='x55'): 'aswzx', StrHole(name='x56'): 'aswz', StrHole(name='x57'): 'glvtb', StrHole(name='x58'): 'vtbxl', StrHole(name='x59'): 'gvwd', StrHole(name='x60'): 'glgv', StrHole(name='x61'): 'qccr'}, 'qccrwd')
+({StrHole(name='x53'): 'asfavfp', StrHole(name='x54'): 'asfav', StrHole(name='x55'): 'qbya', StrHole(name='x56'): 'byafp', StrHole(name='x57'): 'pcdyeoc', StrHole(name='x58'): 'qpcdyeo', StrHole(name='x59'): 'kpnmmda', StrHole(name='x60'): 'pnmmd', StrHole(name='x61'): 'yisvz'}, 'kyisvzac')
+({StrHole(name='x53'): 'qknskj', StrHole(name='x54'): 'knskj', StrHole(name='x55'): 'rhsvtdl', StrHole(name='x56'): 'qrhsv', StrHole(name='x57'): 'mwgb', StrHole(name='x58'): 'wgbtdl', StrHole(name='x59'): 'taumo', StrHole(name='x60'): 'aumo', StrHole(name='x61'): 'qypp'}, 'mtqypp')
+
+=== Solution ===
+Replace
+├── Replace
+│   ├── Replace
+│   │   ├── Replace
+│   │   │   ├── StrHole(name='x53')
+│   │   │   ├── StrHole(name='x54')
+│   │   │   └── StrHole(name='x55')
+│   │   ├── StrHole(name='x56')
+│   │   └── StrHole(name='x57')
+│   ├── StrHole(name='x58')
+│   └── StrHole(name='x59')
+├── StrHole(name='x60')
+└── StrHole(name='x61')

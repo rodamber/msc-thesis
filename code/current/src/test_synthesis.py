@@ -1,6 +1,6 @@
 import pytest
 
-from ..synthesis.smt.lines.synth import synth
+from ..synthesis.synth import synth
 from .test_cases import all_test_cases
 
 

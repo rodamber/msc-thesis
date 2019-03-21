@@ -1,0 +1,1 @@
+{"text": "Replace(Replace(Replace(Site.BodyMessage_RecommendationMessage,\"$Recommeder$\",\"Recommender\"),\"$RecommendationBox$\",Recommendation_Box_URL),\"$UserName$\",GetSender.List.Current.USER_MASTER.Name)", "functions": ["Replace"]}

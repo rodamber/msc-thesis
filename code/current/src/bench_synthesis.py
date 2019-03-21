@@ -1,10 +1,10 @@
 import logging
+import sys
 import time
 
+from synthesis.pretty import pretty_oneliner
+from synthesis.synth import config, synth
 from test_cases import all_test_cases
-
-from synthesis.smt.lines.pretty import pretty_oneliner
-from synthesis.smt.lines.synth import synth, config
 
 
 def bench(config, test_cases):
@@ -34,8 +34,8 @@ def log_examples(examples):
     for ex in examples:
         logging.info(f'\t{tuple(ex.inputs)} --> {repr(ex.output)}')
 
+
 if __name__ == '__main__':
-    logging.basicConfig(
-        format='%(levelname)s:%(message)s', level=logging.INFO)
+    logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
     bench(config(timeout=1000), all_test_cases())

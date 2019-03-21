@@ -1,0 +1,14 @@
+({StrHole(name='x0'): 'ktqzeb', StrHole(name='x1'): 'ktqze', StrHole(name='x2'): 'udua', StrHole(name='x3'): 'udua', StrHole(name='x4'): 'mmkv'}, 'mmkvb')
+({StrHole(name='x0'): 'jvmlx', StrHole(name='x1'): 'vmlx', StrHole(name='x2'): 'tqdj', StrHole(name='x3'): 'jtqd', StrHole(name='x4'): 'rjgn'}, 'rjgnj')
+({StrHole(name='x0'): 'pjjpltg', StrHole(name='x1'): 'pltg', StrHole(name='x2'): 'jwrf', StrHole(name='x3'): 'jwrf', StrHole(name='x4'): 'uhmi'}, 'pjjuhmi')
+({StrHole(name='x0'): 'hyddnbo', StrHole(name='x1'): 'ddnbo', StrHole(name='x2'): 'oppl', StrHole(name='x3'): 'hyopp', StrHole(name='x4'): 'uvvnc'}, 'uvvncl')
+({StrHole(name='x0'): 'pzlxvlp', StrHole(name='x1'): 'lxvlp', StrHole(name='x2'): 'evys', StrHole(name='x3'): 'pzev', StrHole(name='x4'): 'fnhf'}, 'fnhfys')
+
+=== Solution ===
+Replace
+├── Replace
+│   ├── StrHole(name='x0')
+│   ├── StrHole(name='x1')
+│   └── StrHole(name='x2')
+├── StrHole(name='x3')
+└── StrHole(name='x4')

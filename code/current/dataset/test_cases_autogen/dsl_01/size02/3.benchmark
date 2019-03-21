@@ -1,0 +1,13 @@
+({StrHole(name='x15'): 'hpqi', IntHole(name='x16'): 1, IntHole(name='x17'): 3, StrHole(name='x18'): 'hxlb'}, 'pqhxlb')
+({StrHole(name='x15'): 'lpcr', IntHole(name='x16'): 3, IntHole(name='x17'): 4, StrHole(name='x18'): 'vqdd'}, 'rvqdd')
+({StrHole(name='x15'): 'lpcf', IntHole(name='x16'): 0, IntHole(name='x17'): 1, StrHole(name='x18'): 'vqdc'}, 'lvqdc')
+({StrHole(name='x15'): 'lpcoyi', IntHole(name='x16'): 4, IntHole(name='x17'): 5, StrHole(name='x18'): 'vqdo'}, 'yvqdo')
+({StrHole(name='x15'): 'lpboqp', IntHole(name='x16'): 2, IntHole(name='x17'): 6, StrHole(name='x18'): 'vqbo'}, 'boqpvqbo')
+
+=== Solution ===
+Concat
+├── Substr
+│   ├── StrHole(name='x15')
+│   ├── IntHole(name='x16')
+│   └── IntHole(name='x17')
+└── StrHole(name='x18')

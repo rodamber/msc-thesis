@@ -1,0 +1,13 @@
+({StrHole(name='x27'): 'ubaw', IntHole(name='x28'): 0, StrHole(name='x29'): 'utdryz', StrHole(name='x30'): 'tdry'}, 'u')
+({StrHole(name='x27'): 'rwpxp', IntHole(name='x28'): 1, StrHole(name='x29'): 'kwdtdpo', StrHole(name='x30'): 'dtdp'}, 'w')
+({StrHole(name='x27'): 'adtagb', IntHole(name='x28'): 5, StrHole(name='x29'): 'odhaqulwkbh', StrHole(name='x30'): 'lwkb'}, 'b')
+({StrHole(name='x27'): 'aptagv', IntHole(name='x28'): 4, StrHole(name='x29'): 'tdhadufwijx', StrHole(name='x30'): 'ufwi'}, 'g')
+({StrHole(name='x27'): 'hxpmu', IntHole(name='x28'): 2, StrHole(name='x29'): 'dcygyylhllg', StrHole(name='x30'): 'gyyl'}, 'p')
+
+=== Solution ===
+Substr
+├── StrHole(name='x27')
+├── IntHole(name='x28')
+└── Index
+    ├── StrHole(name='x29')
+    └── StrHole(name='x30')
