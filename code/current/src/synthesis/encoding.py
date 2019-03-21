@@ -208,29 +208,28 @@ def gen_output_soundness_constraints(program_lines, examples, ctx):
 
 def gen_input_output_completeness_constraints(last_lineno, inputs, outputs,
                                               holes, examples, ctx):
-    for e in examples:  # FIXME check if this needs to be done for every example.
-        for i in inputs:
-            input_constraints = p.pvector(
-                i.lineno.get == h.lineno.get for h in holes
-                if i.map[e].sort() == h.map[e].sort())
+    for i in inputs:
+        input_constraints = p.pvector(
+            i.lineno.get == h.lineno.get for h in holes
+            if i.map.values()[0].sort() == h.map.values()[0].sort())
 
-            if not input_constraints:
-                raise UnusableInput()
+        if not input_constraints:
+            raise UnusableInput()
 
-            yield z3.Or(*input_constraints, ctx)
+        yield z3.Or(*input_constraints, ctx)
 
-        for o in outputs:
-            output_constraints = p.pvector(
-                o.lineno.get == h.lineno.get for h in holes
-                if o.map[e].sort() == h.map[e].sort())
+    for o in outputs:
+        output_constraints = p.pvector(
+            o.lineno.get == h.lineno.get for h in holes
+            if o.map.values()[0].sort() == h.map.values()[0].sort())
 
-            # # FIXME
-            # if not output_constraints:
-            #     raise UnplugableComponents()
+        # # FIXME
+        # if not output_constraints:
+        #     raise UnplugableComponents()
 
-            # TODO Either this, or add a return hole constant
-            yield z3.Implies(o.lineno.get < z3_val(last_lineno, ctx),
-                             z3.Or(*output_constraints, ctx), ctx)
+        # TODO Either this, or add a return hole constant
+        yield z3.Implies(o.lineno.get < z3_val(last_lineno, ctx),
+                            z3.Or(*output_constraints, ctx), ctx)
 
 
 def gen_correctness_constraints(last_lineno, program_lines, examples, ctx):
