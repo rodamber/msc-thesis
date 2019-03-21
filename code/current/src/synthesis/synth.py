@@ -19,12 +19,14 @@ def default_library():
 def config(library=default_library(),
            program_min_size=1,
            program_max_size=None,
-           timeout=None):
+           timeout=None,
+           string_constant_max_len=5):
     return Config(
         library=library,
         program_min_size=program_min_size,
         program_max_size=program_max_size,
-        timeout=timeout)
+        timeout=timeout,
+        string_constant_max_len=string_constant_max_len)
 
 
 @curry
@@ -35,6 +37,7 @@ def synth(config, examples):
     program_min_size = config.program_min_size
     program_max_size = config.program_max_size
     timeout = config.timeout
+    const_max_len = config.string_constant_max_len
 
     for size in it.islice(it.count(), program_min_size, program_max_size):
         logging.debug(f'Enumerating program size: {size}')
@@ -47,7 +50,8 @@ def synth(config, examples):
                 ctx = z3.Context()
 
                 program = generate_program(components, examples, ctx)
-                constraints = generate_constraints(program, examples, ctx)
+                constraints = generate_constraints(program, examples,
+                                                   const_max_len, ctx)
 
                 solver = z3.Solver(ctx=ctx)
                 solver.add(*constraints)

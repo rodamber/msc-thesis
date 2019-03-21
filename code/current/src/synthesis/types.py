@@ -71,5 +71,6 @@ class Config(p.PRecord):
     program_min_size = p.field(type=int)
     program_max_size = p.field()
     timeout = p.field()
+    string_constant_max_len = p.field(type=int)
 
 

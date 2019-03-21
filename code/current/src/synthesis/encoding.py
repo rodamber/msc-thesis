@@ -6,9 +6,6 @@ import pyrsistent as p
 from .types import *
 from .utils import *
 
-# TODO Wonder if a different program representation, like a tree, would give
-# itself to a better smt encoding.
-
 # ---------
 # Constants
 # ---------
@@ -100,7 +97,7 @@ def generate_holes(component, examples, n, fresh, ctx):
 # -----------
 
 
-def generate_constraints(program, examples, ctx):
+def generate_constraints(program, examples, const_max_len, ctx):
     consts = program.consts
     inputs = program.inputs
     outputs = p.pvector(l.output for l in program.lines)
@@ -119,14 +116,22 @@ def generate_constraints(program, examples, ctx):
                                            ctx)
     yield from gen_hole_line_constraints(program, ctx)
     yield from gen_sort_line_constraints(consts, inputs, holes, outputs, ctx)
+
     yield from gen_well_formedness_constraints(holes, consts, inputs, outputs,
                                                examples, ctx)
+
     yield from gen_output_soundness_constraints(program.lines, examples, ctx)
+
     yield from gen_input_output_completeness_constraints(
         last_lineno, inputs, outputs, holes, examples, ctx)
+
     yield from gen_correctness_constraints(last_lineno, program.lines,
                                            examples, ctx)
+
     yield from gen_input_value_constraints(inputs, examples, ctx)
+
+    # New
+    yield from gen_const_size_constraints(consts, const_max_len, ctx)
 
 
 def gen_const_line_constraints(consts, ctx):
@@ -246,3 +251,9 @@ def gen_input_value_constraints(inputs, examples, ctx):
     for e in examples:
         for i, ei in zip(inputs, e.inputs):
             yield i.map[e] == z3_val(ei, ctx)
+
+
+def gen_const_size_constraints(consts, max_size, ctx):
+    for const in consts:
+        if const.get.sort() == z3.StringSort(ctx):
+            yield z3.Length(const.get) <= z3_val(max_size, ctx)
