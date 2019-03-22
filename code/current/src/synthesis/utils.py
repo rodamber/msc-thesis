@@ -41,7 +41,7 @@ def z3_val(val, ctx):
     elif isinstance(val, str):
         return z3.StringVal(val, ctx)
     else:
-        raise ValueError(f'z3_val: unsupported typ ({typ})')
+        raise ValueError(f'z3_val: unsupported typ ({type(val)})')
 
 
 def z3_as(ref):
