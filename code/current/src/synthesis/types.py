@@ -71,7 +71,7 @@ class Config(p.PRecord):
     library = p.pvector_field(item_type=Component)
     program_min_size = p.field(type=int)
     program_max_size = p.field()
-    timeout = p.field()
+    max_conflicts = p.field()
     string_constant_max_len = p.field(type=int)
 
 

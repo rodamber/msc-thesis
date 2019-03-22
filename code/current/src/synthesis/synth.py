@@ -19,13 +19,13 @@ def default_library(*args):
 def config(library=default_library(),
            program_min_size=1,
            program_max_size=None,
-           timeout=None,
+           max_conflicts=None,
            string_constant_max_len=5):
     return Config(
         library=library,
         program_min_size=program_min_size,
         program_max_size=program_max_size,
-        timeout=timeout,
+        max_conflicts=max_conflicts,
         string_constant_max_len=string_constant_max_len)
 
 
@@ -36,7 +36,7 @@ def synth(config, examples):
     library = config.library
     program_min_size = config.program_min_size
     program_max_size = config.program_max_size
-    timeout = config.timeout
+    max_conflicts = config.max_conflicts
     const_max_len = config.string_constant_max_len
 
     start = program_min_size
@@ -59,14 +59,16 @@ def synth(config, examples):
                 solver = z3.Solver(ctx=ctx)
                 solver.add(*constraints)
 
-                if timeout:
-                    solver.set('timeout', timeout)
+                if max_conflicts:
+                    solver.set('max_conflicts', max_conflicts)
 
                 check = solver.check()
-
                 logging.debug(f'Solver result: {repr(check).upper()}')
 
-                if check == z3.sat:
+                if check == z3.unknown:
+                    reason = solver.reason_unknown()
+                    logging.debug(f'Reason: {reason}')
+                elif check == z3.sat:
                     model = solver.model()
                     return True, (program, model)
 
@@ -81,7 +83,7 @@ def synth(config, examples):
 def synth_log_parameters(config):
     synth_log_library(config.library)
     synth_log_program_size(config.program_min_size, config.program_max_size)
-    synth_log_timeout(config.timeout)
+    synth_log_timeout(config.max_conflicts)
 
 
 def synth_log_library(library):
@@ -96,12 +98,10 @@ def synth_log_program_size(program_min_size, program_max_size):
     logging.debug(f'Max size: {program_max_size}')
 
 
-def synth_log_timeout(timeout):
-    logging.debug(f'Z3 timeout: {timeout}')
+def synth_log_timeout(max_conflicts):
+    logging.debug(f'Z3 max_conflicts: {max_conflicts}')
 
 
-# TODO Should we use a different representation for symbolic and concrete
-# programs?
 def reconstruct(program, model):
     consts = p.pvector(
         Const(
