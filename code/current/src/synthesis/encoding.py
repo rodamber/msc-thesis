@@ -2,9 +2,20 @@ import collections
 import itertools
 
 import pyrsistent as p
+from z3 import *
 
 from .types import *
 from .utils import *
+
+
+def program_spec(components, examples, const_max_len):
+    ctx = z3.Context()
+
+    program = generate_program(components, examples, ctx)
+    constraints = generate_constraints(program, examples, const_max_len, ctx)
+
+    return ctx, program, constraints
+
 
 # ---------
 # Constants

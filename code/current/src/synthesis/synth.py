@@ -29,18 +29,13 @@ def config(library=default_library(),
         string_constant_max_len=string_constant_max_len)
 
 
-@curry
-def synth(config, examples):
-    synth_log_parameters(config)
+# ==============================================================================
+# Synthesis
 
-    library = config.library
-    program_min_size = config.program_min_size
-    program_max_size = config.program_max_size
-    max_conflicts = config.max_conflicts
-    const_max_len = config.string_constant_max_len
 
-    start = program_min_size
-    stop = program_max_size + 1 if program_max_size else None
+def enum(library, min_size, max_size):
+    start = min_size
+    stop = max_size + 1 if max_size else None
 
     for size in it.islice(it.count(), start, stop):
         logging.debug(f'Enumerating program size: {size}')
@@ -49,35 +44,49 @@ def synth(config, examples):
             components_names = tuple(c.name for c in components)
             logging.debug(f'Enumerated components: {components_names}')
 
-            try:
-                ctx = z3.Context()
+            yield components
 
-                program = generate_program(components, examples, ctx)
-                constraints = generate_constraints(program, examples,
-                                                   const_max_len, ctx)
 
-                solver = z3.Solver(ctx=ctx)
-                solver.add(*constraints)
+def oracle(components, examples, max_conflicts, const_max_len):
+    ctx, program, constraints = \
+        program_spec(components, examples, const_max_len)
 
-                if max_conflicts:
-                    solver.set('max_conflicts', max_conflicts)
+    solver = z3.Solver(ctx=ctx)
+    solver.add(*constraints)
 
-                check = solver.check()
-                logging.debug(f'Solver result: {repr(check).upper()}')
+    if max_conflicts:
+        solver.set('max_conflicts', max_conflicts)
 
-                if check == z3.unknown:
-                    reason = solver.reason_unknown()
-                    logging.debug(f'Reason: {reason}')
-                elif check == z3.sat:
-                    model = solver.model()
-                    return True, (program, model)
+    check = solver.check()
+    logging.debug(f'Solver result: {repr(check).upper()}')
 
-            except UnplugableComponents:
-                logging.debug(f'Unplugable components')
-            except UnusableInput as e:
-                logging.debug(f'Unusable input {e.input}')
+    if check == z3.unknown:
+        reason = solver.reason_unknown()
+        logging.debug(f'Reason: {reason}')
+    elif check == z3.sat:
+        model = solver.model()
+        return (program, model)
 
-    return False, ()
+
+def synth(config, examples):
+    synth_log_parameters(config)
+
+    library = config.library
+    min_size = config.program_min_size
+    max_size = config.program_max_size
+    max_conflicts = config.max_conflicts
+    const_max_len = config.string_constant_max_len
+
+    for components in enum(library, min_size, max_size):
+        res = oracle(components, examples, max_conflicts, const_max_len)
+
+        if res:
+            return res
+
+
+
+# ==============================================================================
+# Logging
 
 
 def synth_log_parameters(config):
@@ -100,6 +109,10 @@ def synth_log_program_size(program_min_size, program_max_size):
 
 def synth_log_timeout(max_conflicts):
     logging.debug(f'Z3 max_conflicts: {max_conflicts}')
+
+
+# ==============================================================================
+# Program reconstruction
 
 
 def reconstruct(program, model):
