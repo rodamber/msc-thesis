@@ -1,4 +1,3 @@
-import pyrsistent as p
 import z3
 
 from .types import Component
@@ -38,7 +37,9 @@ substr = Component(
     name='substr',
     domain=(str, int, int),
     ret_type=str,
-    function=lambda text, i, j: z3.SubString(text, i, j))
+    function=lambda text, i, n: z3.SubString(text, i, n),
+    # spec=lambda ctx, text, i, n: n == z3.Length(z3.SubString(text, i, n))
+)
 
 # Other components (sketches, really)
 
