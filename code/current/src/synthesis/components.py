@@ -49,6 +49,11 @@ replace2 = Component(
     ret_type=str,
     function=lambda x, y, z, w: z3.Replace(z3.Replace(x, y, z), y, w))
 
+# Using these, besides reducing the number of components used, reduces the
+# ambiguity that the associativity of concat introduces, by fixing the
+# arguments. This reduces solver overhead.
+#
+# It would be nice if we could have varargs components.
 concat3 = Component(
     name='concat3',
     domain=(str, str, str),
