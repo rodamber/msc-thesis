@@ -1,6 +1,7 @@
 import z3
 
 from .types import Component
+from .utils import z3_val
 
 concat = Component(
     name='concat',
@@ -31,7 +32,10 @@ replace = Component(
     domain=(str, str, str),
     ret_type=str,
     function=lambda x, y, z: z3.Replace(x, y, z),
-    spec=lambda ctx, x, y, z: z3.And(x != y, z3.Contains(x, y), ctx))
+    spec=lambda ctx, x, y, z: z3.And(x != y,
+                                     z3.Contains(x, y),
+                                     y != z3_val('', ctx),
+                                     ctx))
 
 substr = Component(
     name='substr',
