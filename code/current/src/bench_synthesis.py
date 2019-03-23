@@ -2,8 +2,10 @@ import logging
 import time
 
 import test_cases
+from synthesis import components as comp
 from synthesis.pretty import pretty_oneliner
 from synthesis.synth import config, default_library, synth
+from synthesis.types import example
 
 
 def log_examples(examples):
@@ -17,12 +19,12 @@ def bench(config, examples):
     log_examples(examples)
 
     start = time.time()
-    is_ok, res = synth(config, examples)
+    res = synth(config, examples)
     end = time.time()
 
     logging.info(f'Elapsed time: {end - start:.3f} seconds')
 
-    if is_ok:
+    if res:
         program, model = res
         pretty = pretty_oneliner(program, model)
 
@@ -36,18 +38,19 @@ def main(log_level=logging.INFO):
 
     logging.info('Started synthesis tests')
 
-    library = default_library()
-    timeout = 10 * 1000
+    my_config = config(
+        max_conflicts=1 * (10 ** 4),
+        program_min_size=3,
+        program_max_size=3,
+        library=[comp.replace, comp.concat], # default_library(),
+        fix_lines=True
+    )
 
-    for examples in test_cases.all_test_cases():
-        bench(
-            examples=examples,
-            config=config(
-                timeout=timeout,
-                program_min_size=1,
-                program_max_size=6,
-                library=library
-            ))
+    # examples = test_cases.concat.cases[9]
+    # bench(my_config, examples)
+
+    for examples in test_cases.concat.cases[:9]:
+        bench(examples=examples, config=my_config)
 
     logging.info('Finished synthesis tests')
 
