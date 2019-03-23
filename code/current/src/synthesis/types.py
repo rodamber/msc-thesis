@@ -75,7 +75,7 @@ class Hole(p.PClass):
 
 def make_hole(examples, component_ix, domain_ix, typ, lineno, ctx):
     from_example = p.pmap(
-        (example, z3_const(ctx, typ, component_ix, example_ix, domain_ix))
+        (example, z3_const(ctx, typ, 'h', component_ix, example_ix, domain_ix))
         for example_ix, example in enumerate(examples, 1))
     lineno = make_lineno(lineno, ctx)
 
