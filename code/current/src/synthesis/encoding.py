@@ -8,11 +8,12 @@ from . import types
 from .utils import *
 
 
-def program_spec(components, examples, local_max_len):
+def program_spec(components, examples, local_max_len, fix_lines):
     ctx = z3.Context()
 
     program = generate_program(components, examples, ctx)
-    constraints = generate_constraints(program, examples, local_max_len, ctx)
+    constraints = generate_constraints(program, examples, local_max_len,
+                                       fix_lines, ctx)
 
     return ctx, program, constraints
 
@@ -106,7 +107,7 @@ def generate_holes(component, examples, component_ix, fresh, ctx):
 # -----------
 
 
-def generate_constraints(program, examples, local_max_len, ctx):
+def generate_constraints(program, examples, local_max_len, fix_lines, ctx):
     locals_ = program.locals_
     inputs = program.inputs
     outputs = p.pvector(line.output for line in program.lines)
@@ -122,7 +123,7 @@ def generate_constraints(program, examples, local_max_len, ctx):
     yield from generate_local_line_constraints(locals_, ctx)
     yield from generate_input_line_constraints(inputs, local_count, ctx)
     yield from generate_output_line_constraints(outputs, local_count,
-                                                input_count, ctx)
+                                                input_count, fix_lines, ctx)
     yield from generate_hole_line_constraints(program, ctx)
     yield from generate_sort_line_constraints(locals_, inputs, holes, outputs,
                                               ctx)
@@ -159,18 +160,23 @@ def generate_input_line_constraints(inputs, local_count, ctx):
         yield i.lineno.get == z3_val(lineno, ctx)
 
 
-def generate_output_line_constraints(outputs, local_count, input_count, ctx):
+def generate_output_line_constraints(outputs, local_count, input_count,
+                                     fix_lines, ctx):
+    # Define bounds
     start = local_count + input_count + 1
     end = start + len(outputs)
 
-    # Define bounds
-    for o in outputs:
-        yield z3_val(start, ctx) <= o.lineno.get
-        yield o.lineno.get < z3_val(end, ctx)
+    if fix_lines:
+        for n, output in enumerate(outputs):
+            yield output.lineno.get == z3_val(start + n, ctx)
+    else:
+        for o in outputs:
+            yield z3_val(start, ctx) <= o.lineno.get
+            yield o.lineno.get < z3_val(end, ctx)
 
-    # Each output is defined in a different line
-    for (o1, o2) in itertools.combinations(outputs, r=2):
-        yield o1.lineno.get != o2.lineno.get
+        # Each output is defined in a different line
+        for (o1, o2) in itertools.combinations(outputs, r=2):
+            yield o1.lineno.get != o2.lineno.get
 
 
 def generate_hole_line_constraints(program, ctx):

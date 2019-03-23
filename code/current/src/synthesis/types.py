@@ -113,3 +113,4 @@ class Config(p.PRecord):
     program_max_size = p.field()
     max_conflicts = p.field()
     local_string_max_len = p.field(type=int)
+    fix_lines = p.field(type=bool)
