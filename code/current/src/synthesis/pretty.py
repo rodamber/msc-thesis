@@ -2,7 +2,7 @@ from contextlib import suppress
 
 import pyrsistent as p
 
-from .types import Const
+from .types import Local
 from .utils import z3_as
 
 
@@ -19,7 +19,7 @@ def pretty_oneliner(program, model):
     inputs = dict(
         (i.lineno, x) for i, x in zip(program.inputs, string.ascii_lowercase))
 
-    for c in program.consts:
+    for c in program.locals_:
         show.update({eval(c.lineno.get, model): repr(eval(c.get, model))})
 
     for i in program.inputs:
@@ -36,6 +36,7 @@ def pretty_oneliner(program, model):
 
 
 # XXX
+# FIXME old
 def pretty_lines(program, model, example=None):
     consts = program.consts
     inputs = program.inputs
@@ -61,7 +62,7 @@ def pretty_lines(program, model, example=None):
 
         def hole_ref(h):
             c = line2val[eval(h.lineno.get, model)]
-            if isinstance(c, Const):
+            if isinstance(c, Local):
                 return c.get
             else:
                 return c.map.values()[0]

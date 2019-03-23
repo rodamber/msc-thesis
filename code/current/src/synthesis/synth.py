@@ -20,13 +20,13 @@ def config(library=default_library(),
            program_min_size=1,
            program_max_size=None,
            max_conflicts=None,
-           string_constant_max_len=5):
+           local_string_max_len=5):
     return Config(
         library=library,
         program_min_size=program_min_size,
         program_max_size=program_max_size,
         max_conflicts=max_conflicts,
-        string_constant_max_len=string_constant_max_len)
+        local_string_max_len=local_string_max_len)
 
 
 # ==============================================================================
@@ -47,9 +47,9 @@ def enum(library, min_size, max_size):
             yield components
 
 
-def oracle(components, examples, max_conflicts, const_max_len):
+def oracle(components, examples, max_conflicts, local_max_len):
     ctx, program, constraints = \
-        program_spec(components, examples, const_max_len)
+        program_spec(components, examples, local_max_len)
 
     solver = z3.Solver(ctx=ctx)
     solver.add(*constraints)
@@ -75,10 +75,10 @@ def synth(config, examples):
     min_size = config.program_min_size
     max_size = config.program_max_size
     max_conflicts = config.max_conflicts
-    const_max_len = config.string_constant_max_len
+    local_max_len = config.local_string_max_len
 
     for components in enum(library, min_size, max_size):
-        res = oracle(components, examples, max_conflicts, const_max_len)
+        res = oracle(components, examples, max_conflicts, local_max_len)
 
         if res:
             return res
@@ -109,37 +109,3 @@ def synth_log_program_size(program_min_size, program_max_size):
 
 def synth_log_timeout(max_conflicts):
     logging.debug(f'Z3 max_conflicts: {max_conflicts}')
-
-
-# ==============================================================================
-# Program reconstruction
-
-
-def reconstruct(program, model):
-    consts = p.pvector(
-        Const(
-            get=z3_as(model[c.get]),
-            lineno=Lineno(get=z3_as(model[c.lineno.get])))
-        for c in program.consts)
-
-    inputs = p.pvector(
-        Input(map=i.map, lineno=Lineno(get=z3_as(model[i.lineno.get])))
-        for i in program.inputs)
-
-    def _line():
-        for line in program.lines:
-            output = Output(
-                map=line.output.map,
-                lineno=Lineno(get=z3_as(model[line.output.lineno.get])))
-
-            component = line.component
-
-            holes = p.pvector(
-                Hole(map=h.map, lineno=Lineno(get=z3_as(model[h.lineno.get])))
-                for h in line.holes)
-
-            yield ProgramLine(output=output, component=component, holes=holes)
-
-    lines = p.pvector(_line())
-
-    return Program(consts=consts, inputs=inputs, lines=lines)

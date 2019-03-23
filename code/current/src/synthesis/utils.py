@@ -10,29 +10,9 @@ def type2sort(typ, ctx):
         raise ValueError(f'Unsupported type: {typ}')
 
 
-def _z3_smt_const(ctx, typ, prefix, *ix):
+def z3_const(ctx, typ, prefix, *ix):
     ix = '_'.join(map(str, ix))
     return z3.Const(f'{prefix}_{ix}', type2sort(typ, ctx))
-
-
-def z3_const(typ, x, ctx):
-    return _z3_smt_const(ctx, typ, 'c', x)
-
-
-def z3_input(typ, x, y, ctx):
-    return _z3_smt_const(ctx, typ, 'i', x, y)
-
-
-def z3_output(typ, x, y, ctx):
-    return _z3_smt_const(ctx, typ, 'o', x, y)
-
-
-def z3_hole(typ, x, y, z, ctx):
-    return _z3_smt_const(ctx, typ, 'h', x, y, z)
-
-
-def z3_line(fresh, ctx):
-    return z3.Int(f'l_{next(fresh)}', ctx)
 
 
 def z3_val(val, ctx):
