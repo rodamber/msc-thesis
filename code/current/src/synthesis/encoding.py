@@ -8,14 +8,14 @@ from . import types
 from .utils import *
 
 
-def program_spec(components, examples, local_max_len, fix_lines):
-    ctx = z3.Context()
+def program_spec(components, examples, local_max_len, fix_lines, stack_space):
+    context = z3.Context()
 
-    program = generate_program(components, examples, ctx)
+    program = generate_program(components, examples, stack_space, context)
     constraints = generate_constraints(program, examples, local_max_len,
-                                       fix_lines, ctx)
+                                       fix_lines, context)
 
-    return ctx, program, constraints
+    return context, program, constraints
 
 
 # ---------
@@ -23,21 +23,19 @@ def program_spec(components, examples, local_max_len, fix_lines):
 # ---------
 
 
-def generate_program(components, examples, ctx):
-    fresh = itertools.count(1)
-
-    locals_ = generate_locals(components, examples, fresh, ctx)
-    inputs = generate_inputs(examples, fresh, ctx)
-    lines = generate_program_lines(components, examples, fresh, ctx)
+def generate_program(components, examples, stack_space, context):
+    locals_ = generate_locals(components, examples, stack_space, context)
+    inputs = generate_inputs(examples, context)
+    lines = generate_program_lines(components, examples, context)
 
     return types.Program(locals_=locals_, inputs=inputs, lines=lines)
 
 
-def generate_program_lines(components, examples, fresh, ctx):
-    outputs = generate_outputs(components, examples, fresh, ctx)
+def generate_program_lines(components, examples, context):
+    outputs = generate_outputs(components, examples, context)
 
     holes = p.pvector(
-        generate_holes(comp, examples, comp_ix, fresh, ctx)
+        generate_holes(comp, examples, comp_ix, context)
         for comp_ix, comp in enumerate(components, 1))
 
     lines = p.pvector(
@@ -47,7 +45,7 @@ def generate_program_lines(components, examples, fresh, ctx):
     return lines
 
 
-def generate_locals(components, examples, fresh, ctx):
+def generate_locals(components, examples, stack_space, context):
     """
     Generate local variables of the program, i.e., values that are not
     defined in the inputs and that are the same in every run.
@@ -75,31 +73,33 @@ def generate_locals(components, examples, fresh, ctx):
         # FIXME We're creating plus one local variable per type here, but I
         # don't remember why.
         for i in range(cnt + 1):
-            yield types.make_local(typ, next(n), next(fresh), ctx)
+            x = next(n)
+
+            if x <= stack_space:
+                yield types.make_local(typ, x, context)
 
 
-def generate_inputs(examples, fresh, ctx):
+def generate_inputs(examples, context):
     # Assuming all examples share the same type signature:
     for ix, input in enumerate(examples[0].inputs, 1):
-        yield types.make_input(examples, ix, type(input), next(fresh), ctx)
+        yield types.make_input(examples, ix, type(input), context)
 
 
-def generate_outputs(components, examples, fresh, ctx):
+def generate_outputs(components, examples, context):
     """
     Create one output variable for each of the given components per
     example.
     """
     for ix, comp in enumerate(components, 1):
-        yield types.make_output(examples, ix, comp.ret_type, next(fresh), ctx)
+        yield types.make_output(examples, ix, comp.ret_type, context)
 
 
-def generate_holes(component, examples, component_ix, fresh, ctx):
+def generate_holes(component, examples, component_ix, context):
     """
     Create one variable for each argument of the given component per example.
     """
     for domain_ix, typ in enumerate(component.domain, 1):
-        yield types.make_hole(examples, component_ix, domain_ix, typ,
-                              next(fresh), ctx)
+        yield types.make_hole(examples, component_ix, domain_ix, typ, context)
 
 
 # -----------
@@ -107,93 +107,98 @@ def generate_holes(component, examples, component_ix, fresh, ctx):
 # -----------
 
 
-def generate_constraints(program, examples, local_max_len, fix_lines, ctx):
-    locals_ = program.locals_
-    inputs = program.inputs
+class ConstraintEnv(p.PClass):
+    program = p.field(type=types.Program)
+    examples = p.pvector_field(types.Example)
+    locals_ = p.pvector_field(types.Local)
+    inputs = p.pvector_field(types.Input)
+    outputs = p.pvector_field(types.Output)
+    holes = p.pvector_field(types.Hole)
+    last_lineno = p.field(type=int)
+    local_max_len = p.field()
+    fix_lines = p.field()
+    context = p.field()
+
+
+def generate_constraints(program, examples, local_max_len, fix_lines, context):
     outputs = p.pvector(line.output for line in program.lines)
     holes = p.pvector(hole for line in program.lines for hole in line.holes)
+    last_lineno = len(program.locals_) + len(program.inputs) + len(outputs)
 
-    local_count = len(locals_)
-    input_count = len(inputs)
-    output_count = len(outputs)
-    hole_count = len(holes)
+    env = ConstraintEnv(
+        program=program,
+        examples=examples,
+        locals_=program.locals_,
+        inputs=program.inputs,
+        outputs=outputs,
+        holes=holes,
+        last_lineno=last_lineno,
+        local_max_len=local_max_len,
+        fix_lines=fix_lines,
+        context=context)
 
-    last_lineno = local_count + input_count + output_count
-
-    yield from generate_local_line_constraints(locals_, ctx)
-    yield from generate_input_line_constraints(inputs, local_count, ctx)
-    yield from generate_output_line_constraints(outputs, local_count,
-                                                input_count, fix_lines, ctx)
-    yield from generate_hole_line_constraints(program, ctx)
-    yield from generate_sort_line_constraints(locals_, inputs, holes, outputs,
-                                              ctx)
-
-    yield from generate_well_formedness_constraints(holes, locals_, inputs,
-                                                    outputs, examples, ctx)
-
-    yield from generate_output_soundness_constraints(program.lines, examples,
-                                                     ctx)
-
-    yield from generate_input_output_completeness_constraints(
-        last_lineno, inputs, outputs, holes, examples, ctx)
-
-    yield from generate_correctness_constraints(last_lineno, program.lines,
-                                                examples, ctx)
-
-    yield from generate_input_value_constraints(inputs, examples, ctx)
+    yield from generate_local_line_constraints(env)
+    yield from generate_input_line_constraints(env)
+    yield from generate_output_line_constraints(env)
+    yield from generate_hole_line_constraints(env)
+    yield from generate_sort_line_constraints(env)
+    yield from generate_well_formedness_constraints(env)
+    yield from generate_output_soundness_constraints(env)
+    yield from generate_input_output_completeness_constraints(env)
+    yield from generate_correctness_constraints(env)
+    yield from generate_input_value_constraints(env)
 
     # New
-    yield from generate_local_size_constraints(locals_, local_max_len, ctx)
-    yield from generate_input_neq_local_constraints(locals_, inputs)
-    # yield from generate_local_not_contains_input_constraints(locals_, inputs, ctx)
+    yield from generate_local_size_constraints(env)
+    yield from generate_input_neq_local_constraints(env)
+    # yield from generate_local_not_contains_input_constraints(env)
 
 
-def generate_local_line_constraints(locals_, ctx):
-    for n, c in enumerate(locals_, 1):
-        yield c.lineno.get == z3_val(n, ctx)
+def generate_local_line_constraints(env):
+    for n, c in enumerate(env.locals_, 1):
+        yield c.lineno.get == z3_val(n, env.context)
 
 
-def generate_input_line_constraints(inputs, local_count, ctx):
-    start = local_count + 1
+def generate_input_line_constraints(env):
+    start = len(env.locals_) + 1
 
-    for lineno, i in enumerate(inputs, start):
-        yield i.lineno.get == z3_val(lineno, ctx)
+    for lineno, i in enumerate(env.inputs, start):
+        yield i.lineno.get == z3_val(lineno, env.context)
 
 
-def generate_output_line_constraints(outputs, local_count, input_count,
-                                     fix_lines, ctx):
+def generate_output_line_constraints(env):
     # Define bounds
-    start = local_count + input_count + 1
-    end = start + len(outputs)
+    start = len(env.locals_) + len(env.inputs) + 1
+    end = start + len(env.outputs)
 
-    if fix_lines:
-        for n, output in enumerate(outputs):
-            yield output.lineno.get == z3_val(start + n, ctx)
+    if env.fix_lines:
+        for n, output in enumerate(env.outputs):
+            yield output.lineno.get == z3_val(start + n, env.context)
     else:
-        for o in outputs:
-            yield z3_val(start, ctx) <= o.lineno.get
-            yield o.lineno.get < z3_val(end, ctx)
+        for o in env.outputs:
+            yield z3_val(start, env.context) <= o.lineno.get
+            yield o.lineno.get < z3_val(end, env.context)
 
         # Each output is defined in a different line
-        for (o1, o2) in itertools.combinations(outputs, r=2):
+        for (o1, o2) in itertools.combinations(env.outputs, r=2):
             yield o1.lineno.get != o2.lineno.get
 
 
-def generate_hole_line_constraints(program, ctx):
-    for line in program.lines:
+def generate_hole_line_constraints(env):
+    for line in env.program.lines:
         for hole in line.holes:
-            yield z3_val(1, ctx) <= hole.lineno.get
+            yield z3_val(1, env.context) <= hole.lineno.get
             yield hole.lineno.get < line.output.lineno.get
 
 
-def generate_sort_line_constraints(locals_, inputs, outputs, holes, ctx):
-    line_inputs = ((x.lineno.get, i) for x in inputs
+def generate_sort_line_constraints(env):
+    line_inputs = ((x.lineno.get, i) for x in env.inputs
                    for i in x.from_example.values())
-    line_outputs = ((x.lineno.get, o) for x in outputs
+    line_outputs = ((x.lineno.get, o) for x in env.outputs
                     for o in x.from_example.values())
-    line_holes = ((x.lineno.get, h) for x in holes
+    line_holes = ((x.lineno.get, h) for x in env.holes
                   for h in x.from_example.values())
-    line_consts = ((x.lineno.get, x.get) for x in locals_)
+    line_consts = ((x.lineno.get, x.get) for x in env.locals_)
 
     all_ = p.v(*line_inputs, *line_outputs, *line_holes, *line_consts)
 
@@ -202,10 +207,10 @@ def generate_sort_line_constraints(locals_, inputs, outputs, holes, ctx):
             yield l1 != l2
 
 
-def generate_well_formedness_constraints(holes, locals_, inputs, outputs,
-                                         examples, ctx):
-    for e in examples:
-        for h, c in itertools.product(holes, p.v(*locals_, *inputs, *outputs)):
+def generate_well_formedness_constraints(env):
+    for e in env.examples:
+        for h, c in itertools.product(
+                env.holes, p.v(*env.locals_, *env.inputs, *env.outputs)):
             h_const = h.from_example[e]
 
             if isinstance(c, types.Local):
@@ -215,12 +220,12 @@ def generate_well_formedness_constraints(holes, locals_, inputs, outputs,
 
             if h_const.sort() == c_const.sort():
                 yield z3.Implies(h.lineno.get == c.lineno.get,
-                                 h_const == c_const, ctx)
+                                 h_const == c_const, env.context)
 
 
-def generate_output_soundness_constraints(program_lines, examples, ctx):
-    for line in program_lines:
-        for e in examples:
+def generate_output_soundness_constraints(env):
+    for line in env.program.lines:
+        for e in env.examples:
             output = line.output.from_example[e]
             component = line.component.function
             holes = p.pvector(h.from_example[e] for h in line.holes)
@@ -228,68 +233,90 @@ def generate_output_soundness_constraints(program_lines, examples, ctx):
             yield output == component(*holes)
 
             if line.component.spec:
-                yield line.component.spec(ctx, *holes)
+                yield line.component.spec(env.context, *holes)
 
 
-def generate_input_output_completeness_constraints(
-        last_lineno, inputs, outputs, holes, examples, ctx):
-    for i in inputs:
+def generate_input_output_completeness_constraints(env):
+    for i in env.inputs:
         input_constraints = p.pvector(i.lineno.get == h.lineno.get
-                                      for h in holes
-                                      if i.from_example.values()[0].sort() ==
-                                      h.from_example.values()[0].sort())
+                                      for h in env.holes
+                                      if i.from_example.values()[0].sort() == \
+                                         h.from_example.values()[0].sort())
 
         if not input_constraints:
-            raise UnusableInput()
+            raise types.UnusableInput()
 
-        yield z3.Or(*input_constraints, ctx)
+        yield z3.Or(*input_constraints, env.context)
 
-    for o in outputs:
-        output_constraints = p.pvector(o.lineno.get == h.lineno.get
-                                       for h in holes
-                                       if o.from_example.values()[0].sort() ==
-                                       h.from_example.values()[0].sort())
+    if env.fix_lines:
+        for line in env.program.lines[:-1]:
+            o = line.output
 
-        # # FIXME
-        # if not output_constraints:
-        #     raise UnplugableComponents()
+            # XXX
+            output_constraints = p.pvector(o.lineno.get == h.lineno.get
+                                        for h in env.holes
+                                        if o.from_example.values()[0].sort() == \
+                                           h.from_example.values()[0].sort())
 
-        # TODO Either this, or add a return hole constant
-        yield z3.Implies(o.lineno.get < z3_val(last_lineno, ctx),
-                         z3.Or(*output_constraints, ctx), ctx)
+            yield z3.Or(*output_constraints, env.context)
+    else:
+        for o in env.outputs:
+            # XXX
+            output_constraints = p.pvector(o.lineno.get == h.lineno.get
+                                        for h in env.holes
+                                        if o.from_example.values()[0].sort() == \
+                                            h.from_example.values()[0].sort())
+
+            # # FIXME
+            # if not output_constraints:
+            #     raise types.UnplugableComponents()
+
+            # TODO Either this, or add a return hole constant
+            yield z3.Implies(
+                o.lineno.get < z3_val(env.last_lineno, env.context),
+                z3.Or(*output_constraints, env.context), env.context)
 
 
-def generate_correctness_constraints(last_lineno, program_lines, examples,
-                                     ctx):
-    for e in examples:
-        for l in program_lines:
-            # Outputs of the last component and the examples must have the
-            # same sort and value. If any of these conditions are not met, then
-            # this component cannot be the last component of the program.
-            if l.output.from_example[e].sort() != type2sort(
-                    type(examples[0].output), ctx):
-                yield l.output.lineno.get != last_lineno
+def generate_correctness_constraints(env):
+    for e in env.examples:
+        if env.fix_lines:
+            output = env.program.lines[-1].output
+
+            if output.from_example[e].sort() != type2sort(
+                        type(env.examples[0].output), env.context):
+                raise types.UnplugableComponents()
             else:
-                yield z3.Implies(
-                    l.output.lineno.get == last_lineno,
-                    l.output.from_example[e] == z3_val(e.output, ctx), ctx)
+                yield output.from_example[e] == z3_val(e.output, env.context)
+        else:
+            for l in env.program.lines:
+                # Outputs of the last component and the examples must have the same
+                # sort and value.
+                if l.output.from_example[e].sort() != type2sort(
+                        type(env.examples[0].output), env.context):
+                    yield l.output.lineno.get != env.last_lineno
+                else:
+                    yield z3.Implies(
+                        l.output.lineno.get == env.last_lineno,
+                        l.output.from_example[e] == z3_val(
+                            e.output, env.context), env.context)
 
 
-def generate_input_value_constraints(inputs, examples, ctx):
-    for e in examples:
-        for i, ei in zip(inputs, e.inputs):
-            yield i.from_example[e] == z3_val(ei, ctx)
+def generate_input_value_constraints(env):
+    for e in env.examples:
+        for i, ei in zip(env.inputs, e.inputs):
+            yield i.from_example[e] == z3_val(ei, env.context)
 
 
-def generate_local_size_constraints(locals_, max_size, ctx):
-    for local in locals_:
-        if local.get.sort() == z3.StringSort(ctx):
-            yield z3.Length(local.get) <= z3_val(max_size, ctx)
+def generate_local_size_constraints(env):
+    for local in env.locals_:
+        if local.get.sort() == z3.StringSort(env.context):
+            yield z3.Length(local.get) <= z3_val(env.local_max_len,
+                                                 env.context)
 
 
-def generate_input_neq_local_constraints(locals_, inputs):
-    for i in inputs:
-        for local in locals_:
+def generate_input_neq_local_constraints(env):
+    for i in env.inputs:
+        for local in env.locals_:
             for x in filter(lambda x: x.sort() == local.get.sort(),
                             i.from_example.values()):
                 yield local.get != x
@@ -298,10 +325,10 @@ def generate_input_neq_local_constraints(locals_, inputs):
 # FIXME z3 ignores these constraints, so I'm turning them off
 # FIXME If this worked, we wouldn't need the constraints preventing string
 # constants from being equal to the inputs
-def generate_local_not_contains_input_constraints(locals_, inputs, ctx):
-    for i in inputs:
-        for local in locals_:
+def generate_local_not_contains_input_constraints(env):
+    for i in env.inputs:
+        for local in env.locals_:
             if local.get.sort() == i.from_example.values()[0].sort() \
-               == z3.StringSort(ctx):
+               == z3.StringSort(env.context):
                 for x in i.from_example.values():
-                    yield z3.Not(z3.Contains(local.get, x), ctx)
+                    yield z3.Not(z3.Contains(local.get, x), env.context)

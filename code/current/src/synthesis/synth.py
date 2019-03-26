@@ -13,23 +13,34 @@ from .types import *
 from .utils import *
 
 
-def default_library(*args):
-    return (concat, index, length, replace, substr) + tuple(args)
+class Config(p.PRecord):
+    library = p.pvector_field(item_type=Component)
+    program_min_size = p.field(type=int, mandatory=True)
+    program_max_size = p.field(mandatory=True)
+    max_conflicts = p.field(mandatory=True)
+    timeout = p.field(mandatory=True)
+    local_string_max_len = p.field(type=int, mandatory=True)
+    fix_lines = p.field(type=bool, mandatory=True)
+    stack_space = p.field(mandatory=True)
 
 
-def config(library=default_library(),
+def config(library,
            program_min_size=1,
            program_max_size=None,
            max_conflicts=None,
+           timeout=None,
            local_string_max_len=5,
-           fix_lines=False):
+           fix_lines=False,
+           stack_space=None):
     return Config(
         library=library,
         program_min_size=program_min_size,
         program_max_size=program_max_size,
         max_conflicts=max_conflicts,
+        timeout=timeout,
         local_string_max_len=local_string_max_len,
-        fix_lines=fix_lines)
+        fix_lines=fix_lines,
+        stack_space=stack_space)
 
 
 # ==============================================================================
@@ -55,22 +66,30 @@ def enum(library, min_size, max_size, fix_lines):
             yield components
 
 
-def oracle(components, examples, max_conflicts, local_max_len, fix_lines):
-    ctx, program, constraints = \
-        program_spec(components, examples, local_max_len, fix_lines)
+def solver(components, examples, max_conflicts, timeout, local_max_len,
+           fix_lines, stack_space):
+    try:
+        ctx, program, constraints = \
+            program_spec(components, examples, local_max_len, fix_lines, stack_space)
 
-    solver = z3.Solver(ctx=ctx)
-    solver.add(*constraints)
+        solver = z3.Solver(ctx=ctx)
+        solver.add(*constraints)
+    except (types.UnusableInput, types.UnplugableComponents) as e:
+        logging.debug(f'Reason: {type(e).__name__}')
+        return
 
     if max_conflicts:
-        solver.set('max_conflicts', max_conflicts)
+        solver.set(max_conflicts=max_conflicts)
+    if timeout:
+        solver.set(timeout=timeout)
 
     start = time.time()
     check = solver.check()
     end = time.time()
 
     elapsed = end - start
-    logging.debug(f'Solver result: {repr(check).upper()} ({elapsed:.3f} seconds)')
+    logging.debug(
+        f'Solver result: {repr(check).upper()} ({elapsed:.3f} seconds)')
 
     if check == z3.unknown:
         reason = solver.reason_unknown()
@@ -87,12 +106,14 @@ def synth(config, examples):
     min_size = config.program_min_size
     max_size = config.program_max_size
     max_conflicts = config.max_conflicts
+    timeout = config.timeout
     local_max_len = config.local_string_max_len
     fix_lines = config.fix_lines
+    stack_space = config.stack_space
 
     for components in enum(library, min_size, max_size, fix_lines):
-        res = oracle(components, examples, max_conflicts, local_max_len,
-                     fix_lines)
+        res = solver(components, examples, max_conflicts, timeout,
+                     local_max_len, fix_lines, stack_space)
         if res:
             return res
 
@@ -104,7 +125,9 @@ def synth(config, examples):
 def synth_log_parameters(config):
     synth_log_library(config.library)
     synth_log_program_size(config.program_min_size, config.program_max_size)
-    synth_log_timeout(config.max_conflicts)
+    synth_log_timeout(config.timeout)
+    synth_log_max_conflicts(config.max_conflicts)
+    synth_stack_space(config.stack_space)
 
 
 def synth_log_library(library):
@@ -119,5 +142,13 @@ def synth_log_program_size(program_min_size, program_max_size):
     logging.debug(f'Max size: {program_max_size}')
 
 
-def synth_log_timeout(max_conflicts):
+def synth_log_timeout(timeout):
+    logging.debug(f'Z3 timeout: {timeout}')
+
+
+def synth_log_max_conflicts(max_conflicts):
     logging.debug(f'Z3 max_conflicts: {max_conflicts}')
+
+
+def synth_stack_space(stack_space):
+    logging.debug(f'Z3 stack_space: {stack_space}')

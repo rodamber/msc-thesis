@@ -13,13 +13,18 @@ index = Component(
     name='index',
     domain=(str, str),
     ret_type=int,
-    function=lambda text, x: z3.IndexOf(text, x, 0))
+    function=lambda text, x: z3.IndexOf(text, x, 0),
+    spec=lambda ctx, text, x: x != z3_val('', ctx))
 
 index3 = Component(
     name='index3',
     domain=(str, str, int),
     ret_type=int,
-    function=lambda text, x, y: z3.IndexOf(text, x, y))
+    function=lambda text, x, y: z3.IndexOf(text, x, y),
+    spec=lambda ctx, text, x, y: \
+        z3.And(x != z3_val('', ctx),
+               y > z3_val(0, ctx), # use index otherwise
+               ctx))
 
 length = Component(
     name='length',
@@ -32,10 +37,8 @@ replace = Component(
     domain=(str, str, str),
     ret_type=str,
     function=lambda x, y, z: z3.Replace(x, y, z),
-    spec=lambda ctx, x, y, z: z3.And(x != y,
-                                     z3.Contains(x, y),
-                                     y != z3_val('', ctx),
-                                     ctx))
+    # spec=lambda ctx, x, y, z: z3.And(x != y, z3.Contains(x, y), ctx)
+)
 
 substr = Component(
     name='substr',
@@ -45,33 +48,26 @@ substr = Component(
     # spec=lambda ctx, text, i, n: n == z3.Length(z3.SubString(text, i, n))
 )
 
-# Other components (sketches, really)
+add = Component(
+    name='add', domain=(int, int), ret_type=int, function=lambda x, y: x + y)
 
-replace2 = Component(
-    name='replace2',
-    domain=(str, str, str, str),
-    ret_type=str,
-    function=lambda x, y, z, w: z3.Replace(z3.Replace(x, y, z), y, w))
+minus = Component(
+    name='minus', domain=(int, int), ret_type=int, function=lambda x, y: x - y)
 
-# Using these, besides reducing the number of components used, reduces the
-# ambiguity that the associativity of concat introduces, by fixing the
-# arguments. This reduces solver overhead.
-#
-# It would be nice if we could have varargs components.
-concat3 = Component(
-    name='concat3',
-    domain=(str, str, str),
-    ret_type=str,
-    function=lambda x, y, z: z3.Concat(z3.Concat(x, y), z))
+# replaceall = Component(
+#     name='replaceall',
+#     domain=(str, str, str),
+#     ret_type=str,
+#     function=lambda # Fuck, we need the context here. Time to refactor this.
+#     )
 
-concat4 = Component(
-    name='concat4',
-    domain=(str, str, str, str),
-    ret_type=str,
-    function=lambda x, y, z, w: z3.Concat(z3.Concat(z3.Concat(x, y), z), w))
 
-concat5 = Component(
-    name='concat5',
-    domain=(str, str, str, str, str),
-    ret_type=str,
-    function=lambda x, y, z, w, v: z3.Concat(z3.Concat(z3.Concat(z3.Concat(x, y), z), w), v))
+def replace_all_z3(ctx, text, old, new):
+    f = z3.RecFunction('replace_all', z3.StringSort(ctx), z3.StringSort(ctx),
+                       z3.StringSort(ctx))
+    z3.RecAddDefinition(
+        f, [text, old, new],
+        z3.If(
+            z3.Or(old == new, z3.Not(z3.Contains(text, old), ctx), ctx), text,
+            f(z3.Replace(text, old, new), old, new), ctx))
+    return f(text, old, new)
