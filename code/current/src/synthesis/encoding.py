@@ -8,6 +8,8 @@ from . import types
 from .utils import *
 
 
+
+
 def program_spec(components, examples, local_max_len, fix_lines, stack_space):
     context = z3.Context()
 
@@ -45,6 +47,7 @@ def generate_program_lines(components, examples, context):
     return lines
 
 
+# FIXME The stack_space option is not well implemented.
 def generate_locals(components, examples, stack_space, context):
     """
     Generate local variables of the program, i.e., values that are not
@@ -75,7 +78,7 @@ def generate_locals(components, examples, stack_space, context):
         for i in range(cnt + 1):
             x = next(n)
 
-            if x <= stack_space:
+            if not stack_space or x <= stack_space:
                 yield types.make_local(typ, x, context)
 
 
@@ -227,13 +230,9 @@ def generate_output_soundness_constraints(env):
     for line in env.program.lines:
         for e in env.examples:
             output = line.output.from_example[e]
-            component = line.component.function
             holes = p.pvector(h.from_example[e] for h in line.holes)
 
-            yield output == component(*holes)
-
-            if line.component.spec:
-                yield line.component.spec(env.context, *holes)
+            yield line.component.spec(env.context, output, *holes)
 
 
 def generate_input_output_completeness_constraints(env):
