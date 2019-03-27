@@ -4,6 +4,8 @@ import z3
 from .utils import z3_const
 
 
+# TODO Split spec into actual spec and hints, for testability
+# TODO Add python function interpretation as field
 class Component(p.PClass):
     name = p.field(type=str)
     domain = p.pvector_field(item_type=type)

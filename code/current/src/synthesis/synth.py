@@ -78,10 +78,10 @@ def solver(components, examples, max_conflicts, timeout, local_max_len,
         logging.debug(f'Reason: {type(e).__name__}')
         return
 
-    if max_conflicts:
-        solver.set(max_conflicts=max_conflicts)
     if timeout:
         solver.set(timeout=timeout)
+    elif max_conflicts:
+        solver.set(max_conflicts=max_conflicts)
 
     start = time.time()
     check = solver.check()

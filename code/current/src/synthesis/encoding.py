@@ -48,6 +48,8 @@ def generate_program_lines(components, examples, context):
 
 
 # FIXME The stack_space option is not well implemented.
+# NOTE that outsystems' strings provide no way to escape characters (apart from
+# quotes, I believe), so we might be generating things that do not make sense.
 def generate_locals(components, examples, stack_space, context):
     """
     Generate local variables of the program, i.e., values that are not

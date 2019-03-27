@@ -1,3 +1,4 @@
+import string
 import z3
 
 from .types import Component
@@ -41,7 +42,7 @@ length = Component(
     name='length', domain=(str, ), ret_type=int, spec=length_spec)
 
 
-def replace_spec(context, output, text, old, new):
+def replace_spec_01(context, output, text, old, new):
     f = z3.RecFunction('replace_all', z3.StringSort(context),
                        z3.StringSort(context), z3.StringSort(context),
                        z3.StringSort(context))
@@ -58,6 +59,7 @@ def replace_spec(context, output, text, old, new):
                      z3.IndexOf(text, old, zero) + z3.Length(old),
                      z3.Length(text))
 
+    # FIXME Should use new consts as args
     z3.RecAddDefinition(
         f, [text, old, new],
         z3.If(
@@ -68,28 +70,55 @@ def replace_spec(context, output, text, old, new):
     return output == f(text, old, new)
 
 
-# def replace_spec(context, output, text, old, new):
-#     f = z3.RecFunction('replace_all', z3.StringSort(context),
-#                        z3.StringSort(context), z3.StringSort(context),
-#                        z3.StringSort(context))
-#     z3.RecAddDefinition(
-#         f, [text, old, new],
-#         z3.If(
-#             z3.Or(old == new,
-#                   z3.Not(z3.Contains(text, old),
-#                          context),
-#                   context),
-#             text,
-#             f(z3.Replace(text, old, new), old, new), context))
+def replace_spec_02(context, output, text, old, new):
+    f = z3.RecFunction('replace_all', z3.StringSort(context),
+                       z3.StringSort(context), z3.StringSort(context),
+                       z3.StringSort(context))
 
-#     return output == f(text, old, new)
+    # FIXME Should use new consts as args
+    z3.RecAddDefinition(
+        f, [text, old, new],
+        z3.If(
+            z3.Or(old == new, z3.Not(z3.Contains(text, old),
+                                     context), context), text,
+            f(z3.Replace(text, old, new), old, new), context))
+
+    return output == f(text, old, new)
+
 
 replace = Component(
     name='replace',
     domain=(str, str, str),
     ret_type=str,
-    spec=replace_spec,
+    spec=replace_spec_02,
     # spec=lambda ctx, x, y, z: z3.And(x != y, z3.Contains(x, y), ctx)
+)
+
+
+# FIXME: Partial specifications probably don't work well with magic constants
+def replace_over_spec(context, output, text, old, new):
+    zero = z3.IntVal(0, context)
+    empty = z3.StringVal('', context)
+
+    ix_old = z3.IndexOf(text, old, zero)
+    ix_new = z3.IndexOf(output, new, zero)
+
+    c1 = ix_old == ix_new
+    c2 = z3.Contains(text, old)
+    c3 = z3.Contains(output, new)
+    c4 = old != new
+    c5 = old != empty
+
+    c6 = z3.SubString(text, 0, ix_old) == z3.SubString(output, 0, ix_new)
+
+    return z3.And(c1, c2, c3, c4, c5, c6, context)
+
+
+replace_over = Component(
+    name='replace',
+    domain=(str, str, str),
+    ret_type=str,
+    spec=replace_over_spec,
 )
 
 
@@ -189,3 +218,61 @@ def trim_spec(context, output, text):
 ltrim = Component(name='ltrim', domain=(str, ), ret_type=str, spec=ltrim_spec)
 rtrim = Component(name='rtrim', domain=(str, ), ret_type=str, spec=rtrim_spec)
 trim = Component(name='trim', domain=(str, ), ret_type=str, spec=trim_spec)
+
+
+def newline_spec(context, output):
+    return output == z3.StringVal('\n', context)
+
+
+newline = Component(name='newline', domain=(), ret_type=str, spec=newline_spec)
+
+
+def case_char(name, map_, ctx=z3.main_ctx()):
+    char = z3.FreshConst(z3.StringSort(ctx))
+    const = char
+    for x, y in map_:
+        const = z3.If(char == z3.StringVal(x, ctx), z3.StringVal(y, ctx),
+                      const, ctx)
+
+    f = z3.RecFunction(f'{name}_char', z3.StringSort(ctx), z3.StringSort(ctx))
+    z3.RecAddDefinition(f, char, const)
+
+    return f
+
+
+def lower_char(ctx=z3.main_ctx()):
+    map_ = zip(string.ascii_uppercase, string.ascii_lowercase)
+    return case_char('lower', map_, ctx)
+
+
+def upper_char(ctx=z3.main_ctx()):
+    map_ = zip(string.ascii_lowercase, string.ascii_uppercase)
+    return case_char('upper', map_, ctx)
+
+
+def case_spec(name, name_char, ctx, output, text):
+    f = z3.RecFunction(name, z3.StringSort(ctx), z3.StringSort(ctx))
+
+    empty = z3.StringVal("", ctx)
+
+    z3.RecAddDefinition(
+        f, text,
+        z3.If(text == empty, empty,
+              z3.Concat(name_char(ctx)(head(ctx, text)), f(tail(ctx, text)))))
+
+    return output == f(text)
+
+
+def lower_spec(ctx, output, text):
+    return case_spec('lower', lower_char, ctx, output, text)
+
+
+def upper_spec(ctx, output, text):
+    return case_spec('upper', upper_char, ctx, output, text)
+
+
+lower = Component(name='lower', domain=(str, ), ret_type=str, spec=lower_spec)
+upper = Component(name='upper', domain=(str, ), ret_type=str, spec=upper_spec)
+
+# Missing:
+# chr, encodehtml, encodejavascript, encodesql, encodeurl
