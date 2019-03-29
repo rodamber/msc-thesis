@@ -80,7 +80,7 @@ def solver(components, examples, max_conflicts, timeout, local_max_len,
 
     if timeout:
         solver.set(timeout=timeout)
-    elif max_conflicts:
+    if max_conflicts:
         solver.set(max_conflicts=max_conflicts)
 
     start = time.time()
