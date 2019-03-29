@@ -4,8 +4,7 @@ import time
 import test_cases
 from synthesis import components as comp
 from synthesis.pretty import pretty_oneliner
-from synthesis.synth import config, default_library, synth
-from synthesis.types import example
+from synthesis.synth import config, synth, example
 
 
 def log_examples(examples):
@@ -39,17 +38,42 @@ def main(log_level=logging.INFO):
     logging.info('Started synthesis tests')
 
     my_config = config(
-        max_conflicts=1 * (10 ** 4),
-        program_min_size=3,
-        program_max_size=3,
-        library=[comp.replace, comp.concat], # default_library(),
-        fix_lines=True
-    )
+        max_conflicts=20 * 1000,
+        timeout=5 * 60 * 1000,
+        program_min_size=1,
+        program_max_size=6,
+        library=[
+            comp.add,
+            comp.concat,
+            comp.index,
+            comp.index3,
+            comp.length,
+            comp.newline,
+            # comp.replace_over,
+            # comp.replace,
+            comp.sub,
+            comp.substr,
+            comp.ltrim,
+            # comp.rtrim,
+            comp.trim,
+            comp.lower,
+            comp.upper,
+        ],
+        fix_lines=False,
+        stack_space=None)
 
-    # examples = test_cases.concat.cases[9]
-    # bench(my_config, examples)
+    # buggy01 = [
+    #     example(['John   Doe'], 'John Doe'),
+    #     example(['A B'], 'A')
+    # ]
 
-    for examples in test_cases.concat.cases[:9]:
+    # examples = [
+    #     example(['John   Doe'], 'John Doe'),
+    #     example(['A B'], 'A B')
+    # ]
+    # bench(examples=examples, config=my_config)
+
+    for examples in test_cases.all_test_cases():
         bench(examples=examples, config=my_config)
 
     logging.info('Finished synthesis tests')
