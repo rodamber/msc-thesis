@@ -1,0 +1,26 @@
+Extending Jha's et al. OG synthesis to work with several types.
+
+Right now we are synthesizing straight-line programs (no loops or conditionals).
+
+The output of the program is the output of the last component.
+
+A solution (model) to this set of constraints can be decoded into a program.
+
+The solver is therefore trying to find a program that satisfies the examples.
+
+We are encoding in a formula the independent runs of the program over the
+provided examples. One run per example. i^e, o^e, etc...
+
+The properties we want to encode are:
+
+- acyclicity
+- ...
+
+% Program paradigm
+% Formula
+% Example of the encoding of a concrete program and set of examples
+% Solution for that example in terms of the assignment (model) of the formula
+
+% Analysis of the size of the problem in function of the number of constants,
+% components, arity of the components, number of examples, number of inputs,
+% etc.

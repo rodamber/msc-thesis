@@ -79,8 +79,7 @@ typography?
 :RELWORK:  TODO
 :END:
 
-May be added as an appendix? Well, it's not like I'm lacking space, but I guess
-that's how they usually do it in books. Not sure about theses, though.
+Check todos.
 
 Things that might be missing:
 
@@ -90,8 +89,8 @@ Things that might be missing:
   high-level.
 - Context-free grammars.
 - Definitions such as:
-  - Ahat does it mean for a program to satisfy a specification, an example, a
-    set of examples, etc.
+  - What does it mean for a program to satisfy a specification
+  - Example, a set of examples, etc.
 
 ** TODO Background
    DEADLINE: <2019-03-13 Wed>
