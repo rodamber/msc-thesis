@@ -14,30 +14,25 @@ Therefore, we must understand the kind of programs we are trying to find, as
 well as the kind of specifications that the system understands.
 
 % TODO
-\todo{We are working in the context of OutSystems'...}{concept of readability,
-  usability, etc. That the programs are outsystems' expressions, etc.}
+Programs are usually defined by means of a \gls{cfg}. ...
 
-The programs we are interested in are OutSystems'
-expressions\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}.
+% TODO
+A specification is a way to convey intent. There are several ways to specify
+which program we are interested in such as, for example, this and that. In our
+case we are working in a \gls{pbe} setting, where the user explains their intent
+by means of a set of input-output \textit{examples}.
+% Def. of PBE and example follows
 
-In the context of this work, we can think OutSystems' expressions as a simple
-functional language of operands and operators that compose themselves to create
-a pure, stateless, pipeline-like program. This means that OutSystems'
-expressions do not have side-effects, like printing to the screen, or writing to
-a database.
+We say that a program $f$ \textit{satisfies} an input-output example
+$(\mathbf{x}, y)$ if $f(\mathbf{x}) = y$. We say that a program satisfies a set
+of examples if it satisfies every example in that set.
 
-% TODO What is an operator? What is and operand?
-% https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions
-
-% TODO Example of an outsystems' expression
-The library of builtin expressions includes functions that manipulate data types
-such a text, or dates. \todo{Listing x includes examples of outsystems
-  expressions. These do y and z.}{}
-
-% TODO Explain how it fits in the context of service studio and how it interacts
-% with other features (like being able to manipulate structures and lists).
-This language of expressions fits on ...
-
+% TODO
+For example, the following set of examples are satisfied by the program f = abc,
+because ... . However, the program g = xyz also satisfies the examples. These
+examples are, therefore, \textit{ambiguous}, and further examples are required
+to disambiguate between the two programs. Ambiguity is a characteristic inherent
+to the \gls{pbe} synthesis setting.
 
 \section{Constraint Solving}
 \label{sec:preliminaries-constraint-solving}
@@ -45,24 +40,24 @@ This language of expressions fits on ...
 Our work includes the modeling of programs as constraints. We make use of
 off-the-shelf automated constraint solvers in order to solve these constraints.
 To understand how we can model our problem domain as constraints, it is useful
-to know about the concepts of \gls{SAT} and \gls{SMT}.
+to know about the concepts of \gls{sat} and \gls{smt}.
 
 % TODO Explain how these solvers are good and we leverage improvements made in
 % the last decades, blah, blah, blah
 
 % TODO Quintessential examples are n-queens and sudoku
-\todo{<Insert here the definition of SAT, and examples of encodings>}{}
+\todo{<Insert here the definition of sat, and examples of encodings>}{}
 
 % TODO Explain how it fits in the frame of theoretical computer science
 
-Encoding programs in SAT can be a bit too low-level. We are encoding domain
-knowledge into the domain of boolean formulas. In can be both hard for a human
-to model a problem this way, ...
+Encoding programs in \gls{sat} can be a bit too low-level. We are encoding
+domain knowledge into the domain of boolean formulas. In can be both hard for a
+human to model a problem this way, ...
 
 % TODO Encodings using strings and numbers.
 % TODO Check examples in the puzzles directory of the SBV Haskell library
 % https://en.wikipedia.org/wiki/Satisfiability_modulo_theories
-\todo{<Insert here the definition of SMT, and examples of encodings>}{}
+\todo{<Insert here the definition of smt, and examples of encodings>}{}
 
 % \section{Other Definitions}
 % \label{sec:other-definitions}

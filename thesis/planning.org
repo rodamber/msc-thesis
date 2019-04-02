@@ -91,6 +91,7 @@ Things that might be missing:
 - Definitions such as:
   - What does it mean for a program to satisfy a specification
   - Example, a set of examples, etc.
+- SSA (static single assignment) form
 
 ** TODO Background
    DEADLINE: <2019-03-13 Wed>
@@ -452,6 +453,108 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 :EXAMPLES: TODO
 :RELWORK:  ONGOING
 :END:
+
+** TODO Synthesis
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+(Probably not here) Synthesis as a next-step from verification.
+ - \phi{}(input, program, output)
+   - fix program and input: interpretation
+   - fix program and output: reverse interpretation
+   - fix program: verification
+   - fix input and output: synthesis
+
+Extending Jha's et al. OG synthesis to work with several types.
+
+Right now we are synthesizing straight-line programs (no loops or conditionals).
+
+The output of the program is the output of the last component.
+
+A solution (model) to this set of constraints can be decoded into a program.
+
+The solver is therefore trying to find a program that satisfies the examples.
+
+We are encoding in a formula the independent runs of the program over the
+provided examples. One run per example. i^e, o^e, etc...
+
+The properties we want to encode are:
+
+- acyclicity
+- ...
+
+% Program paradigm
+% Formula
+% Example of the encoding of a concrete program and set of examples
+% Solution for that example in terms of the assignment (model) of the formula
+
+% Analysis of the size of the problem in function of the number of constants,
+% components, arity of the components, number of examples, number of inputs,
+% etc.
+
+% TODO What is an operator? What is and operand?
+% https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions
+
+*** TODO Problem Statement
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+In our context, we are working in a \gls{PBE} setting, so we are interested in
+synthesizing an OutSystems expression from input-output examples. However, the
+problem specification was deliberately vague, which gave us liberty to explore
+different options. In practice, this means ... (asking for user constants, etc).
+%
+The problem was open-ended at first and was refined over time. We approach the
+problem in stages. First just a small dsl of text components. Then all of them,
+then If statements.
+
+# Introduction, maybe?
+In this context, the synthesis process should be \todo{reasonably fast}{explain}
+in order to be useful. The synthesized programs should also be ``natural'' in
+the sense that it seems like it was written by a human programmer. We also want
+our programs to be readable in order for the users to able to verify it
+themselves. 
+
+Comparison to Jha's et al. approach:
+
+- We use a lot more components.
+- We synthesize arbitrary constants that are not given as user input.
+- Their components work only over bitvectors.
+- Their program must use all components from the library exactly once.
+- Separation of program enumeration and constraint solving (?)
+
+**** First Approach
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+TODO:
+
+- Enumeration of components
+- Synthesizer program listing
+
+In our case we are using Z3, a state-of-the-art \gls{smt} solver. It allows
+reasoning over string constraints and linear arithmetic...
+
+***** Encoding
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+
+- Example of the encoding of a concrete program
+
+** TODO Other Approaches/Future Work
+- Learning patterns from the corpus of expressions. see: https://arxiv.org/abs/1902.06349
 
 ** TODO Bibliography
    :PROPERTIES:
