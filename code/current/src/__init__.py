@@ -1,1 +1,1 @@
-from . import synthesis, test_cases
+from . import simple, test_cases

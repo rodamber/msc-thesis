@@ -1,7 +1,5 @@
-from . import (concat, index, length, replace, substr, substr_concat,
-               substr_index)
-
-# from .. import synthesis
+from . import (add, concat, index, length, lower, newline, replace, sub,
+               substr, substr_concat, substr_index, upper)
 
 
 def all_test_cases():

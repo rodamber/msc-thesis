@@ -1,14 +1,12 @@
-from synthesis.types import example
+from simple.types import IO
 
 cases = (
-    [example(('outsystems.com',), 10)],
-
-    [example(('outsystems.com', '.'), 10)],
-
-    [example(('outsystems.com',), 10),
-     example(('cmu.edu',), 3)],
+    [IO(('outsystems.com', ), 10)],
+    [IO(('outsystems.com', '.'), 10)],
+    [IO(('outsystems.com', ), 10),
+     IO(('cmu.edu', ), 3)],
 
     # Adding more '.' shouldn't confuse the synthesizer.
-    [example(('outsystems.com',), 10),
-     example(('abc.gmail.com',), 3)],
+    [IO(('outsystems.com', ), 10),
+     IO(('abc.gmail.com', ), 3)],
 )

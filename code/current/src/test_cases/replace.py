@@ -1,22 +1,18 @@
-from synthesis.types import example
+from simple.types import IO
 
 cases = (
     # Simple replace test cases
-    [example(('John Doe', ), 'John_Doe')],
+    [IO(('John Doe', ), 'John_Doe')],
+    [IO(('John Doe', ), 'John_Doe'),
+     IO(('Michael Scott', ), 'Michael_Scott')],
+    [IO(('01/02/2000', ), '01-02-2000')],
     [
-        example(('John Doe', ), 'John_Doe'),
-        example(('Michael Scott', ), 'Michael_Scott')
+        IO(('01/02/2000', '/', '-'), '01-02-2000'),
+        IO(('20/03/1999', '/', '-'), '20-03-1999')
     ],
-    [example(('01/02/2000', ), '01-02-2000')],
-    [ # 190
-        example(('01/02/2000', '/', '-'), '01-02-2000'),
-        example(('20/03/1999', '/', '-'), '20-03-1999')
+    [
+        IO(('01/02/2000', '-'), '01-02-2000'),
+        IO(('20/03/1999', '-'), '20-03-1999')
     ],
-    [ # 1479 sec
-        example(('01/02/2000', '-'), '01-02-2000'),
-        example(('20/03/1999', '-'), '20-03-1999')
-    ],
-    [ # 1801 sec
-        example(('01/02/2000', ), '01-02-2000'),
-        example(('02/03/1999', ), '02-03-1999')
-    ])
+    [IO(('01/02/2000', ), '01-02-2000'),
+     IO(('02/03/1999', ), '02-03-1999')])

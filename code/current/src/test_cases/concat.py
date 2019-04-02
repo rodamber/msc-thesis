@@ -1,95 +1,92 @@
-from synthesis.types import example
+from simple.types import IO
 
 cases = (
     # 0: Size 2
-    [example(('John', 'Doe'), 'John Doe')],
+    [IO(('John', 'Doe'), 'John Doe')],
 
     # 1: Size 2
     [
-        example(('John', 'Doe'), 'John Doe'),
-        example(('Anne', 'Smith'), 'Anne Smith'),
+        IO(('John', 'Doe'), 'John Doe'),
+        IO(('Anne', 'Smith'), 'Anne Smith'),
     ],
 
     # 2: Size 3
     [
-        example(('John', 'Doe', '-Odoi'), 'John Doe-Odoi'),
+        IO(('John', 'Doe', '-Odoi'), 'John Doe-Odoi'),
     ],
 
     # 3: Size 3
     [
-        example(('John', 'Doe', '-Odoi'), 'John Doe-Odoi'),
-        example(('Anne', 'Smith', '-Sonian'), 'Anne Smith-Sonian'),
+        IO(('John', 'Doe', '-Odoi'), 'John Doe-Odoi'),
+        IO(('Anne', 'Smith', '-Sonian'), 'Anne Smith-Sonian'),
     ],
 
     # 4: Size 3, learning the prefix
     [
-        example(('John', 'Doe'), 'Dr. John Doe'),
+        IO(('John', 'Doe'), 'Dr. John Doe'),
     ],
 
     # 5: Size 3, learning the prefix
     [
-        example(('John', 'Doe'), 'Dr. John Doe'),
-        example(('Anne', 'Smith'), 'Dr. Anne Smith'),
+        IO(('John', 'Doe'), 'Dr. John Doe'),
+        IO(('Anne', 'Smith'), 'Dr. Anne Smith'),
     ],
 
     # 6: Size 4
     [
-        example(('John', 'Michael', 'Doe'), 'John Michael Doe'),
+        IO(('John', 'Michael', 'Doe'), 'John Michael Doe'),
     ],
 
     # 7: Size 4
     [
-        example(('John', 'Michael', 'Doe'), 'John Michael Doe'),
-        example(('Anne', 'Marie', 'Smith'), 'Anne Marie Smith')
+        IO(('John', 'Michael', 'Doe'), 'John Michael Doe'),
+        IO(('Anne', 'Marie', 'Smith'), 'Anne Marie Smith')
     ],
 
     # 8: Size 4
     [
-        example(('John', 'Michael', 'Doe'), 'John Michael Doe'),
-        example(('Anne', 'Marie', 'Smith'), 'Anne Marie Smith'),
-        example(('Laura', 'Pinto', 'Wang'), 'Laura Pinto Wang')
+        IO(('John', 'Michael', 'Doe'), 'John Michael Doe'),
+        IO(('Anne', 'Marie', 'Smith'), 'Anne Marie Smith'),
+        IO(('Laura', 'Pinto', 'Wang'), 'Laura Pinto Wang')
     ],
 
     # 9: Size 5, learning the prefix
-    [example(('Anne', 'Marie', 'Smith'), 'Dr. Anne Marie Smith')],
+    [IO(('Anne', 'Marie', 'Smith'), 'Dr. Anne Marie Smith')],
 
     # 10: Size 5, learning the prefix
     [
-        example(('John', 'Michael', 'Doe'), 'Dr. John Michael Doe'),
-        example(('Anne', 'Marie', 'Smith'), 'Dr. Anne Marie Smith'),
+        IO(('John', 'Michael', 'Doe'), 'Dr. John Michael Doe'),
+        IO(('Anne', 'Marie', 'Smith'), 'Dr. Anne Marie Smith'),
     ],
 
     # 11: Size 5, learning the prefix
     [
-        example(('John', 'Michael', 'Doe'), 'Dr. John Michael Doe'),
-        example(('Anne', 'Marie', 'Smith'), 'Dr. Anne Marie Smith'),
-        example(('Laura', 'Pinto', 'Wang'), 'Dr. Laura Pinto Wang')
+        IO(('John', 'Michael', 'Doe'), 'Dr. John Michael Doe'),
+        IO(('Anne', 'Marie', 'Smith'), 'Dr. Anne Marie Smith'),
+        IO(('Laura', 'Pinto', 'Wang'), 'Dr. Laura Pinto Wang')
     ],
 
     # 12: Size 6, no learning
     [
-        example(('John', 'Oliver', 'Michael', 'Doe', ' '),
-                'John Oliver Michael Doe'),
+        IO(('John', 'Oliver', 'Michael', 'Doe', ' '),
+           'John Oliver Michael Doe'),
     ],
 
     # 13: Size 6, no learning
     [
-        example(('John', 'Oliver', 'Michael', 'Doe', ' '),
-                'John Oliver Michael Doe'),
-        example(('Anne', 'Emily', 'Marie', 'Smith', ' '),
-                'Anne Emily Marie Smith')
+        IO(('John', 'Oliver', 'Michael', 'Doe', ' '),
+           'John Oliver Michael Doe'),
+        IO(('Anne', 'Emily', 'Marie', 'Smith', ' '), 'Anne Emily Marie Smith')
     ],
 
     # 14: Size 6, with learning
     [
-        example(('John', 'Oliver', 'Michael', 'Doe'),
-                'John Oliver Michael Doe'),
+        IO(('John', 'Oliver', 'Michael', 'Doe'), 'John Oliver Michael Doe'),
     ],
 
     # 15: Size 6, with learning
     [
-        example(('John', 'Oliver', 'Michael', 'Doe'),
-                'John Oliver Michael Doe'),
-        example(('Anne', 'Emily', 'Marie', 'Smith'), 'Anne Emily Marie Smith')
+        IO(('John', 'Oliver', 'Michael', 'Doe'), 'John Oliver Michael Doe'),
+        IO(('Anne', 'Emily', 'Marie', 'Smith'), 'Anne Emily Marie Smith')
     ],
 )

@@ -1,9 +1,9 @@
-from synthesis.types import example
+from simple.types import IO
 
 cases = (
-    [example(('abc',), 3)],
-    [example(('abc',), 3), example(('rodrigo',), 7)],
-    [example(('abc',), 3),
-     example(('rodrigo',), 7),
-     example(('pedro',), 5)],
+    [IO(('abc', ), 3)],
+    [IO(('abc', ), 3), IO(('rodrigo', ), 7)],
+    [IO(('abc', ), 3),
+     IO(('rodrigo', ), 7),
+     IO(('pedro', ), 5)],
 )
