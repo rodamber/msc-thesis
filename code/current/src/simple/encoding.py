@@ -142,6 +142,7 @@ def all_ret_val_used_constraint(env: Env) -> Constraint:
 
     for f in F:
         # TODO Check if there's any performance gain from verifying if p is in
+        # TODO Also, remove kind check if we're only checking for line equality
         # f.params.
         constr = Or([f.line == p.line \
                      for p in P

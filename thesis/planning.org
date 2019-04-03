@@ -461,39 +461,18 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 :RELWORK:  TODO
 :END:
 
-(Probably not here) Synthesis as a next-step from verification.
+# Introduction, maybe?
+Synthesis as a next-step from verification:
  - \phi{}(input, program, output)
    - fix program and input: interpretation
    - fix program and output: reverse interpretation
    - fix program: verification
    - fix input and output: synthesis
 
-Extending Jha's et al. OG synthesis to work with several types.
-
-Right now we are synthesizing straight-line programs (no loops or conditionals).
-
-The output of the program is the output of the last component.
-
-A solution (model) to this set of constraints can be decoded into a program.
-
-The solver is therefore trying to find a program that satisfies the examples.
-
 We are encoding in a formula the independent runs of the program over the
 provided examples. One run per example. i^e, o^e, etc...
 
-The properties we want to encode are:
-
-- acyclicity
-- ...
-
 % Program paradigm
-% Formula
-% Example of the encoding of a concrete program and set of examples
-% Solution for that example in terms of the assignment (model) of the formula
-
-% Analysis of the size of the problem in function of the number of constants,
-% components, arity of the components, number of examples, number of inputs,
-% etc.
 
 % TODO What is an operator? What is and operand?
 % https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions
@@ -505,6 +484,15 @@ The properties we want to encode are:
 :RELWORK:  TODO
 :END:
 
+# The problem statement will actually evolve over time, so this chapter
+# structure may not be the best.
+
+- [ ] examples -> prog1 -> more examples -> prog2
+- [ ] (later) encoding for the second examples and model for prog 2
+- [ ] Give a concise definition of the problem
+% We assume a set of examples ..., a set of components ... where ... is ... etc
+
+# Context of the problem
 In our context, we are working in a \gls{PBE} setting, so we are interested in
 synthesizing an OutSystems expression from input-output examples. However, the
 problem specification was deliberately vague, which gave us liberty to explore
@@ -521,13 +509,10 @@ the sense that it seems like it was written by a human programmer. We also want
 our programs to be readable in order for the users to able to verify it
 themselves. 
 
-Comparison to Jha's et al. approach:
-
-- We use a lot more components.
-- We synthesize arbitrary constants that are not given as user input.
-- Their components work only over bitvectors.
-- Their program must use all components from the library exactly once.
-- Separation of program enumeration and constraint solving (?)
+# Preliminaries? 
+At some point we have to explain which components we are considering and how
+they map to SMT. Particularly, we should explain the logics that we need, and
+whether they are decidable (preliminaries) or not.
 
 **** First Approach
 :PROPERTIES:
@@ -536,13 +521,13 @@ Comparison to Jha's et al. approach:
 :RELWORK:  TODO
 :END:
 
-TODO:
-
-- Enumeration of components
-- Synthesizer program listing
-
-In our case we are using Z3, a state-of-the-art \gls{smt} solver. It allows
-reasoning over string constraints and linear arithmetic...
+- State that right now we are synthesizing straight-line programs (no loops or
+  conditionals). 
+- [ ] Enumeration of components
+- [ ] Synthesizer program listing
+- [ ] Which SMT solver are we using?
+% In our case we are using Z3, a state-of-the-art \gls{smt} solver. It allows
+% reasoning over string constraints and linear arithmetic...
 
 ***** Encoding
 :PROPERTIES:
@@ -551,7 +536,25 @@ reasoning over string constraints and linear arithmetic...
 :RELWORK:  TODO
 :END:
 
-- Example of the encoding of a concrete program
+- [ ] Explain the idea of the encoding first (location-based variables)
+- [ ] The output of the program is the output of the last component.
+
+- [ ] Clarify the notation, and enforce it in the formula
+- [ ] What properties are we trying to enforce (aciclicy)?
+
+- [ ] Example of the encoding of a concrete program and set of examples
+- [ ] Solution for that example in terms of the assignment (model) of the formula
+
+- [ ] Analysis of the size of the problem in function of the number of constants,
+  components, arity of the components, number of examples, number of inputs,
+  etc.
+
+***** Comparison to Jha's et al. approach
+- We use a lot more components.
+- We synthesize arbitrary constants that are not given as user input.
+- Their components work only over bitvectors.
+- Their program must use all components from the library exactly once.
+- Separation of program enumeration and constraint solving (?)
 
 ** TODO Other Approaches/Future Work
 - Learning patterns from the corpus of expressions. see: https://arxiv.org/abs/1902.06349
