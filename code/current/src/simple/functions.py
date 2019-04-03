@@ -116,26 +116,26 @@ def SSub(x: SInt, y: SInt) -> z3.ArithRef:
 
 def head(s: z3.SeqRef) -> z3.SeqRef:
     ctx = s.ctx
-    zero = z3.Int(0, ctx)
+    zero = z3.IntVal(0, ctx)
     return s[zero]
 
 
 def last(s: z3.SeqRef) -> z3.SeqRef:
     ctx = s.ctx
-    one = z3.Int(1, ctx)
+    one = z3.IntVal(1, ctx)
     return s[z3.Length(s) - one]
 
 
 def tail(s: z3.SeqRef) -> z3.SeqRef:
     ctx = s.ctx
-    one = z3.Int(1, ctx)
+    one = z3.IntVal(1, ctx)
     return z3.SubString(s, one, z3.Length(s))
 
 
 def init(s: z3.SeqRef) -> z3.SeqRef:
     ctx = s.ctx
-    zero = z3.Int(0, ctx)
-    one = z3.Int(1, ctx)
+    zero = z3.IntVal(0, ctx)
+    one = z3.IntVal(1, ctx)
     return z3.SubString(s, zero, z3.Length(s) - one)
 
 
@@ -203,9 +203,9 @@ def reverse(s: z3.SeqRef) -> z3.SeqRef:
 
 def is_whitespace(c: z3.SeqRef) -> z3.BoolRef:
     ctx = c.ctx
-    space = z3.String(" ", ctx)
-    newline = z3.String("\n", ctx)
-    tab = z3.String("\t", ctx)
+    space = z3.StringVal(" ", ctx)
+    newline = z3.StringVal("\n", ctx)
+    tab = z3.StringVal("\t", ctx)
     return z3.Or(c == space, c == newline, c == tab, ctx)
 
 
