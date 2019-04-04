@@ -3,7 +3,7 @@ from typing import Callable, Dict
 
 import z3
 
-from .types import SInt, SStr, Symbol
+from .types import SInt, SStr
 
 # ==============================================================================
 #                               Symbolic Functions
@@ -190,14 +190,23 @@ def to_case(name: str, name_char: Callable[[z3.Context], z3.FuncDeclRef], \
 
 def reverse(s: z3.SeqRef) -> z3.SeqRef:
     ctx = s.ctx
+
     empty = z3.StringVal("", ctx)
+    acc = z3.FreshConst(z3.StringSort(ctx), 'acc')
+
+    tail_rev = z3.RecFunction('reverse', \
+                              z3.StringSort(ctx), z3.StringSort(ctx), \
+                              z3.StringSort(ctx))
+    z3.RecAddDefinition(tail_rev, [s, acc], \
+                        z3.If(s == empty, \
+                              acc,
+                              tail_rev(tail(s),
+                                       z3.Concat(head(s), acc))))
 
     rev = z3.RecFunction('reverse', z3.StringSort(ctx), \
                          z3.StringSort(ctx))
-    z3.RecAddDefinition(rev, s, \
-                        z3.If(s == empty, \
-                              s,
-                              z3.Concat(tail(s), head(s))))
+    z3.RecAddDefinition(rev, s, tail_rev(s, empty))
+
     return rev(s)
 
 

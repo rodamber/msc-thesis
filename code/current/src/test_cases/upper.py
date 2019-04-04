@@ -1,8 +1,9 @@
 from simple.types import IO
 
-cases = ([IO(['abc'], 'abc')], \
-         [IO(['ABC'], 'abc')],
-         [IO(['aBc'], 'abc')],
-         [IO(['aBC'], 'abc')],
-         [IO(['a B C'], 'a b c')],
-         )
+cases = ( \
+    [IO(['abc'], 'ABC')], \
+    [IO(['ABC'], 'ABC')],
+    [IO(['aBc'], 'ABC')],
+    [IO(['aBC'], 'ABC')],
+    [IO(['a B C'], 'A B C')],
+)
