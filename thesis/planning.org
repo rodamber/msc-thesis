@@ -513,6 +513,7 @@ themselves.
 At some point we have to explain which components we are considering and how
 they map to SMT. Particularly, we should explain the logics that we need, and
 whether they are decidable (preliminaries) or not.
+# https://anthonywlin.github.io/papers/popl18-replace.pdf
 
 **** First Approach
 :PROPERTIES:
