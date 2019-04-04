@@ -33,20 +33,23 @@ class RetVal(Symbol):
 
 @dataclass
 class SymComponent:
+    name: str
     params: Tuple[Param, ...]
     ret_val: RetVal
     _spec: Spec
 
     @classmethod
     def mk(cls, f: 'enumerator.Component') -> 'SymComponent':
+        name = f.name
+
         params = tuple(
-            Param(kind=kind, name=f.name, line=line, id=f.id, n=n)
+            Param(kind=kind, name=name, line=line, id=f.id, n=n)
             for n, (kind, line) in enumerate(f.domain, start=1))
 
         ret_val = RetVal(kind=f.ret_type.kind, line=f.ret_type.line, \
-                         name=f.name, id=f.id)
+                         name=name, id=f.id)
 
-        return cls(params, ret_val, f.spec)
+        return cls(name, params, ret_val, f.spec)
 
     @property
     def line(self) -> Line:
@@ -111,8 +114,13 @@ def well_formedness_constraint(env: Env) -> Constraint:
 def spec_constraint(env: Env) -> Constraint:
     _, _, F, _, _, _ = env
     for f in F:
-        yield f.spec
-
+        if f.name != 'replace': # XXX
+            yield f.spec
+        else:
+            yield from [p.line <= len(env.I) + len(env.C) \
+                        for p in f.params[1:]]
+            yield f.params[1].expr != f.params[2].expr # XXX
+            yield f.spec
 
 def dataflow_constraint(env: Env) -> Constraint:
     I, C, F, P, R, o = env

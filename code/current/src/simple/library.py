@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import *
 
-from z3 import And, FreshConst, StringSort
+from z3 import And, BoolVal, IntVal, FreshConst, StringSort, If
 
 from .functions import (SAdd, SConcat, SIndex, SLength, SNewLine, SReplace,
                         SSub, SSubstr, SToLower, SToUpper, STrim, STrimEnd,
                         STrimStart)
-from .types import Constraint, Kind, SInt, SStr, Symbol
+from .types import Const, Constraint, Input, Kind, SInt, SStr, Symbol
 from .utils import z3_val
 
 # ==============================================================================
@@ -63,6 +63,7 @@ newline = Sig(
     domain=(),
     ret_type=Kind.STR,
     spec=lambda args, ret: ret == SNewLine(ret.ctx))
+
 
 replace = Sig(
     name='replace',

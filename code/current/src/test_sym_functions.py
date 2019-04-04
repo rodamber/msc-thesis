@@ -4,7 +4,7 @@ import pytest
 from z3 import Context, ExprRef, Solver, StringVal, sat
 
 from .simple.functions import *
-from .simple.types import kind, Const
+from .simple.types import Kind, kind, Const
 from .simple.utils import z3_val
 
 # ==============================================================================
@@ -33,6 +33,23 @@ def abstract_sfun_test(fun: Callable[..., ExprRef], \
 ])
 def test_sreplace(params, expected):
     abstract_sfun_test(SReplace, params, expected)
+
+
+@pytest.mark.parametrize('params,expected', [
+    (['#01/23/4567#', '#', '|', '/', '-'], '|01-23-4567|'),
+])
+def test_sreplace2(params, expected):
+    ctx = Context()
+    solver = Solver(ctx=ctx)
+
+    cs = [Const(k, kind(p), k, ctx) for k, p in enumerate(params)]
+    r = Const(5, Kind.STR, 5, ctx)
+
+    solver.add([c == z3_val(p, ctx) for c, p in zip(cs, params)])
+    solver.add(r == SReplace(cs[0], cs[1], cs[2]))
+    solver.add(z3_val(expected, ctx) == SReplace(r, cs[3], cs[4]))
+
+    assert solver.check() == sat
 
 
 @pytest.mark.parametrize('params,expected', [

@@ -1,4 +1,4 @@
-from .. import simple
+# from .. import simple
 from . import (add, concat, index, length, lower, newline, replace, sub,
                substr, substr_concat, substr_index, trim, trim_end, trim_start,
                upper)
