@@ -48,6 +48,13 @@ Synthesis as a next-step from verification:
    - fix program: verification
    - fix input and output: synthesis
 
+# Introduction, maybe?
+In this context, the synthesis process should be \todo{reasonably fast}{explain}
+in order to be useful. The synthesized programs should also be ``natural'' in
+the sense that it seems like it was written by a human programmer. We also want
+our programs to be readable in order for the users to able to verify it
+themselves. 
+
 % ------------------------------------------------------------------------------
 % Questions left to answer?
 % - Extend the motivation.
@@ -477,22 +484,15 @@ Explanation of why we chose the components we chose.
 :RELWORK:  TODO
 :END:
 
+Note that examples show constants that are not part of the input.
+
 # Context of the problem
 In our context, we are working in a \gls{PBE} setting, so we are interested in
-synthesizing an OutSystems expression from input-output examples. However, the
-problem specification was deliberately vague, which gave us liberty to explore
-different options. In practice, this means ... (asking for user constants, etc).
-%
+synthesizing an OutSystems expression from input-output examples.
+
 The problem was open-ended at first and was refined over time. We approach the
 problem in stages. First just a small dsl of text components. Then all of them,
 then If statements.
-
-# Introduction, maybe?
-In this context, the synthesis process should be \todo{reasonably fast}{explain}
-in order to be useful. The synthesized programs should also be ``natural'' in
-the sense that it seems like it was written by a human programmer. We also want
-our programs to be readable in order for the users to able to verify it
-themselves. 
 
 # Preliminaries? 
 At some point we have to explain which components we are considering and how
@@ -500,7 +500,7 @@ they map to SMT. Particularly, we should explain the logics that we need, and
 whether they are decidable (preliminaries) or not.
 # https://anthonywlin.github.io/papers/popl18-replace.pdf
 
-**** First Approach
+*** First Approach
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: TODO
@@ -526,7 +526,7 @@ whether they are decidable (preliminaries) or not.
 % In our case we are using Z3, a state-of-the-art \gls{smt} solver. It allows
 % reasoning over string constraints and linear arithmetic...
 
-***** Encoding
+**** Encoding
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: TODO
@@ -552,7 +552,7 @@ provided examples. One run per example. i^e, o^e, etc...
   components, arity of the components, number of examples, number of inputs,
   etc.
 
-***** Comparison to Jha's et al. approach
+**** Comparison to Jha's et al. approach
 
 - We use a lot more components.
 - More than just one type. Also, larger search space with strings that with bitvectors.
@@ -569,6 +569,16 @@ provided examples. One run per example. i^e, o^e, etc...
    :PROPERTIES:
    :CONTENT:  ONGOING
    :END:
+
+
+** Experimental Results
+** Conclusion
+However, the problem specification was deliberately vague, which gave us liberty
+to explore different options. In practice, this means ... (asking for user
+constants, etc).
+
+** Summary
+
 
 * config :noexport:
 #+COLUMNS: %36ITEM %7CONTENT %7RELWORK %7EXAMPLES

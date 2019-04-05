@@ -1,0 +1,242 @@
+\section{Problem Description}
+\label{sec:problem-description}
+
+We are working in the context of the OutSystems platform. OutSystems is a
+low-code platform that features visual application development, easy integration
+with existing systems, and the possibility to add own code when needed. To that
+effect, the kind of programs we are interested in are expressions in the
+OutSystems language
+\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}.
+
+We can think of OutSystems expressions as a simple functional language of
+operands and operators that compose themselves to create pure, stateless,
+loop-less programs. This means that OutSystems expressions do not have
+side-effects, like printing to the screen, or writing to a database, and do not
+permit any variables or (for/while) loops. They do, however, have conditional
+expressions in the form of ``if'' statements. The library of builtin expressions
+includes functions that manipulate builtin data types such a text strings,
+numbers, or dates
+\footnote{\url{https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Data/Data_Types/Available_Data_Types}}
+\footnote{\url{https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions}}.
+
+\begin{table}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+
+      \multicolumn{1}{c}{Function Signatures}
+      & \multicolumn{1}{c}{Description}
+      \\ \midrule
+
+      Concat(t: Text, s: Text): Text
+      & Concatenation of the texts \textit{t} and \textit{s}.
+      \\ \midrule
+
+      Index(t: Text, s: Text, n: Integer): Text
+      & \begin{tabular}{@{}l@{}}
+          Retrieves first position of \textit{s} at or after \textit{n}
+          characters in t.\\
+          Returns -1 if there are no occurrences of \textit{s} in \textit{t}.
+        \end{tabular}
+      \\ \midrule
+
+      Length(t: Text): Integer
+      & Returns the number of characters in \textit{t}.
+      \\ \midrule
+
+      Replace(t: Text, s: Text, s': Text): Text
+      & Returns \textit{t} after replacing all occurrences of \textit{s} with
+        \textit{s'}.
+      \\ \midrule
+
+      Substr(t: Text, i: Integer, n: Integer): Text
+      & Returns the substring of \textit{t} with \textit{n} characters starting
+        at index \textit{i}.
+      \\ \midrule
+
+      ToLower(t: Text): Text
+      & Converts all characters in \textit{t} to lowercase.
+      \\ \midrule
+
+      ToUpper(t: Text): Text
+      & Converts all characters in \textit{t} to uppercase.
+      \\ \midrule
+
+      Trim(t: Text): Text
+      & Removes all leading and trailing space characters (' ') from \textit{t}.
+      \\ \midrule
+
+      TrimStart(t: Text): Text
+      & Removes all leading space characters (' ') from \textit{t}.
+      \\ \midrule
+
+      TrimEnd(t: Text): Text
+      & Removes all trailing space characters (' ') from \textit{t}.
+      \\ \midrule
+
+      +(x: Integer, y: Integer): Integer
+      & Integer addition.
+      \\ \midrule
+
+      -(x: Integer, y: Integer): Integer
+      & Integer subtraction.
+      \\ \bottomrule
+    \end{tabular}}
+  \caption{Description of the builtin functions used for synthesis.}
+  \label{table:builtin-description}
+\end{table}
+
+\begin{table}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+
+      \multicolumn{1}{c}{Function Signatures}
+      & \multicolumn{1}{c}{Examples}
+      \\ \midrule
+
+      Concat(t: Text, s: Text): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Concat("", "") = ""\\
+          Concat("x", "yz") = "xyz"
+        \end{tabular}
+      \\ \midrule
+
+      Index(t: Text, s: Text, n: Integer): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Index("abcbc", "b", 0) = 1\\
+          Index("abcbc", "b", 2) = 3\\
+          Index("abcbc", "d", 0) = -1
+        \end{tabular}
+      \\ \midrule
+
+      Length(t: Text): Integer
+      & \begin{tabular}[c]{@{}l@{}}
+          Length("") = 0\\
+          Length("abc") = 3
+        \end{tabular}
+      \\ \midrule
+
+      Replace(t: Text, s: Text, s': Text): Text
+      & Replace("ababa", "a", "xy") = "xybxybxy"
+      \\ \midrule
+
+      Substr(t: Text, i: Integer, n: Integer): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Substr("abcdef", 2, 3) = "cde"\\
+          Substr("abcdef", 2, 100) = "cdef"
+        \end{tabular}
+      \\ \midrule
+
+      ToLower(Text): Text
+      & ToLower("AbC ") = "abc "
+      \\ \midrule
+
+      ToUpper(Text): Text
+      & ToUpper("aBc ") = "ABC "
+      \\ \midrule
+
+      Trim(Text): Text
+      & Trim("    xyz    ") = "xyz"
+      \\ \midrule
+
+      TrimStart(Text): Text
+      & TrimStart("    xyz    ") = "xyz    "
+      \\ \midrule
+
+      TrimEnd(Text): Text
+      & TrimEnd("    xyz    ") = "    xyz"
+      \\ \midrule
+    \end{tabular}}
+  \caption{Examples for the builtin functions used for synthesis.}
+  \label{table:builtin-examples}
+\end{table}
+
+In this work we are mainly interested in synthesizing expressions that
+manipulate text strings, like concatenation, substring slicing or whitespace
+trimming. As some of these operations involve indexing, we are also interested
+in synthesizing simple arithmetic expressions involving addition and
+subtraction. Therefore, the data types we are working with are text strings and
+integers. In particular, we are not dealing neither with boolean or conditional
+expressions. Table~\ref{table:builtin-description} describes the builtin
+expressions that our synthesized programs can be composed of.
+Table~\ref{table:builtin-examples} shows input-output examples for each of the
+functions in Table~\ref{table:builtin-description}.
+
+\begin{example}
+  Suppose that we would like to capitalize a given text string. For example,
+given the text ``joseph'' we would like to obtain ``Joseph''. The expression
+
+\begin{center}
+  \begin{tabular}{l}
+    \texttt{f(t) = ToUpper(Concat(Substr(t, 0, 1)), Substr(t, 1, Length(t)))}\\
+  \end{tabular}
+\end{center}
+
+\noindent
+satisfies the specification.
+\end{example}
+
+\begin{example}
+  Suppose that, given a text representing a person's name, we are interested in
+extracting the first name. For example, given the text ``John Michael Doe'' we
+would like to obtain ``John''. The expression
+ 
+\begin{center}
+  \begin{tabular}{l}
+    \texttt{f(t) = Substr(t, 0, Index(t, ' ', 0))}\\
+  \end{tabular}
+\end{center}
+
+\noindent
+satisfies the specification.
+\end{example}
+
+Outsystems expressions can easily become very long if we want to solve slightly
+more complex problems. In order for them to become more tractable, we can
+imagine extending the language with \textit{let expressions}, similar to
+languages like Haskell or Standard ML. This lets us name intermediate values,
+but is purely syntactic sugar. An application of this extension can be seen in
+the following example.
+
+\begin{example}
+  Suppose now that, given a text representing a person's name, we are interested
+in extracting not the first but the second name. For example, given the text
+``John Michael Doe'' we would like to obtain ``Michael''. The expression
+ 
+\begin{center}
+  \begin{tabular}{l}
+    \begin{lstlisting}[xleftmargin=10em]
+      f(t) = let ixSpace1 = Index(t, " ", 0)
+                 ixSpace2 = Index(t, " ", ixSpace1 + 1)
+             in Substr(t, ixSpace1, ixSpace2 - ixSpace1)
+    \end{lstlisting}
+  \end{tabular}
+\end{center}
+
+\noindent
+satisfies the specification.
+\end{example}
+
+Without let expressions, an equivalent expression to the one from the previous
+example could be
+
+\begin{center}
+  \begin{tabular}{l}
+    \begin{lstlisting}
+      f(t) = Substr(t, Index(t, " ", 0), Index(t, " ",
+                    Index(t, " ", 0) + 1) - Index(t, " ", 0))
+    \end{lstlisting}
+  \end{tabular}
+\end{center}
+
+In our context, we are working in a \gls{pbe} setting, so we are interested in
+synthesizing an OutSystems expression from a set of input-output examples
+$\{(I_i, o_i)\}_i$.
+
+For example, \{([``John Michael Doe''], ``Michael'')\} is a set of input-output
+examples that are satisfied by the previous program. However, in this case, the
+program \lstinline{f(t) = Substr(0, 5, 7) } would have done just fine. In order
+to rule out this program, we could extend the input-output examples with a
+second example, for instance, ([``Anne Marie Joe''], ``Marie'').
+
