@@ -41,6 +41,13 @@ Maybe rewrite the example in haskell or a similar language to improve the
 typography?
 
 
+Synthesis as a next-step from verification:
+ - \phi{}(input, program, output)
+   - fix program and input: interpretation
+   - fix program and output: reverse interpretation
+   - fix program: verification
+   - fix input and output: synthesis
+
 % ------------------------------------------------------------------------------
 % Questions left to answer?
 % - Extend the motivation.
@@ -461,36 +468,14 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 :RELWORK:  TODO
 :END:
 
-# Introduction, maybe?
-Synthesis as a next-step from verification:
- - \phi{}(input, program, output)
-   - fix program and input: interpretation
-   - fix program and output: reverse interpretation
-   - fix program: verification
-   - fix input and output: synthesis
+Explanation of why we chose the components we chose.
 
-We are encoding in a formula the independent runs of the program over the
-provided examples. One run per example. i^e, o^e, etc...
-
-% Program paradigm
-
-% TODO What is an operator? What is and operand?
-% https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions
-
-*** TODO Problem Statement
+*** TODO Problem Description
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
-
-# The problem statement will actually evolve over time, so this chapter
-# structure may not be the best.
-
-- [ ] examples -> prog1 -> more examples -> prog2
-- [ ] (later) encoding for the second examples and model for prog 2
-- [ ] Give a concise definition of the problem
-% We assume a set of examples ..., a set of components ... where ... is ... etc
 
 # Context of the problem
 In our context, we are working in a \gls{PBE} setting, so we are interested in
@@ -522,11 +507,22 @@ whether they are decidable (preliminaries) or not.
 :RELWORK:  TODO
 :END:
 
+- [ ] Why does a component-based approach lend itself well? (direct mapping
+  between components and DSL constructs; compare this with FlashFill's
+  approach).
+- [ ] examples -> prog1 -> more examples -> prog2
+- [ ] (later) encoding for the second examples and model for prog 2
+- [ ] Give a concise definition of the problem
+% We assume a set of examples ..., a set of components ... where ... is ... etc
+
+
 - State that right now we are synthesizing straight-line programs (no loops or
   conditionals). 
 - [ ] Enumeration of components
 - [ ] Synthesizer program listing
-- [ ] Which SMT solver are we using?
+- [ ] Which SMT solver are we using? (bibliographic reference)
+- [ ] What constructs does the SMT theory for strings provide?
+
 % In our case we are using Z3, a state-of-the-art \gls{smt} solver. It allows
 % reasoning over string constraints and linear arithmetic...
 
@@ -537,6 +533,12 @@ whether they are decidable (preliminaries) or not.
 :RELWORK:  TODO
 :END:
 
+We are encoding in a formula the independent runs of the program over the
+provided examples. One run per example. i^e, o^e, etc...
+
+
+- [ ] Explain that this encoding is independent of the components used as long
+  as they can be specified in SMT
 - [ ] Explain the idea of the encoding first (location-based variables)
 - [ ] The output of the program is the output of the last component.
 
@@ -551,10 +553,13 @@ whether they are decidable (preliminaries) or not.
   etc.
 
 ***** Comparison to Jha's et al. approach
+
 - We use a lot more components.
+- More than just one type. Also, larger search space with strings that with bitvectors.
 - We synthesize arbitrary constants that are not given as user input.
 - Their components work only over bitvectors.
 - Their program must use all components from the library exactly once.
+- Our components are recursive.
 - Separation of program enumeration and constraint solving (?)
 
 ** TODO Other Approaches/Future Work

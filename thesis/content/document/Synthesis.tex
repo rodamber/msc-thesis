@@ -1,49 +1,220 @@
 \chapter{Synthesis}
 \label{chap:synthesis}
 
-% TODO
 This chapter describes the problem statement, its definition, and the approaches
-that were studied in order to try to solve it. The first one, described in
-section ???, is based on a component-based constraint solving approach presented
-by~\citeauthor{Jha:oracle:2010} when applied to ... and further explored in
-their ogis paper \cite{Jha:oracle:2010}...
+that were studied in order to solve it. The first one, described in
+section~\ref{sec:first-approach}, is based on a component-based constraint
+solving approach first applied to the synthesis of bitvector
+programs~\cite{Gulwani:2011:SLP, Jha:oracle:2010}.
 
-% TODO
-\todo{We are working in the context of OutSystems...}{concept of readability,
-  usability, etc. That the programs are outsystems expressions, etc.}
+\section{Problem Description}
+\label{sec:problem-description}
 
-The programs we are interested in are expressions in the OutSystems language
+We are working in the context of the OutSystems platform. OutSystems is a
+low-code platform that features visual application development, easy integration
+with existing systems, and the possibility to add own code when needed. To that
+effect, the kind of programs we are interested in are expressions in the
+OutSystems language
 \footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}.
-In the context of this work, we can think of OutSystems expressions as a simple
-functional language of operands and operators that compose themselves to create
-pure, stateless, tree-like programs. This means that OutSystems expressions do
-not have side-effects, like printing to the screen, or writing to a database,
-and do not permit any variables or loops. They do, however, have conditional
+
+We can think of OutSystems expressions as a simple functional language of
+operands and operators that compose themselves to create pure, stateless,
+loop-less programs. This means that OutSystems expressions do not have
+side-effects, like printing to the screen, or writing to a database, and do not
+permit any variables or (for/while) loops. They do, however, have conditional
 expressions in the form of ``if'' statements. The library of builtin expressions
 includes functions that manipulate builtin data types such a text strings,
-numbers, or dates.
+numbers, or dates
+\footnote{\url{https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Data/Data_Types/Available_Data_Types}}
+\footnote{\url{https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions}}.
 
-% TODO Example of an outsystems expression
+\begin{table}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+
+      \multicolumn{1}{c}{Function Signatures}
+      & \multicolumn{1}{c}{Description}
+      \\ \midrule
+
+      Concat(t: Text, s: Text): Text
+      & Concatenation of the texts \textit{t} and \textit{s}.
+      \\ \midrule
+
+      Index(t: Text, s: Text, n: Integer): Text
+      & \begin{tabular}{@{}l@{}}
+          Retrieves first position of \textit{s} at or after \textit{n}
+          characters in t.\\
+          Returns -1 if there are no occurrences of \textit{s} in \textit{t}.
+        \end{tabular}
+      \\ \midrule
+
+      Length(t: Text): Integer
+      & Returns the number of characters in \textit{t}.
+      \\ \midrule
+
+      Replace(t: Text, s: Text, s': Text): Text
+      & Returns \textit{t} after replacing all occurrences of \textit{s} with
+        \textit{s'}.
+      \\ \midrule
+
+      Substr(t: Text, i: Integer, n: Integer): Text
+      & Returns the substring of \textit{t} with \textit{n} characters starting
+        at index \textit{i}.
+      \\ \midrule
+
+      ToLower(t: Text): Text
+      & Converts all characters in \textit{t} to lowercase.
+      \\ \midrule
+
+      ToUpper(t: Text): Text
+      & Converts all characters in \textit{t} to uppercase.
+      \\ \midrule
+
+      Trim(t: Text): Text
+      & Removes all leading and trailing space characters (' ') from \textit{t}.
+      \\ \midrule
+
+      TrimStart(t: Text): Text
+      & Removes all leading space characters (' ') from \textit{t}.
+      \\ \midrule
+
+      TrimEnd(t: Text): Text
+      & Removes all trailing space characters (' ') from \textit{t}.
+      \\ \midrule
+
+      +(x: Integer, y: Integer): Integer
+      & Integer addition.
+      \\ \midrule
+
+      -(x: Integer, y: Integer): Integer
+      & Integer subtraction.
+      \\ \bottomrule
+    \end{tabular}}
+  \caption{Description of the builtin functions used for synthesis.}
+  \label{table:builtin-description}
+\end{table}
+
+\begin{table}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+
+      \multicolumn{1}{c}{Function Signatures}
+      & \multicolumn{1}{c}{Examples}
+      \\ \midrule
+
+      Concat(t: Text, s: Text): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Concat("", "") = ""\\
+          Concat("x", "yz") = "xyz"
+        \end{tabular}
+      \\ \midrule
+
+      Index(t: Text, s: Text, n: Integer): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Index("abcbc", "b", 0) = 1\\
+          Index("abcbc", "b", 2) = 3\\
+          Index("abcbc", "d", 0) = -1
+        \end{tabular}
+      \\ \midrule
+
+      Length(t: Text): Integer
+      & \begin{tabular}[c]{@{}l@{}}
+          Length("") = 0\\
+          Length("abc") = 3
+        \end{tabular}
+      \\ \midrule
+
+      Replace(t: Text, s: Text, s': Text): Text
+      & Replace("ababa", "a", "xy") = "xybxybxy"
+      \\ \midrule
+
+      Substr(t: Text, i: Integer, n: Integer): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Substr("abcdef", 2, 3) = "cde"\\
+          Substr("abcdef", 2, 100) = "cdef"
+        \end{tabular}
+      \\ \midrule
+
+      ToLower(Text): Text
+      & ToLower("AbC ") = "abc "
+      \\ \midrule
+
+      ToUpper(Text): Text
+      & ToUpper("aBc ") = "ABC "
+      \\ \midrule
+
+      Trim(Text): Text
+      & Trim("    xyz    ") = "xyz"
+      \\ \midrule
+
+      TrimStart(Text): Text
+      & TrimStart("    xyz    ") = "xyz    "
+      \\ \midrule
+
+      TrimEnd(Text): Text
+      & TrimEnd("    xyz    ") = "    xyz"
+      \\ \midrule
+
+      % Add(x: Integer, y: Integer): Integer
+      % & \begin{tabular}[c]{@{}l@{}}
+      %     Add(0, 0) = 0
+      %     Add(1, 2) = 3
+      %   \end{tabular}
+      % \\ \midrule
+
+      % Sub(x: Integer, y: Integer): Integer
+      % & \begin{tabular}[c]{@{}l@{}}
+      %     0 - 0 = 0
+      %     1 - 2 = -1
+      %   \end{tabular}
+      % \\ \bottomrule
+    \end{tabular}}
+  \caption{Examples for the builtin functions used for synthesis.}
+  \label{table:builtin-examples}
+\end{table}
+
+In this work we are mainly interested in synthesizing expressions that
+manipulate text strings, like concatenation, substring slicing or whitespace
+trimming. As some of these operations involve indexing, we are also interested
+in synthesizing simple arithmetic expressions involving addition and
+subtraction. Therefore, the data types we are working with are text strings and
+integers. In particular, we are not dealing neither with boolean or conditional
+expressions. Table~\ref{table:builtin-description} describes the builtin
+expressions that our synthesized programs can be composed of.
+Table~\ref{table:builtin-examples} shows input-output examples for each of the
+functions in Table~\ref{table:builtin-description}.
+
+\begin{example}
+  Suppose that we would like to capitalize a given text string \textit{t}. For
+example, given the text ``joseph'' we would like to obtain ``Joseph''. The
+expression
+
+% \texttt{f(x) = ToUpper(Substr(x, 0, 1)) + Substr(x, 1, Length(x))}
+
+\begin{center}
+\begin{tabular}{l}
+\texttt{f(x) = ToUpper(Substr(x, 0, 1)) + Substr(x, 1, Length(x))}\\
+\end{tabular}
+\end{center}
+
+\noindent
+satisfies this example.
+\end{example}
+
+
+% TODO Example of one or more outsystems expressions.
+% Include one or more where there are constants that are not part of the inputs,
+% and explain that it would be nice if the synthesizer could do that for us.
 \todo{Listing x includes examples of outsystems expressions. These do y and z.}{}
 
-% TODO Explain how it fits in the context of service studio and how it interacts
-% with other features (like being able to manipulate structures and lists).
-This language of expressions fits on ...
 
-We do not have access to actual input-output data, which swayed the kind of
-approaches we took in order to solve this problem. For example, we could not
-use approaches that applied inductive reasoning to a corpus of pre-existing
-input-output examples in order to find some common patterns 
 
-% of expression usage.
 
-% TODO FIXME
-We had access to 10239847012983 OutSystems expressions, with sizes ranging from
-x to y, and manipulating data types such as z and w. The most used functions
-were ... and typical programming patterns included ...
 
-\section{Problem Statement}
-\label{sec:problem-statement}
+\section{A First Approach}
+\label{sec:first-approach}
 
 In our context, we are working in a \gls{pbe} setting, so we are interested in
 synthesizing an OutSystems expression from a set of input-output examples
@@ -79,10 +250,6 @@ whose form can be succintly described using a \gls{cfg}:
 
 where $I$ denotes the set of inputs from a given input-output example, and
 $C$ is the set of constant literals in the OutSystems language.
-
-
-\section{A First Approach}
-\label{sec:first-approach}
 
 It is useful to reason about OutSystems expressions in another representation,
 called \gls{ssa}. A program in \gls{ssa} form is a line program with variables
@@ -201,6 +368,10 @@ We could also try:
 
 \[
   \Phi{} = \exists L\ldotp \forall (I, o) \in E \ldotp \phi{}_{prog}
+\]
+
+\[
+  \Phi{} = \exists L\ldotp \forall I, o \ldotp (I, o) \in E \implies \phi{}_{prog}
 \]
 
 
