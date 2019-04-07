@@ -165,78 +165,49 @@ functions in Table~\ref{table:builtin-description}.
 
 \begin{example}
   Suppose that we would like to capitalize a given text string. For example,
-given the text ``joseph'' we would like to obtain ``Joseph''. The expression
+given the name ``joseph'' we would like to obtain ``Joseph''. The following
+expression satisfies the specification.
 
-\begin{center}
-  \begin{tabular}{l}
-    \texttt{f(t) = ToUpper(Concat(Substr(t, 0, 1)), Substr(t, 1, Length(t)))}\\
-  \end{tabular}
-\end{center}
-
-\noindent
-satisfies the specification.
+\begin{lstlisting}
+  prog(name) = ToUpper(Concat(Substr(name, 0, 1)),
+                              Substr(name, 1, Length(name)))
+\end{lstlisting}
 \end{example}
 
-\begin{example}
+\begin{example}\label{ex:first-name}
   Suppose that, given a text representing a person's name, we are interested in
-extracting the first name. For example, given the text ``John Michael Doe'' we
-would like to obtain ``John''. The expression
+extracting the first name and prepend it with a prefix. For example, given the
+text ``John Michael Doe'' and the prefix ``Dr. '' we would like to obtain
+``Dr. John''. The following expression satisfies the specification.
  
-\begin{center}
-  \begin{tabular}{l}
-    \texttt{f(t) = Substr(t, 0, Index(t, ' ', 0))}\\
-  \end{tabular}
-\end{center}
-
-\noindent
-satisfies the specification.
+\begin{lstlisting}
+  prog(name, prefix) = Concat(prefix,
+                              Substr(name, 0,
+                                     Index(name, " ", 0)))
+\end{lstlisting}
 \end{example}
 
-Outsystems expressions can easily become very long if we want to solve slightly
-more complex problems. In order for them to become more tractable, we can
-imagine extending the language with \textit{let expressions}, similar to
-languages like Haskell or Standard ML. This lets us name intermediate values,
-but is purely syntactic sugar. An application of this extension can be seen in
-the following example.
-
-\begin{example}
+\begin{example}\label{ex:second-name}
   Suppose now that, given a text representing a person's name, we are interested
-in extracting not the first but the second name. For example, given the text
-``John Michael Doe'' we would like to obtain ``Michael''. The expression
+in extracting not the first but the second name. For example, given the name
+``John Michael Doe'' we would like to obtain ``Michael''. The following
+expression satisfies the specification.
  
-\begin{center}
-  \begin{tabular}{l}
-    \begin{lstlisting}[xleftmargin=10em]
-      f(t) = let ixSpace1 = Index(t, " ", 0)
-                 ixSpace2 = Index(t, " ", ixSpace1 + 1)
-             in Substr(t, ixSpace1, ixSpace2 - ixSpace1)
-    \end{lstlisting}
-  \end{tabular}
-\end{center}
-
-\noindent
-satisfies the specification.
+\begin{lstlisting}
+  prog(name) = Substr(name, Index(name, " ", 0),
+                      Index(name, " ",
+                            Index(name, " ", 0) + 1) - Index(name, " ", 0))
+\end{lstlisting}
 \end{example}
-
-Without let expressions, an equivalent expression to the one from the previous
-example could be
-
-\begin{center}
-  \begin{tabular}{l}
-    \begin{lstlisting}
-      f(t) = Substr(t, Index(t, " ", 0), Index(t, " ",
-                    Index(t, " ", 0) + 1) - Index(t, " ", 0))
-    \end{lstlisting}
-  \end{tabular}
-\end{center}
 
 In our context, we are working in a \gls{pbe} setting, so we are interested in
 synthesizing an OutSystems expression from a set of input-output examples
-$\{(I_i, o_i)\}_i$.
-
-For example, \{([``John Michael Doe''], ``Michael'')\} is a set of input-output
-examples that are satisfied by the previous program. However, in this case, the
-program \lstinline{f(t) = Substr(0, 5, 7) } would have done just fine. In order
-to rule out this program, we could extend the input-output examples with a
-second example, for instance, ([``Anne Marie Joe''], ``Marie'').
+$\{(I_i, o_i)\}_i$. For example,
+\lstinline|{(["John Michael Doe"], "Michael")}|
+is a set of input-output examples that are satisfied by the previous program.
+However, in this case, the program
+\lstinline|f(t) = Substr(0, 5, 7)|
+would have done just fine. In order to rule out this program, we could extend
+the input-output examples with a second example, for instance,
+\lstinline|(["Anne Marie Joe"], "Marie")|.
 

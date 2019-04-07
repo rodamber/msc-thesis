@@ -475,50 +475,28 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 :RELWORK:  TODO
 :END:
 
-Explanation of why we chose the components we chose.
+- [ ] Explanation of why we chose the components we chose. The problem was
+  open-ended at first and was refined over time. We approach the problem in
+  stages. First just a small dsl of text components. Then all of them, then If
+  statements. 
 
 *** TODO Problem Description
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
-Note that examples show constants that are not part of the input.
+- [ ] Note that examples show constants that are not part of the input.
 
-# Context of the problem
-In our context, we are working in a \gls{PBE} setting, so we are interested in
-synthesizing an OutSystems expression from input-output examples.
-
-The problem was open-ended at first and was refined over time. We approach the
-problem in stages. First just a small dsl of text components. Then all of them,
-then If statements.
-
-# Preliminaries? 
-At some point we have to explain which components we are considering and how
-they map to SMT. Particularly, we should explain the logics that we need, and
-whether they are decidable (preliminaries) or not.
-# https://anthonywlin.github.io/papers/popl18-replace.pdf
-
-*** First Approach
+*** TODO Setwise Encoding
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
 
-- [ ] Why does a component-based approach lend itself well? (direct mapping
-  between components and DSL constructs; compare this with FlashFill's
-  approach).
-- [ ] examples -> prog1 -> more examples -> prog2
 - [ ] (later) encoding for the second examples and model for prog 2
-- [ ] Give a concise definition of the problem
-% We assume a set of examples ..., a set of components ... where ... is ... etc
-
-
-- State that right now we are synthesizing straight-line programs (no loops or
-  conditionals). 
-- [ ] Enumeration of components
 - [ ] Synthesizer program listing
 - [ ] Which SMT solver are we using? (bibliographic reference)
 - [ ] What constructs does the SMT theory for strings provide?
@@ -557,10 +535,11 @@ provided examples. One run per example. i^e, o^e, etc...
 - We use a lot more components.
 - More than just one type. Also, larger search space with strings that with bitvectors.
 - We synthesize arbitrary constants that are not given as user input.
-- Their components work only over bitvectors.
 - Their program must use all components from the library exactly once.
-- Our components are recursive.
+- Our components are more complex (recursive).
 - Separation of program enumeration and constraint solving (?)
+- We prevent the addition of dead-code by asserting that every variable should
+  be used at least once.
 
 ** TODO Other Approaches/Future Work
 - Learning patterns from the corpus of expressions. see: https://arxiv.org/abs/1902.06349
@@ -570,15 +549,23 @@ provided examples. One run per example. i^e, o^e, etc...
    :CONTENT:  ONGOING
    :END:
 
+** TODO Experimental Results
 
-** Experimental Results
-** Conclusion
+- [ ] At some point we have to explain which components we are considering and
+  how they map to SMT. Particularly, we should explain the logics that we need,
+  and whether they are decidable (preliminaries) or not.
+  (https://anthonywlin.github.io/papers/popl18-replace.pdf)
+
+- [ ] Why does a component-based approach lend itself well? (direct mapping
+  between components and DSL constructs; compare this with FlashFill's
+  approach).
+
+** TODO Conclusion
 However, the problem specification was deliberately vague, which gave us liberty
 to explore different options. In practice, this means ... (asking for user
 constants, etc).
 
-** Summary
-
+** TODO Summary
 
 * config :noexport:
 #+COLUMNS: %36ITEM %7CONTENT %7RELWORK %7EXAMPLES

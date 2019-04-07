@@ -2,8 +2,7 @@
 | Chapter                      | Date             |
 |------------------------------+------------------|
 | 4.1 + 4.2 + 4.3 (motivation) | <2019-04-05 Fri> |
-| Preliminaries (PS + CS)      | <2019-04-06 Sat> |
-| Finish 4.3 + Impl.           | <2019-04-09 Tue> |
-| Background                   | <2019-04-18 Thu> |
+| Finish 4.3 + Impl.           | <2019-04-08 Mon> |
+| Preliminaries/Background     | <2019-04-18 Thu> |
 | Results, Discussion          | <2019-04-26 Fri> |
 |------------------------------+------------------|
