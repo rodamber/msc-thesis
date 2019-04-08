@@ -3,7 +3,7 @@
 
 Because OutSystems expressions are composed of self-contained pure functions,
 this synthesis problem fits nicely in the component-based synthesis
-paradigm~\ref{sec:components}. Therefore, assume we are given a \textit{library}
+paradigm~(\ref{sec:components}). Therefore, assume we are given a \textit{library}
 of base components $F$ that the synthesizer can use in order to compose the
 programs. These components will be builtin functions drawn from the OutSystems
 library, or combinations of them. Each component can take a finite number of
@@ -20,7 +20,7 @@ tree-like program whose form can be succintly described using a \gls{cfg}:
 \[S \rightarrow f(S, ..., S) \OR x \OR c\]
 
 \noindent
-where $f \in F$, $x \in I$, and $c \in C$, where $I$ and $C$ are the set of
+where $f \in F$, $x \in I$, and $c \in C$, and where $I$ and $C$ are the set of
 inputs of the program, and the set of constant literals in the OutSystems
 language, respectively.
 
@@ -101,12 +101,12 @@ that satisfies the examples. There is the additional restriction that the
 program must use each of the components in the query exactly once.
 
 The solver works by encoding the query into an \gls{smt} formula, and uses an
-automated SMT solver to check for satisfiability. The SMT solver might or might
-not be able to solve the formula. If the formula is satisfiable, the solver
-responds to the enumerator with SAT and a solution (called a \textit{model}) to
-that formula. If not, it responds UNSAT or UNKNOWN, depending on whether the
-formula is unsatisfiable or the SMT solver could not verify its satisfiability,
-respectively.
+automated \gls{smt} solver to check for satisfiability. The \gls{smt} solver
+might or might not be able to solve the formula. If the formula is satisfiable,
+the solver responds to the enumerator with SAT and a solution (called a
+\textit{model}) to that formula. If not, it responds UNSAT or UNKNOWN, depending
+on whether the formula is unsatisfiable or the \gls{smt} solver could not verify
+its satisfiability, respectively.
 
 The procedure keeps going in a loop until the enumerator receives SAT from the
 solver. The enumerator then decodes the model into an actual program, which is
@@ -115,12 +115,12 @@ then returned.
 \subsection{Program Formula}
 \label{sec:program-formula}
 
-Let us take the program from Listing~\ref{fig:first-name-ssa} as a running
-example in order to understand how, given the examples and a set of components,
-we can construct a formula whose model can be decoded into a program that
-satisfies the examples. This program is good because it is a small, non-trivial
-program, which uses non-input constant variables (\lstinline{" "} and
-\lstinline{0}), and whose components have different return types.
+Let us take the program from Figure~\ref{fig:first-name-ssa} as a running
+example in order to understand how, given the input-output examples and a set of
+components, we can construct a formula whose model can be decoded into a program
+that satisfies the examples. This program is good because it is a small,
+non-trivial program, which uses non-input constant variables (\lstinline{" "}
+and \lstinline{0}), and not every component has the same return type.
 
 In order to encode the space of valid programs, the solver has to decide
 \begin{enumerate*}[(1)]
@@ -162,7 +162,7 @@ however, does not satisfy the example because the values passed to
       r3 = Concat(r2, prefix)
 \end{lstlisting}
 \end{minipage}
-\caption{Two other valid programs using the components \lstinline{Index},
+\caption{Two other well-formed programs using the components \lstinline{Index},
   \lstinline{Substr}, and \lstinline{Concat}.}
 \label{fig:other-valid-programs}
 \end{figure}
@@ -176,7 +176,7 @@ entities:
 \item the return variables of all components;
 \item the output variable of the program; and
 \item the \textit{connections} between the variables, that specify which
-  variables are passed to the formal parameters of each component.
+  actual parameters are passed to the formal parameters of each component.
 \end{enumerate*}
 Thus, we have a set $I$ of input variables, a set $C$ of constant variables, a
 set $P$ of the formal parameters of all components, a set $R$ of the return
@@ -204,9 +204,9 @@ parameter of some component, then $l_x$ is the line number where the actual
 parameter is defined. In practice, each variable in $I$ is assigned a line
 number from $1$ to $|I|$ (in the obvious way), variables in $C$ are assigned
 a number from $|I| + 1$ to $C$, and the output variable $\{o\}$ is assigned the
-line number $|I| + |C|$ (the last line). The locations of variables in $R$ range
-from $|I| + |C| + 1$ to $|I| + |C| + |R|$. The location of each formal parameter
-$x \in P$ ranges from $|I| + 1$ up to the location of its corresponding
+line number $|I| + |C| + |R|$ (the last line). The locations of variables in $R$
+range from $|I| + |C| + 1$ to $|I| + |C| + |R|$. The location of each formal
+parameter $x \in P$ ranges from $1$ up to the location of its corresponding
 component.
 For program~\ref{fig:first-name-ssa} we would have
 $l_{name} = 1$, $l_{prefix} = 2$,
@@ -214,9 +214,9 @@ $l_{c_0} = 3$, $l_{c_1} = 4$,
 and $l_o = 7$.
 The range constraints are
 $4 \leq l_x \leq 7$ for $x \in R$,
-$1 \leq l_x \leq 4$ for $x \in P_{Index}$,
-$1 \leq l_x \leq 5$ for $x \in P_{Substr}$, and
-$1 \leq l_x \leq 6$ for $x \in P_{Concat}$.
+$1 \leq l_x < 5$ for $x \in P_{Index}$,
+$1 \leq l_x < 6$ for $x \in P_{Substr}$, and
+$1 \leq l_x < 7$ for $x \in P_{Concat}$.
 In general, we can capture these constraints with the following formula:
 
 \[
@@ -226,18 +226,18 @@ In general, we can capture these constraints with the following formula:
   %
   \quad \wedge
   \bigwedge_{f \in F'}
-  \bigwedge_{p \in P_f} (1 \leq l_p \leq l_{r_f})
+  \bigwedge_{p \in P_f} (1 \leq l_p < l_{r_f})
 \]
 
 The locations of the variables $x \in I \cup C \cup \{o\}$ are known as soon as
-we decide how many constant variables the program will have at its disposal
-(which will be explained later). The objective is then to find an assignment to
-the variables $x \in P \cup R$. These give us all the information we need to
-decode back the program. For program~\ref{fig:first-name-ssa} we have $l_{r_1} =
-5$, $l_{r_2} = 6$, $l_{r_3} = 7$; $l_{p_{11}} = 1$, $l_{p_{12}} = 3$,
+we decide how many constant variables the program will have at its disposal. The
+objective is then to find an assignment to the locations of the variables $x \in
+P \cup R$. These give us all the information we need to decode back the program.
+For program~\ref{fig:first-name-ssa} we have
+$l_{r_1} = 5$, $l_{r_2} = 6$, $l_{r_3} = 7$; $l_{p_{11}} = 1$, $l_{p_{12}} = 3$,
 $l_{p_{13}} = 4$; $l_{p_{21}} = 1$, $l_{p_{22}} = 4$, $l_{p_{23}} = 5$; and
 $l_{p_{31}} = 2$, $l_{p_{32}} = 6$. Because the program has two inputs, we need
-to subtract two to the location variables to get the ``corresponding line
+to subtract two to the location variables to get the corresponding ``line
 numbers''. This means, for example, that \lstinline{Index}, \lstinline{Substr},
 and \lstinline{Concat} appear on lines 3, 4 and 5, respectively, and so on.
 
@@ -284,18 +284,18 @@ $\psi{}_{\mathtt{tloc}}$ we get the full program well-formedness constraint:
 \label{sec:functional-constraint}
 
 The formula we arrived to in the last section encodes the space of all
-\textit{structurally} well-formed programs. However, in no way does it
+\textit{syntactically} well-formed programs. However, in no way does it
 constraint the programs to have the correct \textit{semantics}. In particular,
 it does not
 \begin{enumerate*}[(1)]
 \item \label{itm:fc-one} relate the return values to their corresponding components;
 \item \label{itm:fc-two} make sure that variables share the same value if they share the same
 location; nor
-\item \label{itm:fc-three} that the program satisfies the input-output example.
+\item \label{itm:fc-three} make sure that the program satisfies the input-output example.
 \end{enumerate*}
 For example, for program~\ref{fig:first-name-ssa} we would like to make sure
 \begin{enumerate*}[(1)]
-\item that the value of $r_1$ is effectively equal to \lstinline{Index(name, c0, c1)};
+\item that the value of $r_1$ is actually equal to \lstinline{Index(name, c0, c1)};
 \item that $p_{21}$, the first formal parameter of \lstinline{Substr}, and $name$
   share the same value; and that
 \item $r_3$ equals $o$, the output variable.
@@ -339,8 +339,8 @@ the final output of the program. This makes sense because of the way that the
 enumerator draws components from the library (combinations with replacement in
 order of increasing size), as every subset of $F'$ would have already been
 passed to the solver and deemed insufficient in order to build a satisfying
-program. For instance, the return value of \lstinline{Concat} be either the
-output of the program, or one of the actual parameters of the same type of
+program. For instance, the return value of \lstinline{Concat} could be either
+the output of the program, or one of the actual parameters of the same type of
 \lstinline{Input} or \lstinline{Substr}. Thus, we would have
 $l_{r_3} = l_o \vee l_{r_3} = l_{p_{11}} \vee l_{r_3} = l_{p_{12}} \vee l_{r_3} = l_{p_{21}}$.
 In general, this can be encoded in the formula
@@ -357,7 +357,8 @@ In general, this can be encoded in the formula
 Formula $\psi{}_{flow}$ along with $\psi{}_{out}$ guarantee that the generated
 program has the correct output, thus ensuring that constraint~\ref{itm:fc-three}
 is satisfied. Moreover, we would also like to make sure that no program input
-goes ignored, which can be guaranteed by a formula similar to $\psi{}_{out}$:
+goes ignored, significantly cutting down the search space, which can be
+guaranteed by a formula similar to $\psi{}_{out}$:
 
 \[
   \psi{}_{in}(I, P) = \bigwedge_{i \in I}\bigvee_{p \in P}(l_i = l_p)
@@ -382,9 +383,8 @@ variables $x \in P \cup R$ under an existential quantifier:
 
 We are now in position to show the full formula. The formula $\psi{}_{prog}(I,
 o)$ encodes a well-formed program that satisfies the input-output example $(I,
-o)$. In order to get a program that works over \textit{all} provided
-input-output examples $(I, o) \in E$. We can do this with a simple conjuction
-over $E$ like so:
+o)$. We can get a program that works over \textit{all} provided
+input-output examples $(I, o) \in E$ with a simple conjuction over $E$ like so:
 
 \[
   \Psi{} = \exists L,C\ldotp \bigwedge_{(I, o) \in E}\psi{}_{prog}(I, o, C)
@@ -392,9 +392,11 @@ over $E$ like so:
 
 \noindent
 In essence, this formula encodes the different runs of the program over all
-the provided input-output examples. 
-
-
+the provided input-output examples. A model of this formula corresponds to a
+program that uses only the components provided by the enumerator, and satisfies
+all input-output examples. The variables $x \in L \cup C$ should retain their
+values across all runs, and are the only information we need in order to decode
+back the program.
 
 % Constrain the length of string constants:
 

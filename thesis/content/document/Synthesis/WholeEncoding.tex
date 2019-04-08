@@ -1,0 +1,19 @@
+\section{Whole Encoding}
+\label{sec:whole-encoding}
+
+In the previous approach the workload was split between the enumerator and the
+solver: the enumerator would exhaustively search for all combinations (with
+replacement) of the library of components in increasing order of size, while
+passing them one by one to the solver. In turn, the solver would then verify if
+there was any way to make a satisfying program out of the given components.
+However, the number of combinations of a given size grows exponentially. One
+wonders if it is possible to absolve the enumerator by pushing as much workload
+as possible to the solver.
+
+In this next approach we reduce the enumerator to query the solver with a single
+number $n$ (plus the input-output examples). Instead of drawing components from the
+library and passing them to the solver, the enumerator now queries if there is 
+any program of size $n$ satisfying the examples. This process is repeated for
+increasing values of $n$ until a program is found.
+
+\todo{TODO: Formula...}{}

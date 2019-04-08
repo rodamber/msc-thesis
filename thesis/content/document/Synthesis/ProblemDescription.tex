@@ -10,7 +10,7 @@ OutSystems language
 
 We can think of OutSystems expressions as a simple functional language of
 operands and operators that compose themselves to create pure, stateless,
-loop-less programs. This means that OutSystems expressions do not have
+loopless programs. This means that OutSystems expressions do not have
 side-effects, like printing to the screen, or writing to a database, and do not
 permit any variables or (for/while) loops. They do, however, have conditional
 expressions in the form of ``if'' statements. The library of builtin expressions
@@ -157,7 +157,7 @@ manipulate text strings, like concatenation, substring slicing or whitespace
 trimming. As some of these operations involve indexing, we are also interested
 in synthesizing simple arithmetic expressions involving addition and
 subtraction. Therefore, the data types we are working with are text strings and
-integers. In particular, we are not dealing neither with boolean or conditional
+integers. In particular, we are not dealing neither with boolean, nor conditional
 expressions. Table~\ref{table:builtin-description} describes the builtin
 expressions that our synthesized programs can be composed of.
 Table~\ref{table:builtin-examples} shows input-output examples for each of the
@@ -203,11 +203,11 @@ expression satisfies the specification.
 In our context, we are working in a \gls{pbe} setting, so we are interested in
 synthesizing an OutSystems expression from a set of input-output examples
 $E = \{(I_i, o_i)\}_i$. For example,
-\lstinline|{(["John Michael Doe"], "Michael")}|
+\lstinline|{(<"John Michael Doe">, "Michael")}|
 is a set of input-output examples that are satisfied by the previous program.
 However, in this case, the program
-\lstinline|f(t) = Substr(0, 5, 7)|
+\lstinline|prog(name) = Substr(0, 5, 7)|
 would have done just fine. In order to rule out this program, we could extend
 the input-output examples with a second example, for instance,
-\lstinline|(["Anne Marie Joe"], "Marie")|.
+\lstinline|(<"Anne Marie Joe">, "Marie")|.
 

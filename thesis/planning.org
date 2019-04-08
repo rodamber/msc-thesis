@@ -487,7 +487,7 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 :RELWORK:  ONGOING
 :END:
 
-*** TODO Problem Description
+*** REVIEW Problem Description
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
@@ -496,7 +496,7 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 
 - [ ] Note that examples show constants that are not part of the input.
 
-*** TODO Setwise Encoding
+*** REVIEW Setwise Encoding
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
@@ -507,9 +507,16 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 
 **** Program Formula
 :PROPERTIES:
-:CONTENT:  DONE
-:EXAMPLES: ONGOING
-:RELWORK:  DONE
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
+:END:
+
+*** TODO Whole Encoding
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: TODO
+:RELWORK:  TODO
 :END:
 
 ** TODO Other Approaches/Future Work
@@ -520,8 +527,10 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
    :CONTENT:  ONGOING
    :END:
 
-** TODO Experimental Results
+** TODO Discussion/Experimental Results
 *** Setwise Encoding
+- [ ] How to decide on the number of constants
+
 - [ ] Explain that this encoding is independent of the components used as long
   as they can be specified in SMT
 
