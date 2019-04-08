@@ -8,8 +8,8 @@ of base components $F$ that the synthesizer can use in order to compose the
 programs. These components will be builtin functions drawn from the OutSystems
 library, or combinations of them. Each component can take a finite number of
 inputs and return exactly one output. More formally, a component $f \in F$ is
-represented by an expression $\phi{}_f$ that specifies how its input parameters
-$P_f$ relate to its return value $r_f$.
+represented by an expression $\phi{}_f$ (a specification) that specifies how its
+input parameters $P_f$ relate to its return value $r_f$.
 
 We can see from the previous examples that OutSystems expressions can also
 include constant literals, like \lstinline{" "}, or \lstinline{0}. These could
@@ -220,7 +220,7 @@ $1 \leq l_x \leq 6$ for $x \in P_{Concat}$.
 In general, we can capture these constraints with the following formula:
 
 \[
-  \psi{}_{\mathtt{range}} =
+  \psi{}_{\mathtt{range}}(I, C, P, R) =
   \bigwedge_{f \in F'} (|I| + |C| + 1 \leq l_{r_f} \leq |I| + |C| + |R|)
   \wedge \bigwedge_{f \in F'}\bigwedge_{p \in P_f} (1 \leq l_p \leq l_{r_f})
 \]
@@ -242,8 +242,8 @@ programs. First, no two components should have the same location. Thus,
 we have $l_{r_1} \neq l_{r_2} \neq l_{r_3}$. In the general case:
 
 \[
-  \psi{}_{\mathtt{rloc}} =
-  \bigwedge_{\substack{r_1, r_2 \in R\\ r_1 \not\equiv r_2}} (l_{r_1} \neq l_{r_2}) 
+  \psi{}_{\mathtt{rloc}}(R) =
+  \bigwedge_{\substack{x, y \in R\\ x \not\equiv y}} (l_{x} \neq l_{y}) 
 \]
 
 \noindent
@@ -254,78 +254,128 @@ value has the same type as the output may appear in the last line. These
 constraints can be written in the following way:
 
 \[
-  \psi{}_{\mathtt{tloc}} =
+  \psi{}_{\mathtt{tloc}}(I, o, C, P, R) =
   \bigwedge_{p \in P}\bigwedge_{\substack{x \in I \cup C \cup R \\ type(p) \neq type(x)}} (l_p \neq l_x)
   \wedge \bigwedge_{\substack{r \in R \\ type(r) \neq type(o)}} (l_r \neq l_o)
 \]
 
-Combining formulas $\psi{}_{\mathtt{range}}$, $\psi{}_{\mathtt{tloc}}$, and
-$\psi{}_{\mathtt{tloc}}$ we get the full program well-formedness contraint:
+Combining formulas $\psi{}_{\mathtt{range}}$, $\psi{}_{\mathtt{rloc}}$, and
+$\psi{}_{\mathtt{tloc}}$ we get the full program well-formedness constraint:
 
 \[
-  \psi{}_{\mathtt{wfp}}(I, C, P, R) =
-  \psi{}_{\mathtt{range}} \wedge \psi{}_{\mathtt{tloc}} \wedge \psi{}_{\mathtt{tloc}}
+  \psi{}_{\mathtt{wfp}}(I, o, C, P, R) =
+  \psi{}_{\mathtt{range}}(I, C, P, R)
+  \wedge \psi{}_{\mathtt{rloc}}(R)
+  \wedge \psi{}_{\mathtt{tloc}}(I, o, C, P, R)
 \]
 
 
 \subsubsection{Functional Constraint}
 \label{sec:functional-constraint}
 
-
-% Variables whose location variables are equal should share the same value. 
-
-
-Semantics:
-
-\begin{align*}
-  \phi{}_{spec} &= \bigwedge_{f \in F} \phi{}_f (I_f, o_f) \\
-  \phi{}_{flow} &= \bigwedge_{p \in P}\bigwedge_{\substack{x \in I \cup C \cup R \\ kind(p) \neq kind(x)}} (l_p = l_x \implies p = x)
-\end{align*}
-
-All inputs used:
-
-\[ \phi{}_{in} = \bigwedge_{i \in I}\bigvee_{p \in P}(l_i = l_p) \]
-
-All outputs used:
-
-\begin{align*}
-  \phi{}_{out} &= \bigwedge_{f \in F}\bigvee_{p \in P - P_f}(l_f = l_p) \\
-               &\vee \bigwedge_{f \in F} (l_f = l_o)
-\end{align*}
-
-Constrain the length of string constants:
+The formula we arrived to in the last section encodes the space of all
+\textit{structurally} well-formed programs. However, in no way does it
+constraint the programs to have the correct \textit{semantics}. In particular,
+it does not
+\begin{enumerate*}[(1)]
+\item \label{itm:fc-one} relate the return values to their corresponding components;
+\item \label{itm:fc-two} make sure that variables share the same value if they share the same
+location; nor
+\item \label{itm:fc-three} that the program satisfies the input-output example.
+\end{enumerate*}
+Constraint~\ref{itm:fc-one} can be guaranteed by the following formula:
 
 \[
-  \phi{}_{len} = \bigwedge_{\substack{c \in C \\ kind(c) = string}} len(c) \leq 5
+  \psi{}_{spec}(P, R) = \bigwedge_{f \in F'} \phi{}_f (P_f, r_f)
 \]
 
-Extra:
-
-\[ \phi{}_{extra} = \phi{}_{in} \wedge \phi{}_{out} \wedge \phi{}_{len} \]
-
-Formula for a single run of a program:
-
-\begin{align*}
-  \phi{}_{prog} = \exists P,R\ldotp (\phi{}_{wfp} \wedge \phi{}_{spec} \wedge
-  \phi{}_{flow} \wedge \phi{}_{extra})
-\end{align*}
-
-The full formula:
+\noindent
+Recall that $\phi{}_f$ denotes the specification of component $f$, which relates
+its formal parameters to its return value. Constraint~\ref{itm:fc-two} refers to
+the dataflow properties of the program, and can be straightforwardly encoded in
+the formula:
 
 \[
-  \Phi{} = \exists L\ldotp \bigwedge_{(I, o) \in E}\phi{}_{prog}
+  \psi{}_{flow}(I, C, P, R) =
+    \bigwedge_{p \in P}
+    \bigwedge_{\substack{x \in I \cup C \cup R \\ type(p) \neq type(x)}} 
+    (l_p = l_x \implies p = x)
 \]
 
-We could also try:
+We would like to make sure that every component given by the enumerator is
+effectively used in the generated program, meaning that their correspondent
+return value should be either the actual parameter of some other component, or
+the final output of the program. This makes sense because of the way that the
+enumerator draws components from the library (combinations with replacement in
+order of increasing size), as every subset of $F'$ would have already been
+passed to the solver and deemed insufficient to build a satisfying program. This
+can be encoded with the formula
 
 \[
-  \Phi{} = \exists L\ldotp \forall (I, o) \in E \ldotp \phi{}_{prog}
+  \psi{}_{out}(o, P, R) =
+  \bigwedge_{f \in F}\bigvee_{p \in P - P_f}(l_{r_f} = l_p)
+  \vee \bigwedge_{r \in R} (l_{r} = l_o)
 \]
+
+\noindent
+Formula $\psi{}_{flow}$ along with $\psi{}_{out}$ guarantee that the generated
+program has the correct output, thus ensuring that constraint~\ref{itm:fc-three}
+is satisfied. Moreover, we would also like to make sure that no program input
+goes ignored, which can be guaranteed by a formula similar to $\psi{}_{out}$:
 
 \[
-  \Phi{} = \exists L\ldotp \forall I, o \ldotp (I, o) \in E \implies \phi{}_{prog}
+  \psi{}_{in}(I, P) = \bigwedge_{i \in I}\bigvee_{p \in P}(l_i = l_p)
+\]
+
+The functional constraint is obtained by adding to $\psi{}_{\mathtt{wfp}}$ the
+formulas from this section, wrapping the formal parameter and return value
+variables $x \in P \cup R$ under an existential quantifier:
+
+\[
+  \psi{}_{prog}(I, o, C) = \exists P,R\ldotp
+  (\psi{}_{\mathtt{wfp}}(I, o, C, P, R) \wedge
+  \psi{}_{spec}(P, R) \wedge
+  \psi{}_{flow}(I, C, P, R) \wedge 
+  \psi{}_{out}(o, P, R) \wedge
+  \psi{}_{in}(I, P))
 \]
 
 
+\subsubsection{The Full Constraint}
+\label{sec:full-constraint}
 
-% TODO Concrete example of the encoding of a program
+We are now in position to show the full formula. The formula $\psi{}_{prog}(I,
+o)$ encodes a well-formed program that satisfies the input-output example $(I,
+o)$. In order to get a program that works over \textit{all} provided
+input-output examples $(I, o) \in E$. We can do this with a simple conjuction
+over $E$ like so:
+
+\[
+  \Psi{} = \exists L,C\ldotp \bigwedge_{(I, o) \in E}\psi{}_{prog}(I, o, C)
+\]
+
+\noindent
+In essence, this formula encodes the different runs of the program over all
+the provided input-output examples. 
+
+
+
+% Constrain the length of string constants:
+
+% \[
+%   \psi{}_{len} = \bigwedge_{\substack{c \in C \\ type(c) = string}} len(c) \leq 5
+% \]
+
+% Extra:
+
+% \[ \phi{}_{extra} = \phi{}_{in} \wedge \phi{}_{out} \wedge \phi{}_{len} \]
+
+% We could also try:
+
+% \[
+%   \Phi{} = \exists L\ldotp \forall (I, o) \in E \ldotp \phi{}_{prog}
+% \]
+
+% \[
+%   \Phi{} = \exists L\ldotp \forall I, o \ldotp (I, o) \in E \implies \phi{}_{prog}
+% \]

@@ -1,3 +1,15 @@
+* Unanswered Questions
+- [ ] Which SMT solver are we using? (bibliographic reference)
+% In our case we are using Z3, a state-of-the-art \gls{smt} solver. It allows
+% reasoning over string constraints and linear arithmetic...
+
+- [ ] What constructs does the SMT theory for strings provide?
+
+- [ ] Explanation of why we chose the components we chose. The problem was
+  open-ended at first and was refined over time. We approach the problem in
+  stages. First just a small dsl of text components. Then all of them, then If
+  statements. 
+
 * Chapters
 ** TODO Introduction
 :PROPERTIES:
@@ -470,15 +482,10 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 
 ** TODO Synthesis
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:CONTENT:  REVIEW
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
 :END:
-
-- [ ] Explanation of why we chose the components we chose. The problem was
-  open-ended at first and was refined over time. We approach the problem in
-  stages. First just a small dsl of text components. Then all of them, then If
-  statements. 
 
 *** TODO Problem Description
 :PROPERTIES:
@@ -492,46 +499,31 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 *** TODO Setwise Encoding
 :PROPERTIES:
 :CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
 :END:
 
-- [ ] (later) encoding for the second examples and model for prog 2
 - [ ] Synthesizer program listing
-- [ ] Which SMT solver are we using? (bibliographic reference)
-- [ ] What constructs does the SMT theory for strings provide?
 
-% In our case we are using Z3, a state-of-the-art \gls{smt} solver. It allows
-% reasoning over string constraints and linear arithmetic...
-
-**** Encoding
+**** Program Formula
 :PROPERTIES:
 :CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:EXAMPLES: DONE
+:RELWORK:  REVIEW
 :END:
 
-We are encoding in a formula the independent runs of the program over the
-provided examples. One run per example. i^e, o^e, etc...
+- [ ] Example for semantics
 
+**** Discussion
 
 - [ ] Explain that this encoding is independent of the components used as long
   as they can be specified in SMT
-- [ ] Explain the idea of the encoding first (location-based variables)
-- [ ] The output of the program is the output of the last component.
-
-- [ ] Clarify the notation, and enforce it in the formula
-- [ ] What properties are we trying to enforce (aciclicy)?
-
-- [ ] Example of the encoding of a concrete program and set of examples
-- [ ] Solution for that example in terms of the assignment (model) of the formula
 
 - [ ] Analysis of the size of the problem in function of the number of constants,
   components, arity of the components, number of examples, number of inputs,
   etc.
 
-**** Comparison to Jha's et al. approach
-
+***** Comparison to Jha's et al. approach
 - We use a lot more components.
 - More than just one type. Also, larger search space with strings that with bitvectors.
 - We synthesize arbitrary constants that are not given as user input.
