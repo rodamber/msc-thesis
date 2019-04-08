@@ -482,7 +482,7 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 
 ** TODO Synthesis
 :PROPERTIES:
-:CONTENT:  REVIEW
+:CONTENT:  ONGOING
 :EXAMPLES: ONGOING
 :RELWORK:  ONGOING
 :END:
@@ -498,40 +498,19 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 
 *** TODO Setwise Encoding
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 - [ ] Synthesizer program listing
 
 **** Program Formula
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: DONE
-:RELWORK:  REVIEW
+:CONTENT:  DONE
+:EXAMPLES: ONGOING
+:RELWORK:  DONE
 :END:
-
-- [ ] Example for semantics
-
-**** Discussion
-
-- [ ] Explain that this encoding is independent of the components used as long
-  as they can be specified in SMT
-
-- [ ] Analysis of the size of the problem in function of the number of constants,
-  components, arity of the components, number of examples, number of inputs,
-  etc.
-
-***** Comparison to Jha's et al. approach
-- We use a lot more components.
-- More than just one type. Also, larger search space with strings that with bitvectors.
-- We synthesize arbitrary constants that are not given as user input.
-- Their program must use all components from the library exactly once.
-- Our components are more complex (recursive).
-- Separation of program enumeration and constraint solving (?)
-- We prevent the addition of dead-code by asserting that every variable should
-  be used at least once.
 
 ** TODO Other Approaches/Future Work
 - Learning patterns from the corpus of expressions. see: https://arxiv.org/abs/1902.06349
@@ -542,7 +521,26 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
    :END:
 
 ** TODO Experimental Results
+*** Setwise Encoding
+- [ ] Explain that this encoding is independent of the components used as long
+  as they can be specified in SMT
 
+- [ ] Analysis of the size of the problem in function of the number of constants,
+  components, arity of the components, number of examples, number of inputs,
+  etc.
+
+Comparison to Jha's et al. approach:
+
+- [ ] We use a lot more components.
+- [ ] More than just one type. Also, larger search space with strings that with bitvectors.
+- [ ] We synthesize arbitrary constants that are not given as user input.
+- [ ] Their program must use all components from the library exactly once.
+- [ ] Our components are more complex (recursive).
+- [ ] Separation of program enumeration and constraint solving (?)
+- [ ] We prevent the addition of dead-code by asserting that every variable should
+  be used at least once.
+
+*** Other
 - [ ] At some point we have to explain which components we are considering and
   how they map to SMT. Particularly, we should explain the logics that we need,
   and whether they are decidable (preliminaries) or not.

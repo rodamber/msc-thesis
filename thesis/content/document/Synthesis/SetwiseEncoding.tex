@@ -221,8 +221,12 @@ In general, we can capture these constraints with the following formula:
 
 \[
   \psi{}_{\mathtt{range}}(I, C, P, R) =
+  %
   \bigwedge_{f \in F'} (|I| + |C| + 1 \leq l_{r_f} \leq |I| + |C| + |R|)
-  \wedge \bigwedge_{f \in F'}\bigwedge_{p \in P_f} (1 \leq l_p \leq l_{r_f})
+  %
+  \quad \wedge
+  \bigwedge_{f \in F'}
+  \bigwedge_{p \in P_f} (1 \leq l_p \leq l_{r_f})
 \]
 
 The locations of the variables $x \in I \cup C \cup \{o\}$ are known as soon as
@@ -255,8 +259,14 @@ constraints can be written in the following way:
 
 \[
   \psi{}_{\mathtt{tloc}}(I, o, C, P, R) =
-  \bigwedge_{p \in P}\bigwedge_{\substack{x \in I \cup C \cup R \\ type(p) \neq type(x)}} (l_p \neq l_x)
-  \wedge \bigwedge_{\substack{r \in R \\ type(r) \neq type(o)}} (l_r \neq l_o)
+  %
+  \bigwedge_{p \in P}
+  \bigwedge_{\substack{x \in I \cup C \cup R \\ type(p) \neq type(x)}}
+  (l_p \neq l_x)
+  %
+  \qquad \wedge
+  \bigwedge_{\substack{r \in R \\ type(r) \neq type(o)}}
+  (l_r \neq l_o)
 \]
 
 Combining formulas $\psi{}_{\mathtt{range}}$, $\psi{}_{\mathtt{rloc}}$, and
@@ -283,6 +293,14 @@ it does not
 location; nor
 \item \label{itm:fc-three} that the program satisfies the input-output example.
 \end{enumerate*}
+For example, for program~\ref{fig:first-name-ssa} we would like to make sure
+\begin{enumerate*}[(1)]
+\item that the value of $r_1$ is effectively equal to \lstinline{Index(name, c0, c1)};
+\item that $p_{21}$, the first formal parameter of \lstinline{Substr}, and $name$
+  share the same value; and that
+\item $r_3$ equals $o$, the output variable.
+\end{enumerate*}
+
 Constraint~\ref{itm:fc-one} can be guaranteed by the following formula:
 
 \[
@@ -291,30 +309,48 @@ Constraint~\ref{itm:fc-one} can be guaranteed by the following formula:
 
 \noindent
 Recall that $\phi{}_f$ denotes the specification of component $f$, which relates
-its formal parameters to its return value. Constraint~\ref{itm:fc-two} refers to
-the dataflow properties of the program, and can be straightforwardly encoded in
-the formula:
+its formal parameters to its return value.
+Constraint~\ref{itm:fc-two} refers to
+the dataflow properties of the program. For example, we would like to have the
+constraints $l_{p_{21}} = l_{prefix} \implies p_{21} = prefix$ (because we do
+not know beforehand that
+$p_{21} \neq prefix$), or $l_{r_2} = l_o \implies r_2 = o$
+(because we do not know which component is going to be on the last line), but we
+do not want $l_{p_{21}} = l_{r_1} \implies p_{21} = r_1$ (because $p_{21}$ and
+$r_1$ have different types). In general, these properties can be encoded in the
+following formula:
 
 \[
   \psi{}_{flow}(I, C, P, R) =
+  % 
     \bigwedge_{p \in P}
-    \bigwedge_{\substack{x \in I \cup C \cup R \\ type(p) \neq type(x)}} 
+    \bigwedge_{\substack{x \in I \cup C \cup R \\ type(p) = type(x)}} 
     (l_p = l_x \implies p = x)
+    % 
+    \qquad \wedge \bigwedge_{\substack{r \in R \\ type(r) = type(o)}}
+    (l_r = l_o \implies r = o)
 \]
 
+\noindent
 We would like to make sure that every component given by the enumerator is
 effectively used in the generated program, meaning that their correspondent
 return value should be either the actual parameter of some other component, or
 the final output of the program. This makes sense because of the way that the
 enumerator draws components from the library (combinations with replacement in
 order of increasing size), as every subset of $F'$ would have already been
-passed to the solver and deemed insufficient to build a satisfying program. This
-can be encoded with the formula
+passed to the solver and deemed insufficient in order to build a satisfying
+program. For instance, the return value of \lstinline{Concat} be either the
+output of the program, or one of the actual parameters of the same type of
+\lstinline{Input} or \lstinline{Substr}. Thus, we would have
+$l_{r_3} = l_o \vee l_{r_3} = l_{p_{11}} \vee l_{r_3} = l_{p_{12}} \vee l_{r_3} = l_{p_{21}}$.
+In general, this can be encoded in the formula
 
 \[
   \psi{}_{out}(o, P, R) =
-  \bigwedge_{f \in F}\bigvee_{p \in P - P_f}(l_{r_f} = l_p)
-  \vee \bigwedge_{r \in R} (l_{r} = l_o)
+  \bigwedge_{f \in F}
+  \bigvee_{\substack{p \in P - P_f \\ type(p) = type(r_f)}}(l_{r_f} = l_p)
+  %
+  \vee \bigwedge_{\substack{r \in R \\ type(r) = type(o)}} (l_{r} = l_o)
 \]
 
 \noindent
