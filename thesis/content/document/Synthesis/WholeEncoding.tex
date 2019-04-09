@@ -5,15 +5,58 @@ In the previous approach the workload was split between the enumerator and the
 solver: the enumerator would exhaustively search for all combinations (with
 replacement) of the library of components in increasing order of size, while
 passing them one by one to the solver. In turn, the solver would then verify if
-there was any way to make a satisfying program out of the given components.
-However, the number of combinations of a given size grows exponentially. One
-wonders if it is possible to absolve the enumerator by pushing as much workload
-as possible to the solver.
+there was any way to make a satisfying program using the given components each
+exactly once. However, the number of combinations of a given size grows
+exponentially. One wonders if it is possible to absolve the enumerator by
+pushing as much workload as possible to the solver.
 
 In this next approach we reduce the enumerator to query the solver with a single
 number $n$ (plus the input-output examples). Instead of drawing components from the
 library and passing them to the solver, the enumerator now queries if there is 
-any program of size $n$ satisfying the examples. This process is repeated for
-increasing values of $n$ until a program is found.
+any program using exactly $n$ components satisfying the examples. Thus, the
+solver is now parameterized by the library of components $F$. This process is
+repeated for increasing values of $n$ until a program is found.
 
-\todo{TODO: Formula...}{}
+\subsection{Program Formula}
+\label{sec:program-formula-whole}
+
+It is now the job of the solver to pick which components the program will be
+composed of. The solver is given the query $n$, the exact number of components
+allowed. We do not know, however, how many times each component will be used in
+the synthesized program. This means we must have some way to model the choices
+of which components get picked and which do not. For this we introduce a new set
+of integer-valued variables $A = \{a_1, a_2, ..., a_n\}$, which we will call the
+\textit{activation} variables. The activation variables have values in the set
+$\{1, 2, ..., |F|\}$, meaning that if we have $a_i = k$, then component $f_k$
+will be the $i$-th component of the program. For example, for
+program~\ref{fig:first-name-ssa}, assuming that component \lstinline{Concat}
+corresponds to $k = 1$, \lstinline{Index} to $k = 2$, and \lstinline{Substr} to
+$k = 3$, then we would have $a_1 = 2 $, $a_2 = 3$, and $a_3 = 1$.
+
+Because we do not know beforehand which component goes on which line, we do not
+know beforehand the types of the return variables. Thus, we
+can not assign return variables to each component, like we did in the previous
+approach. Lacking this information, we circumvent this problem by introducing
+one return variable $r_i^t$ per type $t \in T$ for $i = 1, 2, ... n$, where $T$
+is the set of allowed types. In our case, $T = \{txt, int\}$, corresponding to
+the types \lstinline{Text} and \lstinline{Integer}. We want to make sure to bind
+the correct return variable to the return value of each component, in order to
+make the formula well-typed (we will see later how to do this). For instance, in
+program~\ref{fig:first-name-ssa} we would like to bind the variables
+$r_1^{int}$, $r_2^{txt}$, and $r_3^{txt}$, because \lstinline{Index} is the
+first component, followed by \lstinline{Substr}, and then \lstinline{Concat}
+(whose return types are, respectively, \lstinline{Integer}, \lstinline{Text},
+and \lstinline{Text}). Moreover, we want to connect $r_3^{txt}$ to the output
+variable, because the return type of the program is \lstinline{Text}.
+
+Similarly, we can not assign formal parameter variables to each component
+beforehand, as we would not know how many to create, nor their type. We know,
+however, the maximum arity $m$ of all components, so we have an upper bound on
+the number of formal parameter variables needed, namely $n * m * T$. Thus, we
+introduce variables $p_{ij}^t$ for $i = 1, 2, ..., n$, $j = 1, 2, ..., m$, and
+$t \in T$. Again, we want to make sure that whatever components the solver
+picks are applied to the right variables.
+
+Like in the previous approach, we have a set $L$ of integer-valued location
+variables. Locations for the input, constant and output variables are assigned
+as before. By definition, we also have $l_{r_i^t} = |I| + |C| + i$.
