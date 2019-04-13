@@ -1,0 +1,35 @@
+
+./Setup.hs,15
+main main1,2
+
+./Main.hs,619
+module Main Main1,2
+type Loc'ed Loc'ed9,10
+type Sort Sort10,11
+type Symbol Symbol11,12
+type I I14,15
+type O O15,16
+type A A16,17
+type C C17,18
+type R R18,19
+type SFormal SFormal20,21
+type P P21,22
+type SLoc SLoc23,24
+type L L24,25
+type Example Example27,28
+mkActs mkActs31,32
+mkInputs mkInputs41,42
+mkConsts mkConsts44,45
+mkRetVals mkRetVals48,49
+mkOutput mkOutput52,53
+mkFormals mkFormals55,56
+mkLocs mkLocs60,61
+imapM2 imapM265,66
+imap2 imap270,71
+wfp wfp74,75
+fno fno84,85
+arity arity85,86
+cno cno86,87
+prog prog88,89
+formula formula97,98
+main main121,122
