@@ -13,50 +13,167 @@ pushing as much workload as possible to the solver.
 In this next approach we reduce the enumerator to query the solver with a single
 number $n$ (plus the input-output examples). Instead of drawing components from the
 library and passing them to the solver, the enumerator now queries if there is 
-any program using exactly $n$ components satisfying the examples. Thus, the
+any program of exactly $n$ components that satisfies the examples. Thus, the
 solver is now parameterized by the library of components $F$. This process is
 repeated for increasing values of $n$ until a program is found.
 
 \subsection{Program Formula}
 \label{sec:program-formula-whole}
 
-It is now the job of the solver to pick which components the program will be
-composed of. The solver is given the query $n$, the exact number of components
-allowed. We do not know, however, how many times each component will be used in
-the synthesized program. This means we must have some way to model the choices
-of which components get picked and which do not. For this we introduce a new set
-of integer-valued variables $A = \{a_1, a_2, ..., a_n\}$, which we will call the
-\textit{activation} variables. The activation variables have values in the set
-$\{1, 2, ..., |F|\}$, meaning that if we have $a_i = k$, then component $f_k$
-will be the $i$-th component of the program. For example, for
-program~\ref{fig:first-name-ssa}, assuming that component \lstinline{Concat}
-corresponds to $k = 1$, \lstinline{Index} to $k = 2$, and \lstinline{Substr} to
-$k = 3$, then we would have $a_1 = 2 $, $a_2 = 3$, and $a_3 = 1$.
+Here, we adapt the location-based encoding from the previous section in order to
+have a solver that finds a program with the exact number of allowed components,
+$n$. 
+Just as before, we will have a set $I$ of input variables, an output variable
+$o$, a set $C$ of constant variables, a set $L$ of location variables, a set $R$
+of return variables, and a set $P$ of formal parameter variables, with some
+changes, as we will see next.
 
-Because we do not know beforehand which component goes on which line, we do not
-know beforehand the types of the return variables. Thus, we
-can not assign return variables to each component, like we did in the previous
-approach. Lacking this information, we circumvent this problem by introducing
-one return variable $r_i^t$ per type $t \in T$ for $i = 1, 2, ... n$, where $T$
-is the set of allowed types. In our case, $T = \{txt, int\}$, corresponding to
-the types \lstinline{Text} and \lstinline{Integer}. We want to make sure to bind
-the correct return variable to the return value of each component, in order to
-make the formula well-typed (we will see later how to do this). For instance, in
-program~\ref{fig:first-name-ssa} we would like to bind the variables
-$r_1^{int}$, $r_2^{txt}$, and $r_3^{txt}$, because \lstinline{Index} is the
-first component, followed by \lstinline{Substr}, and then \lstinline{Concat}
-(whose return types are, respectively, \lstinline{Integer}, \lstinline{Text},
-and \lstinline{Text}). Moreover, we want to connect $r_3^{txt}$ to the output
-variable, because the return type of the program is \lstinline{Text}.
+This time we do not know how many times each component will be used in the
+synthesized program.
+This means we must have some way to model the choices of which components get
+picked and which do not.
+For this we introduce a new set of integer-valued variables $A = \{a_1, a_2,
+\ldots, a_n\}$, which we will call the \textit{activation} variables.
+The activation variables have values in the set $\{1, 2, \ldots, |F|\}$, with
+the interpretation that if we have $a_i = k$, then component $f_k$ will be the
+$i$-th component in the program (the one appearing in line $|I| + |C| + i$).
+For the same reason this time we do not assign return variables to each
+component.
+Instead, as we know the number $n$ of components we are aiming for, we have one
+return variable $r_i$, associated with each $a_i$ in the obvious way, for
+$i = 1, \ldots, n$.
+These will have their locations fixed beforehand: variable $r_i \in R$ will be
+assigned to location $l_{r_i} = |I| + |C| + i$.
 
-Similarly, we can not assign formal parameter variables to each component
-beforehand, as we would not know how many to create, nor their type. We know,
-however, the maximum arity $m$ of all components, so we have an upper bound on
-the number of formal parameter variables needed, namely $n * m * T$. Thus, we
-introduce variables $p_{ij}^t$ for $i = 1, 2, ..., n$, $j = 1, 2, ..., m$, and
-$t \in T$. Again, we want to make sure that whatever components the solver
-picks are applied to the right variables.
+\begin{example}
+  Consider program~\ref{fig:first-name-ssa}.
+  Assuming that component \lstinline{Concat} corresponds to $k = 1$,
+  \lstinline{Index} to $k = 2$, and \lstinline{Substr} to $k = 3$, then we would
+  have $a_1 = 2 $, $a_2 = 3$, and $a_3 = 1$.
+  We would also have $l_{r_1} = 5$, $l_{r_2} = 6$, and $l_{r_3} = 7$.
+\end{example}
 
-Like in the previous approach, we have a set $L$ of integer-valued location
-variables. Locations for the input, constant and output variables are assigned
-as before. By definition, we also have $l_{r_i^t} = |I| + |C| + i$.
+As the values of the activation variables $x \in A$ will be found by the solver
+at constraint-solving time, we also do not know apriori the concrete types of
+the return variables $x \in R$.
+Lacking this information, we circumvent the problem by augmenting the type of
+each return variable to be the union of all possible return types.
+In our case, this would mean that all return variables may be either of type
+\lstinline{Text}, or of type \lstinline{Integer}.
+
+That is also the case for the types of the formal parameter variables $x \in P$.
+Moreover, we do not know exactly how many formal parameter variables to create
+because we do not know the arities of the components that are going to be picked.
+We know, however, the maximum arity $m$ of all components, so we have an upper
+bound on the number of formal parameter variables we might need, namely
+$n * m$.
+Thus, we introduce variables $p_{ij} \in P$, for $i = 1, 2, \ldots, n$, and
+$j = 1, 2, \ldots, m$, with the interpretation that $p_{ij}$ is the $j$-th
+parameter of $f_{a_i}$, the component activated by $a_i$.
+We also augment their type to be the union of all possible formal parameter
+types, plus a \lstinline{Null} type, inhabited by a single value,
+\lstinline{null}, to indicate the absence of value.
+A variable $p_{ij} \in P$ will be \lstinline{null} if and only if the arity of
+component $f_{a_i}$ is less than $j$, and will be ignored by $f_{a_i}$ if that
+is the case.
+Finally, we perform the same \lstinline{Null} type augmentation to the location
+variables $x \in L$, because there is no sense in having a location number if a
+variable does not take any value.
+
+\begin{figure}
+  \begin{lstlisting}[frame=tlrb,mathescape=true]
+    prog($i_0$, $i_1$):
+      $c_0$ = ?
+      $c_1$ = ?
+      $r_1$ = $f_{a_1}$($p_{11}$, $p_{12}$, $p_{13}$)
+      $r_2$ = $f_{a_2}$($p_{21}$, $p_{22}$, $p_{23}$)
+      $r_3$ = $f_{a_2}$($p_{31}$, $p_{32}$, $p_{33}$)
+  \end{lstlisting}
+\caption{Symbolic representation of a program with two inputs, $i_0, i_1 \in I$
+  two constant variables $c_0, c_1 \in C$, three return value variables $r_i \in
+  R$, for $i = 1, \ldots, n$, and nine formal parameter variables $p_{ij} \in
+  P$, for $i = 1, \ldots, n$, $j = 1, \ldots, m$, with $n = m = 3$.}
+\label{fig:whole-encoding-prog}
+\end{figure}
+
+\begin{example}
+  Consider program~\ref{fig:first-name-ssa} and its corresponding symbolic
+  skeleton from Figure~\ref{fig:whole-encoding-prog}.
+  We have three components: \lstinline{Concat}, \lstinline{Index}, and
+  \lstinline{Substr}.
+  Components \lstinline{Index} and \lstinline{Substr} have the arity equal to 3,
+  which are the largest among the three components.
+  Thus, we have $n = m = 3$. This means we have nine variables $p_{ij} \in P$.
+  Variables $p_{1j}$, with $j = 1, \ldots, 3$ are the formal parameters of
+  $f_{a_1}$, which is component \lstinline{Concat}.
+  However, \lstinline{Concat} only takes two parameters.
+  These will be $p_{11}$ and $p_{12}$, meaning that $p_{13}$ will take value
+  \lstinline{null}.
+\end{example}
+
+\subsubsection{Well-Formedness Constraint}
+\label{sec:whole-well-formedness-constraint}
+
+As with the last encoding, each input variable $x \in I$ is assigned a distinct
+location $l_x$ from 1 to $|I|$, and each constant variable $x \in C$ is assigned
+a distinct location from $|I| + 1$ to $|I| + |C|$.
+As said in the previous section, this time we do the same for each return
+variable $x \in R$, assigning to each a location from $|I| + |C| + 1$ to
+$|I| + |C| + |R|$.
+The upper bound on the location (if non-null) of each parameter variable $p_{ij}
+\in P$ is now statically known to be $|I| + |C| + i$, so now our well-formedness
+constraint is just:
+
+\begin{align*}
+  \psi{}_{\mathtt{wfp}}(L, F, P) &=
+  % 
+  \bigwedge_{i = 1, \ldots, n}\bigwedge_{j = 1, \ldots, m}
+  (p_{ij} \neq \mathtt{null} \implies 1 \leq l_{p_{ij}} < |I| + |C| + i) \\
+  % 
+  &\wedge
+  \bigwedge_{i = 1, \ldots, n}\bigwedge_{j = 1, \ldots, m}
+  (p_{ij} = \mathtt{null} \iff l_{p_{ij}} = \mathtt{null}) \\
+\end{align*}
+
+\noindent
+Compared to the well-formedness constraint of the setwise encoding, this one is
+arguably made simpler by the fact that the lines of the return variables are
+fixed apriori, and because we are not doing any type checking.
+
+\begin{example}
+  Consider the symbolic skeleton from Figure~\ref{fig:whole-encoding-prog}.
+  We have $l_{i_0} = 1$, $l_{i_1} = 2$, $l_{c_0} = 3$, $l_{c_1} = 4$, $l_{r_1} =
+  5$, $l_{r_2} = 6$, and $l_{r_3} = 7$.
+  Also, for instance, for $i = 3$ and $ j = 2$, the well-formedness constraint
+  is the following:
+  \[
+    p_{32} \neq \mathtt{null} \implies 1 \leq l_{p_{32}} < 7
+    \quad\wedge\quad
+    p_{32} = \mathtt{null} \iff l_{p_{32}} = \mathtt{null}
+  \]
+\end{example}
+
+\subsubsection{Functional Constraint}
+
+Just as with the last encoding, we have the following concerns regarding the
+semantics of the program:
+\begin{enumerate*}[(1)]
+\item \label{itm:whole-fc-one} relating return variables to the values of their
+components and their parameters;
+\item value sharing between variables with same location; and
+\item effectively mapping the inputs $x \in I$ to the output $o$.
+\end{enumerate*}
+
+Constraint $psi{}_{\mathtt{spec}}$, which guarantees
+constraint~\ref{itm:whole-fc-one}, is very similar to the one from
+section~\ref{sec:functional-constraint}, only with the additional clauses that
+relate the activation variables to their corresponding components:
+
+\[
+  \psi{}_{\mathtt{spec}}(F, P, R) =
+  \bigwedge_{i=1,\ldots,n}\bigwedge_{k=1,\ldots,|F|}
+  (a_i = k \implies \phi{}_{f_{k}}'(p_{i1}, p_{i2}, \ldots, p_{ij}, r_i))
+  \quad\wedge\quad
+  \bigwedge_{i=1,\ldots,n}
+  (1 \leq a_i < |F|)
+\]
