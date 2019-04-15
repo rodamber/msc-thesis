@@ -16,7 +16,7 @@ include constant literals, like \lstinline{" "}, or \lstinline{0}. These could
 have be given as input, but we would like them to be figured out automatically
 by the synthesizer. Ignoring well-typedness, an OutSystems expression is a
 tree-like program whose form can be succintly described using a \gls{cfg}:
-
+%
 \[S \rightarrow f(S, ..., S) \OR x \OR c\]
 
 \noindent
@@ -45,7 +45,7 @@ variable is assigned exactly once and defined before it is used. For example,
 the program from Example~\ref{ex:first-name} could be written in \gls{ssa} form
 as shown in Listing~\ref{fig:first-name-ssa}. The body of a program in this
 format can be described succinctly with the following \gls{cfg}:
-
+%
 \[S \to ID = c \OR ID = f(x_1, ..., x_n) \OR S;S\]
 
 \noindent
@@ -218,7 +218,7 @@ $1 \leq l_x < 5$ for $x \in P_{Index}$,
 $1 \leq l_x < 6$ for $x \in P_{Substr}$, and
 $1 \leq l_x < 7$ for $x \in P_{Concat}$.
 In general, we can capture these constraints with the following formula:
-
+%
 \[
   \psi{}_{\mathtt{range}}(I, C, P, R) =
   %
@@ -244,7 +244,7 @@ and \lstinline{Concat} appear on lines 3, 4 and 5, respectively, and so on.
 We need a few more constraints in order to encode the space of well-formed
 programs. First, no two components should have the same location. Thus,
 we have $l_{r_1} \neq l_{r_2} \neq l_{r_3}$. In the general case:
-
+%
 \[
   \psi{}_{\mathtt{rloc}}(R) =
   \bigwedge_{\substack{x, y \in R\\ x \not\equiv y}} (l_{x} \neq l_{y}) 
@@ -256,7 +256,7 @@ $x \in P$ should differ from the location of any $y \in I \cup C \cup R$ whose
 type does not match with $x$. In the same vein, only components whose return
 value has the same type as the output may appear in the last line. These
 constraints can be written in the following way:
-
+%
 \[
   \psi{}_{\mathtt{tloc}}(I, o, C, P, R) =
   %
@@ -271,14 +271,13 @@ constraints can be written in the following way:
 
 Combining formulas $\psi{}_{\mathtt{range}}$, $\psi{}_{\mathtt{rloc}}$, and
 $\psi{}_{\mathtt{tloc}}$ we get the full program well-formedness constraint:
-
+%
 \[
   \psi{}_{\mathtt{wfp}}(I, o, C, P, R) =
   \psi{}_{\mathtt{range}}(I, C, P, R)
   \wedge \psi{}_{\mathtt{rloc}}(R)
   \wedge \psi{}_{\mathtt{tloc}}(I, o, C, P, R)
 \]
-
 
 \subsubsection{Functional Constraint}
 \label{sec:functional-constraint}
@@ -302,7 +301,7 @@ For example, for program~\ref{fig:first-name-ssa} we would like to make sure
 \end{enumerate*}
 
 Constraint~\ref{itm:fc-one} can be guaranteed by the following formula:
-
+%
 \[
   \psi{}_{spec}(P, R) = \bigwedge_{f \in F'} \phi{}_f (P_f, r_f)
 \]
@@ -319,7 +318,7 @@ $p_{21} \neq prefix$), or $l_{r_2} = l_o \implies r_2 = o$
 do not want $l_{p_{21}} = l_{r_1} \implies p_{21} = r_1$ (because $p_{21}$ and
 $r_1$ have different types). In general, these properties can be encoded in the
 following formula:
-
+%
 \[
   \psi{}_{flow}(I, C, P, R) =
   % 
@@ -344,13 +343,13 @@ the output of the program, or one of the actual parameters of the same type of
 \lstinline{Input} or \lstinline{Substr}. Thus, we would have
 $l_{r_3} = l_o \vee l_{r_3} = l_{p_{11}} \vee l_{r_3} = l_{p_{12}} \vee l_{r_3} = l_{p_{21}}$.
 In general, this can be encoded in the formula
-
+%
 \[
   \psi{}_{out}(o, P, R) =
   \bigwedge_{f \in F}
   \bigvee_{\substack{p \in P - P_f \\ type(p) = type(r_f)}}(l_{r_f} = l_p)
   %
-  \vee \bigwedge_{\substack{r \in R \\ type(r) = type(o)}} (l_{r} = l_o)
+  \quad \vee \bigwedge_{\substack{r \in R \\ type(r) = type(o)}} (l_{r} = l_o)
 \]
 
 \noindent
@@ -359,7 +358,7 @@ program has the correct output, thus ensuring that constraint~\ref{itm:fc-three}
 is satisfied. Moreover, we would also like to make sure that no program input
 goes ignored, significantly cutting down the search space, which can be
 guaranteed by a formula similar to $\psi{}_{out}$:
-
+%
 \[
   \psi{}_{in}(I, P) = \bigwedge_{i \in I}\bigvee_{p \in P}(l_i = l_p)
 \]
@@ -367,7 +366,7 @@ guaranteed by a formula similar to $\psi{}_{out}$:
 The functional constraint is obtained by adding to $\psi{}_{\mathtt{wfp}}$ the
 formulas from this section, wrapping the formal parameter and return value
 variables $x \in P \cup R$ under an existential quantifier:
-
+%
 \[
   \psi{}_{prog}(I, o, C) = \exists P,R\ldotp
   (\psi{}_{\mathtt{wfp}}(I, o, C, P, R) \wedge
@@ -377,7 +376,6 @@ variables $x \in P \cup R$ under an existential quantifier:
   \psi{}_{in}(I, P))
 \]
 
-
 \subsubsection{The Full Constraint}
 \label{sec:full-constraint}
 
@@ -385,7 +383,7 @@ We are now in position to show the full formula. The formula $\psi{}_{prog}(I,
 o)$ encodes a well-formed program that satisfies the input-output example $(I,
 o)$. We can get a program that works over \textit{all} provided
 input-output examples $(I, o) \in E$ with a simple conjuction over $E$ like so:
-
+%
 \[
   \Psi{} = \exists L,C\ldotp \bigwedge_{(I, o) \in E}\psi{}_{prog}(I, o, C)
 \]
