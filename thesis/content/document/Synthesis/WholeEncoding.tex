@@ -126,7 +126,7 @@ The upper bound on the location (if non-null) of each parameter variable $p_{ij}
 constraint is just:
 %
 \[
-  \psi{}_{\mathtt{wfp}}(L, P) =
+  \psi{}_{\mathtt{wfp}}(L,C,I,P) =
   \bigwedge_{i = 1, \ldots, n}\bigwedge_{j = 1, \ldots, m}
   (l_{p_{ij}} \neq \mathtt{null} \implies 1 \leq l_{p_{ij}} < |I| + |C| + i)
 \]
@@ -244,7 +244,7 @@ added constraint that every formal parameter variable whose value is
 \lstinline{null} must also have a \lstinline{null} location:
 %
 \begin{align*}
-  \psi{}_{flow}(I, C, P, R)
+  \psi{}_{flow}(C,I,P,R)
   &=\bigwedge_{i=1,\ldots,n}
     \bigwedge_{j=1,\ldots,m}
     \bigwedge_{\substack{x \in I \cup C \cup R}}
@@ -283,16 +283,31 @@ parameter of some component, a property encoded by the following formula:
 \end{align*}
 %
 The functional constraint is obtained by conjoining the previous constraints
-with the well-formedness constraint $\psi{}_{\mathtt{wfp}}$ from last section,
+with the well-formedness constraint $\psi{}_{\mathtt{wfp}}$,
 again wrapping the formal parameter and return value variables $x \in P \cup R$
 under an existential quantifier:
 %
-%
 \begin{align*}
-  \psi{}_{prog}(A, L, I, o, C) &= \exists P,R\ldotp
+  \psi{}_{prog}(A,L,C,I,o) &= \exists P,R\ldotp
   (\psi{}_{\mathtt{wfp}}(L, P) \wedge
   \psi{}_{spec}(A, P, R) \wedge
   \psi{}_{flow}(I, C, P, R)\\&\wedge 
   \psi{}_{out}(o, P, R) \wedge
   \psi{}_{in}(I, P))
 \end{align*}
+
+\subsubsection{Full Constraint}
+\label{sec:whole-full-constraint}
+
+Just as last time, the functional constraint $\psi{}_{prog}$ encodes the space
+of well-formed programs that satisfy a specific input-output example.
+To obtain a formula that ranges over all input-output examples, we just make a
+conjuction over the set $E$:
+%
+\[
+  \Psi{}=\exists{A,L,C}\ldotp\bigwedge_{(I, o) \in E}\psi{}_{prog}(A,L,C,I,o)
+\]
+
+A model of this formula is a valuation of the variables $x \in A \cup L \cup C$,
+which can then be used to reconstruct a program that satisfies the input-output
+examples $E$ using only $n$ components.
