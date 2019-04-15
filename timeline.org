@@ -1,4 +1,17 @@
-* Current plan
+* Plan after Apr 15 meeting
+|------------------+---------------------------------------|
+| <2019-04-18 Thu> | Preliminaries                         |
+| <2019-04-18 Thu> | Add more benchmarks                   |
+| <2019-04-24 Wed> | Run tests                             |
+| <2019-04-24 Wed> | Fix bug regarding recursive functions |
+| <2019-04-25 Thu> | Run more tests                        |
+| <2019-04-26 Fri> | Results, Discussion                   |
+| <2019-04-30 Tue> | Background                            |
+| <2019-05-02 Thu> | Introduction, Conclusion, Abstract    |
+| <2019-05-05 Sun> | Extended abstract                     |
+|------------------+---------------------------------------|
+
+* Plan before Apr 15 meeting
 |------------------+-----------------------------------------------------|
 | <2019-04-18 Thu> | Fix recursive bug regarding recursive functions     |
 | <2019-04-18 Thu> | Add more benchmarks & run tests                     |
