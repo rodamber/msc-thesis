@@ -1,3 +1,13 @@
+* Current plan
+|------------------+-----------------------------------------------------|
+| <2019-04-18 Thu> | Fix recursive bug regarding recursive functions     |
+| <2019-04-18 Thu> | Add more benchmarks & run tests                     |
+| <2019-04-26 Fri> | Preliminaries/Background                            |
+| <2019-04-26 Fri> | Results, Discussion                                 |
+| <2019-04-30 Tue> | Introduction, Conclusion, Abstract                  |
+|------------------+-----------------------------------------------------|
+
+* Old plan
 |------------------+-----------------------------------------------------|
 | <2019-04-09 Tue> | Implement new encoding                              |
 | <2019-04-10 Wed> | Write new encoding                                  |
@@ -6,5 +16,4 @@
 | <2019-04-26 Fri> | Results, Discussion                                 |
 | <2019-04-30 Tue> | Introduction                                        |
 | <2019-05-02 Thu> | Abstract, Conclusion                                |
-| <2019-05-10 Fri> | Hopefully, try to implement/write one more approach |
 |------------------+-----------------------------------------------------|
