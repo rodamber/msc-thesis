@@ -1,0 +1,97 @@
+{"functions": ["Replace"], "text": "Replace(Replace(x0, \"http://\", \"\"), \"/UserHappinessBackEnd/_TimerHandler.asmx\", \"\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \" \", \"&nbsp;\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \",\", \", \")"}
+{"functions": ["Replace"], "text": "Replace(x0, \".\", \",\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \".\",\", \")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"/\", \"\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"Customer with \", \"\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"http://\", \"\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"of\", \"of<br />\", \"Way\", \"<br />Way\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"|\", \" | \")"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 10)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 100)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 1000)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 14)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 15)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 16)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 160)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 20)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 200)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 25)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 250)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 30)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 36) "}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 45)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 50)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 7)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, x1)"}
+{"functions": ["Substr"], "text": "Substr(x0, 11, 8)"}
+{"functions": ["Substr"], "text": "Substr(x0, 17, 5)"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 20), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 25), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 30), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 49), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 50), \"...\")"}
+{"functions": ["Replace", "Substr"], "text": "Replace(Substr(x0, 0, 45), \"+\", \" \")"}
+{"functions": ["Replace", "Substr"], "text": "Replace(Substr(x0, 0, 7), \"-\", \"/\")"}
+{"functions": ["Replace", "Substr"], "text": "Substr(Replace(x0, \"\n\", \"    \"), 0, 300)"}
+{"functions": ["Replace", "Substr"], "text": "Substr(Replace(x0, \"\n\", \"   \"), 0, 300)"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 100), \"..........\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 100), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 150), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 300), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 40), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Concat(Substr(x0, 0, 5), \"-\"), Substr(x1, 0, 5))"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 5), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 70), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 80), \"...\")"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 0, Index(x0, \" \"))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 0, Index(x0, \".\"))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 0, Index(x0, \"@\"))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 0, Index(x0,\",\",0))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 1, Index(x0, \" \"))"}
+{"functions": ["Length", "Substr"], "text": "Substr(x0, 23, Length(x0))"}
+{"functions": ["Length", "Substr"], "text": "Substr(x0, 4, Length(x0))"}
+{"functions": ["Length", "Substr"], "text": "Substr(x0, 5, Length(x0))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, Index(x0, \"/\", 8), 5000)"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, Index(x0,\"/\", 0), 100)"}
+{"functions": ["Concat", "Replace"], "text": "Concat(Concat(\"<a href=\", Replace(x0, \"_TimerHandler.asmx\", \"\")), \">Open backend</a>\")"}
+{"functions": ["Concat", "Replace"], "text": "Concat(Concat(\"<span id =\", Replace (x0, \" \" , \"_\" )), \" > \")"}
+{"functions": ["Concat", "Replace"], "text": "Concat(Concat(\"<span id=\", Replace(x0, \" \" , \"_\" )), \" > \")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(\"Created on \", Substr(x0, 0, 16))"}
+{"functions": ["Concat", "Substr"], "text": "Concat(\"updated on \", Substr(x0, 0, 16))"}
+{"functions": ["Index", "Replace", "Substr"], "text": "Replace(Replace(Replace(Substr(x0, Index(x0, \"<new>\"), Index(x0, \"</new>\")), \"<new>\", \"\"), \"</new>\", \"\"), \"<br/>\", \" \")"}
+{"functions": ["Index", "Replace", "Substr"], "text": "Replace(Replace(Replace(Substr(x0, Index(x0, \"<old>\"), Index(x0, \"</old>\")), \"<old>\", \"\"), \"</old>\", \"\"), \"<br/>\", \" \")"}
+{"functions": ["Concat", "Replace", "Substr"], "text": "Concat(Replace(Replace(Substr(x0,2,10), \".0\", \".\"), \".0\", \".\"), \"*\")"}
+{"functions": ["Concat", "Replace", "Substr"], "text": "Concat(Concat(Substr(x0, 0, 10), \" \"), Replace(Substr(x0, 11, 5)), \".\", \":\")"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(200, Length(x0)))"}
+{"functions": ["Index", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(Index(x0, \"(\"), 1))"}
+{"functions": ["Add", "Index", "Substr"], "text": "Substr(x0, 0, Add(Index(x0, \")\"), 1))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(Length(x0), 1))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(Length(x0), 2))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(Length(x0), 3))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 1, Sub(Length(x0), 1))"}
+{"functions": ["Index", "Sub", "Substr"], "text": "Substr(x0, 6, Sub(Index(x0,\"(\"), 7))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 9, Sub(Length(x0), 9))"}
+{"functions": ["Index", "Length", "Substr"], "text": "Substr(x0, Index(x0, \"#\"), Length(x0))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, Sub(Length(x0), 3), Length(x0))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, Sub(Length(x0), 7), 7)"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(\"...\", Substr(x0, Sub(Length(x0), 30), Length(x0)))"}
+{"functions": ["Add", "Concat", "Index", "Substr"], "text": "Concat(Substr(x0, 0, 1), Substr(x0, Add(Index(x0, \" \")), 1), 1)"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Concat(Substr(x0, 0, 10), \"...\"), Substr(x0, Sub(Length(x0), 10), 10))"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Substr(x0, 0, Sub(x1, Length(x2))), x2)"}
+{"functions": ["Add", "Index", "Length", "Substr"], "text": "Substr(x0, Add(Index(x0, \" \"), 1), Length(x0))"}
+{"functions": ["Add", "Index", "Sub", "Substr"], "text": "Substr(x0, Sub(Sub(Add(Index(x0, \"(\"), 1), Index(x0, \")\"), Index(x0, \"(\")), 1))"}
+{"functions": ["Add", "Index", "Length", "Substr"], "text": "Substr(x0, Add(Index(x0, \"-\"), 1), Length(x0))"}
+{"functions": ["Add", "Index", "Length", "Substr"], "text": "Substr(x0, Add(Index(x0, \".\"), 1), Length(x0))"}
+{"functions": ["Index", "Length", "Sub", "Substr"], "text": "Substr(x0, Index(x0, \"@\"), Sub(Length(x0), Index(x0, \"@\")))"}
+{"functions": ["Add", "Index", "Length", "Substr"], "text": "Substr(x0, Add(Index(x0, \"\\\", 0), 1), Length(x0))"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Concat(Substr(x0, Sub(Length(x0), 3), 3), \" \"), x1)"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Concat(x0, \"/\"), Substr(Concat(\"0\", x1), Sub(Length(Concat(\"0\", x1)), 2), 999))"}
+{"functions": ["Concat", "Index", "Replace", "Substr"], "text": "Concat(\"<strong>DE: </strong>\", Replace(Replace(Substr(x0, Index(x0, \"<old>\"), Index(x0, \"</old>\")), \"<old>\", \"\"), \"</old>\", \"\"))"}
+{"functions": ["Concat", "Index", "Replace", "Substr"], "text": "Concat(\"<strong>PARA: </strong>\", Replace(Replace(Substr(x0, Index(x0, \"<new>\"), Index(x0, \"</new>\")), \"<new>\", \"\"), \"</new>\", \"\"))"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Concat(x0, \" At:\"), Substr(x1, 0, Sub(Length(x1), 3)))"}
+{"functions": ["Add", "Index", "Length", "Sub", "Substr"], "text": "Substr(x0, Add(Index(x0, \"/\"), 1), Sub(Sub(Length(x0), 5), Index(x0, \"/\")))"}
+{"functions": ["Add", "Index", "Length", "Sub", "Substr"], "text": "Substr(x0, Add(Index(x0, \"_\"), 1), Sub(Length(x0), 6))"}
+{"functions": ["Concat", "Length", "Replace", "Sub", "Substr"], "text": "Concat(\"Enviado para \", Replace(Substr(x0, 1, Sub(Length(x0), 2)), \"|\", \", \"))"}
+{"functions": ["Add", "Index", "Replace", "Sub", "Sub", "Substr"], "text": "Replace(Substr(x0, Add(Index(x0, \"<\"), 1), Sub(Index(x0, \">\"), 2)), \">\", \"\")"}
