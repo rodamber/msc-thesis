@@ -1,0 +1,100 @@
+{"functions": ["Replace"], "text": "Replace(x0, \" \", \"&nbsp;\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \",\", \", \")"}
+{"functions": ["Replace"], "text": "Replace(x0, \".\", \",\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \".\", \", \")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"/\", \"\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"Customer with \", \"\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"http://\", \"\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"of\", \"of<br />\", \"Way\", \"<br />Way\")"}
+{"functions": ["Replace"], "text": "Replace(x0, \"|\", \" | \")"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 5)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 10)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 100)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, 1000)"}
+{"functions": ["Substr"], "text": "Substr(x0, 0, x1)"}
+{"functions": ["Substr"], "text": "Substr(x0, 10, 15)"}
+{"functions": ["ToLower"], "text": "ToLower(x0)"}
+{"functions": ["ToUpper"], "text": "ToUpper(x0)"}
+{"functions": ["Trim"], "text": "Trim(x0)"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 20), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 30), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 50), \"...\")"}
+{"functions": ["Replace", "Substr"], "text": "Replace(Substr(x0, 0, 45), \"+\", \" \")"}
+{"functions": ["Replace", "Substr"], "text": "Replace(Substr(x0, 0, 7), \"-\", \"/\")"}
+{"functions": ["Replace", "Substr"], "text": "Substr(Replace(x0, \"\n\", \"    \"), 0, 300)"}
+{"functions": ["Replace", "Substr"], "text": "Substr(Replace(x0, \"\n\", \"   \"), 0, 300)"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 5), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 40), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 70), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 80), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Substr(x0, 0, 100), \"...\")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(Concat(Substr(x0, 0, 5), \"-\"), Substr(x1, 0, 5))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 0, Index(x0, \" \"))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 0, Index(x0, \".\"))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 0, Index(x0, \"@\"))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 0, Index(x0,\",\",0))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, 1, Index(x0, \" \"))"}
+{"functions": ["Length", "Substr"], "text": "Substr(x0, 5, Length(x0))"}
+{"functions": ["Length", "Substr"], "text": "Substr(x0, 10, Length(x0))"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, Index(x0, \"/\", 10), 50)"}
+{"functions": ["Index", "Substr"], "text": "Substr(x0, Index(x0, \"/\", 0), 10)"}
+{"functions": ["Concat", "Replace"], "text": "Concat(Concat(\"<span id=\", Replace(x0, \" \" , \"_\")), \" > \")"}
+{"functions": ["Concat", "Substr"], "text": "Concat(\"Created on \", Substr(x0, 0, 16))"}
+{"functions": ["Concat", "Substr"], "text": "Concat(\"updated on \", Substr(x0, 0, 16))"}
+{"functions": ["Concat", "Trim"], "text": "Concat(\"Tradegroup \", Trim(x0))"}
+{"functions": ["Concat", "ToLower"], "text": "Concat(ToLower(x0), \"!@\")"}
+{"functions": ["Replace", "ToLower"], "text": "Replace(Replace(ToLower(x0), \"http://\",\"\"), \"https://\", \"\")"}
+{"functions": ["Replace", "ToLower"], "text": "Replace(ToLower(x0), \"bed \", \"\")"}
+{"functions": ["Replace", "ToLower"], "text": "Replace(ToLower(x0), \"weeks\", \"wks\")"}
+{"functions": ["Replace", "TrimEnd"], "text": "Replace(TrimEnd(x0), \" \", \"0\")"}
+{"functions": ["Replace", "TrimStart"], "text": "Replace(TrimStart(Replace(x0, \"0\", \" \")), \" \", \"0\")"}
+{"functions": ["Concat", "ToLower"], "text": "ToLower(Concat(Concat(Concat(x0, x1), \".\"), x2))"}
+{"functions": ["Concat", "ToUpper"], "text": "ToUpper(Concat(Concat(x0, \" \"), x1))"}
+{"functions": ["Substr", "ToUpper"], "text": "ToUpper(Substr(x0, 0, 1))"}
+{"functions": ["Substr", "ToUpper"], "text": "ToUpper(Substr(x0, 0, 1))"}
+{"functions": ["Concat", "Trim"], "text": "Trim(Concat(Concat(x0, \" \"), x1))"}
+{"functions": ["ToUpper", "Trim"], "text": "Trim(ToUpper(x0))"}
+{"functions": ["TrimEnd", "TrimStart"], "text": "TrimEnd(TrimStart(x0))"}
+{"functions": ["TrimEnd", "TrimStart"], "text": "TrimStart(TrimEnd(x0))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(200, Length(x0)))"}
+{"functions": ["Index", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(Index(x0, \"(\"), 1))"}
+{"functions": ["Add", "Index", "Substr"], "text": "Substr(x0, 0, Add(Index(x0, \")\"), 1))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(Length(x0), 1))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(Length(x0), 2))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 0, Sub(Length(x0), 3))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 1, Sub(Length(x0), 1))"}
+{"functions": ["Index", "Sub", "Substr"], "text": "Substr(x0, 6, Sub(Index(x0, \"(\"), 7))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, 9, Sub(Length(x0), 9))"}
+{"functions": ["Index", "Length", "Substr"], "text": "Substr(x0, Index(x0, \"#\"), Length(x0))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, Sub(Length(x0), 3), Length(x0))"}
+{"functions": ["Length", "Sub", "Substr"], "text": "Substr(x0, Sub(Length(x0), 7), 7)"}
+{"functions": ["Concat", "TrimEnd", "TrimStart"], "text": "Concat(TrimEnd(TrimStart(x0)), \" â‚¬\")"}
+{"functions": ["Index", "Substr", "Trim"], "text": "Trim(Substr(x0, 0, Index(x0, \"-\")))"}
+{"functions": ["Index", "Substr", "TrimEnd"], "text": "TrimEnd(Substr(x0, 0, Index(x0, \"\\\")))"}
+{"functions": ["Replace", "TrimEnd", "TrimStart"], "text": "TrimEnd(TrimStart(Replace(x0, \" \", \"\")))"}
+{"functions": ["Substr", "TrimEnd", "TrimStart"], "text": "TrimEnd(TrimStart(Substr(x0, 0, 7)))"}
+{"functions": ["Concat", "TrimEnd", "TrimStart"], "text": "TrimStart(TrimEnd(Concat(Concat(x0, \" \"), x1)))"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(\"...\", Substr(x0, Sub(Length(x0), 30), Length(x0)))"}
+{"functions": ["Add", "Concat", "Index", "Substr"], "text": "Concat(Substr(x0, 0, 1), Substr(x0, Add(Index(x0, \" \")), 1), 1)"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Concat(Substr(x0, 0, 10), \"...\"), Substr(x0, Sub(Length(x0), 10), 10))"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Substr(x0, 0, Sub(x1, Length(x2))), x2)"}
+{"functions": ["Add", "Index", "Length", "Substr"], "text": "Substr(x0, Add(Index(x0, \" \"), 1), Length(x0))"}
+{"functions": ["Add", "Index", "Sub", "Substr"], "text": "Substr(x0, Sub(Sub(Add(Index(x0, \"(\"), 1), Index(x0, \")\"), Index(x0, \"(\")), 1))"}
+{"functions": ["Add", "Index", "Length", "Substr"], "text": "Substr(x0, Add(Index(x0, \"-\"), 1), Length(x0))"}
+{"functions": ["Add", "Index", "Length", "Substr"], "text": "Substr(x0, Add(Index(x0, \".\"), 1), Length(x0))"}
+{"functions": ["Index", "Length", "Sub", "Substr"], "text": "Substr(x0, Index(x0, \"@\"), Sub(Length(x0), Index(x0, \"@\")))"}
+{"functions": ["Add", "Index", "Length", "Substr"], "text": "Substr(x0, Add(Index(x0, \"\\\", 0), 1), Length(x0))"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Concat(Substr(x0, Sub(Length(x0), 3), 3), \" \"), x1)"}
+{"functions": ["Concat", "Length", "Sub", "Substr"], "text": "Concat(Concat(x0, \" At:\"), Substr(x1, 0, Sub(Length(x1), 3)))"}
+{"functions": ["Concat", "Replace", "ToLower", "Trim"], "text": "Concat(Concat(\"https://\", ToLower(Replace(Trim(x0), \" \", \"\"))), \".myadv.co.uk\")"}
+{"functions": ["Concat", "Substr", "ToLower", "ToUpper"], "text": "Concat(ToUpper(Substr(x0, 0, 1)), ToLower(Substr(x0, 1, 119)))"}
+{"functions": ["Concat", "Substr", "ToLower", "ToUpper"], "text": "Concat(ToUpper(Substr(x0, 0, 1)), ToLower(Substr(x0, 1, 99)))"}
+{"functions": ["Add", "Index", "Length", "Sub", "Substr"], "text": "Substr(x0, Add(Index(x0, \"/\"), 1), Sub(Sub(Length(x0), 5), Index(x0, \"/\")))"}
+{"functions": ["Add", "Index", "Length", "Sub", "Substr"], "text": "Substr(x0, Add(Index(x0, \"_\"), 1), Sub(Length(x0), 6))"}
+{"functions": ["Concat", "Length", "Replace", "Sub", "Substr"], "text": "Concat(\"Enviado para \", Replace(Substr(x0, 1, Sub(Length(x0), 2)), \"|\", \", \"))"}
+{"functions": ["Concat", "Length", "Sub", "Substr", "ToLower"], "text": "Concat(ToLower(Substr(x0, 0, 1)), Substr(x0, 1, Sub(Length(x0), 1)))"}
+{"functions": ["Concat", "Length", "Sub", "Substr", "ToUpper"], "text": "Concat(ToUpper(Substr(x0, 0, 1)), Substr(x0, 1, Sub(Length(x0), 1)))"}
+{"functions": ["Concat", "Length", "Substr", "ToLower", "ToUpper"], "text": "Concat(ToUpper(Substr(x0, 0, 1)), ToLower(Substr(x0, 1, Length(x0))))"}
+{"functions": ["Add", "Index", "Length", "Substr", "Trim"], "text": "Trim(Substr(x0, Add(Index(x0, \"-\"), 1), Length(x0)))"}
+{"functions": ["Add", "Index", "Replace", "Sub", "Sub", "Substr"], "text": "Replace(Substr(x0, Add(Index(x0, \"<\"), 1), Sub(Index(x0, \">\"), 2)), \">\", \"\")"}
+{"functions": ["Add", "Concat", "Index", "Length", "Substr", "TrimStart"], "text": "Concat(\"Sprint: \", TrimStart(Substr(x0, Add(Index(x0, \"-\"), 1), Length(x0))))"}
