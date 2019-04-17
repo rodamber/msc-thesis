@@ -1,0 +1,15 @@
+{"functions": ["Replace"],                                                 "text": "Replace(Replace(x0, \"http://\", \"\"), \"/UserHappinessBackEnd/_TimerHandler.asmx\", \"\")"}
+{"functions": ["Concat", "ToLower"],                                       "text": "Concat(Concat(\"showroom.\", ToLower(x0)), \"@wasco.nl\")"}
+{"functions": ["Index", "Replace", "Substr"],                              "text": "Replace(Replace(Replace(Substr(x0, Index(x0, \"<new>\"), Index(x0, \"</new>\")), \"<new>\", \"\"), \"</new>\", \"\"), \"<br/>\", \" \")"}
+{"functions": ["Index", "Replace", "Substr"],                              "text": "Replace(Replace(Replace(Substr(x0, Index(x0, \"<old>\"), Index(x0, \"</old>\")), \"<old>\", \"\"), \"</old>\", \"\"), \"<br/>\", \" \")"}
+{"functions": ["Concat", "Replace", "Substr"],                             "text": "Concat(Replace(Replace(Substr(x0,2,10), \".0\", \".\"), \".0\", \".\"), \"*\")"}
+{"functions": ["Concat", "Replace", "Substr"],                             "text": "Concat(Concat(Substr(x0, 0, 10), \" \"), Replace(Substr(x0, 11, 5)), \".\", \":\")"}
+{"functions": ["Concat", "Substr", "ToUpper"],                             "text": "Concat(Concat(Concat(Concat(\"<a href=\"\"#group2\", ToUpper(Substr(x0, 0, 1))), \"\"\">\"), ToUpper(Substr(x0, 0, 1))), \"</a>\")"}
+{"functions": ["Concat", "Substr", "ToUpper"],                             "text": "Concat(Concat(Concat(Concat(\"<a href=\"\"#group\", ToUpper(Substr(x0, 0, 1))), \"\"\">\"), ToUpper(Substr(x0, 0, 1))), \"</a> \")"}
+{"functions": ["Concat", "Substr", "ToUpper"],                             "text": "Concat(Concat(Concat(Concat(\"<a href=\"\"#group\", ToUpper(Substr(x0, 0, 1))), \"\"\">\"), ToUpper(Substr(x0, 0, 1))), \"</a>\")"}
+{"functions": ["Concat", "Substr", "ToUpper"],                             "text": "Concat(Concat(\"<a name=\"\"group2\", ToUpper(Substr(x0, 0, 1))), \"\"\"></a>\")"}
+{"functions": ["Concat", "Substr", "ToUpper"],                             "text": "Concat(Concat(\"<a name=\"\"group\", ToUpper(Substr(x0, 0, 1))), \"\"\"></a>\")"}
+{"functions": ["Concat", "ToLower", "ToUpper"],                            "text": "Concat(Concat(Concat(Concat(\"Holla! \", ToUpper(x0)), \", a verification email has been sent to \"), ToLower(x1)), \" in order to activate your account.\")"}
+{"functions": ["Concat", "Length", "Sub", "Substr"],                       "text": "Concat(Concat(x0, \"/\"), Substr(Concat(\"0\", x1), Sub(Length(Concat(\"0\", x1)), 2), 999))"}
+{"functions": ["Concat", "Index", "Replace", "Substr"],                    "text": "Concat(\"<strong>DE: </strong>\", Replace(Replace(Substr(x0, Index(x0, \"<old>\"), Index(x0, \"</old>\")), \"<old>\", \"\"), \"</old>\", \"\"))"}
+{"functions": ["Concat", "Index", "Replace", "Substr"],                    "text": "Concat(\"<strong>PARA: </strong>\", Replace(Replace(Substr(x0, Index(x0, \"<new>\"), Index(x0, \"</new>\")), \"<new>\", \"\"), \"</new>\", \"\"))"}

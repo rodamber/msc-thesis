@@ -1,5 +1,6 @@
 import pyrsistent as p
 import jsonlines
+import json
 import itertools
 
 from test_autogen import parse
@@ -88,7 +89,8 @@ def typecheck(args, types):
     for x, t in zip(args, types):
         if not isinstance(x, t):
             raise RuntimeError(
-                f'Typechecking error: value={x}, expected={t}, actual={type(x)}')
+                f'Typechecking error: value={x}, expected={t}, actual={type(x)}'
+            )
 
 
 def funcall(fname, args):
@@ -135,8 +137,26 @@ def funcall(fname, args):
         raise ValueError(fname)
 
 
+def is2j(xs, prog):
+    '''takes inputs, gets the output, and returns a dict with both'''
+    env = dict((f'x{i}', x) for i, x in enumerate(xs))
+    y = run(env, parse(prog))
+    return {'inputs': xs, 'output': y}
+
+
+def exs(jobj, xss):
+    '''add examples field (xss as a json array) to jobj, and return json object'''
+    examples = [is2j(xs, jobj['text']) for xs in xss]
+    print(json.dumps({'examples': examples, **jobj}))
+
+
 if __name__ == '__main__':
     try_parse('templates.jsonl')
     # myfilter()
     # swapsort('templates.jsonl')
     pass
+'''
+examples
+components
+prog
+'''
