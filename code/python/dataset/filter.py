@@ -111,6 +111,7 @@ def funcall(fname, args):
         return args[0].replace(args[1], args[2])
     elif fname == 'Substr':
         typecheck(args, [str, int, int])
+        assert args[1] >= 0 and args[2] >= 0
         return args[0][args[1]:args[1] + args[2]]
     elif fname == 'ToLower':
         typecheck(args, [str])
