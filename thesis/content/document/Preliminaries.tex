@@ -5,6 +5,97 @@ This chapter introduces some definitions and examples that will be useful later
 on. It might be practical to just skim this chapter at first reading, and then
 come back as needed.
 
+\section{\gls{smt}}
+\label{sec:smt}
+
+Many problems in the real world can be modeled in the form of logical formulas.
+Thus, it is of great interest to have access to efficient off-the-shelf
+logic engines, usually called \textit{solvers}, for these formulas.
+The satisfiability problem is the problem of checking if a given logical formula
+has a solution.
+\gls{smt} solvers check the satisfiability of first-order logic formulas with
+symbols and operations drawn from \textit{theories}, such as the theory of
+uninterpreted functions, the theory of strings, or the theory of linear integer
+arithmetic.
+\gls{smt} solvers have seen a multitude of applications, particularly in
+problems from artificial intelligence and formal methods, such as program
+synthesis, or verification.
+This section gives a short introduction to \gls{smt}, and is based on the
+chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
+
+\subsection{Syntax of \gls{smt} formulas}
+\label{sec:smt-syntax}
+
+\begin{definition}[Signature]
+  A signature $\Sigma{} = \Sigma{}^F \cup{} \Sigma{}^P$ is a set of symbols.
+  $\Sigma{}^F$ is the set of \textit{function} symbols, and $\Sigma{}^P$ is the
+  set of \textit{predicate} symbols.
+  Each symbol has an associated arity. A zero-arity symbol $x$ is called a
+  \textit{constant} symbol if $x \in \Sigma{}^F$, and is called a
+  \textit{propositional} symbol if $x \in \Sigma{}^P$.
+\end{definition}
+
+\begin{definition}[Terms and Formulas]
+  \textit{Terms} and \textit{formulas} are defined in terms of each other.
+  A term $t$ is an expression of the form:
+  %
+  \[t ::= c \OR f(t_1,\ldots,t_n) \OR ite(\phi{}, t_0, t_1)\]
+  %
+  where $c \in \Sigma{}^F$ with arity 0, and $f \in \Sigma{}^F$ with arity
+  $n > 0$.
+  A formula $\phi{}$ is an expression of the form:
+  %
+  \[\phi{} ::= A \OR p(t_1,\ldots,t_n) \OR t_0 = t_1
+    \OR \bot{}
+    \OR \top{}
+    \OR \neg{}\phi{}
+    \OR \phi{}_0 \rightarrow{} \phi{}_1
+    \OR \phi{}_0 \leftrightarrow{} \phi{}_1
+    \OR \phi{}_0 \land{} \phi{}_1
+    \OR \phi{}_0 \lor{} \phi{}_1
+    \OR (\exists{}x\ldotp\phi{}_0)
+    \OR (\forall{}x\ldotp\phi{}_0)
+  \]
+  %
+  where $A \in \Sigma{}^P$ with arity 0, and $p \in \Sigma{}^P$ with arity
+  $n > 0$.
+  
+\end{definition}
+
+\begin{definition}[Atom]
+\end{definition}
+
+\begin{definition}[Literal]
+\end{definition}
+
+\begin{definition}[Clause]
+\end{definition}
+
+\begin{definition}[\gls{cnf}]
+\end{definition}
+
+\subsection{Semantics of \gls{smt} formulas}
+\label{sec:smt-syntax}
+
+\begin{definition}[Model]
+\end{definition}
+
+\begin{definition}[Interpretation]
+\end{definition}
+
+\begin{definition}[Satisfiability]
+\end{definition}
+
+\begin{definition}[Theory]
+\end{definition}
+
+% \begin{definition}[Uninterpreted Symbols]
+% \end{definition}
+
+\begin{definition}[SMT problem]
+\end{definition}
+
+
 \section{Program Synthesis}
 \label{sec:program-synthesis}
 
@@ -34,32 +125,28 @@ examples are, therefore, \textit{ambiguous}, and further examples are required
 to disambiguate between the two programs. Ambiguity is a characteristic inherent
 to the \gls{pbe} synthesis setting.
 
-\section{Constraint Solving}
-\label{sec:preliminaries-constraint-solving}
+% \section{Constraint Solving}
+% \label{sec:preliminaries-constraint-solving}
 
-Our work includes the modeling of programs as constraints. We make use of
-off-the-shelf automated constraint solvers in order to solve these constraints.
-To understand how we can model our problem domain as constraints, it is useful
-to know about the concepts of \gls{sat} and \gls{smt}.
+% Our work includes the modeling of programs as constraints. We make use of
+% off-the-shelf automated constraint solvers in order to solve these constraints.
+% To understand how we can model our problem domain as constraints, it is useful
+% to know about the concepts of \gls{sat} and \gls{smt}.
 
-% TODO Explain how these solvers are good and we leverage improvements made in
-% the last decades, blah, blah, blah
+% % TODO Explain how these solvers are good and we leverage improvements made in
+% % the last decades, blah, blah, blah
 
-% TODO Quintessential examples are n-queens and sudoku
-\todo{<Insert here the definition of sat, and examples of encodings>}{}
+% % TODO Quintessential examples are n-queens and sudoku
+% \todo{<Insert here the definition of sat, and examples of encodings>}{}
 
-% TODO Explain how it fits in the frame of theoretical computer science
+% % TODO Explain how it fits in the frame of theoretical computer science
 
-Encoding programs in \gls{sat} can be a bit too low-level. We are encoding
-domain knowledge into the domain of boolean formulas. In can be both hard for a
-human to model a problem this way, ...
+% Encoding programs in \gls{sat} can be a bit too low-level. We are encoding
+% domain knowledge into the domain of boolean formulas. In can be both hard for a
+% human to model a problem this way, ...
 
-% TODO Encodings using strings and numbers.
-% TODO Check examples in the puzzles directory of the SBV Haskell library
-% https://en.wikipedia.org/wiki/Satisfiability_modulo_theories
-\todo{<Insert here the definition of smt, and examples of encodings>}{}
+% % TODO Encodings using strings and numbers.
+% % TODO Check examples in the puzzles directory of the SBV Haskell library
+% % https://en.wikipedia.org/wiki/Satisfiability_modulo_theories
+% \todo{<Insert here the definition of smt, and examples of encodings>}{}
 
-% \section{Other Definitions}
-% \label{sec:other-definitions}
-
-% TODO DSL, Context-Free Grammar, PBE, program space
