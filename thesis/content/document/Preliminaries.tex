@@ -41,11 +41,13 @@ chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
   %
   \[t ::= c \OR f(t_1,\ldots,t_n) \OR ite(\phi{}, t_0, t_1)\]
   %
-  where $c \in \Sigma{}^F$ with arity 0, and $f \in \Sigma{}^F$ with arity
-  $n > 0$.
+  where $c \in \Sigma{}^F$ with arity 0, $f \in \Sigma{}^F$ with arity
+  $n > 0$, and $\phi{}$ is a formula.
   A formula $\phi{}$ is an expression of the form:
   %
-  \[\phi{} ::= A \OR p(t_1,\ldots,t_n) \OR t_0 = t_1
+  \[\phi{} ::= A
+    \OR p(t_1,\ldots,t_n)
+    \OR t_0 = t_1
     \OR \bot{}
     \OR \top{}
     \OR \neg{}\phi{}
@@ -59,19 +61,23 @@ chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
   %
   where $A \in \Sigma{}^P$ with arity 0, and $p \in \Sigma{}^P$ with arity
   $n > 0$.
-  
 \end{definition}
 
 \begin{definition}[Atom]
+  An atom is a formula of the form $A$, $p(t_1,\ldots,t_n)$, $t_0 = t_1$,
+  $\bot{}$, or $\top{}$.
 \end{definition}
 
 \begin{definition}[Literal]
+  A literal is an atom or the negation of one.
 \end{definition}
 
 \begin{definition}[Clause]
+  A clause is a disjunction of literals.
 \end{definition}
 
 \begin{definition}[\gls{cnf}]
+  A \gls{cnf} formula is a conjunction of clauses.
 \end{definition}
 
 \subsection{Semantics of \gls{smt} formulas}
@@ -95,35 +101,39 @@ chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
 \begin{definition}[SMT problem]
 \end{definition}
 
+\subsection{Theories}
+\label{sec:theories}
 
-\section{Program Synthesis}
-\label{sec:program-synthesis}
 
-Here we define the concrete problem we are trying to solve. In general, program
-synthesis is the problem of finding a program that meets a given specification.
-Therefore, we must understand the kind of programs we are trying to find, as
-well as the kind of specifications that the system understands.
 
-% TODO
-Programs are usually defined by means of a \gls{cfg}. ...
+% \section{Program Synthesis}
+% \label{sec:program-synthesis}
 
-% TODO
-A specification is a way to convey intent. There are several ways to specify
-which program we are interested in such as, for example, this and that. In our
-case we are working in a \gls{pbe} setting, where the user explains their intent
-by means of a set of input-output \textit{examples}.
-% Def. of PBE and example follows
+% Here we define the concrete problem we are trying to solve. In general, program
+% synthesis is the problem of finding a program that meets a given specification.
+% Therefore, we must understand the kind of programs we are trying to find, as
+% well as the kind of specifications that the system understands.
 
-We say that a program $f$ \textit{satisfies} an input-output example
-$(\mathbf{x}, y)$ if $f(\mathbf{x}) = y$. We say that a program satisfies a set
-of examples if it satisfies every example in that set.
+% % TODO
+% Programs are usually defined by means of a \gls{cfg}. ...
 
-% TODO
-For example, the following set of examples are satisfied by the program f = abc,
-because ... . However, the program g = xyz also satisfies the examples. These
-examples are, therefore, \textit{ambiguous}, and further examples are required
-to disambiguate between the two programs. Ambiguity is a characteristic inherent
-to the \gls{pbe} synthesis setting.
+% % TODO
+% A specification is a way to convey intent. There are several ways to specify
+% which program we are interested in such as, for example, this and that. In our
+% case we are working in a \gls{pbe} setting, where the user explains their intent
+% by means of a set of input-output \textit{examples}.
+% % Def. of PBE and example follows
+
+% We say that a program $f$ \textit{satisfies} an input-output example
+% $(\mathbf{x}, y)$ if $f(\mathbf{x}) = y$. We say that a program satisfies a set
+% of examples if it satisfies every example in that set.
+
+% % TODO
+% For example, the following set of examples are satisfied by the program f = abc,
+% because ... . However, the program g = xyz also satisfies the examples. These
+% examples are, therefore, \textit{ambiguous}, and further examples are required
+% to disambiguate between the two programs. Ambiguity is a characteristic inherent
+% to the \gls{pbe} synthesis setting.
 
 % \section{Constraint Solving}
 % \label{sec:preliminaries-constraint-solving}
