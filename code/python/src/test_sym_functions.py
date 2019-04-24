@@ -1,7 +1,7 @@
 from typing import Callable, Tuple, Union
 
 import pytest
-from z3 import Context, ExprRef, Solver, StringVal, sat
+from z3 import Context, ExprRef, Solver, StringVal, sat, unsat
 
 from .simple.functions import *
 from .simple.types import Kind, kind, Const
@@ -13,8 +13,9 @@ from .simple.utils import z3_val
 
 
 def abstract_sfun_test(fun: Callable[..., ExprRef], \
-                  params: Tuple[Union[str, int], ...],
-                  expected: Union[str, int]):
+                       params: Tuple[Union[str, int], ...],
+                       expected: Union[str, int],
+                       xfail=False):
     ctx = Context()
     solver = Solver(ctx=ctx)
 
@@ -23,7 +24,10 @@ def abstract_sfun_test(fun: Callable[..., ExprRef], \
     solver.add([c == z3_val(p, ctx) for c, p in zip(cs, params)])
     solver.add(z3_val(expected, ctx) == fun(*cs))
 
-    assert solver.check() == sat
+    if not xfail:
+        assert solver.check() == sat
+    else:
+        assert solver.check() == unsat
 
 
 @pytest.mark.parametrize('params,expected', [
@@ -61,6 +65,14 @@ def test_sreplace2(params, expected):
 ])
 def test_stolower(params, expected):
     abstract_sfun_test(SToLower, params, expected)
+
+
+@pytest.mark.parametrize('params,not_expected', [
+    (['01/02/2000'], '01-02-2000'), \
+    (['02/03/1999'], '02-03-1999'),
+])
+def test_stolower_fail(params, not_expected):
+    abstract_sfun_test(SToLower, params, not_expected, xfail=True)
 
 
 @pytest.mark.parametrize('params,expected', [
@@ -114,14 +126,18 @@ def test_strim_end(params, expected):
 
 def abstract_helper_test(fun: Callable[..., ExprRef], \
                          params: Tuple[ExprRef, ...],
-                         expected: ExprRef):
+                         expected: ExprRef,
+                         xfail=False):
     ctx = Context()
     solver = Solver(ctx=ctx)
 
     args = [z3_val(p, ctx) for p in params]
     solver.add(fun(*args) == z3_val(expected, ctx))
 
-    assert solver.check() == sat
+    if not xfail:
+        assert solver.check() == sat
+    else:
+        assert solver.check() == unsat
 
 
 @pytest.mark.parametrize('params,expected', [
