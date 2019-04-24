@@ -19,7 +19,11 @@ def synthesize(ios: Tuple[IO, ...], lib: Library, stack: Stack) \
     -> Optional[Program]:
 
     learner = enumerator(ios=ios, lib=lib, stack=stack)
-    oracle = solver()
+
+    timeout = 10 * 1000
+    oracle = solver(timeout=timeout)
+
+    print(f'Warning: z3 call timeout of {timeout / 1000} seconds.')
 
     try:
         problem = next(learner)

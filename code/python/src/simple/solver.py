@@ -32,7 +32,7 @@ def formula(problem: 'enumerator.Problem') -> Constraint:
 # ==============================================================================
 
 
-def solver() -> Generator[Query, Response, None]:
+def solver(timeout=None) -> Generator[Query, Response, None]:
     problem = yield
 
     while True:
@@ -40,7 +40,10 @@ def solver() -> Generator[Query, Response, None]:
         ctx = problem.ctx
 
         solver = Solver(ctx=ctx)
-        solver.set(max_conflicts=20 * 1000)
+        if timeout:
+            solver.set(timeout=timeout)
+        else:
+            solver.set(max_conflicts=20 * 1000)
         solver.add(*constraint)
 
         res = solver.check()

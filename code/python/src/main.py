@@ -14,14 +14,14 @@ stdlib = (concat, index, length, replace, substr, to_lower, to_upper,
 stack = [(Kind.INT, 2), (Kind.STR, 2)]
 
 
-def bench(ios):
+def bench(ios, lib=stdlib):
     print('Examples:')
 
     for io in ios:
         print(f'\t{io.inputs} --> {repr(io.output)}')
 
     start = time.time()
-    prog = synthesize(ios=ios, lib=stdlib, stack=stack)
+    prog = synthesize(ios=ios, lib=lib, stack=stack)
     end = time.time()
 
     print(f'Elapsed time: {end - start:.3f}')
