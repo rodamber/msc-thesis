@@ -110,13 +110,14 @@ Check todos.
 Things that might be missing:
 
 - SAT, SMT, LIA, QF_S and encodings (with examples)
-  - maybe give sudoku as an example
-- VSAs, although I think this should actually go to "RW/PBE" and described only in
-  high-level.
 - Context-free grammars.
+
 - Definitions such as:
   - What does it mean for a program to satisfy a specification
   - Example, a set of examples, etc.
+  - DSL
+  - Program space
+    
 - SSA (static single assignment) form
 
 ** TODO Background

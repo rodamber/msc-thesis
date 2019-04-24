@@ -23,11 +23,15 @@ synthesis, or verification.
 This section gives a short introduction to \gls{smt}, and is based on the
 chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
 
-\subsection{Syntax of \gls{smt} formulas}
+\subsection{Syntax of \gls{smt} Formulas}
 \label{sec:smt-syntax}
 
+Here we define the language of well-formed \gls{smt} formulas. Formulas are
+composed of symbols and logical connectives over those symbols.
+
 \begin{definition}[Signature]
-  A signature $\Sigma{} = \Sigma{}^F \cup{} \Sigma{}^P$ is a set of symbols.
+  A signature $\Sigma{} = \Sigma{}^F \cup{} \Sigma{}^P$ is a set of
+  ($\Sigma{}$-)symbols.
   $\Sigma{}^F$ is the set of \textit{function} symbols, and $\Sigma{}^P$ is the
   set of \textit{predicate} symbols.
   Each symbol has an associated arity. A zero-arity symbol $x$ is called a
@@ -36,14 +40,14 @@ chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
 \end{definition}
 
 \begin{definition}[Terms and Formulas]
-  \textit{Terms} and \textit{formulas} are defined in terms of each other.
-  A term $t$ is an expression of the form:
+  The concepts of \textit{Term} and \textit{formula} are defined in terms of
+  each other. A ($\Sigma{}$-)term $t$ is an expression of the form:
   %
   \[t ::= c \OR f(t_1,\ldots,t_n) \OR ite(\phi{}, t_0, t_1)\]
   %
   where $c \in \Sigma{}^F$ with arity 0, $f \in \Sigma{}^F$ with arity
   $n > 0$, and $\phi{}$ is a formula.
-  A formula $\phi{}$ is an expression of the form:
+  A ($\Sigma{}$-)formula $\phi{}$ is an expression of the form:
   %
   \[\phi{} ::= A
     \OR p(t_1,\ldots,t_n)
@@ -63,48 +67,147 @@ chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
   $n > 0$.
 \end{definition}
 
-\begin{definition}[Atom]
-  An atom is a formula of the form $A$, $p(t_1,\ldots,t_n)$, $t_0 = t_1$,
-  $\bot{}$, or $\top{}$.
-\end{definition}
+% \begin{definition}[Atom]
+%   An atom is a formula of the form $A$, $p(t_1,\ldots,t_n)$, $t_0 = t_1$,
+%   $\bot{}$, or $\top{}$.
+% \end{definition}
 
-\begin{definition}[Literal]
-  A literal is an atom or the negation of one.
-\end{definition}
+% \begin{definition}[Literal]
+%   A literal is an atom or its negation.
+% \end{definition}
 
-\begin{definition}[Clause]
-  A clause is a disjunction of literals.
-\end{definition}
+% \begin{definition}[Clause]
+%   A clause is a disjunction of literals.
+% \end{definition}
 
-\begin{definition}[\gls{cnf}]
-  A \gls{cnf} formula is a conjunction of clauses.
-\end{definition}
+% \begin{definition}[\gls{cnf}]
+%   A \gls{cnf} formula is a conjunction of clauses.
+% \end{definition}
 
-\subsection{Semantics of \gls{smt} formulas}
-\label{sec:smt-syntax}
+\subsection{Semantics of \gls{smt} Formulas}
+\label{sec:smt-semantics}
+
+In this section we explore how \gls{smt} formulas are given meaning.
 
 \begin{definition}[Model]
+  Given a signature $\Sigma{}$, a ($\Sigma{}$-)\textit{model} $\mathcal{A}$ for
+  $\Sigma{}$ is a tuple $(A, (\_)^{\mathcal{A}})$ where:
+  %
+  \begin{enumerate}
+  \item $A$, called the \textit{universe} of the model, is a non-empty set;
+  \item $(\_)^{\mathcal{A}}$ is a function with domain $\Sigma{}$, mapping:
+    \begin{itemize}
+    \item each constant symbol $a \in \Sigma{}^F$ to an element
+      $a^{\mathcal{A}} \in A$;
+    \item each function symbol $f \in \Sigma{}^F$ with arity $n > 0$ to a total
+      function $f^{\mathcal{A}}\colon A^n \to A$;
+    \item each propositional symbol $B \in \Sigma{}^P$ to an element
+      $B^{\mathcal{A}} \in \{\mathbf{true}, \mathbf{false}\}$;
+    \item and each predicate symbol $p \in \Sigma{}^P$ with arity $n > 0$ to a
+      total predicate $p^{\mathcal{A}}\colon A^n \to \{\mathbf{true},
+      \mathbf{false}\}$.
+    \end{itemize}
+  \end{enumerate}
 \end{definition}
 
 \begin{definition}[Interpretation]
+  Given a model $\mathcal{A} = (A, (\_)^{\mathcal{A}})$ for a signature
+  $\Sigma{}$, an \textit{interpretation} for $\mathcal{A}$ is a function, also
+  called $(\_)^{\mathcal{A}}$, mapping each $\Sigma{}$-term $t$ to an element
+  $t^{\mathcal{A}}\in A$ and each $\Sigma{}$-formula $\phi{}$ to an element
+  $\phi{}^{\mathcal{A}}\in \{\mathbf{true}, \mathbf{false}\}$, in the following
+  manner:
+  %
+  \begin{enumerate}
+  \item $f(t_1,\ldots,t_n)^{\mathcal{A}}$ is mapped to
+    $f^{\mathcal{A}}(t_1^{\mathcal{A}},\ldots,t_n^{\mathcal{A}})$;
+  \item $p(t_1,\ldots,t_n)^{\mathcal{A}}$ is mapped to
+    $p^{\mathcal{A}}(t_1^{\mathcal{A}},\ldots,t_n^{\mathcal{A}})$;
+  \item $ite(\phi{}, t_1, t_2)^{\mathcal{A}}$ is equal to $t_1^{\mathcal{A}}$ if
+    $\phi{}^{\mathcal{A}}$ is $\mathbf{true}$, and equal to $t_2^{\mathcal{A}}$
+    otherwise;
+  \item $\bot{}^{\mathcal{A}}$ is mapped to $\mathbf{false}$;
+  \item $\top{}^{\mathcal{A}}$ is mapped to $\mathbf{true}$;
+  \item $(t_1 = t_2)$ is mapped to $\mathbf{true}$ if
+    $t_1^{\mathcal{A}}$ is equal to $ t_2^{\mathcal{A}}$, and is mapped to
+    $\mathbf{false}$ otherwise.
+  \item $\Sigma$-symbols are mapped according to the mapping of the model just
+    as before.
+  \end{enumerate}
 \end{definition}
 
 \begin{definition}[Satisfiability]
+  Given a model $\mathcal{A} = (A, (\_)^{\mathcal{A}})$ for a signature
+  $\Sigma{}$, the model $\mathcal{A}$ is said to satisfy a $\Sigma{}$-formula
+  $\phi{}$ if and only if $\phi{}^{\mathcal{A}}$ is $\mathbf{true}$.
+  The formula $\phi{}$ is said to be \textit{satisfiable}.
 \end{definition}
 
-\begin{definition}[Theory]
+% \todo{Typically we are not interested in just any model...}{give motivation for
+%   introducing theories}
+
+% Typically, we are only interested in certain interpretations of the symbols of
+% the signature $\Sigma{}$.
+% For example, if we have the formula $\exists{} x\ldotp (name(x) =
+% \text{``$Socrates$''}) \land Man(x)$.
+
+\begin{definition}[Theory]\label{def:theory}
+  Given a signature $\Sigma{}$, a ($\Sigma{}$-)theory $\mathcal{T}$ for
+  $\Sigma{}$ is a non-empty, and possibly infinite, set of models for $\Sigma{}$.
 \end{definition}
+
+\begin{definition}[$\mathcal{T}$-Satisfiability]
+  Given a signature $\Sigma{}$ and a $\Sigma{}$-theory $\mathcal{T}$, a
+  $\Sigma{}$-formula $\phi{}$ is said to be $\mathcal{T}$-\textit{satisfiable}
+  if and only if (at least) one of the models of $\mathcal{T}$ satisfies
+  $\phi{}$.
+\end{definition}
+
+% \todo{Motivation for uninterpreted symbols}{}
 
 % \begin{definition}[Uninterpreted Symbols]
+%   Given a signature $\Sigma{}$ and a $\Sigma{}$-formula $\phi{}$, an
+%   \textit{uninterpreted} symbol is any symbol in $\phi{}$ that is not in
+%   $\Sigma{}$.
 % \end{definition}
 
-\begin{definition}[SMT problem]
+% % \todo{How uninterpreted symbols are accommodated in the definitions}{}
+
+% \begin{definition}[Expanded Signature]
+%   Given a signature $\Sigma{}$, an expanded signature of $\Sigma{}$ is any
+%   superset $\Sigma{}'$ of $\Sigma{}$.
+% \end{definition}
+
+% \begin{definition}[Expanded Model]
+%   Given a model $\mathcal{A}$ for a signature $\Sigma{}$, an expanded model
+%   $\mathcal{A}'$ of $\mathcal{A}$ is any model for an expanded signature
+%   $\Sigma{}'$ of $\Sigma{}$ with the same
+%   universe as $\mathcal{A}$, and whose interpretation agrees with the
+%   interpretation of $\mathcal{A}$ on the symbols of $\Sigma{}$.
+% \end{definition}
+
+% \begin{definition}[Expanded Theory]
+%   Given a signature $\Sigma{}$ and a $\Sigma{}$-theory $\mathcal{T}$, an
+%   expanded theory $\mathcal{T}'$ of $\mathcal{T}$ is any theory for an expanded
+%   signature $\Sigma{}'$ of $\Sigma{}$ composed solely of expanded models of the
+%   models of $\mathcal{T}$.
+% \end{definition}
+
+% \begin{definition}[SMT Problem]
+%   Given a signature $\Sigma{}$ and a $\Sigma{}$-theory $\mathcal{T}$, the
+%   \gls{smt} problem is the problem of determining the
+%   $\mathcal{T}'$-satisfiability of $\Sigma{}'$-formulas, where $\Sigma{}'$ and
+%   $\mathcal{T}'$ are arbitrary expansions of $\Sigma{}$ and $\mathcal{T}$,
+%   respectively.
+% \end{definition}
+
+\begin{definition}[SMT Problem]
+  Given a signature $\Sigma{}$ and a $\Sigma{}$-theory $\mathcal{T}$, the
+  \gls{smt} problem is the problem of determining the
+  $\mathcal{T}$-satisfiability of $\Sigma{}$-formulas.
 \end{definition}
 
-\subsection{Theories}
-\label{sec:theories}
-
-
+% ------------------------------------------------------------------------------
 
 % \section{Program Synthesis}
 % \label{sec:program-synthesis}

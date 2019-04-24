@@ -1,0 +1,169 @@
+\section{\gls{smt} Interlude}
+\label{sec:smt-interlude}
+
+At this point it might be nice to sit back and understand how the components of
+our language (see Table~\ref{table:builtin-description}) are encoded in
+\gls{smt}.
+However, it should be noted that the encoding is independent of the particular
+components used, and works as long as their semantics can be fully encoded in
+\gls{smt}.
+
+In section~\ref{sec:smt} we introduced the necessary concepts of \gls{smt} for
+the purposes of this thesis.
+One in particular, was the concept of theory (Definition~\ref{def:theory}).
+Theories constrain the interpretation given to certain symbols.
+Because we are dealing with text and integers data types, we make use of the
+\gls{smt} theory of strings with linear integer arithmetic.
+This theory gives a way to reason with symbols representing operations such as
+integer addition, string length, or substring extraction.
+The symbols we are interested in are represented in
+Table~\ref{table:slia-symbols}.
+
+\begin{table}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{@{}lp{13cm}}
+      \toprule
+
+      \multicolumn{1}{c}{Symbol}
+      & \multicolumn{1}{c}{Description}
+      \\ \midrule
+
+      $At(s, x)$
+      & Function symbol.
+        The terms $x$ and $y$ are a string and an integer, respectively.
+        Its value, a string, is the character of $s$ at index $x$.
+      \\ \midrule
+
+      $x \strconcat y$
+      & Function symbol.
+        The terms $x$ and $y$ are strings.
+        Its value, a string, is the string concatenation of $x$ and $y$.
+      \\ \midrule
+
+      $IndexOf(s, t, i)$
+      & Function symbol.
+        The terms $s$ and $t$ are strings, and $i$ is an integer.
+        Its value, an integer, is the first occurrence of $t$ in $s$ after the
+        index $i$, or $-1$ if $t$ is not in $s$.
+      \\ \midrule
+
+      $Length(s)$
+      & Function symbol.
+        The term $s$ is a string.
+        Its value, an integer, is the length (number of characters) of $s$.
+      \\ \midrule
+
+      $Substr(s,i,j)$
+      & The term $s$ is a string, and the terms $i$ and $j$ are integers.
+        Its value, a string, is the substring of $s$ starting at index $i$ with
+        length $j$ (or from $i$ until the end of $s$ if the length of $s$ is
+        less than $i + j$).
+      \\ \midrule
+
+      $Replace(s, x, y)$
+      & The terms $s$, $x$ and $y$ are strings.
+        Its value, a string, is $s$ with the \textbf{first} occurrence of $x$
+        replaced by $y$, or $s$ if $x$ does not occur in $s$.
+      \\ \midrule
+
+      $Contains(x, y)$
+      & Predicate symbol.
+        The terms $x$ and $y$ are strings.
+        $\mathbf{true}$ if $x$ contains $y$, and $\mathbf{false}$ otherwise.
+      \\ \midrule
+
+      $x + y$
+      & Function symbol.
+        The terms $x$ and $y$ are integers.
+        Its value, an integer, is the addition of $x$ and $y$.
+      \\ \midrule
+      
+      $x - y$
+      & Function symbol.
+        The terms $x$ and $y$ are integers.
+        Its value, an integer, is the subtraction of $x$ and $y$.
+      \\ \bottomrule
+    \end{tabular}}
+  \caption{Some symbols constrained by the theory of strings with linear integer
+    arithmetic.}
+  \label{table:slia-symbols}
+\end{table}
+\raggedbottom
+%
+The semantics of components \lstinline{Concat}, \lstinline{IndexOf},
+\lstinline{Length}, \lstinline{Substr}, \lstinline{Add}, and \lstinline{Sub}
+are directly captured by their \gls{smt} counterparts $\strconcat$, $IndexOf$,
+$Length$, $Substr$, $+$, and $-$, respectively.
+Concretely, their specifications are the following:
+%
+\begin{align*}
+  \phi{}_{\text{\lstinline{Concat}}}(x, y, r)     &= (x \strconcat y   = r) \\
+  \phi{}_{\text{\lstinline{IndexOf}}}(s, t, i, r) &= (IndexOf(s, t, i) = r) \\
+  \phi{}_{\text{\lstinline{Length}}}(s, r)        &= (Length(s)        = r) \\
+  \phi{}_{\text{\lstinline{Substr}}}(s, i, j, r)  &= (Substr(s, i, j)  = r) \\
+  \phi{}_{\text{\lstinline{Add}}}(x, y, r)        &= (x + y            = r) \\
+  \phi{}_{\text{\lstinline{Sub}}}(x, y, r)        &= (x - y            = r) \\
+\end{align*}
+%
+\noindent
+Components \lstinline{Replace}, \lstinline{ToLower}, \lstinline{ToUpper},
+\lstinline{Trim}, \lstinline{TrimStart}, \lstinline{TrimEnd} do not have a
+direct counterpart, so their specifications must be encoded by formulas that
+employ a combination of the symbols of Table~\ref{table:slia-symbols}
+(note that \lstinline{Replace} replaces all occurrences, in contrast with
+$Replace$, which only replaces the first one).
+The specification of component \lstinline{Replace} is the following:
+%
+\[
+  \phi{}_{\text{\lstinline{Replace}}}(s, x, y, r) = (ReplaceAll(s, x, y) = r)
+\]
+%
+where the function symbol $ReplaceAll$ is defined as:
+\begin{align*}
+  ReplaceAll(s, x, y) = ite(&x = ``" \lor{} \neg{}Contains(s, x), \\
+                            &s,                                   \\
+                            &ReplaceAll(Replace(s, x, y), x, y))
+\end{align*}
+%
+The specification for component \lstinline{ToLower} is the following:
+%
+\[
+  \phi{}_{\text{\lstinline{ToLower}}}(s, r) = (Lower(s) = r)
+\]
+%
+where the $Lower$ is defined as sequence of $ite$ terms mapping character $``A"$
+to $``a"$, $``B"$ to $``b"$, and so on, until $``Z"$ and $``z"$, defaulting to
+its parameter $s$ if $s$ is not an upper-case alphabetic character:
+%
+\[
+  Lower(s) = ite(s = ``A", ``a", ite(s = ``B", ``b", \ldots{}
+  ite(``Z", ``z", s)\ldots{}))
+\]
+%
+The specification for \lstinline{ToUpper} is defined analogously.
+Finally, the specifications for \lstinline{Trim}, \lstinline{TrimStart}, and
+\lstinline{TrimEnd} are the following:
+%
+\begin{align*}
+  \phi{}_{\text{\lstinline{Trim}}}(s, r)      &= (Trim(s) = r)      \\
+  \phi{}_{\text{\lstinline{TrimStart}}}(s, r) &= (TrimStart(s) = r) \\
+  \phi{}_{\text{\lstinline{TrimEnd}}}(s, r)   &= (TrimEnd(s) = r)   \\
+\end{align*}
+%
+where $Trim$, $TrimStart$, and $TrimEnd$ are defined as follows:
+%
+\begin{align*}
+  Trim(s)   &= TrimStart(TrimEnd(s)) \\
+  TrimStart &= ite(Head(s) = `` ", TrimStart(Tail(s)), s) \\
+  TrimEnd   &= Reverse(TrimStart(Reverse(s)))
+\end{align*}
+%
+while making use of the following combinators:
+%
+\begin{align*}
+  Head(s) &= At(s, 0) \\
+  Last(s) &= At(s, Length(s) - 1) \\
+  Tail(s) &= Substr(s, 1, Length(s)) \\
+  Init(s) &= Substr(s, 0, Length(s) - 1) \\
+  Reverse(s) &= ite(s = ``", s, Last(s) \strconcat Init(s))
+\end{align*}
