@@ -200,7 +200,7 @@ def test_expr():
     assert set(unary_op_list) < set(op_prec_table)
 
     # ast.lit
-    assert parse('0') == ast.lit('0')
+    assert parse('0') == ast.lit(0)
 
     # ast.dot
     assert parse('a.b.c') == ast.dot(
@@ -209,9 +209,9 @@ def test_expr():
         ast.dot(ast.func('a', ast.var('x')), ast.var('b')), ast.var('c'))
 
     # ast.indexer
-    assert parse('x[0]') == ast.indexer(ast.var('x'), ast.lit('0'))
+    assert parse('x[0]') == ast.indexer(ast.var('x'), ast.lit(0))
     assert parse('f(x)[0]') == ast.indexer(
-        ast.func('f', ast.var('x')), ast.lit('0'))
+        ast.func('f', ast.var('x')), ast.lit(0))
 
     # ast.Dot + ast.Indexer
     assert parse('a[0].b')
