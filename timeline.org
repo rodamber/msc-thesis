@@ -1,7 +1,7 @@
 * Plan after Apr 15 meeting
 |------------------+---------------------------------------|
 | <2019-04-18 Thu> | Preliminaries                         |
-| <2019-04-18 Thu> | Add more benchmarks                   |
+| <2019-04-23 Tue> | Add more benchmarks                   |
 | <2019-04-24 Wed> | Run tests                             |
 | <2019-04-24 Wed> | Fix bug regarding recursive functions |
 | <2019-04-25 Thu> | Run more tests                        |
