@@ -63,7 +63,7 @@ replace_ = mkComponent "Replace" 3 [isSString, isSString, isSString] $
 
 replaceAll :: SString -> SString -> SString -> SString
 replaceAll s old new = ite (SBV.null s) s $ ite (SBV.null old) s $
-                       bfix 10 "replaceAll" replaceAll' s ""
+                       bfix 10 "replaceAll" replaceAll' s (literal "")
   where
     len = SBV.length old
     replaceAll' f s acc = let ix = SBV.indexOf s old
