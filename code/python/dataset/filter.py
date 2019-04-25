@@ -111,8 +111,8 @@ def funcall(fname, args):
         return args[0].replace(args[1], args[2])
     elif fname == 'Substr':
         typecheck(args, [str, int, int])
-        assert args[1] >= 0 and args[2] >= 0
-        return args[0][args[1]:args[1] + args[2]]
+        atleast = lambda n, x: n if x < n else x
+        return args[0][args[1]:atleast(0, args[1]) + atleast(0, args[2])]
     elif fname == 'ToLower':
         typecheck(args, [str])
         return args[0].lower()
@@ -158,6 +158,6 @@ if __name__ == '__main__':
     pass
 '''
 examples
-components
+
 prog
 '''
