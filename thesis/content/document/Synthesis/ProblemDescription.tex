@@ -169,7 +169,7 @@ given the name ``joseph'' we would like to obtain ``Joseph''. The following
 expression satisfies the specification.
 
 \begin{lstlisting}
-  prog(name) = ToUpper(Concat(Substr(name, 0, 1)),
+  prog(name) = Concat(ToUpper(Substr(name, 0, 1)),
                               Substr(name, 1, Length(name)))
 \end{lstlisting}
 \end{example}
