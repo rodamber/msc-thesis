@@ -8,8 +8,8 @@ from simple import (IO, Kind, add, concat, index, length, newline, replace,
                     sub, substr, synthesize, to_lower, to_upper, trim,
                     trim_end, trim_start)
 
-stdlib = (concat, index, length, replace, substr, to_lower, to_upper,
-          trim, trim_start, trim_end, add, sub)
+stdlib = (concat, index, length, replace, substr, to_lower, to_upper, trim,
+          trim_start, trim_end, add, sub)
 
 stack = [(Kind.INT, 2), (Kind.STR, 2)]
 
@@ -52,10 +52,18 @@ def examples_stdin():
 
 
 def main():
-    lib = (concat, index, length, # replace,
+    lib = (concat,\
+           index,
+           length,
+           replace,
            substr,
-          # to_lower, to_upper,
-          # trim, trim_start, trim_end, add, sub
+           to_lower,
+           to_upper,
+           trim,
+           trim_start,
+           trim_end,
+           add,
+           sub
     )
     ios = list(examples_stdin())
     stack = [(Kind.INT, 2), (Kind.STR, 2)]

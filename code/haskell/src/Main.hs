@@ -1,4 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
 module Main where
 
 import           Components
@@ -6,57 +5,65 @@ import           Constraints
 import           Types
 
 import           Control.Monad.Reader
-import           Data.List
 import           Data.Either
+import           Data.List
 import           Data.Maybe
 import           Data.SBV             hiding (name)
 import           Data.SBV.Control
+import           System.TimeIt
 
-config0 = Config { examples = [ ([Left "John", Left "Doe"], Left "John Doe") ]
-                 , library = [ concat_ , length_ , index_ ,  substr_]
-                 -- , library = [replace_]
-                 , constCount = 1
-                 , componentCount = 2
-                 }
 
-config0' = Config { examples = [ ([Left "John", Left "Doe"], Left "John Doe")
-                               , ([Left "Anne", Left "Joe"], Left "Anne Joe")
-                               ]
-                  , library = [ concat_ , length_ , index_ ,  substr_]
-                  -- , library = [replace_]
-                  , constCount = 1
-                  , componentCount = 2
-                  }
+showE = either show show
+showEs = concat . map showE
 
-config1 = Config { examples = [ ([Left "John Michael Doe", Left "Dr. "], Left "Dr. John")
-                              -- , ([Left "Anne Marie", Left "Dr. "], Left "Dr. Anne")
-                              ]
-                 , library = [concat_, length_, index_, substr_-- , replace_
-                             ]
-                 , constCount = 2
-                 , componentCount = 3
-                 }
 
-config1' = Config { examples = [ ([Left "John Michael Doe", Left "Dr. "], Left "Dr. John")
-                               , ([Left "Anne Marie", Left "Dr. "], Left "Dr. Anne")
-                               ]
-                  , library = [concat_, length_, index_, substr_-- , replace_
-                              ]
-                  , constCount = 2
-                  , componentCount = 3
-                  }
+synthesize :: [Example] -> Library -> Int -> IO ()
+synthesize ios lib constCount = loop 1
+  where
+    timeout_value = 10 * 10^6
 
-config2 = Config { examples = [ ([Left "abc", Left "b", Left "B"], Left "aBc") ]
-                 , library = [replace_]
-                 , constCount = 1
-                 , componentCount = 1
-                 }
+    loop componentCount = do
+      let cfg = Config { examples = ios
+                       , library = lib
+                       , constCount = constCount
+                       , componentCount = componentCount
+                       }
 
+      satRes  <-runSMT $ do
+        res <- runReaderT formula cfg
+        query $ timeout timeout_value $ checkSat >>= \x -> do
+          case x of
+            Sat -> do
+              io $ putStr "Program: "
+              io . putStrLn =<< extractProgram cfg res
+            Unk -> do
+              io . putStrLn . show =<< getUnknownReason
+            _ -> return ()
+          return x
+
+      case satRes of
+        Sat -> return ()
+        _ -> loop (componentCount + 1)
+
+
+bench :: [Example] -> Library -> IO ()
+bench ios lib = do
+  let constCount = 4
+  let synthesize = undefined
+
+  putStrLn "Examples:"
+
+  forM_ ios $ \(is, o) ->
+    putStrLn ("\t" <> showEs is <> " --> " <> showE o)
+
+  timeIt $ synthesize ios lib constCount
+
+  putStrLn "=================================================="
 
 
 main :: IO ()
 main = do
-  let cfg = config2
+  let cfg = config0
 
   runSMT $ do
     res <- runReaderT formula cfg
@@ -64,6 +71,13 @@ main = do
       Sat -> io . putStrLn =<< extractProgram cfg res
       x -> io $ print x
 
+
+--------------------------------------------------------------------------------
+--                                  Helpers
+--------------------------------------------------------------------------------
+
+
+-- find and print the program if it can find any, throws an error otherwise
 synth :: Config -> IO ()
 synth cfg = runSMT $ runReaderT formula cfg >>= \res -> query $
   checkSat >> extractProgram cfg res >>= io . putStrLn
@@ -116,3 +130,59 @@ extractProgram cfg res = do
   let indent n = map (replicate n ' ' <>)
 
   return $ unlines $ [topLine] <> indent 2 (constLines <> resLines)
+
+
+--------------------------------------------------------------------------------
+--                              Example Configs
+--------------------------------------------------------------------------------
+
+config0 = Config { examples = [ ([Left "John", Left "Doe"], Left "John Doe") ]
+                 , library = [ concat_ , length_ , index_ ,  substr_]
+                 -- , library = [replace_]
+                 , constCount = 1
+                 , componentCount = 2
+                 }
+
+config0' = Config { examples = [ ([Left "John", Left "Doe"], Left "John Doe")
+                               , ([Left "Anne", Left "Joe"], Left "Anne Joe")
+                               ]
+                  , library = [ concat_ , length_ , index_ ,  substr_]
+                  -- , library = [replace_]
+                  , constCount = 1
+                  , componentCount = 2
+                  }
+
+config1 = Config { examples = [ ([Left "John Michael Doe", Left "Dr. "], Left "Dr. John")
+                              -- , ([Left "Anne Marie", Left "Dr. "], Left "Dr. Anne")
+                              ]
+                 , library = [concat_, length_, index_, substr_-- , replace_
+                             ]
+                 , constCount = 2
+                 , componentCount = 3
+                 }
+
+config1' = Config { examples = [ ([Left "John Michael Doe", Left "Dr. "], Left "Dr. John")
+                               , ([Left "Anne Marie", Left "Dr. "], Left "Dr. Anne")
+                               ]
+                  , library = [concat_, length_, index_, substr_-- , replace_
+                              ]
+                  , constCount = 2
+                  , componentCount = 3
+                  }
+
+config2 = Config { examples = [ ([Left "abc", Left "b", Left "B"], Left "aBc") ]
+                 , library = [replace_]
+                 , constCount = 1
+                 , componentCount = 1
+                 }
+
+config3 = Config { examples = [ ([Left "01/02/2000"], Left "01-02-2000")
+                              -- , ([Left "02/03/1999"], Left "02-03-1999")
+                              ]
+                 , library = [tolower_]
+                 , constCount = 2
+                 , componentCount = 1
+                 }
+
+
+

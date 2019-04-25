@@ -5,7 +5,7 @@ import           Control.Monad
 
 import           Data.SBV                  hiding (name)
 import qualified Data.SBV.Maybe            as SBV
-import           Data.SBV.String           ((.++))
+import           Data.SBV.String           ((.++), (.:))
 import qualified Data.SBV.String           as SBV
 import           Data.SBV.Tools.BoundedFix (bfix)
 
@@ -46,11 +46,6 @@ index_ = mkComponent "Index" 3 [isSString, isSString, isSInt] $
     embed (SBV.offsetIndexOf (proj x1) (proj x2) (proj x3)) .== r
 
 
-substr_ :: Component
-substr_ = mkComponent "Substr" 3 [isSString, isSInt, isSInt] $
-  \[x1, x2, x3] r -> embed (SBV.subStr (proj x1) (proj x2) (proj x3)) .== r
-
-
 length_ :: Component
 length_ = mkComponent "Length" 1 [isSString] $
   \[x1] r -> embed (SBV.length (proj x1)) .== r
@@ -73,18 +68,79 @@ replaceAll s old new = ite (SBV.null s) s $ ite (SBV.null old) s $
                              (f right (acc .++ left .++ new))
 
 
-idS_ :: Component
-idS_  = mkComponent "Id" 1 [\x -> isSString x] $
-  \[x1] r -> embed @SString (proj x1) .== r
+substr_ :: Component
+substr_ = mkComponent "Substr" 3 [isSString, isSInt, isSInt] $
+  \[x1, x2, x3] r -> embed (SBV.subStr (proj x1) (proj x2) (proj x3)) .== r
 
---------------------------------------------------------------------------------
---                                   Utils
---------------------------------------------------------------------------------
 
--- bfix' :: SymVal a => Int -> String -> ((SBV a -> r) -> (SBV a -> r)) -> SBV a -> r
--- bfix' bound nm f x
---   | isConcrete x = g x
---   | True         = unroll bound x
---   where g        = f g
---         unroll 0 = uninterpret nm
---         unroll i = f (unroll (i-1))
+tolower_ :: Component
+tolower_ = mkComponent "ToLower" 1 [isSString] $
+  \[x1] r -> embed (map_str (caseit lowermap) (proj x1)) .== r
+
+
+toupper_ :: Component
+toupper_ = mkComponent "ToUpper" 1 [isSString] $
+  \[x1] r -> embed (map_str (caseit uppermap) (proj x1)) .== r
+
+
+map_str :: (SChar -> SChar) -> SString -> SString
+map_str f s = bfix 10 "map_str" open s where
+  open g s = ite (SBV.null s) SBV.nil $
+             SBV.singleton (f $ SBV.head s) .++ g (SBV.tail s)
+
+
+lowermap :: [(SChar, SChar)]
+lowermap = zip (map literal ['A' .. 'Z']) (map literal ['a' .. 'z'])
+
+
+uppermap :: [(SChar, SChar)]
+uppermap = zip (map literal ['a' .. 'z']) (map literal ['A' .. 'Z'])
+
+
+caseit :: [(SChar, SChar)] -> SChar -> SChar
+caseit m c = foldr (\(u,l) z -> ite (c .== u) l z) c m
+
+
+trim_ :: Component
+trim_ = mkComponent "Trim" 1 [isSString] $
+  \[x1] r -> embed (trimLR (proj x1)) .== r
+
+
+trim_start_ :: Component
+trim_start_ = mkComponent "TrimStart" 1 [isSString] $
+  \[x1] r -> embed (trimL (proj x1)) .== r
+
+
+trim_end_ :: Component
+trim_end_ = mkComponent "TrimEnd" 1 [isSString] $
+  \[x1] r -> embed (trimR (proj x1)) .== r
+
+
+trimLR :: SString -> SString
+trimLR = trimR . trimL
+
+
+trimL :: SString -> SString
+trimL = bfix 10 "trimL" open where
+  open f s = ite (SBV.head s .== literal ' ') (f $ SBV.tail s) s
+
+
+trimR :: SString -> SString
+trimR = srev . trimL . srev
+
+
+-- symbolic string reverse
+srev :: SString -> SString
+srev s = bfix 10 "srev" open s SBV.nil where
+  open f s acc = ite (SBV.null s) acc $
+    f (SBV.tail s) (SBV.head s .: acc)
+
+
+add_ :: Component
+add_ = mkComponent "Add" 2 [isSInt, isSInt] $
+  \[x1, x2] r -> embed @SInteger (proj x1 + proj x2) .== r
+
+sub_ :: Component
+sub_ = mkComponent "Sub" 2 [isSInt, isSInt] $
+  \[x1, x2] r -> embed @SInteger (proj x1 - proj x2) .== r
+
