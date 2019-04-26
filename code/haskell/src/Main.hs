@@ -1,29 +1,36 @@
 module Main where
 
-import           Types
-
 import           Control.Monad
-import           Data.Either
+import           System.Environment
+
 import           System.TimeIt
 
-
-main = undefined
-
-
-showE = either show show
-showEs = concat . map showE
+import           Components
+import           ReadExample
+import           Synth
+import           Types
 
 
-bench :: [Example] -> Library -> IO ()
-bench ios lib = do
-  let constCount = 4
-  let synthesize = undefined
+main = getArgs >>= \[fileName] -> bench fileName
 
-  putStrLn "Examples:"
 
-  forM_ ios $ \(is, o) ->
-    putStrLn ("\t" <> showEs is <> " --> " <> showE o)
+stdlib = [ concat_
+         , length_
+         , replace_
+         , substr_
+         , tolower_
+         , toupper_
+         , trim_
+         , trim_start_
+         , trim_end_
+         , add_
+         , sub_
+         ]
 
-  timeIt $ synthesize ios lib constCount
 
-  putStrLn "=================================================="
+constCount = 2
+
+
+bench :: FilePath -> IO ()
+bench fileName = timeIt $
+  synthesize stdlib constCount . take 1 =<< readExamplesFromFile fileName

@@ -11,9 +11,12 @@ executable synthesis
   main-is:             Main.hs
   other-modules:       Components
                      , Constraints
+                     , ReadExample
                      , Synth
                      , Types
-  build-depends:       base ^>=4.12.0.0
+  build-depends:       aeson
+                     , base ^>=4.12.0.0
+                     , bytestring
                      , containers ^>=0.6.0.1
                      , mtl
                      , sbv

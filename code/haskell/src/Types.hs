@@ -1,11 +1,24 @@
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
-module Types where
+module Types
+  ( Sort
+  , SSort
+  , Example
+  , Act
+  , Loc
+  , SLoc
+  , Component(..)
+  , Library
+  , isSString
+  , isSInt
+  , Embedding(..)
+  , Projection(..)
+  )
+  where
 
 import           Data.SBV
 import qualified Data.SBV.Either as SBV
-import qualified Data.SBV.Maybe  as SBV
 
 -- TODO Check if something other than Integer makes it faster
 type Sort = Either String Integer

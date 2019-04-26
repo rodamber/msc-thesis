@@ -1,9 +1,19 @@
 {-# LANGUAGE TypeApplications #-}
-module Components where
+module Components
+  ( concat_
+  , length_
+  , replace_
+  , substr_
+  , tolower_
+  , toupper_
+  , trim_
+  , trim_start_
+  , trim_end_
+  , add_
+  , sub_
+  ) where
 
-import           Control.Monad
-
-import           Data.SBV                  hiding (name)
+import           Data.SBV                  hiding (name, output)
 import qualified Data.SBV.Maybe            as SBV
 import           Data.SBV.String           ((.++), (.:))
 import qualified Data.SBV.String           as SBV

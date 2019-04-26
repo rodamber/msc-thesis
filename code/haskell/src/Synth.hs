@@ -1,6 +1,5 @@
 module Synth where
 
-import           Components
 import           Constraints
 import           Types
 
@@ -10,12 +9,14 @@ import           Data.Maybe
 import           Data.SBV         hiding (name)
 import           Data.SBV.Control
 
-synthesize :: [Example] -> Library -> Int -> IO ()
-synthesize ios lib constCount = loop 1
+synthesize :: Library -> Int -> [Example] -> IO ()
+synthesize lib constCount ios = loop 1
   where
-    timeout_value = 10 * 10^6
+    -- timeout_value = 5 * 60 * 10^6
 
     loop componentCount = do
+      putStrLn $ "size: " <> show componentCount
+
       let cfg = Config { examples = ios
                        , library = lib
                        , constCount = constCount
@@ -24,13 +25,13 @@ synthesize ios lib constCount = loop 1
 
       satRes  <-runSMT $ do
         res <- runReaderT formula cfg
-        query $ timeout timeout_value $ checkSat >>= \x -> do
+        query $ -- timeout timeout_value $
+          checkSat >>= \x -> do
           case x of
             Sat -> do
               io $ putStr "Program: "
               io . putStrLn =<< extractProgram cfg res
-            Unk -> do
-              io . putStrLn . show =<< getUnknownReason
+            Unk -> io . print =<< getUnknownReason
             _ -> return ()
           return x
 
