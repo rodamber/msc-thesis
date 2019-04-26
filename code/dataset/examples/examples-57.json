@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "what are you doing? (sorry)"
+                {
+                    "Left": "what are you doing? (sorry)"
+                }
             ],
-            "output": "what are you doing? (sorry)"
+            "output": {
+                "Left": "what are you doing? (sorry)"
+            }
         },
         {
             "inputs": [
-                "did you want that? (hmm..)"
+                {
+                    "Left": "did you want that? (hmm..)"
+                }
             ],
-            "output": "did you want that? (hmm..)"
+            "output": {
+                "Left": "did you want that? (hmm..)"
+            }
         },
         {
             "inputs": [
-                "maybe with sub? (oh i see)"
+                {
+                    "Left": "maybe with sub? (oh i see)"
+                }
             ],
-            "output": "maybe with sub? (oh i see)"
+            "output": {
+                "Left": "maybe with sub? (oh i see)"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "aenean aliquam turpis duis."
+                {
+                    "Left": "aenean aliquam turpis duis."
+                }
             ],
-            "output": "Aenean aliquam turpi"
+            "output": {
+                "Left": "Aenean aliquam turpi"
+            }
         },
         {
             "inputs": [
-                "curabitur euismod volutpat."
+                {
+                    "Left": "curabitur euismod volutpat."
+                }
             ],
-            "output": "Curabitur euismod vo"
+            "output": {
+                "Left": "Curabitur euismod vo"
+            }
         },
         {
             "inputs": [
-                "proin pulvinar ornare amet."
+                {
+                    "Left": "proin pulvinar ornare amet."
+                }
             ],
-            "output": "Proin pulvinar ornar"
+            "output": {
+                "Left": "Proin pulvinar ornar"
+            }
         }
     ],
     "functions": [

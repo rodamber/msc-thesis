@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Nulla sapien nisi, auctor sed."
+                {
+                    "Left": "Nulla sapien nisi, auctor sed."
+                }
             ],
-            "output": "Nulla sapien nisi, auctor sed...."
+            "output": {
+                "Left": "Nulla sapien nisi, auctor sed...."
+            }
         },
         {
             "inputs": [
-                "Nunc sed magna in ante congue feugiat nullam."
+                {
+                    "Left": "Nunc sed magna in ante congue feugiat nullam."
+                }
             ],
-            "output": "Nunc sed magna in ante congue feugiat nu..."
+            "output": {
+                "Left": "Nunc sed magna in ante congue feugiat nu..."
+            }
         },
         {
             "inputs": [
-                "Suspendisse ac neque vestibulum volutpat."
+                {
+                    "Left": "Suspendisse ac neque vestibulum volutpat."
+                }
             ],
-            "output": "Suspendisse ac neque vestibulum volutpat..."
+            "output": {
+                "Left": "Suspendisse ac neque vestibulum volutpat..."
+            }
         }
     ],
     "functions": [

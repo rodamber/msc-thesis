@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "hello word"
+                {
+                    "Left": "hello word"
+                }
             ],
-            "output": "hello"
+            "output": {
+                "Left": "hello"
+            }
         },
         {
             "inputs": [
-                "hi my name is"
+                {
+                    "Left": "hi my name is"
+                }
             ],
-            "output": "hi my"
+            "output": {
+                "Left": "hi my"
+            }
         },
         {
             "inputs": [
-                "how are you doing"
+                {
+                    "Left": "how are you doing"
+                }
             ],
-            "output": "how a"
+            "output": {
+                "Left": "how a"
+            }
         }
     ],
     "functions": [

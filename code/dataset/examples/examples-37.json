@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."
+                {
+                    "Left": "Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."
+                }
             ],
-            "output": "/ Nulla eu"
+            "output": {
+                "Left": "/ Nulla eu"
+            }
         },
         {
             "inputs": [
-                "Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus."
+                {
+                    "Left": "Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus."
+                }
             ],
-            "output": "/ Vestibul"
+            "output": {
+                "Left": "/ Vestibul"
+            }
         },
         {
             "inputs": [
-                "Praesent in pulvinar sapien. / Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. / Aliquam cursus est in massa metus."
+                {
+                    "Left": "Praesent in pulvinar sapien. / Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. / Aliquam cursus est in massa metus."
+                }
             ],
-            "output": "/ Orci var"
+            "output": {
+                "Left": "/ Orci var"
+            }
         }
     ],
     "functions": [

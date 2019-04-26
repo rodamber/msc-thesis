@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Lorem ipsum dolor sit amet cras amet."
+                {
+                    "Left": "Lorem ipsum dolor sit amet cras amet."
+                }
             ],
-            "output": "Lorem ipsum dolor sit amet cra..."
+            "output": {
+                "Left": "Lorem ipsum dolor sit amet cra..."
+            }
         },
         {
             "inputs": [
-                "Maecenas non lorem suscipit, pharetra mi sed."
+                {
+                    "Left": "Maecenas non lorem suscipit, pharetra mi sed."
+                }
             ],
-            "output": "Maecenas non lorem suscipit, p..."
+            "output": {
+                "Left": "Maecenas non lorem suscipit, p..."
+            }
         },
         {
             "inputs": [
-                "Nulla facilisi turpis duis."
+                {
+                    "Left": "Nulla facilisi turpis duis."
+                }
             ],
-            "output": "Nulla facilisi turpis duis...."
+            "output": {
+                "Left": "Nulla facilisi turpis duis...."
+            }
         }
     ],
     "functions": [

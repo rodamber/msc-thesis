@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "A12345678 John Doe"
+                {
+                    "Left": "A12345678 John Doe"
+                }
             ],
-            "output": "John Doe"
+            "output": {
+                "Left": "John Doe"
+            }
         },
         {
             "inputs": [
-                "B10293481 Jane Moe"
+                {
+                    "Left": "B10293481 Jane Moe"
+                }
             ],
-            "output": "Jane Moe"
+            "output": {
+                "Left": "Jane Moe"
+            }
         },
         {
             "inputs": [
-                "C12341341 Anonymous"
+                {
+                    "Left": "C12341341 Anonymous"
+                }
             ],
-            "output": "Anonymous"
+            "output": {
+                "Left": "Anonymous"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "who knows  "
+                {
+                    "Left": "who knows  "
+                }
             ],
-            "output": "Prefix who knows"
+            "output": {
+                "Left": "Prefix who knows"
+            }
         },
         {
             "inputs": [
-                "  we'll see"
+                {
+                    "Left": "  we'll see"
+                }
             ],
-            "output": "Prefix we'll see"
+            "output": {
+                "Left": "Prefix we'll see"
+            }
         },
         {
             "inputs": [
-                "  oh come on  "
+                {
+                    "Left": "  oh come on  "
+                }
             ],
-            "output": "Prefix oh come on"
+            "output": {
+                "Left": "Prefix oh come on"
+            }
         }
     ],
     "functions": [

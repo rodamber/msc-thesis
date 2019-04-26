@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Sub of by way"
+                {
+                    "Left": "Sub of by way"
+                }
             ],
-            "output": "Sub of<br /> by way"
+            "output": {
+                "Left": "Sub of<br /> by way"
+            }
         },
         {
             "inputs": [
-                "again sub of by way"
+                {
+                    "Left": "again sub of by way"
+                }
             ],
-            "output": "again sub of<br /> by way"
+            "output": {
+                "Left": "again sub of<br /> by way"
+            }
         },
         {
             "inputs": [
-                "one more time sub of by way"
+                {
+                    "Left": "one more time sub of by way"
+                }
             ],
-            "output": "one more time sub of<br /> by way"
+            "output": {
+                "Left": "one more time sub of<br /> by way"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "hello  "
+                {
+                    "Left": "hello  "
+                }
             ],
-            "output": "HELLO"
+            "output": {
+                "Left": "HELLO"
+            }
         },
         {
             "inputs": [
-                "how are you today?  "
+                {
+                    "Left": "how are you today?  "
+                }
             ],
-            "output": "HOW ARE YOU TODAY?"
+            "output": {
+                "Left": "HOW ARE YOU TODAY?"
+            }
         },
         {
             "inputs": [
-                "you (yes you) are awesome!!! "
+                {
+                    "Left": "you (yes you) are awesome!!! "
+                }
             ],
-            "output": "YOU (YES YOU) ARE AWESOME!!!"
+            "output": {
+                "Left": "YOU (YES YOU) ARE AWESOME!!!"
+            }
         }
     ],
     "functions": [

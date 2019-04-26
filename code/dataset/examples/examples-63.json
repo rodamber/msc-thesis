@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "take first nine"
+                {
+                    "Left": "take first nine"
+                }
             ],
-            "output": "t nine"
+            "output": {
+                "Left": "t nine"
+            }
         },
         {
             "inputs": [
-                "or all"
+                {
+                    "Left": "or all"
+                }
             ],
-            "output": ""
+            "output": {
+                "Left": ""
+            }
         },
         {
             "inputs": [
-                "but dont be greedy"
+                {
+                    "Left": "but dont be greedy"
+                }
             ],
-            "output": "be greedy"
+            "output": {
+                "Left": "be greedy"
+            }
         }
     ],
     "functions": [

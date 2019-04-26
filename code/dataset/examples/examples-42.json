@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "DO IT"
+                {
+                    "Left": "DO IT"
+                }
             ],
-            "output": "do it!@"
+            "output": {
+                "Left": "do it!@"
+            }
         },
         {
             "inputs": [
-                "COME ON"
+                {
+                    "Left": "COME ON"
+                }
             ],
-            "output": "come on!@"
+            "output": {
+                "Left": "come on!@"
+            }
         },
         {
             "inputs": [
-                "LET'S GO FAST"
+                {
+                    "Left": "LET'S GO FAST"
+                }
             ],
-            "output": "let's go fast!@"
+            "output": {
+                "Left": "let's go fast!@"
+            }
         }
     ],
     "functions": [

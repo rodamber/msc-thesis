@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Curabitur commodo volutpat."
+                {
+                    "Left": "Curabitur commodo volutpat."
+                }
             ],
-            "output": "commodo volutpa"
+            "output": {
+                "Left": "commodo volutpa"
+            }
         },
         {
             "inputs": [
-                "Phasellus dignissim nullam."
+                {
+                    "Left": "Phasellus dignissim nullam."
+                }
             ],
-            "output": "dignissim nulla"
+            "output": {
+                "Left": "dignissim nulla"
+            }
         },
         {
             "inputs": [
-                "Suspendisse potenti nullam."
+                {
+                    "Left": "Suspendisse potenti nullam."
+                }
             ],
-            "output": "e potenti nulla"
+            "output": {
+                "Left": "e potenti nulla"
+            }
         }
     ],
     "functions": [

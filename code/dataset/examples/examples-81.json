@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "abc\\xyz"
+                {
+                    "Left": "abc\\xyz"
+                }
             ],
-            "output": "xyz"
+            "output": {
+                "Left": "xyz"
+            }
         },
         {
             "inputs": [
-                "012asdf\\abcd"
+                {
+                    "Left": "012asdf\\abcd"
+                }
             ],
-            "output": "abcd"
+            "output": {
+                "Left": "abcd"
+            }
         },
         {
             "inputs": [
-                "asdfa\\asdfas"
+                {
+                    "Left": "asdfa\\asdfas"
+                }
             ],
-            "output": "asdfas"
+            "output": {
+                "Left": "asdfas"
+            }
         }
     ],
     "functions": [

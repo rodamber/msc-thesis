@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet."
+                {
+                    "Left": "Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet."
+                }
             ],
-            "output": "Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet...."
+            "output": {
+                "Left": "Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet...."
+            }
         },
         {
             "inputs": [
-                "Pellentesque sit amet nisl non risus condimentum accumsan. Sed id eleifend dolor, ac interdum nullam."
+                {
+                    "Left": "Pellentesque sit amet nisl non risus condimentum accumsan. Sed id eleifend dolor, ac interdum nullam."
+                }
             ],
-            "output": "Pellentesque sit amet nisl non risus condimentum accumsan. Sed id eleifend dolor, ac interdum nullam..."
+            "output": {
+                "Left": "Pellentesque sit amet nisl non risus condimentum accumsan. Sed id eleifend dolor, ac interdum nullam..."
+            }
         },
         {
             "inputs": [
-                "Praesent cursus, mauris ac rhoncus efficitur amet."
+                {
+                    "Left": "Praesent cursus, mauris ac rhoncus efficitur amet."
+                }
             ],
-            "output": "Praesent cursus, mauris ac rhoncus efficitur amet...."
+            "output": {
+                "Left": "Praesent cursus, mauris ac rhoncus efficitur amet...."
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "George Michael"
+                {
+                    "Left": "George Michael"
+                }
             ],
-            "output": "GM"
+            "output": {
+                "Left": "GM"
+            }
         },
         {
             "inputs": [
-                "Michael Bluth"
+                {
+                    "Left": "Michael Bluth"
+                }
             ],
-            "output": "MB"
+            "output": {
+                "Left": "MB"
+            }
         },
         {
             "inputs": [
-                "Maebe Bluth"
+                {
+                    "Left": "Maebe Bluth"
+                }
             ],
-            "output": "MB"
+            "output": {
+                "Left": "MB"
+            }
         }
     ],
     "functions": [

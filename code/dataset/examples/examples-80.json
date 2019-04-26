@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "george.bluth@outsystems.com"
+                {
+                    "Left": "george.bluth@outsystems.com"
+                }
             ],
-            "output": "@outsystems.com"
+            "output": {
+                "Left": "@outsystems.com"
+            }
         },
         {
             "inputs": [
-                "maebe@cmu.edu"
+                {
+                    "Left": "maebe@cmu.edu"
+                }
             ],
-            "output": "@cmu.edu"
+            "output": {
+                "Left": "@cmu.edu"
+            }
         },
         {
             "inputs": [
-                "michael@tecnico.pt"
+                {
+                    "Left": "michael@tecnico.pt"
+                }
             ],
-            "output": "@tecnico.pt"
+            "output": {
+                "Left": "@tecnico.pt"
+            }
         }
     ],
     "functions": [

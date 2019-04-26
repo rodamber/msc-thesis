@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "https://ThatCoolWebsite.com"
+                {
+                    "Left": "https://ThatCoolWebsite.com"
+                }
             ],
-            "output": "thatcoolwebsite.com"
+            "output": {
+                "Left": "thatcoolwebsite.com"
+            }
         },
         {
             "inputs": [
-                "https://secure.com"
+                {
+                    "Left": "https://secure.com"
+                }
             ],
-            "output": "secure.com"
+            "output": {
+                "Left": "secure.com"
+            }
         },
         {
             "inputs": [
-                "http://insecure.com"
+                {
+                    "Left": "http://insecure.com"
+                }
             ],
-            "output": "insecure.com"
+            "output": {
+                "Left": "insecure.com"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "alo_helloworld"
+                {
+                    "Left": "alo_helloworld"
+                }
             ],
-            "output": "hellowor"
+            "output": {
+                "Left": "hellowor"
+            }
         },
         {
             "inputs": [
-                "123_testtest"
+                {
+                    "Left": "123_testtest"
+                }
             ],
-            "output": "testte"
+            "output": {
+                "Left": "testte"
+            }
         },
         {
             "inputs": [
-                "wazzuuuuuuuuup_xyz"
+                {
+                    "Left": "wazzuuuuuuuuup_xyz"
+                }
             ],
-            "output": "xyz"
+            "output": {
+                "Left": "xyz"
+            }
         }
     ],
     "functions": [

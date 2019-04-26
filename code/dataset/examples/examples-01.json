@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Hello World"
+                {
+                    "Left": "Hello World"
+                }
             ],
-            "output": "Hello&nbsp;World"
+            "output": {
+                "Left": "Hello&nbsp;World"
+            }
         },
         {
             "inputs": [
-                "Indicates the (zero-based) index where the search starts."
+                {
+                    "Left": "Indicates the (zero-based) index where the search starts."
+                }
             ],
-            "output": "Indicates&nbsp;the&nbsp;(zero-based)&nbsp;index&nbsp;where&nbsp;the&nbsp;search&nbsp;starts."
+            "output": {
+                "Left": "Indicates&nbsp;the&nbsp;(zero-based)&nbsp;index&nbsp;where&nbsp;the&nbsp;search&nbsp;starts."
+            }
         },
         {
             "inputs": [
-                "Can be used with attributes in aggregates."
+                {
+                    "Left": "Can be used with attributes in aggregates."
+                }
             ],
-            "output": "Can&nbsp;be&nbsp;used&nbsp;with&nbsp;attributes&nbsp;in&nbsp;aggregates."
+            "output": {
+                "Left": "Can&nbsp;be&nbsp;used&nbsp;with&nbsp;attributes&nbsp;in&nbsp;aggregates."
+            }
         }
     ],
     "functions": [

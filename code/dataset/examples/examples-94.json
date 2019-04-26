@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "<hello>"
+                {
+                    "Left": "<hello>"
+                }
             ],
-            "output": "hello"
+            "output": {
+                "Left": "hello"
+            }
         },
         {
             "inputs": [
-                "<goodbye>"
+                {
+                    "Left": "<goodbye>"
+                }
             ],
-            "output": "goodbye"
+            "output": {
+                "Left": "goodbye"
+            }
         },
         {
             "inputs": [
-                "<sigh>"
+                {
+                    "Left": "<sigh>"
+                }
             ],
-            "output": "sigh"
+            "output": {
+                "Left": "sigh"
+            }
         }
     ],
     "functions": [

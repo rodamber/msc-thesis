@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "abc"
+                {
+                    "Left": "abc"
+                }
             ],
-            "output": "ABC"
+            "output": {
+                "Left": "ABC"
+            }
         },
         {
             "inputs": [
-                "aBcdef"
+                {
+                    "Left": "aBcdef"
+                }
             ],
-            "output": "ABCDEF"
+            "output": {
+                "Left": "ABCDEF"
+            }
         },
         {
             "inputs": [
-                "aaseHKLsed"
+                {
+                    "Left": "aaseHKLsed"
+                }
             ],
-            "output": "AASEHKLSED"
+            "output": {
+                "Left": "AASEHKLSED"
+            }
         }
     ],
     "functions": [

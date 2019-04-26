@@ -2,24 +2,42 @@
     "examples": [
         {
             "inputs": [
-                "hello word",
-                5
+                {
+                    "Left": "hello word"
+                },
+                {
+                    "Right": 5
+                }
             ],
-            "output": "hello"
+            "output": {
+                "Left": "hello"
+            }
         },
         {
             "inputs": [
-                "hi my name is",
-                10
+                {
+                    "Left": "hi my name is"
+                },
+                {
+                    "Right": 10
+                }
             ],
-            "output": "hi my name"
+            "output": {
+                "Left": "hi my name"
+            }
         },
         {
             "inputs": [
-                "Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam.",
-                100
+                {
+                    "Left": "Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam."
+                },
+                {
+                    "Right": 100
+                }
             ],
-            "output": "Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis "
+            "output": {
+                "Left": "Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis "
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Praesent sed diam vel amet."
+                {
+                    "Left": "Praesent sed diam vel amet."
+                }
             ],
-            "output": "Praesent sed diam vel amet...."
+            "output": {
+                "Left": "Praesent sed diam vel amet...."
+            }
         },
         {
             "inputs": [
-                "Donec ultrices finibus ultrices. Quisque lacus posuere."
+                {
+                    "Left": "Donec ultrices finibus ultrices. Quisque lacus posuere."
+                }
             ],
-            "output": "Donec ultrices finibus ultrices. Quisque lacus pos..."
+            "output": {
+                "Left": "Donec ultrices finibus ultrices. Quisque lacus pos..."
+            }
         },
         {
             "inputs": [
-                "In hac habitasse platea dictumst. Sed dapibus sit amet neque gravida sed."
+                {
+                    "Left": "In hac habitasse platea dictumst. Sed dapibus sit amet neque gravida sed."
+                }
             ],
-            "output": "In hac habitasse platea dictumst. Sed dapibus sit ..."
+            "output": {
+                "Left": "In hac habitasse platea dictumst. Sed dapibus sit ..."
+            }
         }
     ],
     "functions": [

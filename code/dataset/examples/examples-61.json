@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "?01-01-1999"
+                {
+                    "Left": "?01-01-1999"
+                }
             ],
-            "output": "01-01-1999"
+            "output": {
+                "Left": "01-01-1999"
+            }
         },
         {
             "inputs": [
-                "?table cell"
+                {
+                    "Left": "?table cell"
+                }
             ],
-            "output": "table cell"
+            "output": {
+                "Left": "table cell"
+            }
         },
         {
             "inputs": [
-                "Xprobably this"
+                {
+                    "Left": "Xprobably this"
+                }
             ],
-            "output": "probably this"
+            "output": {
+                "Left": "probably this"
+            }
         }
     ],
     "functions": [

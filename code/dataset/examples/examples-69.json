@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "break \\"
+                {
+                    "Left": "break \\"
+                }
             ],
-            "output": "break"
+            "output": {
+                "Left": "break"
+            }
         },
         {
             "inputs": [
-                "line break \\"
+                {
+                    "Left": "line break \\"
+                }
             ],
-            "output": "line break"
+            "output": {
+                "Left": "line break"
+            }
         },
         {
             "inputs": [
-                "another break \\"
+                {
+                    "Left": "another break \\"
+                }
             ],
-            "output": "another break"
+            "output": {
+                "Left": "another break"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "https://outsystems.com"
+                {
+                    "Left": "https://outsystems.com"
+                }
             ],
-            "output": "outsystems"
+            "output": {
+                "Left": "outsystems"
+            }
         },
         {
             "inputs": [
-                "http://cmu.edu"
+                {
+                    "Left": "http://cmu.edu"
+                }
             ],
-            "output": "cmu"
+            "output": {
+                "Left": "cmu"
+            }
         },
         {
             "inputs": [
-                "http://tecnico.ulisboa.pt"
+                {
+                    "Left": "http://tecnico.ulisboa.pt"
+                }
             ],
-            "output": "tecnico"
+            "output": {
+                "Left": "tecnico"
+            }
         }
     ],
     "functions": [

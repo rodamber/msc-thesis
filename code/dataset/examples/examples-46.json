@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                " a b c "
+                {
+                    "Left": " a b c "
+                }
             ],
-            "output": "0a0b0c"
+            "output": {
+                "Left": "0a0b0c"
+            }
         },
         {
             "inputs": [
-                "1 2 3 4 5 "
+                {
+                    "Left": "1 2 3 4 5 "
+                }
             ],
-            "output": "102030405"
+            "output": {
+                "Left": "102030405"
+            }
         },
         {
             "inputs": [
-                " 123 4 32 4  "
+                {
+                    "Left": " 123 4 32 4  "
+                }
             ],
-            "output": "01230403204"
+            "output": {
+                "Left": "01230403204"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci aliquam."
+                {
+                    "Left": "Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci aliquam."
+                }
             ],
-            "output": "Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci ali..."
+            "output": {
+                "Left": "Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci ali..."
+            }
         },
         {
             "inputs": [
-                "Nulla scelerisque purus quis felis ullamcorper, eget euismod sapien nullam."
+                {
+                    "Left": "Nulla scelerisque purus quis felis ullamcorper, eget euismod sapien nullam."
+                }
             ],
-            "output": "Nulla scelerisque purus quis felis ullamcorper, eget euismod sapien nullam...."
+            "output": {
+                "Left": "Nulla scelerisque purus quis felis ullamcorper, eget euismod sapien nullam...."
+            }
         },
         {
             "inputs": [
-                "Pellentesque habitant morbi tristique senectus id."
+                {
+                    "Left": "Pellentesque habitant morbi tristique senectus id."
+                }
             ],
-            "output": "Pellentesque habitant morbi tristique senectus id...."
+            "output": {
+                "Left": "Pellentesque habitant morbi tristique senectus id...."
+            }
         }
     ],
     "functions": [

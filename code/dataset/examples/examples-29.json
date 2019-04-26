@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Sed scelerisque, tortor sit amet."
+                {
+                    "Left": "Sed scelerisque, tortor sit amet."
+                }
             ],
-            "output": "Sed"
+            "output": {
+                "Left": "Sed"
+            }
         },
         {
             "inputs": [
-                "Vestibulum non commodo ex. Maecenas a est sagittis, dapibus nibh."
+                {
+                    "Left": "Vestibulum non commodo ex. Maecenas a est sagittis, dapibus nibh."
+                }
             ],
-            "output": "Vestibulum"
+            "output": {
+                "Left": "Vestibulum"
+            }
         },
         {
             "inputs": [
-                "Maecenas in."
+                {
+                    "Left": "Maecenas in."
+                }
             ],
-            "output": "Maecenas"
+            "output": {
+                "Left": "Maecenas"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "who cares about when"
+                {
+                    "Left": "who cares about when"
+                }
             ],
-            "output": "updated on who cares about "
+            "output": {
+                "Left": "updated on who cares about "
+            }
         },
         {
             "inputs": [
-                "maybe someone will care"
+                {
+                    "Left": "maybe someone will care"
+                }
             ],
-            "output": "updated on maybe someone wi"
+            "output": {
+                "Left": "updated on maybe someone wi"
+            }
         },
         {
             "inputs": [
-                "but then who else?"
+                {
+                    "Left": "but then who else?"
+                }
             ],
-            "output": "updated on but then who els"
+            "output": {
+                "Left": "updated on but then who els"
+            }
         }
     ],
     "functions": [

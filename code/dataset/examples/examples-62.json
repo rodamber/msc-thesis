@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "1234: try this (hmm)"
+                {
+                    "Left": "1234: try this (hmm)"
+                }
             ],
-            "output": "try this"
+            "output": {
+                "Left": "try this"
+            }
         },
         {
             "inputs": [
-                "ABCD: then that (ok)"
+                {
+                    "Left": "ABCD: then that (ok)"
+                }
             ],
-            "output": "then that"
+            "output": {
+                "Left": "then that"
+            }
         },
         {
             "inputs": [
-                "a1b2: so this is how it feels (boring)"
+                {
+                    "Left": "a1b2: so this is how it feels (boring)"
+                }
             ],
-            "output": "so this is how it feels"
+            "output": {
+                "Left": "so this is how it feels"
+            }
         }
     ],
     "functions": [

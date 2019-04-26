@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "that/folder/"
+                {
+                    "Left": "that/folder/"
+                }
             ],
-            "output": "thatfolder"
+            "output": {
+                "Left": "thatfolder"
+            }
         },
         {
             "inputs": [
-                "this/folder/is/longer/"
+                {
+                    "Left": "this/folder/is/longer/"
+                }
             ],
-            "output": "thisfolderislonger"
+            "output": {
+                "Left": "thisfolderislonger"
+            }
         },
         {
             "inputs": [
-                "what/about/this/one/"
+                {
+                    "Left": "what/about/this/one/"
+                }
             ],
-            "output": "whataboutthisone"
+            "output": {
+                "Left": "whataboutthisone"
+            }
         }
     ],
     "functions": [

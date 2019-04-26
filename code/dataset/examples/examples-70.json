@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "  like no spaces at all!!!  "
+                {
+                    "Left": "  like no spaces at all!!!  "
+                }
             ],
-            "output": "likenospacesatall!!!"
+            "output": {
+                "Left": "likenospacesatall!!!"
+            }
         },
         {
             "inputs": [
-                "again don't try "
+                {
+                    "Left": "again don't try "
+                }
             ],
-            "output": "againdon'ttry"
+            "output": {
+                "Left": "againdon'ttry"
+            }
         },
         {
             "inputs": [
-                "you sneaky tricky sli"
+                {
+                    "Left": "you sneaky tricky sli"
+                }
             ],
-            "output": "yousneakytrickysli"
+            "output": {
+                "Left": "yousneakytrickysli"
+            }
         }
     ],
     "functions": [

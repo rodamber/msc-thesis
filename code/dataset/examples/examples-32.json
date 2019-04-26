@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "random,csv"
+                {
+                    "Left": "random,csv"
+                }
             ],
-            "output": "random"
+            "output": {
+                "Left": "random"
+            }
         },
         {
             "inputs": [
-                "another,one"
+                {
+                    "Left": "another,one"
+                }
             ],
-            "output": "another"
+            "output": {
+                "Left": "another"
+            }
         },
         {
             "inputs": [
-                "a,larger,one,this,time"
+                {
+                    "Left": "a,larger,one,this,time"
+                }
             ],
-            "output": "a"
+            "output": {
+                "Left": "a"
+            }
         }
     ],
     "functions": [

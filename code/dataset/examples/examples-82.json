@@ -2,24 +2,42 @@
     "examples": [
         {
             "inputs": [
-                "take last three",
-                "and add this"
+                {
+                    "Left": "take last three"
+                },
+                {
+                    "Left": "and add this"
+                }
             ],
-            "output": "ree and add this"
+            "output": {
+                "Left": "ree and add this"
+            }
         },
         {
             "inputs": [
-                "ueueueueueu",
-                "xyz"
+                {
+                    "Left": "ueueueueueu"
+                },
+                {
+                    "Left": "xyz"
+                }
             ],
-            "output": "ueu xyz"
+            "output": {
+                "Left": "ueu xyz"
+            }
         },
         {
             "inputs": [
-                "george not",
-                "and maebe"
+                {
+                    "Left": "george not"
+                },
+                {
+                    "Left": "and maebe"
+                }
             ],
-            "output": "not and maebe"
+            "output": {
+                "Left": "not and maebe"
+            }
         }
     ],
     "functions": [

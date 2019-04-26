@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Sed metus urna turpis duis."
+                {
+                    "Left": "Sed metus urna turpis duis."
+                }
             ],
-            "output": "...rpis duis."
+            "output": {
+                "Left": "...rpis duis."
+            }
         },
         {
             "inputs": [
-                "Praesent vitae dui posuere."
+                {
+                    "Left": "Praesent vitae dui posuere."
+                }
             ],
-            "output": "...i posuere."
+            "output": {
+                "Left": "...i posuere."
+            }
         },
         {
             "inputs": [
-                "Fusce sapien eros volutpat."
+                {
+                    "Left": "Fusce sapien eros volutpat."
+                }
             ],
-            "output": "... volutpat."
+            "output": {
+                "Left": "... volutpat."
+            }
         }
     ],
     "functions": [

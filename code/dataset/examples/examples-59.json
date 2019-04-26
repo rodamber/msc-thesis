@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "who cares about the last ones..."
+                {
+                    "Left": "who cares about the last ones..."
+                }
             ],
-            "output": "who cares about the last ones."
+            "output": {
+                "Left": "who cares about the last ones."
+            }
         },
         {
             "inputs": [
-                "just let them die!!!"
+                {
+                    "Left": "just let them die!!!"
+                }
             ],
-            "output": "just let them die!"
+            "output": {
+                "Left": "just let them die!"
+            }
         },
         {
             "inputs": [
-                "oh god what have i become!!!"
+                {
+                    "Left": "oh god what have i become!!!"
+                }
             ],
-            "output": "oh god what have i become!"
+            "output": {
+                "Left": "oh god what have i become!"
+            }
         }
     ],
     "functions": [

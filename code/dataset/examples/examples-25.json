@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat."
+                {
+                    "Left": "Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat."
+                }
             ],
-            "output": "Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat..."
+            "output": {
+                "Left": "Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat..."
+            }
         },
         {
             "inputs": [
-                "Donec condimentum lacus ac elit molestie, vel cursus ante nullam."
+                {
+                    "Left": "Donec condimentum lacus ac elit molestie, vel cursus ante nullam."
+                }
             ],
-            "output": "Donec condimentum lacus ac elit molestie, vel cursus ante nullam...."
+            "output": {
+                "Left": "Donec condimentum lacus ac elit molestie, vel cursus ante nullam...."
+            }
         },
         {
             "inputs": [
-                "Pellentesque eu tellus rutrum, mollis lacus eu, posuere massa. Duis varius nibh amet."
+                {
+                    "Left": "Pellentesque eu tellus rutrum, mollis lacus eu, posuere massa. Duis varius nibh amet."
+                }
             ],
-            "output": "Pellentesque eu tellus rutrum, mollis lacus eu, posuere massa. Duis va..."
+            "output": {
+                "Left": "Pellentesque eu tellus rutrum, mollis lacus eu, posuere massa. Duis va..."
+            }
         }
     ],
     "functions": [

@@ -169,3 +169,35 @@ def pretty_all(dir='examples'):
             with open(f'{dir}/{file}.pretty', mode='w') as outfile:
                 json.dump(data, outfile, indent=4, sort_keys=True)
 
+
+def map_example(f, g, dir='examples', ext='map'):
+    import os
+
+    for file in os.listdir(dir):
+        with open(f'{dir}/{file}') as infile:
+            data = f(infile)
+            with open(f'{dir}/{file}.{ext}', mode='w') as outfile:
+                g(data, outfile)
+
+
+def to_either(x):
+    if isinstance(x, str):
+        return {"Left": x}
+    if isinstance(x, int):
+        return {"Right": x}
+    raise ValueError(f'{str(x)}: {type(x)}')
+
+
+def add_either():
+    def f(infile):
+        return json.load(infile)
+
+    def g(data, outfile):
+        for example in data['examples']:
+            example['inputs'] = \
+                [to_either(x) for x in example['inputs']]
+            example['output'] = to_either(example['output'])
+        return json.dump(data, outfile, indent=4, sort_keys=True)
+
+    map_example(f, g, dir='examples', ext='either')
+

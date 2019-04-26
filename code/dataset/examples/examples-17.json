@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Quisque sollicitudin volutpat."
+                {
+                    "Left": "Quisque sollicitudin volutpat."
+                }
             ],
-            "output": "Quisque sollicitudin..."
+            "output": {
+                "Left": "Quisque sollicitudin..."
+            }
         },
         {
             "inputs": [
-                "In viverra in mi non turpis duis."
+                {
+                    "Left": "In viverra in mi non turpis duis."
+                }
             ],
-            "output": "In viverra in mi non..."
+            "output": {
+                "Left": "In viverra in mi non..."
+            }
         },
         {
             "inputs": [
-                "Sed vel massa vitae lectus cras amet."
+                {
+                    "Left": "Sed vel massa vitae lectus cras amet."
+                }
             ],
-            "output": "Sed vel massa vitae ..."
+            "output": {
+                "Left": "Sed vel massa vitae ..."
+            }
         }
     ],
     "functions": [

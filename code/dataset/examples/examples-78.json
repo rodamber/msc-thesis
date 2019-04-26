@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "smith-doe"
+                {
+                    "Left": "smith-doe"
+                }
             ],
-            "output": "doe"
+            "output": {
+                "Left": "doe"
+            }
         },
         {
             "inputs": [
-                "spelled-out"
+                {
+                    "Left": "spelled-out"
+                }
             ],
-            "output": "out"
+            "output": {
+                "Left": "out"
+            }
         },
         {
             "inputs": [
-                "32-foot"
+                {
+                    "Left": "32-foot"
+                }
             ],
-            "output": "foot"
+            "output": {
+                "Left": "foot"
+            }
         }
     ],
     "functions": [

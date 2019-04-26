@@ -2,27 +2,51 @@
     "examples": [
         {
             "inputs": [
-                "John",
-                "Doe",
-                "@gmail.com"
+                {
+                    "Left": "John"
+                },
+                {
+                    "Left": "Doe"
+                },
+                {
+                    "Left": "@gmail.com"
+                }
             ],
-            "output": "johndoe.@gmail.com"
+            "output": {
+                "Left": "johndoe.@gmail.com"
+            }
         },
         {
             "inputs": [
-                "Jane",
-                "Smith",
-                "@outsystems.com"
+                {
+                    "Left": "Jane"
+                },
+                {
+                    "Left": "Smith"
+                },
+                {
+                    "Left": "@outsystems.com"
+                }
             ],
-            "output": "janesmith.@outsystems.com"
+            "output": {
+                "Left": "janesmith.@outsystems.com"
+            }
         },
         {
             "inputs": [
-                "Michael",
-                "Bluth",
-                "@bluth.com"
+                {
+                    "Left": "Michael"
+                },
+                {
+                    "Left": "Bluth"
+                },
+                {
+                    "Left": "@bluth.com"
+                }
             ],
-            "output": "michaelbluth.@bluth.com"
+            "output": {
+                "Left": "michaelbluth.@bluth.com"
+            }
         }
     ],
     "functions": [

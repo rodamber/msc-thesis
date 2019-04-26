@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Suspendisse nec dapibus elit.\nMauris in purus est.\nVestibulum ac viverra quam.\nAliquam a elementum felis.\nSed sollicitudin nullam."
+                {
+                    "Left": "Suspendisse nec dapibus elit.\nMauris in purus est.\nVestibulum ac viverra quam.\nAliquam a elementum felis.\nSed sollicitudin nullam."
+                }
             ],
-            "output": "Suspendisse nec dapibus elit.    Mauris in purus est.    Vestibulum ac viverra quam.    Aliquam a elementum felis.    Sed sollicitudin nullam."
+            "output": {
+                "Left": "Suspendisse nec dapibus elit.    Mauris in purus est.    Vestibulum ac viverra quam.    Aliquam a elementum felis.    Sed sollicitudin nullam."
+            }
         },
         {
             "inputs": [
-                "Nulla accumsan hendrerit neque, eu ornare felis gravida id.\nPraesent tempor metus posuere."
+                {
+                    "Left": "Nulla accumsan hendrerit neque, eu ornare felis gravida id.\nPraesent tempor metus posuere."
+                }
             ],
-            "output": "Nulla accumsan hendrerit neque, eu ornare felis gravida id.    Praesent tempor metus posuere."
+            "output": {
+                "Left": "Nulla accumsan hendrerit neque, eu ornare felis gravida id.    Praesent tempor metus posuere."
+            }
         },
         {
             "inputs": [
-                "Phasellus pharetra in massa in iaculis.\nVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean aliquet nullam."
+                {
+                    "Left": "Phasellus pharetra in massa in iaculis.\nVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean aliquet nullam."
+                }
             ],
-            "output": "Phasellus pharetra in massa in iaculis.    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean aliquet nullam."
+            "output": {
+                "Left": "Phasellus pharetra in massa in iaculis.    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean aliquet nullam."
+            }
         }
     ],
     "functions": [

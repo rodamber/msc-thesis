@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "take seven"
+                {
+                    "Left": "take seven"
+                }
             ],
-            "output": "take se"
+            "output": {
+                "Left": "take se"
+            }
         },
         {
             "inputs": [
-                " and then trim it"
+                {
+                    "Left": " and then trim it"
+                }
             ],
-            "output": "and th"
+            "output": {
+                "Left": "and th"
+            }
         },
         {
             "inputs": [
-                "1234567 "
+                {
+                    "Left": "1234567 "
+                }
             ],
-            "output": "1234567"
+            "output": {
+                "Left": "1234567"
+            }
         }
     ],
     "functions": [

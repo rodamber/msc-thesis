@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "hey. I hope you are doing good"
+                {
+                    "Left": "hey. I hope you are doing good"
+                }
             ],
-            "output": "hey, I hope you are doing good"
+            "output": {
+                "Left": "hey, I hope you are doing good"
+            }
         },
         {
             "inputs": [
-                "how.are.you"
+                {
+                    "Left": "how.are.you"
+                }
             ],
-            "output": "how,are,you"
+            "output": {
+                "Left": "how,are,you"
+            }
         },
         {
             "inputs": [
-                "hello.world"
+                {
+                    "Left": "hello.world"
+                }
             ],
-            "output": "hello,world"
+            "output": {
+                "Left": "hello,world"
+            }
         }
     ],
     "functions": [

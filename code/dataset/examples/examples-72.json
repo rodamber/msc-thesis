@@ -2,24 +2,42 @@
     "examples": [
         {
             "inputs": [
-                "just use",
-                "trim "
+                {
+                    "Left": "just use"
+                },
+                {
+                    "Left": "trim "
+                }
             ],
-            "output": "just use trim"
+            "output": {
+                "Left": "just use trim"
+            }
         },
         {
             "inputs": [
-                " gudamit'",
-                "why you no use "
+                {
+                    "Left": " gudamit'"
+                },
+                {
+                    "Left": "why you no use "
+                }
             ],
-            "output": "gudamit' why you no use"
+            "output": {
+                "Left": "gudamit' why you no use"
+            }
         },
         {
             "inputs": [
-                "your",
-                "libraries  "
+                {
+                    "Left": "your"
+                },
+                {
+                    "Left": "libraries  "
+                }
             ],
-            "output": "your libraries"
+            "output": {
+                "Left": "your libraries"
+            }
         }
     ],
     "functions": [

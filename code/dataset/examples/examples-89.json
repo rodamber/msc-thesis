@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "|George|Maebe|Michael|"
+                {
+                    "Left": "|George|Maebe|Michael|"
+                }
             ],
-            "output": "Enviado para George, Maebe, Michael"
+            "output": {
+                "Left": "Enviado para George, Maebe, Michael"
+            }
         },
         {
             "inputs": [
-                "|John|Jane|Joao|"
+                {
+                    "Left": "|John|Jane|Joao|"
+                }
             ],
-            "output": "Enviado para John, Jane, Joao"
+            "output": {
+                "Left": "Enviado para John, Jane, Joao"
+            }
         },
         {
             "inputs": [
-                "|Abc|Def|Ghi|"
+                {
+                    "Left": "|Abc|Def|Ghi|"
+                }
             ],
-            "output": "Enviado para Abc, Def, Ghi"
+            "output": {
+                "Left": "Enviado para Abc, Def, Ghi"
+            }
         }
     ],
     "functions": [

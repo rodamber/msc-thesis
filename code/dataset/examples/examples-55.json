@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "what is this even supposed to?"
+                {
+                    "Left": "what is this even supposed to?"
+                }
             ],
-            "output": ""
+            "output": {
+                "Left": ""
+            }
         },
         {
             "inputs": [
-                "short one"
+                {
+                    "Left": "short one"
+                }
             ],
-            "output": "s"
+            "output": {
+                "Left": "s"
+            }
         },
         {
             "inputs": [
-                "bit larger"
+                {
+                    "Left": "bit larger"
+                }
             ],
-            "output": ""
+            "output": {
+                "Left": ""
+            }
         }
     ],
     "functions": [

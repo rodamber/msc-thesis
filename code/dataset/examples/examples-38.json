@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "should not be spaced"
+                {
+                    "Left": "should not be spaced"
+                }
             ],
-            "output": "<span id=should_not_be_spaced > "
+            "output": {
+                "Left": "<span id=should_not_be_spaced > "
+            }
         },
         {
             "inputs": [
-                "but underscored"
+                {
+                    "Left": "but underscored"
+                }
             ],
-            "output": "<span id=but_underscored > "
+            "output": {
+                "Left": "<span id=but_underscored > "
+            }
         },
         {
             "inputs": [
-                "cant do anything right"
+                {
+                    "Left": "cant do anything right"
+                }
             ],
-            "output": "<span id=cant_do_anything_right > "
+            "output": {
+                "Left": "<span id=cant_do_anything_right > "
+            }
         }
     ],
     "functions": [

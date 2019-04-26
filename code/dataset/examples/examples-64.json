@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "# this is a comment"
+                {
+                    "Left": "# this is a comment"
+                }
             ],
-            "output": "# this is a comment"
+            "output": {
+                "Left": "# this is a comment"
+            }
         },
         {
             "inputs": [
-                "code code code # comment"
+                {
+                    "Left": "code code code # comment"
+                }
             ],
-            "output": "# comment"
+            "output": {
+                "Left": "# comment"
+            }
         },
         {
             "inputs": [
-                "sigh more code # more comments"
+                {
+                    "Left": "sigh more code # more comments"
+                }
             ],
-            "output": "# more comments"
+            "output": {
+                "Left": "# more comments"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "john.doe@outsystems.com"
+                {
+                    "Left": "john.doe@outsystems.com"
+                }
             ],
-            "output": "john.doe"
+            "output": {
+                "Left": "john.doe"
+            }
         },
         {
             "inputs": [
-                "jane.moe@cmu.edu"
+                {
+                    "Left": "jane.moe@cmu.edu"
+                }
             ],
-            "output": "jane.moe"
+            "output": {
+                "Left": "jane.moe"
+            }
         },
         {
             "inputs": [
-                "anonymous@tecnico.pt"
+                {
+                    "Left": "anonymous@tecnico.pt"
+                }
             ],
-            "output": "anonymous"
+            "output": {
+                "Left": "anonymous"
+            }
         }
     ],
     "functions": [

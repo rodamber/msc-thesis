@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "one|two|three"
+                {
+                    "Left": "one|two|three"
+                }
             ],
-            "output": "one | two | three"
+            "output": {
+                "Left": "one | two | three"
+            }
         },
         {
             "inputs": [
-                "a|b|c"
+                {
+                    "Left": "a|b|c"
+                }
             ],
-            "output": "a | b | c"
+            "output": {
+                "Left": "a | b | c"
+            }
         },
         {
             "inputs": [
-                "this|is|not|a|regex"
+                {
+                    "Left": "this|is|not|a|regex"
+                }
             ],
-            "output": "this | is | not | a | regex"
+            "output": {
+                "Left": "this | is | not | a | regex"
+            }
         }
     ],
     "functions": [

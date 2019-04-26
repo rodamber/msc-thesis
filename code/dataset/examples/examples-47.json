@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "00123"
+                {
+                    "Left": "00123"
+                }
             ],
-            "output": "123"
+            "output": {
+                "Left": "123"
+            }
         },
         {
             "inputs": [
-                "123"
+                {
+                    "Left": "123"
+                }
             ],
-            "output": "123"
+            "output": {
+                "Left": "123"
+            }
         },
         {
             "inputs": [
-                "0000001"
+                {
+                    "Left": "0000001"
+                }
             ],
-            "output": "1"
+            "output": {
+                "Left": "1"
+            }
         }
     ],
     "functions": [

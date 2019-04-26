@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                " this is the same as trim man...  "
+                {
+                    "Left": " this is the same as trim man...  "
+                }
             ],
-            "output": "this is the same as trim man..."
+            "output": {
+                "Left": "this is the same as trim man..."
+            }
         },
         {
             "inputs": [
-                "  know your libraries"
+                {
+                    "Left": "  know your libraries"
+                }
             ],
-            "output": "know your libraries"
+            "output": {
+                "Left": "know your libraries"
+            }
         },
         {
             "inputs": [
-                "or is trim too young? "
+                {
+                    "Left": "or is trim too young? "
+                }
             ],
-            "output": "or is trim too young?"
+            "output": {
+                "Left": "or is trim too young?"
+            }
         }
     ],
     "functions": [

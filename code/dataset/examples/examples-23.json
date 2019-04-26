@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Nam quis purus massa metus."
+                {
+                    "Left": "Nam quis purus massa metus."
+                }
             ],
-            "output": "Nam q..."
+            "output": {
+                "Left": "Nam q..."
+            }
         },
         {
             "inputs": [
-                "Hey."
+                {
+                    "Left": "Hey."
+                }
             ],
-            "output": "Hey...."
+            "output": {
+                "Left": "Hey...."
+            }
         },
         {
             "inputs": [
-                "Praesent"
+                {
+                    "Left": "Praesent"
+                }
             ],
-            "output": "Praes..."
+            "output": {
+                "Left": "Praes..."
+            }
         }
     ],
     "functions": [

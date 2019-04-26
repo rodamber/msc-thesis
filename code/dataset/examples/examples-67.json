@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                " trim me "
+                {
+                    "Left": " trim me "
+                }
             ],
-            "output": "trim me \u00e2\u201a\u00ac"
+            "output": {
+                "Left": "trim me \u00e2\u201a\u00ac"
+            }
         },
         {
             "inputs": [
-                "one more pass   "
+                {
+                    "Left": "one more pass   "
+                }
             ],
-            "output": "one more pass \u00e2\u201a\u00ac"
+            "output": {
+                "Left": "one more pass \u00e2\u201a\u00ac"
+            }
         },
         {
             "inputs": [
-                "  so smooth"
+                {
+                    "Left": "  so smooth"
+                }
             ],
-            "output": "so smooth \u00e2\u201a\u00ac"
+            "output": {
+                "Left": "so smooth \u00e2\u201a\u00ac"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "In+hac+habitasse+platea+dictumst.+Sed+dapibus+sit+amet+neque+gravida+sed."
+                {
+                    "Left": "In+hac+habitasse+platea+dictumst.+Sed+dapibus+sit+amet+neque+gravida+sed."
+                }
             ],
-            "output": "In hac habitasse platea dictumst. Sed dapibus"
+            "output": {
+                "Left": "In hac habitasse platea dictumst. Sed dapibus"
+            }
         },
         {
             "inputs": [
-                "Maecenas+mattis+nec+orci+a+luctus.+Maecenas+metus."
+                {
+                    "Left": "Maecenas+mattis+nec+orci+a+luctus.+Maecenas+metus."
+                }
             ],
-            "output": "Maecenas mattis nec orci a luctus. Maecenas m"
+            "output": {
+                "Left": "Maecenas mattis nec orci a luctus. Maecenas m"
+            }
         },
         {
             "inputs": [
-                "Sed+vehicula+vestibulum+metus."
+                {
+                    "Left": "Sed+vehicula+vestibulum+metus."
+                }
             ],
-            "output": "Sed vehicula vestibulum metus."
+            "output": {
+                "Left": "Sed vehicula vestibulum metus."
+            }
         }
     ],
     "functions": [

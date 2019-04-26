@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "Make it two weeks"
+                {
+                    "Left": "Make it two weeks"
+                }
             ],
-            "output": "make it two wks"
+            "output": {
+                "Left": "make it two wks"
+            }
         },
         {
             "inputs": [
-                "Weeks 2 and 3"
+                {
+                    "Left": "Weeks 2 and 3"
+                }
             ],
-            "output": "wks 2 and 3"
+            "output": {
+                "Left": "wks 2 and 3"
+            }
         },
         {
             "inputs": [
-                "get back to me in 4 weeks"
+                {
+                    "Left": "get back to me in 4 weeks"
+                }
             ],
-            "output": "get back to me in 4 wks"
+            "output": {
+                "Left": "get back to me in 4 wks"
+            }
         }
     ],
     "functions": [

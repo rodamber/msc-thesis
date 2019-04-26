@@ -2,27 +2,51 @@
     "examples": [
         {
             "inputs": [
-                "abcdef",
-                3,
-                "xyz"
+                {
+                    "Left": "abcdef"
+                },
+                {
+                    "Right": 3
+                },
+                {
+                    "Left": "xyz"
+                }
             ],
-            "output": "xyz"
+            "output": {
+                "Left": "xyz"
+            }
         },
         {
             "inputs": [
-                "012345",
-                4,
-                "742"
+                {
+                    "Left": "012345"
+                },
+                {
+                    "Right": 4
+                },
+                {
+                    "Left": "742"
+                }
             ],
-            "output": "0742"
+            "output": {
+                "Left": "0742"
+            }
         },
         {
             "inputs": [
-                "abc132",
-                5,
-                "xyz"
+                {
+                    "Left": "abc132"
+                },
+                {
+                    "Right": 5
+                },
+                {
+                    "Left": "xyz"
+                }
             ],
-            "output": "abxyz"
+            "output": {
+                "Left": "abxyz"
+            }
         }
     ],
     "functions": [

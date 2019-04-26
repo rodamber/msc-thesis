@@ -2,24 +2,42 @@
     "examples": [
         {
             "inputs": [
-                "hello",
-                "world"
+                {
+                    "Left": "hello"
+                },
+                {
+                    "Left": "world"
+                }
             ],
-            "output": "hello-world"
+            "output": {
+                "Left": "hello-world"
+            }
         },
         {
             "inputs": [
-                "train it",
-                "spot it"
+                {
+                    "Left": "train it"
+                },
+                {
+                    "Left": "spot it"
+                }
             ],
-            "output": "train-spot "
+            "output": {
+                "Left": "train-spot "
+            }
         },
         {
             "inputs": [
-                "rain yeah",
-                "fenix id"
+                {
+                    "Left": "rain yeah"
+                },
+                {
+                    "Left": "fenix id"
+                }
             ],
-            "output": "rain -fenix"
+            "output": {
+                "Left": "rain -fenix"
+            }
         }
     ],
     "functions": [

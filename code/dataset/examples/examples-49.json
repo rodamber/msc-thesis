@@ -2,24 +2,42 @@
     "examples": [
         {
             "inputs": [
-                "john",
-                "doe"
+                {
+                    "Left": "john"
+                },
+                {
+                    "Left": "doe"
+                }
             ],
-            "output": "JOHN DOE"
+            "output": {
+                "Left": "JOHN DOE"
+            }
         },
         {
             "inputs": [
-                "jane",
-                "smith"
+                {
+                    "Left": "jane"
+                },
+                {
+                    "Left": "smith"
+                }
             ],
-            "output": "JANE SMITH"
+            "output": {
+                "Left": "JANE SMITH"
+            }
         },
         {
             "inputs": [
-                "michael",
-                "scott"
+                {
+                    "Left": "michael"
+                },
+                {
+                    "Left": "scott"
+                }
             ],
-            "output": "MICHAEL SCOTT"
+            "output": {
+                "Left": "MICHAEL SCOTT"
+            }
         }
     ],
     "functions": [

@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "George"
+                {
+                    "Left": "George"
+                }
             ],
-            "output": "george"
+            "output": {
+                "Left": "george"
+            }
         },
         {
             "inputs": [
-                "Maebe"
+                {
+                    "Left": "Maebe"
+                }
             ],
-            "output": "maebe"
+            "output": {
+                "Left": "maebe"
+            }
         },
         {
             "inputs": [
-                "Michael"
+                {
+                    "Left": "Michael"
+                }
             ],
-            "output": "michael"
+            "output": {
+                "Left": "michael"
+            }
         }
     ],
     "functions": [

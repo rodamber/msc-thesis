@@ -2,24 +2,42 @@
     "examples": [
         {
             "inputs": [
-                "george",
-                "conchichina xy"
+                {
+                    "Left": "george"
+                },
+                {
+                    "Left": "conchichina xy"
+                }
             ],
-            "output": "george At:conchichina"
+            "output": {
+                "Left": "george At:conchichina"
+            }
         },
         {
             "inputs": [
-                "maebe",
-                "terra de sao nunca a tarde ab"
+                {
+                    "Left": "maebe"
+                },
+                {
+                    "Left": "terra de sao nunca a tarde ab"
+                }
             ],
-            "output": "maebe At:terra de sao nunca a tarde"
+            "output": {
+                "Left": "maebe At:terra de sao nunca a tarde"
+            }
         },
         {
             "inputs": [
-                "michael",
-                "cacar gambozinos 12"
+                {
+                    "Left": "michael"
+                },
+                {
+                    "Left": "cacar gambozinos 12"
+                }
             ],
-            "output": "michael At:cacar gambozinos"
+            "output": {
+                "Left": "michael At:cacar gambozinos"
+            }
         }
     ],
     "functions": [

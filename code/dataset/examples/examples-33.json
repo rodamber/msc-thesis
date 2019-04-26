@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "A001 John Doe"
+                {
+                    "Left": "A001 John Doe"
+                }
             ],
-            "output": "John"
+            "output": {
+                "Left": "John"
+            }
         },
         {
             "inputs": [
-                "B234 Jane Moe"
+                {
+                    "Left": "B234 Jane Moe"
+                }
             ],
-            "output": "Jane"
+            "output": {
+                "Left": "Jane"
+            }
         },
         {
             "inputs": [
-                "C099 Not a standard"
+                {
+                    "Left": "C099 Not a standard"
+                }
             ],
-            "output": "Not "
+            "output": {
+                "Left": "Not "
+            }
         }
     ],
     "functions": [

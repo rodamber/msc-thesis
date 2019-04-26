@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "no - he said"
+                {
+                    "Left": "no - he said"
+                }
             ],
-            "output": "Sprint: he said"
+            "output": {
+                "Left": "Sprint: he said"
+            }
         },
         {
             "inputs": [
-                "but but why - she said"
+                {
+                    "Left": "but but why - she said"
+                }
             ],
-            "output": "Sprint: she said"
+            "output": {
+                "Left": "Sprint: she said"
+            }
         },
         {
             "inputs": [
-                "well, because i say so - he said   "
+                {
+                    "Left": "well, because i say so - he said   "
+                }
             ],
-            "output": "Sprint: he said   "
+            "output": {
+                "Left": "Sprint: he said   "
+            }
         }
     ],
     "functions": [

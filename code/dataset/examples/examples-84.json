@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "George Michael"
+                {
+                    "Left": "George Michael"
+                }
             ],
-            "output": "https://georgemichael.com"
+            "output": {
+                "Left": "https://georgemichael.com"
+            }
         },
         {
             "inputs": [
-                "Maebe Bluth"
+                {
+                    "Left": "Maebe Bluth"
+                }
             ],
-            "output": "https://maebebluth.com"
+            "output": {
+                "Left": "https://maebebluth.com"
+            }
         },
         {
             "inputs": [
-                "Michael Bluth"
+                {
+                    "Left": "Michael Bluth"
+                }
             ],
-            "output": "https://michaelbluth.com"
+            "output": {
+                "Left": "https://michaelbluth.com"
+            }
         }
     ],
     "functions": [

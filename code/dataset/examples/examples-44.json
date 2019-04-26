@@ -2,21 +2,33 @@
     "examples": [
         {
             "inputs": [
-                "My Bed is not your bed"
+                {
+                    "Left": "My Bed is not your bed"
+                }
             ],
-            "output": "my is not your bed"
+            "output": {
+                "Left": "my is not your bed"
+            }
         },
         {
             "inputs": [
-                "bed to Bed"
+                {
+                    "Left": "bed to Bed"
+                }
             ],
-            "output": "to bed"
+            "output": {
+                "Left": "to bed"
+            }
         },
         {
             "inputs": [
-                "something with \"Bed \""
+                {
+                    "Left": "something with \"Bed \""
+                }
             ],
-            "output": "something with \"\""
+            "output": {
+                "Left": "something with \"\""
+            }
         }
     ],
     "functions": [
