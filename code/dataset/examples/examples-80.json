@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "george.bluth@outsystems.com"
+            ],
+            "output": "@outsystems.com"
+        },
+        {
+            "inputs": [
+                "maebe@cmu.edu"
+            ],
+            "output": "@cmu.edu"
+        },
+        {
+            "inputs": [
+                "michael@tecnico.pt"
+            ],
+            "output": "@tecnico.pt"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, Index(x0, \"@\", 0), Sub(Length(x0), Index(x0, \"@\", 0)))"
+}

@@ -1,0 +1,33 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "John",
+                "Doe",
+                "@gmail.com"
+            ],
+            "output": "johndoe.@gmail.com"
+        },
+        {
+            "inputs": [
+                "Jane",
+                "Smith",
+                "@outsystems.com"
+            ],
+            "output": "janesmith.@outsystems.com"
+        },
+        {
+            "inputs": [
+                "Michael",
+                "Bluth",
+                "@bluth.com"
+            ],
+            "output": "michaelbluth.@bluth.com"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "ToLower"
+    ],
+    "text": "ToLower(Concat(Concat(Concat(x0, x1), \".\"), x2))"
+}

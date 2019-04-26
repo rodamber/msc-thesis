@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "take out the last 3 chars"
+            ],
+            "output": "ars"
+        },
+        {
+            "inputs": [
+                "abc"
+            ],
+            "output": "abc"
+        },
+        {
+            "inputs": [
+                "outsystems.com"
+            ],
+            "output": "com"
+        }
+    ],
+    "functions": [
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, Sub(Length(x0), 3), Length(x0))"
+}

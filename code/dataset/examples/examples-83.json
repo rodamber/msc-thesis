@@ -1,0 +1,32 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "george",
+                "conchichina xy"
+            ],
+            "output": "george At:conchichina"
+        },
+        {
+            "inputs": [
+                "maebe",
+                "terra de sao nunca a tarde ab"
+            ],
+            "output": "maebe At:terra de sao nunca a tarde"
+        },
+        {
+            "inputs": [
+                "michael",
+                "cacar gambozinos 12"
+            ],
+            "output": "michael At:cacar gambozinos"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Concat(Concat(x0, \" At:\"), Substr(x1, 0, Sub(Length(x1), 3)))"
+}

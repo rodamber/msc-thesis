@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "george"
+            ],
+            "output": "George"
+        },
+        {
+            "inputs": [
+                "maebe"
+            ],
+            "output": "Maebe"
+        },
+        {
+            "inputs": [
+                "michael"
+            ],
+            "output": "Michael"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Length",
+        "Sub",
+        "Substr",
+        "ToUpper"
+    ],
+    "text": "Concat(ToUpper(Substr(x0, 0, 1)), Substr(x0, 1, Sub(Length(x0), 1)))"
+}

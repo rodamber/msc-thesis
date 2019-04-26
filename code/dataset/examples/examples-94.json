@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "<hello>"
+            ],
+            "output": "hello"
+        },
+        {
+            "inputs": [
+                "<goodbye>"
+            ],
+            "output": "goodbye"
+        },
+        {
+            "inputs": [
+                "<sigh>"
+            ],
+            "output": "sigh"
+        }
+    ],
+    "functions": [
+        "Add",
+        "Index",
+        "Sub",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, Add(Index(x0, \"<\", 0), 1), Sub(Index(x0, \">\", 0), 1))"
+}

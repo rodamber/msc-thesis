@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Sed metus urna turpis duis."
+            ],
+            "output": "...rpis duis."
+        },
+        {
+            "inputs": [
+                "Praesent vitae dui posuere."
+            ],
+            "output": "...i posuere."
+        },
+        {
+            "inputs": [
+                "Fusce sapien eros volutpat."
+            ],
+            "output": "... volutpat."
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Concat(\"...\", Substr(x0, Sub(Length(x0), 10), Length(x0)))"
+}

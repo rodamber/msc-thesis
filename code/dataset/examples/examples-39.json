@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "who cares about when"
+            ],
+            "output": "Created on who cares about "
+        },
+        {
+            "inputs": [
+                "maybe someone will care"
+            ],
+            "output": "Created on maybe someone wi"
+        },
+        {
+            "inputs": [
+                "but then who else?"
+            ],
+            "output": "Created on but then who els"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Substr"
+    ],
+    "text": "Concat(\"Created on \", Substr(x0, 0, 16))"
+}

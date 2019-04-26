@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Nam quis purus massa metus."
+            ],
+            "output": "Nam q..."
+        },
+        {
+            "inputs": [
+                "Hey."
+            ],
+            "output": "Hey...."
+        },
+        {
+            "inputs": [
+                "Praesent"
+            ],
+            "output": "Praes..."
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Substr"
+    ],
+    "text": "Concat(Substr(x0, 0, 5), \"...\")"
+}

@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."
+            ],
+            "output": "/ Nulla eu vehicula enim, in metus."
+        },
+        {
+            "inputs": [
+                "Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus."
+            ],
+            "output": "/ Vestibulum ut ligula metus."
+        },
+        {
+            "inputs": [
+                "Praesent in pulvinar sapien. / Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. / Aliquam cursus est in massa metus."
+            ],
+            "output": "/ Orci varius natoque penatibus et magnis dis part"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Substr"
+    ],
+    "text": "Substr(x0, Index(x0, \"/\", 10), 50)"
+}

@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "alo_helloworld"
+            ],
+            "output": "hellowor"
+        },
+        {
+            "inputs": [
+                "123_testtest"
+            ],
+            "output": "testte"
+        },
+        {
+            "inputs": [
+                "wazzuuuuuuuuup_xyz"
+            ],
+            "output": "xyz"
+        }
+    ],
+    "functions": [
+        "Add",
+        "Index",
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, Add(Index(x0, \"_\", 0), 1), Sub(Length(x0), 6))"
+}

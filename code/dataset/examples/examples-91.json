@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "George"
+            ],
+            "output": "george"
+        },
+        {
+            "inputs": [
+                "Maebe"
+            ],
+            "output": "maebe"
+        },
+        {
+            "inputs": [
+                "Michael"
+            ],
+            "output": "michael"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Length",
+        "Sub",
+        "Substr",
+        "ToLower"
+    ],
+    "text": "Concat(ToLower(Substr(x0, 0, 1)), Substr(x0, 1, Sub(Length(x0), 1)))"
+}

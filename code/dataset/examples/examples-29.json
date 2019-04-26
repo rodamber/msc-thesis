@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Sed scelerisque, tortor sit amet."
+            ],
+            "output": "Sed"
+        },
+        {
+            "inputs": [
+                "Vestibulum non commodo ex. Maecenas a est sagittis, dapibus nibh."
+            ],
+            "output": "Vestibulum"
+        },
+        {
+            "inputs": [
+                "Maecenas in."
+            ],
+            "output": "Maecenas"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, Index(x0, \" \", 0))"
+}

@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "My Bed is not your bed"
+            ],
+            "output": "my is not your bed"
+        },
+        {
+            "inputs": [
+                "bed to Bed"
+            ],
+            "output": "to bed"
+        },
+        {
+            "inputs": [
+                "something with \"Bed \""
+            ],
+            "output": "something with \"\""
+        }
+    ],
+    "functions": [
+        "Replace",
+        "ToLower"
+    ],
+    "text": "Replace(ToLower(x0), \"bed \", \"\")"
+}

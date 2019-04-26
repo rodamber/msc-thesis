@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Hello World"
+            ],
+            "output": "Hello&nbsp;World"
+        },
+        {
+            "inputs": [
+                "Indicates the (zero-based) index where the search starts."
+            ],
+            "output": "Indicates&nbsp;the&nbsp;(zero-based)&nbsp;index&nbsp;where&nbsp;the&nbsp;search&nbsp;starts."
+        },
+        {
+            "inputs": [
+                "Can be used with attributes in aggregates."
+            ],
+            "output": "Can&nbsp;be&nbsp;used&nbsp;with&nbsp;attributes&nbsp;in&nbsp;aggregates."
+        }
+    ],
+    "functions": [
+        "Replace"
+    ],
+    "text": "Replace(x0, \" \", \"&nbsp;\")"
+}

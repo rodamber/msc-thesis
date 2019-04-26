@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "take seven"
+            ],
+            "output": "take se"
+        },
+        {
+            "inputs": [
+                " and then trim it"
+            ],
+            "output": "and th"
+        },
+        {
+            "inputs": [
+                "1234567 "
+            ],
+            "output": "1234567"
+        }
+    ],
+    "functions": [
+        "Substr",
+        "TrimEnd",
+        "TrimStart"
+    ],
+    "text": "TrimEnd(TrimStart(Substr(x0, 0, 7)))"
+}

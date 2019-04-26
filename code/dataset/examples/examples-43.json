@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "https://ThatCoolWebsite.com"
+            ],
+            "output": "thatcoolwebsite.com"
+        },
+        {
+            "inputs": [
+                "https://secure.com"
+            ],
+            "output": "secure.com"
+        },
+        {
+            "inputs": [
+                "http://insecure.com"
+            ],
+            "output": "insecure.com"
+        }
+    ],
+    "functions": [
+        "Replace",
+        "ToLower"
+    ],
+    "text": "Replace(Replace(ToLower(x0), \"http://\", \"\"), \"https://\", \"\")"
+}

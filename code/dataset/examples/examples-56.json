@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "what are you doing? (sorry)"
+            ],
+            "output": "what are you doing?"
+        },
+        {
+            "inputs": [
+                "did you want that? (hmm..)"
+            ],
+            "output": "did you want that?"
+        },
+        {
+            "inputs": [
+                "maybe with add? (oh i see)"
+            ],
+            "output": "maybe with add?"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, Sub(Index(x0, \"(\", 0), 1))"
+}

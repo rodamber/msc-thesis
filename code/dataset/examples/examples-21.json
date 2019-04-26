@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "10-05-2019"
+            ],
+            "output": "10/05/20"
+        },
+        {
+            "inputs": [
+                "31-12-1999"
+            ],
+            "output": "31/12/19"
+        },
+        {
+            "inputs": [
+                "01-01-2000"
+            ],
+            "output": "01/01/20"
+        }
+    ],
+    "functions": [
+        "Replace",
+        "Substr"
+    ],
+    "text": "Replace(Substr(x0, 0, 8), \"-\", \"/\")"
+}

@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "DO IT"
+            ],
+            "output": "do it!@"
+        },
+        {
+            "inputs": [
+                "COME ON"
+            ],
+            "output": "come on!@"
+        },
+        {
+            "inputs": [
+                "LET'S GO FAST"
+            ],
+            "output": "let's go fast!@"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "ToLower"
+    ],
+    "text": "Concat(ToLower(x0), \"!@\")"
+}

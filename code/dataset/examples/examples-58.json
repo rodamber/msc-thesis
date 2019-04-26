@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "who cares about the last one."
+            ],
+            "output": "who cares about the last one"
+        },
+        {
+            "inputs": [
+                "just let them die!"
+            ],
+            "output": "just let them die"
+        },
+        {
+            "inputs": [
+                "oh god what have i become!"
+            ],
+            "output": "oh god what have i become"
+        }
+    ],
+    "functions": [
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, Sub(Length(x0), 1))"
+}

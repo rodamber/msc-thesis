@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "no - he said"
+            ],
+            "output": "he said"
+        },
+        {
+            "inputs": [
+                "but but why - she said"
+            ],
+            "output": "she said"
+        },
+        {
+            "inputs": [
+                "well, because i say so - he said   "
+            ],
+            "output": "he said"
+        }
+    ],
+    "functions": [
+        "Add",
+        "Index",
+        "Length",
+        "Substr",
+        "Trim"
+    ],
+    "text": "Trim(Substr(x0, Add(Index(x0, \"-\", 0), 1), Length(x0)))"
+}

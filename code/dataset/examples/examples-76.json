@@ -1,0 +1,35 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "abcdef",
+                3,
+                "xyz"
+            ],
+            "output": "xyz"
+        },
+        {
+            "inputs": [
+                "012345",
+                4,
+                "742"
+            ],
+            "output": "0742"
+        },
+        {
+            "inputs": [
+                "abc132",
+                5,
+                "xyz"
+            ],
+            "output": "abxyz"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Concat(Substr(x0, 0, Sub(x1, Length(x2))), x2)"
+}

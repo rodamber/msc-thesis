@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Praesent sed diam vel amet."
+            ],
+            "output": "Praesent sed diam vel amet...."
+        },
+        {
+            "inputs": [
+                "Donec ultrices finibus ultrices. Quisque lacus posuere."
+            ],
+            "output": "Donec ultrices finibus ultrices. Quisque lacus pos..."
+        },
+        {
+            "inputs": [
+                "In hac habitasse platea dictumst. Sed dapibus sit amet neque gravida sed."
+            ],
+            "output": "In hac habitasse platea dictumst. Sed dapibus sit ..."
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Substr"
+    ],
+    "text": "Concat(Substr(x0, 0, 50), \"...\")"
+}

@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "john.doe@outsystems.com"
+            ],
+            "output": "john.doe"
+        },
+        {
+            "inputs": [
+                "jane.moe@cmu.edu"
+            ],
+            "output": "jane.moe"
+        },
+        {
+            "inputs": [
+                "anonymous@tecnico.pt"
+            ],
+            "output": "anonymous"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, Index(x0, \"@\", 0))"
+}

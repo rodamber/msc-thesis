@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "hello  "
+            ],
+            "output": "HELLO"
+        },
+        {
+            "inputs": [
+                "how are you today?  "
+            ],
+            "output": "HOW ARE YOU TODAY?"
+        },
+        {
+            "inputs": [
+                "you (yes you) are awesome!!! "
+            ],
+            "output": "YOU (YES YOU) ARE AWESOME!!!"
+        }
+    ],
+    "functions": [
+        "ToUpper",
+        "Trim"
+    ],
+    "text": "Trim(ToUpper(x0))"
+}

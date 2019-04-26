@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Quisque sollicitudin volutpat."
+            ],
+            "output": "Quisque sollicitudin..."
+        },
+        {
+            "inputs": [
+                "In viverra in mi non turpis duis."
+            ],
+            "output": "In viverra in mi non..."
+        },
+        {
+            "inputs": [
+                "Sed vel massa vitae lectus cras amet."
+            ],
+            "output": "Sed vel massa vitae ..."
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Substr"
+    ],
+    "text": "Concat(Substr(x0, 0, 20), \"...\")"
+}

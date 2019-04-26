@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "https://outsystems.com"
+            ],
+            "output": "outsystems"
+        },
+        {
+            "inputs": [
+                "http://cmu.edu"
+            ],
+            "output": "cmu"
+        },
+        {
+            "inputs": [
+                "http://tecnico.ulisboa.pt"
+            ],
+            "output": "tecnico"
+        }
+    ],
+    "functions": [
+        "Add",
+        "Index",
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, Add(1, Index(x0, \"/\", Add(1, Index(x0, \"/\", 0)))), Sub(Index(x0, \".\", 0), Add(1, Index(x0, \"/\", Add(1, Index(x0, \"/\", 0))))))"
+}

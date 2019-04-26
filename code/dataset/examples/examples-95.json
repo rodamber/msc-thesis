@@ -1,0 +1,31 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "no - he said"
+            ],
+            "output": "Sprint: he said"
+        },
+        {
+            "inputs": [
+                "but but why - she said"
+            ],
+            "output": "Sprint: she said"
+        },
+        {
+            "inputs": [
+                "well, because i say so - he said   "
+            ],
+            "output": "Sprint: he said   "
+        }
+    ],
+    "functions": [
+        "Add",
+        "Concat",
+        "Index",
+        "Length",
+        "Substr",
+        "TrimStart"
+    ],
+    "text": "Concat(\"Sprint: \", TrimStart(Substr(x0, Add(Index(x0, \"-\", 0), 1), Length(x0))))"
+}

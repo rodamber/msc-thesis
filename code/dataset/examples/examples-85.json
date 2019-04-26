@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "aenean aliquam turpis duis."
+            ],
+            "output": "Aenean aliquam turpi"
+        },
+        {
+            "inputs": [
+                "curabitur euismod volutpat."
+            ],
+            "output": "Curabitur euismod vo"
+        },
+        {
+            "inputs": [
+                "proin pulvinar ornare amet."
+            ],
+            "output": "Proin pulvinar ornar"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Substr",
+        "ToLower",
+        "ToUpper"
+    ],
+    "text": "Concat(ToUpper(Substr(x0, 0, 1)), ToLower(Substr(x0, 1, 19)))"
+}

@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "A12345678 John Doe"
+            ],
+            "output": "John Doe"
+        },
+        {
+            "inputs": [
+                "B10293481 Jane Moe"
+            ],
+            "output": "Jane Moe"
+        },
+        {
+            "inputs": [
+                "C12341341 Anonymous"
+            ],
+            "output": "Anonymous"
+        }
+    ],
+    "functions": [
+        "Length",
+        "Substr"
+    ],
+    "text": "Substr(x0, 10, Length(x0))"
+}

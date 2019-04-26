@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "abc"
+            ],
+            "output": "ABC"
+        },
+        {
+            "inputs": [
+                "aBcdef"
+            ],
+            "output": "ABCDEF"
+        },
+        {
+            "inputs": [
+                "aaseHKLsed"
+            ],
+            "output": "AASEHKLSED"
+        }
+    ],
+    "functions": [
+        "ToUpper"
+    ],
+    "text": "ToUpper(x0)"
+}

@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "?01-01-1999"
+            ],
+            "output": "01-01-1999"
+        },
+        {
+            "inputs": [
+                "?table cell"
+            ],
+            "output": "table cell"
+        },
+        {
+            "inputs": [
+                "Xprobably this"
+            ],
+            "output": "probably this"
+        }
+    ],
+    "functions": [
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, 1, Sub(Length(x0), 1))"
+}

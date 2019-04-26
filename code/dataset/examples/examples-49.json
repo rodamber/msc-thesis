@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "john",
+                "doe"
+            ],
+            "output": "JOHN DOE"
+        },
+        {
+            "inputs": [
+                "jane",
+                "smith"
+            ],
+            "output": "JANE SMITH"
+        },
+        {
+            "inputs": [
+                "michael",
+                "scott"
+            ],
+            "output": "MICHAEL SCOTT"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "ToUpper"
+    ],
+    "text": "ToUpper(Concat(Concat(x0, \" \"), x1))"
+}

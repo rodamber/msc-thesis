@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "who knows  "
+            ],
+            "output": "Prefix who knows"
+        },
+        {
+            "inputs": [
+                "  we'll see"
+            ],
+            "output": "Prefix we'll see"
+        },
+        {
+            "inputs": [
+                "  oh come on  "
+            ],
+            "output": "Prefix oh come on"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Trim"
+    ],
+    "text": "Concat(\"Prefix \", Trim(x0))"
+}

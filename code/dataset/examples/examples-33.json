@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "A001 John Doe"
+            ],
+            "output": "John"
+        },
+        {
+            "inputs": [
+                "B234 Jane Moe"
+            ],
+            "output": "Jane"
+        },
+        {
+            "inputs": [
+                "C099 Not a standard"
+            ],
+            "output": "Not "
+        }
+    ],
+    "functions": [
+        "Index",
+        "Substr"
+    ],
+    "text": "Substr(x0, 5, Index(x0, \" \", 0))"
+}

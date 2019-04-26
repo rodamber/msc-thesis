@@ -1,0 +1,32 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "take last three",
+                "and add this"
+            ],
+            "output": "ree and add this"
+        },
+        {
+            "inputs": [
+                "ueueueueueu",
+                "xyz"
+            ],
+            "output": "ueu xyz"
+        },
+        {
+            "inputs": [
+                "george not",
+                "and maebe"
+            ],
+            "output": "not and maebe"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Concat(Concat(Substr(x0, Sub(Length(x0), 3), 3), \" \"), x1)"
+}

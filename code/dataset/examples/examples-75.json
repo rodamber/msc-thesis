@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Fusce sapien eros volutpat."
+            ],
+            "output": "Fusce...tpat."
+        },
+        {
+            "inputs": [
+                "Sed condimentum at posuere."
+            ],
+            "output": "Sed c...uere."
+        },
+        {
+            "inputs": [
+                "Morbi id ullamcorper metus."
+            ],
+            "output": "Morbi...etus."
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Concat(Concat(Substr(x0, 0, 5), \"...\"), Substr(x0, Sub(Length(x0), 5), 5))"
+}

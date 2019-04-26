@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "George Michael"
+            ],
+            "output": "Michael"
+        },
+        {
+            "inputs": [
+                "Michael Bluth"
+            ],
+            "output": "Bluth"
+        },
+        {
+            "inputs": [
+                "Maebe Bluth"
+            ],
+            "output": "Bluth"
+        }
+    ],
+    "functions": [
+        "Add",
+        "Index",
+        "Length",
+        "Substr"
+    ],
+    "text": "Substr(x0, Add(Index(x0, \" \", 0), 1), Length(x0))"
+}

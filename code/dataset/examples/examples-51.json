@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "George ",
+                "Michael "
+            ],
+            "output": "George  Michael"
+        },
+        {
+            "inputs": [
+                "Maebe",
+                "Bluth   "
+            ],
+            "output": "Maebe Bluth"
+        },
+        {
+            "inputs": [
+                "George",
+                "Sr. "
+            ],
+            "output": "George Sr."
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Trim"
+    ],
+    "text": "Trim(Concat(Concat(x0, \" \"), x1))"
+}

@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                " smith - doe "
+            ],
+            "output": "smith"
+        },
+        {
+            "inputs": [
+                "  spelled-out"
+            ],
+            "output": "spelled"
+        },
+        {
+            "inputs": [
+                "32-foot  "
+            ],
+            "output": "32"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Substr",
+        "Trim"
+    ],
+    "text": "Trim(Substr(x0, 0, Index(x0, \"-\", 0)))"
+}

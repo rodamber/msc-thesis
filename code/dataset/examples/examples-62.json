@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "1234: try this (hmm)"
+            ],
+            "output": "try this"
+        },
+        {
+            "inputs": [
+                "ABCD: then that (ok)"
+            ],
+            "output": "then that"
+        },
+        {
+            "inputs": [
+                "a1b2: so this is how it feels (boring)"
+            ],
+            "output": "so this is how it feels"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, 6, Sub(Index(x0, \"(\", 0), 7))"
+}

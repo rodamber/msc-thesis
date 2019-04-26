@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "that/folder/"
+            ],
+            "output": "thatfolder"
+        },
+        {
+            "inputs": [
+                "this/folder/is/longer/"
+            ],
+            "output": "thisfolderislonger"
+        },
+        {
+            "inputs": [
+                "what/about/this/one/"
+            ],
+            "output": "whataboutthisone"
+        }
+    ],
+    "functions": [
+        "Replace"
+    ],
+    "text": "Replace(x0, \"/\", \"\")"
+}

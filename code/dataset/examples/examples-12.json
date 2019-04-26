@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "hello word",
+                5
+            ],
+            "output": "hello"
+        },
+        {
+            "inputs": [
+                "hi my name is",
+                10
+            ],
+            "output": "hi my name"
+        },
+        {
+            "inputs": [
+                "Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam.",
+                100
+            ],
+            "output": "Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis "
+        }
+    ],
+    "functions": [
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, x1)"
+}

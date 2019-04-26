@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "hello word"
+            ],
+            "output": "hello"
+        },
+        {
+            "inputs": [
+                "hi my name is"
+            ],
+            "output": "hi my"
+        },
+        {
+            "inputs": [
+                "how are you doing"
+            ],
+            "output": "how a"
+        }
+    ],
+    "functions": [
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, 5)"
+}

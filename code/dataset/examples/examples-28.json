@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "hello",
+                "world"
+            ],
+            "output": "hello-world"
+        },
+        {
+            "inputs": [
+                "train it",
+                "spot it"
+            ],
+            "output": "train-spot "
+        },
+        {
+            "inputs": [
+                "rain yeah",
+                "fenix id"
+            ],
+            "output": "rain -fenix"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Substr"
+    ],
+    "text": "Concat(Concat(Substr(x0, 0, 5), \"-\"), Substr(x1, 0, 5))"
+}

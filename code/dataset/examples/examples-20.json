@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "In+hac+habitasse+platea+dictumst.+Sed+dapibus+sit+amet+neque+gravida+sed."
+            ],
+            "output": "In hac habitasse platea dictumst. Sed dapibus"
+        },
+        {
+            "inputs": [
+                "Maecenas+mattis+nec+orci+a+luctus.+Maecenas+metus."
+            ],
+            "output": "Maecenas mattis nec orci a luctus. Maecenas m"
+        },
+        {
+            "inputs": [
+                "Sed+vehicula+vestibulum+metus."
+            ],
+            "output": "Sed vehicula vestibulum metus."
+        }
+    ],
+    "functions": [
+        "Replace",
+        "Substr"
+    ],
+    "text": "Replace(Substr(x0, 0, 45), \"+\", \" \")"
+}

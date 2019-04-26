@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "00123"
+            ],
+            "output": "123"
+        },
+        {
+            "inputs": [
+                "123"
+            ],
+            "output": "123"
+        },
+        {
+            "inputs": [
+                "0000001"
+            ],
+            "output": "1"
+        }
+    ],
+    "functions": [
+        "Replace",
+        "TrimStart"
+    ],
+    "text": "Replace(TrimStart(Replace(x0, \"0\", \" \")), \" \", \"0\")"
+}

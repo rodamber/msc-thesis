@@ -3,9 +3,8 @@ import jsonlines
 import json
 import itertools
 
-from test_autogen import parse
-from test_autogen import templatify
-from test_autogen import expr_ast as ast
+from outsystems_lang import parse
+from outsystems_lang import expr_ast as ast
 
 
 def allin(xs, ys):
@@ -151,13 +150,22 @@ def exs(jobj, xss):
     print(json.dumps({'examples': examples, **jobj}))
 
 
-if __name__ == '__main__':
-    try_parse('templates.jsonl')
-    # myfilter()
-    # swapsort('templates.jsonl')
-    pass
-'''
-examples
+def split_jsonlines(fin, fout_prefix='examples', dout='examples'):
+    '''takes the name of jsonlines file and writes each json object to a new
+    file'''
+    with jsonlines.open(fin) as reader:
+        for i, json in enumerate(reader, 1):
+            fout = f'{dout}/{fout_prefix}-{i}.json'
+            with jsonlines.open(fout, mode='w') as writer:
+                writer.write(json)
 
-prog
-'''
+
+def pretty_all(dir='examples'):
+    import json, os
+
+    for file in os.listdir(dir):
+        with open(f'{dir}/{file}') as json_file:
+            data = json.load(json_file)
+            with open(f'{dir}/{file}.pretty', mode='w') as outfile:
+                json.dump(data, outfile, indent=4, sort_keys=True)
+

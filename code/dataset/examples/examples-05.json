@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Customer with who cares"
+            ],
+            "output": "who cares"
+        },
+        {
+            "inputs": [
+                "Customer with i certainly do not"
+            ],
+            "output": "i certainly do not"
+        },
+        {
+            "inputs": [
+                "well someone must care"
+            ],
+            "output": "well someone must care"
+        }
+    ],
+    "functions": [
+        "Replace"
+    ],
+    "text": "Replace(x0, \"Customer with \", \"\")"
+}

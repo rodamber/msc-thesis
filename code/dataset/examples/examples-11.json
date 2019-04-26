@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam."
+            ],
+            "output": "Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis "
+        },
+        {
+            "inputs": [
+                "Curabitur commodo pellentesque erat. Fusce efficitur tincidunt tincidunt. Proin velit elit, sodales at tincidunt nullam."
+            ],
+            "output": "Curabitur commodo pellentesque erat. Fusce efficitur tincidunt tincidunt. Proin velit elit, sodales "
+        },
+        {
+            "inputs": [
+                "Sed eleifend posuere dui sed hendrerit. Mauris egestas iaculis ultrices. Mauris at ipsum ornare, accumsan diam eget viverra fusce."
+            ],
+            "output": "Sed eleifend posuere dui sed hendrerit. Mauris egestas iaculis ultrices. Mauris at ipsum ornare, acc"
+        }
+    ],
+    "functions": [
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, 100)"
+}

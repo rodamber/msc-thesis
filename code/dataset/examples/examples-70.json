@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "  like no spaces at all!!!  "
+            ],
+            "output": "likenospacesatall!!!"
+        },
+        {
+            "inputs": [
+                "again don't try "
+            ],
+            "output": "againdon'ttry"
+        },
+        {
+            "inputs": [
+                "you sneaky tricky sli"
+            ],
+            "output": "yousneakytrickysli"
+        }
+    ],
+    "functions": [
+        "Replace",
+        "TrimEnd",
+        "TrimStart"
+    ],
+    "text": "TrimEnd(TrimStart(Replace(x0, \" \", \"\")))"
+}

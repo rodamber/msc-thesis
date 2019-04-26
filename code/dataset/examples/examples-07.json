@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "Sub of by way"
+            ],
+            "output": "Sub of<br /> by way"
+        },
+        {
+            "inputs": [
+                "again sub of by way"
+            ],
+            "output": "again sub of<br /> by way"
+        },
+        {
+            "inputs": [
+                "one more time sub of by way"
+            ],
+            "output": "one more time sub of<br /> by way"
+        }
+    ],
+    "functions": [
+        "Replace"
+    ],
+    "text": "Replace(x0, \"of\", \"of<br />\", \"Way\", \"<br />Way\")"
+}

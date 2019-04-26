@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "one|two|three"
+            ],
+            "output": "one | two | three"
+        },
+        {
+            "inputs": [
+                "a|b|c"
+            ],
+            "output": "a | b | c"
+        },
+        {
+            "inputs": [
+                "this|is|not|a|regex"
+            ],
+            "output": "this | is | not | a | regex"
+        }
+    ],
+    "functions": [
+        "Replace"
+    ],
+    "text": "Replace(x0, \"|\", \" | \")"
+}

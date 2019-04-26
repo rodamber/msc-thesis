@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "what is this even supposed to?"
+            ],
+            "output": ""
+        },
+        {
+            "inputs": [
+                "short one"
+            ],
+            "output": "s"
+        },
+        {
+            "inputs": [
+                "bit larger"
+            ],
+            "output": ""
+        }
+    ],
+    "functions": [
+        "Length",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, Sub(10, Length(x0)))"
+}

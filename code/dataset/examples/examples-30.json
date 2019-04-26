@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "outsystems.com"
+            ],
+            "output": "outsystems"
+        },
+        {
+            "inputs": [
+                "cmu.edu"
+            ],
+            "output": "cmu"
+        },
+        {
+            "inputs": [
+                "tecnico.pt"
+            ],
+            "output": "tecnico"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Substr"
+    ],
+    "text": "Substr(x0, 0, Index(x0, \".\", 0))"
+}

@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "http://www.outsystems.com"
+            ],
+            "output": "www.outsystems.com"
+        },
+        {
+            "inputs": [
+                "http://tecnico.ulisboa.pt/"
+            ],
+            "output": "tecnico.ulisboa.pt/"
+        },
+        {
+            "inputs": [
+                "http://www.cmu.edu"
+            ],
+            "output": "www.cmu.edu"
+        }
+    ],
+    "functions": [
+        "Replace"
+    ],
+    "text": "Replace(x0, \"http://\", \"\")"
+}

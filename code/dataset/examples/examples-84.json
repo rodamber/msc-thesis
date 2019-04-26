@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "George Michael"
+            ],
+            "output": "https://georgemichael.com"
+        },
+        {
+            "inputs": [
+                "Maebe Bluth"
+            ],
+            "output": "https://maebebluth.com"
+        },
+        {
+            "inputs": [
+                "Michael Bluth"
+            ],
+            "output": "https://michaelbluth.com"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Replace",
+        "ToLower",
+        "Trim"
+    ],
+    "text": "Concat(Concat(\"https://\", ToLower(Replace(Trim(x0), \" \", \"\"))), \".com\")"
+}

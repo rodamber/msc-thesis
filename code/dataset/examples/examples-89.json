@@ -1,0 +1,30 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "|George|Maebe|Michael|"
+            ],
+            "output": "Enviado para George, Maebe, Michael"
+        },
+        {
+            "inputs": [
+                "|John|Jane|Joao|"
+            ],
+            "output": "Enviado para John, Jane, Joao"
+        },
+        {
+            "inputs": [
+                "|Abc|Def|Ghi|"
+            ],
+            "output": "Enviado para Abc, Def, Ghi"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "Length",
+        "Replace",
+        "Sub",
+        "Substr"
+    ],
+    "text": "Concat(\"Enviado para \", Replace(Substr(x0, 1, Sub(Length(x0), 2)), \"|\", \", \"))"
+}

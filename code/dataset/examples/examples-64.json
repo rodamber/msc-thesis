@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "# this is a comment"
+            ],
+            "output": "# this is a comment"
+        },
+        {
+            "inputs": [
+                "code code code # comment"
+            ],
+            "output": "# comment"
+        },
+        {
+            "inputs": [
+                "sigh more code # more comments"
+            ],
+            "output": "# more comments"
+        }
+    ],
+    "functions": [
+        "Index",
+        "Length",
+        "Substr"
+    ],
+    "text": "Substr(x0, Index(x0, \"#\", 0), Length(x0))"
+}

@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "abc\\xyz"
+            ],
+            "output": "xyz"
+        },
+        {
+            "inputs": [
+                "012asdf\\abcd"
+            ],
+            "output": "abcd"
+        },
+        {
+            "inputs": [
+                "asdfa\\asdfas"
+            ],
+            "output": "asdfas"
+        }
+    ],
+    "functions": [
+        "Add",
+        "Index",
+        "Length",
+        "Substr"
+    ],
+    "text": "Substr(x0, Add(Index(x0, \"\\\", 0), 1), Length(x0))"
+}

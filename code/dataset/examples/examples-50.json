@@ -1,0 +1,27 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "George"
+            ],
+            "output": "G"
+        },
+        {
+            "inputs": [
+                "Michael"
+            ],
+            "output": "M"
+        },
+        {
+            "inputs": [
+                "Jane"
+            ],
+            "output": "J"
+        }
+    ],
+    "functions": [
+        "Substr",
+        "ToUpper"
+    ],
+    "text": "ToUpper(Substr(x0, 0, 1))"
+}

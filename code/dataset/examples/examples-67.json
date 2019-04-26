@@ -1,0 +1,28 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                " trim me "
+            ],
+            "output": "trim me \u00e2\u201a\u00ac"
+        },
+        {
+            "inputs": [
+                "one more pass   "
+            ],
+            "output": "one more pass \u00e2\u201a\u00ac"
+        },
+        {
+            "inputs": [
+                "  so smooth"
+            ],
+            "output": "so smooth \u00e2\u201a\u00ac"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "TrimEnd",
+        "TrimStart"
+    ],
+    "text": "Concat(TrimEnd(TrimStart(x0)), \" \u00e2\u201a\u00ac\")"
+}

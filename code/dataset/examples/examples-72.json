@@ -1,0 +1,31 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "just use",
+                "trim "
+            ],
+            "output": "just use trim"
+        },
+        {
+            "inputs": [
+                " gudamit'",
+                "why you no use "
+            ],
+            "output": "gudamit' why you no use"
+        },
+        {
+            "inputs": [
+                "your",
+                "libraries  "
+            ],
+            "output": "your libraries"
+        }
+    ],
+    "functions": [
+        "Concat",
+        "TrimEnd",
+        "TrimStart"
+    ],
+    "text": "TrimStart(TrimEnd(Concat(Concat(x0, \" \"), x1)))"
+}

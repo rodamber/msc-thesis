@@ -1,0 +1,26 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "hey. I hope you are doing good"
+            ],
+            "output": "hey, I hope you are doing good"
+        },
+        {
+            "inputs": [
+                "how.are.you"
+            ],
+            "output": "how,are,you"
+        },
+        {
+            "inputs": [
+                "hello.world"
+            ],
+            "output": "hello,world"
+        }
+    ],
+    "functions": [
+        "Replace"
+    ],
+    "text": "Replace(x0, \".\", \",\")"
+}

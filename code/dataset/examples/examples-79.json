@@ -1,0 +1,29 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                "outsystems.com"
+            ],
+            "output": "com"
+        },
+        {
+            "inputs": [
+                "cmu.edu"
+            ],
+            "output": "edu"
+        },
+        {
+            "inputs": [
+                "tecnico.pt"
+            ],
+            "output": "pt"
+        }
+    ],
+    "functions": [
+        "Add",
+        "Index",
+        "Length",
+        "Substr"
+    ],
+    "text": "Substr(x0, Add(Index(x0, \".\", 0), 1), Length(x0))"
+}
