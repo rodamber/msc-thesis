@@ -1,7 +1,6 @@
 * Current plan
 |------------------+--------------------------------------|
 | <2019-05-02 Thu> | Run tests                            |
-| <2019-04-26 Fri> | Rewrite 1st encoding in Haskell      |
 | <2019-04-27 Sat> | Start writing results and discussion |
 | <2019-05-01 Wed> | Background                           |
 | <2019-05-02 Thu> | Introduction, Conclusion, Abstract   |
