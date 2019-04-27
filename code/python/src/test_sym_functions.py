@@ -3,9 +3,9 @@ from typing import Callable, Tuple, Union
 import pytest
 from z3 import Context, ExprRef, Solver, StringVal, sat, unsat
 
-from .simple.functions import *
-from .simple.types import Kind, kind, Const
-from .simple.utils import z3_val
+from simple.functions import *
+from simple.types import Kind, kind, Const
+from simple.utils import z3_val
 
 # ==============================================================================
 #                               Symbol Functions
