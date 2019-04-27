@@ -12,10 +12,8 @@ import           Data.SBV.Control
 synthesize :: Library -> Int -> [Example] -> IO ()
 synthesize lib constCount ios = loop 1
   where
-    -- timeout_value = 5 * 60 * 10^6
-
     loop componentCount = do
-      putStrLn $ "size: " <> show componentCount
+      putStrLn $ "Size: " <> show componentCount
 
       let cfg = Config { examples = ios
                        , library = lib
@@ -25,14 +23,14 @@ synthesize lib constCount ios = loop 1
 
       satRes  <-runSMT $ do
         res <- runReaderT formula cfg
-        query $ -- timeout timeout_value $
+        query $
           checkSat >>= \x -> do
           case x of
             Sat -> do
-              io $ putStr "Program: "
+              io $ putStrLn "=== Program"
               io . putStrLn =<< extractProgram cfg res
+            Unsat -> return ()
             Unk -> io . print =<< getUnknownReason
-            _ -> return ()
           return x
 
       case satRes of

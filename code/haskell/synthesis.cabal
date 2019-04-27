@@ -19,6 +19,7 @@ executable synthesis
                      , bytestring
                      , containers ^>=0.6.0.1
                      , mtl
+                     , optparse-applicative
                      , sbv
                      , timeit
   hs-source-dirs:    src

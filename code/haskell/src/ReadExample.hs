@@ -1,6 +1,8 @@
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE OverloadedStrings #-}
-module ReadExample where
+module ReadExample
+  ( readExamplesFromFile
+  , readExamples
+  ) where
 
 import           Control.Arrow ((&&&))
 import           GHC.Generics
@@ -25,7 +27,7 @@ newtype ExampleListRecord =
 instance FromJSON ExampleListRecord
 
 
-toExamples :: ExampleListRecord -> [([Sort], Sort)]
+toExamples :: ExampleListRecord -> [Example]
 toExamples = map (inputs &&& output) . examples
 
 
