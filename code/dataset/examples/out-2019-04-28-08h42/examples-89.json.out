@@ -1,0 +1,22 @@
+=== Examples (examples-89.json)
+(["|George|Maebe|Michael|"],"Enviado para George, Maebe, Michael")
+(["|John|Jane|Joao|"],"Enviado para John, Jane, Joao")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+outsynth2: 
+*** Data.SBV: fd:5: hGetLine: end of file:
+***
+***    Sent      : (check-sat)
+***
+***    Executable: /home/rodrigo/bin/z3
+***    Options   : -nw -in -smt2
+
