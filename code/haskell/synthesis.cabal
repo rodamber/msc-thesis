@@ -7,8 +7,8 @@ author:              rodamber
 maintainer:          rodrigoambernardo@gmail.com
 extra-source-files:  CHANGELOG.md
 
-executable synthesis
-  main-is:             Main.hs
+executable outsynth2
+  main-is:             RunSynth.hs
   other-modules:       Components
                      , Constraints
                      , ReadExample
@@ -24,5 +24,26 @@ executable synthesis
                      , timeit
   hs-source-dirs:    src
   default-language:    Haskell2010
-  ghc-options: -freverse-errors
-  -- extensions: Strict
+  ghc-options: -freverse-errors -main-is RunSynth
+
+executable runbench
+  main-is:           RunBench.hs
+  other-modules:     RunSynth
+                   , Components
+                   , Constraints
+                   , ReadExample
+                   , Synth
+                   , Types
+  build-depends:     aeson == 1.4.2.0
+                   , base ^>=4.12.0.0
+                   , bytestring
+                   , containers ^>=0.6.0.1
+                   , directory
+                   , mtl
+                   , optparse-applicative
+                   , process
+                   , sbv
+                   , timeit
+  hs-source-dirs:    src
+  default-language:    Haskell2010
+  ghc-options: -freverse-errors -main-is RunBench
