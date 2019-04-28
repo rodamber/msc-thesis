@@ -73,16 +73,18 @@ optsInfo = info (opts <**> helper)
 
 lib :: [Component]
 lib = [ concat_
+      , index_
       , length_
-      , replace_
+      -- , replace_
       , substr_
-      , tolower_
-      , toupper_
-      , trim_
-      , trim_start_
-      , trim_end_
+      -- , tolower_
+      -- , toupper_
+      -- , trim_
+      -- , trim_start_
+      -- , trim_end_
       , add_
-      , sub_]
+      , sub_
+      ]
 
 
 runSynth :: Opts -> IO ()

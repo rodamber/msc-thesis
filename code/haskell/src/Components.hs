@@ -1,6 +1,7 @@
 {-# LANGUAGE TypeApplications #-}
 module Components
   ( concat_
+  , index_
   , length_
   , replace_
   , substr_
