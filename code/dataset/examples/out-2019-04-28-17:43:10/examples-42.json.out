@@ -1,0 +1,21 @@
+=== Examples (examples-42.json)
+(["DO IT"],"do it!@")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+=== Program
+prog(x0):
+  c0 = "\NUL\NUL\NUL\NUL\NULdo it!@"
+  r0 = Length(c0)
+  r1 = Length(x0)
+  r2 = Substr(c0, r1, r0)
+
+CPU time:   0.15s

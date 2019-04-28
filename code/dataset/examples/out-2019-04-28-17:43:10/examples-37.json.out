@@ -1,0 +1,19 @@
+=== Examples (examples-37.json)
+(["Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."],"/ Nulla eu")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "Duis eget ultrices sapien. / Nulla \NULu vehicul\b  nim, \NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL/ Nulla eu"
+  r0 = Length(x0)
+  r1 = Substr(c0, r0, r0)
+
+CPU time:   0.08s

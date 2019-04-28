@@ -1,0 +1,17 @@
+=== Examples (examples-66.json)
+(["take out the last 7 chars"],"7 chars")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "18"
+  r0 = Substr(x0, c0, c0)
+
+CPU time:   0.03s

@@ -1,0 +1,17 @@
+=== Examples (examples-24.json)
+(["Nulla sapien nisi, auctor sed."],"Nulla sapien nisi, auctor sed....")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "..."
+  r0 = Concat(x0, c0)
+
+CPU time:   0.02s

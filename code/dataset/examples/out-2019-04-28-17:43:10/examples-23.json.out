@@ -1,0 +1,19 @@
+=== Examples (examples-23.json)
+(["Nam quis purus massa metus."],"Nam q...")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULNam q..."
+  r0 = Length(x0)
+  r1 = Substr(c0, r0, r0)
+
+CPU time:   0.08s

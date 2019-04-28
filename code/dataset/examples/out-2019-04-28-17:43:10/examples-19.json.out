@@ -1,0 +1,17 @@
+=== Examples (examples-19.json)
+(["Praesent sed diam vel amet."],"Praesent sed diam vel amet....")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "..."
+  r0 = Concat(x0, c0)
+
+CPU time:   0.03s

@@ -1,0 +1,17 @@
+=== Examples (examples-25.json)
+(["Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat."],"Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat...")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = ".."
+  r0 = Concat(x0, c0)
+
+CPU time:   0.03s

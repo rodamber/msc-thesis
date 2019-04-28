@@ -1,0 +1,19 @@
+=== Examples (examples-59.json)
+(["who cares about the last ones..."],"who cares about the last ones.")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "30"
+  r0 = Sub(c0, c0)
+  r1 = Substr(x0, r0, c0)
+
+CPU time:   0.08s

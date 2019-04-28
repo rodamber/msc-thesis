@@ -1,0 +1,21 @@
+=== Examples (examples-72.json)
+(["just use","trim "],"just use trim")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+=== Program
+prog(x0, x1):
+  c0 = "just use trim"
+  r0 = Length(x0)
+  r1 = Substr(x1, r0, r0)
+  r2 = Concat(c0, r1)
+
+CPU time:   0.18s

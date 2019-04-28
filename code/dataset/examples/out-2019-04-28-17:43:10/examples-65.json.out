@@ -1,0 +1,17 @@
+=== Examples (examples-65.json)
+(["take out the last 3 chars"],"ars")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "22"
+  r0 = Substr(x0, c0, c0)
+
+CPU time:   0.03s

@@ -1,0 +1,19 @@
+=== Examples (examples-80.json)
+(["george.bluth@outsystems.com"],"@outsystems.com")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "12"
+  r0 = Length(x0)
+  r1 = Substr(x0, c0, r0)
+
+CPU time:   0.07s

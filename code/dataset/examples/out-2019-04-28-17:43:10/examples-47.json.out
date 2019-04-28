@@ -1,0 +1,19 @@
+=== Examples (examples-47.json)
+(["00123"],"123")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "2"
+  r0 = Add(c0, c0)
+  r1 = Substr(x0, c0, r0)
+
+CPU time:   0.07s
