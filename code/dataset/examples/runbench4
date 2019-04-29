@@ -1,10 +1,11 @@
 #!/bin/bash
 TIMESTAMP=$(date '+%F-%T')
-OUTDIR=out-$TIMESTAMP
-EXAMPLES=$1
-CONSTS=$2
+PROG=$1
+OUTDIR=out/$PROG/$TIMESTAMP
+EXAMPLES=$2
+CONSTS=$3
 
-mkdir $OUTDIR
+mkdir -p $OUTDIR
 touch $OUTDIR/command.txt
 printf '%s\n' "runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS" > $OUTDIR/command.txt
 
