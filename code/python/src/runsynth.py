@@ -50,8 +50,7 @@ def runsynth(opts: Opts):
         print(f'No program found.')
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+def add_example_arg(parser):
     parser.add_argument(
         '-e',
         '--examples',
@@ -59,6 +58,9 @@ if __name__ == '__main__':
         default=1,
         type=int,
         help='How many examples to use')
+
+
+def add_consts_args(parser):
     parser.add_argument(
         '-cs',
         '--consts-str',
@@ -73,9 +75,23 @@ if __name__ == '__main__':
         default=1,
         type=int,
         help='How many constants of type int to use')
+
+
+def add_file_arg(parser):
     parser.add_argument(
         'file', metavar='FILE', type=str, help='The file with the examples')
 
+
+def argparser():
+    parser = argparse.ArgumentParser()
+    add_example_arg(parser)
+    add_consts_args(parser)
+    add_file_arg(parser)
+    return parser
+
+
+if __name__ == '__main__':
+    parser = argparser()
     args = parser.parse_args()
     opts = Opts(
         file=args.file,
