@@ -1,0 +1,20 @@
+17.29/17.35	=== Examples (examples-10.json)
+17.29/17.35	(["hello word"],"hello word")
+17.29/17.35	(["hi my name is"],"hi my name")
+17.29/17.35	(["how are you doing"],"how are yo")
+17.29/17.35	=== Library
+17.29/17.35	Concat
+17.29/17.35	Index
+17.29/17.35	Length
+17.29/17.35	Substr
+17.29/17.35	Add
+17.29/17.35	Sub
+17.29/17.35	=== Synthesis
+17.29/17.35	Size: 1
+17.29/17.35	Size: 2
+17.29/17.35	=== Program
+17.29/17.35	prog(x0):
+17.29/17.35	  c0 = "10"
+17.29/17.35	  r0 = Sub(c0, c0)
+17.29/17.35	  r1 = Substr(x0, r0, c0)
+17.29/17.35	
