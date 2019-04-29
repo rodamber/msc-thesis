@@ -1,0 +1,20 @@
+=== Examples (examples-03.json)
+(["hey. I hope you are doing good"],"hey, I hope you are doing good")
+(["how.are.you"],"how,are,you")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULhow,are,you\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULhey, I hope you are doing good\NUL\NUL\NUL\NUL@\NUL\NUL\NUL\NUL\NUL"
+  r0 = Length(x0)
+  r1 = Substr(c0, r0, r0)
+
+CPU time:   0.15s

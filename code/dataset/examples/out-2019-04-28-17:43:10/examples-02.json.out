@@ -1,0 +1,21 @@
+=== Examples (examples-02.json)
+(["0,1"],"0, 1")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+=== Program
+prog(x0):
+  c0 = "0, 1"
+  r0 = Length(c0)
+  r1 = Substr(x0, r0, r0)
+  r2 = Concat(c0, r1)
+
+CPU time:   0.14s

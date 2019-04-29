@@ -1,0 +1,19 @@
+=== Examples (examples-76.json)
+(["abcdef",3,"xyz"],"xyz")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0, x1, x2):
+  c0 = "0"
+  r0 = Concat(x2, x0)
+  r1 = Substr(r0, c0, x1)
+
+CPU time:   0.10s

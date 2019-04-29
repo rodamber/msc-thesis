@@ -1,0 +1,19 @@
+=== Examples (examples-88.json)
+(["alo_helloworld"],"hellowor")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "4"
+  r0 = Add(c0, c0)
+  r1 = Substr(x0, c0, r0)
+
+CPU time:   0.08s

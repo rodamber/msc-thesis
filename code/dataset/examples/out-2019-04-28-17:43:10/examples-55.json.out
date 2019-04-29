@@ -1,0 +1,17 @@
+=== Examples (examples-55.json)
+(["what is this even supposed to?"],"")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "31"
+  r0 = Substr(x0, c0, c0)
+
+CPU time:   0.03s

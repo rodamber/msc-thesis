@@ -1,0 +1,19 @@
+=== Examples (examples-73.json)
+(["Sed metus urna turpis duis."],"...rpis duis.")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "\NUL\NUL\NUL\NUL\EOT\NUL\NUL\NUL\NUL\NUL\STX\NUL@\NUL\NUL\NUL\NUL\NULi\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL...rpis duis."
+  r0 = Length(x0)
+  r1 = Substr(c0, r0, r0)
+
+CPU time:   0.07s

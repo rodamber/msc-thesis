@@ -1,0 +1,20 @@
+=== Examples (examples-05.json)
+(["Customer with who cares"],"who cares")
+(["Customer with i certainly do not"],"i certainly do not")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "14"
+  r0 = Add(c0, c0)
+  r1 = Substr(x0, c0, r0)
+
+CPU time:   0.11s

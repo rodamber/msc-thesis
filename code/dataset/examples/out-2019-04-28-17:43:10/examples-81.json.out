@@ -1,0 +1,17 @@
+=== Examples (examples-81.json)
+(["abc\\xyz"],"xyz")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "4"
+  r0 = Substr(x0, c0, c0)
+
+CPU time:   0.03s

@@ -1,0 +1,21 @@
+=== Examples (examples-07.json)
+(["Sub of by way"],"Sub of<br /> by way")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+=== Program
+prog(x0):
+  c0 = "Sub of<br /> by way"
+  r0 = Length(x0)
+  r1 = Substr(x0, r0, r0)
+  r2 = Concat(c0, r1)
+
+CPU time:   0.16s

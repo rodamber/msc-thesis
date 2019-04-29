@@ -1,0 +1,14 @@
+=== Examples (examples-83.json)
+(["george","conchichina xy"],"george At:conchichina")
+(["maebe","terra de sao nunca a tarde ab"],"maebe At:terra de sao nunca a tarde")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3

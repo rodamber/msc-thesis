@@ -1,0 +1,17 @@
+=== Examples (examples-27.json)
+(["Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet."],"Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet....")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "..."
+  r0 = Concat(x0, c0)
+
+CPU time:   0.03s

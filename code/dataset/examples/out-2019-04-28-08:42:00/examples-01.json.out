@@ -1,0 +1,22 @@
+=== Examples (examples-01.json)
+(["Hello World"],"Hello&nbsp;World")
+(["Indicates the (zero-based) index where the search starts."],"Indicates&nbsp;the&nbsp;(zero-based)&nbsp;index&nbsp;where&nbsp;the&nbsp;search&nbsp;starts.")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+outsynth2: 
+*** Data.SBV: fd:5: hGetLine: end of file:
+***
+***    Sent      : (check-sat)
+***
+***    Executable: /home/rodrigo/bin/z3
+***    Options   : -nw -in -smt2
+

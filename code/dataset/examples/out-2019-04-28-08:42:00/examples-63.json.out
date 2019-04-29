@@ -1,0 +1,18 @@
+=== Examples (examples-63.json)
+(["take first nine"],"t nine")
+(["or all"],"")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "9"
+  r0 = Substr(x0, c0, c0)
+
+CPU time:   0.04s

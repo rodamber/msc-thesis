@@ -1,0 +1,19 @@
+=== Examples (examples-71.json)
+(["take seven"],"take se")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "\NUL\128\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULtake se"
+  r0 = Length(x0)
+  r1 = Substr(c0, r0, r0)
+
+CPU time:   0.08s

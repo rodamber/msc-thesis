@@ -1,0 +1,20 @@
+=== Examples (examples-31.json)
+(["john.doe@outsystems.com"],"john.doe")
+(["jane.moe@cmu.edu"],"jane.moe")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "8"
+  r0 = Sub(c0, c0)
+  r1 = Substr(x0, r0, c0)
+
+CPU time:   0.12s

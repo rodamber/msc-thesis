@@ -1,0 +1,19 @@
+=== Examples (examples-61.json)
+(["?01-01-1999"],"01-01-1999")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "1"
+  r0 = Length(x0)
+  r1 = Substr(x0, c0, r0)
+
+CPU time:   0.07s

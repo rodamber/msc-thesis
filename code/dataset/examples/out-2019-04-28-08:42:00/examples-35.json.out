@@ -1,0 +1,18 @@
+=== Examples (examples-35.json)
+(["A12345678 John Doe"],"John Doe")
+(["B10293481 Jane Moe"],"Jane Moe")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = "10"
+  r0 = Substr(x0, c0, c0)
+
+CPU time:   0.04s
