@@ -83,7 +83,9 @@ def add_file_arg(parser):
 
 
 def argparser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description='outsynth1 -- a PBE synthesizer for OutSystems expressions'
+    )
     add_example_arg(parser)
     add_consts_args(parser)
     add_file_arg(parser)
