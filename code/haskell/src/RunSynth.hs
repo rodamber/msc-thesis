@@ -10,7 +10,6 @@ module RunSynth
    main) where
 
 import           Options.Applicative
-import           System.TimeIt
 
 import           Components
 import           ReadExample
@@ -99,7 +98,7 @@ runSynth opts = do
       mapM_ (putStrLn . name) lib
 
       putStrLn "=== Synthesis"
-      timeIt $ synthesize lib (numConsts opts) examples
+      synthesize lib (numConsts opts) examples
 
 
 main :: IO ()

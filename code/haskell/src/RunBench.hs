@@ -83,6 +83,8 @@ runBench opts = do
                             , show $ memLimit opts * 1000 -- megabytes
                             , "--solver-data"
                             , outputDir opts <> "/" <> file <> ".out"
+                            , "--timestamp"
+                            , "--add-eof"
                             , "outsynth2"
                             , "--examples"
                             , show $ numExamples opts
