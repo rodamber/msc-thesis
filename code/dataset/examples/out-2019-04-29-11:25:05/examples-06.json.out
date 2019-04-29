@@ -1,0 +1,19 @@
+52.20/52.27	=== Examples (examples-06.json)
+52.20/52.27	(["http://www.outsystems.com"],"www.outsystems.com")
+52.20/52.27	(["http://tecnico.ulisboa.pt/"],"tecnico.ulisboa.pt/")
+52.20/52.27	=== Library
+52.20/52.27	Concat
+52.20/52.27	Index
+52.20/52.27	Length
+52.20/52.27	Substr
+52.20/52.27	Add
+52.20/52.27	Sub
+52.20/52.27	=== Synthesis
+52.20/52.27	Size: 1
+52.20/52.27	Size: 2
+52.20/52.27	=== Program
+52.20/52.27	prog(x0):
+52.20/52.27	  c0 = "7"
+52.20/52.27	  r0 = Length(x0)
+52.20/52.27	  r1 = Substr(x0, c0, r0)
+52.20/52.27	

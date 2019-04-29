@@ -1,0 +1,17 @@
+0.26/0.35	=== Examples (examples-57.json)
+0.26/0.35	(["what are you doing? (sorry)"],"what are you doing? (sorry)")
+0.26/0.35	(["did you want that? (hmm..)"],"did you want that? (hmm..)")
+0.26/0.35	=== Library
+0.26/0.35	Concat
+0.26/0.35	Index
+0.26/0.35	Length
+0.26/0.35	Substr
+0.26/0.35	Add
+0.26/0.35	Sub
+0.26/0.35	=== Synthesis
+0.26/0.35	Size: 1
+0.26/0.35	=== Program
+0.26/0.35	prog(x0):
+0.26/0.35	  c0 = ""
+0.26/0.35	  r0 = Concat(x0, c0)
+0.26/0.35	

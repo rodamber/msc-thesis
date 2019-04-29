@@ -1,0 +1,19 @@
+18.47/18.59	=== Examples (examples-31.json)
+18.47/18.59	(["john.doe@outsystems.com"],"john.doe")
+18.47/18.59	(["jane.moe@cmu.edu"],"jane.moe")
+18.47/18.59	=== Library
+18.47/18.59	Concat
+18.47/18.59	Index
+18.47/18.59	Length
+18.47/18.59	Substr
+18.47/18.59	Add
+18.47/18.59	Sub
+18.47/18.59	=== Synthesis
+18.47/18.59	Size: 1
+18.47/18.59	Size: 2
+18.47/18.59	=== Program
+18.47/18.59	prog(x0):
+18.47/18.59	  c0 = "8"
+18.47/18.59	  r0 = Sub(c0, c0)
+18.47/18.59	  r1 = Substr(x0, r0, c0)
+18.47/18.59	

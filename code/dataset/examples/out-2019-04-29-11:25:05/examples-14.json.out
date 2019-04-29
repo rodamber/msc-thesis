@@ -1,0 +1,19 @@
+0.76/0.96	=== Examples (examples-14.json)
+0.76/0.96	(["ABC"],"abc")
+0.76/0.96	(["aBcdef"],"abcdef")
+0.76/0.96	=== Library
+0.76/0.96	Concat
+0.76/0.96	Index
+0.76/0.96	Length
+0.76/0.96	Substr
+0.76/0.96	Add
+0.76/0.96	Sub
+0.76/0.96	=== Synthesis
+0.76/0.96	Size: 1
+0.76/0.96	Size: 2
+0.76/0.96	=== Program
+0.76/0.96	prog(x0):
+0.76/0.96	  c0 = "\NUL\NUL\NULabcabcdef"
+0.76/0.96	  r0 = Length(x0)
+0.76/0.96	  r1 = Substr(c0, r0, r0)
+0.76/0.96	

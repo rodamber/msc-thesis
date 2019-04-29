@@ -1,0 +1,19 @@
+65.17/65.20	=== Examples (examples-03.json)
+65.17/65.20	(["hey. I hope you are doing good"],"hey, I hope you are doing good")
+65.17/65.20	(["how.are.you"],"how,are,you")
+65.17/65.20	=== Library
+65.17/65.20	Concat
+65.17/65.20	Index
+65.17/65.20	Length
+65.17/65.20	Substr
+65.17/65.20	Add
+65.17/65.20	Sub
+65.17/65.20	=== Synthesis
+65.17/65.20	Size: 1
+65.17/65.20	Size: 2
+65.17/65.20	=== Program
+65.17/65.20	prog(x0):
+65.17/65.20	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULhow,are,you\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULhey, I hope you are doing good\NUL\NUL\NUL\NUL@\NUL\NUL\NUL\NUL\NUL"
+65.17/65.20	  r0 = Length(x0)
+65.17/65.20	  r1 = Substr(c0, r0, r0)
+65.17/65.20	

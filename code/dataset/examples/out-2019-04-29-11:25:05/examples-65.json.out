@@ -1,0 +1,19 @@
+16.88/16.94	=== Examples (examples-65.json)
+16.88/16.94	(["take out the last 3 chars"],"ars")
+16.88/16.94	(["abc"],"abc")
+16.88/16.94	=== Library
+16.88/16.94	Concat
+16.88/16.94	Index
+16.88/16.94	Length
+16.88/16.94	Substr
+16.88/16.94	Add
+16.88/16.94	Sub
+16.88/16.94	=== Synthesis
+16.88/16.94	Size: 1
+16.88/16.94	Size: 2
+16.88/16.94	=== Program
+16.88/16.94	prog(x0):
+16.88/16.94	  c0 = "\NUL\NUL\NULabc\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\128\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULars"
+16.88/16.94	  r0 = Length(x0)
+16.88/16.94	  r1 = Substr(c0, r0, r0)
+16.88/16.94	

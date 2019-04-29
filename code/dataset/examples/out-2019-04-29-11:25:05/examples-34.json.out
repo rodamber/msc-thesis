@@ -1,0 +1,19 @@
+8.38/8.48	=== Examples (examples-34.json)
+8.38/8.48	(["A001 John Doe"],"John Doe")
+8.38/8.48	(["B234 Jane Moe"],"Jane Moe")
+8.38/8.48	=== Library
+8.38/8.48	Concat
+8.38/8.48	Index
+8.38/8.48	Length
+8.38/8.48	Substr
+8.38/8.48	Add
+8.38/8.48	Sub
+8.38/8.48	=== Synthesis
+8.38/8.48	Size: 1
+8.38/8.48	Size: 2
+8.38/8.48	=== Program
+8.38/8.48	prog(x0):
+8.38/8.48	  c0 = "5"
+8.38/8.48	  r0 = Add(c0, c0)
+8.38/8.48	  r1 = Substr(x0, c0, r0)
+8.38/8.48	

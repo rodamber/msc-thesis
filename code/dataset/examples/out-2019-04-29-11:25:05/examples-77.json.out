@@ -1,0 +1,19 @@
+1.18/1.23	=== Examples (examples-77.json)
+1.18/1.23	(["George Michael"],"Michael")
+1.18/1.23	(["Michael Bluth"],"Bluth")
+1.18/1.23	=== Library
+1.18/1.23	Concat
+1.18/1.23	Index
+1.18/1.23	Length
+1.18/1.23	Substr
+1.18/1.23	Add
+1.18/1.23	Sub
+1.18/1.23	=== Synthesis
+1.18/1.23	Size: 1
+1.18/1.23	Size: 2
+1.18/1.23	=== Program
+1.18/1.23	prog(x0):
+1.18/1.23	  c0 = "21"
+1.18/1.23	  r0 = Concat(x0, x0)
+1.18/1.23	  r1 = Substr(r0, c0, c0)
+1.18/1.23	

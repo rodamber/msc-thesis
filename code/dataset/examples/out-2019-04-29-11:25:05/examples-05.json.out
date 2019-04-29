@@ -1,0 +1,19 @@
+2.49/2.54	=== Examples (examples-05.json)
+2.49/2.54	(["Customer with who cares"],"who cares")
+2.49/2.54	(["Customer with i certainly do not"],"i certainly do not")
+2.49/2.54	=== Library
+2.49/2.54	Concat
+2.49/2.54	Index
+2.49/2.54	Length
+2.49/2.54	Substr
+2.49/2.54	Add
+2.49/2.54	Sub
+2.49/2.54	=== Synthesis
+2.49/2.54	Size: 1
+2.49/2.54	Size: 2
+2.49/2.54	=== Program
+2.49/2.54	prog(x0):
+2.49/2.54	  c0 = "14"
+2.49/2.54	  r0 = Add(c0, c0)
+2.49/2.54	  r1 = Substr(x0, c0, r0)
+2.49/2.54	

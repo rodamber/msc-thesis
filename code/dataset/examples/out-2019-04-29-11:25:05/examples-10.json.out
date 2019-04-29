@@ -1,0 +1,19 @@
+9.59/9.68	=== Examples (examples-10.json)
+9.59/9.68	(["hello word"],"hello word")
+9.59/9.68	(["hi my name is"],"hi my name")
+9.59/9.68	=== Library
+9.59/9.68	Concat
+9.59/9.68	Index
+9.59/9.68	Length
+9.59/9.68	Substr
+9.59/9.68	Add
+9.59/9.68	Sub
+9.59/9.68	=== Synthesis
+9.59/9.68	Size: 1
+9.59/9.68	Size: 2
+9.59/9.68	=== Program
+9.59/9.68	prog(x0):
+9.59/9.68	  c0 = "10"
+9.59/9.68	  r0 = Sub(c0, c0)
+9.59/9.68	  r1 = Substr(x0, r0, c0)
+9.59/9.68	

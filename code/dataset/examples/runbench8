@@ -1,0 +1,18 @@
+#!/bin/bash
+TIMESTAMP=$(date '+%F-%T')
+OUTDIR=out-$TIMESTAMP
+EXAMPLES=$1
+CONSTS=$2
+
+mkdir $OUTDIR
+touch $OUTDIR/command.txt
+printf '%s\n' "runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS" > $OUTDIR/command.txt
+
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{01..12}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{13..24}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{25..36}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{37..48}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{49..60}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{61..72}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{73..84}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{85..95}.json &

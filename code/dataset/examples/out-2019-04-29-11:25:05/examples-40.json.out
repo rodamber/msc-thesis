@@ -1,0 +1,22 @@
+599.91/600.00	=== Examples (examples-40.json)
+599.91/600.00	(["who cares about when"],"updated on who cares about ")
+599.91/600.00	(["maybe someone will care"],"updated on maybe someone wi")
+599.91/600.00	=== Library
+599.91/600.00	Concat
+599.91/600.00	Index
+599.91/600.00	Length
+599.91/600.00	Substr
+599.91/600.00	Add
+599.91/600.00	Sub
+599.91/600.00	=== Synthesis
+599.91/600.00	Size: 1
+599.91/600.00	Size: 2
+599.91/600.00	Size: 3
+599.91/600.00	outsynth2: 
+599.91/600.00	*** Data.SBV: fd:6: hGetLine: end of file:
+599.91/600.00	***
+599.91/600.00	***    Sent      : (check-sat)
+599.91/600.00	***
+599.91/600.00	***    Executable: /home/rodrigo/bin/z3
+599.91/600.00	***    Options   : -nw -in -smt2
+599.91/600.00	

@@ -1,0 +1,19 @@
+5.79/6.05	=== Examples (examples-50.json)
+5.79/6.05	(["George"],"G")
+5.79/6.05	(["Michael"],"M")
+5.79/6.05	=== Library
+5.79/6.05	Concat
+5.79/6.05	Index
+5.79/6.05	Length
+5.79/6.05	Substr
+5.79/6.05	Add
+5.79/6.05	Sub
+5.79/6.05	=== Synthesis
+5.79/6.05	Size: 1
+5.79/6.05	Size: 2
+5.79/6.05	=== Program
+5.79/6.05	prog(x0):
+5.79/6.05	  c0 = "1"
+5.79/6.05	  r0 = Sub(c0, c0)
+5.79/6.05	  r1 = Substr(x0, r0, c0)
+5.79/6.05	

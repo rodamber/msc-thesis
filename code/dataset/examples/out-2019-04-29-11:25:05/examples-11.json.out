@@ -1,0 +1,19 @@
+78.08/78.19	=== Examples (examples-11.json)
+78.08/78.19	(["Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam."],"Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis ")
+78.08/78.19	(["Curabitur commodo pellentesque erat. Fusce efficitur tincidunt tincidunt. Proin velit elit, sodales at tincidunt nullam."],"Curabitur commodo pellentesque erat. Fusce efficitur tincidunt tincidunt. Proin velit elit, sodales ")
+78.08/78.19	=== Library
+78.08/78.19	Concat
+78.08/78.19	Index
+78.08/78.19	Length
+78.08/78.19	Substr
+78.08/78.19	Add
+78.08/78.19	Sub
+78.08/78.19	=== Synthesis
+78.08/78.19	Size: 1
+78.08/78.19	Size: 2
+78.08/78.19	=== Program
+78.08/78.19	prog(x0):
+78.08/78.19	  c0 = "100"
+78.08/78.19	  r0 = Sub(c0, c0)
+78.08/78.19	  r1 = Substr(x0, r0, c0)
+78.08/78.19	

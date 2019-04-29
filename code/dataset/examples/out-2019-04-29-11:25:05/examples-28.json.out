@@ -1,0 +1,22 @@
+600.02/600.03	=== Examples (examples-28.json)
+600.02/600.03	(["hello","world"],"hello-world")
+600.02/600.03	(["train it","spot it"],"train-spot ")
+600.02/600.03	=== Library
+600.02/600.03	Concat
+600.02/600.03	Index
+600.02/600.03	Length
+600.02/600.03	Substr
+600.02/600.03	Add
+600.02/600.03	Sub
+600.02/600.03	=== Synthesis
+600.02/600.03	Size: 1
+600.02/600.03	Size: 2
+600.02/600.03	Size: 3
+600.02/600.03	outsynth2: 
+600.02/600.03	*** Data.SBV: fd:6: hGetLine: end of file:
+600.02/600.03	***
+600.02/600.03	***    Sent      : (check-sat)
+600.02/600.03	***
+600.02/600.03	***    Executable: /home/rodrigo/bin/z3
+600.02/600.03	***    Options   : -nw -in -smt2
+600.02/600.03	

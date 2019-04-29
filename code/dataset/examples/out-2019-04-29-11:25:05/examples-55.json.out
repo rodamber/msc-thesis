@@ -1,0 +1,19 @@
+7.29/7.31	=== Examples (examples-55.json)
+7.29/7.31	(["what is this even supposed to?"],"")
+7.29/7.31	(["short one"],"s")
+7.29/7.31	=== Library
+7.29/7.31	Concat
+7.29/7.31	Index
+7.29/7.31	Length
+7.29/7.31	Substr
+7.29/7.31	Add
+7.29/7.31	Sub
+7.29/7.31	=== Synthesis
+7.29/7.31	Size: 1
+7.29/7.31	Size: 2
+7.29/7.31	=== Program
+7.29/7.31	prog(x0):
+7.29/7.31	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULs"
+7.29/7.31	  r0 = Length(x0)
+7.29/7.31	  r1 = Substr(c0, r0, r0)
+7.29/7.31	

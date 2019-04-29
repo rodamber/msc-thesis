@@ -1,0 +1,19 @@
+1.38/1.45	=== Examples (examples-09.json)
+1.38/1.45	(["hello word"],"hello")
+1.38/1.45	(["hi my name is"],"hi my")
+1.38/1.45	=== Library
+1.38/1.45	Concat
+1.38/1.45	Index
+1.38/1.45	Length
+1.38/1.45	Substr
+1.38/1.45	Add
+1.38/1.45	Sub
+1.38/1.45	=== Synthesis
+1.38/1.45	Size: 1
+1.38/1.45	Size: 2
+1.38/1.45	=== Program
+1.38/1.45	prog(x0):
+1.38/1.45	  c0 = "5"
+1.38/1.45	  r0 = Sub(c0, c0)
+1.38/1.45	  r1 = Substr(x0, r0, c0)
+1.38/1.45	

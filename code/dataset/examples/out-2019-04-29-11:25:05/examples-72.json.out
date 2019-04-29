@@ -1,0 +1,15 @@
+600.04/600.05	=== Examples (examples-72.json)
+600.04/600.05	(["just use","trim "],"just use trim")
+600.04/600.05	([" gudamit'","why you no use "],"gudamit' why you no use")
+600.04/600.05	=== Library
+600.04/600.05	Concat
+600.04/600.05	Index
+600.04/600.05	Length
+600.04/600.05	Substr
+600.04/600.05	Add
+600.04/600.05	Sub
+600.04/600.05	=== Synthesis
+600.04/600.05	Size: 1
+600.04/600.05	Size: 2
+600.04/600.05	Size: 3
+600.04/600.05	Size: 4
