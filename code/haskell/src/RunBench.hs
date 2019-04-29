@@ -84,7 +84,6 @@ runBench opts = do
                             , "--solver-data"
                             , outputDir opts <> "/" <> file <> ".out"
                             , "--timestamp"
-                            , "--add-eof"
                             , "outsynth2"
                             , "--examples"
                             , show $ numExamples opts
