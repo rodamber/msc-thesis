@@ -1,0 +1,18 @@
+0.26/0.30	=== Examples (examples-09.json)
+0.26/0.30	(["hello word"],"hello")
+0.26/0.30	=== Library
+0.26/0.30	Concat
+0.26/0.30	Index
+0.26/0.30	Length
+0.26/0.30	Substr
+0.26/0.30	Add
+0.26/0.30	Sub
+0.26/0.30	=== Synthesis
+0.26/0.30	Size: 1
+0.26/0.30	Size: 2
+0.26/0.30	=== Program
+0.26/0.30	prog(x0):
+0.26/0.30	  c0 = "\NUL\NUL\NUL\NUL \NUL\NUL\NUL\NUL\NULhello"
+0.26/0.30	  r0 = Length(x0)
+0.26/0.30	  r1 = Substr(c0, r0, r0)
+0.26/0.30	

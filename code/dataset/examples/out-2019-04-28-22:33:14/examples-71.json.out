@@ -1,0 +1,18 @@
+0.43/0.58	=== Examples (examples-71.json)
+0.43/0.58	(["take seven"],"take se")
+0.43/0.58	=== Library
+0.43/0.58	Concat
+0.43/0.58	Index
+0.43/0.58	Length
+0.43/0.58	Substr
+0.43/0.58	Add
+0.43/0.58	Sub
+0.43/0.58	=== Synthesis
+0.43/0.58	Size: 1
+0.43/0.58	Size: 2
+0.43/0.58	=== Program
+0.43/0.58	prog(x0):
+0.43/0.58	  c0 = "\NUL\128\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULtake se"
+0.43/0.58	  r0 = Length(x0)
+0.43/0.58	  r1 = Substr(c0, r0, r0)
+0.43/0.58	

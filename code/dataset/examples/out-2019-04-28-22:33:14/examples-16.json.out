@@ -1,0 +1,18 @@
+0.11/0.26	=== Examples (examples-16.json)
+0.11/0.26	(["  hello world"],"hello world")
+0.11/0.26	=== Library
+0.11/0.26	Concat
+0.11/0.26	Index
+0.11/0.26	Length
+0.11/0.26	Substr
+0.11/0.26	Add
+0.11/0.26	Sub
+0.11/0.26	=== Synthesis
+0.11/0.26	Size: 1
+0.11/0.26	Size: 2
+0.11/0.26	=== Program
+0.11/0.26	prog(x0):
+0.11/0.26	  c0 = "15"
+0.11/0.26	  r0 = Concat(x0, x0)
+0.11/0.26	  r1 = Substr(r0, c0, c0)
+0.11/0.26	

@@ -1,0 +1,18 @@
+1.00/1.06	=== Examples (examples-46.json)
+1.00/1.06	([" a b c "],"0a0b0c")
+1.00/1.06	=== Library
+1.00/1.06	Concat
+1.00/1.06	Index
+1.00/1.06	Length
+1.00/1.06	Substr
+1.00/1.06	Add
+1.00/1.06	Sub
+1.00/1.06	=== Synthesis
+1.00/1.06	Size: 1
+1.00/1.06	Size: 2
+1.00/1.06	=== Program
+1.00/1.06	prog(x0):
+1.00/1.06	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL0a0b0c"
+1.00/1.06	  r0 = Length(x0)
+1.00/1.06	  r1 = Substr(c0, r0, r0)
+1.00/1.06	

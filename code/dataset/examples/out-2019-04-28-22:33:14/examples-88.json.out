@@ -1,0 +1,18 @@
+0.88/0.95	=== Examples (examples-88.json)
+0.88/0.95	(["alo_helloworld"],"hellowor")
+0.88/0.95	=== Library
+0.88/0.95	Concat
+0.88/0.95	Index
+0.88/0.95	Length
+0.88/0.95	Substr
+0.88/0.95	Add
+0.88/0.95	Sub
+0.88/0.95	=== Synthesis
+0.88/0.95	Size: 1
+0.88/0.95	Size: 2
+0.88/0.95	=== Program
+0.88/0.95	prog(x0):
+0.88/0.95	  c0 = "4"
+0.88/0.95	  r0 = Add(c0, c0)
+0.88/0.95	  r1 = Substr(x0, c0, r0)
+0.88/0.95	

@@ -1,0 +1,20 @@
+1.78/1.89	=== Examples (examples-72.json)
+1.78/1.89	(["just use","trim "],"just use trim")
+1.78/1.89	=== Library
+1.78/1.89	Concat
+1.78/1.89	Index
+1.78/1.89	Length
+1.78/1.89	Substr
+1.78/1.89	Add
+1.78/1.89	Sub
+1.78/1.89	=== Synthesis
+1.78/1.89	Size: 1
+1.78/1.89	Size: 2
+1.78/1.89	Size: 3
+1.78/1.89	=== Program
+1.78/1.89	prog(x0, x1):
+1.78/1.89	  c0 = "just use trim"
+1.78/1.89	  r0 = Length(x0)
+1.78/1.89	  r1 = Substr(x1, r0, r0)
+1.78/1.89	  r2 = Concat(c0, r1)
+1.78/1.89	

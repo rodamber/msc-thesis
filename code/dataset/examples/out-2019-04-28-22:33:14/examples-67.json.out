@@ -1,0 +1,14 @@
+0.00/0.00	=== Examples (examples-67.json)
+0.00/0.00	([" trim me "],"trim me \226\8218\172")
+0.00/0.00	=== Library
+0.00/0.00	Concat
+0.00/0.00	Index
+0.00/0.00	Length
+0.00/0.00	Substr
+0.00/0.00	Add
+0.00/0.00	Sub
+0.00/0.00	=== Synthesis
+0.00/0.00	Size: 1
+0.00/0.00	outsynth2: Data.SBV: stringToQFS: Haskell character: '\8218' is not representable in QF_S
+0.00/0.00	CallStack (from HasCallStack):
+0.00/0.00	  error, called at ./Data/SBV/Utils/Lib.hs:137:12 in sbv-8.2-06c86fd5f74daa6ce2b0df90c49ca0cb992ccbf755e8c7f0c083aa86b5d0b987:Data.SBV.Utils.Lib

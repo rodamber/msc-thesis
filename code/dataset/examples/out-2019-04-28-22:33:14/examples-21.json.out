@@ -1,0 +1,18 @@
+0.78/0.84	=== Examples (examples-21.json)
+0.78/0.84	(["10-05-2019"],"10/05/20")
+0.78/0.84	=== Library
+0.78/0.84	Concat
+0.78/0.84	Index
+0.78/0.84	Length
+0.78/0.84	Substr
+0.78/0.84	Add
+0.78/0.84	Sub
+0.78/0.84	=== Synthesis
+0.78/0.84	Size: 1
+0.78/0.84	Size: 2
+0.78/0.84	=== Program
+0.78/0.84	prog(x0):
+0.78/0.84	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL10/05/20"
+0.78/0.84	  r0 = Length(x0)
+0.78/0.84	  r1 = Substr(c0, r0, r0)
+0.78/0.84	

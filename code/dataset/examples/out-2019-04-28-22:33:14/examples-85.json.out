@@ -1,0 +1,18 @@
+2.88/3.01	=== Examples (examples-85.json)
+2.88/3.01	(["aenean aliquam turpis duis."],"Aenean aliquam turpi")
+2.88/3.01	=== Library
+2.88/3.01	Concat
+2.88/3.01	Index
+2.88/3.01	Length
+2.88/3.01	Substr
+2.88/3.01	Add
+2.88/3.01	Sub
+2.88/3.01	=== Synthesis
+2.88/3.01	Size: 1
+2.88/3.01	Size: 2
+2.88/3.01	=== Program
+2.88/3.01	prog(x0):
+2.88/3.01	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULAenean aliquam turpi"
+2.88/3.01	  r0 = Length(x0)
+2.88/3.01	  r1 = Substr(c0, r0, r0)
+2.88/3.01	

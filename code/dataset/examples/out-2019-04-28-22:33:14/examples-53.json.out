@@ -1,0 +1,18 @@
+5.39/5.42	=== Examples (examples-53.json)
+5.39/5.42	([" this is the same as trim man...  "],"this is the same as trim man...")
+5.39/5.42	=== Library
+5.39/5.42	Concat
+5.39/5.42	Index
+5.39/5.42	Length
+5.39/5.42	Substr
+5.39/5.42	Add
+5.39/5.42	Sub
+5.39/5.42	=== Synthesis
+5.39/5.42	Size: 1
+5.39/5.42	Size: 2
+5.39/5.42	=== Program
+5.39/5.42	prog(x0):
+5.39/5.42	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULthis is the same as trim man..."
+5.39/5.42	  r0 = Length(x0)
+5.39/5.42	  r1 = Substr(c0, r0, r0)
+5.39/5.42	

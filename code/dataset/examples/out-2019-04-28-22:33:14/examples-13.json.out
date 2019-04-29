@@ -1,0 +1,18 @@
+6.77/6.90	=== Examples (examples-13.json)
+6.77/6.90	(["Curabitur commodo volutpat."],"commodo volutpa")
+6.77/6.90	=== Library
+6.77/6.90	Concat
+6.77/6.90	Index
+6.77/6.90	Length
+6.77/6.90	Substr
+6.77/6.90	Add
+6.77/6.90	Sub
+6.77/6.90	=== Synthesis
+6.77/6.90	Size: 1
+6.77/6.90	Size: 2
+6.77/6.90	=== Program
+6.77/6.90	prog(x0):
+6.77/6.90	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULcommodo volutpa"
+6.77/6.90	  r0 = Length(x0)
+6.77/6.90	  r1 = Substr(c0, r0, r0)
+6.77/6.90	

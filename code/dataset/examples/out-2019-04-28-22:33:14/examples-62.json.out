@@ -1,0 +1,18 @@
+0.35/0.41	=== Examples (examples-62.json)
+0.35/0.41	(["1234: try this (hmm)"],"try this")
+0.35/0.41	=== Library
+0.35/0.41	Concat
+0.35/0.41	Index
+0.35/0.41	Length
+0.35/0.41	Substr
+0.35/0.41	Add
+0.35/0.41	Sub
+0.35/0.41	=== Synthesis
+0.35/0.41	Size: 1
+0.35/0.41	Size: 2
+0.35/0.41	=== Program
+0.35/0.41	prog(x0):
+0.35/0.41	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULtry this"
+0.35/0.41	  r0 = Length(x0)
+0.35/0.41	  r1 = Substr(c0, r0, r0)
+0.35/0.41	

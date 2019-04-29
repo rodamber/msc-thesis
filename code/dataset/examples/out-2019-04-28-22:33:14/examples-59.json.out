@@ -1,0 +1,18 @@
+2.00/2.09	=== Examples (examples-59.json)
+2.00/2.09	(["who cares about the last ones..."],"who cares about the last ones.")
+2.00/2.09	=== Library
+2.00/2.09	Concat
+2.00/2.09	Index
+2.00/2.09	Length
+2.00/2.09	Substr
+2.00/2.09	Add
+2.00/2.09	Sub
+2.00/2.09	=== Synthesis
+2.00/2.09	Size: 1
+2.00/2.09	Size: 2
+2.00/2.09	=== Program
+2.00/2.09	prog(x0):
+2.00/2.09	  c0 = "30"
+2.00/2.09	  r0 = Sub(c0, c0)
+2.00/2.09	  r1 = Substr(x0, r0, c0)
+2.00/2.09	

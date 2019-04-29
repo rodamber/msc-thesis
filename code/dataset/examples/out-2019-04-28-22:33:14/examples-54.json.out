@@ -1,0 +1,18 @@
+5.68/5.73	=== Examples (examples-54.json)
+5.68/5.73	([" this is the same as trim man...  "],"this is the same as trim man...")
+5.68/5.73	=== Library
+5.68/5.73	Concat
+5.68/5.73	Index
+5.68/5.73	Length
+5.68/5.73	Substr
+5.68/5.73	Add
+5.68/5.73	Sub
+5.68/5.73	=== Synthesis
+5.68/5.73	Size: 1
+5.68/5.73	Size: 2
+5.68/5.73	=== Program
+5.68/5.73	prog(x0):
+5.68/5.73	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULthis is the same as trim man..."
+5.68/5.73	  r0 = Length(x0)
+5.68/5.73	  r1 = Substr(c0, r0, r0)
+5.68/5.73	

@@ -1,0 +1,18 @@
+0.13/0.26	=== Examples (examples-91.json)
+0.13/0.26	(["George"],"george")
+0.13/0.26	=== Library
+0.13/0.26	Concat
+0.13/0.26	Index
+0.13/0.26	Length
+0.13/0.26	Substr
+0.13/0.26	Add
+0.13/0.26	Sub
+0.13/0.26	=== Synthesis
+0.13/0.26	Size: 1
+0.13/0.26	Size: 2
+0.13/0.26	=== Program
+0.13/0.26	prog(x0):
+0.13/0.26	  c0 = "\NUL\NUL\NUL\NUL\NUL\NULgeorge"
+0.13/0.26	  r0 = Length(x0)
+0.13/0.26	  r1 = Substr(c0, r0, r0)
+0.13/0.26	

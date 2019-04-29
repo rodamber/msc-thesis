@@ -1,0 +1,18 @@
+53.48/53.50	=== Examples (examples-60.json)
+53.48/53.50	(["who cares about the last ones..."],"who cares about the last ones")
+53.48/53.50	=== Library
+53.48/53.50	Concat
+53.48/53.50	Index
+53.48/53.50	Length
+53.48/53.50	Substr
+53.48/53.50	Add
+53.48/53.50	Sub
+53.48/53.50	=== Synthesis
+53.48/53.50	Size: 1
+53.48/53.50	Size: 2
+53.48/53.50	=== Program
+53.48/53.50	prog(x0):
+53.48/53.50	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULwho cares about the last ones"
+53.48/53.50	  r0 = Length(x0)
+53.48/53.50	  r1 = Substr(c0, r0, r0)
+53.48/53.50	

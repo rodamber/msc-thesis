@@ -1,0 +1,18 @@
+1.68/1.76	=== Examples (examples-29.json)
+1.68/1.76	(["Sed scelerisque, tortor sit amet."],"Sed")
+1.68/1.76	=== Library
+1.68/1.76	Concat
+1.68/1.76	Index
+1.68/1.76	Length
+1.68/1.76	Substr
+1.68/1.76	Add
+1.68/1.76	Sub
+1.68/1.76	=== Synthesis
+1.68/1.76	Size: 1
+1.68/1.76	Size: 2
+1.68/1.76	=== Program
+1.68/1.76	prog(x0):
+1.68/1.76	  c0 = "3"
+1.68/1.76	  r0 = Sub(c0, c0)
+1.68/1.76	  r1 = Substr(x0, r0, c0)
+1.68/1.76	

@@ -1,0 +1,18 @@
+7.67/7.72	=== Examples (examples-03.json)
+7.67/7.72	(["hey. I hope you are doing good"],"hey, I hope you are doing good")
+7.67/7.72	=== Library
+7.67/7.72	Concat
+7.67/7.72	Index
+7.67/7.72	Length
+7.67/7.72	Substr
+7.67/7.72	Add
+7.67/7.72	Sub
+7.67/7.72	=== Synthesis
+7.67/7.72	Size: 1
+7.67/7.72	Size: 2
+7.67/7.72	=== Program
+7.67/7.72	prog(x0):
+7.67/7.72	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULhey, I hope you are doing good\NUL\NUL"
+7.67/7.72	  r0 = Length(x0)
+7.67/7.72	  r1 = Substr(c0, r0, r0)
+7.67/7.72	

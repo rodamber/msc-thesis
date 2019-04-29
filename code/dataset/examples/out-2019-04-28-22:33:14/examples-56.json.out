@@ -1,0 +1,18 @@
+76.78/76.85	=== Examples (examples-56.json)
+76.78/76.85	(["what are you doing? (sorry)"],"what are you doing?")
+76.78/76.85	=== Library
+76.78/76.85	Concat
+76.78/76.85	Index
+76.78/76.85	Length
+76.78/76.85	Substr
+76.78/76.85	Add
+76.78/76.85	Sub
+76.78/76.85	=== Synthesis
+76.78/76.85	Size: 1
+76.78/76.85	Size: 2
+76.78/76.85	=== Program
+76.78/76.85	prog(x0):
+76.78/76.85	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULwhat are you doing?"
+76.78/76.85	  r0 = Length(x0)
+76.78/76.85	  r1 = Substr(c0, r0, r0)
+76.78/76.85	

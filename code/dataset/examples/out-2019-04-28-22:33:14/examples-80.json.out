@@ -1,0 +1,18 @@
+73.28/73.39	=== Examples (examples-80.json)
+73.28/73.39	(["george.bluth@outsystems.com"],"@outsystems.com")
+73.28/73.39	=== Library
+73.28/73.39	Concat
+73.28/73.39	Index
+73.28/73.39	Length
+73.28/73.39	Substr
+73.28/73.39	Add
+73.28/73.39	Sub
+73.28/73.39	=== Synthesis
+73.28/73.39	Size: 1
+73.28/73.39	Size: 2
+73.28/73.39	=== Program
+73.28/73.39	prog(x0):
+73.28/73.39	  c0 = "12"
+73.28/73.39	  r0 = Length(x0)
+73.28/73.39	  r1 = Substr(x0, c0, r0)
+73.28/73.39	

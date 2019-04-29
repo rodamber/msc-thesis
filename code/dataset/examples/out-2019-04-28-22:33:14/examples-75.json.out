@@ -1,0 +1,18 @@
+6.01/6.13	=== Examples (examples-75.json)
+6.01/6.13	(["Fusce sapien eros volutpat."],"Fusce...tpat.")
+6.01/6.13	=== Library
+6.01/6.13	Concat
+6.01/6.13	Index
+6.01/6.13	Length
+6.01/6.13	Substr
+6.01/6.13	Add
+6.01/6.13	Sub
+6.01/6.13	=== Synthesis
+6.01/6.13	Size: 1
+6.01/6.13	Size: 2
+6.01/6.13	=== Program
+6.01/6.13	prog(x0):
+6.01/6.13	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULFusce...tpat."
+6.01/6.13	  r0 = Length(x0)
+6.01/6.13	  r1 = Substr(c0, r0, r0)
+6.01/6.13	

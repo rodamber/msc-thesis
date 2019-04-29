@@ -1,0 +1,18 @@
+1.89/2.03	=== Examples (examples-45.json)
+1.89/2.03	(["Make it two weeks"],"make it two wks")
+1.89/2.03	=== Library
+1.89/2.03	Concat
+1.89/2.03	Index
+1.89/2.03	Length
+1.89/2.03	Substr
+1.89/2.03	Add
+1.89/2.03	Sub
+1.89/2.03	=== Synthesis
+1.89/2.03	Size: 1
+1.89/2.03	Size: 2
+1.89/2.03	=== Program
+1.89/2.03	prog(x0):
+1.89/2.03	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULmake it two wks"
+1.89/2.03	  r0 = Length(x0)
+1.89/2.03	  r1 = Substr(c0, r0, r0)
+1.89/2.03	

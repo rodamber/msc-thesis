@@ -1,0 +1,18 @@
+13.68/13.79	=== Examples (examples-18.json)
+13.68/13.79	(["Lorem ipsum dolor sit amet cras amet."],"Lorem ipsum dolor sit amet cra...")
+13.68/13.79	=== Library
+13.68/13.79	Concat
+13.68/13.79	Index
+13.68/13.79	Length
+13.68/13.79	Substr
+13.68/13.79	Add
+13.68/13.79	Sub
+13.68/13.79	=== Synthesis
+13.68/13.79	Size: 1
+13.68/13.79	Size: 2
+13.68/13.79	=== Program
+13.68/13.79	prog(x0):
+13.68/13.79	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\EOT\NUL\NULLorem ipsum dolor sit amet cra..."
+13.68/13.79	  r0 = Length(x0)
+13.68/13.79	  r1 = Substr(c0, r0, r0)
+13.68/13.79	

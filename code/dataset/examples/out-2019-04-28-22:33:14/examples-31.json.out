@@ -1,0 +1,18 @@
+4.58/4.64	=== Examples (examples-31.json)
+4.58/4.64	(["john.doe@outsystems.com"],"john.doe")
+4.58/4.64	=== Library
+4.58/4.64	Concat
+4.58/4.64	Index
+4.58/4.64	Length
+4.58/4.64	Substr
+4.58/4.64	Add
+4.58/4.64	Sub
+4.58/4.64	=== Synthesis
+4.58/4.64	Size: 1
+4.58/4.64	Size: 2
+4.58/4.64	=== Program
+4.58/4.64	prog(x0):
+4.58/4.64	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULjohn.doe"
+4.58/4.64	  r0 = Length(x0)
+4.58/4.64	  r1 = Substr(c0, r0, r0)
+4.58/4.64	

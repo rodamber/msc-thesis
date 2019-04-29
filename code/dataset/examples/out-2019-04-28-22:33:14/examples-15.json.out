@@ -1,0 +1,18 @@
+0.10/0.22	=== Examples (examples-15.json)
+0.10/0.22	(["abc"],"ABC")
+0.10/0.22	=== Library
+0.10/0.22	Concat
+0.10/0.22	Index
+0.10/0.22	Length
+0.10/0.22	Substr
+0.10/0.22	Add
+0.10/0.22	Sub
+0.10/0.22	=== Synthesis
+0.10/0.22	Size: 1
+0.10/0.22	Size: 2
+0.10/0.22	=== Program
+0.10/0.22	prog(x0):
+0.10/0.22	  c0 = "\NUL\NUL\NULABC"
+0.10/0.22	  r0 = Length(x0)
+0.10/0.22	  r1 = Substr(c0, r0, r0)
+0.10/0.22	

@@ -1,0 +1,18 @@
+3.27/3.32	=== Examples (examples-74.json)
+3.27/3.32	(["George Michael"],"GM")
+3.27/3.32	=== Library
+3.27/3.32	Concat
+3.27/3.32	Index
+3.27/3.32	Length
+3.27/3.32	Substr
+3.27/3.32	Add
+3.27/3.32	Sub
+3.27/3.32	=== Synthesis
+3.27/3.32	Size: 1
+3.27/3.32	Size: 2
+3.27/3.32	=== Program
+3.27/3.32	prog(x0):
+3.27/3.32	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULGM"
+3.27/3.32	  r0 = Length(x0)
+3.27/3.32	  r1 = Substr(c0, r0, r0)
+3.27/3.32	

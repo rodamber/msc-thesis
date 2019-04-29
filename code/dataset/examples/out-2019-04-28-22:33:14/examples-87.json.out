@@ -1,0 +1,18 @@
+0.53/0.60	=== Examples (examples-87.json)
+0.53/0.60	(["https://outsystems.com"],"outsystems")
+0.53/0.60	=== Library
+0.53/0.60	Concat
+0.53/0.60	Index
+0.53/0.60	Length
+0.53/0.60	Substr
+0.53/0.60	Add
+0.53/0.60	Sub
+0.53/0.60	=== Synthesis
+0.53/0.60	Size: 1
+0.53/0.60	Size: 2
+0.53/0.60	=== Program
+0.53/0.60	prog(x0):
+0.53/0.60	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\DLEoutsystems"
+0.53/0.60	  r0 = Length(x0)
+0.53/0.60	  r1 = Substr(c0, r0, r0)
+0.53/0.60	

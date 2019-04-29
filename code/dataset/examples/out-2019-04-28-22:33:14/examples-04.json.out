@@ -1,0 +1,18 @@
+1.78/1.81	=== Examples (examples-04.json)
+1.78/1.81	(["that/folder/"],"thatfolder")
+1.78/1.81	=== Library
+1.78/1.81	Concat
+1.78/1.81	Index
+1.78/1.81	Length
+1.78/1.81	Substr
+1.78/1.81	Add
+1.78/1.81	Sub
+1.78/1.81	=== Synthesis
+1.78/1.81	Size: 1
+1.78/1.81	Size: 2
+1.78/1.81	=== Program
+1.78/1.81	prog(x0):
+1.78/1.81	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULthatfolder"
+1.78/1.81	  r0 = Length(x0)
+1.78/1.81	  r1 = Substr(c0, r0, r0)
+1.78/1.81	

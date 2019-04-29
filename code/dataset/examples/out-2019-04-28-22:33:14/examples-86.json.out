@@ -1,0 +1,18 @@
+17.37/17.48	=== Examples (examples-86.json)
+17.37/17.48	(["Sed euismod congue porta. Phasellus posuere rutrum porttitor. Curabitur nec pellentesque sem, luctus volutpat."],"Sed euismod congue porta. phasellus posuere rutrum porttitor. curabitur nec pellentesque sem, luctus")
+17.37/17.48	=== Library
+17.37/17.48	Concat
+17.37/17.48	Index
+17.37/17.48	Length
+17.37/17.48	Substr
+17.37/17.48	Add
+17.37/17.48	Sub
+17.37/17.48	=== Synthesis
+17.37/17.48	Size: 1
+17.37/17.48	Size: 2
+17.37/17.48	=== Program
+17.37/17.48	prog(x0):
+17.37/17.48	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULSed euismod congue porta. phasellus posuere rutrum porttitor. curabitur nec pellentesque sem, luctus"
+17.37/17.48	  r0 = Length(x0)
+17.37/17.48	  r1 = Substr(c0, r0, r0)
+17.37/17.48	

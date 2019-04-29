@@ -1,0 +1,18 @@
+1.67/1.74	=== Examples (examples-73.json)
+1.67/1.74	(["Sed metus urna turpis duis."],"...rpis duis.")
+1.67/1.74	=== Library
+1.67/1.74	Concat
+1.67/1.74	Index
+1.67/1.74	Length
+1.67/1.74	Substr
+1.67/1.74	Add
+1.67/1.74	Sub
+1.67/1.74	=== Synthesis
+1.67/1.74	Size: 1
+1.67/1.74	Size: 2
+1.67/1.74	=== Program
+1.67/1.74	prog(x0):
+1.67/1.74	  c0 = "\NUL\NUL\NUL\NUL\EOT\NUL\NUL\NUL\NUL\NUL\STX\NUL@\NUL\NUL\NUL\NUL\NULi\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL...rpis duis."
+1.67/1.74	  r0 = Length(x0)
+1.67/1.74	  r1 = Substr(c0, r0, r0)
+1.67/1.74	

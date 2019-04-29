@@ -1,0 +1,18 @@
+0.88/0.91	=== Examples (examples-30.json)
+0.88/0.91	(["outsystems.com"],"outsystems")
+0.88/0.91	=== Library
+0.88/0.91	Concat
+0.88/0.91	Index
+0.88/0.91	Length
+0.88/0.91	Substr
+0.88/0.91	Add
+0.88/0.91	Sub
+0.88/0.91	=== Synthesis
+0.88/0.91	Size: 1
+0.88/0.91	Size: 2
+0.88/0.91	=== Program
+0.88/0.91	prog(x0):
+0.88/0.91	  c0 = "10"
+0.88/0.91	  r0 = Sub(c0, c0)
+0.88/0.91	  r1 = Substr(x0, r0, c0)
+0.88/0.91	

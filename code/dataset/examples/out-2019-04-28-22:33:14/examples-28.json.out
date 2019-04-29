@@ -1,0 +1,18 @@
+0.25/0.31	=== Examples (examples-28.json)
+0.25/0.31	(["hello","world"],"hello-world")
+0.25/0.31	=== Library
+0.25/0.31	Concat
+0.25/0.31	Index
+0.25/0.31	Length
+0.25/0.31	Substr
+0.25/0.31	Add
+0.25/0.31	Sub
+0.25/0.31	=== Synthesis
+0.25/0.31	Size: 1
+0.25/0.31	Size: 2
+0.25/0.31	=== Program
+0.25/0.31	prog(x0, x1):
+0.25/0.31	  c0 = "-"
+0.25/0.31	  r0 = Concat(x0, c0)
+0.25/0.31	  r1 = Concat(r0, x1)
+0.25/0.31	

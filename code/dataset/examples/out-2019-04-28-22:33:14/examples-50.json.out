@@ -1,0 +1,18 @@
+0.24/0.31	=== Examples (examples-50.json)
+0.24/0.31	(["George"],"G")
+0.24/0.31	=== Library
+0.24/0.31	Concat
+0.24/0.31	Index
+0.24/0.31	Length
+0.24/0.31	Substr
+0.24/0.31	Add
+0.24/0.31	Sub
+0.24/0.31	=== Synthesis
+0.24/0.31	Size: 1
+0.24/0.31	Size: 2
+0.24/0.31	=== Program
+0.24/0.31	prog(x0):
+0.24/0.31	  c0 = "\NUL\NUL\NUL\NUL\EOT\NULG"
+0.24/0.31	  r0 = Length(x0)
+0.24/0.31	  r1 = Substr(c0, r0, r0)
+0.24/0.31	

@@ -1,0 +1,18 @@
+14.68/14.72	=== Examples (examples-20.json)
+14.68/14.72	(["In+hac+habitasse+platea+dictumst.+Sed+dapibus+sit+amet+neque+gravida+sed."],"In hac habitasse platea dictumst. Sed dapibus")
+14.68/14.72	=== Library
+14.68/14.72	Concat
+14.68/14.72	Index
+14.68/14.72	Length
+14.68/14.72	Substr
+14.68/14.72	Add
+14.68/14.72	Sub
+14.68/14.72	=== Synthesis
+14.68/14.72	Size: 1
+14.68/14.72	Size: 2
+14.68/14.72	=== Program
+14.68/14.72	prog(x0):
+14.68/14.72	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\EOT\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\b\NUL\NUL\NUL\NUL\NUL\NULIn hac habitasse platea dictumst. Sed dapibus"
+14.68/14.72	  r0 = Length(x0)
+14.68/14.72	  r1 = Substr(c0, r0, r0)
+14.68/14.72	

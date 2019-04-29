@@ -1,0 +1,16 @@
+0.11/0.20	=== Examples (examples-27.json)
+0.11/0.20	(["Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet."],"Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet....")
+0.11/0.20	=== Library
+0.11/0.20	Concat
+0.11/0.20	Index
+0.11/0.20	Length
+0.11/0.20	Substr
+0.11/0.20	Add
+0.11/0.20	Sub
+0.11/0.20	=== Synthesis
+0.11/0.20	Size: 1
+0.11/0.20	=== Program
+0.11/0.20	prog(x0):
+0.11/0.20	  c0 = "..."
+0.11/0.20	  r0 = Concat(x0, c0)
+0.11/0.20	

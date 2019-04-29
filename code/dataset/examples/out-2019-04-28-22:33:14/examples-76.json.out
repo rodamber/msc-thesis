@@ -1,0 +1,18 @@
+0.19/0.35	=== Examples (examples-76.json)
+0.19/0.35	(["abcdef",3,"xyz"],"xyz")
+0.19/0.35	=== Library
+0.19/0.35	Concat
+0.19/0.35	Index
+0.19/0.35	Length
+0.19/0.35	Substr
+0.19/0.35	Add
+0.19/0.35	Sub
+0.19/0.35	=== Synthesis
+0.19/0.35	Size: 1
+0.19/0.35	Size: 2
+0.19/0.35	=== Program
+0.19/0.35	prog(x0, x1, x2):
+0.19/0.35	  c0 = "0"
+0.19/0.35	  r0 = Concat(x2, x0)
+0.19/0.35	  r1 = Substr(r0, c0, x1)
+0.19/0.35	

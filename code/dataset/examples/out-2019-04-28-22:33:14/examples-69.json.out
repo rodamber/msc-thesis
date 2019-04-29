@@ -1,0 +1,18 @@
+1.18/1.22	=== Examples (examples-69.json)
+1.18/1.22	(["break \\"],"break")
+1.18/1.22	=== Library
+1.18/1.22	Concat
+1.18/1.22	Index
+1.18/1.22	Length
+1.18/1.22	Substr
+1.18/1.22	Add
+1.18/1.22	Sub
+1.18/1.22	=== Synthesis
+1.18/1.22	Size: 1
+1.18/1.22	Size: 2
+1.18/1.22	=== Program
+1.18/1.22	prog(x0):
+1.18/1.22	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NULbreak"
+1.18/1.22	  r0 = Length(x0)
+1.18/1.22	  r1 = Substr(c0, r0, r0)
+1.18/1.22	

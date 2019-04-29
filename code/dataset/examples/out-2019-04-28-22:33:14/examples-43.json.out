@@ -1,0 +1,18 @@
+89.13/89.19	=== Examples (examples-43.json)
+89.13/89.19	(["https://ThatCoolWebsite.com"],"thatcoolwebsite.com")
+89.13/89.19	=== Library
+89.13/89.19	Concat
+89.13/89.19	Index
+89.13/89.19	Length
+89.13/89.19	Substr
+89.13/89.19	Add
+89.13/89.19	Sub
+89.13/89.19	=== Synthesis
+89.13/89.19	Size: 1
+89.13/89.19	Size: 2
+89.13/89.19	=== Program
+89.13/89.19	prog(x0):
+89.13/89.19	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULthatcoolwebsite.com"
+89.13/89.19	  r0 = Length(x0)
+89.13/89.19	  r1 = Substr(c0, r0, r0)
+89.13/89.19	

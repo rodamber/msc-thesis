@@ -1,0 +1,18 @@
+2.00/2.06	=== Examples (examples-34.json)
+2.00/2.06	(["A001 John Doe"],"John Doe")
+2.00/2.06	=== Library
+2.00/2.06	Concat
+2.00/2.06	Index
+2.00/2.06	Length
+2.00/2.06	Substr
+2.00/2.06	Add
+2.00/2.06	Sub
+2.00/2.06	=== Synthesis
+2.00/2.06	Size: 1
+2.00/2.06	Size: 2
+2.00/2.06	=== Program
+2.00/2.06	prog(x0):
+2.00/2.06	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULJohn Doe"
+2.00/2.06	  r0 = Length(x0)
+2.00/2.06	  r1 = Substr(c0, r0, r0)
+2.00/2.06	

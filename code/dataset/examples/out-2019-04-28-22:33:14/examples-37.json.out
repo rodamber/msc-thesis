@@ -1,0 +1,18 @@
+23.58/23.60	=== Examples (examples-37.json)
+23.58/23.60	(["Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."],"/ Nulla eu")
+23.58/23.60	=== Library
+23.58/23.60	Concat
+23.58/23.60	Index
+23.58/23.60	Length
+23.58/23.60	Substr
+23.58/23.60	Add
+23.58/23.60	Sub
+23.58/23.60	=== Synthesis
+23.58/23.60	Size: 1
+23.58/23.60	Size: 2
+23.58/23.60	=== Program
+23.58/23.60	prog(x0):
+23.58/23.60	  c0 = "Duis eget ultrices sapien. / Nulla \NULu vehicul\b  nim, \NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL/ Nulla eu"
+23.58/23.60	  r0 = Length(x0)
+23.58/23.60	  r1 = Substr(c0, r0, r0)
+23.58/23.60	

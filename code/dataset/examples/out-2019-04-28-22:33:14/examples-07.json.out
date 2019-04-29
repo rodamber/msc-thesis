@@ -1,0 +1,20 @@
+7.50/7.60	=== Examples (examples-07.json)
+7.50/7.60	(["Sub of by way"],"Sub of<br /> by way")
+7.50/7.60	=== Library
+7.50/7.60	Concat
+7.50/7.60	Index
+7.50/7.60	Length
+7.50/7.60	Substr
+7.50/7.60	Add
+7.50/7.60	Sub
+7.50/7.60	=== Synthesis
+7.50/7.60	Size: 1
+7.50/7.60	Size: 2
+7.50/7.60	Size: 3
+7.50/7.60	=== Program
+7.50/7.60	prog(x0):
+7.50/7.60	  c0 = "Sub of<br /> by way"
+7.50/7.60	  r0 = Length(x0)
+7.50/7.60	  r1 = Substr(x0, r0, r0)
+7.50/7.60	  r2 = Concat(c0, r1)
+7.50/7.60	
