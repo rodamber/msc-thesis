@@ -1,0 +1,19 @@
+=== Examples (examples-12.json)
+(["hello word",5],"hello")
+(["hi my name is",10],"hi my name")
+(["Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam.",100],"Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis ")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0, x1):
+  c0 = "0"
+  r0 = Substr(x0, c0, x1)
+
+CPU time:   0.07s

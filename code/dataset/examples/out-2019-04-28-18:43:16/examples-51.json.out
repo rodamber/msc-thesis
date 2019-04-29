@@ -1,0 +1,23 @@
+=== Examples (examples-51.json)
+(["George ","Michael "],"George  Michael")
+(["Maebe","Bluth   "],"Maebe Bluth")
+(["George","Sr. "],"George Sr.")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+outsynth2: 
+*** Data.SBV: fd:5: hGetLine: end of file:
+***
+***    Sent      : (check-sat)
+***
+***    Executable: /home/rodrigo/bin/z3
+***    Options   : -nw -in -smt2
+

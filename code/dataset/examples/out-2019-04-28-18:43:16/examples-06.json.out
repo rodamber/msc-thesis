@@ -1,0 +1,21 @@
+=== Examples (examples-06.json)
+(["http://www.outsystems.com"],"www.outsystems.com")
+(["http://tecnico.ulisboa.pt/"],"tecnico.ulisboa.pt/")
+(["http://www.cmu.edu"],"www.cmu.edu")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "7"
+  r0 = Length(x0)
+  r1 = Substr(x0, c0, r0)
+
+CPU time:   0.17s

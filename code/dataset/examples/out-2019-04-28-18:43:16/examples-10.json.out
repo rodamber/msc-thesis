@@ -1,0 +1,21 @@
+=== Examples (examples-10.json)
+(["hello word"],"hello word")
+(["hi my name is"],"hi my name")
+(["how are you doing"],"how are yo")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "10"
+  r0 = Sub(c0, c0)
+  r1 = Substr(x0, r0, c0)
+
+CPU time:   0.20s

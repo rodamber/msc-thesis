@@ -1,0 +1,21 @@
+=== Examples (examples-34.json)
+(["A001 John Doe"],"John Doe")
+(["B234 Jane Moe"],"Jane Moe")
+(["C099 Not a standard"],"Not a standard")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+=== Program
+prog(x0):
+  c0 = "5"
+  r0 = Length(x0)
+  r1 = Substr(x0, c0, r0)
+
+CPU time:   0.18s

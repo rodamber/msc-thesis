@@ -1,0 +1,19 @@
+=== Examples (examples-57.json)
+(["what are you doing? (sorry)"],"what are you doing? (sorry)")
+(["did you want that? (hmm..)"],"did you want that? (hmm..)")
+(["maybe with sub? (oh i see)"],"maybe with sub? (oh i see)")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+=== Program
+prog(x0):
+  c0 = ""
+  r0 = Concat(c0, x0)
+
+CPU time:   0.06s

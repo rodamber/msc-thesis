@@ -1,0 +1,24 @@
+=== Examples (examples-41.json)
+(["who knows  "],"Prefix who knows")
+(["  we'll see"],"Prefix we'll see")
+(["  oh come on  "],"Prefix oh come on")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+Size: 4
+outsynth2: 
+*** Data.SBV: fd:5: hGetLine: end of file:
+***
+***    Sent      : (check-sat)
+***
+***    Executable: /home/rodrigo/bin/z3
+***    Options   : -nw -in -smt2
+

@@ -1,0 +1,23 @@
+=== Examples (examples-02.json)
+(["0,1"],"0, 1")
+(["a,b,c,d"],"a, b, c, d")
+(["1,2,3,4,5,6,7,8,9,10"],"1, 2, 3, 4, 5, 6, 7, 8, 9, 10")
+=== Library
+Concat
+Index
+Length
+Substr
+Add
+Sub
+=== Synthesis
+Size: 1
+Size: 2
+Size: 3
+outsynth2: 
+*** Data.SBV: fd:5: hGetLine: end of file:
+***
+***    Sent      : (check-sat)
+***
+***    Executable: /home/rodrigo/bin/z3
+***    Options   : -nw -in -smt2
+
