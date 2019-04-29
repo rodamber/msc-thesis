@@ -1,0 +1,20 @@
+9.51/9.56	=== Examples (examples-06.json)
+9.51/9.56	(["http://www.outsystems.com"],"www.outsystems.com")
+9.51/9.56	(["http://tecnico.ulisboa.pt/"],"tecnico.ulisboa.pt/")
+9.51/9.56	(["http://www.cmu.edu"],"www.cmu.edu")
+9.51/9.56	=== Library
+9.51/9.56	Concat
+9.51/9.56	Index
+9.51/9.56	Length
+9.51/9.56	Substr
+9.51/9.56	Add
+9.51/9.56	Sub
+9.51/9.56	=== Synthesis
+9.51/9.56	Size: 1
+9.51/9.56	Size: 2
+9.51/9.56	=== Program
+9.51/9.56	prog(x0):
+9.51/9.56	  c0 = "7"
+9.51/9.56	  r0 = Length(x0)
+9.51/9.56	  r1 = Substr(x0, c0, r0)
+9.51/9.56	

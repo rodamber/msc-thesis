@@ -1,0 +1,18 @@
+0.11/0.24	=== Examples (examples-12.json)
+0.11/0.24	(["hello word",5],"hello")
+0.11/0.24	(["hi my name is",10],"hi my name")
+0.11/0.24	(["Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam.",100],"Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis ")
+0.11/0.24	=== Library
+0.11/0.24	Concat
+0.11/0.24	Index
+0.11/0.24	Length
+0.11/0.24	Substr
+0.11/0.24	Add
+0.11/0.24	Sub
+0.11/0.24	=== Synthesis
+0.11/0.24	Size: 1
+0.11/0.24	=== Program
+0.11/0.24	prog(x0, x1):
+0.11/0.24	  c0 = "0"
+0.11/0.24	  r0 = Substr(x0, c0, x1)
+0.11/0.24	

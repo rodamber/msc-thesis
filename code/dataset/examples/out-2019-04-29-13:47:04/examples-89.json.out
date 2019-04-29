@@ -1,0 +1,23 @@
+599.99/600.04	=== Examples (examples-89.json)
+599.99/600.04	(["|George|Maebe|Michael|"],"Enviado para George, Maebe, Michael")
+599.99/600.04	(["|John|Jane|Joao|"],"Enviado para John, Jane, Joao")
+599.99/600.04	(["|Abc|Def|Ghi|"],"Enviado para Abc, Def, Ghi")
+599.99/600.04	=== Library
+599.99/600.04	Concat
+599.99/600.04	Index
+599.99/600.04	Length
+599.99/600.04	Substr
+599.99/600.04	Add
+599.99/600.04	Sub
+599.99/600.04	=== Synthesis
+599.99/600.04	Size: 1
+599.99/600.04	Size: 2
+599.99/600.04	Size: 3
+599.99/600.04	outsynth2: 
+599.99/600.04	*** Data.SBV: fd:6: hGetLine: end of file:
+599.99/600.04	***
+599.99/600.04	***    Sent      : (check-sat)
+599.99/600.04	***
+599.99/600.04	***    Executable: /home/rodrigo/bin/z3
+599.99/600.04	***    Options   : -nw -in -smt2
+599.99/600.04	
