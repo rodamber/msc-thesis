@@ -6,9 +6,9 @@ CONSTS=$2
 
 mkdir -p $OUTDIR
 touch $OUTDIR/command.txt
-printf '%s\n' "python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS" > $OUTDIR/command.txt
+printf '%s\n' "python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -ci $CONSTS -cs $CONSTS" > $OUTDIR/command.txt
 
-python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS ../../dataset/examples/examples-{01..25}.json &
-python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS ../../dataset/examples/examples-{26..50}.json &
-python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS ../../dataset/examples/examples-{51..75}.json &
-python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS ../../dataset/examples/examples-{76..95}.json &
+python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -ci $CONSTS -cs $CONSTS ../../dataset/examples/examples-{01..25}.json &
+python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -ci $CONSTS -cs $CONSTS ../../dataset/examples/examples-{26..50}.json &
+python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -ci $CONSTS -cs $CONSTS ../../dataset/examples/examples-{51..75}.json &
+python runbench.py -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -ci $CONSTS -cs $CONSTS ../../dataset/examples/examples-{76..95}.json &
