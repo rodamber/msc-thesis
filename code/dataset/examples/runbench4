@@ -1,9 +1,8 @@
 #!/bin/bash
 TIMESTAMP=$(date '+%F-%T')
-PROG=$1
-OUTDIR=out/$PROG/$TIMESTAMP
-EXAMPLES=$2
-CONSTS=$3
+OUTDIR=out/outsynth2/$TIMESTAMP
+EXAMPLES=$1
+CONSTS=$2
 
 mkdir -p $OUTDIR
 touch $OUTDIR/command.txt
