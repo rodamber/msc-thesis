@@ -1,17 +1,67 @@
 \chapter{Experimental Results}
 \label{chap:experimental-results}
 
-% Discussion, maybe?
-% TODO
-We do not have access to actual input-output data, which swayed the kind of
-approaches we took in order to solve this problem. For example, we could not
-use approaches that applied inductive reasoning to a corpus of pre-existing
-input-output examples in order to find some common patterns 
+In this chapter, we evaluate and compare the synthesizers presented in
+Chapter~\ref{chap:synthesis} .
+The synthesizers are compared in terms of their running time and number of
+solved problems.
+A description of the benchmarks is provided in Section~\ref{sec:bench-desc}.
+Section~\ref{sec:results-and-comparison} presents the results of the benchmarks
+and a comparison between the setwise synthesizer
+(Section~\ref{sec:setwise-encoding}) and the whole synthesizer
+(Section~\ref{sec:whole-encoding}).
 
-% of expression usage.
+\section{Benchmark Description}
+\label{sec:bench-desc}
 
-% TODO FIXME
-We had access to 10239847012983 OutSystems expressions, with sizes ranging from
-x to y, and manipulating data types such as z and w. The most used functions
-were ... and typical programming patterns included ...
+A set of 285522 expressions were provided by OutSystems.
+We conducted an analysis to determine which builtin functions and which
+combinations were the most common, and picked 100 expressions containing only
+those functions (see Table~\ref{table:builtin-description}).
+
+We then obtained a set of 3 input-output examples for each of these 100
+expressions.
+We developed an \textit{interpreter} for OutSystems expressions, and manually
+created a set of 3 different inputs for each expression.
+The inputs were carefully crafted in order to try to eliminate as much ambiguity
+as possible.
+Then we interpreted the expressions over their set of inputs in order to
+obtain the correspondent outputs.
+A first approach was tried, where we encoded the expressions in \gls{smt} in
+such a way that a solution to the formulas yielded valid input-output examples.
+Although the approach ``worked'', it was ultimately too slow, and the
+automatically generated examples were not natural, so we resorted to the manual
+approach.
+
+The solver used to solve the formulas generated in the synthesis process was Z3
+version 4.8.5~\cite{DeMoura:2008:ZES}.
+
+% configuracao (exemplos, constantes)
+% que solver foi utilizado
+% time and memory limits (runsolver)
+
+% tamanho dos programas
+% calls to solvers (timeout, numero de conflictos)
+
+\section{Results and Comparison}
+\label{sec:results-and-comparison}
+
+
+
+% 
+
+
+% % Discussion, maybe?
+% % TODO
+% We do not have access to actual input-output data, which swayed the kind of
+% approaches we took in order to solve this problem. For example, we could not
+% use approaches that applied inductive reasoning to a corpus of pre-existing
+% input-output examples in order to find some common patterns 
+
+% % of expression usage.
+
+% % TODO FIXME
+% We had access to 10239847012983 OutSystems expressions, with sizes ranging from
+% x to y, and manipulating data types such as z and w. The most used functions
+% were ... and typical programming patterns included ...
 
