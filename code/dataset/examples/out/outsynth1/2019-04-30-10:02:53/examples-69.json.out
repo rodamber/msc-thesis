@@ -1,0 +1,21 @@
+0.14/0.20	=== Examples (../../dataset/examples/examples-69.json)
+0.14/0.20	IO(inputs=('break \\',), output='break')
+0.14/0.20	=== Library
+0.14/0.20	concat
+0.14/0.20	index
+0.14/0.20	length
+0.14/0.20	replace
+0.14/0.20	substr
+0.14/0.20	to_lower
+0.14/0.20	to_upper
+0.14/0.20	trim
+0.14/0.20	trim_start
+0.14/0.20	trim_end
+0.14/0.20	add
+0.14/0.20	sub
+0.14/0.20	=== Synthesis
+0.14/0.20	['concat']: UNSAT (0.022 seconds)
+0.14/0.22	['index']: UNSAT (0.021 seconds)
+0.14/0.24	['length']: UNSAT (0.018 seconds)
+0.14/0.26	['replace']: SAT (0.025 seconds)
+0.14/0.29	replace('break', arg0, 'break')

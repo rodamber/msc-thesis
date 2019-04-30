@@ -1,0 +1,16 @@
+0.12/0.19	=== Examples (../../dataset/examples/examples-63.json)
+0.12/0.19	IO(inputs=('take first nine',), output='t nine')
+0.12/0.19	IO(inputs=('or all',), output='')
+0.12/0.19	=== Library
+0.12/0.19	concat
+0.12/0.19	index
+0.12/0.19	length
+0.12/0.19	substr
+0.12/0.19	add
+0.12/0.19	sub
+0.12/0.19	=== Synthesis
+0.12/0.19	['concat']: UNSAT (0.027 seconds)
+0.12/0.21	['index']: UNSAT (0.026 seconds)
+0.12/0.24	['length']: UNSAT (0.019 seconds)
+0.12/0.26	['substr']: SAT (0.035 seconds)
+0.12/0.30	substr(arg0, 9, 9)

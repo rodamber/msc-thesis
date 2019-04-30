@@ -1,0 +1,43 @@
+0.11/0.20	=== Examples (../../dataset/examples/examples-36.json)
+0.11/0.20	IO(inputs=('Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus.',), output='/ Nulla eu vehicula enim, in metus.')
+0.11/0.20	IO(inputs=('Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus.',), output='/ Vestibulum ut ligula metus.')
+0.11/0.20	=== Library
+0.11/0.20	concat
+0.11/0.20	index
+0.11/0.20	length
+0.11/0.20	substr
+0.11/0.20	add
+0.11/0.20	sub
+0.11/0.20	=== Synthesis
+0.11/0.20	['concat']: UNSAT (0.028 seconds)
+0.11/0.23	['index']: UNSAT (0.026 seconds)
+0.11/0.25	['length']: UNSAT (0.019 seconds)
+0.25/0.27	['substr']: UNSAT (0.029 seconds)
+0.25/0.30	['add']: UNSAT (0.023 seconds)
+0.25/0.33	['sub']: UNSAT (0.023 seconds)
+0.25/0.35	['concat', 'concat']: UNSAT (0.049 seconds)
+0.36/0.40	['concat', 'index']: UNSAT (0.043 seconds)
+0.36/0.45	['concat', 'length']: UNSAT (0.033 seconds)
+0.36/0.48	['concat', 'substr']: UNSAT (0.214 seconds)
+0.65/0.69	['concat', 'add']: UNSAT (0.027 seconds)
+0.69/0.72	['concat', 'sub']: UNSAT (0.027 seconds)
+0.69/0.75	['index', 'index']: UNSAT (0.035 seconds)
+0.69/0.79	['index', 'length']: UNSAT (0.026 seconds)
+0.79/0.81	['index', 'substr']: UNSAT (0.935 seconds)
+1.69/1.75	['index', 'add']: UNSAT (0.031 seconds)
+1.69/1.78	['index', 'sub']: UNSAT (0.032 seconds)
+1.79/1.81	['length', 'length']: UNSAT (0.020 seconds)
+1.79/1.83	['length', 'substr']: UNSAT (0.033 seconds)
+1.79/1.87	['length', 'add']: UNSAT (0.024 seconds)
+1.79/1.89	['length', 'sub']: UNSAT (0.025 seconds)
+1.89/1.92	['substr', 'substr']: UNSAT (0.041 seconds)
+1.89/1.96	['substr', 'add']: UNSAT (0.036 seconds)
+1.89/1.99	['substr', 'sub']: UNSAT (0.035 seconds)
+1.89/2.03	['add', 'add']: UNSAT (0.029 seconds)
+1.89/2.06	['add', 'sub']: UNSAT (0.030 seconds)
+2.05/2.09	['sub', 'sub']: UNSAT (0.029 seconds)
+2.05/2.12	['concat', 'concat', 'concat']: UNSAT (0.444 seconds)
+2.49/2.57	['concat', 'concat', 'index']: UNSAT (0.050 seconds)
+2.59/2.62	['concat', 'concat', 'length']: UNSAT (0.040 seconds)
+2.59/2.66	['concat', 'concat', 'substr']: SAT (0.272 seconds)
+2.89/2.93	substr(concat(arg0, concat(arg0, arg0)), 151, 151)

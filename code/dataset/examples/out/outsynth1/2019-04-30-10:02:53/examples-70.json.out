@@ -1,0 +1,20 @@
+0.11/0.19	=== Examples (../../dataset/examples/examples-70.json)
+0.11/0.19	IO(inputs=('  like no spaces at all!!!  ',), output='likenospacesatall!!!')
+0.11/0.19	=== Library
+0.11/0.19	concat
+0.11/0.19	index
+0.11/0.19	length
+0.11/0.19	replace
+0.11/0.19	substr
+0.11/0.19	to_lower
+0.11/0.19	to_upper
+0.11/0.19	trim
+0.11/0.19	trim_start
+0.11/0.19	trim_end
+0.11/0.19	add
+0.11/0.19	sub
+0.11/0.19	=== Synthesis
+0.11/0.19	['concat']: UNSAT (0.023 seconds)
+0.11/0.22	['index']: UNSAT (0.021 seconds)
+0.11/0.24	['length']: UNSAT (0.018 seconds)
+0.11/0.26	['replace']: 

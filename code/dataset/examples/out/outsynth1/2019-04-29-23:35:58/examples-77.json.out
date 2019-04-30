@@ -1,0 +1,22 @@
+0.12/0.18	=== Examples (../../dataset/examples/examples-77.json)
+0.12/0.18	IO(inputs=('George Michael',), output='Michael')
+0.12/0.18	IO(inputs=('Michael Bluth',), output='Bluth')
+0.12/0.18	=== Library
+0.12/0.18	concat
+0.12/0.18	index
+0.12/0.18	length
+0.12/0.18	substr
+0.12/0.18	add
+0.12/0.18	sub
+0.12/0.18	=== Synthesis
+0.12/0.18	['concat']: UNSAT (0.021 seconds)
+0.12/0.21	['index']: UNSAT (0.020 seconds)
+0.12/0.23	['length']: UNSAT (0.015 seconds)
+0.12/0.24	['substr']: UNSAT (0.021 seconds)
+0.12/0.26	['add']: UNSAT (0.018 seconds)
+0.27/0.28	['sub']: UNSAT (0.018 seconds)
+0.27/0.30	['concat', 'concat']: UNSAT (0.034 seconds)
+0.27/0.33	['concat', 'index']: UNSAT (0.033 seconds)
+0.27/0.37	['concat', 'length']: UNSAT (0.025 seconds)
+0.37/0.39	['concat', 'substr']: SAT (0.068 seconds)
+0.37/0.46	substr(concat(arg0, arg0), 21, 21)

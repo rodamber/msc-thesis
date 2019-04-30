@@ -1,0 +1,20 @@
+0.12/0.22	=== Examples (../../dataset/examples/examples-87.json)
+0.12/0.22	IO(inputs=('https://outsystems.com',), output='outsystems')
+0.12/0.22	=== Library
+0.12/0.22	concat
+0.12/0.22	index
+0.12/0.22	length
+0.12/0.22	replace
+0.12/0.22	substr
+0.12/0.22	to_lower
+0.12/0.22	to_upper
+0.12/0.22	trim
+0.12/0.22	trim_start
+0.12/0.22	trim_end
+0.12/0.22	add
+0.12/0.22	sub
+0.12/0.22	=== Synthesis
+0.12/0.22	['concat']: UNSAT (0.027 seconds)
+0.12/0.25	['index']: UNSAT (0.022 seconds)
+0.12/0.27	['length']: UNSAT (0.017 seconds)
+0.12/0.29	['replace']: 

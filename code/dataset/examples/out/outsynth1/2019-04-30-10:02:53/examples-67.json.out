@@ -1,0 +1,40 @@
+0.11/0.19	=== Examples (../../dataset/examples/examples-67.json)
+0.11/0.19	IO(inputs=(' trim me ',), output='trim me â‚¬')
+0.11/0.19	=== Library
+0.11/0.19	concat
+0.11/0.19	index
+0.11/0.19	length
+0.11/0.19	replace
+0.11/0.19	substr
+0.11/0.19	to_lower
+0.11/0.19	to_upper
+0.11/0.19	trim
+0.11/0.19	trim_start
+0.11/0.19	trim_end
+0.11/0.19	add
+0.11/0.19	sub
+0.11/0.19	=== Synthesis
+0.11/0.20	Traceback (most recent call last):
+0.11/0.20	  File "runsynth.py", line 103, in <module>
+0.11/0.20	    runsynth(opts)
+0.11/0.20	  File "runsynth.py", line 45, in runsynth
+0.11/0.20	    prog = synthesize(ios=examples, lib=lib, stack=stack)
+0.11/0.20	  File "/home/rodrigo/msc/code/python/src/simple/synth.py", line 30, in synthesize
+0.11/0.20	    problem = next(learner)
+0.11/0.20	  File "/home/rodrigo/msc/code/python/src/simple/enumerator.py", line 171, in enumerator
+0.11/0.20	    problem = Problem.mk(ios=ios, stack=stack, lib=sigs)
+0.11/0.20	  File "/home/rodrigo/msc/code/python/src/simple/enumerator.py", line 87, in mk
+0.11/0.20	    for io in ios)
+0.11/0.20	  File "/home/rodrigo/msc/code/python/src/simple/enumerator.py", line 87, in <genexpr>
+0.11/0.20	    for io in ios)
+0.11/0.20	  File "/home/rodrigo/msc/code/python/src/simple/types.py", line 100, in mk
+0.11/0.20	    output = Output(val=io.output, lineno=last_line, ctx=ctx)
+0.11/0.20	  File "/home/rodrigo/msc/code/python/src/simple/types.py", line 88, in __init__
+0.11/0.20	    super().__init__(expr=z3_val(val, ctx), kind=kind(val), \
+0.11/0.20	  File "/home/rodrigo/msc/code/python/src/simple/utils.py", line 22, in z3_val
+0.11/0.20	    return z3.StringVal(val, ctx)
+0.11/0.20	  File "/home/rodrigo/msc/code/python/venv/lib/python3.7/site-packages/z3/z3.py", line 10049, in StringVal
+0.11/0.20	    return SeqRef(Z3_mk_lstring(ctx.ref(), len(s), s), ctx)
+0.11/0.20	  File "/home/rodrigo/msc/code/python/venv/lib/python3.7/site-packages/z3/z3core.py", line 2202, in Z3_mk_lstring
+0.11/0.20	    r = _elems.f(a0, a1, _to_ascii(a2))
+0.11/0.20	ctypes.ArgumentError: argument 3: <class 'TypeError'>: wrong type

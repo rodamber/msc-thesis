@@ -1,0 +1,21 @@
+0.13/0.22	=== Examples (../../dataset/examples/examples-30.json)
+0.13/0.22	IO(inputs=('outsystems.com',), output='outsystems')
+0.13/0.22	=== Library
+0.13/0.22	concat
+0.13/0.22	index
+0.13/0.22	length
+0.13/0.22	substr
+0.13/0.22	add
+0.13/0.22	sub
+0.13/0.22	=== Synthesis
+0.13/0.22	['concat']: UNSAT (0.022 seconds)
+0.13/0.24	['index']: UNSAT (0.022 seconds)
+0.13/0.27	['length']: UNSAT (0.018 seconds)
+0.27/0.29	['substr']: UNSAT (0.022 seconds)
+0.27/0.31	['add']: UNSAT (0.019 seconds)
+0.27/0.33	['sub']: UNSAT (0.019 seconds)
+0.27/0.35	['concat', 'concat']: UNSAT (0.032 seconds)
+0.36/0.38	['concat', 'index']: UNSAT (0.032 seconds)
+0.36/0.41	['concat', 'length']: UNSAT (0.026 seconds)
+0.36/0.44	['concat', 'substr']: SAT (0.372 seconds)
+0.79/0.81	concat('outsy', substr(arg0, 5, 5))

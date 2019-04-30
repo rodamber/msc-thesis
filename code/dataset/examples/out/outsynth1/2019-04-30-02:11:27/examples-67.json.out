@@ -1,0 +1,36 @@
+0.13/0.20	=== Examples (../../dataset/examples/examples-67.json)
+0.13/0.20	IO(inputs=(' trim me ',), output='trim me â‚¬')
+0.13/0.20	IO(inputs=('one more pass   ',), output='one more pass â‚¬')
+0.13/0.20	IO(inputs=('  so smooth',), output='so smooth â‚¬')
+0.13/0.20	=== Library
+0.13/0.20	concat
+0.13/0.20	index
+0.13/0.20	length
+0.13/0.20	substr
+0.13/0.20	add
+0.13/0.20	sub
+0.13/0.20	=== Synthesis
+0.13/0.20	Traceback (most recent call last):
+0.13/0.20	  File "runsynth.py", line 103, in <module>
+0.13/0.20	    runsynth(opts)
+0.13/0.20	  File "runsynth.py", line 45, in runsynth
+0.13/0.20	    prog = synthesize(ios=examples, lib=lib, stack=stack)
+0.13/0.20	  File "/home/rodrigo/msc/code/python/src/simple/synth.py", line 30, in synthesize
+0.13/0.20	    problem = next(learner)
+0.13/0.20	  File "/home/rodrigo/msc/code/python/src/simple/enumerator.py", line 171, in enumerator
+0.13/0.20	    problem = Problem.mk(ios=ios, stack=stack, lib=sigs)
+0.13/0.20	  File "/home/rodrigo/msc/code/python/src/simple/enumerator.py", line 87, in mk
+0.13/0.20	    for io in ios)
+0.13/0.20	  File "/home/rodrigo/msc/code/python/src/simple/enumerator.py", line 87, in <genexpr>
+0.13/0.20	    for io in ios)
+0.13/0.20	  File "/home/rodrigo/msc/code/python/src/simple/types.py", line 100, in mk
+0.13/0.20	    output = Output(val=io.output, lineno=last_line, ctx=ctx)
+0.13/0.20	  File "/home/rodrigo/msc/code/python/src/simple/types.py", line 88, in __init__
+0.13/0.20	    super().__init__(expr=z3_val(val, ctx), kind=kind(val), \
+0.13/0.20	  File "/home/rodrigo/msc/code/python/src/simple/utils.py", line 22, in z3_val
+0.13/0.20	    return z3.StringVal(val, ctx)
+0.13/0.20	  File "/home/rodrigo/msc/code/python/venv/lib/python3.7/site-packages/z3/z3.py", line 10049, in StringVal
+0.13/0.20	    return SeqRef(Z3_mk_lstring(ctx.ref(), len(s), s), ctx)
+0.13/0.20	  File "/home/rodrigo/msc/code/python/venv/lib/python3.7/site-packages/z3/z3core.py", line 2202, in Z3_mk_lstring
+0.13/0.20	    r = _elems.f(a0, a1, _to_ascii(a2))
+0.13/0.20	ctypes.ArgumentError: argument 3: <class 'TypeError'>: wrong type

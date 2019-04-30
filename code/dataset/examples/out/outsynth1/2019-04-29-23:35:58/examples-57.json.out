@@ -1,0 +1,13 @@
+0.18/0.23	=== Examples (../../dataset/examples/examples-57.json)
+0.18/0.23	IO(inputs=('what are you doing? (sorry)',), output='what are you doing? (sorry)')
+0.18/0.23	IO(inputs=('did you want that? (hmm..)',), output='did you want that? (hmm..)')
+0.18/0.23	=== Library
+0.18/0.23	concat
+0.18/0.23	index
+0.18/0.23	length
+0.18/0.23	substr
+0.18/0.23	add
+0.18/0.23	sub
+0.18/0.23	=== Synthesis
+0.18/0.23	['concat']: SAT (0.022 seconds)
+0.18/0.26	concat(arg0, '')

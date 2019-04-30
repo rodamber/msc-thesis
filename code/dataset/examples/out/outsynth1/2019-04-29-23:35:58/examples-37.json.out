@@ -1,0 +1,50 @@
+0.12/0.19	=== Examples (../../dataset/examples/examples-37.json)
+0.12/0.19	IO(inputs=('Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus.',), output='/ Nulla eu')
+0.12/0.19	IO(inputs=('Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus.',), output='/ Vestibul')
+0.12/0.19	=== Library
+0.12/0.19	concat
+0.12/0.19	index
+0.12/0.19	length
+0.12/0.19	substr
+0.12/0.19	add
+0.12/0.19	sub
+0.12/0.19	=== Synthesis
+0.12/0.19	['concat']: UNSAT (0.027 seconds)
+0.12/0.22	['index']: UNSAT (0.026 seconds)
+0.12/0.25	['length']: UNSAT (0.019 seconds)
+0.12/0.27	['substr']: UNSAT (0.038 seconds)
+0.26/0.31	['add']: UNSAT (0.022 seconds)
+0.26/0.33	['sub']: UNSAT (0.023 seconds)
+0.26/0.35	['concat', 'concat']: UNSAT (0.050 seconds)
+0.26/0.41	['concat', 'index']: UNSAT (0.043 seconds)
+0.41/0.45	['concat', 'length']: UNSAT (0.033 seconds)
+0.41/0.48	['concat', 'substr']: UNSAT (0.251 seconds)
+0.69/0.73	['concat', 'add']: UNSAT (0.028 seconds)
+0.69/0.76	['concat', 'sub']: UNSAT (0.028 seconds)
+0.69/0.79	['index', 'index']: UNSAT (0.035 seconds)
+0.79/0.83	['index', 'length']: UNSAT (0.026 seconds)
+0.79/0.85	['index', 'substr']: UNKNOWN (131.825 seconds)
+132.58/132.68	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+132.58/132.68	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+132.58/132.68	['index', 'add']: UNSAT (0.033 seconds)
+132.67/132.71	['index', 'sub']: UNSAT (0.031 seconds)
+132.67/132.75	['length', 'length']: UNSAT (0.021 seconds)
+132.67/132.77	['length', 'substr']: UNSAT (0.073 seconds)
+132.77/132.84	['length', 'add']: UNSAT (0.023 seconds)
+132.77/132.87	['length', 'sub']: UNSAT (0.023 seconds)
+132.77/132.89	['substr', 'substr']: UNSAT (0.040 seconds)
+132.87/132.93	['substr', 'add']: UNSAT (0.058 seconds)
+132.87/132.99	['substr', 'sub']: UNSAT (0.053 seconds)
+133.01/133.04	['add', 'add']: UNSAT (0.029 seconds)
+133.01/133.07	['add', 'sub']: UNSAT (0.030 seconds)
+133.01/133.10	['sub', 'sub']: UNSAT (0.029 seconds)
+133.01/133.13	['concat', 'concat', 'concat']: UNSAT (0.480 seconds)
+133.57/133.62	['concat', 'concat', 'index']: UNSAT (0.050 seconds)
+133.57/133.67	['concat', 'concat', 'length']: UNSAT (0.040 seconds)
+133.67/133.71	['concat', 'concat', 'substr']: UNSAT (3.350 seconds)
+137.01/137.06	['concat', 'concat', 'add']: UNSAT (0.041 seconds)
+137.01/137.10	['concat', 'concat', 'sub']: UNSAT (0.042 seconds)
+137.12/137.14	['concat', 'index', 'index']: UNSAT (0.054 seconds)
+137.18/137.20	['concat', 'index', 'length']: UNSAT (0.043 seconds)
+137.18/137.24	['concat', 'index', 'substr']: SAT (305.862 seconds)
+443.01/443.11	substr(concat('/', arg0), index(concat('/', arg0), '/', 10), 10)

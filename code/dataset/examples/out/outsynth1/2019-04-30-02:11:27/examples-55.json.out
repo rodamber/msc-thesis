@@ -1,0 +1,28 @@
+0.12/0.20	=== Examples (../../dataset/examples/examples-55.json)
+0.12/0.20	IO(inputs=('what is this even supposed to?',), output='')
+0.12/0.20	IO(inputs=('short one',), output='s')
+0.12/0.20	IO(inputs=('bit larger',), output='')
+0.12/0.20	=== Library
+0.12/0.20	concat
+0.12/0.20	index
+0.12/0.20	length
+0.12/0.20	substr
+0.12/0.20	add
+0.12/0.20	sub
+0.12/0.20	=== Synthesis
+0.12/0.20	['concat']: UNSAT (0.031 seconds)
+0.12/0.23	['index']: UNSAT (0.032 seconds)
+0.12/0.26	['length']: UNSAT (0.022 seconds)
+0.25/0.29	['substr']: UNSAT (0.035 seconds)
+0.25/0.32	['add']: UNSAT (0.028 seconds)
+0.25/0.35	['sub']: UNSAT (0.027 seconds)
+0.25/0.38	['concat', 'concat']: UNSAT (0.071 seconds)
+0.35/0.45	['concat', 'index']: UNSAT (0.064 seconds)
+0.45/0.52	['concat', 'length']: UNSAT (0.041 seconds)
+0.45/0.56	['concat', 'substr']: UNSAT (0.064 seconds)
+0.54/0.62	['concat', 'add']: UNSAT (0.044 seconds)
+0.62/0.67	['concat', 'sub']: UNSAT (0.046 seconds)
+0.68/0.72	['index', 'index']: UNSAT (0.061 seconds)
+0.68/0.78	['index', 'length']: UNSAT (0.044 seconds)
+0.78/0.82	['index', 'substr']: SAT (5.162 seconds)
+5.89/5.99	substr(arg0, 0, index(arg0, 'hort ', 0))

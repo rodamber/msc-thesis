@@ -1,0 +1,1 @@
+python runbench.py -t 600 -m 16 -d ../../dataset/examples/out/outsynth1/2019-04-29-21:38:21 -e 1 -ci 1 -cs 1

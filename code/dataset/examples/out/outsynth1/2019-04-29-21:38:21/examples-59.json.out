@@ -1,0 +1,30 @@
+0.13/0.20	=== Examples (../../dataset/examples/examples-59.json)
+0.13/0.20	IO(inputs=('who cares about the last ones...',), output='who cares about the last ones.')
+0.13/0.20	=== Library
+0.13/0.20	concat
+0.13/0.20	index
+0.13/0.20	length
+0.13/0.20	substr
+0.13/0.20	add
+0.13/0.20	sub
+0.13/0.20	=== Synthesis
+0.13/0.20	['concat']: UNSAT (0.023 seconds)
+0.13/0.23	['index']: UNSAT (0.021 seconds)
+0.13/0.25	['length']: UNSAT (0.018 seconds)
+0.13/0.26	['substr']: UNSAT (0.023 seconds)
+0.28/0.29	['add']: UNSAT (0.019 seconds)
+0.28/0.31	['sub']: UNSAT (0.019 seconds)
+0.28/0.33	['concat', 'concat']: UNSAT (0.035 seconds)
+0.28/0.36	['concat', 'index']: UNSAT (0.031 seconds)
+0.38/0.40	['concat', 'length']: UNSAT (0.025 seconds)
+0.38/0.42	['concat', 'substr']: UNSAT (0.175 seconds)
+0.58/0.60	['concat', 'add']: UNSAT (0.026 seconds)
+0.58/0.63	['concat', 'sub']: UNSAT (0.023 seconds)
+0.63/0.65	['index', 'index']: UNSAT (0.026 seconds)
+0.63/0.68	['index', 'length']: UNSAT (0.021 seconds)
+0.69/0.70	['index', 'substr']: UNSAT (0.469 seconds)
+1.12/1.17	['index', 'add']: UNSAT (0.023 seconds)
+1.12/1.19	['index', 'sub']: UNSAT (0.022 seconds)
+1.19/1.21	['length', 'length']: UNSAT (0.016 seconds)
+1.19/1.23	['length', 'substr']: SAT (0.037 seconds)
+1.19/1.27	substr(arg0, length(''), 30)

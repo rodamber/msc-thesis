@@ -1,0 +1,32 @@
+0.12/0.20	=== Examples (../../dataset/examples/examples-11.json)
+0.12/0.20	IO(inputs=('Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam.',), output='Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis ')
+0.12/0.20	=== Library
+0.12/0.20	concat
+0.12/0.20	index
+0.12/0.20	length
+0.12/0.20	substr
+0.12/0.20	add
+0.12/0.20	sub
+0.12/0.20	=== Synthesis
+0.12/0.20	['concat']: UNSAT (0.023 seconds)
+0.12/0.22	['index']: UNSAT (0.020 seconds)
+0.12/0.24	['length']: UNSAT (0.017 seconds)
+0.12/0.26	['substr']: UNSAT (0.025 seconds)
+0.12/0.28	['add']: UNSAT (0.019 seconds)
+0.12/0.30	['sub']: UNSAT (0.019 seconds)
+0.28/0.32	['concat', 'concat']: UNSAT (0.045 seconds)
+0.28/0.37	['concat', 'index']: UNSAT (0.030 seconds)
+0.28/0.40	['concat', 'length']: UNSAT (0.025 seconds)
+0.39/0.43	['concat', 'substr']: UNSAT (0.561 seconds)
+0.88/0.99	['concat', 'add']: UNSAT (0.020 seconds)
+0.88/1.01	['concat', 'sub']: UNSAT (0.020 seconds)
+0.88/1.03	['index', 'index']: UNSAT (0.025 seconds)
+1.01/1.05	['index', 'length']: UNSAT (0.019 seconds)
+1.01/1.07	['index', 'substr']: UNKNOWN (101.809 seconds)
+102.78/102.88	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+102.78/102.88	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+102.78/102.88	['index', 'add']: UNSAT (0.022 seconds)
+102.89/102.91	['index', 'sub']: UNSAT (0.021 seconds)
+102.89/102.93	['length', 'length']: UNSAT (0.015 seconds)
+102.89/102.94	['length', 'substr']: SAT (0.088 seconds)
+102.89/103.03	substr(arg0, length(''), 100)

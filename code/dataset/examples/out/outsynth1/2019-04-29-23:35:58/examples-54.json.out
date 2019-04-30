@@ -1,0 +1,26 @@
+0.10/0.19	=== Examples (../../dataset/examples/examples-54.json)
+0.10/0.19	IO(inputs=(' this is the same as trim man...  ',), output='this is the same as trim man...')
+0.10/0.19	IO(inputs=('  know your libraries',), output='know your libraries')
+0.10/0.19	=== Library
+0.10/0.19	concat
+0.10/0.19	index
+0.10/0.19	length
+0.10/0.19	substr
+0.10/0.19	add
+0.10/0.19	sub
+0.10/0.19	=== Synthesis
+0.10/0.19	['concat']: UNSAT (0.027 seconds)
+0.10/0.22	['index']: UNSAT (0.027 seconds)
+0.10/0.25	['length']: UNSAT (0.019 seconds)
+0.10/0.27	['substr']: UNSAT (0.028 seconds)
+0.25/0.30	['add']: UNSAT (0.023 seconds)
+0.25/0.32	['sub']: UNSAT (0.024 seconds)
+0.25/0.35	['concat', 'concat']: UNSAT (0.046 seconds)
+0.35/0.39	['concat', 'index']: UNSAT (0.043 seconds)
+0.35/0.44	['concat', 'length']: UNSAT (0.033 seconds)
+0.35/0.47	['concat', 'substr']: UNSAT (0.082 seconds)
+0.45/0.56	['concat', 'add']: UNSAT (0.035 seconds)
+0.45/0.59	['concat', 'sub']: UNSAT (0.028 seconds)
+0.55/0.62	['index', 'index']: UNSAT (0.036 seconds)
+0.65/0.66	['index', 'length']: UNSAT (0.026 seconds)
+0.65/0.69	['index', 'substr']: 
