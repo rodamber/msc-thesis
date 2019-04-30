@@ -22,13 +22,13 @@ def runsynth(opts: Opts):
     lib = (concat,\
            index,
            length,
-           # replace,
+           replace,
            substr,
-           # to_lower,
-           # to_upper,
-           # trim,
-           # trim_start,
-           # trim_end,
+           to_lower,
+           to_upper,
+           trim,
+           trim_start,
+           trim_end,
            add,
            sub
     )
