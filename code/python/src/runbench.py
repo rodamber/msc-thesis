@@ -77,7 +77,7 @@ def add_files_arg(parser):
 
 def argparser():
     parser = argparse.ArgumentParser(
-        description='outsynth2 benchmark runner')
+        description='outsynth1 benchmark runner')
     add_res_args(parser)
     add_dir_arg(parser)
     add_files_arg(parser)
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         time_limit=args.time_limit,
         mem_limit=args.mem_limit,
         output_dir=args.output_dir,
-        file=args.file,
+        files=args.file,
         num_examples=args.examples,
         num_consts_int=args.consts_int,
         num_consts_str=args.consts_str)
