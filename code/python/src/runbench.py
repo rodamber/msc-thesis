@@ -97,4 +97,4 @@ if __name__ == '__main__':
         num_examples=args.examples,
         num_consts_int=args.consts_int,
         num_consts_str=args.consts_str)
-    runsynth(opts)
+    runbench(opts)
