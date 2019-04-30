@@ -1,5 +1,6 @@
 import argparse
 from dataclasses import dataclass
+import os
 import subprocess
 
 import runsynth
@@ -22,22 +23,25 @@ def runbench(opts: Opts):
         os.makedirs(directory)
 
     for file in opts.files:
+        basename = os.path.basename(file)
         subprocess.run(
-            'runsolver',
             [
+	        'runsolver',
                 '--wall-clock-limit',
-                opts.time_limit,
+                str(opts.time_limit),
                 '--mem-limit',
-                opts.mem_limit * 1000,  # megabytes
+                str(opts.mem_limit * 1000),  # megabytes
                 '--solver-data',
-                f'{opts.outputDir}/{file}.out',
+                f'{opts.output_dir}/{basename}.out',
                 '--timestamp',
                 'python',
                 'runsynth.py',
                 '--examples',
-                opts.num_examples,
-                '--constants',
-                opts.num_consts,
+                str(opts.num_examples),
+                '--consts-int',
+                str(opts.num_consts_int),
+                '--consts-str',
+                str(opts.num_consts_str),
                 file
             ])
 
