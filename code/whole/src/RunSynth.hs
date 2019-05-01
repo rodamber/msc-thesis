@@ -71,18 +71,18 @@ optsInfo = info (opts <**> helper)
 
 
 lib :: [Component]
-lib = [ concat_
+lib = [ add_
+      , concat_
       , index_
       , length_
-      -- , replace_
-      , substr_
-      -- , tolower_
-      -- , toupper_
-      -- , trim_
-      -- , trim_start_
-      -- , trim_end_
-      , add_
+      , replace_
       , sub_
+      , substr_
+      , tolower_
+      , toupper_
+      , trim_
+      , trim_end_
+      , trim_start_
       ]
 
 
