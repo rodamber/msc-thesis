@@ -1,0 +1,21 @@
+0.00/0.20	=== Examples (../../dataset/examples/examples-08.json)
+0.00/0.20	IO(inputs=('one|two|three',), output='one | two | three')
+0.00/0.20	IO(inputs=('a|b|c',), output='a | b | c')
+0.00/0.20	=== Library
+0.00/0.20	concat
+0.00/0.20	index
+0.00/0.20	length
+0.00/0.20	replace
+0.00/0.20	substr
+0.00/0.20	to_lower
+0.00/0.20	to_upper
+0.00/0.20	trim
+0.00/0.20	trim_start
+0.00/0.20	trim_end
+0.00/0.20	add
+0.00/0.20	sub
+0.00/0.20	=== Synthesis
+0.00/0.20	['concat']: UNSAT (0.028 seconds)
+0.17/0.23	['index']: UNSAT (0.026 seconds)
+0.17/0.26	['length']: UNSAT (0.020 seconds)
+0.17/0.28	['replace']: 

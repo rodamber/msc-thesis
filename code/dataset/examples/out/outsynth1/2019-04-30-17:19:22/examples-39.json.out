@@ -1,0 +1,22 @@
+0.00/0.17	=== Examples (../../dataset/examples/examples-39.json)
+0.00/0.17	IO(inputs=('who cares about when',), output='Created on who cares about ')
+0.00/0.17	IO(inputs=('maybe someone will care',), output='Created on maybe someone wi')
+0.00/0.17	IO(inputs=('but then who else?',), output='Created on but then who els')
+0.00/0.17	=== Library
+0.00/0.17	concat
+0.00/0.17	index
+0.00/0.17	length
+0.00/0.17	replace
+0.00/0.17	substr
+0.00/0.17	to_lower
+0.00/0.17	to_upper
+0.00/0.17	trim
+0.00/0.17	trim_start
+0.00/0.17	trim_end
+0.00/0.17	add
+0.00/0.17	sub
+0.00/0.17	=== Synthesis
+0.00/0.17	['concat']: UNSAT (0.026 seconds)
+0.00/0.20	['index']: UNSAT (0.026 seconds)
+0.00/0.22	['length']: UNSAT (0.017 seconds)
+0.00/0.24	['replace']: 

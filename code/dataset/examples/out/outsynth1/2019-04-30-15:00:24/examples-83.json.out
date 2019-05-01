@@ -1,0 +1,21 @@
+0.11/0.17	=== Examples (../../dataset/examples/examples-83.json)
+0.11/0.17	IO(inputs=('george', 'conchichina xy'), output='george At:conchichina')
+0.11/0.17	IO(inputs=('maebe', 'terra de sao nunca a tarde ab'), output='maebe At:terra de sao nunca a tarde')
+0.11/0.17	=== Library
+0.11/0.17	concat
+0.11/0.17	index
+0.11/0.17	length
+0.11/0.17	replace
+0.11/0.17	substr
+0.11/0.17	to_lower
+0.11/0.17	to_upper
+0.11/0.17	trim
+0.11/0.17	trim_start
+0.11/0.17	trim_end
+0.11/0.17	add
+0.11/0.17	sub
+0.11/0.17	=== Synthesis
+0.11/0.17	['concat']: UNSAT (0.024 seconds)
+0.11/0.19	['index']: UNSAT (0.023 seconds)
+0.11/0.22	['length']: UNSAT (0.017 seconds)
+0.11/0.24	['replace']: 

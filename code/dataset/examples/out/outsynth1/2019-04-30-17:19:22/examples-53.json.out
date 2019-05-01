@@ -1,0 +1,22 @@
+0.00/0.18	=== Examples (../../dataset/examples/examples-53.json)
+0.00/0.18	IO(inputs=(' this is the same as trim man...  ',), output='this is the same as trim man...')
+0.00/0.18	IO(inputs=('  know your libraries',), output='know your libraries')
+0.00/0.18	IO(inputs=('or is trim too young? ',), output='or is trim too young?')
+0.00/0.18	=== Library
+0.00/0.18	concat
+0.00/0.18	index
+0.00/0.18	length
+0.00/0.18	replace
+0.00/0.18	substr
+0.00/0.18	to_lower
+0.00/0.18	to_upper
+0.00/0.18	trim
+0.00/0.18	trim_start
+0.00/0.18	trim_end
+0.00/0.18	add
+0.00/0.18	sub
+0.00/0.18	=== Synthesis
+0.00/0.18	['concat']: UNSAT (0.032 seconds)
+0.00/0.21	['index']: UNSAT (0.031 seconds)
+0.12/0.24	['length']: UNSAT (0.019 seconds)
+0.12/0.26	['replace']: 

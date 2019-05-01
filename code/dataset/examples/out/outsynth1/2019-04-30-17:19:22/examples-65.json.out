@@ -1,0 +1,22 @@
+0.00/0.29	=== Examples (../../dataset/examples/examples-65.json)
+0.00/0.29	IO(inputs=('take out the last 3 chars',), output='ars')
+0.00/0.29	IO(inputs=('abc',), output='abc')
+0.00/0.29	IO(inputs=('outsystems.com',), output='com')
+0.00/0.29	=== Library
+0.00/0.29	concat
+0.00/0.29	index
+0.00/0.29	length
+0.00/0.29	replace
+0.00/0.29	substr
+0.00/0.29	to_lower
+0.00/0.29	to_upper
+0.00/0.29	trim
+0.00/0.29	trim_start
+0.00/0.29	trim_end
+0.00/0.29	add
+0.00/0.29	sub
+0.00/0.29	=== Synthesis
+0.00/0.29	['concat']: UNSAT (0.048 seconds)
+0.00/0.34	['index']: UNSAT (0.050 seconds)
+0.00/0.39	['length']: UNSAT (0.027 seconds)
+0.30/0.42	['replace']: 

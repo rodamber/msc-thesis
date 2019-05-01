@@ -1,0 +1,22 @@
+0.00/0.25	=== Examples (../../dataset/examples/examples-46.json)
+0.00/0.25	IO(inputs=(' a b c ',), output='0a0b0c')
+0.00/0.25	IO(inputs=('1 2 3 4 5 ',), output='102030405')
+0.00/0.25	IO(inputs=(' 123 4 32 4  ',), output='01230403204')
+0.00/0.25	=== Library
+0.00/0.25	concat
+0.00/0.25	index
+0.00/0.25	length
+0.00/0.25	replace
+0.00/0.25	substr
+0.00/0.25	to_lower
+0.00/0.25	to_upper
+0.00/0.25	trim
+0.00/0.25	trim_start
+0.00/0.25	trim_end
+0.00/0.25	add
+0.00/0.25	sub
+0.00/0.25	=== Synthesis
+0.00/0.25	['concat']: UNSAT (0.032 seconds)
+0.00/0.28	['index']: UNSAT (0.033 seconds)
+0.00/0.32	['length']: UNSAT (0.023 seconds)
+0.00/0.34	['replace']: 

@@ -1,0 +1,41 @@
+0.00/0.22	=== Examples (../../dataset/examples/examples-67.json)
+0.00/0.22	IO(inputs=(' trim me ',), output='trim me â‚¬')
+0.00/0.22	IO(inputs=('one more pass   ',), output='one more pass â‚¬')
+0.00/0.22	=== Library
+0.00/0.22	concat
+0.00/0.22	index
+0.00/0.22	length
+0.00/0.22	replace
+0.00/0.22	substr
+0.00/0.22	to_lower
+0.00/0.22	to_upper
+0.00/0.22	trim
+0.00/0.22	trim_start
+0.00/0.22	trim_end
+0.00/0.22	add
+0.00/0.22	sub
+0.00/0.22	=== Synthesis
+0.00/0.22	Traceback (most recent call last):
+0.00/0.22	  File "runsynth.py", line 103, in <module>
+0.00/0.22	    runsynth(opts)
+0.00/0.22	  File "runsynth.py", line 45, in runsynth
+0.00/0.22	    prog = synthesize(ios=examples, lib=lib, stack=stack)
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/src/simple/synth.py", line 30, in synthesize
+0.00/0.22	    problem = next(learner)
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/src/simple/enumerator.py", line 171, in enumerator
+0.00/0.22	    problem = Problem.mk(ios=ios, stack=stack, lib=sigs)
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/src/simple/enumerator.py", line 87, in mk
+0.00/0.22	    for io in ios)
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/src/simple/enumerator.py", line 87, in <genexpr>
+0.00/0.22	    for io in ios)
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/src/simple/types.py", line 100, in mk
+0.00/0.22	    output = Output(val=io.output, lineno=last_line, ctx=ctx)
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/src/simple/types.py", line 88, in __init__
+0.00/0.22	    super().__init__(expr=z3_val(val, ctx), kind=kind(val), \
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/src/simple/utils.py", line 22, in z3_val
+0.00/0.22	    return z3.StringVal(val, ctx)
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/venv/lib/python3.7/site-packages/z3/z3.py", line 10047, in StringVal
+0.00/0.22	    return SeqRef(Z3_mk_lstring(ctx.ref(), len(s), s), ctx)
+0.00/0.22	  File "/home/rodrigo/msc/code/setwise/venv/lib/python3.7/site-packages/z3/z3core.py", line 2200, in Z3_mk_lstring
+0.00/0.22	    r = _elems.f(a0, a1, _to_ascii(a2))
+0.00/0.22	ctypes.ArgumentError: argument 3: <class 'TypeError'>: wrong type

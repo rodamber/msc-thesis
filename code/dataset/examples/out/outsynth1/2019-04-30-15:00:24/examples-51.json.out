@@ -1,0 +1,34 @@
+0.12/0.20	=== Examples (../../dataset/examples/examples-51.json)
+0.12/0.20	IO(inputs=('George ', 'Michael '), output='George  Michael')
+0.12/0.20	IO(inputs=('Maebe', 'Bluth   '), output='Maebe Bluth')
+0.12/0.20	=== Library
+0.12/0.20	concat
+0.12/0.20	index
+0.12/0.20	length
+0.12/0.20	replace
+0.12/0.20	substr
+0.12/0.20	to_lower
+0.12/0.20	to_upper
+0.12/0.20	trim
+0.12/0.20	trim_start
+0.12/0.20	trim_end
+0.12/0.20	add
+0.12/0.20	sub
+0.12/0.20	=== Synthesis
+0.12/0.20	['concat']: UNSAT (0.030 seconds)
+0.12/0.23	['index']: UNSAT (0.033 seconds)
+0.12/0.27	['length']: UNSAT (0.029 seconds)
+0.27/0.30	['replace']: UNSAT (112.331 seconds)
+112.58/112.63	['substr']: UNSAT (0.031 seconds)
+112.58/112.67	['to_lower']: UNSAT (0.036 seconds)
+112.68/112.70	['to_upper']: UNSAT (0.039 seconds)
+112.68/112.74	['trim']: UNSAT (0.026 seconds)
+112.68/112.77	['trim_start']: UNSAT (0.021 seconds)
+112.68/112.79	['trim_end']: UNSAT (0.025 seconds)
+112.78/112.82	['add']: UNSAT (0.021 seconds)
+112.78/112.84	['sub']: UNSAT (0.020 seconds)
+112.78/112.86	['concat', 'concat']: UNSAT (0.042 seconds)
+112.88/112.90	['concat', 'index']: UNSAT (0.039 seconds)
+112.88/112.94	['concat', 'length']: UNSAT (0.029 seconds)
+112.88/112.97	['concat', 'replace']: SAT (6.241 seconds)
+119.11/119.21	replace(concat(arg1, ' '), ' ', arg0)

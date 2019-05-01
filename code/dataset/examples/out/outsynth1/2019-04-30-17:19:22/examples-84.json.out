@@ -1,0 +1,22 @@
+0.10/0.22	=== Examples (../../dataset/examples/examples-84.json)
+0.10/0.22	IO(inputs=('George Michael',), output='https://georgemichael.com')
+0.10/0.22	IO(inputs=('Maebe Bluth',), output='https://maebebluth.com')
+0.10/0.22	IO(inputs=('Michael Bluth',), output='https://michaelbluth.com')
+0.10/0.22	=== Library
+0.10/0.22	concat
+0.10/0.22	index
+0.10/0.22	length
+0.10/0.22	replace
+0.10/0.22	substr
+0.10/0.22	to_lower
+0.10/0.22	to_upper
+0.10/0.22	trim
+0.10/0.22	trim_start
+0.10/0.22	trim_end
+0.10/0.22	add
+0.10/0.22	sub
+0.10/0.22	=== Synthesis
+0.10/0.22	['concat']: UNSAT (0.032 seconds)
+0.10/0.25	['index']: UNSAT (0.032 seconds)
+0.24/0.28	['length']: UNSAT (0.022 seconds)
+0.24/0.31	['replace']: 

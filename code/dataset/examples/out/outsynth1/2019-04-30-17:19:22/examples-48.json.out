@@ -1,0 +1,64 @@
+0.00/0.20	=== Examples (../../dataset/examples/examples-48.json)
+0.00/0.20	IO(inputs=('John', 'Doe', '@gmail.com'), output='johndoe.@gmail.com')
+0.00/0.20	IO(inputs=('Jane', 'Smith', '@outsystems.com'), output='janesmith.@outsystems.com')
+0.00/0.20	IO(inputs=('Michael', 'Bluth', '@bluth.com'), output='michaelbluth.@bluth.com')
+0.00/0.20	=== Library
+0.00/0.20	concat
+0.00/0.20	index
+0.00/0.20	length
+0.00/0.20	replace
+0.00/0.20	substr
+0.00/0.20	to_lower
+0.00/0.20	to_upper
+0.00/0.20	trim
+0.00/0.20	trim_start
+0.00/0.20	trim_end
+0.00/0.20	add
+0.00/0.20	sub
+0.00/0.20	=== Synthesis
+0.00/0.20	['concat']: UNSAT (0.036 seconds)
+0.00/0.23	['index']: UNSAT (0.037 seconds)
+0.19/0.27	['length']: UNSAT (0.024 seconds)
+0.19/0.30	['replace']: UNSAT (0.703 seconds)
+0.99/1.00	['substr']: UNSAT (0.030 seconds)
+0.99/1.03	['to_lower']: UNSAT (0.041 seconds)
+0.99/1.07	['to_upper']: UNSAT (0.040 seconds)
+1.09/1.11	['trim']: UNSAT (0.034 seconds)
+1.09/1.15	['trim_start']: UNSAT (0.025 seconds)
+1.09/1.17	['trim_end']: UNSAT (0.028 seconds)
+1.09/1.20	['add']: UNSAT (0.026 seconds)
+1.09/1.23	['sub']: UNSAT (0.026 seconds)
+1.09/1.26	['concat', 'concat']: UNSAT (0.055 seconds)
+1.26/1.31	['concat', 'index']: UNSAT (0.054 seconds)
+1.26/1.37	['concat', 'length']: UNSAT (0.041 seconds)
+1.26/1.41	['concat', 'replace']: UNSAT (370.302 seconds)
+371.68/371.71	['concat', 'substr']: UNSAT (0.050 seconds)
+371.68/371.77	['concat', 'to_lower']: UNSAT (0.059 seconds)
+371.78/371.83	['concat', 'to_upper']: UNSAT (0.057 seconds)
+371.78/371.88	['concat', 'trim']: UNSAT (0.064 seconds)
+371.88/371.95	['concat', 'trim_start']: UNSAT (0.044 seconds)
+371.88/371.99	['concat', 'trim_end']: UNSAT (0.065 seconds)
+371.98/372.06	['concat', 'add']: UNSAT (0.038 seconds)
+371.98/372.10	['concat', 'sub']: UNSAT (0.038 seconds)
+372.08/372.14	['index', 'index']: UNSAT (0.053 seconds)
+372.08/372.19	['index', 'length']: UNSAT (0.039 seconds)
+372.19/372.23	['index', 'replace']: UNSAT (0.060 seconds)
+372.19/372.29	['index', 'substr']: UNSAT (0.060 seconds)
+372.30/372.35	['index', 'to_lower']: UNSAT (0.057 seconds)
+372.30/372.41	['index', 'to_upper']: UNSAT (0.057 seconds)
+372.42/372.47	['index', 'trim']: UNSAT (0.051 seconds)
+372.48/372.52	['index', 'trim_start']: UNSAT (0.044 seconds)
+372.48/372.57	['index', 'trim_end']: UNSAT (0.047 seconds)
+372.58/372.62	['index', 'add']: UNSAT (0.049 seconds)
+372.58/372.67	['index', 'sub']: UNSAT (0.043 seconds)
+372.68/372.71	['length', 'length']: UNSAT (0.027 seconds)
+372.68/372.74	['length', 'replace']: UNSAT (0.046 seconds)
+372.68/372.78	['length', 'substr']: UNSAT (0.038 seconds)
+372.78/372.82	['length', 'to_lower']: UNSAT (0.046 seconds)
+372.78/372.87	['length', 'to_upper']: UNSAT (0.046 seconds)
+372.88/372.92	['length', 'trim']: UNSAT (0.038 seconds)
+372.88/372.96	['length', 'trim_start']: UNSAT (0.032 seconds)
+372.88/372.99	['length', 'trim_end']: UNSAT (0.033 seconds)
+372.98/373.02	['length', 'add']: UNSAT (0.033 seconds)
+372.98/373.06	['length', 'sub']: UNSAT (0.031 seconds)
+372.98/373.09	['replace', 'replace']: 

@@ -1,0 +1,22 @@
+0.21/0.29	=== Examples (../../dataset/examples/examples-93.json)
+0.21/0.29	IO(inputs=('no - he said',), output='he said')
+0.21/0.29	IO(inputs=('but but why - she said',), output='she said')
+0.21/0.29	IO(inputs=('well, because i say so - he said   ',), output='he said')
+0.21/0.29	=== Library
+0.21/0.29	concat
+0.21/0.29	index
+0.21/0.29	length
+0.21/0.29	replace
+0.21/0.29	substr
+0.21/0.29	to_lower
+0.21/0.29	to_upper
+0.21/0.29	trim
+0.21/0.29	trim_start
+0.21/0.29	trim_end
+0.21/0.29	add
+0.21/0.29	sub
+0.21/0.29	=== Synthesis
+0.21/0.29	['concat']: UNSAT (0.052 seconds)
+0.21/0.34	['index']: UNSAT (0.053 seconds)
+0.21/0.39	['length']: UNSAT (0.037 seconds)
+0.21/0.43	['replace']: 

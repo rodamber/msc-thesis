@@ -1,0 +1,22 @@
+0.15/0.22	=== Examples (../../dataset/examples/examples-69.json)
+0.15/0.22	IO(inputs=('break \\',), output='break')
+0.15/0.22	IO(inputs=('line break \\',), output='line break')
+0.15/0.22	IO(inputs=('another break \\',), output='another break')
+0.15/0.22	=== Library
+0.15/0.22	concat
+0.15/0.22	index
+0.15/0.22	length
+0.15/0.22	replace
+0.15/0.22	substr
+0.15/0.22	to_lower
+0.15/0.22	to_upper
+0.15/0.22	trim
+0.15/0.22	trim_start
+0.15/0.22	trim_end
+0.15/0.22	add
+0.15/0.22	sub
+0.15/0.22	=== Synthesis
+0.15/0.22	['concat']: UNSAT (0.031 seconds)
+0.15/0.25	['index']: UNSAT (0.031 seconds)
+0.15/0.28	['length']: UNSAT (0.022 seconds)
+0.15/0.31	['replace']: 

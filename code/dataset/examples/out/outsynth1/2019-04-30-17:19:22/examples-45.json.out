@@ -1,0 +1,22 @@
+0.24/0.29	=== Examples (../../dataset/examples/examples-45.json)
+0.24/0.29	IO(inputs=('Make it two weeks',), output='make it two wks')
+0.24/0.29	IO(inputs=('Weeks 2 and 3',), output='wks 2 and 3')
+0.24/0.29	IO(inputs=('get back to me in 4 weeks',), output='get back to me in 4 wks')
+0.24/0.29	=== Library
+0.24/0.29	concat
+0.24/0.29	index
+0.24/0.29	length
+0.24/0.29	replace
+0.24/0.29	substr
+0.24/0.29	to_lower
+0.24/0.29	to_upper
+0.24/0.29	trim
+0.24/0.29	trim_start
+0.24/0.29	trim_end
+0.24/0.29	add
+0.24/0.29	sub
+0.24/0.29	=== Synthesis
+0.24/0.29	['concat']: UNSAT (0.053 seconds)
+0.24/0.34	['index']: UNSAT (0.054 seconds)
+0.24/0.40	['length']: UNSAT (0.037 seconds)
+0.24/0.43	['replace']: 

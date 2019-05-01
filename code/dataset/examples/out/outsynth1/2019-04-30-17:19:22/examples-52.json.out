@@ -1,0 +1,22 @@
+0.13/0.22	=== Examples (../../dataset/examples/examples-52.json)
+0.13/0.22	IO(inputs=('hello  ',), output='HELLO')
+0.13/0.22	IO(inputs=('how are you today?  ',), output='HOW ARE YOU TODAY?')
+0.13/0.22	IO(inputs=('you (yes you) are awesome!!! ',), output='YOU (YES YOU) ARE AWESOME!!!')
+0.13/0.22	=== Library
+0.13/0.22	concat
+0.13/0.22	index
+0.13/0.22	length
+0.13/0.22	replace
+0.13/0.22	substr
+0.13/0.22	to_lower
+0.13/0.22	to_upper
+0.13/0.22	trim
+0.13/0.22	trim_start
+0.13/0.22	trim_end
+0.13/0.22	add
+0.13/0.22	sub
+0.13/0.22	=== Synthesis
+0.13/0.22	['concat']: UNSAT (0.032 seconds)
+0.13/0.26	['index']: UNSAT (0.031 seconds)
+0.27/0.29	['length']: UNSAT (0.023 seconds)
+0.27/0.31	['replace']: 

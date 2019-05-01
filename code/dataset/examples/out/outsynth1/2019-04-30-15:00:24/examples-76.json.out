@@ -1,0 +1,65 @@
+0.00/0.20	=== Examples (../../dataset/examples/examples-76.json)
+0.00/0.20	IO(inputs=('abcdef', 3, 'xyz'), output='xyz')
+0.00/0.20	IO(inputs=('012345', 4, '742'), output='0742')
+0.00/0.20	=== Library
+0.00/0.20	concat
+0.00/0.20	index
+0.00/0.20	length
+0.00/0.20	replace
+0.00/0.20	substr
+0.00/0.20	to_lower
+0.00/0.20	to_upper
+0.00/0.20	trim
+0.00/0.20	trim_start
+0.00/0.20	trim_end
+0.00/0.20	add
+0.00/0.20	sub
+0.00/0.20	=== Synthesis
+0.00/0.20	['concat']: UNSAT (0.026 seconds)
+0.00/0.22	['index']: UNSAT (0.028 seconds)
+0.00/0.25	['length']: UNSAT (0.020 seconds)
+0.00/0.27	['replace']: UNSAT (0.031 seconds)
+0.00/0.30	['substr']: UNSAT (0.028 seconds)
+0.25/0.33	['to_lower']: UNSAT (0.034 seconds)
+0.25/0.37	['to_upper']: UNSAT (0.035 seconds)
+0.25/0.40	['trim']: UNSAT (0.040 seconds)
+0.25/0.44	['trim_start']: UNSAT (0.023 seconds)
+0.25/0.47	['trim_end']: UNSAT (0.026 seconds)
+0.25/0.49	['add']: UNSAT (0.029 seconds)
+0.25/0.52	['sub']: UNSAT (0.024 seconds)
+0.25/0.55	['concat', 'concat']: UNSAT (0.042 seconds)
+0.53/0.59	['concat', 'index']: UNSAT (0.048 seconds)
+0.53/0.64	['concat', 'length']: UNSAT (0.033 seconds)
+0.53/0.68	['concat', 'replace']: UNSAT (0.051 seconds)
+0.53/0.73	['concat', 'substr']: UNSAT (0.075 seconds)
+0.73/0.80	['concat', 'to_lower']: UNSAT (0.050 seconds)
+0.73/0.85	['concat', 'to_upper']: UNSAT (0.050 seconds)
+0.73/0.91	['concat', 'trim']: UNSAT (0.043 seconds)
+0.93/0.95	['concat', 'trim_start']: UNSAT (0.038 seconds)
+0.93/0.99	['concat', 'trim_end']: UNSAT (0.041 seconds)
+0.93/1.03	['concat', 'add']: UNSAT (0.038 seconds)
+0.93/1.07	['concat', 'sub']: UNSAT (0.038 seconds)
+0.93/1.11	['index', 'index']: UNSAT (0.050 seconds)
+0.93/1.16	['index', 'length']: UNSAT (0.037 seconds)
+1.13/1.20	['index', 'replace']: UNSAT (0.055 seconds)
+1.22/1.25	['index', 'substr']: UNSAT (0.128 seconds)
+1.29/1.38	['index', 'to_lower']: UNSAT (0.065 seconds)
+1.39/1.45	['index', 'to_upper']: UNSAT (0.053 seconds)
+1.49/1.50	['index', 'trim']: UNSAT (0.047 seconds)
+1.49/1.55	['index', 'trim_start']: UNSAT (0.040 seconds)
+1.49/1.59	['index', 'trim_end']: UNSAT (0.046 seconds)
+1.49/1.64	['index', 'add']: UNSAT (0.045 seconds)
+1.49/1.68	['index', 'sub']: UNSAT (0.043 seconds)
+1.67/1.73	['length', 'length']: UNSAT (0.027 seconds)
+1.67/1.76	['length', 'replace']: UNSAT (0.041 seconds)
+1.79/1.80	['length', 'substr']: UNSAT (0.040 seconds)
+1.79/1.84	['length', 'to_lower']: UNSAT (0.042 seconds)
+1.79/1.88	['length', 'to_upper']: UNSAT (0.044 seconds)
+1.89/1.93	['length', 'trim']: UNSAT (0.036 seconds)
+1.89/1.96	['length', 'trim_start']: UNSAT (0.047 seconds)
+1.99/2.01	['length', 'trim_end']: UNSAT (0.044 seconds)
+1.99/2.06	['length', 'add']: UNSAT (0.034 seconds)
+1.99/2.09	['length', 'sub']: UNSAT (0.034 seconds)
+2.08/2.13	['replace', 'replace']: UNSAT (0.066 seconds)
+2.08/2.20	['replace', 'substr']: SAT (2.213 seconds)
+4.38/4.41	replace(substr(arg2, 0, arg1), '4', arg0)

@@ -1,0 +1,22 @@
+0.00/0.21	=== Examples (../../dataset/examples/examples-36.json)
+0.00/0.21	IO(inputs=('Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus.',), output='/ Nulla eu vehicula enim, in metus.')
+0.00/0.21	IO(inputs=('Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus.',), output='/ Vestibulum ut ligula metus.')
+0.00/0.21	IO(inputs=('Praesent in pulvinar sapien. / Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. / Aliquam cursus est in massa metus.',), output='/ Orci varius natoque penatibus et magnis dis part')
+0.00/0.21	=== Library
+0.00/0.21	concat
+0.00/0.21	index
+0.00/0.21	length
+0.00/0.21	replace
+0.00/0.21	substr
+0.00/0.21	to_lower
+0.00/0.21	to_upper
+0.00/0.21	trim
+0.00/0.21	trim_start
+0.00/0.21	trim_end
+0.00/0.21	add
+0.00/0.21	sub
+0.00/0.21	=== Synthesis
+0.00/0.21	['concat']: UNSAT (0.033 seconds)
+0.17/0.24	['index']: UNSAT (0.031 seconds)
+0.17/0.27	['length']: UNSAT (0.022 seconds)
+0.17/0.30	['replace']: 
