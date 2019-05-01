@@ -39,5 +39,6 @@
         "Substr",
         "TrimStart"
     ],
-    "text": "Concat(\"Sprint: \", TrimStart(Substr(x0, Add(Index(x0, \"-\", 0), 1), Length(x0))))"
+    "text": "Concat(\"Sprint: \", TrimStart(Substr(x0, Add(Index(x0, \"-\", 0), 1), Length(x0))))",
+    "size": 6
 }

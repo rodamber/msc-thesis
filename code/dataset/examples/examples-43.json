@@ -35,5 +35,6 @@
         "Replace",
         "ToLower"
     ],
-    "text": "Replace(Replace(ToLower(x0), \"http://\", \"\"), \"https://\", \"\")"
+    "text": "Replace(Replace(ToLower(x0), \"http://\", \"\"), \"https://\", \"\")",
+    "size": 3
 }

@@ -53,5 +53,6 @@
         "Concat",
         "ToLower"
     ],
-    "text": "ToLower(Concat(Concat(Concat(x0, x1), \".\"), x2))"
+    "text": "ToLower(Concat(Concat(Concat(x0, x1), \".\"), x2))",
+    "size": 4
 }

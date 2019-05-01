@@ -35,5 +35,6 @@
         "Concat",
         "Trim"
     ],
-    "text": "Concat(\"Prefix \", Trim(x0))"
+    "text": "Concat(\"Prefix \", Trim(x0))",
+    "size": 2
 }

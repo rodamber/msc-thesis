@@ -34,5 +34,6 @@
     "functions": [
         "ToLower"
     ],
-    "text": "ToLower(x0)"
+    "text": "ToLower(x0)",
+    "size": 1
 }

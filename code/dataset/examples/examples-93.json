@@ -38,5 +38,6 @@
         "Substr",
         "Trim"
     ],
-    "text": "Trim(Substr(x0, Add(Index(x0, \"-\", 0), 1), Length(x0)))"
+    "text": "Trim(Substr(x0, Add(Index(x0, \"-\", 0), 1), Length(x0)))",
+    "size": 5
 }

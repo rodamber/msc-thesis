@@ -35,5 +35,6 @@
         "Concat",
         "ToLower"
     ],
-    "text": "Concat(ToLower(x0), \"!@\")"
+    "text": "Concat(ToLower(x0), \"!@\")",
+    "size": 2
 }

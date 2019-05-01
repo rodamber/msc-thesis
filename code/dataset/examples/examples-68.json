@@ -36,5 +36,6 @@
         "Substr",
         "Trim"
     ],
-    "text": "Trim(Substr(x0, 0, Index(x0, \"-\", 0)))"
+    "text": "Trim(Substr(x0, 0, Index(x0, \"-\", 0)))",
+    "size": 3
 }

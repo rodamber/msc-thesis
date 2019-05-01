@@ -37,5 +37,6 @@
         "ToLower",
         "Trim"
     ],
-    "text": "Concat(Concat(\"https://\", ToLower(Replace(Trim(x0), \" \", \"\"))), \".com\")"
+    "text": "Concat(Concat(\"https://\", ToLower(Replace(Trim(x0), \" \", \"\"))), \".com\")",
+    "size": 5
 }

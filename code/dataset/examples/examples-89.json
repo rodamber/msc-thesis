@@ -38,5 +38,6 @@
         "Sub",
         "Substr"
     ],
-    "text": "Concat(\"Enviado para \", Replace(Substr(x0, 1, Sub(Length(x0), 2)), \"|\", \", \"))"
+    "text": "Concat(\"Enviado para \", Replace(Substr(x0, 1, Sub(Length(x0), 2)), \"|\", \", \"))",
+    "size": 5
 }

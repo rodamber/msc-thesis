@@ -34,5 +34,6 @@
     "functions": [
         "Substr"
     ],
-    "text": "Substr(x0, 0, 100)"
+    "text": "Substr(x0, 0, 100)",
+    "size": 1
 }

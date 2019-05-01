@@ -36,5 +36,6 @@
         "Sub",
         "Substr"
     ],
-    "text": "Substr(x0, 1, Sub(Length(x0), 1))"
+    "text": "Substr(x0, 1, Sub(Length(x0), 1))",
+    "size": 3
 }

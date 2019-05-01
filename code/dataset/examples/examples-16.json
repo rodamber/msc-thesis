@@ -34,5 +34,6 @@
     "functions": [
         "Trim"
     ],
-    "text": "Trim(x0)"
+    "text": "Trim(x0)",
+    "size": 1
 }

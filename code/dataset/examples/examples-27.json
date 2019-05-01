@@ -35,5 +35,6 @@
         "Concat",
         "Substr"
     ],
-    "text": "Concat(Substr(x0, 0, 100), \"...\")"
+    "text": "Concat(Substr(x0, 0, 100), \"...\")",
+    "size": 2
 }

@@ -35,5 +35,6 @@
         "ToUpper",
         "Trim"
     ],
-    "text": "Trim(ToUpper(x0))"
+    "text": "Trim(ToUpper(x0))",
+    "size": 2
 }

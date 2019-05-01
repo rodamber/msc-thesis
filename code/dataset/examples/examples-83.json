@@ -46,5 +46,6 @@
         "Sub",
         "Substr"
     ],
-    "text": "Concat(Concat(x0, \" At:\"), Substr(x1, 0, Sub(Length(x1), 3)))"
+    "text": "Concat(Concat(x0, \" At:\"), Substr(x1, 0, Sub(Length(x1), 3)))",
+    "size": 5
 }

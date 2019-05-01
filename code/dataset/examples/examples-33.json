@@ -35,5 +35,6 @@
         "Index",
         "Substr"
     ],
-    "text": "Substr(x0, 5, Index(x0, \" \", 0))"
+    "text": "Substr(x0, 5, Index(x0, \" \", 0))",
+    "size": 2
 }

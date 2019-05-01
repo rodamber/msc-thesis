@@ -34,5 +34,6 @@
     "functions": [
         "Replace"
     ],
-    "text": "Replace(x0, \".\", \",\")"
+    "text": "Replace(x0, \".\", \",\")",
+    "size": 1
 }

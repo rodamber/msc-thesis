@@ -36,5 +36,6 @@
         "Substr",
         "TrimEnd"
     ],
-    "text": "TrimEnd(Substr(x0, 0, Index(x0, \"\\\", 0)))"
+    "text": "TrimEnd(Substr(x0, 0, Index(x0, \"\\\", 0)))",
+    "size": 3
 }

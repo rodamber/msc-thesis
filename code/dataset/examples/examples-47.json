@@ -35,5 +35,6 @@
         "Replace",
         "TrimStart"
     ],
-    "text": "Replace(TrimStart(Replace(x0, \"0\", \" \")), \" \", \"0\")"
+    "text": "Replace(TrimStart(Replace(x0, \"0\", \" \")), \" \", \"0\")",
+    "size": 3
 }

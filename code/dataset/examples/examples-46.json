@@ -35,5 +35,6 @@
         "Replace",
         "TrimEnd"
     ],
-    "text": "Replace(TrimEnd(x0), \" \", \"0\")"
+    "text": "Replace(TrimEnd(x0), \" \", \"0\")",
+    "size": 2
 }
