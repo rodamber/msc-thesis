@@ -34,5 +34,6 @@
     "functions": [
         "ToUpper"
     ],
-    "text": "ToUpper(x0)"
+    "text": "ToUpper(x0)",
+    "size": 1
 }

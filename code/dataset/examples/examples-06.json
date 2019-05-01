@@ -34,5 +34,6 @@
     "functions": [
         "Replace"
     ],
-    "text": "Replace(x0, \"http://\", \"\")"
+    "text": "Replace(x0, \"http://\", \"\")",
+    "size": 1
 }

@@ -38,5 +38,6 @@
         "ToLower",
         "ToUpper"
     ],
-    "text": "Concat(ToUpper(Substr(x0, 0, 1)), ToLower(Substr(x0, 1, Length(x0))))"
+    "text": "Concat(ToUpper(Substr(x0, 0, 1)), ToLower(Substr(x0, 1, Length(x0))))",
+    "size": 6
 }

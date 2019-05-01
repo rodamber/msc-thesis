@@ -36,5 +36,6 @@
         "TrimEnd",
         "TrimStart"
     ],
-    "text": "TrimEnd(TrimStart(Substr(x0, 0, 7)))"
+    "text": "TrimEnd(TrimStart(Substr(x0, 0, 7)))",
+    "size": 3
 }

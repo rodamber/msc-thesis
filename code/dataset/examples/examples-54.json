@@ -35,5 +35,6 @@
         "TrimEnd",
         "TrimStart"
     ],
-    "text": "TrimStart(TrimEnd(x0))"
+    "text": "TrimStart(TrimEnd(x0))",
+    "size": 2
 }

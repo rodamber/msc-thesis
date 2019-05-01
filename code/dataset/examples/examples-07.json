@@ -34,5 +34,6 @@
     "functions": [
         "Replace"
     ],
-    "text": "Replace(x0, \"of\", \"of<br />\", \"Way\", \"<br />Way\")"
+    "text": "Replace(x0, \"of\", \"of<br />\", \"Way\", \"<br />Way\")",
+    "size": 1
 }

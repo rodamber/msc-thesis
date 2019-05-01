@@ -44,5 +44,6 @@
         "Concat",
         "ToUpper"
     ],
-    "text": "ToUpper(Concat(Concat(x0, \" \"), x1))"
+    "text": "ToUpper(Concat(Concat(x0, \" \"), x1))",
+    "size": 3
 }

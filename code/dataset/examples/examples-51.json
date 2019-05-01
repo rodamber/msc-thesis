@@ -44,5 +44,6 @@
         "Concat",
         "Trim"
     ],
-    "text": "Trim(Concat(Concat(x0, \" \"), x1))"
+    "text": "Trim(Concat(Concat(x0, \" \"), x1))",
+    "size": 3
 }

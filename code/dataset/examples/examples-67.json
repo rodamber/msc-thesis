@@ -36,5 +36,6 @@
         "TrimEnd",
         "TrimStart"
     ],
-    "text": "Concat(TrimEnd(TrimStart(x0)), \" \u00e2\u201a\u00ac\")"
+    "text": "Concat(TrimEnd(TrimStart(x0)), \" \u00e2\u201a\u00ac\")",
+    "size": 3
 }

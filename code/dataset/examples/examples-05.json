@@ -34,5 +34,6 @@
     "functions": [
         "Replace"
     ],
-    "text": "Replace(x0, \"Customer with \", \"\")"
+    "text": "Replace(x0, \"Customer with \", \"\")",
+    "size": 1
 }

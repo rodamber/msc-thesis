@@ -35,5 +35,6 @@
         "Concat",
         "Replace"
     ],
-    "text": "Concat(Concat(\"<span id=\", Replace(x0, \" \" , \"_\")), \" > \")"
+    "text": "Concat(Concat(\"<span id=\", Replace(x0, \" \" , \"_\")), \" > \")",
+    "size": 3
 }

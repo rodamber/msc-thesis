@@ -35,5 +35,6 @@
         "Replace",
         "Substr"
     ],
-    "text": "Replace(Substr(x0, 0, 8), \"-\", \"/\")"
+    "text": "Replace(Substr(x0, 0, 8), \"-\", \"/\")",
+    "size": 2
 }

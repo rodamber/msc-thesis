@@ -35,5 +35,6 @@
         "Replace",
         "ToLower"
     ],
-    "text": "Replace(ToLower(x0), \"bed \", \"\")"
+    "text": "Replace(ToLower(x0), \"bed \", \"\")",
+    "size": 2
 }

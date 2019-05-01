@@ -35,5 +35,6 @@
         "Replace",
         "Substr"
     ],
-    "text": "Substr(Replace(x0, \"\n\", \"    \"), 0, 300)"
+    "text": "Substr(Replace(x0, \"\n\", \"    \"), 0, 300)",
+    "size": 2
 }

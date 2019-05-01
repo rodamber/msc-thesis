@@ -35,5 +35,6 @@
         "Replace",
         "Substr"
     ],
-    "text": "Replace(Substr(x0, 0, 45), \"+\", \" \")"
+    "text": "Replace(Substr(x0, 0, 45), \"+\", \" \")",
+    "size": 2
 }

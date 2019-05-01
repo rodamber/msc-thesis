@@ -35,5 +35,6 @@
         "Replace",
         "ToLower"
     ],
-    "text": "Replace(ToLower(x0), \"weeks\", \"wks\")"
+    "text": "Replace(ToLower(x0), \"weeks\", \"wks\")",
+    "size": 2
 }
