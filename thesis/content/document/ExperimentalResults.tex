@@ -16,13 +16,44 @@ and a comparison between the setwise synthesizer
 
 A set of 285522 expressions were provided by OutSystems.
 We conducted an analysis to determine which builtin functions and which
-combinations were the most common, and picked 95 expressions containing only
-those functions (see Table~\ref{table:builtin-description}).
+combinations were the most common in that set.
+We picked 95 expressions containing only those functions (see
+Table~\ref{table:builtin-description}) with sizes (number of components) ranging
+from 1 to 7.
+A description of these 95 expressions in terms of size is shown in
+Figure~\ref{fig:bar-chart-sizes-95}.
 
-We then obtained a set of 3 input-output examples for each of these 100
-expressions.
-We developed an \textit{interpreter} for OutSystems expressions, and manually
-created a set of 3 different inputs for each expression.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{assets/bar-chart-sizes-95.pdf}
+  \caption{Number of expressions per size. For example, there are 31
+    expressions of size 2, and 16 expressions of size 1, out of 95 expressions.}
+  \label{fig:bar-chart-sizes-95}
+\end{figure}
+
+The hardness of a benchmark depends on the size of the solution, the number of
+input-output examples, and the library of components.
+Typically, the higher the size and the number of components, the harder it is to
+synthesize a program.
+Moreover, a library containing components which must be encoded to recursive
+formulas (\lstinline{Replace}, \lstinline{ToLower}, \lstinline{ToUpper},
+\lstinline{Trim}, \lstinline{TrimStart}, and \lstinline{TrimEnd}) makes the
+synthesis problem much harder than if we just had a library whose components
+had a direct counterpart in some \gls{smt} theory.
+Figure~\ref{fig:bar-chart-components-freq-95} shows in how many expressions each
+component occurs.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{assets/bar-chart-components-freq-95.pdf}
+  \caption{Number of expressions per component.}
+  \label{fig:bar-chart-components-freq-95}
+\end{figure}
+
+We obtained a set of 3 input-output examples for each of these 100 expressions.
+In order to do that, we developed an \textit{interpreter} for OutSystems
+expressions, and manually created a set of 3 different inputs for each
+expression.
 The inputs were carefully crafted in order to try to eliminate as much ambiguity
 as possible.
 Then we interpreted the expressions over their set of inputs in order to
@@ -33,25 +64,17 @@ Although the approach ``worked'', it was ultimately too slow, and the
 automatically generated examples were not natural, so we resorted to the manual
 approach.
 
-The solver used to solve the formulas generated in the synthesis process was Z3
-version 4.8.5~\cite{DeMoura:2008:ZES}.
+The \gls{smt} solver used to solve the formulas generated in the synthesis
+process was Z3 version 4.8.5~\cite{DeMoura:2008:ZES}.
+Each benchmark was monitored by the \textit{runsolver}
+program~\cite{Roussel:2011:JSAT}, and restricted to a time limit of 10 minutes
+and a memory limit of 16 GB.
 
-% configuracao (exemplos, constantes)
-% que solver foi utilizado
-% time and memory limits (runsolver)
 
-% tamanho dos programas
 % calls to solvers (timeout, numero de conflictos)
-% quantas benchmarks tem funcoes recursivas (histogram)
-% size of the expected solution (histogram)
 % replace e undecidable
-% fixar as constantes
 % utilizar outras componentes
-
-% quantas benchmarks usam replace
-% quantas e quais as constantes? enviar ao Ruben
 % versao em que fixa o set de constantes
-% quantas benchmarks usam funcoes recursivas
 
 \section{Results and Comparison}
 \label{sec:results-and-comparison}
@@ -59,19 +82,5 @@ version 4.8.5~\cite{DeMoura:2008:ZES}.
 % user intent
 % time
 % comparing size of encodings
-
-
-% % Discussion, maybe?
-% % TODO
-% We do not have access to actual input-output data, which swayed the kind of
-% approaches we took in order to solve this problem. For example, we could not
-% use approaches that applied inductive reasoning to a corpus of pre-existing
-% input-output examples in order to find some common patterns 
-
-% % of expression usage.
-
-% % TODO FIXME
-% We had access to 10239847012983 OutSystems expressions, with sizes ranging from
-% x to y, and manipulating data types such as z and w. The most used functions
-% were ... and typical programming patterns included ...
-
+%% later |--v
+% number of constants needed of each type
