@@ -1,0 +1,22 @@
+17.60/17.68	=== Examples (examples-15.json)
+17.60/17.68	(["abc"],"ABC")
+17.60/17.68	=== Library
+17.60/17.68	Add
+17.60/17.68	Concat
+17.60/17.68	Index
+17.60/17.68	Length
+17.60/17.68	Replace
+17.60/17.68	Sub
+17.60/17.68	Substr
+17.60/17.68	ToLower
+17.60/17.68	ToUpper
+17.60/17.68	Trim
+17.60/17.68	TrimEnd
+17.60/17.68	TrimStart
+17.60/17.68	=== Synthesis
+17.60/17.68	Size: 1
+17.60/17.68	=== Program
+17.60/17.68	prog(x0):
+17.60/17.68	  c0 = "0"
+17.60/17.68	  r0 = ToUpper(x0)
+17.60/17.68	

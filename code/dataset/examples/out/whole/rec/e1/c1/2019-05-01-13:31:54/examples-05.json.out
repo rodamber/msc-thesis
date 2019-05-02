@@ -1,0 +1,22 @@
+135.80/135.83	=== Examples (examples-05.json)
+135.80/135.83	(["Customer with who cares"],"who cares")
+135.80/135.83	=== Library
+135.80/135.83	Add
+135.80/135.83	Concat
+135.80/135.83	Index
+135.80/135.83	Length
+135.80/135.83	Replace
+135.80/135.83	Sub
+135.80/135.83	Substr
+135.80/135.83	ToLower
+135.80/135.83	ToUpper
+135.80/135.83	Trim
+135.80/135.83	TrimEnd
+135.80/135.83	TrimStart
+135.80/135.83	=== Synthesis
+135.80/135.83	Size: 1
+135.80/135.83	=== Program
+135.80/135.83	prog(x0):
+135.80/135.83	  c0 = "who cares"
+135.80/135.83	  r0 = Replace(c0, x0, x0)
+135.80/135.83	

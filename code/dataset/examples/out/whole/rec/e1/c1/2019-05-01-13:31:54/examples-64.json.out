@@ -1,0 +1,22 @@
+36.10/36.16	=== Examples (examples-64.json)
+36.10/36.16	(["# this is a comment"],"# this is a comment")
+36.10/36.16	=== Library
+36.10/36.16	Add
+36.10/36.16	Concat
+36.10/36.16	Index
+36.10/36.16	Length
+36.10/36.16	Replace
+36.10/36.16	Sub
+36.10/36.16	Substr
+36.10/36.16	ToLower
+36.10/36.16	ToUpper
+36.10/36.16	Trim
+36.10/36.16	TrimEnd
+36.10/36.16	TrimStart
+36.10/36.16	=== Synthesis
+36.10/36.16	Size: 1
+36.10/36.16	=== Program
+36.10/36.16	prog(x0):
+36.10/36.16	  c0 = ""
+36.10/36.16	  r0 = Concat(c0, x0)
+36.10/36.16	

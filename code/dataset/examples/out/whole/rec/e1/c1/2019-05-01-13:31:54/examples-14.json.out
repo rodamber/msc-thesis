@@ -1,0 +1,22 @@
+12.90/12.92	=== Examples (examples-14.json)
+12.90/12.92	(["ABC"],"abc")
+12.90/12.92	=== Library
+12.90/12.92	Add
+12.90/12.92	Concat
+12.90/12.92	Index
+12.90/12.92	Length
+12.90/12.92	Replace
+12.90/12.92	Sub
+12.90/12.92	Substr
+12.90/12.92	ToLower
+12.90/12.92	ToUpper
+12.90/12.92	Trim
+12.90/12.92	TrimEnd
+12.90/12.92	TrimStart
+12.90/12.92	=== Synthesis
+12.90/12.92	Size: 1
+12.90/12.92	=== Program
+12.90/12.92	prog(x0):
+12.90/12.92	  c0 = "abc"
+12.90/12.92	  r0 = Replace(c0, x0, c0)
+12.90/12.92	

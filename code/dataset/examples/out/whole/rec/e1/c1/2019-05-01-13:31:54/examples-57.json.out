@@ -1,0 +1,22 @@
+419.77/419.81	=== Examples (examples-57.json)
+419.77/419.81	(["what are you doing? (sorry)"],"what are you doing? (sorry)")
+419.77/419.81	=== Library
+419.77/419.81	Add
+419.77/419.81	Concat
+419.77/419.81	Index
+419.77/419.81	Length
+419.77/419.81	Replace
+419.77/419.81	Sub
+419.77/419.81	Substr
+419.77/419.81	ToLower
+419.77/419.81	ToUpper
+419.77/419.81	Trim
+419.77/419.81	TrimEnd
+419.77/419.81	TrimStart
+419.77/419.81	=== Synthesis
+419.77/419.81	Size: 1
+419.77/419.81	=== Program
+419.77/419.81	prog(x0):
+419.77/419.81	  c0 = " "
+419.77/419.81	  r0 = Replace(c0, c0, x0)
+419.77/419.81	

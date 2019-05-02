@@ -1,0 +1,22 @@
+66.59/66.62	=== Examples (examples-69.json)
+66.59/66.62	(["break \\"],"break")
+66.59/66.62	=== Library
+66.59/66.62	Add
+66.59/66.62	Concat
+66.59/66.62	Index
+66.59/66.62	Length
+66.59/66.62	Replace
+66.59/66.62	Sub
+66.59/66.62	Substr
+66.59/66.62	ToLower
+66.59/66.62	ToUpper
+66.59/66.62	Trim
+66.59/66.62	TrimEnd
+66.59/66.62	TrimStart
+66.59/66.62	=== Synthesis
+66.59/66.62	Size: 1
+66.59/66.62	=== Program
+66.59/66.62	prog(x0):
+66.59/66.62	  c0 = "break"
+66.59/66.62	  r0 = Replace(x0, x0, c0)
+66.59/66.62	

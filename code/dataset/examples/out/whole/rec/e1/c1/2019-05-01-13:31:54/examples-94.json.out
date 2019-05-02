@@ -1,0 +1,22 @@
+0.14/88.40	=== Examples (examples-94.json)
+0.14/88.40	(["<hello>"],"hello")
+0.14/88.40	=== Library
+0.14/88.40	Add
+0.14/88.40	Concat
+0.14/88.40	Index
+0.14/88.40	Length
+0.14/88.40	Replace
+0.14/88.40	Sub
+0.14/88.40	Substr
+0.14/88.40	ToLower
+0.14/88.40	ToUpper
+0.14/88.40	Trim
+0.14/88.40	TrimEnd
+0.14/88.40	TrimStart
+0.14/88.40	=== Synthesis
+0.14/88.40	Size: 1
+0.14/88.40	=== Program
+0.14/88.40	prog(x0):
+0.14/88.40	  c0 = "hello"
+0.14/88.40	  r0 = Replace(c0, x0, c0)
+0.14/88.40	

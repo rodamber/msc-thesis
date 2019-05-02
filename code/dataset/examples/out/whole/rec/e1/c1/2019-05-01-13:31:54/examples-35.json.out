@@ -1,0 +1,22 @@
+41.39/41.47	=== Examples (examples-35.json)
+41.39/41.47	(["A12345678 John Doe"],"John Doe")
+41.39/41.47	=== Library
+41.39/41.47	Add
+41.39/41.47	Concat
+41.39/41.47	Index
+41.39/41.47	Length
+41.39/41.47	Replace
+41.39/41.47	Sub
+41.39/41.47	Substr
+41.39/41.47	ToLower
+41.39/41.47	ToUpper
+41.39/41.47	Trim
+41.39/41.47	TrimEnd
+41.39/41.47	TrimStart
+41.39/41.47	=== Synthesis
+41.39/41.47	Size: 1
+41.39/41.47	=== Program
+41.39/41.47	prog(x0):
+41.39/41.47	  c0 = "John Doe"
+41.39/41.47	  r0 = Replace(c0, x0, x0)
+41.39/41.47	

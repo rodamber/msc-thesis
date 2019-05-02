@@ -1,0 +1,17 @@
+600.02/600.04	=== Examples (examples-49.json)
+600.02/600.04	(["john","doe"],"JOHN DOE")
+600.02/600.04	=== Library
+600.02/600.04	Add
+600.02/600.04	Concat
+600.02/600.04	Index
+600.02/600.04	Length
+600.02/600.04	Replace
+600.02/600.04	Sub
+600.02/600.04	Substr
+600.02/600.04	ToLower
+600.02/600.04	ToUpper
+600.02/600.04	Trim
+600.02/600.04	TrimEnd
+600.02/600.04	TrimStart
+600.02/600.04	=== Synthesis
+600.02/600.04	Size: 1

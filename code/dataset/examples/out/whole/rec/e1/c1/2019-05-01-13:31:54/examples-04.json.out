@@ -1,0 +1,22 @@
+455.89/455.94	=== Examples (examples-04.json)
+455.89/455.94	(["that/folder/"],"thatfolder")
+455.89/455.94	=== Library
+455.89/455.94	Add
+455.89/455.94	Concat
+455.89/455.94	Index
+455.89/455.94	Length
+455.89/455.94	Replace
+455.89/455.94	Sub
+455.89/455.94	Substr
+455.89/455.94	ToLower
+455.89/455.94	ToUpper
+455.89/455.94	Trim
+455.89/455.94	TrimEnd
+455.89/455.94	TrimStart
+455.89/455.94	=== Synthesis
+455.89/455.94	Size: 1
+455.89/455.94	=== Program
+455.89/455.94	prog(x0):
+455.89/455.94	  c0 = "thatfolder"
+455.89/455.94	  r0 = Replace(c0, x0, x0)
+455.89/455.94	

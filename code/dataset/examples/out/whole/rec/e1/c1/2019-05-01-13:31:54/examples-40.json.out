@@ -1,0 +1,22 @@
+185.84/185.93	=== Examples (examples-40.json)
+185.84/185.93	(["who cares about when"],"updated on who cares about ")
+185.84/185.93	=== Library
+185.84/185.93	Add
+185.84/185.93	Concat
+185.84/185.93	Index
+185.84/185.93	Length
+185.84/185.93	Replace
+185.84/185.93	Sub
+185.84/185.93	Substr
+185.84/185.93	ToLower
+185.84/185.93	ToUpper
+185.84/185.93	Trim
+185.84/185.93	TrimEnd
+185.84/185.93	TrimStart
+185.84/185.93	=== Synthesis
+185.84/185.93	Size: 1
+185.84/185.93	=== Program
+185.84/185.93	prog(x0):
+185.84/185.93	  c0 = "updated on who cares about "
+185.84/185.93	  r0 = Replace(x0, x0, c0)
+185.84/185.93	

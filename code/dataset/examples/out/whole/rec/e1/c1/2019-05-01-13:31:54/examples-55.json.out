@@ -1,0 +1,22 @@
+60.30/60.38	=== Examples (examples-55.json)
+60.30/60.38	(["what is this even supposed to?"],"")
+60.30/60.38	=== Library
+60.30/60.38	Add
+60.30/60.38	Concat
+60.30/60.38	Index
+60.30/60.38	Length
+60.30/60.38	Replace
+60.30/60.38	Sub
+60.30/60.38	Substr
+60.30/60.38	ToLower
+60.30/60.38	ToUpper
+60.30/60.38	Trim
+60.30/60.38	TrimEnd
+60.30/60.38	TrimStart
+60.30/60.38	=== Synthesis
+60.30/60.38	Size: 1
+60.30/60.38	=== Program
+60.30/60.38	prog(x0):
+60.30/60.38	  c0 = ""
+60.30/60.38	  r0 = Replace(c0, x0, x0)
+60.30/60.38	

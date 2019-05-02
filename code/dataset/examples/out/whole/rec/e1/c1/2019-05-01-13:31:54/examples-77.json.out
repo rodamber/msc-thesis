@@ -1,0 +1,22 @@
+53.08/53.20	=== Examples (examples-77.json)
+53.08/53.20	(["George Michael"],"Michael")
+53.08/53.20	=== Library
+53.08/53.20	Add
+53.08/53.20	Concat
+53.08/53.20	Index
+53.08/53.20	Length
+53.08/53.20	Replace
+53.08/53.20	Sub
+53.08/53.20	Substr
+53.08/53.20	ToLower
+53.08/53.20	ToUpper
+53.08/53.20	Trim
+53.08/53.20	TrimEnd
+53.08/53.20	TrimStart
+53.08/53.20	=== Synthesis
+53.08/53.20	Size: 1
+53.08/53.20	=== Program
+53.08/53.20	prog(x0):
+53.08/53.20	  c0 = "Michael"
+53.08/53.20	  r0 = Replace(c0, x0, x0)
+53.08/53.20	

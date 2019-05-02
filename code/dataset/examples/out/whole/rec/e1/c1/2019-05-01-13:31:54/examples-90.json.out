@@ -1,0 +1,22 @@
+22.29/22.39	=== Examples (examples-90.json)
+22.29/22.39	(["george"],"George")
+22.29/22.39	=== Library
+22.29/22.39	Add
+22.29/22.39	Concat
+22.29/22.39	Index
+22.29/22.39	Length
+22.29/22.39	Replace
+22.29/22.39	Sub
+22.29/22.39	Substr
+22.29/22.39	ToLower
+22.29/22.39	ToUpper
+22.29/22.39	Trim
+22.29/22.39	TrimEnd
+22.29/22.39	TrimStart
+22.29/22.39	=== Synthesis
+22.29/22.39	Size: 1
+22.29/22.39	=== Program
+22.29/22.39	prog(x0):
+22.29/22.39	  c0 = "George"
+22.29/22.39	  r0 = Replace(c0, x0, c0)
+22.29/22.39	
