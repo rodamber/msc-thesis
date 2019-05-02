@@ -7,7 +7,7 @@
                 }
             ],
             "output": {
-                "Left": "trim me \u00e2\u201a\u00ac"
+                "Left": "trim me xyz"
             }
         },
         {
@@ -17,7 +17,7 @@
                 }
             ],
             "output": {
-                "Left": "one more pass \u00e2\u201a\u00ac"
+                "Left": "one more pass xyz"
             }
         },
         {
@@ -27,7 +27,7 @@
                 }
             ],
             "output": {
-                "Left": "so smooth \u00e2\u201a\u00ac"
+                "Left": "so smooth xyz"
             }
         }
     ],
@@ -36,6 +36,6 @@
         "TrimEnd",
         "TrimStart"
     ],
-    "text": "Concat(TrimEnd(TrimStart(x0)), \" \u00e2\u201a\u00ac\")",
+    "text": "Concat(TrimEnd(TrimStart(x0)), \" xyz\")",
     "size": 3
 }

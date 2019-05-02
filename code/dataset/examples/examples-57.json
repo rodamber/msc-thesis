@@ -2,33 +2,21 @@
     "examples": [
         {
             "inputs": [
-                {
-                    "Left": "what are you doing? (sorry)"
-                }
+                "what are you doing? (sorry) yup?"
             ],
-            "output": {
-                "Left": "what are you doing? (sorry)"
-            }
+            "output": "what are you doing? (sorry)"
         },
         {
             "inputs": [
-                {
-                    "Left": "did you want that? (hmm..)"
-                }
+                "did you want that? (hmm..) cmon"
             ],
-            "output": {
-                "Left": "did you want that? (hmm..)"
-            }
+            "output": "did you want that? (hmm..)"
         },
         {
             "inputs": [
-                {
-                    "Left": "maybe with sub? (oh i see)"
-                }
+                "maybe with sub? (oh i see) im tired"
             ],
-            "output": {
-                "Left": "maybe with sub? (oh i see)"
-            }
+            "output": "maybe with sub? (oh i see)"
         }
     ],
     "functions": [
@@ -36,6 +24,6 @@
         "Index",
         "Substr"
     ],
-    "text": "Substr(x0, 0, Add(Index(x0, \")\", 0), 1))",
-    "size": 3
+    "size": 3,
+    "text": "Substr(x0, 0, Add(Index(x0, \")\", 0), 1))"
 }
