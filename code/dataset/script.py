@@ -147,7 +147,7 @@ def is2j(xs, prog):
 def exs(jobj, xss):
     '''add examples field (xss as a json array) to jobj, and return json object'''
     examples = [is2j(xs, jobj['text']) for xs in xss]
-    print(json.dumps({'examples': examples, **jobj}))
+    print(json.dumps({**jobj, 'examples': examples}, indent=4, sort_keys=True))
 
 
 def split_jsonlines(fin, fout_prefix='examples', dout='examples'):
