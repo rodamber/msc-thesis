@@ -1,0 +1,16 @@
+1.28/1.38	=== Examples (examples-25.json)
+1.28/1.38	(["Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat."],"Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat...")
+1.28/1.38	=== Library
+1.28/1.38	Add
+1.28/1.38	Concat
+1.28/1.38	Index
+1.28/1.38	Length
+1.28/1.38	Sub
+1.28/1.38	Substr
+1.28/1.38	=== Synthesis
+1.28/1.38	Size: 1
+1.28/1.38	=== Program
+1.28/1.38	prog(x0):
+1.28/1.38	  c0 = ".."
+1.28/1.38	  r0 = Concat(x0, c0)
+1.28/1.38	

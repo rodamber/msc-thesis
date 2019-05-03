@@ -1,0 +1,18 @@
+2.47/2.57	=== Examples (examples-23.json)
+2.47/2.57	(["Nam quis purus massa metus."],"Nam q...")
+2.47/2.57	=== Library
+2.47/2.57	Add
+2.47/2.57	Concat
+2.47/2.57	Index
+2.47/2.57	Length
+2.47/2.57	Sub
+2.47/2.57	Substr
+2.47/2.57	=== Synthesis
+2.47/2.57	Size: 1
+2.47/2.57	Size: 2
+2.47/2.57	=== Program
+2.47/2.57	prog(x0):
+2.47/2.57	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULNam q..."
+2.47/2.57	  r0 = Length(x0)
+2.47/2.57	  r1 = Substr(c0, r0, r0)
+2.47/2.57	
