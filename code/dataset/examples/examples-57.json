@@ -2,21 +2,21 @@
     "examples": [
         {
             "inputs": [
-                "what are you doing? (sorry) yup?"
+                { "Left": "what are you doing? (sorry) yup?" }
             ],
-            "output": "what are you doing? (sorry)"
+            "output": { "Left": "what are you doing? (sorry)" }
         },
         {
             "inputs": [
-                "did you want that? (hmm..) cmon"
+                { "Left": "did you want that? (hmm..) cmon" }
             ],
-            "output": "did you want that? (hmm..)"
+            "output": { "Left": "did you want that? (hmm..)" }
         },
         {
             "inputs": [
-                "maybe with sub? (oh i see) im tired"
+                { "Left": "maybe with sub? (oh i see) im tired" }
             ],
-            "output": "maybe with sub? (oh i see)"
+            "output": { "Left": "maybe with sub? (oh i see)" }
         }
     ],
     "functions": [
