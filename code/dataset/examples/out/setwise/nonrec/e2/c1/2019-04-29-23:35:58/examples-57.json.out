@@ -1,13 +1,50 @@
-0.18/0.23	=== Examples (../../dataset/examples/examples-57.json)
-0.18/0.23	IO(inputs=('what are you doing? (sorry)',), output='what are you doing? (sorry)')
-0.18/0.23	IO(inputs=('did you want that? (hmm..)',), output='did you want that? (hmm..)')
-0.18/0.23	=== Library
-0.18/0.23	concat
-0.18/0.23	index
-0.18/0.23	length
-0.18/0.23	substr
-0.18/0.23	add
-0.18/0.23	sub
-0.18/0.23	=== Synthesis
-0.18/0.23	['concat']: SAT (0.022 seconds)
-0.18/0.26	concat(arg0, '')
+0.11/0.19	=== Examples (../../dataset/examples/examples-57.json)
+0.11/0.19	IO(inputs=('what are you doing? (sorry) yup?',), output='what are you doing? (sorry)')
+0.11/0.19	IO(inputs=('did you want that? (hmm..) cmon',), output='did you want that? (hmm..)')
+0.11/0.19	=== Library
+0.11/0.19	concat
+0.11/0.19	index
+0.11/0.19	length
+0.11/0.19	substr
+0.11/0.19	add
+0.11/0.19	sub
+0.11/0.19	=== Synthesis
+0.11/0.19	['concat']: UNSAT (0.028 seconds)
+0.11/0.22	['index']: UNSAT (0.026 seconds)
+0.11/0.25	['length']: UNSAT (0.020 seconds)
+0.11/0.27	['substr']: UNSAT (0.030 seconds)
+0.25/0.30	['add']: UNSAT (0.023 seconds)
+0.25/0.32	['sub']: UNSAT (0.023 seconds)
+0.25/0.35	['concat', 'concat']: UNSAT (0.048 seconds)
+0.35/0.40	['concat', 'index']: UNSAT (0.042 seconds)
+0.35/0.44	['concat', 'length']: UNSAT (0.033 seconds)
+0.35/0.47	['concat', 'substr']: UNSAT (0.101 seconds)
+0.54/0.57	['concat', 'add']: UNSAT (0.031 seconds)
+0.54/0.61	['concat', 'sub']: UNSAT (0.025 seconds)
+0.54/0.63	['index', 'index']: UNSAT (0.035 seconds)
+0.63/0.67	['index', 'length']: UNSAT (0.028 seconds)
+0.69/0.70	['index', 'substr']: UNKNOWN (86.501 seconds)
+87.18/87.20	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+87.18/87.20	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+87.18/87.20	['index', 'add']: UNSAT (0.033 seconds)
+87.18/87.23	['index', 'sub']: UNSAT (0.029 seconds)
+87.18/87.26	['length', 'length']: UNSAT (0.018 seconds)
+87.18/87.28	['length', 'substr']: UNSAT (0.037 seconds)
+87.28/87.32	['length', 'add']: UNSAT (0.022 seconds)
+87.28/87.34	['length', 'sub']: UNSAT (0.020 seconds)
+87.28/87.36	['substr', 'substr']: UNSAT (0.036 seconds)
+87.38/87.40	['substr', 'add']: UNSAT (0.032 seconds)
+87.38/87.43	['substr', 'sub']: UNSAT (0.031 seconds)
+87.38/87.46	['add', 'add']: UNSAT (0.026 seconds)
+87.38/87.49	['add', 'sub']: UNSAT (0.026 seconds)
+87.48/87.52	['sub', 'sub']: UNSAT (0.026 seconds)
+87.48/87.54	['concat', 'concat', 'concat']: UNSAT (0.231 seconds)
+87.68/87.78	['concat', 'concat', 'index']: UNSAT (0.047 seconds)
+87.78/87.82	['concat', 'concat', 'length']: UNSAT (0.037 seconds)
+87.78/87.86	['concat', 'concat', 'substr']: UNSAT (0.212 seconds)
+88.00/88.07	['concat', 'concat', 'add']: UNSAT (0.037 seconds)
+88.00/88.11	['concat', 'concat', 'sub']: UNSAT (0.036 seconds)
+88.13/88.15	['concat', 'index', 'index']: UNSAT (0.047 seconds)
+88.18/88.20	['concat', 'index', 'length']: UNSAT (0.037 seconds)
+88.18/88.23	['concat', 'index', 'substr']: SAT (46.577 seconds)
+134.78/134.81	concat(substr(arg0, 0, index(arg0, ')', 0)), ')')
