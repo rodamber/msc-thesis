@@ -3,20 +3,19 @@
 
 A specification can be seen as a constraint over the space of all possible
 programs. We have already seen one type of specification, logical
-specifications, which are a kind of \textit{semantic} specification, meaning
-that they constrain the program space over \textit{behaviour}. Syntactic
+specifications, which are a kind of \textit{semantic} specifications, meaning
+that they constrain the program space over \textit{behavior}. Syntactic
 specifications are a method of specifying intent in program synthesis where a
-semantic specification (like logical specifications) is complemented with some
-form of \textit{syntactic} constraints on the shape that the desired program can
-take.
+semantic specification is complemented with some form of \textit{syntactic}
+constraints on the shape that the desired program can take.
 
-Syntactic specifications are typically provided in the form of a context-free
-grammar \cite{Alur:sygus:2013}, or with sketches \cite{Solar-Lezama:2008}. These
-restrictions provide structure to the set of candidate programs, possibly
+Syntactic specifications are typically provided in the form of a
+\gls{cfg}~\cite{Alur:sygus:2013}, or with sketches \cite{Solar-Lezama:2008}.
+These restrictions provide structure to the set of candidate programs, possibly
 resulting in more efficient search procedures. They can also be used for the
-purpose of performance optimizations (of the desired program), e.g., by limiting
-the search space to implementations that only use a limited amount of lines of
-code. The learned programs also tend to be more readable and explainable.
+purpose of performance optimizations, e.g., by limiting the search space to
+implementations that only use a limited amount of lines of code. The learned
+programs also tend to be more readable and explainable.
 
 \subsubsection{Sketching}
 \label{sec:sketching}
@@ -26,11 +25,9 @@ synthesize, called \textit{sketches}, leaving missing details, called
 \textit{holes}, for the synthesizer to fill. The synthesizer is then directed by
 the high-level structure of the skeleton while taking care of finding the
 low-level details according to user-specified assertions.
-
 Sketching is an accessible form of program synthesis, as it does not require
 learning new specification languages and formalizations, allowing the users to
 use the programming model with which they are already familiarized.
-
 This approach was introduced in the SKETCH system by
 Solar-Lezama~\cite{Solar-Lezama:2008}, which allowed the synthesis of imperative
 programs in a C-like language.
@@ -55,13 +52,11 @@ The problem of program synthesis with syntactic specifications was generalized
 and formalized in the work on
 \gls{sygus}~\cite{Alur:sygus:2013}\footnote{\url{https://sygus.org}}.
 \gls{sygus} is a community effort with the objective of ``formulating the core
-computational
-problem common to many recent tools for program synthesis in a canonical and
-logical manner''. The input to this problem consists of a background theory,
-that defines the language, a semantic correctness specification defined by a
-logical formula in that theory, and a syntactic specification in the form of a
-\gls{cfg}.
-
+computational problem common to many recent tools for program synthesis in a
+canonical and logical manner''.
+The input to this problem consists of a background theory, that defines the
+language, a semantic correctness specification defined by a logical formula in
+that theory, and a syntactic specification in the form of a \gls{cfg}.
 This effort has helped to create a common format for the definition of program
 synthesis problems and a growing repository of benchmarks. It has also led to
 the creation of the SyGuS-Comp annual competition.

@@ -107,9 +107,6 @@ themselves.
 
 Check todos.
 
-Things that might be missing:
-
-- SAT, SMT, LIA, QF_S and encodings (with examples)
 - Context-free grammars.
 
 - Definitions such as:
@@ -118,8 +115,6 @@ Things that might be missing:
   - DSL
   - Program space
     
-- SSA (static single assignment) form
-
 ** TODO Background
    DEADLINE: <2019-03-13 Wed>
 :PROPERTIES:
@@ -127,13 +122,6 @@ Things that might be missing:
 :EXAMPLES: DONE
 :RELWORK:  REVIEW
 :END:
-
-Should I add references here (before the sections)?
-
-% Section~\ref{sec:challenges} presents the inherent challenges of the problem,
-% such as resolving ambiguity or the size of the search space;
-
-% section~\ref{sec:applications} presents applications of the problem;
 
 I guess, at the end of this section there should probably be a discussion
 comparing the different approaches to the problem.
@@ -145,98 +133,61 @@ comparing the different approaches to the problem.
 :RELWORK:  REVIEW
 :END:
 
-Fails to discuss the pros and cons of each approach.
-
-Should I add ref links to each subsection?
-
 **** TODO Logical Specifications
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
+
+- [ ] missing ref
 
 #+BEGIN_QUOTE
 precise and succinct, but complete ones are often quite tricky to write --
 Almost sic, page 8, \cite{Gulwani2017}
 #+END_QUOTE
 
-There seems to be no reference to any specific logic (like FOL), which seems
-kind of dumb.
-
+***** [Ideas]
 Add an example. Ideas:
 - Leon
 - POPL'19 Polikarpova, swap. This one is good because it can serve as an example
   for the subsection on deductive synthesis.
 
-Maybe add both examples because this is a basic idea that may be worth
-exploring with detail. Maybe a first-order logic and another based on type
-signatures (synquid, lifty)?
-
-Maybe add a subsection (or just a paragraph speaking about type signatures).
-
-% - expert-oriented
-% - poder do sintetizador vs tipo de logica que suporta (primeira-ordem, etc)
-
-**** TODO Syntactic Bias
+**** TODO Syntactic Specifications
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: TODO
-:RELWORK:  ONGOING
+:RELWORK:  REVIEW
 :END:
 
-Maybe from here on, refer to "specifications and syntactic bias" simply as
-"specifications."
-
-- Check out PSKETCH: overview, page 32.
-- Metasketching
-
-***** TODO Sketching and Metasketching
+***** TODO Sketching
       :PROPERTIES:
       :CONTENT:  REVIEW
       :EXAMPLES: TODO
-      :RELWORK:  ONGOING
+      :RELWORK:  REVIEW
       :END:
 
-Needs cleaning and rewriting. Was left kind of dull after updates.
-
-Decide whether to speak or not of metasketching. I think we should speak about
-[[https://alexpolozov.com/blog/program-synthesis-2018/][sketch generation]] somewhere, but I'm not sure if metasketching is really what we
-want. Maybe metasketching makes more sense to stay next to SyGuS.
+Missing example.
 
 ***** TODO Component-Based Synthesis
       :PROPERTIES:
-      :EXAMPLES: TODO
       :CONTENT:  REVIEW
-      :RELWORK:  ONGOING
+      :EXAMPLES: TODO
+      :RELWORK:  REVIEW
       :END:
 
-We already speak about this on the constraint-solving section. Decide whether to
-put it here, there or split it.
-^ _Put it here_
-
-Refer that some methods (like sypet and frangel) rely on type signatures.
-
-Check:
-
-- 12, 13, 22, 34 of Gulwani2017
-- 9, 16, 17 of Feng:2017:CSC
-
-Add examples:
-
+Missing example. Ideas:
 - SyPet
 - FrAngel: Also, it adds control structures to the problem
-
-Maybe move this section to the syntactic bias one.
 
 ***** TODO Syntax-Guided Synthesis
       :PROPERTIES:
       :CONTENT:  REVIEW
-      :RELWORK:  ONGOING
       :EXAMPLES: TODO
+      :RELWORK:  REVIEW
       :END:
 
-I think it would make sense to compare it to the work done by the SMT community.
+Missing example.
 
 **** TODO Inductive Synthesis
 :PROPERTIES:
@@ -244,6 +195,9 @@ I think it would make sense to compare it to the work done by the SMT community.
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
+
+Moreover, it is also possible that in some cases a complete specification might
+just no exist.
 
 # \cite{Solar-Lezama:2008}
 ``Inductive synthesis is the process of generating a program from concrete
