@@ -1,43 +1,9 @@
 * Current plan
-|------------------+--------------------------------------|
-| <2019-05-02 Thu> | Run tests                            |
-| <2019-04-27 Sat> | Start writing results and discussion |
-| <2019-05-01 Wed> | Background                           |
-| <2019-05-02 Thu> | Introduction, Conclusion, Abstract   |
-| <2019-05-03 Fri> | Wrap up results and discussion       |
-| <2019-05-05 Sun> | Extended abstract                    |
-| <2019-05-10 Fri> | Improve documents                    |
-|------------------+--------------------------------------|
 
-* Plan after Apr 15 meeting
-|------------------+---------------------------------------|
-| <2019-04-18 Thu> | Preliminaries                         |
-| <2019-04-23 Tue> | Add more benchmarks                   |
-| <2019-04-24 Wed> | Run tests                             |
-| <2019-04-24 Wed> | Fix bug regarding recursive functions |
-| <2019-04-25 Thu> | Run more tests                        |
-| <2019-04-26 Fri> | Results, Discussion                   |
-| <2019-04-30 Tue> | Background                            |
-| <2019-05-02 Thu> | Introduction, Conclusion, Abstract    |
-| <2019-05-05 Sun> | Extended abstract                     |
-|------------------+---------------------------------------|
-
-* Plan before Apr 15 meeting
-|------------------+-----------------------------------------------------|
-| <2019-04-18 Thu> | Fix recursive bug regarding recursive functions     |
-| <2019-04-18 Thu> | Add more benchmarks & run tests                     |
-| <2019-04-26 Fri> | Preliminaries/Background                            |
-| <2019-04-26 Fri> | Results, Discussion                                 |
-| <2019-04-30 Tue> | Introduction, Conclusion, Abstract                  |
-|------------------+-----------------------------------------------------|
-
-* Old plan
-|------------------+-----------------------------------------------------|
-| <2019-04-09 Tue> | Implement new encoding                              |
-| <2019-04-10 Wed> | Write new encoding                                  |
-| <2019-04-11 Thu> | Fix recursive bug regarding recursive functions     |
-| <2019-04-18 Thu> | Preliminaries/Background                            |
-| <2019-04-26 Fri> | Results, Discussion                                 |
-| <2019-04-30 Tue> | Introduction                                        |
-| <2019-05-02 Thu> | Abstract, Conclusion                                |
-|------------------+-----------------------------------------------------|
+|------------------+-----------------------------|
+| <2019-05-03 Fri> | Draft                       |
+| <2019-05-04 Sat> | Improve draft of background |
+| <2019-05-04 Sat> | Add review comments         |
+| <2019-05-05 Sun> | Extended abstract draft     |
+| <2019-05-10 Fri> | Improve                     |
+|------------------+-----------------------------|
