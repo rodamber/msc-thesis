@@ -212,12 +212,12 @@ Missing example.
 
 **** TODO Programs
 :PROPERTIES:
-:CONTENT:  ONGOING
+:CONTENT:  REVIEW
 :EXAMPLES: TODO
-:RELWORK:  TODO
+:RELWORK:  REVIEW
 :END:
 
-Needs cleaning.
+Missing example (take one from the papers).
 
 *** TODO Search Techniques
 :PROPERTIES:
@@ -388,37 +388,14 @@ Wonder if some parts are too close to the original.
 :RELWORK:  ONGOING
 :END:
 
+% Examples, being a kind of inductive specifications, are inherently
+% \textit{ambiguous}.
+% There might be multiple programs consistent with the examples, but we must find
+% the \textit{intended} one (disambiguation).
+
 Specifics of PBE. Needs cleaning.
 
 PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
-
-**** Specialized Search Techniques
-:PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
-:END:
-
-**** Disambiguation
-:PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  ONGOING
-:END:
-
-***** Ranking
-:PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  ONGOING
-:END:
-
-***** Active Learning
-:PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  ONGOING
-:END:
 
 ** TODO Synthesis
 :PROPERTIES:
