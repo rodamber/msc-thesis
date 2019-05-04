@@ -2,39 +2,48 @@
 \label{sec:inductive}
 
 Inductive synthesis is an instance of the program synthesis problem where the
-constraints are under-specified. Sometimes the domain we want to model is
-complex enough that a complete specification could be as hard to produce as the
-program itself. In other cases, we might want the synthesizer to be as easy and
-intuitive to use as possible for users with a myriad of different backgrounds.
+constraints are underspecified.
+The intended program should not only satisfy the specifications, but also
+generalize.
+Sometimes the domain we want to model is complex enough that a complete
+specification could be as hard to produce as the program itself, or might not
+even exist.
+In other cases, we might want the synthesizer to be as easy and intuitive to use
+as possible for users coming from different backgrounds.
 
-\subsubsection{Programming By Examples}
+\subsubsection{\Glsfmtfull{pbe}}
 
-\Gls{pbe} is an instance of inductive synthesis where the specification is given
-by \gls{io} examples that the desired program must satisfy. Explicitly giving
-examples can be preferred due to their ease of use, especially by
-non-programmers, when compared to more technical kinds of specification, such as
-logical formulas. The examples may either be \todo{positive}{explain me; example
-ref} or \todo{negative}{explain me; example ref}. More generally, given some
-(implicit) \gls{io} pair, we may include asserting properties of the output
-instead of specifying it completely \cite{Gulwani2017, Polozov:2015:FFI}. This
-can be helpful if it is impractical or impossible to write the output concretely,
-e.g., if it is infinite.
+\gls{pbe} is an instance of inductive synthesis where the specification is given
+by \gls{io} examples that the desired program must satisfy.
+Explicitly giving examples can be preferred due to their ease of use, especially
+by non-programmers, when compared to more technical kinds of specification, such
+as logical formulas.
+The examples may be either \textit{positive}, i.e., an example that the desired
+program must satisfy, or \textit{negative}, i.e., an example that the desired
+should \textit{not} satisfy.
+More generally, given some (implicit) \gls{io} example, we may include asserting
+properties of the output instead of specifying it completely
+\cite{Polozov:2015:FFI}.
+This can be helpful if it is impractical or impossible
+to write the output concretely, e.g., if it is infinite.
 
-\subsubsection{Programming By Demonstration}
+\subsubsection{\Glsfmtfull{pbd}}
 
-In \gls{pbd} the user does not write a specification \textit{per se}; instead the
-synthesizer actively records user actions on concrete examples using them to
-infer the intended program. The program must be general enough to be used
-with different inputs. \gls{pbd} can be seen as a refinement of \gls{pbe} that
+In \gls{pbd} the user does not write a specification \textit{per se};
+instead the synthesizer is given a sequence of transformation steps (a
+demonstration) on concrete inputs, and uses them to infer the intended program.
+The program must be general enough to be used with different inputs.
+\gls{pbd} can be seen as a refinement of \gls{pbe} that
 considers an entire execution trace (i.e., step-by-step instructions of the
-program behavior on a given input) instead of a single \gls{io} example. It
-depicts \textit{how} to achieve the corresponding output instead of just
+program behavior on a given input) instead of a single \gls{io} example.
+It depicts \textit{how} to achieve the corresponding output instead of just
 specifying \textit{what} it should be.
 
 Though the concept of \gls{pbd} is easy to understand, the task of the user can
 be tedious and time-consuming. Therefore, the synthesizer must be able to infer
-the intended program from a small set of user demonstrations. Ideally, it would
-also be able to interact effectively and receive feedback from the user.
+the intended program from a small set of user demonstrations.
+Ideally, it would also be able to interact effectively and receive feedback from
+the user.
 However, the concept might also be interesting when applied to non-interactive
 contexts, such as \textit{reverse engineering}.
 
@@ -42,6 +51,7 @@ Lau et al. applied \gls{pbd} to the text-editing domain by implementing
 SMARTedit, a system that induces repetitive text-editing programs from as few as
 one or two examples. The system resembles familiar keystroke-based macro
 interfaces, but it generalizes to a more robust program that is likely to work
-in more situations \cite{Lau2003}. They have also presented a language-neutral
-framework and an implementation of a system that learns procedural programs from
-just 5.1 traces on average \cite{Lau:traces:2003}.
+in more situations \cite{Lau2003}.
+They have also presented a language-neutral framework and an implementation of a
+system that learns procedural programs from just 5.1 traces on average
+\cite{Lau:traces:2003}.

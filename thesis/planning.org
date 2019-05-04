@@ -140,12 +140,7 @@ comparing the different approaches to the problem.
 :RELWORK:  REVIEW
 :END:
 
-- [ ] missing ref
-
-#+BEGIN_QUOTE
-precise and succinct, but complete ones are often quite tricky to write --
-Almost sic, page 8, \cite{Gulwani2017}
-#+END_QUOTE
+Missing reference.
 
 ***** [Ideas]
 Add an example. Ideas:
@@ -196,21 +191,6 @@ Missing example.
 :RELWORK:  TODO
 :END:
 
-Moreover, it is also possible that in some cases a complete specification might
-just no exist.
-
-# \cite{Solar-Lezama:2008}
-``Inductive synthesis is the process of generating a program from concrete
-observations of its behavior, where an observation describes the expected
-behavior of the program on a specific input. The inductive synthesizer uses each
-new observation to refine its hypothesis about what the correct program should
-be until it converges to a solution. Inductive synthesis had its origin in the
-work by Gold [33] on language learning, and the pioneering work by Shapiro [57]
-on inductive synthesis and its application to algorithmic debugging among
-others.''
-
-Check p. 92 of the overview for the pros and cons of \gls{PBE}.
-
 ***** TODO Programming By Examples
 :PROPERTIES:
 :CONTENT:  REVIEW
@@ -218,12 +198,17 @@ Check p. 92 of the overview for the pros and cons of \gls{PBE}.
 :RELWORK:  TODO
 :END:
 
+- Missing references
+- Missing example
+
 ***** TODO Programming By Demonstration
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
+
+- Maybe check if there's some Gulwani paper to put here.
 
 **** TODO Programs
 :PROPERTIES:
@@ -442,16 +427,17 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
 :RELWORK:  ONGOING
 :END:
 
-*** REVIEW Problem Description
+*** TODO Problem Description
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
 :RELWORK:  REVIEW
 :END:
 
+- [ ] Mention that we are using _positive_ examples.
 - [ ] Note that examples show constants that are not part of the input.
 
-*** REVIEW Setwise Encoding
+*** TODO Setwise Encoding
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
