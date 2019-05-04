@@ -100,23 +100,22 @@ themselves.
 
 ** TODO Preliminaries
 :PROPERTIES:
-:CONTENT:  TODO
+:CONTENT:  ONGOING
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
 
-Check todos.
+Missing definitions:
+- Program space
+- What does it mean for a program to satisfy a specification
+- Example, a set of examples, etc
+- Context-free grammars
+- DSL
 
-- Context-free grammars.
+Some background on how SMT solvers work, e.g., describe DPLL(T).
 
-- Definitions such as:
-  - What does it mean for a program to satisfy a specification
-  - Example, a set of examples, etc.
-  - DSL
-  - Program space
-    
 ** TODO Background
-   DEADLINE: <2019-03-13 Wed>
+  DEADLINE: <2019-03-13 Wed>
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: DONE
@@ -228,15 +227,15 @@ Missing example (take one from the papers).
 
 **** TODO Deductive Search
 :PROPERTIES:
-:CONTENT:  REVIEW
+:CONTENT:  ONGOING
 :EXAMPLES: TODO
 :RELWORK:  TODO
 :END:
 
 Expand on this.
+Commented out because it is too simple.
 
 References: Polikarpova:2019:SSH, Manna:1971:TAP, Green:1969:ATP
-# These last two refs. are old!
 
 **** TODO Enumerative Search
 :PROPERTIES:

@@ -1,25 +1,31 @@
 \section{Search Techniques}
 \label{sec:search-techniques}
 
-% TODO Don't forget to put an intro here
+The second part of solving a program synthesis problem is deciding which search
+technique to apply in order to find the intended program.
+First, we want to ensure that the program satisfies the semantic and syntactic
+specifications.
+Second, we want to leverage the specifications and the knowledge we have from
+the problem domain in order to guide the search.
+Common search techniques are
+% deductive search (Section~\ref{sec:deductive-synthesis}),
+enumerative search~\cite{Alur:2017:SEP}
+(Section~\ref{sec:enumerative-search}),
+stochastic search~\cite{Schkufza:2013:SS,Singh:ranking:2015}
+(Section~\ref{sec:stochastic-search}), and
+constraint solving~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC}
+(Section~\ref{sec:constraint-solving}).
+Modern synthesizers usually apply a combination of those, and so we can also
+talk about frameworks for structuring their construction, such as
+\gls{cegis}~\cite{Solar-Lezama:2008},
+\gls{cegis}($\mathcal{T}$)~\cite{Abate:2018:CMT}, and
+\gls{ogis}~\cite{Jha:2017:TFS}
+(Section~\ref{sec:ogis}).
 
-% You can find an overview of the most common search techniques used in the field
-% of program synthesis.
-\citeauthor{Alur:sygus:2013}~\cite{Alur:sygus:2013} presented an overview of the
-most common search techniques used in the field of program synthesis.
 
-\input{Deductive}
+% \input{Deductive}
 \input{EnumerativeSearch}
 \input{StochasticSearch}
 \input{ConstraintSolving}
 \input{OGIS}
-
-% TODO: It might be the case that it makes more sense to expose SyGuS here
-% instead of in the previous section. It's more of a learning bias than a kind
-% of specification. The overview seems to do this.
-% ON THE OTHER HAND: It might also make sense to put it in the previous section
-% because it answers the question of how to ask it. Maybe the title should be
-% changed to Specifications and Syntactic Bias?
-
-% TODO: Also, I think it's important to refer to SyGuS explicitly.
 
