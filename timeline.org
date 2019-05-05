@@ -1,9 +1,7 @@
 * Current plan
 
 |------------------+-----------------------------|
-| <2019-05-03 Fri> | Draft                       |
-| <2019-05-04 Sat> | Improve draft of background |
-| <2019-05-04 Sat> | Add review comments         |
-| <2019-05-05 Sun> | Extended abstract draft     |
+| <2019-05-06 Mon> | Draft                       |
+| <2019-05-07 Tue> | Extended abstract draft     |
 | <2019-05-10 Fri> | Improve                     |
 |------------------+-----------------------------|
