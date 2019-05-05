@@ -225,6 +225,14 @@ Missing example (take one from the papers).
 :RELWORK:  ONGOING
 :END:
 
+Missing:
+- deductive search
+- representation-based search (!!!)
+  - VSAs: motivated by inductive learning; particularly suited to pbe
+    - put simply, just a DAG where every part corresponds to a valid program
+    - supports learn, intersect and pick
+    - encodes a possibly exponential number of programs
+
 **** TODO Deductive Search
 :PROPERTIES:
 :CONTENT:  ONGOING
@@ -240,20 +248,15 @@ References: Polikarpova:2019:SSH, Manna:1971:TAP, Green:1969:ATP
 **** TODO Enumerative Search
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: ONGOING
-:RELWORK:  TODO
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
-
-Missing figures.
-Check out Professor's notes on my figures from Jan 8 2019.
-
-Professor says to give more detail of the (first?) algorithm (?)
 
 ***** TODO Top-Down Tree Search
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: ONGOING
-:RELWORK:  TODO
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 Adicionar ref. ao facto de que estes algoritmos geralmente consideram o tamanho
@@ -265,8 +268,8 @@ Adicionar (possivelmente) um exemplo de um traço de execução do algoritmo.
 ***** TODO Bottom-Up Tree Search
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: ONGOING
-:RELWORK:  TODO
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 Check out references [4, 141] of Gulwani2017.
@@ -277,12 +280,11 @@ figura}, using program size as the metric of program complexity.
 ***** TODO Bidirectional Tree Search
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: ONGOING
-:RELWORK:  TODO
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
-Explicar porque que isto e bom: Note that instructions _ and _ may be
-parallelizable.
+Missing pseudocode.
 
 **** TODO Stochastic Search
 :PROPERTIES:
