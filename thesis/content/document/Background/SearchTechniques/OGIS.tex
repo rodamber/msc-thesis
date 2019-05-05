@@ -9,7 +9,7 @@ program and is parameterized by some form of semantic and/or syntactic
 specifications (see~\ref{sec:specifications}). The usefulness of the oracle is
 defined by the type of queries it can handle and the properties of its
 responses. The characteristics of these components are typically imposed by the
-\todo{application}{give an example}.
+application.
 
 \begin{figure}[htb]
   \centering
@@ -51,9 +51,8 @@ Typical queries and response types are some of the following~\cite{Jha:2017:TFS}
   $\phi$ the oracle responds with the answer to whether $p$ satisfies $\phi$ or
   not, or $\bot$ if it cannot find the answer.
 \item \textit{Distinguishing input queries}, where given program $p$ and set $X$
-  of I/O examples that $p$ \todo{satisfies}{did I define what satisfying a set of
-    examples means?} the oracle responds with a new program $p'$ and a
-  counterexample $x$ to $p$ that $p'$ satisfies along with all the other
+  of I/O examples that $p$ satisfies the oracle responds with a new program $p'$
+  and a counterexample $x$ to $p$ that $p'$ satisfies along with all the other
   examples in $X$.
 \end{itemize}
 
@@ -71,7 +70,6 @@ inputs in order to deobfuscate malware and to generate bit-manipulating
 programs. Jha et al. further developed this idea by presenting a new theoretical
 framework for inductive synthesis \cite{Jha:2017:TFS}.
 
-% FIXME This paragraph is confusing. What do I mean by ''not necessarily positive`'?
 In general, the higher the capabilities of the oracles, the more expensive they
 are to run. Distinguishing oracles are (typically) not as strong as
 counterexample or correctness oracles as the returned counterexample is not
@@ -80,14 +78,14 @@ turn to the Bounded Observation Hypothesis \cite{Solar-Lezama:2008}, which
 asserts that ``an implementation that works correctly for the common case and
 for all the different corner cases is likely to work correctly for all inputs.''
 
-In a setting of \todo{interactive program synthesis}{defined?} we could see the
-users take the role of the oracles. However, the interesting cases are the ones
-where the ratio between the amount of work the users are given and the
-information given to the synthesizer is maximized. A system that frequently
-queries the users for correctness checks would probably feel very cumbersome. On
-the other hand, a system that queries for membership or positiveness checks
-might be more realistic, as usually the \todo{users}{sometimes I refer to the
-user in the singular and sometimes not. I probably should be paying more
-attention to this.} have an idea of what sort of examples fit their desired
-model.
+In a setting where the synthesizer is allowed to interact with the user, we
+could see the users take the role of the oracles.
+However, the interesting cases are the ones where the ratio between the amount
+of work the users are given and the information given to the synthesizer is
+maximized.
+A system that frequently queries the usrs for correctness checks would probably
+feel very cumbersome.
+On the other hand, a system that queries for membership or positiveness checks
+might be more realistic, as usually the user has an idea of what sort of
+examples fit their desired model.
 
