@@ -303,41 +303,6 @@ Missing stuff on:
 Missing refs: LEE_ASP_2018, DeepCoder, Ruben, for the first approach and STOKE
 for the second one, for example.
 
-***** Guiding the Search
-:PROPERTIES:
-:CONTENT:  TODO
-:EXAMPLES: TODO
-:RELWORK:  TODO
-:END:
-
-They describe their \gls{dsl} by a \gls{cfg}.
-
-``Our algorithm is essentially the same as the existing enumerative algorithm
-except that it enumerates programs in order of likelihood instead of size.
-Therefore, instead of enumerating all the smallest expressions (e.g., “.”, “-”,
-x), it first proposes x + “.”, which is found only in the third iteration by the
-existing enumerative search. ''
-
-``The first key contribution of our approach is an efficient algorithm based on
-A* search to enumerate programs in order of decreasing probability.''
-It works with wide range of different probabilistic models. One of them is pcfg,
-which takes a sentential form and returns a probability for each production rule.
-
-``Our algorithm conceptually works on a directed weighted graph—constructed on
-demand—of sentential forms derived from the given model.''
-
-``However, as our evaluation in Section 5 shows, uniform cost search performs
-poorly in practice by expanding a huge number of paths before reaching the
-solution node. We address this problem by employing A* search [14] instead of
-uniform cost search.''
-
-They apply a slightly tweaked version of $A*$. The heuristic function is a
-statistical model.
-
-
-% LEE_ASP_2018
-% DeepCoder style synthesis
-
 ***** Sampling the Search Space
 :PROPERTIES:
 :CONTENT:  REVIEW
@@ -348,23 +313,9 @@ statistical model.
 **** TODO Constraint Solving
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
-
-% TODO: Check out 132, 133, 134 of the overview
-
-Examples are still missing.
-
-Things that might be missing:
-
-- SMTEN? PROSE?
-- concept of domain separation
-- Metasketching, symbolic profiling?
-- Conflict-driven (example)
-- Distinguishing inputs (example)
-- Inductive Logic Programming (subsubsection)
-
 **** TODO Oracle-Guided Inductive Synthesis
 :PROPERTIES:
 :CONTENT:  REVIEW
@@ -447,6 +398,8 @@ PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
    :END:
 
 ** TODO Discussion/Experimental Results
+Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
+
 *** Setwise Encoding
 - [ ] How to decide on the number of constants
 

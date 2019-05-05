@@ -5,43 +5,97 @@ Another approach to program synthesis is to reduce the problem to that of
 constraint solving by the use of off-the-shelf automated constraint
 solvers~\cite{Shi:2019:FCS,Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Solar-Lezama:2008,Jha:oracle:2010}
 (typically SAT or SMT solvers).
-
-One idea is to encode the specification in a logical constraint whose solution
-corresponds to the desired program. \citeauthor{Gulwani2017} illustrate this
-idea nicely with an example~\cite{Gulwani2017} which we adapt here.
+The idea is to encode the specification in a logical constraint whose solution
+corresponds to the desired program.
+\citeauthor{Gulwani2017}~\cite{Gulwani2017} illustrate this in a simple way with
+an example which we show here.
+This example also serves as a short introduction to the SMT-LIB
+language~\cite{BarFT-RR-17}, a standard language for SMT solvers.
 Suppose our programs are composed of operations over two input bitvectors, $x$
-and $y$ of length eight:
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{assets/constraint-solving-example.png}
-  \caption{FIXME: This example is a placeholder and should be adapted.}
-\end{figure}
-
-We consider an expression to be the input variable $x$ or an 8-bit constant. A
-program consists of additions and multiplications between expressions, or of
+and $y$, of length eight:
+%
+\begin{align*}
+  \text{program }P    &::= plus(E,E) \OR mul(E,E) \OR shl(E,C) \OR shr(E,C)    \\
+  \text{expression }E &::= x \OR C                                             \\
+  \text{constant }C   &::= 00000000_2 \OR 00000001_2 \OR \ldots \OR 11111111_2 \\
+\end{align*}
+%
+\noindent
+We consider an expression to be either the input variable $x$ or an 8-bit
+constant.
+A program consists of additions and multiplications between expressions, or of
 shift left/right operations over an expression by a constant.
+We can declare the type of bitvectors of length 8 in SMT-LIB as:
+%
+\begin{lstlisting}[language=Lisp,numbers=left,
+  firstnumber=1,
+  morekeywords={define-sort},
+  xleftmargin=.2\textwidth, xrightmargin=.2\textwidth]
+  (define-sort Bit8 () (_ BitVec 8))
+\end{lstlisting}
+%
+\noindent
+To encode the grammar of well-formed programs we first need to introduce the
+constant symbols \texttt{hP}, \texttt{hE0}, \texttt{hE1}, \texttt{c0} and
+\texttt{c1}, as well as the function symbol \texttt{prog}:
+%
+\begin{lstlisting}[language=Lisp,
+  numbers=left,
+  firstnumber=2,
+  morekeywords={declare-const,define-fun,ite},
+  xleftmargin=.2\textwidth, xrightmargin=.2\textwidth]
+  (declare-const hP Int)
+  (declare-const hE0 Bool)
+  (declare-const hE1 Bool)
+  (declare-const c0 Bit8)
+  (declare-const c1 Bit8)
 
-Imagine we are interested in a program that \todo{<insert interesting bit
-  twiddling hack>}{check Hacker's Delight}. In the theory of
-\todo{bitvectors}{missing ref}, the program we are interested in can be encoded
-by the formula \todo{<insert formula here>}{add formula correspondent to the
-hack}. To find the program we can write the constraints in the SMT-LIB format
-and feed them to an SMT solver:
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{assets/constraint-solving-smtlib.png}
-  \caption{FIXME: This example is a placeholder and should be adapted.}
-\end{figure}
-
+  (define-fun prog ((x Bit8)) Bit8
+  (let ((left (ite hE0 c0 x))
+       (right (ite hE1 c1 x)))
+    (ite (= hP 0) (bvadd left right)
+    (ite (= hP 1) (bvmul left right)
+    (ite (= hP 2) (bvshl left c1)
+                  (bvlshr left c1))))))
+\end{lstlisting}
+%
+The symbol \texttt{hP} encodes the choice of which language construct to pick,
+while the symbols \texttt{hE0}, \texttt{hE1} encode the choice of whether
+\texttt{left} and \texttt{right} are assigned the values of constants
+(\texttt{c0}, \texttt{c1}) or the value of the input (\texttt{x}).
+An assignment to these constant symbols corresponds to a valid program in our
+grammar, if we ensure that \texttt{hP} is in a valid range.
+We can use \texttt{assert} to introduce new clauses that must be satisfied:
+%
+\begin{lstlisting}[language=Lisp,
+  numbers=left,
+  firstnumber=15,
+  morekeywords={assert},
+  xleftmargin=.2\textwidth, xrightmargin=.2\textwidth]
+  (assert (>= hP 0))
+  (assert (<  hP 4))
+\end{lstlisting}
+%
+Finally, we can also use \texttt{assert} to encode a semantic specification.
+For example, suppose we are interested in a bitvector program $P$ that, for all
+input $x$, its output is always positive, i.e., $\forall x\ldotp P(x) \geq 0$.
+In SMT-LIB that can be written as:
+%
+\begin{lstlisting}[language=Lisp,
+  numbers=left,
+  firstnumber=17,
+  morekeywords={assert},
+  xleftmargin=.2\textwidth, xrightmargin=.2\textwidth]
+  (assert (forall ((x Bit8)) (bvsge (prog x) #x00)))
+\end{lstlisting}
+ 
 This example shows an end-to-end constraint solving approach to program
-synthesis. However, enconding the problem this way can sometimes be non-trivial
-or time-consuming. This idea led to the appearance of the concept of
-\textit{solver-aided programming}, where programming languages are enlarged with
-high-level constructs that give the user access to synthesis without having to
-deal with the constraint solvers directly.
-
+synthesis. However, encoding the problem this way can sometimes be non-trivial
+or time-consuming.
+This led to the appearance of the concept of \textit{solver-aided programming},
+where programming languages are enlarged with high-level constructs that give
+the user access to synthesis without having to deal with the constraint solvers
+directly.
 For example, \citeauthor{Gulwani2017} describe the SKETCH system as a ``compiler
 [that] relies on a SAT solver to materialize some language constructs''.
 ROSETTE~\cite{Torlak:2013:GSL} is a framework for developing solver-aided
