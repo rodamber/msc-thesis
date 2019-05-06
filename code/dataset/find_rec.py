@@ -17,7 +17,8 @@ def count_funs(directory: str):
             with open(f'{directory}/{f}') as file:
                 try:
                     fs = json.load(file)['functions']
-                    c += Counter(fs)
+                    if not any(x in fs for x in recs):
+                        c += Counter(fs)
                 except:
                     print(f'Error on {f}')
     return c

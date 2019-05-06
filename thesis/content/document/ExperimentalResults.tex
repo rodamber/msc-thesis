@@ -17,40 +17,40 @@ and a comparison between the setwise synthesizer
 A set of 285522 expressions were provided by OutSystems.
 We conducted an analysis to determine which builtin functions and which
 combinations were the most common in that set.
-We picked 95 expressions containing only those functions (see
+We picked 51 expressions containing only those functions (see
 Table~\ref{table:builtin-description}) with sizes (number of components) ranging
 from 1 to 7.
-A description of these 95 expressions in terms of size is shown in
-Figure~\ref{fig:bar-chart-sizes-95}.
+A description of these 51 expressions in terms of size is shown in
+Figure~\ref{fig:bar-chart-sizes-51}.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-sizes-95.pdf}
+  \includegraphics[width=0.5\textwidth]{assets/bar-chart-sizes-51.pdf}
   \caption{Number of expressions per size. For example, there are 31
-    expressions of size 2, and 16 expressions of size 1, out of 95 expressions.}
-  \label{fig:bar-chart-sizes-95}
+    expressions of size 2, and 16 expressions of size 1, out of 51 expressions.}
+  \label{fig:bar-chart-sizes-51}
 \end{figure}
 
 The hardness of a benchmark depends on the size of the solution, the number of
 input-output examples, and the library of components.
 Typically, the higher the size and the number of components, the harder it is to
 synthesize a program.
-Moreover, a library containing components which must be encoded to recursive
-formulas (\lstinline{Replace}, \lstinline{ToLower}, \lstinline{ToUpper},
-\lstinline{Trim}, \lstinline{TrimStart}, and \lstinline{TrimEnd}) makes the
-synthesis problem much harder than if we just had a library whose components
-had a direct counterpart in some \gls{smt} theory.
-Figure~\ref{fig:bar-chart-components-freq-95} shows in how many expressions each
+% Moreover, a library containing components which must be encoded to recursive
+% formulas (\lstinline{Replace}, \lstinline{ToLower}, \lstinline{ToUpper},
+% \lstinline{Trim}, \lstinline{TrimStart}, and \lstinline{TrimEnd}) makes the
+% synthesis problem much harder than if we just had a library whose components
+% had a direct counterpart in some \gls{smt} theory.
+Figure~\ref{fig:bar-chart-components-freq-51} shows in how many expressions each
 component occurs.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-components-freq-95.pdf}
+  \includegraphics[width=0.5\textwidth]{assets/bar-chart-components-freq-51.pdf}
   \caption{Number of expressions per component.}
-  \label{fig:bar-chart-components-freq-95}
+  \label{fig:bar-chart-components-freq-51}
 \end{figure}
 
-We obtained a set of 3 input-output examples for each of these 100 expressions.
+We obtained a set of 3 input-output examples for each of these 51 expressions.
 In order to do that, we developed an \textit{interpreter} for OutSystems
 expressions, and manually created a set of 3 different inputs for each
 expression.
@@ -70,24 +70,6 @@ Each benchmark was monitored by the \textit{runsolver}
 program~\cite{Roussel:2011:JSAT}, and restricted to a time limit of 10 minutes
 and a memory limit of 16 GB.
 
-
-% calls to solvers (timeout, numero de conflictos)
-% replace e undecidable
-% utilizar outras componentes
-% versao em que fixa o set de constantes
-
 \section{Results and Comparison}
 \label{sec:results-and-comparison}
 
-% user intent
-% time
-% comparing size of encodings
-%% later |--v
-% number of constants needed of each type
-
-% ranking needed, especially for few examples: far fetched constants and
-% "identity components" make everything possible
-% substring indexes can not be the same
-% constants cannot be equal to the output
-% remove example with unicode (example-67.json)
-% definitely interesting to check the case where constants are limited
