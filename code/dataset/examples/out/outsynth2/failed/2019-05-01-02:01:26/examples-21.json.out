@@ -1,0 +1,25 @@
+600.20/600.40	=== Examples (examples-21.json)
+600.20/600.40	(["10-05-2019"],"10/05/20")
+600.20/600.40	=== Library
+600.20/600.40	Add
+600.20/600.40	Concat
+600.20/600.40	Index
+600.20/600.40	Length
+600.20/600.40	Replace
+600.20/600.40	Sub
+600.20/600.40	Substr
+600.20/600.40	ToLower
+600.20/600.40	ToUpper
+600.20/600.40	Trim
+600.20/600.40	TrimEnd
+600.20/600.40	TrimStart
+600.20/600.40	=== Synthesis
+600.20/600.40	Size: 1
+600.20/600.40	outsynth2: 
+600.20/600.40	*** Data.SBV: fd:6: hGetLine: end of file:
+600.20/600.40	***
+600.20/600.40	***    Sent      : (check-sat)
+600.20/600.40	***
+600.20/600.40	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+600.20/600.40	***    Options   : -nw -in -smt2
+600.20/600.40	

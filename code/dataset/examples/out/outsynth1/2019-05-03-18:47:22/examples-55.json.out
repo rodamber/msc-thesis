@@ -1,0 +1,24 @@
+0.12/0.19	=== Examples (../../dataset/examples/examples-55.json)
+0.12/0.19	IO(inputs=('what is this even supposed to?',), output='')
+0.12/0.19	IO(inputs=('short one',), output='s')
+0.12/0.19	IO(inputs=('bit larger',), output='')
+0.12/0.19	=== Library
+0.12/0.19	concat
+0.12/0.19	index
+0.12/0.19	length
+0.12/0.19	substr
+0.12/0.19	to_lower
+0.12/0.19	to_upper
+0.12/0.19	trim
+0.12/0.19	trim_start
+0.12/0.19	trim_end
+0.12/0.19	add
+0.12/0.19	sub
+0.12/0.19	=== Synthesis
+0.12/0.19	['concat']: UNSAT (0.032 seconds)
+0.12/0.22	['index']: UNSAT (0.031 seconds)
+0.12/0.26	['length']: UNSAT (0.022 seconds)
+0.12/0.28	['substr']: UNSAT (0.035 seconds)
+0.12/0.31	['to_lower']: UNSAT (0.072 seconds)
+0.28/0.39	['to_upper']: UNSAT (0.069 seconds)
+0.28/0.46	['trim']: 

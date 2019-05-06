@@ -1,0 +1,22 @@
+600.08/600.10	=== Examples (examples-37.json)
+600.08/600.10	(["Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."],"/ Nulla eu")
+600.08/600.10	(["Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus."],"/ Vestibul")
+600.08/600.10	(["Praesent in pulvinar sapien. / Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. / Aliquam cursus est in massa metus."],"/ Orci var")
+600.08/600.10	=== Library
+600.08/600.10	Add
+600.08/600.10	Concat
+600.08/600.10	Index
+600.08/600.10	Length
+600.08/600.10	Sub
+600.08/600.10	Substr
+600.08/600.10	=== Synthesis
+600.08/600.10	Size: 1
+600.08/600.10	Size: 2
+600.08/600.10	outsynth2: 
+600.08/600.10	*** Data.SBV: fd:6: hGetLine: end of file:
+600.08/600.10	***
+600.08/600.10	***    Sent      : (check-sat)
+600.08/600.10	***
+600.08/600.10	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+600.08/600.10	***    Options   : -nw -in -smt2
+600.08/600.10	

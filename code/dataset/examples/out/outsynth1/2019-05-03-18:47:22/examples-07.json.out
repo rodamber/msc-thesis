@@ -1,0 +1,24 @@
+0.11/0.20	=== Examples (../../dataset/examples/examples-07.json)
+0.11/0.20	IO(inputs=('Sub of by way',), output='Sub of<br /> by way')
+0.11/0.20	IO(inputs=('again sub of by way',), output='again sub of<br /> by way')
+0.11/0.20	IO(inputs=('one more time sub of by way',), output='one more time sub of<br /> by way')
+0.11/0.20	=== Library
+0.11/0.20	concat
+0.11/0.20	index
+0.11/0.20	length
+0.11/0.20	substr
+0.11/0.20	to_lower
+0.11/0.20	to_upper
+0.11/0.20	trim
+0.11/0.20	trim_start
+0.11/0.20	trim_end
+0.11/0.20	add
+0.11/0.20	sub
+0.11/0.20	=== Synthesis
+0.11/0.20	['concat']: UNSAT (0.032 seconds)
+0.11/0.24	['index']: UNSAT (0.032 seconds)
+0.11/0.27	['length']: UNSAT (0.023 seconds)
+0.28/0.29	['substr']: UNSAT (0.036 seconds)
+0.28/0.33	['to_lower']: UNSAT (0.729 seconds)
+1.02/1.06	['to_upper']: UNSAT (0.314 seconds)
+1.29/1.38	['trim']: 

@@ -1,0 +1,37 @@
+0.12/0.19	=== Examples (../../dataset/examples/examples-68.json)
+0.12/0.19	IO(inputs=(' smith - doe ',), output='smith')
+0.12/0.19	IO(inputs=('  spelled-out',), output='spelled')
+0.12/0.19	IO(inputs=('32-foot  ',), output='32')
+0.12/0.19	=== Library
+0.12/0.19	concat
+0.12/0.19	index
+0.12/0.19	length
+0.12/0.19	substr
+0.12/0.19	to_lower
+0.12/0.19	to_upper
+0.12/0.19	trim
+0.12/0.19	trim_start
+0.12/0.19	trim_end
+0.12/0.19	add
+0.12/0.19	sub
+0.12/0.19	=== Synthesis
+0.12/0.19	['concat']: UNSAT (0.029 seconds)
+0.12/0.22	['index']: UNSAT (0.033 seconds)
+0.12/0.26	['length']: UNSAT (0.035 seconds)
+0.26/0.29	['substr']: UNSAT (0.031 seconds)
+0.26/0.32	['to_lower']: UNSAT (0.150 seconds)
+0.26/0.47	['to_upper']: UNSAT (0.158 seconds)
+0.58/0.63	['trim']: UNSAT (145.146 seconds)
+145.68/145.78	['trim_start']: UNSAT (0.045 seconds)
+145.78/145.83	['trim_end']: UNSAT (62.295 seconds)
+207.98/208.12	['add']: UNSAT (0.026 seconds)
+207.98/208.15	['sub']: UNSAT (0.026 seconds)
+208.13/208.18	['concat', 'concat']: UNSAT (0.048 seconds)
+208.13/208.23	['concat', 'index']: UNSAT (0.045 seconds)
+208.24/208.27	['concat', 'length']: UNSAT (0.034 seconds)
+208.28/208.31	['concat', 'substr']: UNSAT (0.075 seconds)
+208.28/208.38	['concat', 'to_lower']: UNSAT (0.680 seconds)
+208.98/209.06	['concat', 'to_upper']: UNSAT (0.456 seconds)
+209.48/209.52	['concat', 'trim']: UNSAT (356.085 seconds)
+565.57/565.61	['concat', 'trim_start']: UNSAT (2.557 seconds)
+568.07/568.17	['concat', 'trim_end']: 

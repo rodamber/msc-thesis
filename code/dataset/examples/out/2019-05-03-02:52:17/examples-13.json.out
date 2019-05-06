@@ -1,0 +1,18 @@
+0.00/0.16	=== Examples (examples-13.json)
+0.00/0.16	(["Curabitur commodo volutpat."],"commodo volutpa")
+0.00/0.16	(["Phasellus dignissim nullam."],"dignissim nulla")
+0.00/0.16	=== Library
+0.00/0.16	Add
+0.00/0.16	Concat
+0.00/0.16	Index
+0.00/0.16	Length
+0.00/0.16	Sub
+0.00/0.16	Substr
+0.00/0.16	=== Synthesis
+0.00/0.16	Size: 1
+0.00/0.16	=== Program
+0.00/0.16	prog(x0):
+0.00/0.16	  c0 = "15"
+0.00/0.16	  c1 = "10"
+0.00/0.16	  r0 = Substr(x0, c1, c0)
+0.00/0.16	

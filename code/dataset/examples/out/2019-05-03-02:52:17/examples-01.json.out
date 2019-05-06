@@ -1,0 +1,21 @@
+599.99/600.08	=== Examples (examples-01.json)
+599.99/600.08	(["Hello World"],"Hello&nbsp;World")
+599.99/600.08	(["Indicates the (zero-based) index where the search starts."],"Indicates&nbsp;the&nbsp;(zero-based)&nbsp;index&nbsp;where&nbsp;the&nbsp;search&nbsp;starts.")
+599.99/600.08	=== Library
+599.99/600.08	Add
+599.99/600.08	Concat
+599.99/600.08	Index
+599.99/600.08	Length
+599.99/600.08	Sub
+599.99/600.08	Substr
+599.99/600.08	=== Synthesis
+599.99/600.08	Size: 1
+599.99/600.08	Size: 2
+599.99/600.08	outsynth2: 
+599.99/600.08	*** Data.SBV: fd:6: hGetLine: end of file:
+599.99/600.08	***
+599.99/600.08	***    Sent      : (check-sat)
+599.99/600.08	***
+599.99/600.08	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+599.99/600.08	***    Options   : -nw -in -smt2
+599.99/600.08	

@@ -1,0 +1,28 @@
+0.00/0.20	=== Examples (../../dataset/examples/examples-14.json)
+0.00/0.20	IO(inputs=('ABC',), output='abc')
+0.00/0.20	IO(inputs=('aBcdef',), output='abcdef')
+0.00/0.20	IO(inputs=('aaseHKLsed',), output='aasehklsed')
+0.00/0.20	=== Library
+0.00/0.20	concat
+0.00/0.20	index
+0.00/0.20	length
+0.00/0.20	substr
+0.00/0.20	to_lower
+0.00/0.20	to_upper
+0.00/0.20	trim
+0.00/0.20	trim_start
+0.00/0.20	trim_end
+0.00/0.20	add
+0.00/0.20	sub
+0.00/0.20	=== Synthesis
+0.00/0.20	['concat']: UNSAT (0.031 seconds)
+0.00/0.23	['index']: UNSAT (0.031 seconds)
+0.00/0.26	['length']: UNSAT (0.021 seconds)
+0.00/0.28	['substr']: UNSAT (0.033 seconds)
+0.18/0.32	['to_lower']: UNKNOWN (169.512 seconds)
+169.79/169.83	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+169.79/169.83	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+169.79/169.83	['to_upper']: UNSAT (0.060 seconds)
+169.79/169.89	['trim']: UNSAT (4.209 seconds)
+174.09/174.10	['trim_start']: UNSAT (0.036 seconds)
+174.09/174.14	['trim_end']: 

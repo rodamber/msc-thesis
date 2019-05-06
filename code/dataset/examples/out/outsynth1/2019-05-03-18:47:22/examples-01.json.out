@@ -1,0 +1,24 @@
+0.00/0.20	=== Examples (../../dataset/examples/examples-01.json)
+0.00/0.20	IO(inputs=('Hello World',), output='Hello&nbsp;World')
+0.00/0.20	IO(inputs=('Indicates the (zero-based) index where the search starts.',), output='Indicates&nbsp;the&nbsp;(zero-based)&nbsp;index&nbsp;where&nbsp;the&nbsp;search&nbsp;starts.')
+0.00/0.20	IO(inputs=('Can be used with attributes in aggregates.',), output='Can&nbsp;be&nbsp;used&nbsp;with&nbsp;attributes&nbsp;in&nbsp;aggregates.')
+0.00/0.20	=== Library
+0.00/0.20	concat
+0.00/0.20	index
+0.00/0.20	length
+0.00/0.20	substr
+0.00/0.20	to_lower
+0.00/0.20	to_upper
+0.00/0.20	trim
+0.00/0.20	trim_start
+0.00/0.20	trim_end
+0.00/0.20	add
+0.00/0.20	sub
+0.00/0.20	=== Synthesis
+0.00/0.20	['concat']: UNSAT (0.032 seconds)
+0.00/0.23	['index']: UNSAT (0.029 seconds)
+0.00/0.26	['length']: UNSAT (0.021 seconds)
+0.00/0.28	['substr']: UNSAT (0.036 seconds)
+0.00/0.32	['to_lower']: UNSAT (0.215 seconds)
+0.28/0.53	['to_upper']: UNSAT (0.559 seconds)
+1.08/1.09	['trim']: 

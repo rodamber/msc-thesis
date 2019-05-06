@@ -1,0 +1,39 @@
+0.13/0.23	=== Examples (../../dataset/examples/examples-70.json)
+0.13/0.23	IO(inputs=('  like no spaces at all!!!  ',), output='likenospacesatall!!!')
+0.13/0.23	IO(inputs=("again don't try ",), output="againdon'ttry")
+0.13/0.23	IO(inputs=('you sneaky tricky sli',), output='yousneakytrickysli')
+0.13/0.23	=== Library
+0.13/0.23	concat
+0.13/0.23	index
+0.13/0.23	length
+0.13/0.23	substr
+0.13/0.23	to_lower
+0.13/0.23	to_upper
+0.13/0.23	trim
+0.13/0.23	trim_start
+0.13/0.23	trim_end
+0.13/0.23	add
+0.13/0.23	sub
+0.13/0.23	=== Synthesis
+0.13/0.23	['concat']: UNSAT (0.058 seconds)
+0.13/0.29	['index']: UNSAT (0.059 seconds)
+0.31/0.35	['length']: UNSAT (0.034 seconds)
+0.31/0.39	['substr']: UNSAT (0.038 seconds)
+0.31/0.43	['to_lower']: UNSAT (35.545 seconds)
+35.88/35.98	['to_upper']: UNSAT (0.060 seconds)
+36.01/36.04	['trim']: UNSAT (96.565 seconds)
+132.58/132.60	['trim_start']: UNSAT (0.041 seconds)
+132.58/132.65	['trim_end']: UNSAT (109.836 seconds)
+242.38/242.48	['add']: UNSAT (0.029 seconds)
+242.48/242.51	['sub']: UNSAT (0.027 seconds)
+242.48/242.54	['concat', 'concat']: UNSAT (0.055 seconds)
+242.48/242.60	['concat', 'index']: UNSAT (0.050 seconds)
+242.58/242.65	['concat', 'length']: UNSAT (0.035 seconds)
+242.58/242.68	['concat', 'substr']: UNSAT (0.120 seconds)
+242.78/242.80	['concat', 'to_lower']: UNKNOWN (97.481 seconds)
+340.18/340.29	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+340.18/340.29	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+340.18/340.29	['concat', 'to_upper']: UNKNOWN (56.263 seconds)
+396.48/396.55	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+396.48/396.55	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+396.48/396.55	['concat', 'trim']: 

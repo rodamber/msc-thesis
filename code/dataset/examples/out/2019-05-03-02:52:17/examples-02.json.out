@@ -1,0 +1,21 @@
+600.05/600.14	=== Examples (examples-02.json)
+600.05/600.14	(["0,1"],"0, 1")
+600.05/600.14	(["a,b,c,d"],"a, b, c, d")
+600.05/600.14	=== Library
+600.05/600.14	Add
+600.05/600.14	Concat
+600.05/600.14	Index
+600.05/600.14	Length
+600.05/600.14	Sub
+600.05/600.14	Substr
+600.05/600.14	=== Synthesis
+600.05/600.14	Size: 1
+600.05/600.14	Size: 2
+600.05/600.14	outsynth2: 
+600.05/600.14	*** Data.SBV: fd:6: hGetLine: end of file:
+600.05/600.14	***
+600.05/600.14	***    Sent      : (check-sat)
+600.05/600.14	***
+600.05/600.14	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+600.05/600.14	***    Options   : -nw -in -smt2
+600.05/600.14	

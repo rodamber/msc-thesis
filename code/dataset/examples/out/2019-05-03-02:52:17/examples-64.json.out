@@ -1,0 +1,21 @@
+599.99/600.01	=== Examples (examples-64.json)
+599.99/600.01	(["# this is a comment"],"# this is a comment")
+599.99/600.01	(["code code code # comment"],"# comment")
+599.99/600.01	=== Library
+599.99/600.01	Add
+599.99/600.01	Concat
+599.99/600.01	Index
+599.99/600.01	Length
+599.99/600.01	Sub
+599.99/600.01	Substr
+599.99/600.01	=== Synthesis
+599.99/600.01	Size: 1
+599.99/600.01	Size: 2
+599.99/600.01	outsynth2: 
+599.99/600.01	*** Data.SBV: fd:6: hGetLine: end of file:
+599.99/600.01	***
+599.99/600.01	***    Sent      : (check-sat)
+599.99/600.01	***
+599.99/600.01	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+599.99/600.01	***    Options   : -nw -in -smt2
+599.99/600.01	

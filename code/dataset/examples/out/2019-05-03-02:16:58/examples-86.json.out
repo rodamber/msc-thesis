@@ -1,0 +1,19 @@
+18.27/18.32	=== Examples (examples-86.json)
+18.27/18.32	(["Sed euismod congue porta. Phasellus posuere rutrum porttitor. Curabitur nec pellentesque sem, luctus volutpat."],"Sed euismod congue porta. phasellus posuere rutrum porttitor. curabitur nec pellentesque sem, luctus")
+18.27/18.32	=== Library
+18.27/18.32	Add
+18.27/18.32	Concat
+18.27/18.32	Index
+18.27/18.32	Length
+18.27/18.32	Sub
+18.27/18.32	Substr
+18.27/18.32	=== Synthesis
+18.27/18.32	Size: 1
+18.27/18.32	Size: 2
+18.27/18.32	=== Program
+18.27/18.32	prog(x0):
+18.27/18.32	  c0 = "Sed euismod congue porta. phasellus posuere rutrum porttitor. curabitur nec pellentesque sem, luctus"
+18.27/18.32	  c1 = "111"
+18.27/18.32	  r0 = Substr(x0, c1, c1)
+18.27/18.32	  r1 = Concat(c0, r0)
+18.27/18.32	

@@ -1,0 +1,19 @@
+41.57/41.61	=== Examples (examples-18.json)
+41.57/41.61	(["Lorem ipsum dolor sit amet cras amet."],"Lorem ipsum dolor sit amet cra...")
+41.57/41.61	=== Library
+41.57/41.61	Add
+41.57/41.61	Concat
+41.57/41.61	Index
+41.57/41.61	Length
+41.57/41.61	Sub
+41.57/41.61	Substr
+41.57/41.61	=== Synthesis
+41.57/41.61	Size: 1
+41.57/41.61	Size: 2
+41.57/41.61	=== Program
+41.57/41.61	prog(x0):
+41.57/41.61	  c0 = "38"
+41.57/41.61	  c1 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULLorem ipsum dolor sit amet cra..."
+41.57/41.61	  r0 = Length(x0)
+41.57/41.61	  r1 = Substr(c1, c0, r0)
+41.57/41.61	

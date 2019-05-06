@@ -1,0 +1,19 @@
+85.58/85.61	=== Examples (examples-41.json)
+85.58/85.61	(["who knows  "],"Prefix who knows")
+85.58/85.61	=== Library
+85.58/85.61	Add
+85.58/85.61	Concat
+85.58/85.61	Index
+85.58/85.61	Length
+85.58/85.61	Sub
+85.58/85.61	Substr
+85.58/85.61	=== Synthesis
+85.58/85.61	Size: 1
+85.58/85.61	Size: 2
+85.58/85.61	=== Program
+85.58/85.61	prog(x0):
+85.58/85.61	  c0 = "-19"
+85.58/85.61	  c1 = "Prefix who knows"
+85.58/85.61	  r0 = Substr(x0, c0, c0)
+85.58/85.61	  r1 = Concat(c1, r0)
+85.58/85.61	

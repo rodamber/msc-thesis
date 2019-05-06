@@ -1,0 +1,21 @@
+8.90/8.90	=== Examples (examples-48.json)
+8.90/8.90	(["John","Doe","@gmail.com"],"johndoe.@gmail.com")
+8.90/8.90	=== Library
+8.90/8.90	Add
+8.90/8.90	Concat
+8.90/8.90	Index
+8.90/8.90	Length
+8.90/8.90	Sub
+8.90/8.90	Substr
+8.90/8.90	=== Synthesis
+8.90/8.90	Size: 1
+8.90/8.90	Size: 2
+8.90/8.90	Size: 3
+8.90/8.90	=== Program
+8.90/8.90	prog(x0, x1, x2):
+8.90/8.90	  c0 = "3626"
+8.90/8.90	  c1 = "johndoe.@gmail.com"
+8.90/8.90	  r0 = Index(x2, x1, c0)
+8.90/8.90	  r1 = Substr(x0, r0, r0)
+8.90/8.90	  r2 = Concat(c1, r1)
+8.90/8.90	

@@ -1,0 +1,28 @@
+0.15/0.19	=== Examples (../../dataset/examples/examples-04.json)
+0.15/0.19	IO(inputs=('that/folder/',), output='thatfolder')
+0.15/0.19	IO(inputs=('this/folder/is/longer/',), output='thisfolderislonger')
+0.15/0.19	IO(inputs=('what/about/this/one/',), output='whataboutthisone')
+0.15/0.19	=== Library
+0.15/0.19	concat
+0.15/0.19	index
+0.15/0.19	length
+0.15/0.19	substr
+0.15/0.19	to_lower
+0.15/0.19	to_upper
+0.15/0.19	trim
+0.15/0.19	trim_start
+0.15/0.19	trim_end
+0.15/0.19	add
+0.15/0.19	sub
+0.15/0.19	=== Synthesis
+0.15/0.19	['concat']: UNSAT (0.027 seconds)
+0.15/0.21	['index']: UNSAT (0.027 seconds)
+0.15/0.24	['length']: UNSAT (0.018 seconds)
+0.15/0.26	['substr']: UNSAT (0.030 seconds)
+0.15/0.29	['to_lower']: UNKNOWN (32.218 seconds)
+32.49/32.51	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+32.49/32.51	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+32.49/32.51	['to_upper']: UNSAT (0.206 seconds)
+32.61/32.72	['trim']: UNSAT (130.717 seconds)
+163.38/163.43	['trim_start']: UNSAT (0.034 seconds)
+163.38/163.47	['trim_end']: 

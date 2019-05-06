@@ -1,0 +1,22 @@
+599.96/600.05	=== Examples (examples-08.json)
+599.96/600.05	(["one|two|three"],"one | two | three")
+599.96/600.05	(["a|b|c"],"a | b | c")
+599.96/600.05	(["this|is|not|a|regex"],"this | is | not | a | regex")
+599.96/600.05	=== Library
+599.96/600.05	Add
+599.96/600.05	Concat
+599.96/600.05	Index
+599.96/600.05	Length
+599.96/600.05	Sub
+599.96/600.05	Substr
+599.96/600.05	=== Synthesis
+599.96/600.05	Size: 1
+599.96/600.05	Size: 2
+599.96/600.05	outsynth2: 
+599.96/600.05	*** Data.SBV: fd:6: hGetLine: end of file:
+599.96/600.05	***
+599.96/600.05	***    Sent      : (check-sat)
+599.96/600.05	***
+599.96/600.05	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+599.96/600.05	***    Options   : -nw -in -smt2
+599.96/600.05	

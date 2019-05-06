@@ -1,0 +1,22 @@
+19.89/19.96	=== Examples (examples-15.json)
+19.89/19.96	(["abc"],"ABC")
+19.89/19.96	=== Library
+19.89/19.96	Add
+19.89/19.96	Concat
+19.89/19.96	Index
+19.89/19.96	Length
+19.89/19.96	Replace
+19.89/19.96	Sub
+19.89/19.96	Substr
+19.89/19.96	ToLower
+19.89/19.96	ToUpper
+19.89/19.96	Trim
+19.89/19.96	TrimEnd
+19.89/19.96	TrimStart
+19.89/19.96	=== Synthesis
+19.89/19.96	Size: 1
+19.89/19.96	=== Program
+19.89/19.96	prog(x0):
+19.89/19.96	  c0 = "0"
+19.89/19.96	  r0 = ToUpper(x0)
+19.89/19.96	

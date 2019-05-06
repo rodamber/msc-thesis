@@ -1,0 +1,21 @@
+86.11/86.18	=== Examples (examples-51.json)
+86.11/86.18	(["George ","Michael "],"George  Michael")
+86.11/86.18	=== Library
+86.11/86.18	Add
+86.11/86.18	Concat
+86.11/86.18	Index
+86.11/86.18	Length
+86.11/86.18	Sub
+86.11/86.18	Substr
+86.11/86.18	=== Synthesis
+86.11/86.18	Size: 1
+86.11/86.18	Size: 2
+86.11/86.18	Size: 3
+86.11/86.18	=== Program
+86.11/86.18	prog(x0, x1):
+86.11/86.18	  c0 = "\NUL\NUL\NUL\NUL\NUL\b\NUL\NUL "
+86.11/86.18	  c1 = "8"
+86.11/86.18	  r0 = Concat(c0, x1)
+86.11/86.18	  r1 = Substr(r0, c1, c1)
+86.11/86.18	  r2 = Concat(x0, r1)
+86.11/86.18	

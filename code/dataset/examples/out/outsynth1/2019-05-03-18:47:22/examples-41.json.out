@@ -1,0 +1,37 @@
+0.00/0.19	=== Examples (../../dataset/examples/examples-41.json)
+0.00/0.19	IO(inputs=('who knows  ',), output='Prefix who knows')
+0.00/0.19	IO(inputs=("  we'll see",), output="Prefix we'll see")
+0.00/0.19	IO(inputs=('  oh come on  ',), output='Prefix oh come on')
+0.00/0.19	=== Library
+0.00/0.19	concat
+0.00/0.19	index
+0.00/0.19	length
+0.00/0.19	substr
+0.00/0.19	to_lower
+0.00/0.19	to_upper
+0.00/0.19	trim
+0.00/0.19	trim_start
+0.00/0.19	trim_end
+0.00/0.19	add
+0.00/0.19	sub
+0.00/0.19	=== Synthesis
+0.00/0.19	['concat']: UNSAT (0.029 seconds)
+0.18/0.21	['index']: UNSAT (0.027 seconds)
+0.18/0.24	['length']: UNSAT (0.019 seconds)
+0.18/0.26	['substr']: UNSAT (0.031 seconds)
+0.18/0.29	['to_lower']: UNSAT (0.062 seconds)
+0.18/0.36	['to_upper']: UNSAT (0.088 seconds)
+0.37/0.44	['trim']: UNSAT (6.912 seconds)
+7.34/7.36	['trim_start']: UNSAT (0.042 seconds)
+7.39/7.40	['trim_end']: UNSAT (6.232 seconds)
+13.59/13.64	['add']: UNSAT (0.025 seconds)
+13.59/13.66	['sub']: UNSAT (0.025 seconds)
+13.59/13.69	['concat', 'concat']: UNSAT (0.092 seconds)
+13.69/13.78	['concat', 'index']: UNSAT (0.049 seconds)
+13.79/13.83	['concat', 'length']: UNSAT (0.035 seconds)
+13.79/13.87	['concat', 'substr']: UNSAT (0.093 seconds)
+13.88/13.96	['concat', 'to_lower']: UNKNOWN (56.332 seconds)
+70.18/70.29	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+70.18/70.29	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+70.18/70.29	['concat', 'to_upper']: UNSAT (73.112 seconds)
+143.38/143.41	['concat', 'trim']: 

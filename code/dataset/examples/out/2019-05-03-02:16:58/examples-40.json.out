@@ -1,0 +1,19 @@
+2.67/2.72	=== Examples (examples-40.json)
+2.67/2.72	(["who cares about when"],"updated on who cares about ")
+2.67/2.72	=== Library
+2.67/2.72	Add
+2.67/2.72	Concat
+2.67/2.72	Index
+2.67/2.72	Length
+2.67/2.72	Sub
+2.67/2.72	Substr
+2.67/2.72	=== Synthesis
+2.67/2.72	Size: 1
+2.67/2.72	Size: 2
+2.67/2.72	=== Program
+2.67/2.72	prog(x0):
+2.67/2.72	  c0 = "updated on who cares about "
+2.67/2.72	  c1 = "-3974"
+2.67/2.72	  r0 = Substr(x0, c1, c1)
+2.67/2.72	  r1 = Concat(c0, r0)
+2.67/2.72	

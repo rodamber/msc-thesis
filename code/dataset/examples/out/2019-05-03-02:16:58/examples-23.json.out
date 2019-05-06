@@ -1,0 +1,19 @@
+1.78/1.89	=== Examples (examples-23.json)
+1.78/1.89	(["Nam quis purus massa metus."],"Nam q...")
+1.78/1.89	=== Library
+1.78/1.89	Add
+1.78/1.89	Concat
+1.78/1.89	Index
+1.78/1.89	Length
+1.78/1.89	Sub
+1.78/1.89	Substr
+1.78/1.89	=== Synthesis
+1.78/1.89	Size: 1
+1.78/1.89	Size: 2
+1.78/1.89	=== Program
+1.78/1.89	prog(x0):
+1.78/1.89	  c0 = "8"
+1.78/1.89	  c1 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULNam q...\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL"
+1.78/1.89	  r0 = Concat(c1, x0)
+1.78/1.89	  r1 = Substr(r0, c0, c0)
+1.78/1.89	

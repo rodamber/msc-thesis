@@ -1,0 +1,1 @@
+runbench -t 600 -m 16 -d out/outsynth2/2019-05-01-04:20:31 -e 3 -c 1

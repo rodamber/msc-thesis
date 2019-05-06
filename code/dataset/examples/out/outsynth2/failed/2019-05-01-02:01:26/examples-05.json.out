@@ -1,0 +1,22 @@
+204.77/204.81	=== Examples (examples-05.json)
+204.77/204.81	(["Customer with who cares"],"who cares")
+204.77/204.81	=== Library
+204.77/204.81	Add
+204.77/204.81	Concat
+204.77/204.81	Index
+204.77/204.81	Length
+204.77/204.81	Replace
+204.77/204.81	Sub
+204.77/204.81	Substr
+204.77/204.81	ToLower
+204.77/204.81	ToUpper
+204.77/204.81	Trim
+204.77/204.81	TrimEnd
+204.77/204.81	TrimStart
+204.77/204.81	=== Synthesis
+204.77/204.81	Size: 1
+204.77/204.81	=== Program
+204.77/204.81	prog(x0):
+204.77/204.81	  c0 = "who cares"
+204.77/204.81	  r0 = Replace(c0, x0, x0)
+204.77/204.81	

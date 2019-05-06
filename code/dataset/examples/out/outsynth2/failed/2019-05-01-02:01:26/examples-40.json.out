@@ -1,0 +1,22 @@
+261.58/262.05	=== Examples (examples-40.json)
+261.58/262.05	(["who cares about when"],"updated on who cares about ")
+261.58/262.05	=== Library
+261.58/262.05	Add
+261.58/262.05	Concat
+261.58/262.05	Index
+261.58/262.05	Length
+261.58/262.05	Replace
+261.58/262.05	Sub
+261.58/262.05	Substr
+261.58/262.05	ToLower
+261.58/262.05	ToUpper
+261.58/262.05	Trim
+261.58/262.05	TrimEnd
+261.58/262.05	TrimStart
+261.58/262.05	=== Synthesis
+261.58/262.05	Size: 1
+261.58/262.05	=== Program
+261.58/262.05	prog(x0):
+261.58/262.05	  c0 = "updated on who cares about "
+261.58/262.05	  r0 = Replace(x0, x0, c0)
+261.58/262.05	

@@ -1,0 +1,17 @@
+0.10/0.14	=== Examples (examples-11.json)
+0.10/0.14	(["Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam."],"Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis ")
+0.10/0.14	=== Library
+0.10/0.14	Add
+0.10/0.14	Concat
+0.10/0.14	Index
+0.10/0.14	Length
+0.10/0.14	Sub
+0.10/0.14	Substr
+0.10/0.14	=== Synthesis
+0.10/0.14	Size: 1
+0.10/0.14	=== Program
+0.10/0.14	prog(x0):
+0.10/0.14	  c0 = "0"
+0.10/0.14	  c1 = "100"
+0.10/0.14	  r0 = Substr(x0, c0, c1)
+0.10/0.14	

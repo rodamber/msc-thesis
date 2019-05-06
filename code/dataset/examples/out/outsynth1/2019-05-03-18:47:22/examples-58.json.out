@@ -1,0 +1,41 @@
+0.15/0.22	=== Examples (../../dataset/examples/examples-58.json)
+0.15/0.22	IO(inputs=('who cares about the last one.',), output='who cares about the last one')
+0.15/0.22	IO(inputs=('just let them die!',), output='just let them die')
+0.15/0.22	IO(inputs=('oh god what have i become!',), output='oh god what have i become')
+0.15/0.22	=== Library
+0.15/0.22	concat
+0.15/0.22	index
+0.15/0.22	length
+0.15/0.22	substr
+0.15/0.22	to_lower
+0.15/0.22	to_upper
+0.15/0.22	trim
+0.15/0.22	trim_start
+0.15/0.22	trim_end
+0.15/0.22	add
+0.15/0.22	sub
+0.15/0.22	=== Synthesis
+0.15/0.22	['concat']: UNSAT (0.033 seconds)
+0.15/0.25	['index']: UNSAT (0.032 seconds)
+0.15/0.29	['length']: UNSAT (0.023 seconds)
+0.15/0.31	['substr']: UNSAT (0.041 seconds)
+0.34/0.35	['to_lower']: UNKNOWN (59.560 seconds)
+59.88/59.91	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+59.88/59.91	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+59.88/59.91	['to_upper']: UNSAT (0.185 seconds)
+60.02/60.10	['trim']: UNSAT (65.676 seconds)
+125.69/125.77	['trim_start']: UNSAT (0.028 seconds)
+125.78/125.80	['trim_end']: UNSAT (213.674 seconds)
+339.43/339.48	['add']: UNSAT (0.029 seconds)
+339.43/339.51	['sub']: UNSAT (0.029 seconds)
+339.43/339.54	['concat', 'concat']: UNSAT (0.050 seconds)
+339.53/339.59	['concat', 'index']: UNSAT (0.052 seconds)
+339.58/339.64	['concat', 'length']: UNSAT (0.034 seconds)
+339.58/339.68	['concat', 'substr']: UNSAT (0.115 seconds)
+339.68/339.79	['concat', 'to_lower']: UNKNOWN (51.651 seconds)
+391.41/391.45	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+391.41/391.45	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+391.41/391.45	['concat', 'to_upper']: UNKNOWN (84.063 seconds)
+475.43/475.51	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+475.43/475.51	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+475.43/475.51	['concat', 'trim']: 

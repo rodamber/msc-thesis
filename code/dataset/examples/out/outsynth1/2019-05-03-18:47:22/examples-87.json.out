@@ -1,0 +1,24 @@
+0.12/0.18	=== Examples (../../dataset/examples/examples-87.json)
+0.12/0.18	IO(inputs=('https://outsystems.com',), output='outsystems')
+0.12/0.18	IO(inputs=('http://cmu.edu',), output='cmu')
+0.12/0.18	IO(inputs=('http://tecnico.ulisboa.pt',), output='tecnico')
+0.12/0.18	=== Library
+0.12/0.18	concat
+0.12/0.18	index
+0.12/0.18	length
+0.12/0.18	substr
+0.12/0.18	to_lower
+0.12/0.18	to_upper
+0.12/0.18	trim
+0.12/0.18	trim_start
+0.12/0.18	trim_end
+0.12/0.18	add
+0.12/0.18	sub
+0.12/0.18	=== Synthesis
+0.12/0.18	['concat']: UNSAT (0.028 seconds)
+0.12/0.21	['index']: UNSAT (0.028 seconds)
+0.12/0.24	['length']: UNSAT (0.020 seconds)
+0.12/0.26	['substr']: UNSAT (0.031 seconds)
+0.27/0.29	['to_lower']: UNSAT (0.079 seconds)
+0.27/0.37	['to_upper']: UNSAT (0.091 seconds)
+0.39/0.46	['trim']: 

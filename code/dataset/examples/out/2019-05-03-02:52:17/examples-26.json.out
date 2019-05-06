@@ -1,0 +1,21 @@
+600.26/600.36	=== Examples (examples-26.json)
+600.26/600.36	(["Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci aliquam."],"Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci ali...")
+600.26/600.36	(["Nulla scelerisque purus quis felis ullamcorper, eget euismod sapien nullam."],"Nulla scelerisque purus quis felis ullamcorper, eget euismod sapien nullam....")
+600.26/600.36	=== Library
+600.26/600.36	Add
+600.26/600.36	Concat
+600.26/600.36	Index
+600.26/600.36	Length
+600.26/600.36	Sub
+600.26/600.36	Substr
+600.26/600.36	=== Synthesis
+600.26/600.36	Size: 1
+600.26/600.36	Size: 2
+600.26/600.36	outsynth2: 
+600.26/600.36	*** Data.SBV: fd:6: hGetLine: end of file:
+600.26/600.36	***
+600.26/600.36	***    Sent      : (check-sat)
+600.26/600.36	***
+600.26/600.36	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+600.26/600.36	***    Options   : -nw -in -smt2
+600.26/600.36	

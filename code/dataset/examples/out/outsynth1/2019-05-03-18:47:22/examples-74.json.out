@@ -1,0 +1,25 @@
+0.00/0.18	=== Examples (../../dataset/examples/examples-74.json)
+0.00/0.18	IO(inputs=('George Michael',), output='GM')
+0.00/0.18	IO(inputs=('Michael Bluth',), output='MB')
+0.00/0.18	IO(inputs=('Maebe Bluth',), output='MB')
+0.00/0.18	=== Library
+0.00/0.18	concat
+0.00/0.18	index
+0.00/0.18	length
+0.00/0.18	substr
+0.00/0.18	to_lower
+0.00/0.18	to_upper
+0.00/0.18	trim
+0.00/0.18	trim_start
+0.00/0.18	trim_end
+0.00/0.18	add
+0.00/0.18	sub
+0.00/0.18	=== Synthesis
+0.00/0.18	['concat']: UNSAT (0.028 seconds)
+0.00/0.21	['index']: UNSAT (0.029 seconds)
+0.00/0.24	['length']: UNSAT (0.019 seconds)
+0.00/0.26	['substr']: UNSAT (0.032 seconds)
+0.21/0.29	['to_lower']: UNSAT (0.299 seconds)
+0.47/0.59	['to_upper']: UNSAT (11.457 seconds)
+11.99/12.05	['trim']: SAT (47.740 seconds)
+59.72/59.79	trim(arg0)

@@ -1,0 +1,39 @@
+0.10/0.24	=== Examples (../../dataset/examples/examples-44.json)
+0.10/0.24	IO(inputs=('My Bed is not your bed',), output='my is not your bed')
+0.10/0.24	IO(inputs=('bed to Bed',), output='to bed')
+0.10/0.24	IO(inputs=('something with "Bed "',), output='something with ""')
+0.10/0.24	=== Library
+0.10/0.24	concat
+0.10/0.24	index
+0.10/0.24	length
+0.10/0.24	substr
+0.10/0.24	to_lower
+0.10/0.24	to_upper
+0.10/0.24	trim
+0.10/0.24	trim_start
+0.10/0.24	trim_end
+0.10/0.24	add
+0.10/0.24	sub
+0.10/0.24	=== Synthesis
+0.10/0.24	['concat']: UNSAT (0.033 seconds)
+0.10/0.27	['index']: UNSAT (0.032 seconds)
+0.27/0.31	['length']: UNSAT (0.023 seconds)
+0.27/0.33	['substr']: UNSAT (0.036 seconds)
+0.27/0.37	['to_lower']: UNSAT (1.162 seconds)
+1.49/1.53	['to_upper']: UNSAT (0.379 seconds)
+1.89/1.91	['trim']: UNSAT (55.680 seconds)
+57.49/57.59	['trim_start']: UNSAT (0.031 seconds)
+57.58/57.62	['trim_end']: UNSAT (108.902 seconds)
+166.48/166.53	['add']: UNSAT (0.027 seconds)
+166.48/166.56	['sub']: UNSAT (0.031 seconds)
+166.48/166.59	['concat', 'concat']: UNSAT (0.049 seconds)
+166.58/166.64	['concat', 'index']: UNSAT (0.047 seconds)
+166.58/166.69	['concat', 'length']: UNSAT (0.033 seconds)
+166.68/166.72	['concat', 'substr']: UNSAT (0.093 seconds)
+166.78/166.81	['concat', 'to_lower']: UNKNOWN (17.317 seconds)
+184.01/184.13	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+184.01/184.13	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+184.01/184.13	['concat', 'to_upper']: UNKNOWN (21.403 seconds)
+205.48/205.54	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+205.48/205.54	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+205.48/205.54	['concat', 'trim']: 

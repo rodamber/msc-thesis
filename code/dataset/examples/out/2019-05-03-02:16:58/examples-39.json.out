@@ -1,0 +1,19 @@
+29.99/30.03	=== Examples (examples-39.json)
+29.99/30.03	(["who cares about when"],"Created on who cares about ")
+29.99/30.03	=== Library
+29.99/30.03	Add
+29.99/30.03	Concat
+29.99/30.03	Index
+29.99/30.03	Length
+29.99/30.03	Sub
+29.99/30.03	Substr
+29.99/30.03	=== Synthesis
+29.99/30.03	Size: 1
+29.99/30.03	Size: 2
+29.99/30.03	=== Program
+29.99/30.03	prog(x0):
+29.99/30.03	  c0 = "Created on who cares about "
+29.99/30.03	  c1 = "-9302"
+29.99/30.03	  r0 = Substr(x0, c1, c1)
+29.99/30.03	  r1 = Concat(c0, r0)
+29.99/30.03	

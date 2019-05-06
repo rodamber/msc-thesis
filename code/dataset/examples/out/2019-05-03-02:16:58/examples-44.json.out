@@ -1,0 +1,19 @@
+0.46/0.61	=== Examples (examples-44.json)
+0.46/0.61	(["My Bed is not your bed"],"my is not your bed")
+0.46/0.61	=== Library
+0.46/0.61	Add
+0.46/0.61	Concat
+0.46/0.61	Index
+0.46/0.61	Length
+0.46/0.61	Sub
+0.46/0.61	Substr
+0.46/0.61	=== Synthesis
+0.46/0.61	Size: 1
+0.46/0.61	Size: 2
+0.46/0.61	=== Program
+0.46/0.61	prog(x0):
+0.46/0.61	  c0 = "my is not your bed"
+0.46/0.61	  c1 = "-2"
+0.46/0.61	  r0 = Substr(x0, c1, c1)
+0.46/0.61	  r1 = Concat(r0, c0)
+0.46/0.61	

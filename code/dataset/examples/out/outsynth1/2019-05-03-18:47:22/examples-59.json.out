@@ -1,0 +1,28 @@
+0.16/0.21	=== Examples (../../dataset/examples/examples-59.json)
+0.16/0.21	IO(inputs=('who cares about the last ones...',), output='who cares about the last ones.')
+0.16/0.21	IO(inputs=('just let them die!!!',), output='just let them die!')
+0.16/0.21	IO(inputs=('oh god what have i become!!!',), output='oh god what have i become!')
+0.16/0.21	=== Library
+0.16/0.21	concat
+0.16/0.21	index
+0.16/0.21	length
+0.16/0.21	substr
+0.16/0.21	to_lower
+0.16/0.21	to_upper
+0.16/0.21	trim
+0.16/0.21	trim_start
+0.16/0.21	trim_end
+0.16/0.21	add
+0.16/0.21	sub
+0.16/0.21	=== Synthesis
+0.16/0.21	['concat']: UNSAT (0.028 seconds)
+0.16/0.24	['index']: UNSAT (0.027 seconds)
+0.16/0.27	['length']: UNSAT (0.028 seconds)
+0.16/0.30	['substr']: UNSAT (0.048 seconds)
+0.30/0.35	['to_lower']: UNKNOWN (86.952 seconds)
+87.22/87.30	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+87.22/87.30	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+87.22/87.30	['to_upper']: UNSAT (0.183 seconds)
+87.37/87.49	['trim']: UNSAT (243.621 seconds)
+331.07/331.11	['trim_start']: UNSAT (0.031 seconds)
+331.07/331.14	['trim_end']: 

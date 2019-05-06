@@ -1,0 +1,24 @@
+0.11/0.20	=== Examples (../../dataset/examples/examples-89.json)
+0.11/0.20	IO(inputs=('|George|Maebe|Michael|',), output='Enviado para George, Maebe, Michael')
+0.11/0.20	IO(inputs=('|John|Jane|Joao|',), output='Enviado para John, Jane, Joao')
+0.11/0.20	IO(inputs=('|Abc|Def|Ghi|',), output='Enviado para Abc, Def, Ghi')
+0.11/0.20	=== Library
+0.11/0.20	concat
+0.11/0.20	index
+0.11/0.20	length
+0.11/0.20	substr
+0.11/0.20	to_lower
+0.11/0.20	to_upper
+0.11/0.20	trim
+0.11/0.20	trim_start
+0.11/0.20	trim_end
+0.11/0.20	add
+0.11/0.20	sub
+0.11/0.20	=== Synthesis
+0.11/0.20	['concat']: UNSAT (0.032 seconds)
+0.11/0.23	['index']: UNSAT (0.031 seconds)
+0.11/0.26	['length']: UNSAT (0.022 seconds)
+0.11/0.29	['substr']: UNSAT (0.035 seconds)
+0.27/0.32	['to_lower']: UNSAT (0.092 seconds)
+0.37/0.42	['to_upper']: UNSAT (0.092 seconds)
+0.46/0.51	['trim']: 

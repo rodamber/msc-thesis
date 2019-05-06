@@ -1,0 +1,19 @@
+0.35/0.41	=== Examples (examples-91.json)
+0.35/0.41	(["George"],"george")
+0.35/0.41	=== Library
+0.35/0.41	Add
+0.35/0.41	Concat
+0.35/0.41	Index
+0.35/0.41	Length
+0.35/0.41	Sub
+0.35/0.41	Substr
+0.35/0.41	=== Synthesis
+0.35/0.41	Size: 1
+0.35/0.41	Size: 2
+0.35/0.41	=== Program
+0.35/0.41	prog(x0):
+0.35/0.41	  c0 = "6"
+0.35/0.41	  c1 = "\NUL\NUL\NUL\NUL\NUL\NULgeorge\NUL\NUL"
+0.35/0.41	  r0 = Concat(c1, x0)
+0.35/0.41	  r1 = Substr(r0, c0, c0)
+0.35/0.41	

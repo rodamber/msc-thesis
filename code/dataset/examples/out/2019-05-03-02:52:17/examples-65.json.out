@@ -1,0 +1,20 @@
+0.39/0.57	=== Examples (examples-65.json)
+0.39/0.57	(["take out the last 3 chars"],"ars")
+0.39/0.57	(["abc"],"abc")
+0.39/0.57	=== Library
+0.39/0.57	Add
+0.39/0.57	Concat
+0.39/0.57	Index
+0.39/0.57	Length
+0.39/0.57	Sub
+0.39/0.57	Substr
+0.39/0.57	=== Synthesis
+0.39/0.57	Size: 1
+0.39/0.57	Size: 2
+0.39/0.57	=== Program
+0.39/0.57	prog(x0):
+0.39/0.57	  c0 = "0"
+0.39/0.57	  c1 = "\NUL\NUL\NULabc\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULars"
+0.39/0.57	  r0 = Length(x0)
+0.39/0.57	  r1 = Substr(c1, r0, r0)
+0.39/0.57	

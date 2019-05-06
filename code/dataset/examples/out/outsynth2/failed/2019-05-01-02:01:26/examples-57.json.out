@@ -1,0 +1,22 @@
+509.08/509.19	=== Examples (examples-57.json)
+509.08/509.19	(["what are you doing? (sorry)"],"what are you doing? (sorry)")
+509.08/509.19	=== Library
+509.08/509.19	Add
+509.08/509.19	Concat
+509.08/509.19	Index
+509.08/509.19	Length
+509.08/509.19	Replace
+509.08/509.19	Sub
+509.08/509.19	Substr
+509.08/509.19	ToLower
+509.08/509.19	ToUpper
+509.08/509.19	Trim
+509.08/509.19	TrimEnd
+509.08/509.19	TrimStart
+509.08/509.19	=== Synthesis
+509.08/509.19	Size: 1
+509.08/509.19	=== Program
+509.08/509.19	prog(x0):
+509.08/509.19	  c0 = " "
+509.08/509.19	  r0 = Replace(c0, c0, x0)
+509.08/509.19	

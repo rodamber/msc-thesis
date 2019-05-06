@@ -1,0 +1,17 @@
+0.10/0.17	=== Examples (examples-27.json)
+0.10/0.17	(["Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet."],"Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet....")
+0.10/0.17	=== Library
+0.10/0.17	Add
+0.10/0.17	Concat
+0.10/0.17	Index
+0.10/0.17	Length
+0.10/0.17	Sub
+0.10/0.17	Substr
+0.10/0.17	=== Synthesis
+0.10/0.17	Size: 1
+0.10/0.17	=== Program
+0.10/0.17	prog(x0):
+0.10/0.17	  c0 = "..."
+0.10/0.17	  c1 = "0"
+0.10/0.17	  r0 = Concat(x0, c0)
+0.10/0.17	

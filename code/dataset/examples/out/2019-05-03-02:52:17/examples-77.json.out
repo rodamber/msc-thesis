@@ -1,0 +1,20 @@
+22.60/22.69	=== Examples (examples-77.json)
+22.60/22.69	(["George Michael"],"Michael")
+22.60/22.69	(["Michael Bluth"],"Bluth")
+22.60/22.69	=== Library
+22.60/22.69	Add
+22.60/22.69	Concat
+22.60/22.69	Index
+22.60/22.69	Length
+22.60/22.69	Sub
+22.60/22.69	Substr
+22.60/22.69	=== Synthesis
+22.60/22.69	Size: 1
+22.60/22.69	Size: 2
+22.60/22.69	=== Program
+22.60/22.69	prog(x0):
+22.60/22.69	  c0 = "21"
+22.60/22.69	  c1 = "19"
+22.60/22.69	  r0 = Concat(x0, x0)
+22.60/22.69	  r1 = Substr(r0, c0, c1)
+22.60/22.69	

@@ -1,0 +1,21 @@
+1.20/1.27	=== Examples (examples-72.json)
+1.20/1.27	(["just use","trim "],"just use trim")
+1.20/1.27	=== Library
+1.20/1.27	Add
+1.20/1.27	Concat
+1.20/1.27	Index
+1.20/1.27	Length
+1.20/1.27	Sub
+1.20/1.27	Substr
+1.20/1.27	=== Synthesis
+1.20/1.27	Size: 1
+1.20/1.27	Size: 2
+1.20/1.27	Size: 3
+1.20/1.27	=== Program
+1.20/1.27	prog(x0, x1):
+1.20/1.27	  c0 = "15"
+1.20/1.27	  c1 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\STXjust use trim"
+1.20/1.27	  r0 = Index(x1, x0, c0)
+1.20/1.27	  r1 = Add(r0, c0)
+1.20/1.27	  r2 = Substr(c1, c0, r1)
+1.20/1.27	

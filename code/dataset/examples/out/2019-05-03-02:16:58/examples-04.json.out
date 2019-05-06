@@ -1,0 +1,19 @@
+0.23/0.34	=== Examples (examples-04.json)
+0.23/0.34	(["that/folder/"],"thatfolder")
+0.23/0.34	=== Library
+0.23/0.34	Add
+0.23/0.34	Concat
+0.23/0.34	Index
+0.23/0.34	Length
+0.23/0.34	Sub
+0.23/0.34	Substr
+0.23/0.34	=== Synthesis
+0.23/0.34	Size: 1
+0.23/0.34	Size: 2
+0.23/0.34	=== Program
+0.23/0.34	prog(x0):
+0.23/0.34	  c0 = "2"
+0.23/0.34	  c1 = "\NUL\NULthatfolder"
+0.23/0.34	  r0 = Length(x0)
+0.23/0.34	  r1 = Substr(c1, c0, r0)
+0.23/0.34	

@@ -1,0 +1,19 @@
+1.02/1.11	=== Examples (examples-08.json)
+1.02/1.11	(["one|two|three"],"one | two | three")
+1.02/1.11	=== Library
+1.02/1.11	Add
+1.02/1.11	Concat
+1.02/1.11	Index
+1.02/1.11	Length
+1.02/1.11	Sub
+1.02/1.11	Substr
+1.02/1.11	=== Synthesis
+1.02/1.11	Size: 1
+1.02/1.11	Size: 2
+1.02/1.11	=== Program
+1.02/1.11	prog(x0):
+1.02/1.11	  c0 = "17"
+1.02/1.11	  c1 = "!\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULone | two | three"
+1.02/1.11	  r0 = Concat(c1, x0)
+1.02/1.11	  r1 = Substr(r0, c0, c0)
+1.02/1.11	

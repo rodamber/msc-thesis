@@ -1,0 +1,26 @@
+0.16/0.23	=== Examples (../../dataset/examples/examples-05.json)
+0.16/0.23	IO(inputs=('Customer with who cares',), output='who cares')
+0.16/0.23	IO(inputs=('Customer with i certainly do not',), output='i certainly do not')
+0.16/0.23	IO(inputs=('well someone must care',), output='well someone must care')
+0.16/0.23	=== Library
+0.16/0.23	concat
+0.16/0.23	index
+0.16/0.23	length
+0.16/0.23	substr
+0.16/0.23	to_lower
+0.16/0.23	to_upper
+0.16/0.23	trim
+0.16/0.23	trim_start
+0.16/0.23	trim_end
+0.16/0.23	add
+0.16/0.23	sub
+0.16/0.23	=== Synthesis
+0.16/0.23	['concat']: UNSAT (0.032 seconds)
+0.16/0.26	['index']: UNSAT (0.032 seconds)
+0.16/0.29	['length']: UNSAT (0.022 seconds)
+0.16/0.31	['substr']: UNSAT (0.035 seconds)
+0.32/0.35	['to_lower']: UNSAT (0.080 seconds)
+0.32/0.43	['to_upper']: UNSAT (0.311 seconds)
+0.68/0.74	['trim']: UNSAT (263.351 seconds)
+264.09/264.10	['trim_start']: UNSAT (0.035 seconds)
+264.09/264.13	['trim_end']: 

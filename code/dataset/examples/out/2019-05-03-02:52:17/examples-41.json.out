@@ -1,0 +1,13 @@
+599.97/600.01	=== Examples (examples-41.json)
+599.97/600.01	(["who knows  "],"Prefix who knows")
+599.97/600.01	(["  we'll see"],"Prefix we'll see")
+599.97/600.01	=== Library
+599.97/600.01	Add
+599.97/600.01	Concat
+599.97/600.01	Index
+599.97/600.01	Length
+599.97/600.01	Sub
+599.97/600.01	Substr
+599.97/600.01	=== Synthesis
+599.97/600.01	Size: 1
+599.97/600.01	Size: 2

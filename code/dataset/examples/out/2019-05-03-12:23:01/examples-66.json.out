@@ -1,0 +1,22 @@
+600.06/600.16	=== Examples (examples-66.json)
+600.06/600.16	(["take out the last 7 chars"],"7 chars")
+600.06/600.16	(["abcdefg"],"abcdefg")
+600.06/600.16	(["outsystems.com"],"ems.com")
+600.06/600.16	=== Library
+600.06/600.16	Add
+600.06/600.16	Concat
+600.06/600.16	Index
+600.06/600.16	Length
+600.06/600.16	Sub
+600.06/600.16	Substr
+600.06/600.16	=== Synthesis
+600.06/600.16	Size: 1
+600.06/600.16	Size: 2
+600.06/600.16	outsynth2: 
+600.06/600.16	*** Data.SBV: fd:6: hGetLine: end of file:
+600.06/600.16	***
+600.06/600.16	***    Sent      : (check-sat)
+600.06/600.16	***
+600.06/600.16	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+600.06/600.16	***    Options   : -nw -in -smt2
+600.06/600.16	

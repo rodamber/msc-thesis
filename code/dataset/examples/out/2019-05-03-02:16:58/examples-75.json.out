@@ -1,0 +1,19 @@
+0.34/0.48	=== Examples (examples-75.json)
+0.34/0.48	(["Fusce sapien eros volutpat."],"Fusce...tpat.")
+0.34/0.48	=== Library
+0.34/0.48	Add
+0.34/0.48	Concat
+0.34/0.48	Index
+0.34/0.48	Length
+0.34/0.48	Sub
+0.34/0.48	Substr
+0.34/0.48	=== Synthesis
+0.34/0.48	Size: 1
+0.34/0.48	Size: 2
+0.34/0.48	=== Program
+0.34/0.48	prog(x0):
+0.34/0.48	  c0 = "27"
+0.34/0.48	  c1 = "Fusce...tpat."
+0.34/0.48	  r0 = Substr(x0, c0, c0)
+0.34/0.48	  r1 = Concat(r0, c1)
+0.34/0.48	

@@ -1,0 +1,17 @@
+0.18/0.40	=== Examples (examples-37.json)
+0.18/0.40	(["Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."],"/ Nulla eu")
+0.18/0.40	=== Library
+0.18/0.40	Add
+0.18/0.40	Concat
+0.18/0.40	Index
+0.18/0.40	Length
+0.18/0.40	Sub
+0.18/0.40	Substr
+0.18/0.40	=== Synthesis
+0.18/0.40	Size: 1
+0.18/0.40	=== Program
+0.18/0.40	prog(x0):
+0.18/0.40	  c0 = "10"
+0.18/0.40	  c1 = "27"
+0.18/0.40	  r0 = Substr(x0, c1, c0)
+0.18/0.40	

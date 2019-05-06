@@ -1,0 +1,39 @@
+0.16/0.21	=== Examples (../../dataset/examples/examples-08.json)
+0.16/0.21	IO(inputs=('one|two|three',), output='one | two | three')
+0.16/0.21	IO(inputs=('a|b|c',), output='a | b | c')
+0.16/0.21	IO(inputs=('this|is|not|a|regex',), output='this | is | not | a | regex')
+0.16/0.21	=== Library
+0.16/0.21	concat
+0.16/0.21	index
+0.16/0.21	length
+0.16/0.21	substr
+0.16/0.21	to_lower
+0.16/0.21	to_upper
+0.16/0.21	trim
+0.16/0.21	trim_start
+0.16/0.21	trim_end
+0.16/0.21	add
+0.16/0.21	sub
+0.16/0.21	=== Synthesis
+0.16/0.21	['concat']: UNSAT (0.032 seconds)
+0.16/0.24	['index']: UNSAT (0.032 seconds)
+0.16/0.27	['length']: UNSAT (0.024 seconds)
+0.16/0.30	['substr']: UNSAT (0.036 seconds)
+0.16/0.33	['to_lower']: UNKNOWN (88.403 seconds)
+88.71/88.74	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+88.71/88.74	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+88.71/88.74	['to_upper']: UNSAT (0.230 seconds)
+88.91/88.97	['trim']: UNSAT (35.455 seconds)
+124.41/124.42	['trim_start']: UNSAT (0.028 seconds)
+124.41/124.45	['trim_end']: UNSAT (7.461 seconds)
+131.80/131.91	['add']: UNSAT (0.023 seconds)
+131.91/131.94	['sub']: UNSAT (0.023 seconds)
+131.91/131.96	['concat', 'concat']: UNSAT (0.081 seconds)
+131.91/132.05	['concat', 'index']: UNSAT (0.047 seconds)
+132.03/132.09	['concat', 'length']: UNSAT (0.036 seconds)
+132.03/132.13	['concat', 'substr']: UNSAT (0.080 seconds)
+132.14/132.21	['concat', 'to_lower']: UNKNOWN (47.926 seconds)
+180.02/180.14	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+180.02/180.14	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+180.02/180.14	['concat', 'to_upper']: UNSAT (6.710 seconds)
+186.80/186.85	['concat', 'trim']: 

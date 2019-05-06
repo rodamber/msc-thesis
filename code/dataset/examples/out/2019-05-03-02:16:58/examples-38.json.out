@@ -1,0 +1,19 @@
+11.18/11.27	=== Examples (examples-38.json)
+11.18/11.27	(["should not be spaced"],"<span id=should_not_be_spaced > ")
+11.18/11.27	=== Library
+11.18/11.27	Add
+11.18/11.27	Concat
+11.18/11.27	Index
+11.18/11.27	Length
+11.18/11.27	Sub
+11.18/11.27	Substr
+11.18/11.27	=== Synthesis
+11.18/11.27	Size: 1
+11.18/11.27	Size: 2
+11.18/11.27	=== Program
+11.18/11.27	prog(x0):
+11.18/11.27	  c0 = "<span id=should_not_be_spaced > "
+11.18/11.27	  c1 = "-5642"
+11.18/11.27	  r0 = Substr(x0, c1, c1)
+11.18/11.27	  r1 = Concat(c0, r0)
+11.18/11.27	

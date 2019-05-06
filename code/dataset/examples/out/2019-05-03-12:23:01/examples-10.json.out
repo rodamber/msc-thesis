@@ -1,0 +1,19 @@
+0.00/0.14	=== Examples (examples-10.json)
+0.00/0.14	(["hello word"],"hello word")
+0.00/0.14	(["hi my name is"],"hi my name")
+0.00/0.14	(["how are you doing"],"how are yo")
+0.00/0.14	=== Library
+0.00/0.14	Add
+0.00/0.14	Concat
+0.00/0.14	Index
+0.00/0.14	Length
+0.00/0.14	Sub
+0.00/0.14	Substr
+0.00/0.14	=== Synthesis
+0.00/0.14	Size: 1
+0.00/0.14	=== Program
+0.00/0.14	prog(x0):
+0.00/0.14	  c0 = "0"
+0.00/0.14	  c1 = "10"
+0.00/0.14	  r0 = Substr(x0, c0, c1)
+0.00/0.14	

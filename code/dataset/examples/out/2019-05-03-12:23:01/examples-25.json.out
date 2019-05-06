@@ -1,0 +1,22 @@
+599.99/600.00	=== Examples (examples-25.json)
+599.99/600.00	(["Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat."],"Suspendisse libero felis, efficitur eget metus eget, ultrices volutpat...")
+599.99/600.00	(["Donec condimentum lacus ac elit molestie, vel cursus ante nullam."],"Donec condimentum lacus ac elit molestie, vel cursus ante nullam....")
+599.99/600.00	(["Pellentesque eu tellus rutrum, mollis lacus eu, posuere massa. Duis varius nibh amet."],"Pellentesque eu tellus rutrum, mollis lacus eu, posuere massa. Duis va...")
+599.99/600.00	=== Library
+599.99/600.00	Add
+599.99/600.00	Concat
+599.99/600.00	Index
+599.99/600.00	Length
+599.99/600.00	Sub
+599.99/600.00	Substr
+599.99/600.00	=== Synthesis
+599.99/600.00	Size: 1
+599.99/600.00	Size: 2
+599.99/600.00	outsynth2: 
+599.99/600.00	*** Data.SBV: fd:6: hGetLine: end of file:
+599.99/600.00	***
+599.99/600.00	***    Sent      : (check-sat)
+599.99/600.00	***
+599.99/600.00	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+599.99/600.00	***    Options   : -nw -in -smt2
+599.99/600.00	

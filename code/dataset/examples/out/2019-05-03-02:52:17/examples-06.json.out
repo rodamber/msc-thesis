@@ -1,0 +1,18 @@
+0.00/0.09	=== Examples (examples-06.json)
+0.00/0.09	(["http://www.outsystems.com"],"www.outsystems.com")
+0.00/0.09	(["http://tecnico.ulisboa.pt/"],"tecnico.ulisboa.pt/")
+0.00/0.09	=== Library
+0.00/0.09	Add
+0.00/0.09	Concat
+0.00/0.09	Index
+0.00/0.09	Length
+0.00/0.09	Sub
+0.00/0.09	Substr
+0.00/0.09	=== Synthesis
+0.00/0.09	Size: 1
+0.00/0.09	=== Program
+0.00/0.09	prog(x0):
+0.00/0.09	  c0 = "58"
+0.00/0.09	  c1 = "7"
+0.00/0.09	  r0 = Substr(x0, c1, c0)
+0.00/0.09	

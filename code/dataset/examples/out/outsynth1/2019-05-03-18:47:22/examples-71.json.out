@@ -1,0 +1,27 @@
+0.11/0.16	=== Examples (../../dataset/examples/examples-71.json)
+0.11/0.16	IO(inputs=('take seven',), output='take se')
+0.11/0.16	IO(inputs=(' and then trim it',), output='and th')
+0.11/0.16	IO(inputs=('1234567 ',), output='1234567')
+0.11/0.16	=== Library
+0.11/0.16	concat
+0.11/0.16	index
+0.11/0.16	length
+0.11/0.16	substr
+0.11/0.16	to_lower
+0.11/0.16	to_upper
+0.11/0.16	trim
+0.11/0.16	trim_start
+0.11/0.16	trim_end
+0.11/0.16	add
+0.11/0.16	sub
+0.11/0.16	=== Synthesis
+0.11/0.16	['concat']: UNSAT (0.028 seconds)
+0.11/0.19	['index']: UNSAT (0.028 seconds)
+0.11/0.22	['length']: UNSAT (0.020 seconds)
+0.11/0.24	['substr']: UNSAT (0.031 seconds)
+0.11/0.27	['to_lower']: UNSAT (1.297 seconds)
+1.48/1.57	['to_upper']: UNSAT (0.671 seconds)
+2.18/2.24	['trim']: UNSAT (84.983 seconds)
+87.18/87.23	['trim_start']: UNSAT (0.039 seconds)
+87.18/87.27	['trim_end']: SAT (68.643 seconds)
+155.79/155.91	trim_end(arg0)

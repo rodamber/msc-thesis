@@ -1,0 +1,26 @@
+0.11/0.21	=== Examples (../../dataset/examples/examples-81.json)
+0.11/0.21	IO(inputs=('abc\\xyz',), output='xyz')
+0.11/0.21	IO(inputs=('012asdf\\abcd',), output='abcd')
+0.11/0.21	IO(inputs=('asdfa\\asdfas',), output='asdfas')
+0.11/0.21	=== Library
+0.11/0.21	concat
+0.11/0.21	index
+0.11/0.21	length
+0.11/0.21	substr
+0.11/0.21	to_lower
+0.11/0.21	to_upper
+0.11/0.21	trim
+0.11/0.21	trim_start
+0.11/0.21	trim_end
+0.11/0.21	add
+0.11/0.21	sub
+0.11/0.21	=== Synthesis
+0.11/0.21	['concat']: UNSAT (0.032 seconds)
+0.11/0.24	['index']: UNSAT (0.032 seconds)
+0.24/0.28	['length']: UNSAT (0.023 seconds)
+0.24/0.30	['substr']: UNSAT (0.035 seconds)
+0.24/0.34	['to_lower']: UNSAT (0.112 seconds)
+0.37/0.45	['to_upper']: UNSAT (0.322 seconds)
+0.69/0.77	['trim']: UNSAT (27.690 seconds)
+28.39/28.46	['trim_start']: UNSAT (0.028 seconds)
+28.39/28.49	['trim_end']: 

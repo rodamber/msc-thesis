@@ -1,0 +1,22 @@
+599.95/600.00	=== Examples (examples-75.json)
+599.95/600.00	(["Fusce sapien eros volutpat."],"Fusce...tpat.")
+599.95/600.00	(["Sed condimentum at posuere."],"Sed c...uere.")
+599.95/600.00	(["Morbi id ullamcorper metus."],"Morbi...etus.")
+599.95/600.00	=== Library
+599.95/600.00	Add
+599.95/600.00	Concat
+599.95/600.00	Index
+599.95/600.00	Length
+599.95/600.00	Sub
+599.95/600.00	Substr
+599.95/600.00	=== Synthesis
+599.95/600.00	Size: 1
+599.95/600.00	Size: 2
+599.95/600.00	outsynth2: 
+599.95/600.00	*** Data.SBV: fd:6: hGetLine: end of file:
+599.95/600.00	***
+599.95/600.00	***    Sent      : (check-sat)
+599.95/600.00	***
+599.95/600.00	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+599.95/600.00	***    Options   : -nw -in -smt2
+599.95/600.00	

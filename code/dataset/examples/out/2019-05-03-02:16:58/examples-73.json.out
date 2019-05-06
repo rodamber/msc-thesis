@@ -1,0 +1,19 @@
+7.98/8.03	=== Examples (examples-73.json)
+7.98/8.03	(["Sed metus urna turpis duis."],"...rpis duis.")
+7.98/8.03	=== Library
+7.98/8.03	Add
+7.98/8.03	Concat
+7.98/8.03	Index
+7.98/8.03	Length
+7.98/8.03	Sub
+7.98/8.03	Substr
+7.98/8.03	=== Synthesis
+7.98/8.03	Size: 1
+7.98/8.03	Size: 2
+7.98/8.03	=== Program
+7.98/8.03	prog(x0):
+7.98/8.03	  c0 = "26"
+7.98/8.03	  c1 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL...rpis duis."
+7.98/8.03	  r0 = Length(x0)
+7.98/8.03	  r1 = Substr(c1, r0, c0)
+7.98/8.03	

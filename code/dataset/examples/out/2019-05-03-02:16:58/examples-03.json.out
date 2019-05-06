@@ -1,0 +1,19 @@
+16.47/16.53	=== Examples (examples-03.json)
+16.47/16.53	(["hey. I hope you are doing good"],"hey, I hope you are doing good")
+16.47/16.53	=== Library
+16.47/16.53	Add
+16.47/16.53	Concat
+16.47/16.53	Index
+16.47/16.53	Length
+16.47/16.53	Sub
+16.47/16.53	Substr
+16.47/16.53	=== Synthesis
+16.47/16.53	Size: 1
+16.47/16.53	Size: 2
+16.47/16.53	=== Program
+16.47/16.53	prog(x0):
+16.47/16.53	  c0 = "hey, I hope you are doing good"
+16.47/16.53	  c1 = "-8523"
+16.47/16.53	  r0 = Substr(x0, c1, c1)
+16.47/16.53	  r1 = Concat(c0, r0)
+16.47/16.53	

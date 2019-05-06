@@ -1,0 +1,19 @@
+167.47/167.58	=== Examples (examples-22.json)
+167.47/167.58	(["Suspendisse nec dapibus elit.\nMauris in purus est.\nVestibulum ac viverra quam.\nAliquam a elementum felis.\nSed sollicitudin nullam."],"Suspendisse nec dapibus elit.    Mauris in purus est.    Vestibulum ac viverra quam.    Aliquam a elementum felis.    Sed sollicitudin nullam.")
+167.47/167.58	=== Library
+167.47/167.58	Add
+167.47/167.58	Concat
+167.47/167.58	Index
+167.47/167.58	Length
+167.47/167.58	Sub
+167.47/167.58	Substr
+167.47/167.58	=== Synthesis
+167.47/167.58	Size: 1
+167.47/167.58	Size: 2
+167.47/167.58	=== Program
+167.47/167.58	prog(x0):
+167.47/167.58	  c0 = "Suspendisse nec dapibus elit.    Mauris in purus est.    Vestibulum ac viverra quam.    Aliquam a elementum felis.    Sed sollicitudin nullam."
+167.47/167.58	  c1 = "131"
+167.47/167.58	  r0 = Substr(x0, c1, c1)
+167.47/167.58	  r1 = Concat(c0, r0)
+167.47/167.58	

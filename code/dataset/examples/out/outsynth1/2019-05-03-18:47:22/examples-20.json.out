@@ -1,0 +1,24 @@
+0.18/0.23	=== Examples (../../dataset/examples/examples-20.json)
+0.18/0.23	IO(inputs=('In+hac+habitasse+platea+dictumst.+Sed+dapibus+sit+amet+neque+gravida+sed.',), output='In hac habitasse platea dictumst. Sed dapibus')
+0.18/0.23	IO(inputs=('Maecenas+mattis+nec+orci+a+luctus.+Maecenas+metus.',), output='Maecenas mattis nec orci a luctus. Maecenas m')
+0.18/0.23	IO(inputs=('Sed+vehicula+vestibulum+metus.',), output='Sed vehicula vestibulum metus.')
+0.18/0.23	=== Library
+0.18/0.23	concat
+0.18/0.23	index
+0.18/0.23	length
+0.18/0.23	substr
+0.18/0.23	to_lower
+0.18/0.23	to_upper
+0.18/0.23	trim
+0.18/0.23	trim_start
+0.18/0.23	trim_end
+0.18/0.23	add
+0.18/0.23	sub
+0.18/0.23	=== Synthesis
+0.18/0.23	['concat']: UNSAT (0.033 seconds)
+0.18/0.26	['index']: UNSAT (0.031 seconds)
+0.18/0.29	['length']: UNSAT (0.022 seconds)
+0.18/0.31	['substr']: UNSAT (0.037 seconds)
+0.32/0.35	['to_lower']: UNSAT (0.254 seconds)
+0.57/0.61	['to_upper']: UNSAT (0.624 seconds)
+1.19/1.23	['trim']: 

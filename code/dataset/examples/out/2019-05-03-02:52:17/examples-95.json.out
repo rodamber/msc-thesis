@@ -1,0 +1,21 @@
+600.00/600.04	=== Examples (examples-95.json)
+600.00/600.04	(["no - he said"],"Sprint: he said")
+600.00/600.04	(["but but why - she said"],"Sprint: she said")
+600.00/600.04	=== Library
+600.00/600.04	Add
+600.00/600.04	Concat
+600.00/600.04	Index
+600.00/600.04	Length
+600.00/600.04	Sub
+600.00/600.04	Substr
+600.00/600.04	=== Synthesis
+600.00/600.04	Size: 1
+600.00/600.04	Size: 2
+600.00/600.04	outsynth2: 
+600.00/600.04	*** Data.SBV: fd:6: hGetLine: end of file:
+600.00/600.04	***
+600.00/600.04	***    Sent      : (check-sat)
+600.00/600.04	***
+600.00/600.04	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+600.00/600.04	***    Options   : -nw -in -smt2
+600.00/600.04	

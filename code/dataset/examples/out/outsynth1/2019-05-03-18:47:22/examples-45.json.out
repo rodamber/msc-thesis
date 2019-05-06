@@ -1,0 +1,27 @@
+0.15/0.21	=== Examples (../../dataset/examples/examples-45.json)
+0.15/0.21	IO(inputs=('Make it two weeks',), output='make it two wks')
+0.15/0.21	IO(inputs=('Weeks 2 and 3',), output='wks 2 and 3')
+0.15/0.21	IO(inputs=('get back to me in 4 weeks',), output='get back to me in 4 wks')
+0.15/0.21	=== Library
+0.15/0.21	concat
+0.15/0.21	index
+0.15/0.21	length
+0.15/0.21	substr
+0.15/0.21	to_lower
+0.15/0.21	to_upper
+0.15/0.21	trim
+0.15/0.21	trim_start
+0.15/0.21	trim_end
+0.15/0.21	add
+0.15/0.21	sub
+0.15/0.21	=== Synthesis
+0.15/0.21	['concat']: UNSAT (0.032 seconds)
+0.15/0.25	['index']: UNSAT (0.031 seconds)
+0.15/0.28	['length']: UNSAT (0.022 seconds)
+0.29/0.30	['substr']: UNSAT (0.035 seconds)
+0.29/0.34	['to_lower']: UNKNOWN (35.652 seconds)
+35.90/35.99	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+35.90/35.99	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+35.90/35.99	['to_upper']: UNSAT (0.191 seconds)
+36.14/36.19	['trim']: SAT (362.398 seconds)
+398.48/398.59	trim(arg0)

@@ -1,0 +1,19 @@
+2.68/2.72	=== Examples (examples-70.json)
+2.68/2.72	(["  like no spaces at all!!!  "],"likenospacesatall!!!")
+2.68/2.72	=== Library
+2.68/2.72	Add
+2.68/2.72	Concat
+2.68/2.72	Index
+2.68/2.72	Length
+2.68/2.72	Sub
+2.68/2.72	Substr
+2.68/2.72	=== Synthesis
+2.68/2.72	Size: 1
+2.68/2.72	Size: 2
+2.68/2.72	=== Program
+2.68/2.72	prog(x0):
+2.68/2.72	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULlikenospacesatall!!!"
+2.68/2.72	  c1 = "9"
+2.68/2.72	  r0 = Length(x0)
+2.68/2.72	  r1 = Substr(c0, c1, r0)
+2.68/2.72	

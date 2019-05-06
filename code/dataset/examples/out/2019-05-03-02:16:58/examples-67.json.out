@@ -1,0 +1,19 @@
+2.68/2.77	=== Examples (examples-67.json)
+2.68/2.77	([" trim me "],"trim me xyz")
+2.68/2.77	=== Library
+2.68/2.77	Add
+2.68/2.77	Concat
+2.68/2.77	Index
+2.68/2.77	Length
+2.68/2.77	Sub
+2.68/2.77	Substr
+2.68/2.77	=== Synthesis
+2.68/2.77	Size: 1
+2.68/2.77	Size: 2
+2.68/2.77	=== Program
+2.68/2.77	prog(x0):
+2.68/2.77	  c0 = "trim me xyz"
+2.68/2.77	  c1 = "10"
+2.68/2.77	  r0 = Substr(x0, c1, c1)
+2.68/2.77	  r1 = Concat(c0, r0)
+2.68/2.77	

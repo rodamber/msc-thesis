@@ -1,0 +1,19 @@
+5.78/5.84	=== Examples (examples-84.json)
+5.78/5.84	(["George Michael"],"https://georgemichael.com")
+5.78/5.84	=== Library
+5.78/5.84	Add
+5.78/5.84	Concat
+5.78/5.84	Index
+5.78/5.84	Length
+5.78/5.84	Sub
+5.78/5.84	Substr
+5.78/5.84	=== Synthesis
+5.78/5.84	Size: 1
+5.78/5.84	Size: 2
+5.78/5.84	=== Program
+5.78/5.84	prog(x0):
+5.78/5.84	  c0 = "https://georgemichael.com"
+5.78/5.84	  c1 = "18"
+5.78/5.84	  r0 = Substr(x0, c1, c1)
+5.78/5.84	  r1 = Concat(c0, r0)
+5.78/5.84	

@@ -1,0 +1,24 @@
+0.12/0.24	=== Examples (../../dataset/examples/examples-94.json)
+0.12/0.24	IO(inputs=('<hello>',), output='hello')
+0.12/0.24	IO(inputs=('<goodbye>',), output='goodbye')
+0.12/0.24	IO(inputs=('<sigh>',), output='sigh')
+0.12/0.24	=== Library
+0.12/0.24	concat
+0.12/0.24	index
+0.12/0.24	length
+0.12/0.24	substr
+0.12/0.24	to_lower
+0.12/0.24	to_upper
+0.12/0.24	trim
+0.12/0.24	trim_start
+0.12/0.24	trim_end
+0.12/0.24	add
+0.12/0.24	sub
+0.12/0.24	=== Synthesis
+0.12/0.24	['concat']: UNSAT (0.034 seconds)
+0.12/0.27	['index']: UNSAT (0.033 seconds)
+0.12/0.31	['length']: UNSAT (0.024 seconds)
+0.12/0.33	['substr']: UNSAT (0.037 seconds)
+0.32/0.37	['to_lower']: UNSAT (0.098 seconds)
+0.40/0.47	['to_upper']: UNSAT (0.092 seconds)
+0.53/0.56	['trim']: 

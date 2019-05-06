@@ -1,0 +1,39 @@
+0.17/0.21	=== Examples (../../dataset/examples/examples-30.json)
+0.17/0.21	IO(inputs=('outsystems.com',), output='outsystems')
+0.17/0.21	IO(inputs=('cmu.edu',), output='cmu')
+0.17/0.21	IO(inputs=('tecnico.pt',), output='tecnico')
+0.17/0.21	=== Library
+0.17/0.21	concat
+0.17/0.21	index
+0.17/0.21	length
+0.17/0.21	substr
+0.17/0.21	to_lower
+0.17/0.21	to_upper
+0.17/0.21	trim
+0.17/0.21	trim_start
+0.17/0.21	trim_end
+0.17/0.21	add
+0.17/0.21	sub
+0.17/0.21	=== Synthesis
+0.17/0.21	['concat']: UNSAT (0.029 seconds)
+0.17/0.24	['index']: UNSAT (0.028 seconds)
+0.17/0.27	['length']: UNSAT (0.021 seconds)
+0.17/0.29	['substr']: UNSAT (0.032 seconds)
+0.17/0.32	['to_lower']: UNKNOWN (11.866 seconds)
+12.09/12.19	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+12.09/12.19	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+12.09/12.19	['to_upper']: UNSAT (0.224 seconds)
+12.39/12.41	['trim']: UNSAT (18.213 seconds)
+30.49/30.63	['trim_start']: UNSAT (0.031 seconds)
+30.49/30.66	['trim_end']: UNSAT (34.565 seconds)
+65.18/65.23	['add']: UNSAT (0.028 seconds)
+65.18/65.25	['sub']: UNSAT (0.025 seconds)
+65.18/65.28	['concat', 'concat']: UNSAT (0.050 seconds)
+65.28/65.33	['concat', 'index']: UNSAT (0.047 seconds)
+65.28/65.38	['concat', 'length']: UNSAT (0.034 seconds)
+65.38/65.41	['concat', 'substr']: UNSAT (0.083 seconds)
+65.48/65.50	['concat', 'to_lower']: UNSAT (12.596 seconds)
+77.98/78.09	['concat', 'to_upper']: UNSAT (1.182 seconds)
+79.18/79.28	['concat', 'trim']: UNSAT (446.834 seconds)
+526.07/526.11	['concat', 'trim_start']: SAT (1.191 seconds)
+527.27/527.31	trim_start(concat('\\n \\x09\\n\\x00', arg0))

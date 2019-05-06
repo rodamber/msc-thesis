@@ -1,0 +1,35 @@
+0.18/0.20	=== Examples (../../dataset/examples/examples-82.json)
+0.18/0.20	IO(inputs=('take last three', 'and add this'), output='ree and add this')
+0.18/0.20	IO(inputs=('ueueueueueu', 'xyz'), output='ueu xyz')
+0.18/0.20	IO(inputs=('george not', 'and maebe'), output='not and maebe')
+0.18/0.20	=== Library
+0.18/0.20	concat
+0.18/0.20	index
+0.18/0.20	length
+0.18/0.20	substr
+0.18/0.20	to_lower
+0.18/0.20	to_upper
+0.18/0.20	trim
+0.18/0.20	trim_start
+0.18/0.20	trim_end
+0.18/0.20	add
+0.18/0.20	sub
+0.18/0.20	=== Synthesis
+0.18/0.20	['concat']: UNSAT (0.034 seconds)
+0.18/0.24	['index']: UNSAT (0.035 seconds)
+0.18/0.27	['length']: UNSAT (0.023 seconds)
+0.18/0.30	['substr']: UNSAT (0.035 seconds)
+0.30/0.33	['to_lower']: UNSAT (0.049 seconds)
+0.35/0.38	['to_upper']: UNSAT (0.049 seconds)
+0.35/0.43	['trim']: UNSAT (0.038 seconds)
+0.45/0.47	['trim_start']: UNSAT (0.029 seconds)
+0.45/0.50	['trim_end']: UNSAT (0.035 seconds)
+0.45/0.54	['add']: UNSAT (0.029 seconds)
+0.55/0.57	['sub']: UNSAT (0.029 seconds)
+0.55/0.60	['concat', 'concat']: UNSAT (0.068 seconds)
+0.61/0.67	['concat', 'index']: UNSAT (0.053 seconds)
+0.69/0.72	['concat', 'length']: UNSAT (0.039 seconds)
+0.69/0.76	['concat', 'substr']: UNSAT (0.059 seconds)
+0.79/0.82	['concat', 'to_lower']: UNSAT (0.268 seconds)
+1.02/1.09	['concat', 'to_upper']: UNSAT (0.329 seconds)
+1.39/1.42	['concat', 'trim']: 

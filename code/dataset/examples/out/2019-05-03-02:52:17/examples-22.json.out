@@ -1,0 +1,21 @@
+599.98/600.03	=== Examples (examples-22.json)
+599.98/600.03	(["Suspendisse nec dapibus elit.\nMauris in purus est.\nVestibulum ac viverra quam.\nAliquam a elementum felis.\nSed sollicitudin nullam."],"Suspendisse nec dapibus elit.    Mauris in purus est.    Vestibulum ac viverra quam.    Aliquam a elementum felis.    Sed sollicitudin nullam.")
+599.98/600.03	(["Nulla accumsan hendrerit neque, eu ornare felis gravida id.\nPraesent tempor metus posuere."],"Nulla accumsan hendrerit neque, eu ornare felis gravida id.    Praesent tempor metus posuere.")
+599.98/600.03	=== Library
+599.98/600.03	Add
+599.98/600.03	Concat
+599.98/600.03	Index
+599.98/600.03	Length
+599.98/600.03	Sub
+599.98/600.03	Substr
+599.98/600.03	=== Synthesis
+599.98/600.03	Size: 1
+599.98/600.03	Size: 2
+599.98/600.03	outsynth2: 
+599.98/600.03	*** Data.SBV: fd:6: hGetLine: end of file:
+599.98/600.03	***
+599.98/600.03	***    Sent      : (check-sat)
+599.98/600.03	***
+599.98/600.03	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+599.98/600.03	***    Options   : -nw -in -smt2
+599.98/600.03	

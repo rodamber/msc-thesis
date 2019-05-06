@@ -1,0 +1,26 @@
+0.11/0.21	=== Examples (../../dataset/examples/examples-56.json)
+0.11/0.21	IO(inputs=('what are you doing? (sorry)',), output='what are you doing?')
+0.11/0.21	IO(inputs=('did you want that? (hmm..)',), output='did you want that?')
+0.11/0.21	IO(inputs=('maybe with add? (oh i see)',), output='maybe with add?')
+0.11/0.21	=== Library
+0.11/0.21	concat
+0.11/0.21	index
+0.11/0.21	length
+0.11/0.21	substr
+0.11/0.21	to_lower
+0.11/0.21	to_upper
+0.11/0.21	trim
+0.11/0.21	trim_start
+0.11/0.21	trim_end
+0.11/0.21	add
+0.11/0.21	sub
+0.11/0.21	=== Synthesis
+0.11/0.21	['concat']: UNSAT (0.031 seconds)
+0.11/0.24	['index']: UNSAT (0.031 seconds)
+0.25/0.28	['length']: UNSAT (0.032 seconds)
+0.25/0.31	['substr']: UNSAT (0.040 seconds)
+0.25/0.35	['to_lower']: UNKNOWN (193.802 seconds)
+194.09/194.16	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+194.09/194.16	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+194.09/194.16	['to_upper']: UNSAT (0.223 seconds)
+194.28/194.38	['trim']: 

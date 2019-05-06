@@ -1,0 +1,21 @@
+11.98/12.17	=== Examples (examples-82.json)
+11.98/12.17	(["take last three","and add this"],"ree and add this")
+11.98/12.17	=== Library
+11.98/12.17	Add
+11.98/12.17	Concat
+11.98/12.17	Index
+11.98/12.17	Length
+11.98/12.17	Sub
+11.98/12.17	Substr
+11.98/12.17	=== Synthesis
+11.98/12.17	Size: 1
+11.98/12.17	Size: 2
+11.98/12.17	Size: 3
+11.98/12.17	=== Program
+11.98/12.17	prog(x0, x1):
+11.98/12.17	  c0 = "28"
+11.98/12.17	  c1 = "ree and add this"
+11.98/12.17	  r0 = Concat(x1, x0)
+11.98/12.17	  r1 = Substr(r0, c0, c0)
+11.98/12.17	  r2 = Concat(c1, r1)
+11.98/12.17	

@@ -1,0 +1,17 @@
+0.00/0.09	=== Examples (examples-54.json)
+0.00/0.09	([" this is the same as trim man...  "],"this is the same as trim man...")
+0.00/0.09	=== Library
+0.00/0.09	Add
+0.00/0.09	Concat
+0.00/0.09	Index
+0.00/0.09	Length
+0.00/0.09	Sub
+0.00/0.09	Substr
+0.00/0.09	=== Synthesis
+0.00/0.09	Size: 1
+0.00/0.09	=== Program
+0.00/0.09	prog(x0):
+0.00/0.09	  c0 = "1"
+0.00/0.09	  c1 = "31"
+0.00/0.09	  r0 = Substr(x0, c0, c1)
+0.00/0.09	

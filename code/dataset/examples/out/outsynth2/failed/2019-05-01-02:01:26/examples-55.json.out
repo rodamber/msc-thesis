@@ -1,0 +1,22 @@
+92.79/92.81	=== Examples (examples-55.json)
+92.79/92.81	(["what is this even supposed to?"],"")
+92.79/92.81	=== Library
+92.79/92.81	Add
+92.79/92.81	Concat
+92.79/92.81	Index
+92.79/92.81	Length
+92.79/92.81	Replace
+92.79/92.81	Sub
+92.79/92.81	Substr
+92.79/92.81	ToLower
+92.79/92.81	ToUpper
+92.79/92.81	Trim
+92.79/92.81	TrimEnd
+92.79/92.81	TrimStart
+92.79/92.81	=== Synthesis
+92.79/92.81	Size: 1
+92.79/92.81	=== Program
+92.79/92.81	prog(x0):
+92.79/92.81	  c0 = ""
+92.79/92.81	  r0 = Replace(c0, x0, x0)
+92.79/92.81	

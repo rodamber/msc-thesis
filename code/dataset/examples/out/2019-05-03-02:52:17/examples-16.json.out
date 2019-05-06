@@ -1,0 +1,20 @@
+4.38/4.56	=== Examples (examples-16.json)
+4.38/4.56	(["  hello world"],"hello world")
+4.38/4.56	([" how are you? "],"how are you?")
+4.38/4.56	=== Library
+4.38/4.56	Add
+4.38/4.56	Concat
+4.38/4.56	Index
+4.38/4.56	Length
+4.38/4.56	Sub
+4.38/4.56	Substr
+4.38/4.56	=== Synthesis
+4.38/4.56	Size: 1
+4.38/4.56	Size: 2
+4.38/4.56	=== Program
+4.38/4.56	prog(x0):
+4.38/4.56	  c0 = "12"
+4.38/4.56	  c1 = "15"
+4.38/4.56	  r0 = Concat(x0, x0)
+4.38/4.56	  r1 = Substr(r0, c1, c0)
+4.38/4.56	

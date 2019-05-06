@@ -1,0 +1,19 @@
+0.27/0.38	=== Examples (examples-12.json)
+0.27/0.38	(["hello word",5],"hello")
+0.27/0.38	(["hi my name is",10],"hi my name")
+0.27/0.38	(["Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam.",100],"Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis ")
+0.27/0.38	=== Library
+0.27/0.38	Add
+0.27/0.38	Concat
+0.27/0.38	Index
+0.27/0.38	Length
+0.27/0.38	Sub
+0.27/0.38	Substr
+0.27/0.38	=== Synthesis
+0.27/0.38	Size: 1
+0.27/0.38	=== Program
+0.27/0.38	prog(x0, x1):
+0.27/0.38	  c0 = "0"
+0.27/0.38	  c1 = "0"
+0.27/0.38	  r0 = Substr(x0, c1, x1)
+0.27/0.38	

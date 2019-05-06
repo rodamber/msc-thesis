@@ -1,0 +1,19 @@
+0.00/0.15	=== Examples (examples-33.json)
+0.00/0.15	(["A001 John Doe"],"John")
+0.00/0.15	(["B234 Jane Moe"],"Jane")
+0.00/0.15	(["C099 Not a standard"],"Not ")
+0.00/0.15	=== Library
+0.00/0.15	Add
+0.00/0.15	Concat
+0.00/0.15	Index
+0.00/0.15	Length
+0.00/0.15	Sub
+0.00/0.15	Substr
+0.00/0.15	=== Synthesis
+0.00/0.15	Size: 1
+0.00/0.15	=== Program
+0.00/0.15	prog(x0):
+0.00/0.15	  c0 = "5"
+0.00/0.15	  c1 = "4"
+0.00/0.15	  r0 = Substr(x0, c0, c1)
+0.00/0.15	

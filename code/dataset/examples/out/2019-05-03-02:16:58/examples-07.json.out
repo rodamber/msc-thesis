@@ -1,0 +1,19 @@
+1.37/1.44	=== Examples (examples-07.json)
+1.37/1.44	(["Sub of by way"],"Sub of<br /> by way")
+1.37/1.44	=== Library
+1.37/1.44	Add
+1.37/1.44	Concat
+1.37/1.44	Index
+1.37/1.44	Length
+1.37/1.44	Sub
+1.37/1.44	Substr
+1.37/1.44	=== Synthesis
+1.37/1.44	Size: 1
+1.37/1.44	Size: 2
+1.37/1.44	=== Program
+1.37/1.44	prog(x0):
+1.37/1.44	  c0 = "19"
+1.37/1.44	  c1 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULSub of<br /> by way\NUL"
+1.37/1.44	  r0 = Concat(c1, x0)
+1.37/1.44	  r1 = Substr(r0, c0, c0)
+1.37/1.44	

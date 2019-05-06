@@ -1,0 +1,19 @@
+147.32/147.38	=== Examples (examples-26.json)
+147.32/147.38	(["Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci aliquam."],"Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci ali...")
+147.32/147.38	=== Library
+147.32/147.38	Add
+147.32/147.38	Concat
+147.32/147.38	Index
+147.32/147.38	Length
+147.32/147.38	Sub
+147.32/147.38	Substr
+147.32/147.38	=== Synthesis
+147.32/147.38	Size: 1
+147.32/147.38	Size: 2
+147.32/147.38	=== Program
+147.32/147.38	prog(x0):
+147.32/147.38	  c0 = "0"
+147.32/147.38	  c1 = "Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci ali..."
+147.32/147.38	  r0 = Length(x0)
+147.32/147.38	  r1 = Substr(c1, c0, r0)
+147.32/147.38	

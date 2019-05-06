@@ -1,0 +1,21 @@
+599.96/600.00	=== Examples (examples-91.json)
+599.96/600.00	(["George"],"george")
+599.96/600.00	(["Maebe"],"maebe")
+599.96/600.00	=== Library
+599.96/600.00	Add
+599.96/600.00	Concat
+599.96/600.00	Index
+599.96/600.00	Length
+599.96/600.00	Sub
+599.96/600.00	Substr
+599.96/600.00	=== Synthesis
+599.96/600.00	Size: 1
+599.96/600.00	Size: 2
+599.96/600.00	outsynth2: 
+599.96/600.00	*** Data.SBV: fd:6: hGetLine: end of file:
+599.96/600.00	***
+599.96/600.00	***    Sent      : (check-sat)
+599.96/600.00	***
+599.96/600.00	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+599.96/600.00	***    Options   : -nw -in -smt2
+599.96/600.00	

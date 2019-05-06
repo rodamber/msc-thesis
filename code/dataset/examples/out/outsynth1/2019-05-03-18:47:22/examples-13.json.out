@@ -1,0 +1,26 @@
+0.00/0.17	=== Examples (../../dataset/examples/examples-13.json)
+0.00/0.17	IO(inputs=('Curabitur commodo volutpat.',), output='commodo volutpa')
+0.00/0.17	IO(inputs=('Phasellus dignissim nullam.',), output='dignissim nulla')
+0.00/0.17	IO(inputs=('Suspendisse potenti nullam.',), output='e potenti nulla')
+0.00/0.17	=== Library
+0.00/0.17	concat
+0.00/0.17	index
+0.00/0.17	length
+0.00/0.17	substr
+0.00/0.17	to_lower
+0.00/0.17	to_upper
+0.00/0.17	trim
+0.00/0.17	trim_start
+0.00/0.17	trim_end
+0.00/0.17	add
+0.00/0.17	sub
+0.00/0.17	=== Synthesis
+0.00/0.17	['concat']: UNSAT (0.028 seconds)
+0.00/0.20	['index']: UNSAT (0.027 seconds)
+0.00/0.23	['length']: UNSAT (0.019 seconds)
+0.00/0.25	['substr']: UNSAT (0.031 seconds)
+0.00/0.28	['to_lower']: UNSAT (0.173 seconds)
+0.30/0.45	['to_upper']: UNSAT (0.157 seconds)
+0.30/0.61	['trim']: UNSAT (93.125 seconds)
+93.67/93.74	['trim_start']: UNSAT (0.030 seconds)
+93.67/93.77	['trim_end']: 

@@ -1,0 +1,22 @@
+559.26/559.82	=== Examples (examples-04.json)
+559.26/559.82	(["that/folder/"],"thatfolder")
+559.26/559.82	=== Library
+559.26/559.82	Add
+559.26/559.82	Concat
+559.26/559.82	Index
+559.26/559.82	Length
+559.26/559.82	Replace
+559.26/559.82	Sub
+559.26/559.82	Substr
+559.26/559.82	ToLower
+559.26/559.82	ToUpper
+559.26/559.82	Trim
+559.26/559.82	TrimEnd
+559.26/559.82	TrimStart
+559.26/559.82	=== Synthesis
+559.26/559.82	Size: 1
+559.26/559.82	=== Program
+559.26/559.82	prog(x0):
+559.26/559.82	  c0 = "thatfolder"
+559.26/559.82	  r0 = Replace(c0, x0, x0)
+559.26/559.82	

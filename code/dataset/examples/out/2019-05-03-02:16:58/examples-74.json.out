@@ -1,0 +1,19 @@
+0.11/0.23	=== Examples (examples-74.json)
+0.11/0.23	(["George Michael"],"GM")
+0.11/0.23	=== Library
+0.11/0.23	Add
+0.11/0.23	Concat
+0.11/0.23	Index
+0.11/0.23	Length
+0.11/0.23	Sub
+0.11/0.23	Substr
+0.11/0.23	=== Synthesis
+0.11/0.23	Size: 1
+0.11/0.23	Size: 2
+0.11/0.23	=== Program
+0.11/0.23	prog(x0):
+0.11/0.23	  c0 = "2"
+0.11/0.23	  c1 = "\NUL\NULGM\NUL"
+0.11/0.23	  r0 = Concat(c1, x0)
+0.11/0.23	  r1 = Substr(r0, c0, c0)
+0.11/0.23	

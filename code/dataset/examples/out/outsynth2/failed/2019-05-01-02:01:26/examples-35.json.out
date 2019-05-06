@@ -1,0 +1,22 @@
+53.20/53.42	=== Examples (examples-35.json)
+53.20/53.42	(["A12345678 John Doe"],"John Doe")
+53.20/53.42	=== Library
+53.20/53.42	Add
+53.20/53.42	Concat
+53.20/53.42	Index
+53.20/53.42	Length
+53.20/53.42	Replace
+53.20/53.42	Sub
+53.20/53.42	Substr
+53.20/53.42	ToLower
+53.20/53.42	ToUpper
+53.20/53.42	Trim
+53.20/53.42	TrimEnd
+53.20/53.42	TrimStart
+53.20/53.42	=== Synthesis
+53.20/53.42	Size: 1
+53.20/53.42	=== Program
+53.20/53.42	prog(x0):
+53.20/53.42	  c0 = "John Doe"
+53.20/53.42	  r0 = Replace(c0, x0, x0)
+53.20/53.42	

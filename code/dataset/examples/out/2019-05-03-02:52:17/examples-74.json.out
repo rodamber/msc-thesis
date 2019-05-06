@@ -1,0 +1,21 @@
+600.25/600.35	=== Examples (examples-74.json)
+600.25/600.35	(["George Michael"],"GM")
+600.25/600.35	(["Michael Bluth"],"MB")
+600.25/600.35	=== Library
+600.25/600.35	Add
+600.25/600.35	Concat
+600.25/600.35	Index
+600.25/600.35	Length
+600.25/600.35	Sub
+600.25/600.35	Substr
+600.25/600.35	=== Synthesis
+600.25/600.35	Size: 1
+600.25/600.35	Size: 2
+600.25/600.35	outsynth2: 
+600.25/600.35	*** Data.SBV: fd:6: hGetLine: end of file:
+600.25/600.35	***
+600.25/600.35	***    Sent      : (check-sat)
+600.25/600.35	***
+600.25/600.35	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+600.25/600.35	***    Options   : -nw -in -smt2
+600.25/600.35	

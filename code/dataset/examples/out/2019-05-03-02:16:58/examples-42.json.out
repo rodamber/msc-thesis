@@ -1,0 +1,19 @@
+3.56/3.68	=== Examples (examples-42.json)
+3.56/3.68	(["DO IT"],"do it!@")
+3.56/3.68	=== Library
+3.56/3.68	Add
+3.56/3.68	Concat
+3.56/3.68	Index
+3.56/3.68	Length
+3.56/3.68	Sub
+3.56/3.68	Substr
+3.56/3.68	=== Synthesis
+3.56/3.68	Size: 1
+3.56/3.68	Size: 2
+3.56/3.68	=== Program
+3.56/3.68	prog(x0):
+3.56/3.68	  c0 = "\NUL\NULdo it!@"
+3.56/3.68	  c1 = "7"
+3.56/3.68	  r0 = Concat(x0, c0)
+3.56/3.68	  r1 = Substr(r0, c1, c1)
+3.56/3.68	

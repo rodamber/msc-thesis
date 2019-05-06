@@ -1,0 +1,22 @@
+27.49/27.53	=== Examples (examples-30.json)
+27.49/27.53	(["outsystems.com"],"outsystems")
+27.49/27.53	=== Library
+27.49/27.53	Add
+27.49/27.53	Concat
+27.49/27.53	Index
+27.49/27.53	Length
+27.49/27.53	Replace
+27.49/27.53	Sub
+27.49/27.53	Substr
+27.49/27.53	ToLower
+27.49/27.53	ToUpper
+27.49/27.53	Trim
+27.49/27.53	TrimEnd
+27.49/27.53	TrimStart
+27.49/27.53	=== Synthesis
+27.49/27.53	Size: 1
+27.49/27.53	=== Program
+27.49/27.53	prog(x0):
+27.49/27.53	  c0 = "outsystems"
+27.49/27.53	  r0 = Replace(x0, x0, c0)
+27.49/27.53	

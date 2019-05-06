@@ -1,0 +1,24 @@
+0.00/0.20	=== Examples (../../dataset/examples/examples-38.json)
+0.00/0.20	IO(inputs=('should not be spaced',), output='<span id=should_not_be_spaced > ')
+0.00/0.20	IO(inputs=('but underscored',), output='<span id=but_underscored > ')
+0.00/0.20	IO(inputs=('cant do anything right',), output='<span id=cant_do_anything_right > ')
+0.00/0.20	=== Library
+0.00/0.20	concat
+0.00/0.20	index
+0.00/0.20	length
+0.00/0.20	substr
+0.00/0.20	to_lower
+0.00/0.20	to_upper
+0.00/0.20	trim
+0.00/0.20	trim_start
+0.00/0.20	trim_end
+0.00/0.20	add
+0.00/0.20	sub
+0.00/0.20	=== Synthesis
+0.00/0.20	['concat']: UNSAT (0.032 seconds)
+0.00/0.23	['index']: UNSAT (0.031 seconds)
+0.00/0.26	['length']: UNSAT (0.022 seconds)
+0.20/0.28	['substr']: UNSAT (0.034 seconds)
+0.20/0.32	['to_lower']: UNSAT (0.217 seconds)
+0.47/0.54	['to_upper']: UNSAT (0.192 seconds)
+0.63/0.73	['trim']: 

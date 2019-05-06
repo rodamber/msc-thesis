@@ -1,0 +1,35 @@
+0.00/0.17	=== Examples (../../dataset/examples/examples-49.json)
+0.00/0.17	IO(inputs=('john', 'doe'), output='JOHN DOE')
+0.00/0.17	IO(inputs=('jane', 'smith'), output='JANE SMITH')
+0.00/0.17	IO(inputs=('michael', 'scott'), output='MICHAEL SCOTT')
+0.00/0.17	=== Library
+0.00/0.17	concat
+0.00/0.17	index
+0.00/0.17	length
+0.00/0.17	substr
+0.00/0.17	to_lower
+0.00/0.17	to_upper
+0.00/0.17	trim
+0.00/0.17	trim_start
+0.00/0.17	trim_end
+0.00/0.17	add
+0.00/0.17	sub
+0.00/0.17	=== Synthesis
+0.00/0.17	['concat']: UNSAT (0.030 seconds)
+0.00/0.20	['index']: UNSAT (0.030 seconds)
+0.00/0.23	['length']: UNSAT (0.021 seconds)
+0.00/0.25	['substr']: UNSAT (0.031 seconds)
+0.00/0.29	['to_lower']: UNSAT (0.043 seconds)
+0.31/0.33	['to_upper']: UNSAT (0.043 seconds)
+0.31/0.37	['trim']: UNSAT (0.033 seconds)
+0.31/0.41	['trim_start']: UNSAT (0.025 seconds)
+0.31/0.43	['trim_end']: UNSAT (0.029 seconds)
+0.31/0.46	['add']: UNSAT (0.026 seconds)
+0.31/0.49	['sub']: UNSAT (0.026 seconds)
+0.31/0.52	['concat', 'concat']: UNSAT (0.055 seconds)
+0.31/0.57	['concat', 'index']: UNSAT (0.052 seconds)
+0.31/0.63	['concat', 'length']: UNSAT (0.039 seconds)
+0.60/0.67	['concat', 'substr']: UNSAT (0.053 seconds)
+0.60/0.72	['concat', 'to_lower']: UNSAT (0.234 seconds)
+0.88/0.96	['concat', 'to_upper']: UNSAT (7.743 seconds)
+8.69/8.70	['concat', 'trim']: 

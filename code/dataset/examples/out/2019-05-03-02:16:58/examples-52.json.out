@@ -1,0 +1,19 @@
+0.13/0.27	=== Examples (examples-52.json)
+0.13/0.27	(["hello  "],"HELLO")
+0.13/0.27	=== Library
+0.13/0.27	Add
+0.13/0.27	Concat
+0.13/0.27	Index
+0.13/0.27	Length
+0.13/0.27	Sub
+0.13/0.27	Substr
+0.13/0.27	=== Synthesis
+0.13/0.27	Size: 1
+0.13/0.27	Size: 2
+0.13/0.27	=== Program
+0.13/0.27	prog(x0):
+0.13/0.27	  c0 = "4"
+0.13/0.27	  c1 = "\NUL\NUL\NUL\NULHELLO"
+0.13/0.27	  r0 = Length(x0)
+0.13/0.27	  r1 = Substr(c1, c0, r0)
+0.13/0.27	

@@ -1,0 +1,20 @@
+50.98/51.05	=== Examples (examples-71.json)
+50.98/51.05	(["take seven"],"take se")
+50.98/51.05	([" and then trim it"],"and th")
+50.98/51.05	=== Library
+50.98/51.05	Add
+50.98/51.05	Concat
+50.98/51.05	Index
+50.98/51.05	Length
+50.98/51.05	Sub
+50.98/51.05	Substr
+50.98/51.05	=== Synthesis
+50.98/51.05	Size: 1
+50.98/51.05	Size: 2
+50.98/51.05	=== Program
+50.98/51.05	prog(x0):
+50.98/51.05	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULtake seand th"
+50.98/51.05	  c1 = "7"
+50.98/51.05	  r0 = Length(x0)
+50.98/51.05	  r1 = Substr(c0, r0, c1)
+50.98/51.05	

@@ -1,0 +1,19 @@
+1.88/1.95	=== Examples (examples-43.json)
+1.88/1.95	(["https://ThatCoolWebsite.com"],"thatcoolwebsite.com")
+1.88/1.95	=== Library
+1.88/1.95	Add
+1.88/1.95	Concat
+1.88/1.95	Index
+1.88/1.95	Length
+1.88/1.95	Sub
+1.88/1.95	Substr
+1.88/1.95	=== Synthesis
+1.88/1.95	Size: 1
+1.88/1.95	Size: 2
+1.88/1.95	=== Program
+1.88/1.95	prog(x0):
+1.88/1.95	  c0 = "28"
+1.88/1.95	  c1 = "thatcoolwebsite.com"
+1.88/1.95	  r0 = Substr(x0, c0, c0)
+1.88/1.95	  r1 = Concat(c1, r0)
+1.88/1.95	

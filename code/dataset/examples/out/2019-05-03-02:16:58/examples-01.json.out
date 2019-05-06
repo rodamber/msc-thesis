@@ -1,0 +1,19 @@
+18.58/18.72	=== Examples (examples-01.json)
+18.58/18.72	(["Hello World"],"Hello&nbsp;World")
+18.58/18.72	=== Library
+18.58/18.72	Add
+18.58/18.72	Concat
+18.58/18.72	Index
+18.58/18.72	Length
+18.58/18.72	Sub
+18.58/18.72	Substr
+18.58/18.72	=== Synthesis
+18.58/18.72	Size: 1
+18.58/18.72	Size: 2
+18.58/18.72	=== Program
+18.58/18.72	prog(x0):
+18.58/18.72	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULHello&nbsp;World"
+18.58/18.72	  c1 = "7035"
+18.58/18.72	  r0 = Length(x0)
+18.58/18.72	  r1 = Substr(c0, r0, c1)
+18.58/18.72	

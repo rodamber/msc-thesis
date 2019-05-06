@@ -1,0 +1,22 @@
+33.20/33.21	=== Examples (examples-46.json)
+33.20/33.21	([" a b c "],"0a0b0c")
+33.20/33.21	=== Library
+33.20/33.21	Add
+33.20/33.21	Concat
+33.20/33.21	Index
+33.20/33.21	Length
+33.20/33.21	Replace
+33.20/33.21	Sub
+33.20/33.21	Substr
+33.20/33.21	ToLower
+33.20/33.21	ToUpper
+33.20/33.21	Trim
+33.20/33.21	TrimEnd
+33.20/33.21	TrimStart
+33.20/33.21	=== Synthesis
+33.20/33.21	Size: 1
+33.20/33.21	=== Program
+33.20/33.21	prog(x0):
+33.20/33.21	  c0 = "0a0b0c"
+33.20/33.21	  r0 = Replace(c0, x0, x0)
+33.20/33.21	

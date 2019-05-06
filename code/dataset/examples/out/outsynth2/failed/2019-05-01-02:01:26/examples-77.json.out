@@ -1,0 +1,22 @@
+76.99/77.06	=== Examples (examples-77.json)
+76.99/77.06	(["George Michael"],"Michael")
+76.99/77.06	=== Library
+76.99/77.06	Add
+76.99/77.06	Concat
+76.99/77.06	Index
+76.99/77.06	Length
+76.99/77.06	Replace
+76.99/77.06	Sub
+76.99/77.06	Substr
+76.99/77.06	ToLower
+76.99/77.06	ToUpper
+76.99/77.06	Trim
+76.99/77.06	TrimEnd
+76.99/77.06	TrimStart
+76.99/77.06	=== Synthesis
+76.99/77.06	Size: 1
+76.99/77.06	=== Program
+76.99/77.06	prog(x0):
+76.99/77.06	  c0 = "Michael"
+76.99/77.06	  r0 = Replace(c0, x0, x0)
+76.99/77.06	

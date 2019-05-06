@@ -1,0 +1,19 @@
+4.01/4.11	=== Examples (examples-20.json)
+4.01/4.11	(["In+hac+habitasse+platea+dictumst.+Sed+dapibus+sit+amet+neque+gravida+sed."],"In hac habitasse platea dictumst. Sed dapibus")
+4.01/4.11	=== Library
+4.01/4.11	Add
+4.01/4.11	Concat
+4.01/4.11	Index
+4.01/4.11	Length
+4.01/4.11	Sub
+4.01/4.11	Substr
+4.01/4.11	=== Synthesis
+4.01/4.11	Size: 1
+4.01/4.11	Size: 2
+4.01/4.11	=== Program
+4.01/4.11	prog(x0):
+4.01/4.11	  c0 = "-2"
+4.01/4.11	  c1 = "In hac habitasse platea dictumst. Sed dapibus"
+4.01/4.11	  r0 = Substr(x0, c0, c0)
+4.01/4.11	  r1 = Concat(c1, r0)
+4.01/4.11	

@@ -1,0 +1,33 @@
+0.16/0.19	=== Examples (../../dataset/examples/examples-09.json)
+0.16/0.19	IO(inputs=('hello word',), output='hello')
+0.16/0.19	IO(inputs=('hi my name is',), output='hi my')
+0.16/0.19	IO(inputs=('how are you doing',), output='how a')
+0.16/0.19	=== Library
+0.16/0.19	concat
+0.16/0.19	index
+0.16/0.19	length
+0.16/0.19	substr
+0.16/0.19	to_lower
+0.16/0.19	to_upper
+0.16/0.19	trim
+0.16/0.19	trim_start
+0.16/0.19	trim_end
+0.16/0.19	add
+0.16/0.19	sub
+0.16/0.19	=== Synthesis
+0.16/0.19	['concat']: UNSAT (0.032 seconds)
+0.16/0.23	['index']: UNSAT (0.032 seconds)
+0.16/0.26	['length']: UNSAT (0.022 seconds)
+0.16/0.28	['substr']: UNSAT (0.038 seconds)
+0.16/0.32	['to_lower']: UNSAT (4.172 seconds)
+4.38/4.50	['to_upper']: UNSAT (0.088 seconds)
+4.48/4.58	['trim']: UNSAT (53.022 seconds)
+57.59/57.61	['trim_start']: UNSAT (0.028 seconds)
+57.59/57.64	['trim_end']: UNSAT (73.772 seconds)
+131.38/131.41	['add']: UNSAT (0.026 seconds)
+131.38/131.43	['sub']: UNSAT (0.026 seconds)
+131.38/131.46	['concat', 'concat']: UNSAT (0.049 seconds)
+131.49/131.51	['concat', 'index']: UNSAT (0.046 seconds)
+131.49/131.56	['concat', 'length']: UNSAT (0.035 seconds)
+131.49/131.59	['concat', 'substr']: SAT (0.139 seconds)
+131.69/131.74	substr(concat('\\x00\\x00\\x00\\x00\\x00', arg0), 5, 5)

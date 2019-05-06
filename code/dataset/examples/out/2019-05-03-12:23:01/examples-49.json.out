@@ -1,0 +1,23 @@
+600.12/600.12	=== Examples (examples-49.json)
+600.12/600.12	(["john","doe"],"JOHN DOE")
+600.12/600.12	(["jane","smith"],"JANE SMITH")
+600.12/600.12	(["michael","scott"],"MICHAEL SCOTT")
+600.12/600.12	=== Library
+600.12/600.12	Add
+600.12/600.12	Concat
+600.12/600.12	Index
+600.12/600.12	Length
+600.12/600.12	Sub
+600.12/600.12	Substr
+600.12/600.12	=== Synthesis
+600.12/600.12	Size: 1
+600.12/600.12	Size: 2
+600.12/600.12	Size: 3
+600.12/600.12	outsynth2: 
+600.12/600.12	*** Data.SBV: fd:6: hGetLine: end of file:
+600.12/600.12	***
+600.12/600.12	***    Sent      : (check-sat)
+600.12/600.12	***
+600.12/600.12	***    Executable: /home/rodrigo/msc/code/setwise/venv/bin/z3
+600.12/600.12	***    Options   : -nw -in -smt2
+600.12/600.12	

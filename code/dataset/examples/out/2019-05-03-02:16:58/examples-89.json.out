@@ -1,0 +1,19 @@
+1.86/1.97	=== Examples (examples-89.json)
+1.86/1.97	(["|George|Maebe|Michael|"],"Enviado para George, Maebe, Michael")
+1.86/1.97	=== Library
+1.86/1.97	Add
+1.86/1.97	Concat
+1.86/1.97	Index
+1.86/1.97	Length
+1.86/1.97	Sub
+1.86/1.97	Substr
+1.86/1.97	=== Synthesis
+1.86/1.97	Size: 1
+1.86/1.97	Size: 2
+1.86/1.97	=== Program
+1.86/1.97	prog(x0):
+1.86/1.97	  c0 = "35"
+1.86/1.97	  c1 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULEnviado para George, Maebe, Michael\NUL"
+1.86/1.97	  r0 = Concat(c1, x0)
+1.86/1.97	  r1 = Substr(r0, c0, c0)
+1.86/1.97	
