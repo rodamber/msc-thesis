@@ -355,15 +355,63 @@ Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 :RELWORK:  ONGOING
 :END:
 
-*** Setwise Encoding
-- [ ] How to decide on the number of constants
+*** REVIEW Benchmark Description
 
-- [ ] Explain that this encoding is independent of the components used as long
-  as they can be specified in SMT
+Missing computer specifications.
+
+*** TODO Results and Comparison
+
+- calls to solvers (timeout, numero de conflictos)
+- replace e undecidable
+- versao em que se fixa o set de constantes
+
+- user intent
+- time
+- comparing size of encodings
+-- later: number of constants needed of each type
+
+- ranking needed, especially for few examples: far fetched constants and
+  "identity components" make everything possible
+- substring indexes should not be the same
+- constants should not contain the output
+- would be interesting to check the case where constants are limited, or
+  provided by the user
+
+- we're counting the solution as 'expected' even if it's not the same program
+  from the benchmark: the reasoning is that if it captures the same idea and
+  generalizes, even if it is not natural, then we consider it correct.
+
+- setwise, nonrec, e2c1, results much closer to the expected solution, although
+  many times 2 examples are not enough to generalize
+
+- we could try adding more examples (and refine them)
+
+- there seems to be some sweet spot at 3 lines where the synth. is able to find
+  programs that satisfy three examples 
+
+- mention that while we tried to make the examples "as good as possible" ...
 
 - [ ] Analysis of the size of the problem in function of the number of constants,
   components, arity of the components, number of examples, number of inputs,
   etc.
+
+*** TODO Other
+
+We tried encoding more complex functions (recursive), but...
+
+** TODO Concluding Remarks
+- [ ] At some point we have to explain which components we are considering and
+  how they map to SMT. Particularly, we should explain the logics that we need,
+  and whether they are decidable (preliminaries) or not.
+  (https://anthonywlin.github.io/papers/popl18-replace.pdf)
+
+- [ ] Why does a component-based approach lend itself well? (direct mapping
+  between components and DSL constructs; compare this with FlashFill's
+  approach).
+
+
+- [ ] Explain that both encodings are independent of the components used as long
+  as they can be specified in SMT
 
 Comparison to Jha's et al. approach:
 
@@ -375,17 +423,6 @@ Comparison to Jha's et al. approach:
 - [ ] Our components are more complex.
 - [ ] We prevent the addition of dead-code by asserting that every variable
   should be used at least once.
-
-*** Other
-** TODO Concluding Remarks
-- [ ] At some point we have to explain which components we are considering and
-  how they map to SMT. Particularly, we should explain the logics that we need,
-  and whether they are decidable (preliminaries) or not.
-  (https://anthonywlin.github.io/papers/popl18-replace.pdf)
-
-- [ ] Why does a component-based approach lend itself well? (direct mapping
-  between components and DSL constructs; compare this with FlashFill's
-  approach).
 
 *** TODO Related Work
 *** TODO Future Work
