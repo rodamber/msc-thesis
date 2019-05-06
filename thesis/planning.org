@@ -1,17 +1,5 @@
-* Unanswered Questions
-- [ ] Which SMT solver are we using? (bibliographic reference)
-% In our case we are using Z3, a state-of-the-art \gls{smt} solver. It allows
-% reasoning over string constraints and linear arithmetic...
-
-- [ ] What constructs does the SMT theory for strings provide?
-
-- [ ] Explanation of why we chose the components we chose. The problem was
-  open-ended at first and was refined over time. We approach the problem in
-  stages. First just a small dsl of text components. Then all of them, then If
-  statements. 
-
 * Chapters
-** TODO Introduction
+** ONGOING Introduction
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: REVIEW
@@ -98,7 +86,7 @@ themselves.
 % - sintetizadores altamente especializados e calibrados para dominios particulares
 % - bugs enviados para a camada de abstraccao acima
 
-** TODO Preliminaries
+** ONGOING Preliminaries
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: TODO
@@ -114,25 +102,25 @@ Missing definitions:
 
 Some background on how SMT solvers work, e.g., describe DPLL(T).
 
-** TODO Background
+** REVIEW Background
   DEADLINE: <2019-03-13 Wed>
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: DONE
+:EXAMPLES: REVIEW
 :RELWORK:  REVIEW
 :END:
 
 I guess, at the end of this section there should probably be a discussion
 comparing the different approaches to the problem.
 
-*** TODO Specifications
+*** REVIEW Specifications
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: DONE
+:EXAMPLES: REVIEW
 :RELWORK:  REVIEW
 :END:
 
-**** TODO Logical Specifications
+**** REVIEW Logical Specifications
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
@@ -147,17 +135,17 @@ Add an example. Ideas:
 - POPL'19 Polikarpova, swap. This one is good because it can serve as an example
   for the subsection on deductive synthesis.
 
-**** TODO Syntactic Specifications
+**** REVIEW Syntactic Specifications
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: TODO
+:EXAMPLES: REVIEW
 :RELWORK:  REVIEW
 :END:
 
 ***** TODO Sketching
       :PROPERTIES:
       :CONTENT:  REVIEW
-      :EXAMPLES: TODO
+      :EXAMPLES: REVIEW
       :RELWORK:  REVIEW
       :END:
 
@@ -166,7 +154,7 @@ Missing example.
 ***** TODO Component-Based Synthesis
       :PROPERTIES:
       :CONTENT:  REVIEW
-      :EXAMPLES: TODO
+      :EXAMPLES: REVIEW
       :RELWORK:  REVIEW
       :END:
 
@@ -177,24 +165,24 @@ Missing example. Ideas:
 ***** TODO Syntax-Guided Synthesis
       :PROPERTIES:
       :CONTENT:  REVIEW
-      :EXAMPLES: TODO
+      :EXAMPLES: REVIEW
       :RELWORK:  REVIEW
       :END:
 
 Missing example.
 
-**** TODO Inductive Synthesis
+**** REVIEW Inductive Synthesis
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 ***** TODO Programming By Examples
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 - Missing references
@@ -209,29 +197,21 @@ Missing example.
 
 - Maybe check if there's some Gulwani paper to put here.
 
-**** TODO Programs
+**** REVIEW Programs
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: TODO
+:EXAMPLES: REVIEW
 :RELWORK:  REVIEW
 :END:
 
 Missing example (take one from the papers).
 
-*** TODO Search Techniques
+*** REVIEW Search Techniques
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: DONE
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
-
-Missing:
-- deductive search
-- representation-based search (!!!)
-  - VSAs: motivated by inductive learning; particularly suited to pbe
-    - put simply, just a DAG where every part corresponds to a valid program
-    - supports learn, intersect and pick
-    - encodes a possibly exponential number of programs
 
 **** TODO Deductive Search
 :PROPERTIES:
@@ -245,14 +225,27 @@ Commented out because it is too simple.
 
 References: Polikarpova:2019:SSH, Manna:1971:TAP, Green:1969:ATP
 
-**** TODO Enumerative Search
+**** TODO Representation-Based Search
+:PROPERTIES:
+:CONTENT:  TODO
+:EXAMPLES: TODO
+:RELWORK:  TODO
+:END:
+- VSAs: motivated by inductive learning; particularly suited to pbe
+  - put simply, just a DAG where every part corresponds to a valid program
+  - supports learn, intersect and pick
+  - encodes a possibly exponential number of programs
+- Finite tree automata
+
+
+**** REVIEW Enumerative Search
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
 :RELWORK:  REVIEW
 :END:
 
-***** TODO Top-Down Tree Search
+***** Top-Down Tree Search
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
@@ -265,7 +258,7 @@ descrição fica algo inconsistente com os dois algoritmos que vem a seguir.
 
 Adicionar (possivelmente) um exemplo de um traço de execução do algoritmo.
 
-***** TODO Bottom-Up Tree Search
+***** Bottom-Up Tree Search
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
@@ -277,7 +270,7 @@ Check out references [4, 141] of Gulwani2017.
 This algorithm is shown in Figure \fixme{???}{ainda tenho que produzir esta
 figura}, using program size as the metric of program complexity.
 
-***** TODO Bidirectional Tree Search
+***** Bidirectional Tree Search
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
@@ -286,119 +279,81 @@ figura}, using program size as the metric of program complexity.
 
 Missing pseudocode.
 
-**** TODO Stochastic Search
+**** REVIEW Stochastic Search
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
-
-Missing stuff on:
-
-- Genetic Programming
-- Neural Program Synthesis
-- Graph neural networks
-- ... check [[https://alexpolozov.com/blog/program-synthesis-2018/][Polozov's overview]] for work done since 2017
-
-Missing refs: LEE_ASP_2018, DeepCoder, Ruben, for the first approach and STOKE
-for the second one, for example.
 
 ***** Sampling the Search Space
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
-**** TODO Constraint Solving
+**** REVIEW Constraint Solving
 :PROPERTIES:
 :CONTENT:  REVIEW
 :EXAMPLES: REVIEW
 :RELWORK:  REVIEW
 :END:
-**** TODO Oracle-Guided Inductive Synthesis
+**** REVIEW Oracle-Guided Inductive Synthesis
 :PROPERTIES:
 :CONTENT:  REVIEW
-:EXAMPLES: TODO
+:EXAMPLES: REVIEW
 :RELWORK:  REVIEW
 :END:
 
-Example could be Jha's distinguishing inputs from the OGIS paper.
-
-Note that there might be some ambiguity about what we mean about distinguishing
-inputs depending on the context (interactivity, etc).
-
-Figures should come at the top of the page and before the text that references
-it, when possible.
-
-Wonder if some parts are too close to the original.
-
-*** TODO Programming by Examples
-:PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  ONGOING
-:END:
-
-% Examples, being a kind of inductive specifications, are inherently
-% \textit{ambiguous}.
-% There might be multiple programs consistent with the examples, but we must find
-% the \textit{intended} one (disambiguation).
-
-Specifics of PBE. Needs cleaning.
-
-PBE VSAs, deduction-based, inverse semantics, type-based, ambiguity, intent
-
-** TODO Synthesis
+** ONGOING Synthesis
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: ONGOING
 :RELWORK:  ONGOING
 :END:
 
-*** TODO Problem Description
+Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
+
+*** ONGOING Problem Description
 :PROPERTIES:
-:CONTENT:  REVIEW
-:EXAMPLES: REVIEW
-:RELWORK:  REVIEW
+:CONTENT:  ONGOING
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
 :END:
 
 - [ ] Mention that we are using _positive_ examples.
 - [ ] Note that examples show constants that are not part of the input.
 
-*** TODO Setwise Encoding
+*** ONGOING Setwise Encoding
 :PROPERTIES:
-:CONTENT:  REVIEW
-:EXAMPLES: REVIEW
-:RELWORK:  REVIEW
+:CONTENT:  ONGOING
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
 :END:
 
 - [ ] Synthesizer program listing
 
 **** Program Formula
 :PROPERTIES:
-:CONTENT:  REVIEW
-:EXAMPLES: REVIEW
-:RELWORK:  REVIEW
+:CONTENT:  ONGOING
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
 :END:
 
-*** TODO Whole Encoding
+*** ONGOING Whole Encoding
 :PROPERTIES:
 :CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
 :END:
 
-** TODO Other Approaches/Future Work
-- Learning patterns from the corpus of expressions. see: https://arxiv.org/abs/1902.06349
-
-** TODO Bibliography
-   :PROPERTIES:
-   :CONTENT:  ONGOING
-   :END:
-
-** TODO Discussion/Experimental Results
-Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
+** ONGOING Experimental Results
+:PROPERTIES:
+:CONTENT:  ONGOING
+:EXAMPLES: ONGOING
+:RELWORK:  ONGOING
+:END:
 
 *** Setwise Encoding
 - [ ] How to decide on the number of constants
@@ -422,6 +377,7 @@ Comparison to Jha's et al. approach:
   should be used at least once.
 
 *** Other
+** TODO Concluding Remarks
 - [ ] At some point we have to explain which components we are considering and
   how they map to SMT. Particularly, we should explain the logics that we need,
   and whether they are decidable (preliminaries) or not.
@@ -431,11 +387,11 @@ Comparison to Jha's et al. approach:
   between components and DSL constructs; compare this with FlashFill's
   approach).
 
-** TODO Concluding Remarks
 *** TODO Related Work
 *** TODO Future Work
 *** TODO Conclusion
 * config :noexport:
+#+TODO: TODO ONGOING REVIEW | DONE
 #+COLUMNS: %36ITEM %7CONTENT %7RELWORK %7EXAMPLES
 #+PROPERTY: CONTENT_ALL  TODO ONGOING REVIEW DONE
 #+PROPERTY: EXAMPLES_ALL TODO ONGOING REVIEW DONE
