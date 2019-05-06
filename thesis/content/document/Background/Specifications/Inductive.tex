@@ -3,8 +3,6 @@
 
 Inductive synthesis is an instance of the program synthesis problem where the
 constraints are underspecified.
-The intended program should not only satisfy the specifications, but also
-generalize.
 Sometimes the domain we want to model is complex enough that a complete
 specification could be as hard to produce as the program itself, or might not
 even exist.
@@ -14,14 +12,14 @@ as possible for users coming from different backgrounds.
 \subsubsection{\Glsfmtfull{pbe}}
 
 \gls{pbe} is an instance of inductive synthesis where the specification is given
-by \gls{io} examples that the desired program must satisfy.
+by input-output examples that the desired program must satisfy.
 Explicitly giving examples can be preferred due to their ease of use, especially
 by non-programmers, when compared to more technical kinds of specification, such
 as logical formulas.
 The examples may be either \textit{positive}, i.e., an example that the desired
 program must satisfy, or \textit{negative}, i.e., an example that the desired
 should \textit{not} satisfy.
-More generally, given some (implicit) \gls{io} example, we may include asserting
+More generally, given some (implicit) input-output example, we may include asserting
 properties of the output instead of specifying it completely
 \cite{Polozov:2015:FFI}.
 This can be helpful if it is impractical or impossible
@@ -35,7 +33,7 @@ demonstration) on concrete inputs, and uses them to infer the intended program.
 The program must be general enough to be used with different inputs.
 \gls{pbd} can be seen as a refinement of \gls{pbe} that
 considers an entire execution trace (i.e., step-by-step instructions of the
-program behavior on a given input) instead of a single \gls{io} example.
+program behavior on a given input) instead of a single input-output example.
 It depicts \textit{how} to achieve the corresponding output instead of just
 specifying \textit{what} it should be.
 
@@ -55,3 +53,37 @@ in more situations \cite{Lau2003}.
 They have also presented a language-neutral framework and an implementation of a
 system that learns procedural programs from just 5.1 traces on average
 \cite{Lau:traces:2003}.
+
+\subsubsection{Ambiguity}
+\label{sec:ambiguity}
+
+In inductive synthesis the specifications are inherently ambiguous.
+Therefore, the intended program should not only satisfy the specifications,
+but also generalize, effectively trying to figure out the user's intention.
+Typically, two approaches have been used to solve this problem.
+
+The first approach works by \textit{ranking} the set of programs consistent with
+examples according to their likelihood of being the desired program.
+This ranking function should allow for the efficient identification of the
+top-ranked program without having to perform costly enumeration.
+There have been manual approaches to create such functions, but it is a
+time-consuming process that requires a lot of domain expertise.
+It is also a fragile approach because it depends too much on the underlying
+\gls{dsl}.
+Recently, more automated approaches have been proposed~\cite{Singh:ranking:2015,
+  Ramsey:2017:LTL}, usually relying on machine learning techniques.
+However, as is usual with machine learning techniques, they require large
+labeled training datasets.
+
+The second approach is called \textit{active learning}, and (usually) relies
+on interaction between the user and the synthesizer.
+Typically, this happens by asking the user for (a small set of) additional
+input-output examples.
+Another idea, (similar to the one) introduced by
+\citeauthor{Jha:oracle:2010}~\cite{Jha:oracle:2010}, works by finding a
+\textit{distinguishing input}, an input on which two candidate programs differ,
+and query the user what the expected output should be for the intended program.
+Other types of active learning exist such as rephrasing the program in natural
+language, and accepting negative examples~\cite{Frankle:2016:EST}.
+
+
