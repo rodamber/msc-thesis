@@ -67,8 +67,8 @@ approach.
 The \gls{smt} solver used to solve the formulas generated in the synthesis
 process was Z3 version 4.8.5~\cite{DeMoura:2008:ZES}.
 Each benchmark was monitored by the \textit{runsolver}
-program~\cite{Roussel:2011:JSAT}, and restricted to a time limit of 10 minutes
-and a memory limit of 16 GB.
+program~\cite{Roussel:2011:JSAT}, and restricted to a wall-clock time limit of
+10 minutes, and a memory limit of 16 GB.
 
 \section{Results}
 \label{sec:results}
@@ -91,155 +91,95 @@ synthesize programs with a maximum of one constant, which the synthesizer can
 choose whether it is a an integer or a string (configurations W-e1:c1, W-e2:c1,
 and W-e3:c1, for for 1, 2, and 3 input-output examples, respectively).
 
-Figures~\ref{fig:bar-chart-solved-S-e1-c1}, \ref{fig:bar-chart-solved-S-e2-c1},
-and \ref{fig:bar-chart-solved-S-e3-c1} show the number of solved instances per
-size of the expected solution for S-e1:c1, S-e2:c1, and S-e3:c1, respectively,
-where by solved we mean that the synthesizer outputs a program that satisfies
-the input-output examples.
-Figures~\ref{fig:bar-chart-solved-W-e1-c1}, \ref{fig:bar-chart-solved-W-e2-c1},
-and \ref{fig:bar-chart-solved-W-e3-c1} show the same for W-e1:c1, W-e2:c1, and
-W-e3:c1, respectively.
-
-Figures~\ref{fig:bar-chart-expected-S-e1-c1}, \ref{fig:bar-chart-expected-S-e2-c1},
-and \ref{fig:bar-chart-expected-S-e3-c1} show the number of solved instances per
-size of the expected solution for S-e1:c1, S-e2:c1, and S-e3:c1, respectively,
-where by solved we mean that the synthesizer outputs a program that, not only
-satisfies the input-output examples, but also matches the expected solution.
+Figure~\ref{fig:bar-chart-solved-setwise}, shows the number of solved instances
+per size of the expected solution for the configurations S-e1:c1, S-e2:c1, and
+S-e3:c1, where by solved we mean that the synthesizer outputs a program that
+satisfies the input-output examples.
+Figure~\ref{fig:bar-chart-solved-whole} shows the same for configurations
+W-e1:c1, W-e2:c1, and W-e3:c1.
+Figure~\ref{fig:bar-chart-expected-setwise} shows the number of solved instances
+per size of the expected solution for configurations S-e1:c1, S-e2:c1, and
+S-e3:c1, where by solved we mean that the synthesizer outputs a program that,
+not only satisfies the input-output examples, but also matches the expected
+solution.
 Matching the expected solution does not necessarily mean that the program is
 exactly equal to the expected solution, but rather that it captures the original
 intent and generalizes to more examples.
-Figures~\ref{fig:bar-chart-expected-W-e1-c1}, \ref{fig:bar-chart-expected-W-e2-c1},
-and \ref{fig:bar-chart-expected-W-e3-c1} show the same for W-e1:c1, W-e2:c1, and
-W-e3:c1, respectively.
+Figure~\ref{fig:bar-chart-expected-whole} shows the same for configurations
+W-e1:c1, W-e2:c1, and W-e3:c1.
+Table~\ref{table:comparison-configs} show a comparison between the different
+configurations by number of instances solved and running time (wall-clock time).
+
+\begin{table}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{ccccc}
+      \toprule
+
+      \multicolumn{1}{l}{Configuration}
+      & \multicolumn{1}{l}{\# Instances solved}
+      & \begin{tabular}[c]{@{}c@{}}\# Instances solved\\ (matching expected\\ solution)\end{tabular}
+      & Mean Time (s)
+      & \multicolumn{1}{l}{Median Time (s)}
+      \\ \midrule
+
+      S-e1:c1 & 48 & 3  & 4.62  & 0.48 \\ \midrule 
+      S-e2:c1 & 39 & 21 & 51.28 & 3.21 \\ \midrule
+      S-e3:c1 & 34 & 23 & 51.38 & 4.47 \\ \midrule
+      W-e1:c1 & 47 & 2  & 6.76  & 0.65 \\ \midrule
+      W-e2:c1 & 13 & 4  & 11.14 & 2.24 \\ \midrule
+      W-e3:c1 & 9  & 5  & 21.45 & 7.48 \\ \bottomrule
+    \end{tabular}}
+  \caption{Comparison between the different configurations by number of instances
+    solved and running time (wall-clock time).}
+  \label{table:comparison-configs}
+\end{table}
 
 % Solved Setwise
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-solved-S-e1-c1.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-solved-setwise.pdf}
   \caption{Number of solved instances per size of the expected solution for
-    the Setwise synthesizer with one example, one integer constant, and one
-    string constant (S-e1:c1). Here by solved we mean that the synthesizer
-    outputs a program that satisfies the input-output examples.}
-  \label{fig:bar-chart-solved-S-e1-c1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-solved-S-e2-c1.pdf}
-  \caption{Number of solved instances per size of the expected solution for
-    the Setwise synthesizer with two examples, one integer constant, and one
-    string constant (S-e2:c1). Here by solved we mean that the synthesizer
-    outputs a program that satisfies the input-output examples.}
-  \label{fig:bar-chart-solved-S-e2-c1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-solved-S-e3-c1.pdf}
-  \caption{Number of solved instances per size of the expected solution for
-    the Setwise synthesizer with three examples, one integer constant, and one
-    string constant (S-e3:c1). Here by solved we mean that the synthesizer
-    outputs a program that satisfies the input-output examples.}
-  \label{fig:bar-chart-solved-S-e3-c1}
+    the Setwise synthesizer with one, two, and three examples, one integer
+    constant, and one string constant (S-e1:c1, S-e2:c1, S-e3:c1, respectively).
+    Here by solved we mean that the synthesizer outputs a program that satisfies the
+    input-output examples.}
+  \label{fig:bar-chart-solved-setwise}
 \end{figure}
 
 % Expected Setwise
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-expected-S-e1-c1.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-expected-setwise.pdf}
   \caption{Number of solved instances per size of the expected solution for
-    the Setwise synthesizer with one example, one integer constant, and one
-    string constant (S-e1:c1). Here by solved we mean that the synthesizer
-    outputs a program that matches the expected solution, and generalizes to
-    more examples.}
-  \label{fig:bar-chart-expected-S-e1-c1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-expected-S-e2-c1.pdf}
-  \caption{Number of solved instances per size of the expected solution for
-    the Setwise synthesizer with two examples, one integer constant, and one
-    string constant (S-e2:c1). Here by solved we mean that the synthesizer
-    outputs a program that matches the expected solution, and generalizes to
-    more examples.}
-  \label{fig:bar-chart-expected-S-e2-c1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-expected-S-e3-c1.pdf}
-  \caption{Number of solved instances per size of the expected solution for
-    the Setwise synthesizer with three examples, one integer constant, and one
-    string constant (S-e3:c1). Here by solved we mean that the synthesizer
-    outputs a program that matches the expected solution, and generalizes to
-    more examples.}
-  \label{fig:bar-chart-expected-S-e3-c1}
+    the Setwise synthesizer with one, two, and three examples, one integer
+    constant, and one string constant (S-e1:c1, S-e2:c1, S-e3:c1, respectively).
+    Here by solved we mean that the synthesizer outputs a program that matches
+    the expected solution, and generalizes to more examples.}
+  \label{fig:bar-chart-expected-setwise}
 \end{figure}
 
 % Solved Whole
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-solved-W-e1-c1.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-solved-whole.pdf}
   \caption{Number of solved instances per size of the expected solution for
-    the Whole synthesizer with one example, one integer constant, and one
-    string constant (W-e1:c1). Here by solved we mean that the synthesizer
-    outputs a program that satisfies the input-output examples.}
-  \label{fig:bar-chart-solved-W-e1-c1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-solved-W-e2-c1.pdf}
-  \caption{Number of solved instances per size of the expected solution for
-    the Whole synthesizer with two examples, one integer constant, and one
-    string constant (W-e2:c1). Here by solved we mean that the synthesizer
-    outputs a program that satisfies the input-output examples.}
-  \label{fig:bar-chart-solved-W-e2-c1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-solved-W-e3-c1.pdf}
-  \caption{Number of solved instances per size of the expected solution for
-    the Whole synthesizer with three examples, one integer constant, and one
-    string constant (W-e3:c1). Here by solved we mean that the synthesizer
-    outputs a program that satisfies the input-output examples.}
-  \label{fig:bar-chart-solved-W-e3-c1}
+    the Whole synthesizer with one, two, and three examples, and one constant
+    (W-e1:c1, W-e2:c1, W-e3:c1, respectively).
+    Here by solved we mean that the synthesizer outputs a program that satisfies the
+    input-output examples.}
+  \label{fig:bar-chart-solved-whole}
 \end{figure}
 
 % Expected Whole
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-expected-W-e1-c1.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-expected-whole.pdf}
   \caption{Number of solved instances per size of the expected solution for
-    the Whole synthesizer with one example, one integer constant, and one
-    string constant (W-e1:c1). Here by solved we mean that the synthesizer
-    outputs a program that matches the expected solution, and generalizes to
-    more examples.}
-  \label{fig:bar-chart-expected-W-e1-c1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-expected-W-e2-c1.pdf}
-  \caption{Number of solved instances per size of the expected solution for
-    the Whole synthesizer with two examples, one integer constant, and one
-    string constant (W-e2:c1). Here by solved we mean that the synthesizer
-    outputs a program that matches the expected solution, and generalizes to
-    more examples.}
-  \label{fig:bar-chart-expected-W-e2-c1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{assets/bar-chart-expected-W-e3-c1.pdf}
-  \caption{Number of solved instances per size of the expected solution for
-    the Whole synthesizer with three examples, one integer constant, and one
-    string constant (W-e3:c1). Here by solved we mean that the synthesizer
-    outputs a program that matches the expected solution, and generalizes to
-    more examples.}
-  \label{fig:bar-chart-expected-W-e3-c1}
+    the Whole synthesizer with one, two, and three examples, and one constant
+    (W-e1:c1, W-e2:c1, W-e3:c1, respectively).
+    Here by solved we mean that the synthesizer outputs a program that matches
+    the expected solution, and generalizes to more examples.}
+  \label{fig:bar-chart-expected-whole}
 \end{figure}
 
 \section{Discussion}
