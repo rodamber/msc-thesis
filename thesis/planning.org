@@ -359,45 +359,34 @@ Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 
 Missing computer specifications.
 
-*** TODO Results and Comparison
+*** REVIEW Results
 
-- calls to solvers (timeout, numero de conflictos)
-- replace e undecidable
-- versao em que se fixa o set de constantes
+*** ONGOING Discussion
 
-- user intent
-- time
-- comparing size of encodings
--- later: number of constants needed of each type
+- [ ] For one example, without a ranking function for programs, the synthesizers
+  returns overfitted programs
+  - far fetched constants and "identity components" make everything possible
+  - tricks like (Length(''), or Concat(''), etc)
+  - a common theme is to combine Length and Substr plus a string constant
+    containing the expected output prefixed by garbage with the length of the
+    input: Substr(c0, Length(x0), Length(x0))
 
-- ranking needed, especially for few examples: far fetched constants and
-  "identity components" make everything possible
-- substring indexes should not be the same
-- constants should not contain the output
-- would be interesting to check the case where constants are limited, or
-  provided by the user
+- [ ] Need to apply restrictions:
+  - on the domain of constants: constants should not contain the output
+  - on the domain of formal param,ters: index arguments to substr should
+    not be the same, concat should not be applied to the empty string, length
+    with constants, etc
 
-- we're counting the solution as 'expected' even if it's not the same program
-  from the benchmark: the reasoning is that if it captures the same idea and
-  generalizes, even if it is not natural, then we consider it correct.
+- [X] would be interesting to check the configurations for Setwise and Whole
+  where constants are provided by the user, in order to better compare with
+  SyPet-User.
+  - Or trying to infer the constants from the input-output examples.
+  - Or separating the sketch phase from constant search phase (similar to cegis(t))
 
-- setwise, nonrec, e2c1, results much closer to the expected solution, although
-  many times 2 examples are not enough to generalize
-
-- we could try adding more examples (and refine them)
-
-- there seems to be some sweet spot at 3 lines where the synth. is able to find
-  programs that satisfy three examples 
-
-- mention that while we tried to make the examples "as good as possible" ...
-
-- [ ] Analysis of the size of the problem in function of the number of constants,
-  components, arity of the components, number of examples, number of inputs,
-  etc.
-
-*** TODO Other
-
-We tried encoding more complex functions (recursive), but...
+- [ ] Note that the times for the solved benchmarks are reasonably fast,
+  allowing for reasonable interaction times with the user. 
+- [ ] On the other hand, we do not manage to synthesize programs with many
+  lines, which means.
 
 ** TODO Concluding Remarks
 - [ ] At some point we have to explain which components we are considering and
@@ -423,6 +412,8 @@ Comparison to Jha's et al. approach:
 - [ ] Our components are more complex.
 - [ ] We prevent the addition of dead-code by asserting that every variable
   should be used at least once.
+
+Fine tuning and further benchmarking is needed.
 
 *** TODO Related Work
 *** TODO Future Work
