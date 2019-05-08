@@ -1,46 +1,21 @@
 * Chapters
-** ONGOING Introduction
+** REVIEW Introduction
 :PROPERTIES:
 :CONTENT:  ONGOING
 :EXAMPLES: REVIEW
 :RELWORK:  TODO
 :END:
 
-$\exists P \ldotp \phi(P) $
-
 This chapter should:
 
-- open the thesis with a page or two that sells the work to a general audience
+- [X] open the thesis with a page or two that sells the work to a general audience
 (e.g., a science reporter);
 - tie the work together and highlight the novel contributions;
 - advertise the organization of the rest of the document.
 
-Things to (maybe) talk about:
-
-# Overview: ch.1, pages 7-13
-- user intent
-- search space
-- search technique
-# DSL design
-- expressiveness
-- choice of operators
-- naturalness
-- efficiency
-# Program ranking
-- Program speed - superopt
-- Robustness - pbe
-- Naturalness and readability
-# Artificial intelligence
-- Machine Learning (check Jha:2017:TFS)
-- Explainable AI
-- Reverse engineering of black-box models
-
-Missing an explanation of why the search space is big.
-
-Maybe rewrite the example in haskell or a similar language to improve the
-typography?
-
-
+- [ ] There should be a bridge to constraint solving. Right now it appears out
+  of nowhere in the preliminaries.
+$\exists P \ldotp \phi(P) $
 Synthesis as a next-step from verification:
  - \phi{}(input, program, output)
    - fix program and input: interpretation
@@ -48,43 +23,24 @@ Synthesis as a next-step from verification:
    - fix program: verification
    - fix input and output: synthesis
 
-# Introduction, maybe?
-In this context, the synthesis process should be \todo{reasonably fast}{explain}
-in order to be useful. The synthesized programs should also be ``natural'' in
-the sense that it seems like it was written by a human programmer. We also want
-our programs to be readable in order for the users to able to verify it
-themselves. 
+- How does PBE compare to other kinds of automatic programming? In
+particular, how does it compare to Machine Learning?
 
-% ------------------------------------------------------------------------------
-% Questions left to answer?
-% - Extend the motivation.
-% - In practice where can this be applied (present/future)?
-% - How does prog. synth. compare to other kinds of automatic programming? In
-% particular, how does it compare to ML?
-% - Can you give an example?
-% - What does this thesis introduce? Give a summary of the work done in the rest
-% of the thesis.
+Compromise:
+- reducing the scope or domain of application
+- make the synthesizers domain-specific and less general (embed the insights
+  directly into the synthesizers)
 
-% Other questions that will be answered in the following sections include:
-% - How to provide user intent?
-% - How to solve the problem efficiently?
+Solutions are:
+- solver-aided programming: human provides high-level insights while the
+synthesizer takes care of the low-level details.
+- human-computer working together (interaction through active learning)
 
-% ------------------------------------------------------------------------------
-% Compromise:
-% - reducing the scope or domain of application
-% - make the synthesizers domain-specific and less general (embed the insights
-%   directly into the synthesizers)
+Automating this work is good because:
+- code is correct by construction
 
-% Solutions are:
-% - solver-aided programming: human provides high-level insights while the
-% synthesizer takes care of the low-level details.
-% - human-computer working together (interaction through active learning)
-
-% Automating this work is good because:
-% - code is correct by construction
-
-% - sintetizadores altamente especializados e calibrados para dominios particulares
-% - bugs enviados para a camada de abstraccao acima
+- sintetizadores altamente especializados e calibrados para dominios particulares
+- bugs enviados para a camada de abstraccao acima
 
 ** ONGOING Preliminaries
 :PROPERTIES:
@@ -94,13 +50,11 @@ themselves.
 :END:
 
 Missing definitions:
-- Program space
 - What does it mean for a program to satisfy a specification
 - Example, a set of examples, etc
-- Context-free grammars
-- DSL
+- Context-free grammars (expand example)
 
-Some background on how SMT solvers work, e.g., describe DPLL(T).
+- Some background on how SMT solvers work, e.g., describe DPLL(T).
 
 ** REVIEW Background
   DEADLINE: <2019-03-13 Wed>
@@ -110,8 +64,8 @@ Some background on how SMT solvers work, e.g., describe DPLL(T).
 :RELWORK:  REVIEW
 :END:
 
-I guess, at the end of this section there should probably be a discussion
-comparing the different approaches to the problem.
+- [ ] Synthesis of string-manipulating program
+- [ ] Missing an explanation of why the search space is big
 
 *** REVIEW Specifications
 :PROPERTIES:
@@ -315,6 +269,23 @@ Missing pseudocode.
 
 Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 
+- [ ] Explain that both encodings are independent of the components used as long
+  as they can be specified in SMT
+
+- [ ] Comparison to Jha's et al. approach:
+  - [ ] We use a lot more components.
+  - [ ] More than just one type. Also, larger search space with strings that
+    with bitvectors.
+  - [ ] We synthesize arbitrary constants that are not given as user input.
+  - [ ] Their program must use all components from the library exactly once.
+  - [ ] Our components are more complex.
+  - [ ] We prevent the addition of dead-code by asserting that every variable
+    should be used at least once.
+
+- [ ] Why does a component-based approach lend itself well? (direct mapping
+  between components and DSL constructs; compare this with FlashFill's
+  approach).
+
 *** ONGOING Problem Description
 :PROPERTIES:
 :CONTENT:  ONGOING
@@ -348,21 +319,19 @@ Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 :RELWORK:  ONGOING
 :END:
 
-** ONGOING Experimental Results
+** REVIEW Experimental Results
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
+- Why did we choose SyPet? There is Brahma, Blaze, FlashFill, ...
+- Missing computer specifications.
+
 *** REVIEW Benchmark Description
-
-Missing computer specifications.
-
 *** REVIEW Results
-
-*** ONGOING Discussion
-
+*** REVIEW Discussion
 - [ ] For one example, without a ranking function for programs, the synthesizers
   returns overfitted programs
   - far fetched constants and "identity components" make everything possible
@@ -388,36 +357,13 @@ Missing computer specifications.
 - [ ] On the other hand, we do not manage to synthesize programs with many
   lines, which means.
 
-** TODO Concluding Remarks
-- [ ] At some point we have to explain which components we are considering and
-  how they map to SMT. Particularly, we should explain the logics that we need,
-  and whether they are decidable (preliminaries) or not.
-  (https://anthonywlin.github.io/papers/popl18-replace.pdf)
 
-- [ ] Why does a component-based approach lend itself well? (direct mapping
-  between components and DSL constructs; compare this with FlashFill's
-  approach).
+- [ ] FlashFill, blaze, etc
 
-
-- [ ] Explain that both encodings are independent of the components used as long
-  as they can be specified in SMT
-
-Comparison to Jha's et al. approach:
-
-- [ ] We use a lot more components.
-- [ ] More than just one type. Also, larger search space with strings that
-  with bitvectors.
-- [ ] We synthesize arbitrary constants that are not given as user input.
-- [ ] Their program must use all components from the library exactly once.
-- [ ] Our components are more complex.
-- [ ] We prevent the addition of dead-code by asserting that every variable
-  should be used at least once.
-
-Fine tuning and further benchmarking is needed.
-
-*** TODO Related Work
-*** TODO Future Work
-*** TODO Conclusion
+** REVIEW Concluding Remarks
+*** REVIEW Related Work
+*** REVIEW Future Work
+*** REVIEW Conclusion
 * config :noexport:
 #+TODO: TODO ONGOING REVIEW | DONE
 #+COLUMNS: %36ITEM %7CONTENT %7RELWORK %7EXAMPLES
