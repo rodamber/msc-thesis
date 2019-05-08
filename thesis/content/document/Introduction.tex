@@ -95,7 +95,7 @@ We must require that \lstinline{xs'} has exactly the same contents as those of
 We could express that requirement as a binary predicate \lstinline{sameContents}
 over lists (whose implementation is omitted) and add it to specification:
 
-\begin{lstlisting}
+\begin{lstlisting}[xleftmargin=.2\textwidth]
   sort: (xs: List Int) -> (xs': List Int)
   sortSpec: isSorted(xs') and sameContents(xs, xs')
 
@@ -181,6 +181,20 @@ In particular, it does not seem to exist an obvious way to map the FlashFill
 \gls{dsl} to OutSystems expressions.
 Another notable \gls{pbe} synthesizer is SyPet~\cite{Feng:2017:CSC}, which has
 been applied in the domain of Java programs.
+
+\section{Contributions}
+
+In this work, we surveyed the state of the art in program synthesis, and
+implemented two component-based \gls{pbe} synthesizers based on an \gls{ogis}
+architecture.
+Both synthesizers employ a mixture of constraint solving with basic enumerative
+search, differing on the amount of work they put on the constraint solving
+phase, for which they make use of an \Glsfmtfull{smt} solver.
+The components that we used correspond to a small subset of expressions of the
+OutSystems API that manipulate Integers and Text.
+However, the synthesizers are not specific to OutSystems expressions and could
+be instantiated in other domains.
+We benchmarked both synthesizers and compared them to SyPet~\cite{Feng:2017:CSC}
 
 \section{Document Structure}
 \label{sec:structure}

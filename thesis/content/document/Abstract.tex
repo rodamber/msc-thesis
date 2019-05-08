@@ -3,9 +3,28 @@
 % Add entry in the table of contents as section
 \addcontentsline{toc}{section}{Abstract}
 
+Program synthesis is the problem of automatically generating concrete program
+implementations from high-level specifications that define user intent.
+OutSystems is a low-code platform for rapid application development,
+and easy integration with existing systems, featuring both visual and
+textual programming (expressions).
+In this work, we focus on the textual programming side.
+We tackle the problem of synthesizing OutSystems expressions in a setting where
+the specifications are given in the form of input-output examples, focusing on
+expressions that manipulate the Integer and Text datatypes.
+We surveyed the state of the art in program synthesis, and implemented two
+component-based \Glsfmtshort{pbe} synthesizers based on an \Glsfmtshort{ogis}
+architecture.
+Both synthesizers employ a mixture of constraint solving with basic enumerative
+search, differing on the amount of work they put on the constraint solving
+phase.
+We benchmarked both synthesizers and compared them to
+SyPet~\cite{Feng:2017:CSC} on a set of real world problems provided by
+OutSystems, showing good results for programs of up to size 4.
 
 \vfill
 
-\textbf{\Large Keywords:} 
+\textbf{\Large Keywords:} Program Synthesis, Programming by Examples,
+Component-Based Synthesis, Constraint Solving, Satisfiability Modulo Theories
 
 \cleardoublepage
