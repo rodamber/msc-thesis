@@ -44,35 +44,35 @@ numbers, or dates
       & Returns the number of characters in \textit{t}.
       \\ \midrule
 
-      Replace(t: Text, s: Text, s': Text): Text
-      & Returns \textit{t} after replacing all occurrences of \textit{s} with
-        \textit{s'}.
-      \\ \midrule
+      % Replace(t: Text, s: Text, s': Text): Text
+      % & Returns \textit{t} after replacing all occurrences of \textit{s} with
+      %   \textit{s'}.
+      % \\ \midrule
 
       Substr(t: Text, i: Integer, n: Integer): Text
       & Returns the substring of \textit{t} with \textit{n} characters starting
         at index \textit{i}.
       \\ \midrule
 
-      ToLower(t: Text): Text
-      & Converts all characters in \textit{t} to lowercase.
-      \\ \midrule
+      % ToLower(t: Text): Text
+      % & Converts all characters in \textit{t} to lowercase.
+      % \\ \midrule
 
-      ToUpper(t: Text): Text
-      & Converts all characters in \textit{t} to uppercase.
-      \\ \midrule
+      % ToUpper(t: Text): Text
+      % & Converts all characters in \textit{t} to uppercase.
+      % \\ \midrule
 
-      Trim(t: Text): Text
-      & Removes all leading and trailing space characters (' ') from \textit{t}.
-      \\ \midrule
+      % Trim(t: Text): Text
+      % & Removes all leading and trailing space characters (' ') from \textit{t}.
+      % \\ \midrule
 
-      TrimStart(t: Text): Text
-      & Removes all leading space characters (' ') from \textit{t}.
-      \\ \midrule
+      % TrimStart(t: Text): Text
+      % & Removes all leading space characters (' ') from \textit{t}.
+      % \\ \midrule
 
-      TrimEnd(t: Text): Text
-      & Removes all trailing space characters (' ') from \textit{t}.
-      \\ \midrule
+      % TrimEnd(t: Text): Text
+      % & Removes all trailing space characters (' ') from \textit{t}.
+      % \\ \midrule
 
       +(x: Integer, y: Integer): Integer
       & Integer addition.
@@ -117,36 +117,37 @@ numbers, or dates
         \end{tabular}
       \\ \midrule
 
-      Replace(t: Text, s: Text, s': Text): Text
-      & Replace("ababa", "a", "xy") = "xybxybxy"
-      \\ \midrule
+      % Replace(t: Text, s: Text, s': Text): Text
+      % & Replace("ababa", "a", "xy") = "xybxybxy"
+      % \\ \midrule
 
       Substr(t: Text, i: Integer, n: Integer): Text
       & \begin{tabular}[c]{@{}l@{}}
           Substr("abcdef", 2, 3) = "cde"\\
           Substr("abcdef", 2, 100) = "cdef"
         \end{tabular}
-      \\ \midrule
-
-      ToLower(Text): Text
-      & ToLower("AbC ") = "abc "
-      \\ \midrule
-
-      ToUpper(Text): Text
-      & ToUpper("aBc ") = "ABC "
-      \\ \midrule
-
-      Trim(Text): Text
-      & Trim("    xyz    ") = "xyz"
-      \\ \midrule
-
-      TrimStart(Text): Text
-      & TrimStart("    xyz    ") = "xyz    "
-      \\ \midrule
-
-      TrimEnd(Text): Text
-      & TrimEnd("    xyz    ") = "    xyz"
+      % \\ \midrule
       \\ \bottomrule
+
+      % ToLower(Text): Text
+      % & ToLower("AbC ") = "abc "
+      % \\ \midrule
+
+      % ToUpper(Text): Text
+      % & ToUpper("aBc ") = "ABC "
+      % \\ \midrule
+
+      % Trim(Text): Text
+      % & Trim("    xyz    ") = "xyz"
+      % \\ \midrule
+
+      % TrimStart(Text): Text
+      % & TrimStart("    xyz    ") = "xyz    "
+      % \\ \midrule
+
+      % TrimEnd(Text): Text
+      % & TrimEnd("    xyz    ") = "    xyz"
+      % \\ \bottomrule
     \end{tabular}}
   \caption{Examples for the builtin functions used for synthesis.}
   \label{table:builtin-examples}
@@ -164,13 +165,14 @@ Table~\ref{table:builtin-examples} shows input-output examples for each of the
 functions in Table~\ref{table:builtin-description}.
 
 \begin{example}
-  Suppose that we would like to capitalize a given text string. For example,
-given the name ``joseph'' we would like to obtain ``Joseph''. The following
-expression satisfies the specification.
+  Suppose that, given a text representing an email, we are interested in
+  extracting its domain part.
+  For example, given the text ``john.doe@outsystems.com'', we would like to
+  obtain ``outsystems.com''.
+  The following expression satisfies the specification.
 
 \begin{lstlisting}
-  prog(name) = Concat(ToUpper(Substr(name, 0, 1)),
-                              Substr(name, 1, Length(name)))
+  prog(email) = Substr(email, Add(Index(email, "@", 0), 1), Length(email))
 \end{lstlisting}
 \end{example}
 
@@ -181,9 +183,7 @@ text ``John Michael Doe'' and the prefix ``Dr. '' we would like to obtain
 ``Dr. John''. The following expression satisfies the specification.
  
 \begin{lstlisting}
-  prog(name, prefix) = Concat(prefix,
-                              Substr(name, 0,
-                                     Index(name, " ", 0)))
+  prog(name, prefix) = Concat(prefix, Substr(name, 0, Index(name, " ", 0)))
 \end{lstlisting}
 \end{example}
 
@@ -194,7 +194,8 @@ in extracting not the first but the second name. For example, given the name
 expression satisfies the specification.
  
 \begin{lstlisting}
-  prog(name) = Substr(name, Index(name, " ", 0),
+  prog(name) = Substr(name,
+                      Index(name, " ", 0),
                       Index(name, " ",
                             Index(name, " ", 0) + 1) - Index(name, " ", 0))
 \end{lstlisting}
