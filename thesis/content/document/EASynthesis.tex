@@ -1,0 +1,976 @@
+\section{Synthesis}
+\label{sec:synthesis}
+
+This section describes the problem (Section~\ref{sec:problem-description}) and
+the approaches that were studied in order to solve it. The first one
+(Section~\ref{sec:setwise-encoding}), is an adaptation of a component-based
+constraint solving approach previously applied to the synthesis of bitvector
+programs~\cite{Gulwani:2011:SLP, Jha:oracle:2010}.
+
+\subsection{Problem Description}
+\label{sec:problem-description}
+
+We are working in the context of the OutSystems platform. OutSystems is a
+low-code platform that features visual application development, easy integration
+with existing systems, and the possibility to add own code when needed. To that
+effect, the kind of programs we are interested in are expressions in the
+OutSystems language
+\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}.
+
+We can think of OutSystems expressions as a simple functional language of
+operands and operators that compose themselves to create pure, stateless,
+loopless programs. This means that OutSystems expressions do not have
+side-effects, like printing to the screen, or writing to a database, and do not
+permit any variables or (for/while) loops. They do, however, have conditional
+expressions in the form of ``if'' statements. The library of builtin expressions
+includes functions that manipulate builtin data types such a text strings,
+numbers, or dates
+\footnote{\url{https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Data/Data_Types/Available_Data_Types}}
+\footnote{\url{https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions}}.
+
+\begin{table*}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+
+      \multicolumn{1}{c}{Function Signatures}
+      & \multicolumn{1}{c}{Description}
+      \\ \midrule
+
+      Concat(t: Text, s: Text): Text
+      & Concatenation of the texts \textit{t} and \textit{s}.
+      \\ \midrule
+
+      Index(t: Text, s: Text, n: Integer): Text
+      & \begin{tabular}{@{}l@{}}
+          Retrieves first position of \textit{s} at or after \textit{n}
+          characters in t.\\
+          Returns -1 if there are no occurrences of \textit{s} in \textit{t}.
+        \end{tabular}
+      \\ \midrule
+
+      Length(t: Text): Integer
+      & Returns the number of characters in \textit{t}.
+      \\ \midrule
+
+      Substr(t: Text, i: Integer, n: Integer): Text
+      & Returns the substring of \textit{t} with \textit{n} characters starting
+        at index \textit{i}.
+      \\ \midrule
+
+      +(x: Integer, y: Integer): Integer
+      & Integer addition.
+      \\ \midrule
+
+      -(x: Integer, y: Integer): Integer
+      & Integer subtraction.
+      \\ \bottomrule
+    \end{tabular}}
+  \caption{Description of the builtin functions used for synthesis.}
+  \label{table:builtin-description}
+\end{table*}
+
+\begin{table*}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{@{}ll@{}}
+      \toprule
+
+      \multicolumn{1}{c}{Function Signatures}
+      & \multicolumn{1}{c}{Examples}
+      \\ \midrule
+
+      Concat(t: Text, s: Text): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Concat("", "") = ""\\
+          Concat("x", "yz") = "xyz"
+        \end{tabular}
+      \\ \midrule
+
+      Index(t: Text, s: Text, n: Integer): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Index("abcbc", "b", 0) = 1\\
+          Index("abcbc", "b", 2) = 3\\
+          Index("abcbc", "d", 0) = -1
+        \end{tabular}
+      \\ \midrule
+
+      Length(t: Text): Integer
+      & \begin{tabular}[c]{@{}l@{}}
+          Length("") = 0\\
+          Length("abc") = 3
+        \end{tabular}
+      \\ \midrule
+
+      Substr(t: Text, i: Integer, n: Integer): Text
+      & \begin{tabular}[c]{@{}l@{}}
+          Substr("abcdef", 2, 3) = "cde"\\
+          Substr("abcdef", 2, 100) = "cdef"
+        \end{tabular}
+      \\ \bottomrule
+
+    \end{tabular}}
+  \caption{Examples for the builtin functions used for synthesis.}
+  \label{table:builtin-examples}
+\end{table*}
+
+In this work we are mainly interested in synthesizing expressions that
+manipulate text strings, like concatenation, substring slicing or whitespace
+trimming. As some of these operations involve indexing, we are also interested
+in synthesizing simple arithmetic expressions involving addition and
+subtraction. Therefore, the data types we are working with are text strings and
+integers. In particular, we are not dealing neither with boolean, nor conditional
+expressions. Table~\ref{table:builtin-description} describes the builtin
+expressions that our synthesized programs can be composed of.
+Table~\ref{table:builtin-examples} shows input-output examples for each of the
+functions in Table~\ref{table:builtin-description}.
+
+\begin{example}
+  Suppose that, given a text representing an email, we are interested in
+  extracting its domain part.
+  For example, given the text ``john.doe@outsystems.com'', we would like to
+  obtain ``outsystems.com''.
+  The following expression satisfies the specification.
+
+\begin{lstlisting}
+  prog(email) = Substr(email, Add(Index(email, "@", 0), 1), Length(email))
+\end{lstlisting}
+\end{example}
+
+\begin{example}\label{ex:first-name}
+  Suppose that, given a text representing a person's name, we are interested in
+extracting the first name and prepend it with a prefix. For example, given the
+text ``John Michael Doe'' and the prefix ``Dr. '' we would like to obtain
+``Dr. John''. The following expression satisfies the specification.
+ 
+\begin{lstlisting}
+  prog(name, prefix) = Concat(prefix, Substr(name, 0, Index(name, " ", 0)))
+\end{lstlisting}
+\end{example}
+
+\begin{example}\label{ex:second-name}
+  Suppose now that, given a text representing a person's name, we are interested
+in extracting not the first but the second name. For example, given the name
+``John Michael Doe'' we would like to obtain ``Michael''. The following
+expression satisfies the specification.
+ 
+\begin{lstlisting}
+  prog(name) = Substr(name,
+    Index(name, " ", 0),
+    Index(name, " ",
+      Index(name, " ", 0) + 1) - Index(name, " ", 0))
+\end{lstlisting}
+\end{example}
+
+In our context, we are working in a \gls{pbe} setting, so we are interested in
+synthesizing an OutSystems expression from a set of input-output examples
+$E = \{(I_i, o_i)\}_i$. For example,
+\lstinline|{(<"John Michael Doe">, "Michael")}|
+is a set of input-output examples that are satisfied by the previous program.
+However, in this case, the program
+\lstinline|prog(name) = Substr(0, 5, 7)|
+would have done just fine. In order to rule out this program, we could extend
+the input-output examples with a second example, for instance,
+\lstinline|(<"Anne Marie Joe">, "Marie")|.
+
+\subsection{Setwise Encoding}
+\label{sec:setwise-encoding}
+
+Because OutSystems expressions are composed of self-contained pure functions,
+this synthesis problem fits nicely in the component-based synthesis
+paradigm~(\ref{sec:components}). Therefore, assume we are given a \textit{library}
+of base components $F$ that the synthesizer can use in order to compose the
+programs. These components will be builtin functions drawn from the OutSystems
+library, or combinations of them. Each component can take a finite number of
+inputs and return exactly one output. More formally, a component $f \in F$ is
+represented by an expression $\phi{}_f$ (a specification) that specifies how its
+input parameters $P_f$ relate to its return value $r_f$.
+
+We can see from the previous examples that OutSystems expressions can also
+include constant literals, like \lstinline{" "}, or \lstinline{0}. These could
+have be given as input, but we would like them to be figured out automatically
+by the synthesizer. Ignoring well-typedness, an OutSystems expression is a
+tree-like program whose form can be succintly described using a \gls{cfg}:
+%
+\[S ::= f(S, \ldots, S) \OR x \OR c\]
+
+\noindent
+where $f \in F$, $x \in I$, and $c \in C$, and where $I$ and $C$ are the set of
+inputs of the program, and the set of constant literals in the OutSystems
+language, respectively.
+
+\begin{figure}
+  \begin{lstlisting}[frame=tlrb]
+    prog(name, prefix):
+      c0 = " "
+      c1 = 0
+      r1 = Index(name, c0, c1)
+      r2 = Substr(name, c1, r1)
+      r3 = Concat(prefix, r2)
+  \end{lstlisting}
+\caption{\gls{ssa} representation of the program from
+    Example~\ref{ex:first-name}. The last variable, \lstinline{r3}, is assumed
+    here to be the return value of the program.}
+\label{fig:first-name-ssa}
+\end{figure}
+
+It is useful to reason about OutSystems expressions in another representation,
+called \gls{ssa} form. A program in \gls{ssa} form is a line program where every
+variable is assigned exactly once and defined before it is used. For example,
+the program from Example~\ref{ex:first-name} could be written in \gls{ssa} form
+as shown in Listing~\ref{fig:first-name-ssa}. The body of a program in this
+format can be described succinctly with the following \gls{cfg}:
+%
+\[S ::= ID = c \OR ID = f(x_1, ..., x_n) \OR S;S\]
+
+\noindent
+$ID$ stands for an identifier in the OutSystems language. The non-terminal $S$
+represents a line in the program. A line is an assignment of a variable to a
+constant literal $c$ or to the return value of a component $f$ on inputs $x_1,
+..., x_n$. As long as the program is well-typed, an input to a component can
+be one of the inputs of the program, or variable defined in a preceding line.
+Thus, the general structure of a program in \gls{ssa} form is a sequence of
+assignments.
+
+The approach described in this section is based on
+\citeauthor{Jha:oracle:2010}'s program encoding. The idea is to encode the
+program space in a formula. The formula is then constrained further in order to
+encode only those programs that satisfy the input-output examples. A solution to
+the formula can then be decoded back yielding a program that satisfies the set
+of examples.
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    [semithick, >=stealth, auto,
+     rectangular/.style={rectangle, draw, rounded corners, text width=4cm,
+       align=center, minimum size=1.5cm},
+     spherical/.style={circle, draw, text width=2cm, align=center}]
+
+    \node [rectangular] (S)  {Enumerator};
+    \node [left=1.5cm of S, align=center] (I) {Examples}
+      edge [->] (S);
+    \node [below=of S, align=center] {Program $p$\\or Fail}
+      edge [<-] (S);
+    \node [spherical] (V)  [right=5cm of S] {Solver}
+      ([yshift=0.2cm]S.east) edge [->, bend left]  node [align=center]      {Components subset\\+ examples}     ([yshift=0.2cm]V.west)
+      ([yshift=-.2cm]S.east) edge [<-, bend right] node [swap,align=center] {SAT + Model\\or UNSAT\\or UNKNOWN} ([yshift=-.2cm]V.west);
+  \end{tikzpicture}
+
+  \caption{Diagram of the synthesizer.}
+  \label{fig:synth-setwise}
+\end{figure}
+
+The synthesizer (Figure~\ref{fig:synth-setwise}) follows the \gls{ogis} model,
+described in Section~\ref{sec:ogis}. It has a learner part and an oracle part,
+which will call here the \textit{enumerator} and the \textit{solver},
+respectively.
+
+The enumerator receives the set of input-output examples as input, and is
+parameterized by the library of components. The enumerator is responsible for
+drawing a subset of components from the library. The components are drawn by
+trying all sets of combinations (with replacement) in order of increasing size.
+It then passes these components to the solver, along with the input-output
+examples, and queries whether there is any program made only of those components
+that satisfies the examples. There is the additional restriction that the
+program must use each of the components in the query exactly once.
+
+The solver works by encoding the query into an \gls{smt} formula, and uses an
+automated \gls{smt} solver to check for satisfiability. The \gls{smt} solver
+might or might not be able to solve the formula. If the formula is satisfiable,
+the solver responds to the enumerator with SAT and a solution (called a
+\textit{model}) to that formula. If not, it responds UNSAT or UNKNOWN, depending
+on whether the formula is unsatisfiable or the \gls{smt} solver could not verify
+its satisfiability, respectively.
+
+The procedure keeps going in a loop until the enumerator receives SAT from the
+solver. The enumerator then decodes the model into an actual program, which is
+then returned.
+
+\subsubsection{Program Formula}
+\label{sec:program-formula}
+
+Let us take the program from Figure~\ref{fig:first-name-ssa} as a running
+example in order to understand how, given the input-output examples and a set of
+components, we can construct a formula whose model can be decoded into a program
+that satisfies the examples. This program is good because it is a small,
+non-trivial program, which uses non-input constant variables (\lstinline{" "}
+and \lstinline{0}), and not every component has the same return type.
+
+In order to encode the space of valid programs, the solver has to decide
+\begin{enumerate*}[(1)]
+\item how many constant variables to create and which values to assign them,
+\item in which order the components appear in the program, and
+\item which \textit{actual} values to pass to the \textit{formal} parameters of
+  each component.
+\end{enumerate*}
+
+For instance, Figure~\ref{fig:other-valid-programs} shows two other valid
+programs using the components \lstinline{Index}, \lstinline{Substr}, and
+\lstinline{Concat}. The program on the left does actually satisfy the sole
+input-output example of Example~\ref{ex:first-name}, altough it does not
+generalize. It does so by switching the order of the components, and using one
+more variable than program~\ref{fig:first-name-ssa}. The program on the right,
+however, does not satisfy the example because the values passed to
+\lstinline{Concat} are reversed.
+
+\begin{figure}
+\noindent
+\begin{minipage}{.45\textwidth}
+  \begin{lstlisting}[frame=tlrb]{Name}
+    prog(name, prefix):
+      c0 = " "
+      c1 = 4
+      c2 = 0
+      r1 = Concat(prefix, name)
+      r2 = Index(r1, c0, c1)
+      r3 = Substr(r2, r1, c1)
+  \end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+  \begin{lstlisting}[frame=tlrb]{Name}
+    prog(name, prefix):
+      c0 = " "
+      c1 = 0
+      r1 = Index(name, c0, c1)
+      r2 = Substr(name, c1, r1)
+      r3 = Concat(r2, prefix)
+\end{lstlisting}
+\end{minipage}
+\caption{Two other well-formed programs using the components \lstinline{Index},
+  \lstinline{Substr}, and \lstinline{Concat}.}
+\label{fig:other-valid-programs}
+\end{figure}
+
+In order to encode the program we need variables in the formula to model several
+entities:
+\begin{enumerate*}[(1)]
+\item the input variables to the program;
+\item the constant variables;
+\item the formal parameters of each component;
+\item the return variables of all components;
+\item the output variable of the program; and
+\item the \textit{connections} between the variables, that specify which
+  actual parameters are passed to the formal parameters of each component.
+\end{enumerate*}
+Thus, we have a set $I$ of input variables, a set $C$ of constant variables, a
+set $P$ of the formal parameters of all components, a set $R$ of the return
+variables of all components, and a variable $o$, the output variable of the
+program. We will denote the formal parameter variables and return variable of
+component $f$ by $P_f$ and $r_f$ , respectively. Also, we will use $F'$ to refer
+to the components available to the solver (in this case, \lstinline{Index},
+\lstinline{Substr}, and \lstinline{Concat} --- recall that $F$ is used to denote
+the library of all components).
+For program~\ref{fig:first-name-ssa} this would mean $I = \{name, prefix\}$,
+$C = \{c_0, c_1\}$, and $R = \{r_1, r_2, r_3\}$. We would also have
+$P = P_{Index} \cup P_{Substr} \cup P_{Concat}$, with
+$P_{Index} = \{p_{11}$, $p_{12}$, $p_{13}\}$,
+$P_{Substr} = \{p_{21}$, $p_{22}$, $p_{23}\}$, and
+$P_{Concat} = \{p_{31}$, $p_{32}\}$.
+
+\paragraph{Well-Formedness Constraint}
+\label{sec:wfp-constraint}
+
+To encode the connections, we require a set $L$ of integer-valued
+\textit{location} variables $l_x$ for each variable $x \in I \cup C \cup P \cup
+R \cup \{o\}$. Intuitively, if $x$ is the return variable of component $f$, then
+$l_x$ is the line number where $f$ appears in the program. If $x$ is a formal
+parameter of some component, then $l_x$ is the line number where the actual
+parameter is defined. In practice, each variable in $I$ is assigned a line
+number from $1$ to $|I|$ (in the obvious way), variables in $C$ are assigned
+a number from $|I| + 1$ to $C$, and the output variable $\{o\}$ is assigned the
+line number $|I| + |C| + |R|$ (the last line). The locations of variables in $R$
+range from $|I| + |C| + 1$ to $|I| + |C| + |R|$. The location of each formal
+parameter $x \in P$ ranges from $1$ up to the location of its corresponding
+component.
+For program~\ref{fig:first-name-ssa} we would have
+$l_{name} = 1$, $l_{prefix} = 2$,
+$l_{c_0} = 3$, $l_{c_1} = 4$,
+and $l_o = 7$.
+The range constraints are
+$4 \leq l_x \leq 7$ for $x \in R$,
+$1 \leq l_x < 5$ for $x \in P_{Index}$,
+$1 \leq l_x < 6$ for $x \in P_{Substr}$, and
+$1 \leq l_x < 7$ for $x \in P_{Concat}$.
+In general, we can capture these constraints with the following formula:
+%
+\[
+  \psi{}_{\mathtt{range}}(I, C, P, R) =
+  %
+  \bigwedge_{f \in F'} (|I| + |C| + 1 \leq l_{r_f} \leq |I| + |C| + |R|)
+  %
+  \quad \wedge
+  \bigwedge_{f \in F'}
+  \bigwedge_{p \in P_f} (1 \leq l_p < l_{r_f})
+\]
+
+The locations of the variables $x \in I \cup C \cup \{o\}$ are known as soon as
+we decide how many constant variables the program will have at its disposal. The
+objective is then to find an assignment to the locations of the variables $x \in
+P \cup R$. These give us all the information we need to decode back the program.
+For program~\ref{fig:first-name-ssa} we have
+$l_{r_1} = 5$, $l_{r_2} = 6$, $l_{r_3} = 7$; $l_{p_{11}} = 1$, $l_{p_{12}} = 3$,
+$l_{p_{13}} = 4$; $l_{p_{21}} = 1$, $l_{p_{22}} = 4$, $l_{p_{23}} = 5$; and
+$l_{p_{31}} = 2$, $l_{p_{32}} = 6$. Because the program has two inputs, we need
+to subtract two to the location variables to get the corresponding ``line
+numbers''. This means, for example, that \lstinline{Index}, \lstinline{Substr},
+and \lstinline{Concat} appear on lines 3, 4 and 5, respectively, and so on.
+
+We need a few more constraints in order to encode the space of well-formed
+programs. First, no two components should have the same location. Thus,
+we have $l_{r_1} \neq l_{r_2} \neq l_{r_3}$. In the general case:
+%
+\[
+  \psi{}_{\mathtt{rloc}}(R) =
+  \bigwedge_{\substack{x, y \in R\\ x \not\equiv y}} (l_{x} \neq l_{y}) 
+\]
+
+\noindent
+Second, the program must be well-typed, so the location of each formal parameter
+$x \in P$ should differ from the location of any $y \in I \cup C \cup R$ whose
+type does not match with $x$. In the same vein, only components whose return
+value has the same type as the output may appear in the last line. These
+constraints can be written in the following way:
+%
+\[
+  \psi{}_{\mathtt{tloc}}(I, o, C, P, R) =
+  %
+  \bigwedge_{p \in P}
+  \bigwedge_{\substack{x \in I \cup C \cup R \\ type(p) \neq type(x)}}
+  (l_p \neq l_x)
+  %
+  \qquad \wedge
+  \bigwedge_{\substack{r \in R \\ type(r) \neq type(o)}}
+  (l_r \neq l_o)
+\]
+
+Combining formulas $\psi{}_{\mathtt{range}}$, $\psi{}_{\mathtt{rloc}}$, and
+$\psi{}_{\mathtt{tloc}}$ we get the full program well-formedness constraint:
+%
+\[
+  \psi{}_{\mathtt{wfp}}(I, o, C, P, R) =
+  \psi{}_{\mathtt{range}}(I, C, P, R)
+  \wedge \psi{}_{\mathtt{rloc}}(R)
+  \wedge \psi{}_{\mathtt{tloc}}(I, o, C, P, R)
+\]
+
+\paragraph{Functional Constraint}
+\label{sec:functional-constraint}
+
+The formula we arrived to in the last section encodes the space of all
+\textit{syntactically} well-formed programs. However, in no way does it
+constrain the programs to have the correct \textit{semantics}.
+In particular, it does not
+\begin{enumerate*}[(1)]
+\item \label{itm:fc-one} relate the return values to their corresponding components;
+\item \label{itm:fc-two} make sure that variables share the same value if they share the same
+location; nor
+\item \label{itm:fc-three} make sure that the program satisfies the input-output example.
+\end{enumerate*}
+For example, for program~\ref{fig:first-name-ssa} we would like to make sure
+\begin{enumerate*}[(1)]
+\item that the value of $r_1$ is actually equal to \lstinline{Index(name, c0, c1)};
+\item that $p_{21}$, the first formal parameter of \lstinline{Substr}, and $name$
+  share the same value; and that
+\item $r_3$ equals $o$, the output variable.
+\end{enumerate*}
+
+Constraint~\ref{itm:fc-one} can be guaranteed by the following formula:
+%
+\[
+  \psi{}_{spec}(P, R) = \bigwedge_{f \in F'} \phi{}_f (P_f, r_f)
+\]
+
+\noindent
+Recall that $\phi{}_f$ denotes the specification of component $f$, which relates
+its formal parameters to its return value.
+Constraint~\ref{itm:fc-two} refers to
+the dataflow properties of the program. For example, we would like to have the
+constraints $l_{p_{21}} = l_{prefix} \implies p_{21} = prefix$ (because we do
+not know beforehand that
+$p_{21} \neq prefix$), or $l_{r_2} = l_o \implies r_2 = o$
+(because we do not know which component is going to be on the last line), but we
+do not want $l_{p_{21}} = l_{r_1} \implies p_{21} = r_1$ (because $p_{21}$ and
+$r_1$ have different types). In general, these properties can be encoded in the
+following formula:
+%
+\[
+  \psi{}_{flow}(I, C, P, R) =
+  % 
+    \bigwedge_{p \in P}
+    \bigwedge_{\substack{x \in I \cup C \cup R \\ type(p) = type(x)}} 
+    (l_p = l_x \implies p = x)
+    % 
+    \qquad \wedge \bigwedge_{\substack{r \in R \\ type(r) = type(o)}}
+    (l_r = l_o \implies r = o)
+\]
+
+\noindent
+We would like to make sure that every component given by the enumerator is
+effectively used in the generated program, meaning that their correspondent
+return value should be either the actual parameter of some other component, or
+the final output of the program. This makes sense because of the way that the
+enumerator draws components from the library (combinations with replacement in
+order of increasing size), as every subset of $F'$ would have already been
+passed to the solver and deemed insufficient in order to build a satisfying
+program. For instance, the return value of \lstinline{Concat} could be either
+the output of the program, or one of the actual parameters of the same type of
+\lstinline{Input} or \lstinline{Substr}. Thus, we would have
+$l_{r_3} = l_o \vee l_{r_3} = l_{p_{11}} \vee l_{r_3} = l_{p_{12}} \vee l_{r_3} = l_{p_{21}}$.
+In general, this can be encoded in the formula
+%
+\[
+  \psi{}_{out}(o, P, R) =
+  \bigwedge_{f \in F}
+  \bigvee_{\substack{p \in P - P_f \\ type(p) = type(r_f)}}(l_{r_f} = l_p)
+  %
+  \quad \vee \bigwedge_{\substack{r \in R \\ type(r) = type(o)}} (l_{r} = l_o)
+\]
+
+\noindent
+Formula $\psi{}_{flow}$ along with $\psi{}_{out}$ guarantee that the generated
+program has the correct output, thus ensuring that constraint~\ref{itm:fc-three}
+is satisfied. Moreover, we would also like to make sure that no program input
+goes ignored, significantly cutting down the search space, which can be
+guaranteed by a formula similar to $\psi{}_{out}$:
+%
+\[
+  \psi{}_{in}(I, P) = \bigwedge_{i \in I}\bigvee_{p \in P}(l_i = l_p)
+\]
+
+The functional constraint is obtained by adding to $\psi{}_{\mathtt{wfp}}$ the
+formulas from this section, wrapping the formal parameter and return value
+variables $x \in P \cup R$ under an existential quantifier:
+%
+\[
+  \psi{}_{prog}(I, o, C) = \exists P,R\ldotp
+  (\psi{}_{\mathtt{wfp}}(I, o, C, P, R) \wedge
+  \psi{}_{spec}(P, R) \wedge
+  \psi{}_{flow}(I, C, P, R) \wedge 
+  \psi{}_{out}(o, P, R) \wedge
+  \psi{}_{in}(I, P))
+\]
+
+\paragraph{Full Constraint}
+\label{sec:full-constraint}
+
+% FIXME Forgot to pass `C' as a parameter to `\psi_prog'
+% FIXME Forgot to pass `L' as a parameter almost everywhere
+We are now in position to show the full formula. The formula $\psi{}_{prog}(I,
+o)$ encodes a well-formed program that satisfies the input-output example $(I,
+o)$. We can get a program that works over \textit{all} provided
+input-output examples $(I, o) \in E$ with a simple conjuction over $E$ like so:
+%
+\[
+  \Psi{} = \exists L,C\ldotp \bigwedge_{(I, o) \in E}\psi{}_{prog}(I, o, C)
+\]
+
+\noindent
+In essence, this formula encodes the different runs of the program over all
+the provided input-output examples. A model of this formula corresponds to a
+program that uses only the components provided by the enumerator, and satisfies
+all input-output examples. The variables $x \in L \cup C$ should retain their
+values across all runs, and are the only information we need in order to decode
+back the program.
+
+\subsection{\gls{smt} Interlude}
+\label{sec:smt-interlude}
+
+At this point it might be nice to sit back and understand how the components of
+our language (see Table~\ref{table:builtin-description}) are encoded in
+\gls{smt}.
+However, it should be noted that the encoding is independent of the particular
+components used, and works as long as their semantics can be fully encoded in
+\gls{smt}.
+
+In section~\ref{sec:smt} we introduced the necessary concepts of \gls{smt} for
+the purposes of this thesis.
+One in particular, was the concept of theory (Definition~\ref{def:theory}).
+Theories constrain the interpretation given to certain symbols.
+Because we are dealing with text and integers data types, we make use of the
+\gls{smt} theory of strings with linear integer arithmetic.
+This theory gives a way to reason with symbols representing operations such as
+integer addition, string length, or substring extraction.
+The symbols we are interested in are represented in
+Table~\ref{table:slia-symbols}.
+
+\begin{table*}[]
+  \noindent\makebox[\textwidth]{
+    \begin{tabular}{@{}lp{13cm}}
+      \toprule
+
+      \multicolumn{1}{c}{Symbol}
+      & \multicolumn{1}{c}{Description}
+      \\ \midrule
+
+      $x \strconcat y$
+      & Function symbol.
+        The terms $x$ and $y$ are strings.
+        Its value, a string, is the string concatenation of $x$ and $y$.
+      \\ \midrule
+
+      $IndexOf(s, t, i)$
+      & Function symbol.
+        The terms $s$ and $t$ are strings, and $i$ is an integer.
+        Its value, an integer, is the first occurrence of $t$ in $s$ after the
+        index $i$, or $-1$ if $t$ is not in $s$.
+      \\ \midrule
+
+      $Length(s)$
+      & Function symbol.
+        The term $s$ is a string.
+        Its value, an integer, is the length (number of characters) of $s$.
+      \\ \midrule
+
+      $Substr(s,i,j)$
+      & The term $s$ is a string, and the terms $i$ and $j$ are integers.
+        Its value, a string, is the substring of $s$ starting at index $i$ with
+        length $j$ (or from $i$ until the end of $s$ if the length of $s$ is
+        less than $i + j$).
+      \\ \midrule
+
+      $x + y$
+      & Function symbol.
+        The terms $x$ and $y$ are integers.
+        Its value, an integer, is the addition of $x$ and $y$.
+      \\ \midrule
+      
+      $x - y$
+      & Function symbol.
+        The terms $x$ and $y$ are integers.
+        Its value, an integer, is the subtraction of $x$ and $y$.
+      \\ \bottomrule
+    \end{tabular}}
+  \caption{Some symbols constrained by the theory of strings with linear integer
+    arithmetic.}
+  \label{table:slia-symbols}
+\end{table*}
+\raggedbottom
+
+The semantics of components \lstinline{Concat}, \lstinline{IndexOf},
+\lstinline{Length}, \lstinline{Substr}, \lstinline{Add}, and \lstinline{Sub}
+are directly captured by their \gls{smt} counterparts $\strconcat$, $IndexOf$,
+$Length$, $Substr$, $+$, and $-$, respectively.
+Concretely, their specifications are the following:
+%
+\begin{align*}
+  \phi{}_{\text{\lstinline{Concat}}}(x, y, r)     &= (x \strconcat y   = r) \\
+  \phi{}_{\text{\lstinline{IndexOf}}}(s, t, i, r) &= (IndexOf(s, t, i) = r) \\
+  \phi{}_{\text{\lstinline{Length}}}(s, r)        &= (Length(s)        = r) \\
+  \phi{}_{\text{\lstinline{Substr}}}(s, i, j, r)  &= (Substr(s, i, j)  = r) \\
+  \phi{}_{\text{\lstinline{Add}}}(x, y, r)        &= (x + y            = r) \\
+  \phi{}_{\text{\lstinline{Sub}}}(x, y, r)        &= (x - y            = r)
+\end{align*}
+
+\subsection{Whole Encoding}
+\label{sec:whole-encoding}
+
+In the previous approach the workload was split between the enumerator and the
+solver: the enumerator would exhaustively search for all combinations (with
+replacement) of the library of components in increasing order of size, while
+passing them one by one to the solver. In turn, the solver would then verify if
+there was any way to make a satisfying program using the given components each
+exactly once. However, the number of combinations of a given size grows
+exponentially. One wonders if it is possible to absolve the enumerator by
+pushing as much workload as possible to the solver.
+
+In this next approach we reduce the enumerator to query the solver with a single
+number $n$ (plus the input-output examples). Instead of drawing components from the
+library and passing them to the solver, the enumerator now queries if there is 
+any program of exactly $n$ components that satisfies the examples. Thus, the
+solver is now parameterized by the library of components $F$. This process is
+repeated for increasing values of $n$ until a program is found.
+
+\subsubsection{Program Formula}
+\label{sec:program-formula-whole}
+
+Here, we adapt the location-based encoding from the previous section in order to
+have a solver that finds a program with the exact number of allowed components,
+$n$. 
+Just as before, we will have a set $I$ of input variables, an output variable
+$o$, a set $C$ of constant variables, a set $L$ of location variables, a set $R$
+of return variables, and a set $P$ of formal parameter variables, with some
+changes, as we will see next.
+
+This time we do not know how many times each component will be used in the
+synthesized program.
+This means we must have some way to model the choices of which components get
+picked and which do not.
+For this we introduce a new set of integer-valued variables $A = \{a_1, a_2,
+\ldots, a_n\}$, which we will call the \textit{activation} variables.
+The activation variables have values in the set $\{1, 2, \ldots, |F|\}$, with
+the interpretation that if we have $a_i = k$, then component $f_k$ will be the
+$i$-th component in the program (the one appearing in line $|I| + |C| + i$).
+For the same reason this time we do not assign return variables to each
+component.
+Instead, as we know the number $n$ of components we are aiming for, we have one
+return variable $r_i$, associated with each $a_i$ in the obvious way, for
+$i = 1, \ldots, n$.
+These will have their locations fixed beforehand: variable $r_i \in R$ will be
+assigned to location $l_{r_i} = |I| + |C| + i$.
+
+\begin{example}
+  Consider program~\ref{fig:first-name-ssa}.
+  Assuming that component \lstinline{Concat} corresponds to $k = 1$,
+  \lstinline{Index} to $k = 2$, and \lstinline{Substr} to $k = 3$, then we would
+  have $a_1 = 2 $, $a_2 = 3$, and $a_3 = 1$.
+  We would also have $l_{r_1} = 5$, $l_{r_2} = 6$, and $l_{r_3} = 7$.
+\end{example}
+
+As the values of the activation variables $x \in A$ will be found by the solver
+at constraint-solving time, we also do not know apriori the concrete types of
+the return variables $x \in R$.
+Lacking this information, we circumvent the problem by augmenting the type of
+each return variable to be the union of all possible return types.
+In our case, this would mean that all return variables may be either of type
+\lstinline{Text}, or of type \lstinline{Integer}.
+
+That is also the case for the types of the formal parameter variables $x \in P$.
+Moreover, we do not know exactly how many formal parameter variables to create
+because we do not know the arities of the components that are going to be picked.
+We know, however, the maximum arity $m$ of all components, so we have an upper
+bound on the number of formal parameter variables we might need, namely
+$n * m$.
+Thus, we introduce variables $p_{ij} \in P$, for $i = 1, 2, \ldots, n$, and
+$j = 1, 2, \ldots, m$, with the interpretation that $p_{ij}$ is the $j$-th
+parameter of $f_{a_i}$, the component activated by $a_i$.
+We also augment their type to be the union of all possible formal parameter
+types, plus a \lstinline{Null} type, inhabited by a single value,
+\lstinline{null}, to indicate the absence of value.
+A variable $p_{ij} \in P$ will be \lstinline{null} if and only if the arity of
+component $f_{a_i}$ is less than $j$, and will be ignored by $f_{a_i}$ if that
+is the case.
+Finally, we perform the same \lstinline{Null} type augmentation to the location
+variables $x \in L$, because there is no sense in having a location number if a
+variable is null.
+
+\begin{figure}
+  \begin{lstlisting}[frame=tlrb,mathescape=true]
+    prog($i_0$, $i_1$):
+      $c_0$ = ?
+      $c_1$ = ?
+      $r_1$ = $f_{a_1}$($p_{11}$, $p_{12}$, $p_{13}$)
+      $r_2$ = $f_{a_2}$($p_{21}$, $p_{22}$, $p_{23}$)
+      $r_3$ = $f_{a_2}$($p_{31}$, $p_{32}$, $p_{33}$)
+  \end{lstlisting}
+\caption{Symbolic representation of a program with two inputs, $i_0, i_1 \in I$
+  two constant variables $c_0, c_1 \in C$, three return value variables $r_i \in
+  R$, for $i = 1, \ldots, n$, and nine formal parameter variables $p_{ij} \in
+  P$, for $i = 1, \ldots, n$, $j = 1, \ldots, m$, with $n = m = 3$.
+  The question marks '?' are values that will be found by the solver.}
+\label{fig:whole-encoding-prog}
+\end{figure}
+
+\begin{example}
+  Consider program~\ref{fig:first-name-ssa} and its corresponding symbolic
+  skeleton from Figure~\ref{fig:whole-encoding-prog}.
+  We have three components: \lstinline{Concat}, \lstinline{Index}, and
+  \lstinline{Substr}.
+  Components \lstinline{Index} and \lstinline{Substr} have the arity equal to 3,
+  which are the largest among the three components.
+  Thus, we have $n = m = 3$. This means we have nine variables $p_{ij} \in P$.
+  Variables $p_{1j}$, with $j = 1, \ldots, 3$ are the formal parameters of
+  $f_{a_1}$, which is component \lstinline{Concat}.
+  However, \lstinline{Concat} only takes two parameters.
+  These will be $p_{11}$ and $p_{12}$, meaning that $p_{13}$ will take value
+  \lstinline{null}.
+\end{example}
+
+\paragraph{Well-Formedness Constraint}
+\label{sec:whole-well-formedness-constraint}
+
+As with the last encoding, each input variable $x \in I$ is assigned a distinct
+location $l_x$ from 1 to $|I|$, and each constant variable $x \in C$ is assigned
+a distinct location from $|I| + 1$ to $|I| + |C|$.
+As said in the previous section, this time we do the same for each return
+variable $x \in R$, assigning to each a location from $|I| + |C| + 1$ to
+$|I| + |C| + |R|$.
+The upper bound on the location (if non-null) of each parameter variable $p_{ij}
+\in P$ is now statically known to be $|I| + |C| + i$, so now our well-formedness
+constraint is just:
+%
+\[
+  \psi{}_{\mathtt{wfp}}(L,C,I,P) =
+  \bigwedge_{i = 1, \ldots, n}\bigwedge_{j = 1, \ldots, m}
+  (l_{p_{ij}} \neq \mathtt{null} \implies 1 \leq l_{p_{ij}} < |I| + |C| + i)
+\]
+
+\noindent
+Compared to the well-formedness constraint of the setwise encoding, this one is
+arguably made simpler by the fact that the lines of the return variables are
+fixed apriori, and because we are not doing any type checking.
+
+\begin{example}
+  Consider the symbolic skeleton from Figure~\ref{fig:whole-encoding-prog}.
+  We have:
+  % 
+  \begin{align*}
+    &l_{i_0} = 1 \quad l_{i_1} = 2 \\
+    &l_{c_0} = 3 \quad l_{c_1} = 4 \\
+    &l_{r_1} = 5 \quad l_{r_2} = 6 \quad l_{r_3} = 7
+  \end{align*}
+  % 
+  Also, the well-formedness constraint is the conjunction of the following:
+  % 
+  \begin{align*}
+           l_{p_{11}} \neq \mathtt{null} \implies 1 \leq l_{p_{11}} < 5
+    \qquad l_{p_{12}} \neq \mathtt{null} \implies 1 \leq l_{p_{12}} < 5
+    \qquad l_{p_{13}} \neq \mathtt{null} \implies 1 \leq l_{p_{13}} < 5 \\
+    %
+           l_{p_{21}} \neq \mathtt{null} \implies 1 \leq l_{p_{21}} < 6
+    \qquad l_{p_{23}} \neq \mathtt{null} \implies 1 \leq l_{p_{23}} < 6
+    \qquad l_{p_{22}} \neq \mathtt{null} \implies 1 \leq l_{p_{22}} < 6 \\
+    %
+           l_{p_{31}} \neq \mathtt{null} \implies 1 \leq l_{p_{31}} < 7
+    \qquad l_{p_{32}} \neq \mathtt{null} \implies 1 \leq l_{p_{32}} < 7
+    \qquad l_{p_{33}} \neq \mathtt{null} \implies 1 \leq l_{p_{33}} < 7
+  \end{align*}
+\end{example}
+%
+\paragraph{Functional Constraint}
+
+Just as with the last encoding, we have the following concerns regarding the
+semantics of the program:
+\begin{enumerate*}[(1)]
+\item \label{itm:whole-fc-one} relating return variables to the values of their
+components and their parameters;
+\item \label{itm:whole-fc-two} value sharing between variables with the same
+location; and
+\item \label{itm:whole-fc-three} effectively mapping the inputs $x \in I$ to the
+output $o$.
+\end{enumerate*}
+
+Constraint $\psi{}_{\mathtt{spec}}$, which guarantees
+constraint~\ref{itm:whole-fc-one}, should be similar to the one from
+section~\ref{sec:functional-constraint}, but we will have to pay attention to
+some special points.
+First, we have to make sure that, for every component, we relate the correct
+number of formal parameters to the return value (recall that we may have more
+formal parameter variables than we may need because we do not know apriori which
+component goes on which line):
+%
+\[
+  \psi{}_{pnum}(A, P, R) =
+  \bigwedge_{i=1,\ldots,n}\bigwedge_{k=1,\ldots,|F|}
+  (a_i = k \implies \phi{}_{f_{k}}(p_{i1}, p_{i2}, \ldots, p_{ij_k}, r_i))
+\]
+
+\noindent
+In the constraint shown above, $j_k$ is used as shorthand for the arity of
+component $f_k$.
+Second, we should ensure that formal parameter variables that are in excess
+have value \lstinline{null}:
+%
+\[
+  \psi{}_{null}(A, P) =
+  \bigwedge_{i=1,\ldots,n} \bigwedge_{k=1,\ldots,|F|}
+  (a_i = k \implies \bigwedge_{j=j_k+1,\ldots,m} p_{ij} = \mathtt{null})
+\]
+
+\noindent
+Finally, we need to constrain the formal parameters to have the correct type,
+because the specifications $\phi{}$ of the components are typed.
+An example might, perhaps, be the best way to show how this constraint, which we
+will call $\psi{}_{type}$, can be materialized.
+
+\begin{example}
+  Consider the symbolic skeleton from Figure~\ref{fig:whole-encoding-prog}, and
+  suppose that we are working with components
+  $f_1 = \mathtt{Concat}$, $f_2 = \mathtt{Index}$, and $f_3 = \mathtt{Substr}$.
+  We will use the predicates $isstring$ and $isint$ to mean that a variable must
+  be of type \lstinline{Text}, or \lstinline{Integer}, respectively.
+  For this concrete case, we would the constraint to ensure that the type
+  signatures of these components are satisfied:
+  % 
+  \begin{align*}
+    \psi{}_{type}(A, P)
+    &= \bigwedge_{i=1,\ldots,n}
+      (a_i = 1 \implies (isstring(p_{i1}) \wedge isstring(p_{i2}))) \\
+    &\wedge \bigwedge_{i=1,\ldots,n}
+      (a_i = 2 \implies (isstring(p_{i1}) \wedge isstring(p_{i2}) \wedge isint(p_{i3}))) \\
+    &\wedge \bigwedge_{i=1,\ldots,n}
+      (a_i = 3 \implies (isstring(p_{i1}) \wedge isint(p_{i2}) \wedge isint(p_{i3}))) \\
+  \end{align*}
+\end{example}
+
+\noindent
+Constraint $\psi{}_{\mathtt{spec}}$ is then just the conjunction of the three
+previous constraints:
+%
+\[
+  \psi{}_{\mathtt{spec}}(A, P, R) =
+  \psi{}_{pnum}(A, P, R) \wedge \psi{}_{null}(A, P) \wedge \psi{}_{type}(A, P)
+\]
+
+The dataflow properties of constraint~\ref{itm:whole-fc-two} are encoded in a
+similar way to what we did in section~\ref{sec:functional-constraint}, with the
+added constraint that every formal parameter variable whose value is
+\lstinline{null} must also have a \lstinline{null} location:
+%
+\begin{align*}
+  \psi{}_{flow}(C,I,P,R)
+  &=\bigwedge_{i=1,\ldots,n}
+    \bigwedge_{j=1,\ldots,m}
+    \bigwedge_{\substack{x \in I \cup C \cup R}}
+    (l_{p_{ij}} = l_x \implies p_{ij} = x) \\
+  &\wedge\bigwedge_{i=1,\ldots,n}
+    \bigwedge_{j=1,\ldots,m}
+    (l_p = \mathtt{null} \implies p = \mathtt{null}) \\
+\end{align*}
+%
+\noindent
+Just as last time, we would like to ensure that every return variable is used
+(as an actual parameter or as the output of the program), a property that be
+encoded in the following way:
+%
+\begin{align*}
+  \psi{}_{out}(o, P, R)
+  =\bigwedge_{k=1,\ldots,n-1}
+    \bigvee_{i=k+1,\ldots,n}
+    \bigvee_{j=1,\ldots,m}
+    (l_{r_k} = l_{p_{ij}})
+  \wedge (r_n = o)
+\end{align*}
+%
+\noindent
+Formula $\psi{}_{out}$, along with $\psi{}_{flow}$, ensures that
+constraint~\ref{itm:whole-fc-three} is satisfied.
+We would also like to ensure that every input variable appears as an actual
+parameter of some component, a property encoded by the following formula:
+%
+\begin{align*}
+  \psi{}_{in}(I, P)
+  =\bigwedge_{x \in I}
+    \bigvee_{i=1,\ldots,n}
+    \bigvee_{j=1,\ldots,m}
+    (l_{x} = l_{p_{ij}})
+\end{align*}
+%
+The functional constraint is obtained by conjoining the previous constraints
+with the well-formedness constraint $\psi{}_{\mathtt{wfp}}$,
+again wrapping the formal parameter and return value variables $x \in P \cup R$
+under an existential quantifier:
+%
+\begin{align*}
+  \psi{}_{prog}(A,L,C,I,o) &= \exists P,R\ldotp
+  (\psi{}_{\mathtt{wfp}}(L, P) \wedge
+  \psi{}_{spec}(A, P, R) \wedge
+  \psi{}_{flow}(I, C, P, R)\\&\wedge 
+  \psi{}_{out}(o, P, R) \wedge
+  \psi{}_{in}(I, P))
+\end{align*}
+
+\paragraph{Full Constraint}
+\label{sec:whole-full-constraint}
+
+Just as last time, the functional constraint $\psi{}_{prog}$ encodes the space
+of well-formed programs that satisfy a specific input-output example.
+To obtain a formula that ranges over all input-output examples, we just make a
+conjuction over the set $E$:
+%
+\[
+  \Psi{}=\exists{A,L,C}\ldotp\bigwedge_{(I, o) \in E}\psi{}_{prog}(A,L,C,I,o)
+\]
+
+A model of this formula is a valuation of the variables $x \in A \cup L \cup C$,
+which can then be used to reconstruct a program that satisfies the input-output
+examples $E$ using only $n$ components.
