@@ -3,22 +3,22 @@
 
 Program synthesis is the problem of automatically generating program
 \textit{implementations} from high-level \textit{specifications}.
-Amir Pnuelli, former computer scientist and Turing Award, described it as ``one
-of the most central problems in the theory of
+Amir Pnuelli, former computer scientist and Turing Award winner, described it as
+``one of the most central problems in the theory of
 programming''~\cite{Pnueli:1989:ARM}, and it has been portrayed as one of the
 holy grails of computer science~\cite{Solar-Lezama:2008,Gulwani2017}.
-It is easy to understand why: if only we could tell the computer \textit{what to
-do} and let it figure out \textit{how to do} it, the task of programming would
-be so much easier!
-However, Program synthesis is a very hard problem.
+It is easy to understand why: if only we could tell the computer \textit{what you
+want} and let it figure out \textit{how to do} it, the task of programming would
+be much easier.
+However, program synthesis is a very hard problem.
 Programming is a task that is hard for humans and, given its generality,
 there is no reason to believe it should be any easier for computers.
 Computers lack algorithmic insight and domain expertise.
-Moreover, the challenge is twofold: we need to find out both how to tackle the
+Hence, the challenge is twofold: we need to find out both how to tackle the
 intractability of the program space, and how to accurately capture user
 intent~\cite{Gulwani2017}.
 
-It is important to have in mind that program synthesis is not a panacea for
+It is important to keep in mind that program synthesis is not a panacea for
 solving problems in computer programming.
 For example, we might be interested in other properties besides functional
 correctness, such as efficiency or succinctness of the generated program.
@@ -31,25 +31,24 @@ that come from a poor understanding of the problem domain.
 \label{sec:outsystems-pbe}
 
 This work was done during an internship at
-OutSystems.~\footnote{\url{https://www.outsystems.com}} 
+OutSystems.\footnote{\url{https://www.outsystems.com}} 
 OutSystems is also the name of a low-code platform that features visual
 application development, easy integration with existing systems, and the
-possibility to add own code when needed.
+possibility for the user to add their own code when needed.
 With OutSystems one should be able to build enterprise-grade applications
 swiftly and with a great degree of
 automation.
 To that effect, the kind of programs we are interested in are expressions in the
 OutSystems language.
-Thus, we were interested in building a synthesizer for OutSystems expressions
-that would be \textit{performant} and \textit{easy to use}.
-This would imply that the synthesis process should finish in a matter of seconds
-(instead of hours or days), and the synthesizer should have a
-``push-button''-style interface that does not force the user to acquire new
-skills.
+Thus, we are interested in building a synthesizer for OutSystems expressions
+that is \textit{performant} and \textit{easy to use}.
+This implies that the synthesis process finishes in a matter of seconds
+(instead of hours or days), and the synthesizer has a ``push-button''-style
+interface that does not force the user to acquire new skills.
 The paradigm in program synthesis that best fits this scenario is called
-\glsfmtfull{pbe}.
-In \gls{pbe}, the synthesizer should be able to synthesize ``correct'' programs
-merely from a small set of input-output examples.
+\gls{pbe}.
+In \gls{pbe}, the synthesizer should be able to synthesize \textit{correct}
+programs merely from a small set of input-output examples.
 % For instance, one possible input-output example for the program from
 % example~\ref{ex:intro:first-name} is, for example, (<``John Michael Doe'', ``Dr.
 % ''>, ``Dr. John'').
@@ -66,14 +65,14 @@ been applied in the domain of Java programs.
 
 \subsection{Contributions}
 
-In this work, we surveyed the state of the art in program synthesis, and
-implemented two component-based \gls{pbe} synthesizers based on an \gls{ogis}
+In this work, we survey the state of the art in program synthesis, and
+implement two component-based \gls{pbe} synthesizers based on an \gls{ogis}
 architecture.
 Both synthesizers employ a mixture of constraint solving with basic enumerative
 search, differing on the amount of work they put on the constraint solving
 phase, for which they make use of an \Glsfmtfull{smt} solver.
-The components that we used correspond to a small subset of expressions of the
-OutSystems API that manipulate Integers and Text.
+The components that we use correspond to a small subset of expressions of the
+OutSystems API that manipulate integers and text.
 However, the synthesizers are not specific to OutSystems expressions and could
 be instantiated in other domains.
-We benchmarked both synthesizers and compared them to SyPet~\cite{Feng:2017:CSC}.
+We benchmark both synthesizers and compare them to SyPet~\cite{Feng:2017:CSC}.

@@ -3,22 +3,22 @@
 
 Program synthesis is the problem of automatically generating program
 \textit{implementations} from high-level \textit{specifications}.
-Amir Pnuelli, former computer scientist and Turing Award, described it as ``one
-of the most central problems in the theory of
+Amir Pnuelli, former computer scientist and Turing Award winner, described it as
+``one of the most central problems in the theory of
 programming''~\cite{Pnueli:1989:ARM}, and it has been portrayed as one of the
 holy grails of computer science~\cite{Solar-Lezama:2008,Gulwani2017}.
-It is easy to understand why: if only we could tell the computer \textit{what to
-do} and let it figure out \textit{how to do} it, the task of programming would
-be so much easier!
-However, Program synthesis is a very hard problem.
+It is easy to understand why: if only we could tell the computer \textit{what you
+want} and let it figure out \textit{how to do} it, the task of programming would
+be much easier.
+However, program synthesis is a very hard problem.
 Programming is a task that is hard for humans and, given its generality,
 there is no reason to believe it should be any easier for computers.
 Computers lack algorithmic insight and domain expertise.
-Moreover, the challenge is actually twofold: we need to find out both how to
+Hence, the challenge is actually twofold: we need to find out both how to
 tackle the intractability of the program space, and how to accurately capture
 user intent~\cite{Gulwani2017}.
 
-It is important to have in mind that program synthesis is not a panacea for
+It is important to keep in mind that program synthesis is not a panacea for
 solving problems in computer programming.
 For example, we might be interested in other properties besides functional
 correctness, such as efficiency or succinctness of the generated program.
@@ -28,13 +28,14 @@ Particularly, it cannot solve problems originating from bad specifications
 that come from a poor understanding of the problem domain.
 
 Writing specifications is, indeed, a delicate process.
-This might be better understood with a simple, yet non-trivial, example.
+This might be better understood with a simple, yet non-trivial, motivating
+example.
 
-\section{Example: Sorting}
+\section{Motivating Example: Sorting}
 \label{sec:sorting-example}
 
 In order to exemplify how the interaction between the user and the computer
-(from now on referred to as the ``synthesizer'') might occur, let us suppose we
+(from now on referred to as the ``synthesizer'') may occur, let us suppose we
 are interested in developing a sorting procedure, \lstinline{sort}, for lists of
 integers:
 
@@ -50,21 +51,22 @@ integers:
 \end{lstlisting}
 
 \noindent
-The function \lstinline{sort} would take a list of integers as input and return
-it sorted in ascending order. One approach to implement \lstinline{sort} is to
-resort to an auxiliary function, \lstinline{insert}, taking an element
-\lstinline{x} and a list \lstinline{xs} as inputs, and returning a new list
-\lstinline{xs'}. Assuming that \lstinline{xs} is sorted, \lstinline{insert}
-guarantees that \lstinline{xs'} is also sorted by placing \lstinline{x} in the
-``right place''. It is easy to see, by induction, that \lstinline{sort} is
-correctly defined.
+The function \lstinline{sort} takes a list of integers as input and returns
+it sorted in ascending order (\lstinline{::} represents list concatenation).
+One approach to implement \lstinline{sort} is to resort to an auxiliary
+function, \lstinline{insert}, taking an element \lstinline{x} and a list
+\lstinline{xs} as inputs, and returning a new list \lstinline{xs'}.
+Assuming that \lstinline{xs} is sorted, \lstinline{insert} guarantees that
+\lstinline{xs'} is also sorted by placing \lstinline{x} in the \textit{right
+  place}.
+It is easy to see, by induction, that \lstinline{sort} is correctly defined.
 
-Nevertheless, it would be nicer if we could just give the synthesizer a
+Nevertheless, it would be preferable if we could just give the synthesizer a
 specification of what it means for a list to be sorted and let it figure out the
 implementation. For example, the synthesizer could support using type signatures
 and predicates as specifications. We could also hint the structure of the
 implementation to the synthesizer by giving a specification for another
-function, \lstinline{insert}, which we could believe to be useful to implement
+function, \lstinline{insert}, which could be useful for implementing
 \lstinline{sort}:
 
 \begin{lstlisting}[xleftmargin=.2\textwidth]
@@ -81,8 +83,8 @@ function, \lstinline{insert}, which we could believe to be useful to implement
 \end{lstlisting}
 
 \noindent
-There is a problem with our specification, however, as there are many unwanted
-programs that satisfy it.
+However, there is a problem with this specification, since there exist many
+\textit{unwanted} programs that satisfy it.
 The program that ignores its input and simply outputs the empty list is one such
 example.
 The problem is that the specification does not model our intent precisely.
@@ -90,10 +92,10 @@ It should be clear that the output \lstinline{xs'} should be in some way related
 to the input \lstinline{xs}, but the current specification does not capture that
 relation.
 We must require that \lstinline{xs'} has exactly the same contents as those of
-\lstinline{xs}, meaning that every element of \lstinline{xs} should appear in
-\lstinline{xs'} in the same amount.
+\lstinline{xs}, meaning that every element of \lstinline{xs} should occur in
+\lstinline{xs'} the exact same number of times.
 We could express that requirement as a binary predicate \lstinline{sameContents}
-over lists (whose implementation is omitted) and add it to specification:
+over lists (here the implementation is omitted) and add it to the specification:
 
 \begin{lstlisting}[xleftmargin=.2\textwidth]
   sort: (xs: List Int) -> (xs': List Int)
@@ -107,23 +109,18 @@ over lists (whose implementation is omitted) and add it to specification:
 It should be clear by now why writing specifications can be tricky, even in
 simple cases.
 What might be less clear is that the specification as it is might still not be
-fully specified.
+precise enough.
 There are countless other properties that we might want our sorting procedure to
-satisfy, such as, for example, stability, complexity, or adaptability.
+satisfy, such as, for example, stability, complexity, and/or adaptability.
 
 \section{OutSystems and \Glsfmtfull{pbe}}
 \label{sec:outsystems-pbe}
-
-This work was done during an internship at
-OutSystems.~\footnote{\url{https://www.outsystems.com}} 
-OutSystems is also the name of a low-code platform that features visual
-application development, easy integration with existing systems, and the
-possibility to add own code when needed.
 
 \begin{figure}
   \centering
   \includegraphics[width=1.0\textwidth]{assets/outsystems-app.png}
   \caption{An application developed with the OutSystems platform.}
+  \label{fig:outsystems-app}
 \end{figure}
 
 \begin{figure}
@@ -131,21 +128,27 @@ possibility to add own code when needed.
   \includegraphics[width=1.0\textwidth]{assets/outsystems-studio.png}
   \caption{A screenshot of the OutSystems Service Studio integrated development
     environment. Service Studio is part of the OutSystems platform.}
+  \label{fig:outsystems-platform}
 \end{figure}
 
-\noindent
-With OutSystems one should be able to build enterprise-grade applications
-swiftly and with a great degree of
-\textbf{automation}.~\footnote{\url{https://www.outsystems.com/platform/}}
-To that effect, the kind of programs we are interested in are expressions in the
-OutSystems language
-\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}.
+This work was done in the context of an internship at
+OutSystems.\footnote{\url{https://www.outsystems.com}}
+OutSystems is also the name of a low-code platform that features visual
+application development, easy integration with existing systems, and the
+possibility for the user to add their own code when needed (see
+Figures~\ref{fig:outsystems-app} and~\ref{fig:outsystems-platform}).\footnote{\url{https://www.outsystems.com/platform/}}
+OutSystems developed with the goal of cutting down web and mobile app
+development time from several months to a few weeks.
+Recently, the OutSystems.AI team was created to research and implement more
+degrees of automation into the platform.
+In this work, we focus on synthesizing data transformation expressions in the
+OutSystems language.\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}.
 
 \begin{example}\label{ex:intro:first-name}
   Suppose that, given a text representing a person's name, we are interested in
 extracting the first name and prepend it with a prefix. For example, given the
 text ``John Michael Doe'' and the prefix ``Dr. '' we would like to obtain
-``Dr. John''. The following expression satisfies the specification.
+``Dr. John''. The following expression satisfies this specification.
  
 \begin{lstlisting}
   prog(name, prefix) = Concat(prefix,
@@ -154,47 +157,47 @@ text ``John Michael Doe'' and the prefix ``Dr. '' we would like to obtain
 \end{lstlisting}
 \end{example}
 
-Thus, we were interested in building a synthesizer for OutSystems expressions
-that would be \textit{performant} and \textit{easy to use}.
-This would imply that the synthesis process should finish in a matter of seconds
-(instead of hours or days), and the synthesizer should have a
-``push-button''-style interface that does not force the user to acquire new
-skills.
+\noindent
+We are interested in building a synthesizer of OutSystems expressions that is
+\textit{performant} and \textit{easy to use}.
+This implies that the synthesis process finishes in a matter of seconds
+(instead of hours or days), and the synthesizer has a ``push-button''-style
+interface that does not force the user to acquire new skills.
 The paradigm in program synthesis that best fits this scenario is called
-\glsfmtfull{pbe}.
-In \gls{pbe}, the synthesizer should be able to synthesize ``correct'' programs
-merely from a small set of input-output examples.
+\gls{pbe}.
+In \gls{pbe}, the synthesizer should be able to synthesize \textit{correct}
+programs merely from a small set of input-output examples.
 For instance, one possible input-output example for the program from
-example~\ref{ex:intro:first-name} is, for example, (<``John Michael Doe'', ``Dr.
-''>, ``Dr. John'').
-By correct we mean that the program matches what the user had in mind.
+example~\ref{ex:intro:first-name} is, for example, ($<$``John Michael Doe'', ``Dr.
+''$>$, ``Dr. John'').
+By \textit{correct} we mean that the program captures the user's intent.
 
-The most notable success in the area of program synthesis is incorporated in a
-tool called FlashFill~\cite{Gulwani:2011}.
+The most notable success in the area of program synthesis is Microsoft's
+FlashFill~\cite{Gulwani:2011} tool .
 FlashFill employs \gls{pbe} technology and is currently integrated in Microsoft
 Excel.
-FlashFill is able to synthesize programs that manipulate strings very fast,
-typically under 10 seconds.
-However, the programs are written in a particular \gls{dsl} that does not suit
-our needs.
-In particular, it does not seem to exist an obvious way to map the FlashFill
-\gls{dsl} to OutSystems expressions.
+FlashFill is able to synthesize programs that manipulate strings very fast
+(typically under 10 seconds).
+However, the programs are written in a special-purpose \gls{dsl} that does not
+suit our needs.
+In particular, it is not obvious how one could map the FlashFill \gls{dsl} to
+OutSystems expressions.
 Another notable \gls{pbe} synthesizer is SyPet~\cite{Feng:2017:CSC}, which has
-been applied in the domain of Java programs.
+been applied to the synthesis of Java programs.
 
 \section{Contributions}
 
-In this work, we surveyed the state of the art in program synthesis, and
-implemented two component-based \gls{pbe} synthesizers based on an \gls{ogis}
+In this work, we survey the state of the art in program synthesis, and
+implement two component-based \gls{pbe} synthesizers based on an \gls{ogis}
 architecture.
 Both synthesizers employ a mixture of constraint solving with basic enumerative
-search, differing on the amount of work they put on the constraint solving
-phase, for which they make use of an \Glsfmtfull{smt} solver.
-The components that we used correspond to a small subset of expressions of the
-OutSystems API that manipulate Integers and Text.
+search, differing in the amount of work they put in the constraint solving
+phase, for which they make use of a \Glsfmtfull{smt} solver.
+The components that we use correspond to a small subset of expressions of the
+OutSystems API that manipulate integers and text.
 However, the synthesizers are not specific to OutSystems expressions and could
 be instantiated in other domains.
-We benchmarked both synthesizers and compared them to SyPet~\cite{Feng:2017:CSC}
+We benchmark both synthesizers and compare them to SyPet~\cite{Feng:2017:CSC}.
 
 \section{Document Structure}
 \label{sec:structure}
@@ -206,8 +209,10 @@ introduction to the most common techniques in program synthesis, not only in
 \gls{pbe}, but in general.
 Chapter~\ref{chap:synthesis} details the implementation of our contributions.
 Namely, we implemented two synthesizers for OutSystems expressions based on
-constraint solving, a concept that we introduce in the chapters before.
+constraint solving, a concept that we introduce in
+Chapter~\ref{chapter:background}.
 In Chapter~\ref{chap:experimental-results} we evaluate and compare the
 synthesizers presented in Chapter~\ref{chap:synthesis}.
 We compare both synthesizers to each other and to SyPet.
-Chapter~\ref{chap:conclusion} concludes the work.
+Chapter~\ref{chap:conclusion} concludes the work and suggests future research
+directions.

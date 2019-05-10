@@ -10,7 +10,7 @@ type signatures~\cite{Osera:2015:TPS,
   Frankle:2016:EST, Polikarpova:2016:PSP};
 syntax-guided methods~\cite{Alur:sygus:2013} such as
 sketches~\cite{Solar-Lezama:2008}, or components~\cite{Feng:2017:CST,
-Feng:2017:CSC, Feng:2018:PSU};
+Feng:2017:CSC, Feng:2018:PSU}; and
 inductive specifications such as input-output examples~\cite{Frankle:2016:EST,
 Gulwani:2012:SDM, Leung:2015:IPS}, or demonstrations~\cite{Lau2003}.
 The kind of specification should be chosen according to the particular use case
@@ -30,7 +30,7 @@ combined forms the syntactic specification for the programs we want to find.
 They may also be supplemented by additional constraints in the form of logical
 formulas~\cite{Feng:2018:PSU}.
 
-\paragraph{\Glsfmtfull{pbe}}
+\paragraph{\gls{pbe}}
 
 Inductive synthesis is an instance of the program synthesis problem where the
 constraints are underspecified.
@@ -62,17 +62,14 @@ Second, we want to leverage the specifications and the knowledge we have from
 the problem domain in order to guide the search.
 Common search techniques are
 % deductive search (Section~\ref{sec:deductive-synthesis}),
-enumerative search~\cite{Phothilimthana:2016:SUS,Alur:2017:SEP}
-(Section~\ref{sec:enumerative-search}),
+enumerative search~\cite{Phothilimthana:2016:SUS,Alur:2017:SEP},
 stochastic search~\cite{Schkufza:2013:SS,Singh:ranking:2015}, and
-constraint solving~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC}
-(Section~\ref{sec:constraint-solving}).
+constraint solving~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC}.
 Modern synthesizers usually apply a combination of those, enabling us to
 consider frameworks and techniques for structuring their construction, such as
 \gls{cegis}~\cite{Solar-Lezama:2008},
 \gls{cegis}($\mathcal{T}$)~\cite{Abate:2018:CMT}, and
-\gls{ogis}~\cite{Jha:2017:TFS}
-(Section~\ref{sec:ogis}).
+\gls{ogis}~\cite{Jha:2017:TFS}.
 
 \paragraph{Enumerative Search}
 \label{sec:enumerative-search}
@@ -92,7 +89,7 @@ result in highly effective pruning strategies.
 \paragraph{Constraint Solving}
 \label{sec:constraint-solving}
 
-Another approach to program synthesis is to reduce the problem to that of
+Another approach to program synthesis is to reduce the problem to 
 constraint solving by the use of off-the-shelf automated constraint
 solvers~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Solar-Lezama:2008,Jha:oracle:2010}
 (typically SAT or SMT solvers).
@@ -115,15 +112,15 @@ Typical queries and response types are some of the following~\cite{Jha:2017:TFS}
 %
 \begin{compactitem}
 \item \textit{Counterexample queries}, where given a candidate program $p$ the
-  oracle responds with a positive I/O counterexample that $p$ does not satisfy,
-  if it can find any, or $\bot$ otherwise.
+  oracle responds with a positive input-output counterexample that $p$ does not
+  satisfy, if it can find any, or $\bot$ otherwise.
 \item \textit{Correctness queries}, where given a candidate program $p$ the
   oracle responds if $p$ is correct or not. If it is not, the oracle responds
-with a positive I/O counterexample.
+  with a positive input-output counterexample.
 \item \textit{Distinguishing input queries}, where given program $p$ and set $X$
-  of I/O examples that $p$ satisfies the oracle responds with a new program $p'$
-  and a counterexample $x$ to $p$ that $p'$ satisfies along with all the other
-  examples in $X$.
+  of input-output examples that $p$ satisfies the oracle responds with a new
+  program $p'$ and a counterexample $x$ to $p$ that $p'$ satisfies along with
+  all the other examples in $X$.
 \end{compactitem}
 
 In general, the higher the capabilities of the oracles, the more expensive they

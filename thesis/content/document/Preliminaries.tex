@@ -10,60 +10,64 @@ come back as needed.
 
 This section covers some essential terminology that is used in the document.
 
-Program synthesis is fundamentally a search problem, thus, for it to be
+Program synthesis is fundamentally a search problem, hence, for it to be
 well-defined there must be some \textit{search space} that contains the objects
 we are searching for.
 In our case, these objects are programs, so we have a \textit{program space}.
 
 \begin{definition}[Program Space]
-  The set of all programs in a given programming language.
+  Program space is the set of all programs in a given programming language.
 \end{definition}
 
 Programming languages are usually defined by means of a grammar.
 For our purposes, we are interested in a particular kind of grammar, called a
 \Glsfmtlong{cfg}~(\Glsfmtshort{cfg}).
 
-\begin{definition}[\Glsfmtlong{cfg}]
-  A \Glsfmtlong{cfg} is a tuple $(\mathcal{V}, \Sigma{}, R, S)$, where:
+\begin{definition}[Context-Free Grammar]
+  A \gls{cfg} is a tuple $(\mathcal{V}, \Sigma{}, R, S)$, where:
   \begin{itemize}
-  \item $\mathcal{V}$ is a finite set. It denotes the set of non-terminal symbols.
-  \item $\Sigma{}$ is a finite set. It denotes the set of terminal symbols.
+  \item $\mathcal{V}$ is a finite set denoting the set of non-terminal symbols.
+  \item $\Sigma{}$ is a finite set denoting the set of terminal symbols.
   \item $R$ is a finite relation from $\mathcal{V}$ to $(\mathcal{V} \cup
-    \Sigma{})^*$, where the asterisk denotes the Kleene star operation.
-  \item $S$ is a non-terminal symbol. It is the start symbol of the grammar.
+    \Sigma{})^*$, where * denotes the Kleene star operation.
+  \item $S$ is a non-terminal symbol, corresponding to the start symbol of the
+    grammar.
   \end{itemize}
 \end{definition}
+
+Definition~\ref{def:terms-and-formulas} in Section~\ref{sec:smt} provides an
+example of a \Glsfmtshort{cfg}.
 
 In our context, we are working in a \gls{pbe} setting, where the user explains
 their intent by means of a set of input-output \textit{examples}.
 
 \begin{definition}[Input-Output Example]
   An input-output example is a pair $(\mathbf{x}, y)$ where $\mathbf{x}$ is a
-  list of inputs $<x_0, x_1, \ldots, x_n>$, and $y$ is the output.
+  list of $n$ inputs $<x_0, x_1, \ldots, x_n>$, and $y$ is the output.
 \end{definition}
 
 We say that a program $f$ \textit{satisfies} an input-output example
 $(\mathbf{x}, y)$ if $f(\mathbf{x}) = y$.
 We say that a program satisfies a \textit{set} of input-output examples if it
-satisfies every example in that set.
+satisfies each example in that set.
 
-\section{\Glsfmtfull{smt}}
+\section{Satisfiability Modulo Theories}
 \label{sec:smt}
 
 Many problems in the real world can be modeled in the form of logical formulas.
 Thus, it is of great interest to have access to efficient off-the-shelf
 logic engines, usually called \textit{solvers}, for these formulas.
-The satisfiability problem is the problem of checking if a given logical formula
-has a solution.
-\gls{smt} solvers check the satisfiability of first-order logic formulas with
-symbols and operations drawn from \textit{theories}, such as the theory of
-uninterpreted functions, the theory of strings, or the theory of linear integer
-arithmetic.
+The satisfiability problem is the problem of checking if a given boolean logical
+formula has a solution.
+\Glsfmtfull{smt} solvers extend this problem and check the satisfiability of
+first-order logic formulas with symbols and operations drawn from
+\textit{theories}, such as the theory of uninterpreted functions, the theory of
+strings, or the theory of linear integer arithmetic.
 \gls{smt} solvers have seen a multitude of applications, particularly in
 problems from artificial intelligence and formal methods, such as program
 synthesis, or verification.
 This section gives a short introduction to \gls{smt}, and is based on the
-chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
+chapter about \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
 
 \subsection{Syntax of \gls{smt} Formulas}
 \label{sec:smt-syntax}

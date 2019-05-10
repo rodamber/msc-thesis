@@ -2,14 +2,13 @@
 \label{chap:conclusion}
 
 In this work, we tackle the problem of synthesizing OutSystems expressions from
-examples, focusing on expressions that manipulate the Integer and Text
-datatypes.
-OutSystems sells solutions to help build enterprise-grade applications swiftly
-and with a great degree of automation.
+examples, focusing on expressions that manipulate integers and text.
+OutSystems sells solutions to help building enterprise-grade applications
+swiftly and with a great degree of automation.
 Thus, we were interested in an ``push-button''-style approach that would be
 performant, and could generalize from a small number of examples.
 We surveyed the state of the art in program synthesis, and implemented two
-component-based \gls{pbe} synthesizers -- Setwise and Whole.
+component-based \gls{pbe} synthesizers -- setwise and whole.
 Both synthesizers employ a mixture of constraint solving with basic enumerative
 search, differing on the amount of work they put on the constraint solving
 phase.
@@ -19,12 +18,12 @@ instances are given as new components, and another that simulates
 user-provided constants by only allowing the constants needed for each
 particular instance.
 
-The Setwise synthesizer can consistently synthesize programs that satisfy the
+The setwise synthesizer can consistently synthesize programs that satisfy the
 given input-output with up to four lines, but only manages to match the user
 intent on programs with up to three lines.
 Still, it manages to be competitive with SyPet, even when we configured the
 latter for a scenario simulating user-provided constants.
-On the other hand, the Whole synthesizer fails to produce good results on both
+On the other hand, the whole synthesizer fails to produce good results on both
 fronts in all but the most trivial instances (programs with one line).
 However, further benchmarking should be done, and refinements should be applied.
 In particular, in the future we should benchmark configurations allowing for the
@@ -34,13 +33,13 @@ This should allow for more instances to be solved because it is very common for
 programs to use more than one or two constants.
 It would also be interesting to test configurations with user-provided inputs.
 Another interesting scenario, probably involving extensions to the synthesizers
-includes trying to figure out from the input-output examples what constants the
+includes trying to figure out from the input-output examples which constants the
 program might use.
-Moreover, it would be interesting to see how our synthesizers compare to a
+Moreover, it would be interesting to see how our synthesizers, compare to a
 synthesizer implemented using the PROSE
-framework.~\footnote{\url{https://microsoft.github.io/prose/}}.
+framework.\footnote{\url{https://microsoft.github.io/prose/}}
 
-Both approaches use encodings whose size scales linearly with the number of
+Both approaches use encodings which size scales linearly with the number of
 input-output examples.
 While not ideal, it is not unacceptable given that we are interested in
 offloading as much work as possible from the user, and so the approach should
@@ -53,9 +52,9 @@ for synthesis, or approaches with a tighter integration with the underlying
 solver might fare.
 In fact, some approaches in the literature apply this
 idea~\cite{Feng:2018:PSU,Abate:2018:CMT}.
-Moreover, it should be explored if this approach scales if we use a larger
-library of components, especially components that do not have a direct encoding
-in \gls{smt} (and, in turn, could be more difficult, or even impossible to
-synthesize).
+Moreover, it should be explored whether this approach scales when a larger
+library of components is used, especially components that do not have a direct
+encoding in \gls{smt} (and, in turn, could be more difficult, or even impossible
+to synthesize).
 It would be particularly interesting to support if-then-else expressions, along
 with frequently used predicates over Integers and Texts.

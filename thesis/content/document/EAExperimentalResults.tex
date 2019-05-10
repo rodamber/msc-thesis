@@ -34,8 +34,8 @@
 A set of 285,522 expressions were provided by OutSystems.
 We conducted an analysis to determine which builtin functions and which
 combinations were the most common in that set.
-We picked 51 expressions containing only those functions (see
-Table~\ref{table:builtin-description}) with sizes (number of components) ranging
+We picked 51 expressions containing only functions from
+Table~\ref{table:builtin-description}, and sizes (number of components) ranging
 from 1 to 7.
 The hardness of a benchmark depends on the size of the solution, the number of
 input-output examples, and the library of components.
@@ -48,7 +48,7 @@ expression.
 The inputs were carefully crafted in order to try to eliminate as much ambiguity
 as possible.
 Then we interpreted the expressions over their set of inputs in order to
-obtain the correspondent outputs.
+obtain the corresponding outputs.
 
 We used Z3 version 4.8.5~\cite{DeMoura:2008:ZES} as the underlying \gls{smt}
 solver. 
@@ -103,8 +103,6 @@ input-output examples (but might or might not generalize).
 Matching the expected solution means, that the synthesizer outputs a program
 that, not only satisfies the input-output examples, but also captures the
 original intent and generalizes to more examples.
-Figure~\ref{fig:comparison-expected-sypet} shows a comparison between all
-configurations on three input-output examples.
 
 % Expected comparison
 \begin{figure*}
@@ -120,6 +118,8 @@ configurations on three input-output examples.
 \subsection{Discussion}
 \label{sec:discussion}
 
+Figure~\ref{fig:comparison-expected-sypet} shows a comparison between all
+configurations on three input-output examples.
 In Figure~\ref{fig:comparison-expected-sypet} we can see that SyPet-All has
 similar results to W-e3:c1.
 The large number of components makes the search space intractable.
@@ -138,7 +138,7 @@ smaller constraints.
 Still, it would be interesting to benchmark configurations with more
 constants, or with user-provided constants.
 
-The times for the solved benchmarks are reasonably fast, allowing for reasonable
-interaction times with the user.
+The running times for the solved benchmarks are reasonably fast, allowing for
+tolerable interaction times with the user.
 However, synthesizing programs with 4 or more lines seems to be out of reach for
 these configurations (Figure~\ref{fig:comparison-expected-sypet}).

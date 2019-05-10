@@ -38,24 +38,24 @@ typically imposed by the application.
 Typical queries and response types are some of the following~\cite{Jha:2017:TFS}:
 
 \begin{itemize}
-\item \textit{Membership queries}, where given an I/O example $x$ the oracle
+\item \textit{Membership queries}, where given an input-output example $x$ the oracle
   responds with the answer to whether $x$ is positive or not.
 \item \textit{Positive (resp. negative) witness queries}, where the oracle
-  responds with a positive (resp. negative) I/O example, if it can find any, or
-  $\bot$ otherwise.
+  responds with a positive (resp. negative) input-output example, if it can find
+  any, or $\bot$ otherwise.
 \item \textit{Counterexample queries}, where given a candidate program $p$ the
-  oracle responds with a positive I/O counterexample that $p$ does not satisfy,
-  if it can find any, or $\bot$ otherwise.
+  oracle responds with a positive input-output counterexample that $p$ does not
+  satisfy, if it can find any, or $\bot$ otherwise.
 \item \textit{Correctness queries}, where given a candidate program $p$ the
   oracle responds with the answer to whether $p$ is correct or not. If it is not,
-  the oracle responds with a positive I/O counterexample.
+  the oracle responds with a positive input-output counterexample.
 \item \textit{Verification queries}, where given program $p$ and specification
   $\phi$ the oracle responds with the answer to whether $p$ satisfies $\phi$ or
   not, or $\bot$ if it cannot find the answer.
 \item \textit{Distinguishing input queries}, where given program $p$ and set $X$
-  of I/O examples that $p$ satisfies the oracle responds with a new program $p'$
-  and a counterexample $x$ to $p$ that $p'$ satisfies along with all the other
-  examples in $X$.
+  of input-output examples that $p$ satisfies the oracle responds with a new
+  program $p'$ and a counterexample $x$ to $p$ that $p'$ satisfies along with all
+  the other examples in $X$.
 \end{itemize}
 
 An \gls{ogis} system responding to counterexample queries corresponds to the

@@ -4,13 +4,13 @@
 This section covers some essential terminology that is used throughout the
 document.
 
-Program synthesis is fundamentally a search problem, thus, for it to be
+Program synthesis is fundamentally a search problem, hence, for it to be
 well-defined there must be some \textit{search space} that contains the objects
 we are searching for.
 In our case, these objects are programs, so we have a \textit{program space}.
 
 \begin{definition}[Program Space]
-  The set of all programs in a given programming language.
+  Program space is the set of all programs in a given programming language.
 \end{definition}
 
 Programming languages are usually defined by means of a grammar.
@@ -24,7 +24,8 @@ For our purposes, we are interested in a particular kind of grammar, called a
   \item $\Sigma{}$ is a finite set. It denotes the set of terminal symbols.
   \item $R$ is a finite relation from $\mathcal{V}$ to $(\mathcal{V} \cup
     \Sigma{})^*$, where the asterisk denotes the Kleene star operation.
-  \item $S$ is a non-terminal symbol. It is the start symbol of the grammar.
+  \item $S$ is a non-terminal symbol, corresponding to the start symbol of the
+    grammar.
   \end{enumerate*}
 \end{definition}
 
@@ -56,8 +57,6 @@ arithmetic.
 \gls{smt} solvers have seen a multitude of applications, particularly in
 problems from artificial intelligence and formal methods, such as program
 synthesis, or verification.
-This section gives a short introduction to \gls{smt}, and is based on the
-chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
 
 % \subsection{Syntax of \gls{smt} Formulas}
 % \label{sec:smt-syntax}

@@ -5,8 +5,7 @@ We are working in the context of the OutSystems platform. OutSystems is a
 low-code platform that features visual application development, easy integration
 with existing systems, and the possibility to add own code when needed. To that
 effect, the kind of programs we are interested in are expressions in the
-OutSystems language.
-\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}
+OutSystems language.\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}
 
 We can think of OutSystems expressions as a simple functional language of
 operands and operators that compose themselves to create pure, stateless,
@@ -23,7 +22,7 @@ numbers, or dates.
     \begin{tabular}{@{}ll@{}ll@{}}
       \toprule
 
-      \multicolumn{1}{c}{Function Signatures}
+      \multicolumn{1}{c}{Function Signature}
       & \multicolumn{1}{c}{Description}
       & \multicolumn{1}{c}{Examples}
       \\ \midrule
@@ -123,13 +122,13 @@ text ``John Michael Doe'' and the prefix ``Dr. '' we would like to obtain
 
 Because OutSystems expressions are composed of self-contained pure functions,
 this synthesis problem fits nicely in the component-based synthesis
-paradigm~(\ref{sec:components}). Therefore, assume we are given a \textit{library}
-of base components $F$ that the synthesizer can use in order to compose the
-programs. These components will be builtin functions drawn from the OutSystems
-library, or combinations of them. Each component can take a finite number of
-inputs and return exactly one output. More formally, a component $f \in F$ is
-represented by an expression $\phi{}_f$ (a specification) that specifies how its
-input parameters $P_f$ relate to its return value $r_f$.
+paradigm. Therefore, assume we are given a \textit{library} of base components
+$F$ that the synthesizer can use in order to compose the programs. These
+components will be builtin functions drawn from the OutSystems library, or
+combinations of them. Each component can take a finite number of inputs and
+return exactly one output. More formally, a component $f \in F$ is represented
+by an expression $\phi{}_f$ (a specification) that specifies how its input
+parameters $P_f$ relate to its return value $r_f$.
 
 We can see from the previous examples that OutSystems expressions can also
 include constant literals, like \lstinline{" "}, or \lstinline{0}. These could
@@ -194,17 +193,16 @@ its satisfiability, respectively.
 
 The procedure keeps going in a loop until the enumerator receives SAT from the
 solver. The enumerator then decodes the model into an actual program, which is
-then returned.
+then returned to the user.
 
 \paragraph{Program Formula}
 \label{sec:program-formula}
 
 Let us take the program from Figure~\ref{fig:first-name-ssa} as a running
-example in order to understand how, given the input-output examples and a set of
-components, we can construct a formula whose model can be decoded into a program
-that satisfies the examples. This program is good because it is a small,
-non-trivial program, which uses non-input constant variables (\lstinline{" "}
-and \lstinline{0}), and not every component has the same return type.
+example in order to understand how we can construct a formula whose model can be
+decoded into a program that satisfies the examples. This is a small, non-trivial
+program, which uses non-input constant variables (\lstinline{" "} and
+\lstinline{0}), and not every component has the same return type.
 
 In order to encode the space of valid programs, the solver has to decide
 \begin{enumerate*}[(1)]
@@ -231,8 +229,8 @@ variables of all components, and a variable $o$, the output variable of the
 program. We will denote the formal parameter variables and return variable of
 component $f$ by $P_f$ and $r_f$ , respectively. Also, we will use $F'$ to refer
 to the components available to the solver (in this case, \lstinline{Index},
-\lstinline{Substr}, and \lstinline{Concat} --- recall that $F$ is used to denote
-the library of all components).
+\lstinline{Substr}, and \lstinline{Concat}) --- recall that $F$ is used to
+denote the library of all components).
 
 \paragraph{Well-Formedness Constraint}
 \label{sec:wfp-constraint}
@@ -308,9 +306,9 @@ $\psi{}_{\mathtt{tloc}}$ we get the full program well-formedness constraint:
 \paragraph{Functional Constraint}
 \label{sec:functional-constraint}
 
-The formula we arrived to in the last section encodes the space of all
-\textit{syntactically} well-formed programs. However, in no way does it
-constrain the programs to have the correct \textit{semantics}.
+The previous formula encodes the space of all \textit{syntactically} well-formed
+programs. However, in no way does it constrain the programs to have the correct
+\textit{semantics}.
 In particular, it does not
 \begin{enumerate*}[(1)]
 \item \label{itm:fc-one} relate the return values to their corresponding components;

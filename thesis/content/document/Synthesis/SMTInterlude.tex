@@ -28,12 +28,6 @@ Table~\ref{table:slia-symbols}.
       & \multicolumn{1}{c}{Description}
       \\ \midrule
 
-      % $At(s, x)$
-      % & Function symbol.
-      %   The terms $x$ and $y$ are a string and an integer, respectively.
-      %   Its value, a string, is the character of $s$ at index $x$.
-      % \\ \midrule
-
       $x \strconcat y$
       & Function symbol.
         The terms $x$ and $y$ are strings.
@@ -60,18 +54,6 @@ Table~\ref{table:slia-symbols}.
         less than $i + j$).
       \\ \midrule
 
-      % $Replace(s, x, y)$
-      % & The terms $s$, $x$ and $y$ are strings.
-      %   Its value, a string, is $s$ with the \textbf{first} occurrence of $x$
-      %   replaced by $y$, or $s$ if $x$ does not occur in $s$.
-      % \\ \midrule
-
-      % $Contains(x, y)$
-      % & Predicate symbol.
-      %   The terms $x$ and $y$ are strings.
-      %   $\mathbf{true}$ if $x$ contains $y$, and $\mathbf{false}$ otherwise.
-      % \\ \midrule
-
       $x + y$
       & Function symbol.
         The terms $x$ and $y$ are integers.
@@ -90,11 +72,11 @@ Table~\ref{table:slia-symbols}.
 \end{table}
 \raggedbottom
 %
-The semantics of components \lstinline{Concat}, \lstinline{IndexOf},
-\lstinline{Length}, \lstinline{Substr}, \lstinline{Add}, and \lstinline{Sub}
-are directly captured by their \gls{smt} counterparts $\strconcat$, $IndexOf$,
-$Length$, $Substr$, $+$, and $-$, respectively.
-Concretely, their specifications are the following:
+The semantics of the components \lstinline{Concat}, \lstinline{IndexOf},
+\lstinline{Length}, \lstinline{Substr}, \lstinline{Add}, and \lstinline{Sub} are
+directly captured by their \gls{smt} counterparts $\strconcat$, $IndexOf$,
+$Length$, $Substr$, $+$, and $-$, respectively. Concretely, their specifications
+are the following:
 %
 \begin{align*}
   \phi{}_{\text{\lstinline{Concat}}}(x, y, r)     &= (x \strconcat y   = r) \\
@@ -104,66 +86,3 @@ Concretely, their specifications are the following:
   \phi{}_{\text{\lstinline{Add}}}(x, y, r)        &= (x + y            = r) \\
   \phi{}_{\text{\lstinline{Sub}}}(x, y, r)        &= (x - y            = r)
 \end{align*}
-%
-% \noindent
-% Components \lstinline{Replace}, \lstinline{ToLower}, \lstinline{ToUpper},
-% \lstinline{Trim}, \lstinline{TrimStart}, \lstinline{TrimEnd} do not have a
-% direct counterpart, so their specifications must be encoded by formulas that
-% employ a combination of the symbols of Table~\ref{table:slia-symbols}
-% (note that \lstinline{Replace} replaces all occurrences, in contrast with
-% $Replace$, which only replaces the first one).
-% The specification of component \lstinline{Replace} is the following:
-% %
-% \[
-%   \phi{}_{\text{\lstinline{Replace}}}(s, x, y, r) = (ReplaceAll(s, x, y) = r)
-% \]
-% %
-% where the function symbol $ReplaceAll$ is defined as:
-% \begin{align*}
-%   ReplaceAll(s, x, y) = ite(&x = ``" \lor{} \neg{}Contains(s, x), \\
-%                             &s,                                   \\
-%                             &ReplaceAll(Replace(s, x, y), x, y))
-% \end{align*}
-% %
-% The specification for component \lstinline{ToLower} is the following:
-% %
-% \[
-%   \phi{}_{\text{\lstinline{ToLower}}}(s, r) = (Lower(s) = r)
-% \]
-% %
-% where the $Lower$ is defined as sequence of $ite$ terms mapping character $``A"$
-% to $``a"$, $``B"$ to $``b"$, and so on, until $``Z"$ and $``z"$, defaulting to
-% its parameter $s$ if $s$ is not an upper-case alphabetic character:
-% %
-% \[
-%   Lower(s) = ite(s = ``A", ``a", ite(s = ``B", ``b", \ldots{}
-%   ite(``Z", ``z", s)\ldots{}))
-% \]
-% %
-% The specification for \lstinline{ToUpper} is defined analogously.
-% Finally, the specifications for \lstinline{Trim}, \lstinline{TrimStart}, and
-% \lstinline{TrimEnd} are the following:
-% %
-% \begin{align*}
-%   \phi{}_{\text{\lstinline{Trim}}}(s, r)      &= (Trim(s) = r)      \\
-%   \phi{}_{\text{\lstinline{TrimStart}}}(s, r) &= (TrimStart(s) = r) \\
-%   \phi{}_{\text{\lstinline{TrimEnd}}}(s, r)   &= (TrimEnd(s) = r)   \\
-% \end{align*}
-% %
-% where $Trim$, $TrimStart$, and $TrimEnd$ are defined as follows:
-% %
-% \begin{align*}
-%   Trim(s)   &= TrimStart(TrimEnd(s)) \\
-%   TrimStart &= ite(Head(s) = `` ", TrimStart(Tail(s)), s) \\
-%   TrimEnd   &= Reverse(TrimStart(Reverse(s)))
-% \end{align*}
-% %
-% while making use of the following combinators:
-% %
-% \begin{align*}
-%   Head(s) &= At(s, 0) \\
-%   Last(s) &= At(s, Length(s) - 1) \\
-%   Tail(s) &= Substr(s, 1, Length(s)) \\
-%   Init(s) &= Substr(s, 0, Length(s) - 1) \\
-%   Reverse(s) &= ite(s = ``", s, Last(s) \strconcat Init(s))
-% \end{align*}
