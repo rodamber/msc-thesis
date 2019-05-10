@@ -1,14 +1,8 @@
-\section{Preliminaries}
-\label{sec:preliminaries}
-
-This chapter introduces some definitions and examples that will be useful later
-on. It might be practical to just skim this chapter at first reading, and then
-come back as needed.
-
 \section{Terminology and Basic Definitions}
 \label{sec:terminology}
 
-This section covers some essential terminology that is used in the document.
+This section covers some essential terminology that is used throughout the
+document.
 
 Program synthesis is fundamentally a search problem, thus, for it to be
 well-defined there must be some \textit{search space} that contains the objects
@@ -25,17 +19,14 @@ For our purposes, we are interested in a particular kind of grammar, called a
 
 \begin{definition}[\Glsfmtlong{cfg}]
   A \Glsfmtlong{cfg} is a tuple $(\mathcal{V}, \Sigma{}, R, S)$, where:
-  \begin{itemize}
+  \begin{enumerate*}[(1)]
   \item $\mathcal{V}$ is a finite set. It denotes the set of non-terminal symbols.
   \item $\Sigma{}$ is a finite set. It denotes the set of terminal symbols.
   \item $R$ is a finite relation from $\mathcal{V}$ to $(\mathcal{V} \cup
     \Sigma{})^*$, where the asterisk denotes the Kleene star operation.
   \item $S$ is a non-terminal symbol. It is the start symbol of the grammar.
-  \end{itemize}
+  \end{enumerate*}
 \end{definition}
-
-Definition~\ref{def:terms-and-formulas} in Section~\ref{sec:smt} provides an
-example of a \Glsfmtshort{cfg}.
 
 In our context, we are working in a \gls{pbe} setting, where the user explains
 their intent by means of a set of input-output \textit{examples}.
@@ -50,8 +41,8 @@ $(\mathbf{x}, y)$ if $f(\mathbf{x}) = y$.
 We say that a program satisfies a \textit{set} of input-output examples if it
 satisfies every example in that set.
 
-\section{\Glsfmtfull{smt}}
-\label{sec:smt}
+% \section{Preliminaries on \Glsfmtfull{smt}}
+% \label{sec:smt}
 
 Many problems in the real world can be modeled in the form of logical formulas.
 Thus, it is of great interest to have access to efficient off-the-shelf
@@ -68,11 +59,11 @@ synthesis, or verification.
 This section gives a short introduction to \gls{smt}, and is based on the
 chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
 
-\subsection{Syntax of \gls{smt} Formulas}
-\label{sec:smt-syntax}
-
-Here we define the language of well-formed \gls{smt} formulas. Formulas are
-composed of symbols and logical connectives over those symbols.
+% \subsection{Syntax of \gls{smt} Formulas}
+% \label{sec:smt-syntax}
+%
+% Here we define the language of well-formed \gls{smt} formulas. Formulas are
+% composed of symbols and logical connectives over those symbols.
 
 \begin{definition}[Signature]
   A signature $\Sigma{} = \Sigma{}^F \cup{} \Sigma{}^P$ is a set of
@@ -94,17 +85,17 @@ composed of symbols and logical connectives over those symbols.
   A ($\Sigma{}$-)formula $\phi{}$ is an expression of the form:
   %
   \begin{align*}
-  \phi{} ::= A
+  \phi{} &::= A
     \OR p(t_1,\ldots,t_n)
-    \OR t_0 = t_1
-    \OR \bot{}
+    \OR t_0 = t_1 \\
+    &\OR \bot{}
     \OR \top{}
     \OR \neg{}\phi{} \\
-    \OR \phi{}_0 \rightarrow{} \phi{}_1
+    &\OR \phi{}_0 \rightarrow{} \phi{}_1
     \OR \phi{}_0 \leftrightarrow{} \phi{}_1
     \OR \phi{}_0 \land{} \phi{}_1
-    \OR \phi{}_0 \lor{} \phi{}_1
-    \OR (\exists{}x\ldotp\phi{}_0)
+    \OR \phi{}_0 \lor{} \phi{}_1 \\
+    &\OR (\exists{}x\ldotp\phi{}_0)
     \OR (\forall{}x\ldotp\phi{}_0)
   \end{align*}
   %
@@ -112,30 +103,26 @@ composed of symbols and logical connectives over those symbols.
   $n > 0$.
 \end{definition}
 
-\subsection{Semantics of \gls{smt} Formulas}
-\label{sec:smt-semantics}
-
-In this section we explore how \gls{smt} formulas are given meaning.
+% \subsection{Semantics of \gls{smt} Formulas}
+% \label{sec:smt-semantics}
+%
+% In this section we explore how \gls{smt} formulas are given meaning.
 
 \begin{definition}[Model]
-  Given a signature $\Sigma{}$, a ($\Sigma{}$-)\textit{model} $\mathcal{A}$ for
-  $\Sigma{}$ is a tuple $(A, (\_)^{\mathcal{A}})$ where:
+  Given a signature $\Sigma{}$, a \\ ($\Sigma{}$-)\textit{model} $\mathcal{A}$
+  for $\Sigma{}$ is a tuple $(A, (\_)^{\mathcal{A}})$ where
   %
-  \begin{enumerate}
-  \item $A$, called the \textit{universe} of the model, is a non-empty set;
-  \item $(\_)^{\mathcal{A}}$ is a function with domain $\Sigma{}$, mapping:
-    \begin{itemize}
-    \item each constant symbol $a \in \Sigma{}^F$ to an element
+  $A$, called the \textit{universe} of the model, is a non-empty set, and
+  $(\_)^{\mathcal{A}}$ is a function with domain $\Sigma{}$, mapping:
+    each constant symbol $a \in \Sigma{}^F$ to an element
       $a^{\mathcal{A}} \in A$;
-    \item each function symbol $f \in \Sigma{}^F$ with arity $n > 0$ to a total
+    each function symbol $f \in \Sigma{}^F$ with arity $n > 0$ to a total
       function $f^{\mathcal{A}}\colon A^n \to A$;
-    \item each propositional symbol $B \in \Sigma{}^P$ to an element
+    each propositional symbol $B \in \Sigma{}^P$ to an element
       $B^{\mathcal{A}} \in \{\mathbf{true}, \mathbf{false}\}$;
-    \item and each predicate symbol $p \in \Sigma{}^P$ with arity $n > 0$ to a
+    and each predicate symbol $p \in \Sigma{}^P$ with arity $n > 0$ to a
       total predicate $p^{\mathcal{A}}\colon A^n \to \{\mathbf{true},
       \mathbf{false}\}$.
-    \end{itemize}
-  \end{enumerate}
 \end{definition}
 
 \begin{definition}[Interpretation]
@@ -146,22 +133,20 @@ In this section we explore how \gls{smt} formulas are given meaning.
   $\phi{}^{\mathcal{A}}\in \{\mathbf{true}, \mathbf{false}\}$, in the following
   manner:
   %
-  \begin{enumerate}
-  \item $f(t_1,\ldots,t_n)^{\mathcal{A}}$ is mapped to
+  $f(t_1,\ldots,t_n)^{\mathcal{A}}$ is mapped to
     $f^{\mathcal{A}}(t_1^{\mathcal{A}},\ldots,t_n^{\mathcal{A}})$;
-  \item $p(t_1,\ldots,t_n)^{\mathcal{A}}$ is mapped to
+  $p(t_1,\ldots,t_n)^{\mathcal{A}}$ is mapped to
     $p^{\mathcal{A}}(t_1^{\mathcal{A}},\ldots,t_n^{\mathcal{A}})$;
-  \item $ite(\phi{}, t_1, t_2)^{\mathcal{A}}$ is equal to $t_1^{\mathcal{A}}$ if
+  $ite(\phi{}, t_1, t_2)^{\mathcal{A}}$ is equal to $t_1^{\mathcal{A}}$ if
     $\phi{}^{\mathcal{A}}$ is $\mathbf{true}$, and equal to $t_2^{\mathcal{A}}$
     otherwise;
-  \item $\bot{}^{\mathcal{A}}$ is mapped to $\mathbf{false}$;
-  \item $\top{}^{\mathcal{A}}$ is mapped to $\mathbf{true}$;
-  \item $(t_1 = t_2)$ is mapped to $\mathbf{true}$ if
+  $\bot{}^{\mathcal{A}}$ is mapped to $\mathbf{false}$;
+  $\top{}^{\mathcal{A}}$ is mapped to $\mathbf{true}$;
+  $(t_1 = t_2)$ is mapped to $\mathbf{true}$ if
     $t_1^{\mathcal{A}}$ is equal to $ t_2^{\mathcal{A}}$, and is mapped to
     $\mathbf{false}$ otherwise.
-  \item $\Sigma$-symbols are mapped according to the mapping of the model just
+  $\Sigma$-symbols are mapped according to the mapping of the model just
     as before.
-  \end{enumerate}
 \end{definition}
 
 \begin{definition}[Satisfiability]

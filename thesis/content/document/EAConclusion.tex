@@ -13,11 +13,7 @@ component-based \gls{pbe} synthesizers -- Setwise and Whole.
 Both synthesizers employ a mixture of constraint solving with basic enumerative
 search, differing on the amount of work they put on the constraint solving
 phase.
-We benchmarked both synthesizers and compared them to SyPet~\cite{Feng:2017:CSC}
-with two different configurations: one where all constants needed to solve the
-instances are given as new components, and another that simulates
-user-provided constants by only allowing the constants needed for each
-particular instance.
+We benchmarked both synthesizers and compared them to SyPet~\cite{Feng:2017:CSC}.
 
 The Setwise synthesizer can consistently synthesize programs that satisfy the
 given input-output with up to four lines, but only manages to match the user
@@ -38,7 +34,7 @@ includes trying to figure out from the input-output examples what constants the
 program might use.
 Moreover, it would be interesting to see how our synthesizers compare to a
 synthesizer implemented using the PROSE
-framework.~\footnote{\url{https://microsoft.github.io/prose/}}.
+framework.\footnote{\url{https://microsoft.github.io/prose/}}
 
 Both approaches use encodings whose size scales linearly with the number of
 input-output examples.

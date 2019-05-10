@@ -1,19 +1,6 @@
 \section{Background}
 \label{sec:background}
 
-This section discusses the fundamentals of the field of program synthesis and a
-broad overview of the state of the art, with a focus on constraint solving and
-\glsfmtfull{pbe}.
-Section~\ref{sec:specifications} discusses several ways to describe intent to
-the synthesizer.
-Section~\ref{sec:search-techniques} discusses techniques to search the program
-space for the intended program.
-\citeauthor{Gulwani2017} presented a broader overview of the field as of
-2017~\cite{Gulwani2017}.
-
-\subsection{Specifications}
-\label{sec:specifications}
-
 The first part of solving a program synthesis problem is figuring out how the
 user will communicate their intention to the synthesizer. An intention is
 communicated by a \textit{specification}, and may be given in many different
@@ -23,96 +10,27 @@ type signatures~\cite{Osera:2015:TPS,
   Frankle:2016:EST, Polikarpova:2016:PSP};
 syntax-guided methods~\cite{Alur:sygus:2013} such as
 sketches~\cite{Solar-Lezama:2008}, or components~\cite{Feng:2017:CST,
-Feng:2017:CSC, Feng:2018:PSU, Shi:2019:FCS};
+Feng:2017:CSC, Feng:2018:PSU};
 inductive specifications such as input-output examples~\cite{Frankle:2016:EST,
-Gulwani:2012:SDM, Leung:2015:IPS}, demonstrations~\cite{Lau2003}, or program
-traces~\cite{Lau:traces:2003};
-or even other programs~\cite{Srivastava:2011:PIS}.
+Gulwani:2012:SDM, Leung:2015:IPS}, or demonstrations~\cite{Lau2003}.
 The kind of specification should be chosen according to the particular use case
 and to the background of the user, and it might dictate the type of techniques
-used to solve the problem (see Section~\ref{sec:search-techniques}).
-
-\subsubsection{Logical Specifications}
-\label{sec:logical}
-
-Logical specifications are the canonical way of introducing specifications. In
-the sorting example from the introduction (\ref{sec:sorting-example}) we already
-saw an example of this where the specifications were given as logical
-pre/post-conditions over the inputs/outputs of the program. In that case, the
-specifications were written as predicates in the host programming language.
-Logical specifications may also be given as loop invariants or general
-assertions in the code, in order to give more hints to the
-synthesizer.
-Complete logical specifications are often difficult to write, or expensive to
-synthesize from.
-They usually require a great deal of knowledge about the domain of operation,
-and are typically not suitable for non-technical users.
-
-\subsubsection{Syntactic Specifications}
-\label{sec:syntactic-specifications}
-
-A specification can be seen as a constraint over the space of all possible
-programs. We have already seen one type of specification, logical
-specifications, which are a kind of \textit{semantic} specifications, meaning
-that they constrain the program space over \textit{behavior}. Syntactic
-specifications are a method of specifying intent in program synthesis where a
-semantic specification is complemented with some form of \textit{syntactic}
-constraints on the shape that the desired program can take.
-
-Syntactic specifications are typically provided in the form of a
-\gls{cfg}~\cite{Alur:sygus:2013}, or with sketches \cite{Solar-Lezama:2008}.
-These restrictions provide structure to the set of candidate programs, possibly
-resulting in more efficient search procedures. They can also be used for the
-purpose of performance optimizations, e.g., by limiting the search space to
-implementations that only use a limited amount of lines of code. The learned
-programs also tend to be more readable and explainable.
-
-\paragraph{Sketching}
-\label{sec:sketching}
-
-The idea of sketching is to provide skeletons of the programs we want to
-synthesize, called \textit{sketches}, leaving missing details, called
-\textit{holes}, for the synthesizer to fill. The synthesizer is then directed by
-the high-level structure of the skeleton while taking care of finding the
-low-level details according to user-specified assertions.
-Sketching is an accessible form of program synthesis, as it does not require
-learning new specification languages and formalizations, allowing the users to
-use the programming model with which they are already familiarized.
-This approach was introduced in the SKETCH system by
-Solar-Lezama~\cite{Solar-Lezama:2008}, which allowed the synthesis of imperative
-programs in a C-like language.
+used to solve the problem.
 
 \paragraph{Component-Based Synthesis}
 \label{sec:components}
 
 In component-based
-synthesis~\cite{Shi:2019:FCS,Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Jha:oracle:2010}
+synthesis~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Jha:oracle:2010}
 we are interested in finding a loop-free program made out of a combination of
 fundamental building blocks called \textit{components}. These components could
 be, for example, methods in a library
-\gls{api}~\cite{Shi:2019:FCS,Feng:2017:CSC}, and the way in which they can be
+\gls{api}~\cite{Feng:2017:CSC}, and the way in which they can be
 combined forms the syntactic specification for the programs we want to find.
 They may also be supplemented by additional constraints in the form of logical
 formulas~\cite{Feng:2018:PSU}.
 
-\paragraph{Syntax-Guided Synthesis}
-\label{sec:sygus}
-
-The problem of program synthesis with syntactic specifications was generalized
-and formalized in the work on
-\gls{sygus}~\cite{Alur:sygus:2013}.\footnote{\url{https://sygus.org}}
-\gls{sygus} is a community effort with the objective of ``formulating the core
-computational problem common to many recent tools for program synthesis in a
-canonical and logical manner''.
-The input to this problem consists of a background theory, that defines the
-language, a semantic correctness specification defined by a logical formula in
-that theory, and a syntactic specification in the form of a \gls{cfg}.
-This effort has helped to create a common format for the definition of program
-synthesis problems and a growing repository of benchmarks. It has also led to
-the creation of the SyGuS-Comp annual competition.
-
-\subsubsection{Inductive Synthesis}
-\label{sec:inductive}
+\paragraph{\Glsfmtfull{pbe}}
 
 Inductive synthesis is an instance of the program synthesis problem where the
 constraints are underspecified.
@@ -121,9 +39,6 @@ specification could be as hard to produce as the program itself, or might not
 even exist.
 In other cases, we might want the synthesizer to be as easy and intuitive to use
 as possible for users coming from different backgrounds.
-
-\paragraph{\Glsfmtfull{pbe}}
-
 \gls{pbe} is an instance of inductive synthesis where the specification is given
 by input-output examples that the desired program must satisfy.
 Explicitly giving examples can be preferred due to their ease of use, especially
@@ -138,84 +53,6 @@ properties of the output instead of specifying it completely
 This can be helpful if it is impractical or impossible
 to write the output concretely, e.g., if it is infinite.
 
-\paragraph{\Glsfmtfull{pbd}}
-
-In \gls{pbd} the user does not write a specification \textit{per se};
-instead the synthesizer is given a sequence of transformation steps (a
-demonstration) on concrete inputs, and uses them to infer the intended program.
-The program must be general enough to be used with different inputs.
-\gls{pbd} can be seen as a refinement of \gls{pbe} that
-considers an entire execution trace (i.e., step-by-step instructions of the
-program behavior on a given input) instead of a single input-output example.
-It depicts \textit{how} to achieve the corresponding output instead of just
-specifying \textit{what} it should be.
-
-Though the concept of \gls{pbd} is easy to understand, the task of the user can
-be tedious and time-consuming. Therefore, the synthesizer must be able to infer
-the intended program from a small set of user demonstrations.
-Ideally, it would also be able to interact effectively and receive feedback from
-the user.
-However, the concept might also be interesting when applied to non-interactive
-contexts, such as \textit{reverse engineering}.
-
-Lau et al. applied \gls{pbd} to the text-editing domain by implementing
-SMARTedit, a system that induces repetitive text-editing programs from as few as
-one or two examples. The system resembles familiar keystroke-based macro
-interfaces, but it generalizes to a more robust program that is likely to work
-in more situations \cite{Lau2003}.
-They have also presented a language-neutral framework and an implementation of a
-system that learns procedural programs from just 5.1 traces on average
-\cite{Lau:traces:2003}.
-
-\paragraph{Ambiguity}
-\label{sec:ambiguity}
-
-In inductive synthesis the specifications are inherently ambiguous.
-Therefore, the intended program should not only satisfy the specifications,
-but also generalize, effectively trying to figure out the user's intention.
-Typically, two approaches have been used to solve this problem.
-
-The first approach works by \textit{ranking} the set of programs consistent with
-examples according to their likelihood of being the desired program.
-This ranking function should allow for the efficient identification of the
-top-ranked program without having to perform costly enumeration.
-There have been manual approaches to create such functions, but it is a
-time-consuming process that requires a lot of domain expertise.
-It is also a fragile approach because it depends too much on the underlying
-\gls{dsl}.
-Recently, more automated approaches have been proposed~\cite{Singh:ranking:2015,
-  Ramsey:2017:LTL}, usually relying on machine learning techniques.
-However, as is usual with machine learning techniques, they require large
-labeled training datasets.
-
-The second approach is called \textit{active learning}, and (usually) relies
-on interaction between the user and the synthesizer.
-Typically, this happens by asking the user for (a small set of) additional
-input-output examples.
-Another idea, (similar to the one) introduced by
-\citeauthor{Jha:oracle:2010}~\cite{Jha:oracle:2010}, works by finding a
-\textit{distinguishing input}, an input on which two candidate programs differ,
-and query the user what the expected output should be for the intended program.
-Other types of active learning exist such as rephrasing the program in natural
-language, and accepting negative examples~\cite{Frankle:2016:EST}.
-
-\subsubsection{Programs}
-\label{sec:programs}
-
-A program can also be used as a specification and the job of the synthesizer is
-then to find another program with the same semantics.
-We might also be interested in programs that behave the same way as the original
-one, but, for example, are more efficient (according to some metric).
-
-Typically, the original programs are not made to be efficient, but to be easy to
-read or to prove correct.
-They may also appear naturally as specifications in certain use cases, such as
-superoptimization~\cite{Phothilimthana:2016:SUS},
-deobfuscation~\cite{Jha:oracle:2010}, and
-synthesis of program inverses~\cite{Srivastava:2011:PIS}.
-
-\subsection{Search Techniques}
-\label{sec:search-techniques}
 
 The second part of solving a program synthesis problem is deciding which search
 technique to apply in order to find the intended program.
@@ -227,8 +64,7 @@ Common search techniques are
 % deductive search (Section~\ref{sec:deductive-synthesis}),
 enumerative search~\cite{Phothilimthana:2016:SUS,Alur:2017:SEP}
 (Section~\ref{sec:enumerative-search}),
-stochastic search~\cite{Schkufza:2013:SS,Singh:ranking:2015}
-(Section~\ref{sec:stochastic-search}), and
+stochastic search~\cite{Schkufza:2013:SS,Singh:ranking:2015}, and
 constraint solving~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC}
 (Section~\ref{sec:constraint-solving}).
 Modern synthesizers usually apply a combination of those, enabling us to
@@ -238,8 +74,7 @@ consider frameworks and techniques for structuring their construction, such as
 \gls{ogis}~\cite{Jha:2017:TFS}
 (Section~\ref{sec:ogis}).
 
-
-\subsubsection{Enumerative Search}
+\paragraph{Enumerative Search}
 \label{sec:enumerative-search}
 
 In the context of program synthesis, enumerative search consists of enumerating
@@ -254,362 +89,42 @@ A reason why is that the search can be precisely tailored for the domain at
 hand, encoding domain-specific heuristics and case-by-case scenarios that
 result in highly effective pruning strategies.
 
-In their overview of the field of program synthesis~\cite{Gulwani2017},
-\citeauthor{Gulwani2017} describe some enumerative search algorithms for finding
-programs in program spaces defined by a \glsfmtfull{cfg}, which we describe
-next.
-The algorithms can be generalized to other types of program spaces such as,
-e.g., sketches.
-
-\paragraph{Top-Down Tree Search}
-\label{sec:top-down-tree-search}
-
-\begin{algorithm}
-  \DontPrintSemicolon
-  \LinesNotNumbered
-
-  \SetKw{Not}{not}
-
-  \SetKwInOut{Input}{input}
-  \SetKwInOut{Output}{output}
-
-  \SetKwFunction{Queue}{Queue}
-  \SetKwFunction{PopFirst}{popFirst}
-  \SetKwFunction{NonTerminals}{nonTerminals}
-  \SetKwFunction{Subsumed}{subsumed}
-
-  \Input{A specification $\phi{}$ and a \gls{cfg} $G$}
-  \Output{A program $p$ in the grammar $G$ that satisfies $\phi{}$}
-  \Begin{
-    $P\leftarrow$\Queue{}\;
-    $P'\leftarrow \{S\}$\;
-
-    \While{$P\neq \emptyset$}{
-      $p\leftarrow$\PopFirst{$P$}\;
-      \If{$p$ satisfies $\phi{}$}{
-        \Return{$p$}\;
-      }
-      \For{$a \in$ \NonTerminals{$p$}}{
-        \For{$b \in \{b | (a,b) \in R\}$}{
-          \If{\Not \Subsumed{$p[a\rightarrow b]$, $P'$}}{
-            $P\leftarrow P \cup \{p[a\rightarrow b]\}$\;
-            $P'\leftarrow P' \cup \{p[a\rightarrow b]\}$\;
-          }
-        }
-      }
-    }
-  }
-  \caption{Enumerative Top-Down Tree Search.
-    Adapted from \citeauthor{Gulwani2017}'s overview~\cite{Gulwani2017}.}
-  \label{alg:enum-top-down}
-\end{algorithm}
-
-The first enumerative strategy is the top-down tree search algorithm
-(Algorithm~\ref{alg:enum-top-down}).
-It takes as input a \gls{cfg} $G = (V, \Sigma{}, R, S)$ and a specification
-$\phi{}$, and works by exploring the derivations of $G$ in a best-first top-down
-fashion.
-The algorithm stores the current programs in a priority queue, $P$, and stores
-all the programs found so far in the set $P'$.
-Both $P$ and $P'$ are initialized with the partial program that corresponds to
-the start symbol $S$ of $G$.
-The algorithm runs until it finds a program $p$ that matches the specification
-$\phi{}$ or there are no more programs waiting in the queue (meaning that the
-algorithm fails).
-At every iteration, we take the program $p$ with the highest priority from the
-queue and check whether it satisfies $\phi{}$.
-If yes, we return $p$.
-Otherwise, the algorithm finds new (possibly partial) programs by applying the
-production rules of the grammar to $p$.
-The program space is pruned in the next step by ignoring programs that are
-semantically equivalent (with respect to $\phi{}$) to programs already
-considered in the past (i.e., subsumed within $P'$).
-
-\paragraph{Bottom-Up Tree Search}
-\label{sec:bottom-up-tree-search}
-
-\begin{algorithm}
-  \DontPrintSemicolon
-  \LinesNotNumbered
-
-  \SetKw{Not}{not}
-
-  \SetKwInOut{Input}{input}
-  \SetKwInOut{Output}{output}
-
-  \SetKwFunction{EnumerateExprs}{enumerateExprs}
-  \SetKwFunction{Subsumed}{subsumed}
-
-  \Input{A specification $\phi{}$ and a \gls{cfg} $G$}
-  \Output{A program $p$ in the grammar $G$ that satisfies $\phi{}$}
-  \Begin{
-    $P\leftarrow \emptyset$\;
-    \For{progSize $= 1,2,\ldots$}{
-      $P'\leftarrow$\EnumerateExprs{$G$, $E$, progSize}\;
-      \For{$p \in P'$}{
-        \If{$p$ satisfies $\phi{}$}{
-          \Return{$p$}\;
-        }
-        \If{\Not \Subsumed{$p$, $P$}}{
-          $P\leftarrow P \cup \{p\}$
-        }
-      }
-    }
-  }
-  \caption{Enumerative Bottom-Up Tree Search.
-    Adapted from \citeauthor{Gulwani2017}'s overview~\cite{Gulwani2017}.}
-  \label{alg:enum-bottom-up}
-\end{algorithm}
-
-The bottom-up tree search algorithm (Algorithm~\ref{alg:enum-bottom-up}) is the
-dual to top-down tree search algorithm.
-It also takes a \gls{cfg} $G = (V, \Sigma{}, R, S)$ and a specification
-$\phi{}$, and works by exploring the derivations of the grammar in a bottom-up
-dynamic programming fashion.
-This strategy has the advantage over the top-down search that (in general) only
-complete programs may be evaluated for semantic equivalence.
-The algorithm maintains a set of equivalent expressions, first considering the
-programs corresponding to leafs of the syntax tree of the grammar $G$, and then
-composing them in order to build expressions of increasing complexity,
-essentially applying the rules of the grammar in the opposite direction.
-
-\paragraph{Bidirectional Tree Search}
-\label{sec:bidirectional-search}
-
-We can see that a top-down tree search starts from a set of input states, while
-a bottom-up tree search starts from a set of output states.
-In both approaches the size of the search space grows exponentially with size of
-the programs.
-The bidirectional tree search algorithm tries to attenuate this problem by
-combining the previous two approaches, starting from both a set of input states
-and a set of output states.
-It maintains both sets, evolving in the same way as the previous two
-algorithms, and stops when it finds a state that belongs to both sets in a
-sort of meet-in-the-middle approach.
-
-\subsubsection{Stochastic Search}
-\label{sec:stochastic-search}
-
-Stochastic search is an approach to program synthesis where the synthesizer uses
-probabilistic reasoning to learn a program conditioned by the specification
-(i.e., the specification induces a probability distribution over the program
-space).
-
-Typical stochastic synthesis approaches include, for example:
-genetic programming~\cite{Weimer:2009:AFP} where a population of programs is
-repeatedly evolved by application of biological principles (such as natural
-selection) while optimizing for a given \textit{fitness} function (e.g., the
-number of input-output examples that are satisfied);
-neural networks that learn how to reproduce the intended
-behavior% ~\cite{Joulin:2015:IAP}
-, or that learn actually interpretable
-programs~\cite{Parisotto:2016:NPS};
-learning a distribution (a \textit{guiding function}) over the components of
-the underlying \gls{dsl} in order to guide a weighted enumerative search in the
-direction of a program that is most likely to meet the desired
-specification~\cite{Lee:ASP:2018,Balog:2017:DC}. % Deepcoder
-
-\paragraph{Sampling the Search Space}
-\label{sec:sampling}
-
-In this section we describe the stochastic synthesizer used by
-\citeauthor{Alur:sygus:2013} in their syntax-guided synthesis
-paper~\cite{Alur:sygus:2013}.
-Their synthesizer learns from examples and is adapted from work on
-superoptimization of loop-free binary programs~\cite{Schkufza:2013:SS}.
-Their algorithm uses the Metropolis-Hastings procedure to sample expressions
-that are more likely to meet the specification.
-They define a score function, $Score$, that measures the extent which a given
-program is consistent with the specification.
-Then they perform a probabilistic walk over the search space while maximizing
-this score function.
-The algorithm works by first picking a program $p$ of fixed size $n$ uniformly
-at random.
-They then pick a node from its parse tree uniformly at random and consider the
-subprogram rooted at that node.
-They then substitute it with another subprogram of same size and type, chosen
-uniformly at random, obtaining a new program $p'$.
-The probability of discarding $p$ for $p'$ is given by the formula $min(1,
-Score(p')/Score(p))$.
-It remains to say how to pick the value of $n$.
-Typically we do not know the size of the desired program from the start.
-In order to tackle this problem, they start by fixing its value at $n = 1$ and
-at each iteration change its value to $min(1, n\pm{}1)$ with with some small
-probability (default is 0.01).
-
-\subsubsection{Constraint Solving}
+\paragraph{Constraint Solving}
 \label{sec:constraint-solving}
 
 Another approach to program synthesis is to reduce the problem to that of
 constraint solving by the use of off-the-shelf automated constraint
-solvers~\cite{Shi:2019:FCS,Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Solar-Lezama:2008,Jha:oracle:2010}
+solvers~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Solar-Lezama:2008,Jha:oracle:2010}
 (typically SAT or SMT solvers).
 The idea is to encode the specification in a logical constraint whose solution
 corresponds to the desired program.
-\citeauthor{Gulwani2017}~\cite{Gulwani2017} illustrate this in a simple way with
-an example which we show here.
-This example also serves as a short introduction to the SMT-LIB
-language~\cite{BarFT-RR-17}, a standard language for SMT solvers.
-Suppose our programs are composed of operations over two input bitvectors, $x$
-and $y$, of length eight:
-%
-\begin{align*}
-  \text{program }P    &::= plus(E,E) \OR mul(E,E) \OR shl(E,C) \OR shr(E,C)    \\
-  \text{expression }E &::= x \OR C                                             \\
-  \text{constant }C   &::= 00000000_2 \OR 00000001_2 \OR \ldots \OR 11111111_2 \\
-\end{align*}
-%
-\noindent
-We consider an expression to be either the input variable $x$ or an 8-bit
-constant.
-A program consists of additions and multiplications between expressions, or of
-shift left/right operations over an expression by a constant.
-We can declare the type of bitvectors of length 8 in SMT-LIB as:
-%
-\begin{lstlisting}[language=Lisp,numbers=left,
-  firstnumber=1,
-  morekeywords={define-sort}]
-  (define-sort Bit8 () (_ BitVec 8))
-\end{lstlisting}
-%
-\noindent
-To encode the grammar of well-formed programs we first need to introduce the
-constant symbols \texttt{hP}, \texttt{hE0}, \texttt{hE1}, \texttt{c0} and
-\texttt{c1}, as well as the function symbol \texttt{prog}:
-%
-\begin{lstlisting}[language=Lisp,
-  numbers=left,
-  firstnumber=2,
-  morekeywords={declare-const,define-fun,ite}]
-  (declare-const hP Int)
-  (declare-const hE0 Bool)
-  (declare-const hE1 Bool)
-  (declare-const c0 Bit8)
-  (declare-const c1 Bit8)
 
-  (define-fun prog ((x Bit8)) Bit8
-  (let ((left (ite hE0 c0 x))
-       (right (ite hE1 c1 x)))
-    (ite (= hP 0) (bvadd left right)
-    (ite (= hP 1) (bvmul left right)
-    (ite (= hP 2) (bvshl left c1)
-                  (bvlshr left c1))))))
-\end{lstlisting}
-%
-The symbol \texttt{hP} encodes the choice of which language construct to pick,
-while the symbols \texttt{hE0}, \texttt{hE1} encode the choice of whether
-\texttt{left} and \texttt{right} are assigned the values of constants
-(\texttt{c0}, \texttt{c1}) or the value of the input (\texttt{x}).
-An assignment to these constant symbols corresponds to a valid program in our
-grammar, if we ensure that \texttt{hP} is in a valid range.
-We can use \texttt{assert} to introduce new clauses that must be satisfied:
-%
-\begin{lstlisting}[language=Lisp,
-  numbers=left,
-  firstnumber=15,
-  morekeywords={assert}]
-  (assert (>= hP 0))
-  (assert (<  hP 4))
-\end{lstlisting}
-%
-Finally, we can also use \texttt{assert} to encode a semantic specification.
-For example, suppose we are interested in a bitvector program $P$ that, for all
-input $x$, its output is always positive, i.e., $\forall x\ldotp P(x) \geq 0$.
-In SMT-LIB that can be written as:
-%
-\begin{lstlisting}[language=Lisp,
-  numbers=left,
-  firstnumber=17,
-  morekeywords={assert}]
-  (assert (forall ((x Bit8)) (bvsge (prog x) #x00)))
-\end{lstlisting}
- 
-This example shows an end-to-end constraint solving approach to program
-synthesis. However, encoding the problem this way can sometimes be non-trivial
-or time-consuming.
-This led to the appearance of the concept of \textit{solver-aided programming},
-where programming languages are enlarged with high-level constructs that give
-the user access to synthesis without having to deal with the constraint solvers
-directly.
-For example, \citeauthor{Gulwani2017} describe the SKETCH system as a ``compiler
-[that] relies on a SAT solver to materialize some language constructs''.
-ROSETTE~\cite{Torlak:2013:GSL} is a framework for developing solver-aided
-programming languages embedded in Racket that provides constructs not only for
-synthesis, but also for verification, debugging and angelic execution.
-
-\subsubsection{Oracle-Guided Inductive Synthesis}
+\subsection{Oracle-Guided Inductive Synthesis}
 \label{sec:ogis}
 
 \textit{\Glsfmtlong{ogis}~(\Gls{ogis})} is an approach to program synthesis
-where the synthesizer is split into two components: the \textit{learner} and the
-\textit{oracle}.
-The two components communicate in an iterative \textit{query/response} cycle, as
-shown in Figure~\ref{fig:ogis}.
+where the synthesizer is split into two components -- the \textit{learner} and the
+\textit{oracle} -- which communicate in an iterative \textit{query/response}
+cycle.
 The learner implements the search strategy to find the program and is
-parameterized by some form of semantic and/or syntactic specifications
-(see~\ref{sec:specifications}).
+parameterized by some form of semantic and/or syntactic specifications.
 The usefulness of the oracle is defined by the type of queries it can handle and
 the properties of its responses. The characteristics of these components are
 typically imposed by the application.
-
-\begin{figure}[htb]
-  \centering
-  \begin{tikzpicture}
-    [semithick, >=stealth, auto,
-     rectangular/.style={rectangle, draw, rounded corners, text width=4cm,
-       align=center, minimum size=1.5cm},
-     spherical/.style={circle, draw, text width=2cm, align=center}]
-
-    \node [rectangular] (S)  {Learner};
-    \node [left=1.95cm of S, align=center] (I) {Specification\\and/or Syntactic Bias}
-      edge [->] (S);
-    \node [below=of S, align=center] {Program $p$\\or Fail}
-      edge [<-] (S);
-    \node [spherical] (V)  [right=3cm of S] {Oracle}
-      ([yshift=0.2cm]S.east) edge [->, bend left]  node        {Query}    ([yshift=0.2cm]V.west)
-      ([yshift=-.2cm]S.east) edge [<-, bend right] node [swap] {Response} ([yshift=-.2cm]V.west);
-  \end{tikzpicture}
-  \caption{\Acrlong{ogis}. Adapted from
-    \protect\citeauthor{Jha:2017:TFS}~\protect\cite{Jha:2017:TFS}.}
-  \label{fig:ogis}
-\end{figure}
-
 Typical queries and response types are some of the following~\cite{Jha:2017:TFS}:
-
-\begin{itemize}
-\item \textit{Membership queries}, where given an I/O example $x$ the oracle
-  responds with the answer to whether $x$ is positive or not.
-\item \textit{Positive (resp. negative) witness queries}, where the oracle
-  responds with a positive (resp. negative) I/O example, if it can find any, or
-  $\bot$ otherwise.
+%
+\begin{compactitem}
 \item \textit{Counterexample queries}, where given a candidate program $p$ the
   oracle responds with a positive I/O counterexample that $p$ does not satisfy,
   if it can find any, or $\bot$ otherwise.
 \item \textit{Correctness queries}, where given a candidate program $p$ the
-  oracle responds with the answer to whether $p$ is correct or not. If it is not,
-  the oracle responds with a positive I/O counterexample.
-\item \textit{Verification queries}, where given program $p$ and specification
-  $\phi$ the oracle responds with the answer to whether $p$ satisfies $\phi$ or
-  not, or $\bot$ if it cannot find the answer.
+  oracle responds if $p$ is correct or not. If it is not, the oracle responds
+with a positive I/O counterexample.
 \item \textit{Distinguishing input queries}, where given program $p$ and set $X$
   of I/O examples that $p$ satisfies the oracle responds with a new program $p'$
   and a counterexample $x$ to $p$ that $p'$ satisfies along with all the other
   examples in $X$.
-\end{itemize}
-
-An \gls{ogis} system responding to counterexample queries corresponds to the
-\textit{\gls{cegis}} system, introduced by
-\citeauthor{Solar-Lezama:2008}~\cite{Solar-Lezama:2008} in the context of the
-SKETCH synthesizer. Correctness oracles are more powerful than counterexample
-oracles because they are guaranteed to return a counterexample if the program is
-not correct, where the counterexample oracles might not.
-
-The concepts of \gls{ogis} was introduced by
-\citeauthor{Jha:2017:TFS}~\cite{Jha:2017:TFS} as a generalization of \gls{cegis}
-when they applied this idea to a \gls{pbe} synthesizer based on distinguishing
-inputs in order to deobfuscate malware and to generate bit-manipulating
-programs. Jha et al. further developed this idea by presenting a new theoretical
-framework for inductive synthesis \cite{Jha:2017:TFS}.
+\end{compactitem}
 
 In general, the higher the capabilities of the oracles, the more expensive they
 are to run. Distinguishing oracles are (typically) not as strong as
@@ -619,13 +134,7 @@ turn to the Bounded Observation Hypothesis \cite{Solar-Lezama:2008}, which
 asserts that ``an implementation that works correctly for the common case and
 for all the different corner cases is likely to work correctly for all inputs.''
 
-In a setting where the synthesizer is allowed to interact with the user, we
-could see the users take the role of the oracles.
-However, the interesting cases are the ones where the ratio between the amount
-of work the users are given and the information given to the synthesizer is
-maximized.
-A system that frequently queries the users for correctness checks would probably
-feel very cumbersome.
-On the other hand, a system that queries for membership or positiveness checks
-might be more realistic, as usually the user has an idea of what sort of
-examples fit their desired model.
+The concepts of \gls{ogis} was introduced by Jha~et~al.~\cite{Jha:oracle:2010}
+as a generalization of \gls{cegis} when they applied this idea to a \gls{pbe}
+synthesizer based on distinguishing inputs in order to deobfuscate malware and
+to generate bit-manipulating programs.

@@ -66,11 +66,12 @@ oracles because they are guaranteed to return a counterexample if the program is
 not correct, where the counterexample oracles might not.
 
 The concepts of \gls{ogis} was introduced by
-\citeauthor{Jha:2017:TFS}~\cite{Jha:2017:TFS} as a generalization of \gls{cegis}
-when they applied this idea to a \gls{pbe} synthesizer based on distinguishing
-inputs in order to deobfuscate malware and to generate bit-manipulating
-programs. Jha et al. further developed this idea by presenting a new theoretical
-framework for inductive synthesis~\cite{Jha:2017:TFS}.
+\citeauthor{Jha:oracle:2010}~\cite{Jha:oracle:2010} as a generalization of
+\gls{cegis} when they applied this idea to a \gls{pbe} synthesizer based on
+distinguishing inputs in order to deobfuscate malware and to generate
+bit-manipulating programs.
+Jha et al. further developed this idea by presenting a new theoretical framework
+for inductive synthesis~\cite{Jha:2017:TFS}.
 
 In general, the higher the capabilities of the oracles, the more expensive they
 are to run. Distinguishing oracles are (typically) not as strong as
@@ -84,7 +85,7 @@ In a setting where the synthesizer is allowed to interact with the user, we
 could see the users take the role of the oracles.
 However, the interesting cases are the ones where the ratio between the amount
 of work the users are given and the information given to the synthesizer is
-maximized.
+minimized.
 A system that frequently queries the users for correctness checks would probably
 feel very cumbersome.
 On the other hand, a system that queries for membership or positiveness checks

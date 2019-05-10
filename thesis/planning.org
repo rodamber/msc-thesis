@@ -1,9 +1,9 @@
-* Chapters
+* Thesis
 ** REVIEW Introduction
 :PROPERTIES:
-:CONTENT:  ONGOING
+:CONTENT:  REVIEW
 :EXAMPLES: REVIEW
-:RELWORK:  TODO
+:RELWORK:  REVIEW
 :END:
 
 This chapter should:
@@ -42,17 +42,12 @@ Automating this work is good because:
 - sintetizadores altamente especializados e calibrados para dominios particulares
 - bugs enviados para a camada de abstraccao acima
 
-** ONGOING Preliminaries
+** REVIEW Preliminaries
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
-
-Missing definitions:
-- What does it mean for a program to satisfy a specification
-- Example, a set of examples, etc
-- Context-free grammars (expand example)
 
 - Some background on how SMT solvers work, e.g., describe DPLL(T).
 
@@ -169,9 +164,9 @@ Missing example (take one from the papers).
 
 **** TODO Deductive Search
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 Expand on this.
@@ -181,9 +176,9 @@ References: Polikarpova:2019:SSH, Manna:1971:TAP, Green:1969:ATP
 
 **** TODO Representation-Based Search
 :PROPERTIES:
-:CONTENT:  TODO
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 - VSAs: motivated by inductive learning; particularly suited to pbe
   - put simply, just a DAG where every part corresponds to a valid program
@@ -262,9 +257,9 @@ Missing pseudocode.
 
 ** ONGOING Synthesis
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
@@ -288,9 +283,9 @@ Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 
 *** ONGOING Problem Description
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 - [ ] Mention that we are using _positive_ examples.
@@ -298,25 +293,25 @@ Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 
 *** ONGOING Setwise Encoding
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 - [ ] Synthesizer program listing
 
 **** Program Formula
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 *** ONGOING Whole Encoding
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 ** REVIEW Experimental Results
@@ -364,6 +359,25 @@ Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 *** REVIEW Related Work
 *** REVIEW Future Work
 *** REVIEW Conclusion
+* Extended Abstract
+** Structure
+10 pages, references included
+
+|---------------+---------+-----------------|
+| Section       | # pages | current # pages |
+|---------------+---------+-----------------|
+| Abstract      |     0.5 |             0.5 |
+| Intro         |       1 |               1 |
+| Preliminaries |       1 |               1 |
+| Background    |       2 |               2 |
+| Synthesis     |       4 |             4.3 |
+| Results       |       1 |               4 |
+| Conclusion    |     0.5 |             1.5 |
+| References    |     0.5 |               2 |
+|---------------+---------+-----------------|
+| Total         |    10.5 |             16.3|
+|---------------+---------+-----------------|
+
 * config :noexport:
 #+TODO: TODO ONGOING REVIEW | DONE
 #+COLUMNS: %36ITEM %7CONTENT %7RELWORK %7EXAMPLES

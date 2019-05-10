@@ -82,7 +82,7 @@
 \newcommand{\myFontSize}{\fontsize{10}{0}\selectfont}
 \sectionfont{\myFontSize}       % 10pt, Bold face (default)
 \subsectionfont{\rm\myFontSize} % 10pt, Plain face
-\subsubsectionfont{\rm\myFontSize} % 10pt, Plain face
+% \subsubsectionfont{\rm\myFontSize} % 10pt, Plain face
 
 %% Select alternative section titles.
 %% http://www.ctan.org/tex-archive/help/Catalogue/entries/titlesec.html
@@ -92,7 +92,8 @@
 %% (The starred version kills the indentation of the paragraph following the title)
 \titlespacing*{\section}{0pt}{10pt}{0pt}
 \titlespacing*{\subsection}{0pt}{10pt}{0pt}
-\titlespacing*{\subsubsection}{0pt}{10pt}{0pt}
+% \titlespacing*{\subsubsection}{0pt}{10pt}{0pt}
+\titlespacing*{\paragraph}{0pt}{10pt}{3pt}
 
 %% Section numbers with trailing dots. 
 %% http://www.ctan.org/tex-archive/help/Catalogue/entries/secdot.html
@@ -199,3 +200,13 @@
 
 % Math binary operators
 \newcommand{\strconcat}{\mathbin{++}}
+
+% Multiple stacked footnotes
+\usepackage[multiple]{footmisc}
+
+
+\usepackage{paralist}
+
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.3cm,bmargin=2.3cm,lmargin=2.3cm,rmargin=2.3cm}
+
