@@ -1,0 +1,17 @@
+0.17/0.25	=== Examples (../../dataset/examples/examples-50.json)
+0.17/0.25	IO(inputs=('George',), output='G')
+0.17/0.25	IO(inputs=('Michael',), output='M')
+0.17/0.25	IO(inputs=('Jane',), output='J')
+0.17/0.25	=== Library
+0.17/0.25	concat
+0.17/0.25	index
+0.17/0.25	length
+0.17/0.25	substr
+0.17/0.25	add
+0.17/0.25	sub
+0.17/0.25	=== Synthesis
+0.17/0.25	['concat']: UNSAT (0.033 seconds)
+0.17/0.29	['index']: UNSAT (0.034 seconds)
+0.17/0.32	['length']: UNSAT (0.022 seconds)
+0.17/0.34	['substr']: SAT (0.068 seconds)
+0.17/0.41	substr(arg0, 0, 1)

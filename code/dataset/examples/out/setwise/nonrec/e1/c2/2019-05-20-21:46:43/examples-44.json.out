@@ -1,0 +1,21 @@
+0.14/0.20	=== Examples (../../dataset/examples/examples-44.json)
+0.14/0.20	IO(inputs=('My Bed is not your bed',), output='my is not your bed')
+0.14/0.20	=== Library
+0.14/0.20	concat
+0.14/0.20	index
+0.14/0.20	length
+0.14/0.20	substr
+0.14/0.20	add
+0.14/0.20	sub
+0.14/0.20	=== Synthesis
+0.14/0.20	['concat']: UNSAT (0.032 seconds)
+0.14/0.23	['index']: UNSAT (0.033 seconds)
+0.14/0.26	['length']: UNSAT (0.026 seconds)
+0.14/0.29	['substr']: UNSAT (0.036 seconds)
+0.27/0.33	['add']: UNSAT (0.022 seconds)
+0.27/0.35	['sub']: UNSAT (0.021 seconds)
+0.34/0.37	['concat', 'concat']: UNSAT (0.036 seconds)
+0.34/0.41	['concat', 'index']: UNSAT (0.036 seconds)
+0.34/0.45	['concat', 'length']: UNSAT (0.040 seconds)
+0.43/0.49	['concat', 'substr']: SAT (0.388 seconds)
+0.78/0.88	concat('my ', substr(arg0, 7, 4114))

@@ -1,0 +1,43 @@
+0.11/0.22	=== Examples (../../dataset/examples/examples-78.json)
+0.11/0.22	IO(inputs=('smith-doe',), output='doe')
+0.11/0.22	IO(inputs=('spelled-out',), output='out')
+0.11/0.22	=== Library
+0.11/0.22	concat
+0.11/0.22	index
+0.11/0.22	length
+0.11/0.22	substr
+0.11/0.22	add
+0.11/0.22	sub
+0.11/0.22	=== Synthesis
+0.11/0.22	['concat']: UNSAT (0.030 seconds)
+0.11/0.25	['index']: UNSAT (0.029 seconds)
+0.11/0.28	['length']: UNSAT (0.021 seconds)
+0.11/0.30	['substr']: UNSAT (0.046 seconds)
+0.31/0.35	['add']: UNSAT (0.027 seconds)
+0.31/0.38	['sub']: UNSAT (0.026 seconds)
+0.31/0.41	['concat', 'concat']: UNSAT (0.049 seconds)
+0.31/0.46	['concat', 'index']: UNSAT (0.048 seconds)
+0.31/0.50	['concat', 'length']: UNSAT (0.036 seconds)
+0.45/0.54	['concat', 'substr']: UNSAT (0.354 seconds)
+0.79/0.90	['concat', 'add']: UNSAT (0.038 seconds)
+0.89/0.93	['concat', 'sub']: UNSAT (0.036 seconds)
+0.89/0.97	['index', 'index']: UNSAT (0.047 seconds)
+0.99/1.02	['index', 'length']: UNSAT (0.033 seconds)
+0.99/1.05	['index', 'substr']: UNSAT (10.880 seconds)
+11.89/11.93	['index', 'add']: UNSAT (0.039 seconds)
+11.89/11.97	['index', 'sub']: UNSAT (0.040 seconds)
+11.99/12.01	['length', 'length']: UNSAT (0.025 seconds)
+11.99/12.04	['length', 'substr']: UNSAT (0.057 seconds)
+12.09/12.10	['length', 'add']: UNSAT (0.030 seconds)
+12.09/12.13	['length', 'sub']: UNSAT (0.030 seconds)
+12.09/12.16	['substr', 'substr']: UNSAT (0.124 seconds)
+12.21/12.29	['substr', 'add']: UNSAT (0.065 seconds)
+12.33/12.35	['substr', 'sub']: UNSAT (0.063 seconds)
+12.39/12.42	['add', 'add']: UNSAT (0.037 seconds)
+12.39/12.45	['add', 'sub']: UNSAT (0.037 seconds)
+12.39/12.49	['sub', 'sub']: UNSAT (0.036 seconds)
+12.49/12.53	['concat', 'concat', 'concat']: UNSAT (0.103 seconds)
+12.59/12.63	['concat', 'concat', 'index']: UNSAT (0.064 seconds)
+12.69/12.70	['concat', 'concat', 'length']: UNSAT (0.051 seconds)
+12.69/12.75	['concat', 'concat', 'substr']: SAT (5.231 seconds)
+17.88/17.98	substr(concat(concat(arg0, 'ddoee'), concat(arg0, 'ddoee')), 24, 3)

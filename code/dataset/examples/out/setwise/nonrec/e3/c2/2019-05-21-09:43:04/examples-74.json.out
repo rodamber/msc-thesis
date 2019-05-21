@@ -1,0 +1,23 @@
+0.12/0.19	=== Examples (../../dataset/examples/examples-74.json)
+0.12/0.19	IO(inputs=('George Michael',), output='GM')
+0.12/0.19	IO(inputs=('Michael Bluth',), output='MB')
+0.12/0.19	IO(inputs=('Maebe Bluth',), output='MB')
+0.12/0.19	=== Library
+0.12/0.19	concat
+0.12/0.19	index
+0.12/0.19	length
+0.12/0.19	substr
+0.12/0.19	add
+0.12/0.19	sub
+0.12/0.19	=== Synthesis
+0.12/0.19	['concat']: UNSAT (0.033 seconds)
+0.12/0.23	['index']: UNSAT (0.034 seconds)
+0.12/0.26	['length']: UNSAT (0.023 seconds)
+0.12/0.29	['substr']: UNSAT (0.059 seconds)
+0.30/0.35	['add']: UNSAT (0.029 seconds)
+0.30/0.38	['sub']: UNSAT (0.030 seconds)
+0.30/0.41	['concat', 'concat']: UNSAT (0.061 seconds)
+0.33/0.47	['concat', 'index']: UNSAT (0.061 seconds)
+0.50/0.53	['concat', 'length']: UNSAT (0.044 seconds)
+0.53/0.58	['concat', 'substr']: SAT (0.534 seconds)
+1.01/1.11	substr(concat(arg0, 'GMBMB'), 14, 2)

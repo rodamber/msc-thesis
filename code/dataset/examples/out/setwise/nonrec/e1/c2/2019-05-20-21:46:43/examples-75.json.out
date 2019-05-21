@@ -1,0 +1,42 @@
+0.12/0.20	=== Examples (../../dataset/examples/examples-75.json)
+0.12/0.20	IO(inputs=('Fusce sapien eros volutpat.',), output='Fusce...tpat.')
+0.12/0.20	=== Library
+0.12/0.20	concat
+0.12/0.20	index
+0.12/0.20	length
+0.12/0.20	substr
+0.12/0.20	add
+0.12/0.20	sub
+0.12/0.20	=== Synthesis
+0.12/0.20	['concat']: UNSAT (0.024 seconds)
+0.12/0.22	['index']: UNSAT (0.022 seconds)
+0.12/0.25	['length']: UNSAT (0.018 seconds)
+0.12/0.27	['substr']: UNSAT (0.039 seconds)
+0.12/0.31	['add']: UNSAT (0.022 seconds)
+0.12/0.33	['sub']: UNSAT (0.021 seconds)
+0.30/0.35	['concat', 'concat']: UNSAT (0.034 seconds)
+0.30/0.38	['concat', 'index']: UNSAT (0.032 seconds)
+0.30/0.42	['concat', 'length']: UNSAT (0.027 seconds)
+0.40/0.45	['concat', 'substr']: UNSAT (1.106 seconds)
+1.49/1.55	['concat', 'add']: UNSAT (0.024 seconds)
+1.49/1.58	['concat', 'sub']: UNSAT (0.024 seconds)
+1.58/1.60	['index', 'index']: UNSAT (0.029 seconds)
+1.58/1.63	['index', 'length']: UNSAT (0.023 seconds)
+1.58/1.66	['index', 'substr']: UNSAT (0.109 seconds)
+1.68/1.76	['index', 'add']: UNSAT (0.028 seconds)
+1.68/1.79	['index', 'sub']: UNSAT (0.027 seconds)
+1.78/1.82	['length', 'length']: UNSAT (0.019 seconds)
+1.78/1.84	['length', 'substr']: UNSAT (0.041 seconds)
+1.78/1.88	['length', 'add']: UNSAT (0.021 seconds)
+1.88/1.90	['length', 'sub']: UNSAT (0.020 seconds)
+1.88/1.92	['substr', 'substr']: UNSAT (0.106 seconds)
+1.88/2.03	['substr', 'add']: UNSAT (0.045 seconds)
+2.01/2.08	['substr', 'sub']: UNSAT (0.041 seconds)
+2.01/2.12	['add', 'add']: UNSAT (0.024 seconds)
+2.13/2.14	['add', 'sub']: UNSAT (0.024 seconds)
+2.13/2.17	['sub', 'sub']: UNSAT (0.025 seconds)
+2.13/2.19	['concat', 'concat', 'concat']: UNSAT (0.092 seconds)
+2.18/2.29	['concat', 'concat', 'index']: UNSAT (0.037 seconds)
+2.28/2.33	['concat', 'concat', 'length']: UNSAT (0.031 seconds)
+2.28/2.36	['concat', 'concat', 'substr']: SAT (7.831 seconds)
+10.13/10.19	concat(concat(substr(arg0, 0, 5), '...tp'), 'at.')

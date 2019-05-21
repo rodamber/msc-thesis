@@ -1,0 +1,48 @@
+0.19/0.21	=== Examples (../../dataset/examples/examples-41.json)
+0.19/0.21	IO(inputs=('who knows  ',), output='Prefix who knows')
+0.19/0.21	IO(inputs=("  we'll see",), output="Prefix we'll see")
+0.19/0.21	IO(inputs=('  oh come on  ',), output='Prefix oh come on')
+0.19/0.21	=== Library
+0.19/0.21	concat
+0.19/0.21	index
+0.19/0.21	length
+0.19/0.21	substr
+0.19/0.21	add
+0.19/0.21	sub
+0.19/0.21	=== Synthesis
+0.19/0.21	['concat']: UNSAT (0.037 seconds)
+0.19/0.24	['index']: UNSAT (0.038 seconds)
+0.19/0.28	['length']: UNSAT (0.024 seconds)
+0.19/0.31	['substr']: UNSAT (0.042 seconds)
+0.19/0.35	['add']: UNSAT (0.032 seconds)
+0.19/0.38	['sub']: UNSAT (0.031 seconds)
+0.39/0.42	['concat', 'concat']: UNSAT (0.117 seconds)
+0.43/0.54	['concat', 'index']: UNSAT (0.064 seconds)
+0.43/0.60	['concat', 'length']: UNSAT (0.042 seconds)
+0.58/0.64	['concat', 'substr']: UNSAT (0.198 seconds)
+0.79/0.84	['concat', 'add']: UNSAT (0.049 seconds)
+0.79/0.89	['concat', 'sub']: UNSAT (0.046 seconds)
+0.89/0.94	['index', 'index']: UNSAT (0.064 seconds)
+0.99/1.00	['index', 'length']: UNSAT (0.045 seconds)
+0.99/1.05	['index', 'substr']: UNSAT (0.071 seconds)
+0.99/1.12	['index', 'add']: UNSAT (0.056 seconds)
+1.12/1.18	['index', 'sub']: UNSAT (0.055 seconds)
+1.22/1.24	['length', 'length']: UNSAT (0.031 seconds)
+1.22/1.27	['length', 'substr']: UNSAT (0.049 seconds)
+1.29/1.32	['length', 'add']: UNSAT (0.037 seconds)
+1.29/1.36	['length', 'sub']: UNSAT (0.038 seconds)
+1.29/1.40	['substr', 'substr']: UNSAT (0.068 seconds)
+1.39/1.46	['substr', 'add']: UNSAT (0.072 seconds)
+1.49/1.54	['substr', 'sub']: UNSAT (0.079 seconds)
+1.59/1.62	['add', 'add']: UNSAT (0.059 seconds)
+1.59/1.68	['add', 'sub']: UNSAT (0.058 seconds)
+1.69/1.74	['sub', 'sub']: UNSAT (0.058 seconds)
+1.79/1.80	['concat', 'concat', 'concat']: UNSAT (1.273 seconds)
+2.98/3.07	['concat', 'concat', 'index']: UNSAT (0.087 seconds)
+3.12/3.16	['concat', 'concat', 'length']: UNSAT (0.063 seconds)
+3.12/3.23	['concat', 'concat', 'substr']: UNSAT (5.987 seconds)
+9.13/9.21	['concat', 'concat', 'add']: UNSAT (0.069 seconds)
+9.23/9.28	['concat', 'concat', 'sub']: UNSAT (0.071 seconds)
+9.30/9.36	['concat', 'index', 'index']: UNSAT (0.092 seconds)
+9.39/9.45	['concat', 'index', 'length']: UNSAT (0.071 seconds)
+9.49/9.52	['concat', 'index', 'substr']: 

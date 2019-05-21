@@ -1,0 +1,42 @@
+0.11/0.24	=== Examples (../../dataset/examples/examples-43.json)
+0.11/0.24	IO(inputs=('https://ThatCoolWebsite.com',), output='thatcoolwebsite.com')
+0.11/0.24	=== Library
+0.11/0.24	concat
+0.11/0.24	index
+0.11/0.24	length
+0.11/0.24	substr
+0.11/0.24	add
+0.11/0.24	sub
+0.11/0.24	=== Synthesis
+0.11/0.24	['concat']: UNSAT (0.020 seconds)
+0.11/0.26	['index']: UNSAT (0.018 seconds)
+0.11/0.27	['length']: UNSAT (0.014 seconds)
+0.11/0.29	['substr']: UNSAT (0.025 seconds)
+0.11/0.32	['add']: UNSAT (0.023 seconds)
+0.11/0.34	['sub']: UNSAT (0.028 seconds)
+0.34/0.37	['concat', 'concat']: UNSAT (0.030 seconds)
+0.34/0.40	['concat', 'index']: UNSAT (0.046 seconds)
+0.34/0.45	['concat', 'length']: UNSAT (0.036 seconds)
+0.45/0.48	['concat', 'substr']: UNSAT (0.565 seconds)
+0.99/1.05	['concat', 'add']: UNSAT (0.023 seconds)
+0.99/1.07	['concat', 'sub']: UNSAT (0.025 seconds)
+0.99/1.10	['index', 'index']: UNSAT (0.048 seconds)
+1.11/1.15	['index', 'length']: UNSAT (0.041 seconds)
+1.11/1.19	['index', 'substr']: UNSAT (0.112 seconds)
+1.29/1.30	['index', 'add']: UNSAT (0.025 seconds)
+1.29/1.33	['index', 'sub']: UNSAT (0.026 seconds)
+1.29/1.36	['length', 'length']: UNSAT (0.017 seconds)
+1.29/1.38	['length', 'substr']: UNSAT (0.055 seconds)
+1.39/1.43	['length', 'add']: UNSAT (0.035 seconds)
+1.39/1.47	['length', 'sub']: UNSAT (0.026 seconds)
+1.39/1.50	['substr', 'substr']: UNSAT (0.085 seconds)
+1.49/1.58	['substr', 'add']: UNSAT (0.036 seconds)
+1.59/1.62	['substr', 'sub']: UNSAT (0.036 seconds)
+1.59/1.65	['add', 'add']: UNSAT (0.023 seconds)
+1.59/1.68	['add', 'sub']: UNSAT (0.023 seconds)
+1.69/1.70	['sub', 'sub']: UNSAT (0.022 seconds)
+1.69/1.72	['concat', 'concat', 'concat']: UNSAT (0.105 seconds)
+1.79/1.83	['concat', 'concat', 'index']: UNSAT (0.035 seconds)
+1.79/1.87	['concat', 'concat', 'length']: UNSAT (0.029 seconds)
+1.89/1.90	['concat', 'concat', 'substr']: SAT (5.616 seconds)
+7.49/7.51	concat('thatc', concat('oolw', substr(arg0, 17, 9290)))

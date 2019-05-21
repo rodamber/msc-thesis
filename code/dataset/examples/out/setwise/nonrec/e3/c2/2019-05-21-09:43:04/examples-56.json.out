@@ -1,0 +1,28 @@
+0.13/0.19	=== Examples (../../dataset/examples/examples-56.json)
+0.13/0.19	IO(inputs=('what are you doing? (sorry)',), output='what are you doing?')
+0.13/0.19	IO(inputs=('did you want that? (hmm..)',), output='did you want that?')
+0.13/0.19	IO(inputs=('maybe with add? (oh i see)',), output='maybe with add?')
+0.13/0.19	=== Library
+0.13/0.19	concat
+0.13/0.19	index
+0.13/0.19	length
+0.13/0.19	substr
+0.13/0.19	add
+0.13/0.19	sub
+0.13/0.19	=== Synthesis
+0.13/0.19	['concat']: UNSAT (0.035 seconds)
+0.13/0.23	['index']: UNSAT (0.036 seconds)
+0.13/0.26	['length']: UNSAT (0.024 seconds)
+0.13/0.29	['substr']: UNSAT (0.042 seconds)
+0.13/0.33	['add']: UNSAT (0.031 seconds)
+0.34/0.36	['sub']: UNSAT (0.029 seconds)
+0.34/0.39	['concat', 'concat']: UNSAT (0.053 seconds)
+0.43/0.45	['concat', 'index']: UNSAT (0.052 seconds)
+0.43/0.50	['concat', 'length']: UNSAT (0.038 seconds)
+0.43/0.54	['concat', 'substr']: UNSAT (0.172 seconds)
+0.67/0.71	['concat', 'add']: UNSAT (0.044 seconds)
+0.73/0.76	['concat', 'sub']: UNSAT (0.041 seconds)
+0.79/0.80	['index', 'index']: UNSAT (0.057 seconds)
+0.79/0.86	['index', 'length']: UNSAT (0.040 seconds)
+0.89/0.90	['index', 'substr']: SAT (6.186 seconds)
+6.99/7.08	substr(arg0, 0, index(arg0, ' ', 13))

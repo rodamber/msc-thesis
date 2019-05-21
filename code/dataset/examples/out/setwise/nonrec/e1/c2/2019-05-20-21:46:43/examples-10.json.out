@@ -1,0 +1,12 @@
+0.13/0.20	=== Examples (../../dataset/examples/examples-10.json)
+0.13/0.20	IO(inputs=('hello word',), output='hello word')
+0.13/0.20	=== Library
+0.13/0.20	concat
+0.13/0.20	index
+0.13/0.20	length
+0.13/0.20	substr
+0.13/0.20	add
+0.13/0.20	sub
+0.13/0.20	=== Synthesis
+0.13/0.20	['concat']: SAT (0.024 seconds)
+0.13/0.23	concat('', arg0)

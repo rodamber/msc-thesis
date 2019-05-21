@@ -1,0 +1,42 @@
+0.16/0.20	=== Examples (../../dataset/examples/examples-82.json)
+0.16/0.20	IO(inputs=('take last three', 'and add this'), output='ree and add this')
+0.16/0.20	=== Library
+0.16/0.20	concat
+0.16/0.20	index
+0.16/0.20	length
+0.16/0.20	substr
+0.16/0.20	add
+0.16/0.20	sub
+0.16/0.20	=== Synthesis
+0.16/0.20	['concat']: UNSAT (0.025 seconds)
+0.16/0.23	['index']: UNSAT (0.024 seconds)
+0.16/0.25	['length']: UNSAT (0.019 seconds)
+0.16/0.27	['substr']: UNSAT (0.023 seconds)
+0.16/0.29	['add']: UNSAT (0.021 seconds)
+0.16/0.32	['sub']: UNSAT (0.020 seconds)
+0.16/0.34	['concat', 'concat']: UNSAT (0.037 seconds)
+0.16/0.37	['concat', 'index']: UNSAT (0.035 seconds)
+0.38/0.41	['concat', 'length']: UNSAT (0.028 seconds)
+0.43/0.44	['concat', 'substr']: UNSAT (0.080 seconds)
+0.43/0.52	['concat', 'add']: UNSAT (0.030 seconds)
+0.43/0.55	['concat', 'sub']: UNSAT (0.029 seconds)
+0.43/0.58	['index', 'index']: UNSAT (0.038 seconds)
+0.60/0.62	['index', 'length']: UNSAT (0.028 seconds)
+0.60/0.65	['index', 'substr']: UNSAT (0.035 seconds)
+0.60/0.68	['index', 'add']: UNSAT (0.028 seconds)
+0.68/0.71	['index', 'sub']: UNSAT (0.026 seconds)
+0.72/0.74	['length', 'length']: UNSAT (0.017 seconds)
+0.72/0.76	['length', 'substr']: UNSAT (0.025 seconds)
+0.72/0.78	['length', 'add']: UNSAT (0.019 seconds)
+0.79/0.80	['length', 'sub']: UNSAT (0.019 seconds)
+0.79/0.82	['substr', 'substr']: UNSAT (0.028 seconds)
+0.79/0.85	['substr', 'add']: UNSAT (0.024 seconds)
+0.79/0.87	['substr', 'sub']: UNSAT (0.025 seconds)
+0.89/0.90	['add', 'add']: UNSAT (0.024 seconds)
+0.89/0.92	['add', 'sub']: UNSAT (0.024 seconds)
+0.89/0.95	['sub', 'sub']: UNSAT (0.024 seconds)
+0.89/0.97	['concat', 'concat', 'concat']: UNSAT (0.091 seconds)
+0.99/1.07	['concat', 'concat', 'index']: UNSAT (0.038 seconds)
+0.99/1.11	['concat', 'concat', 'length']: UNSAT (0.031 seconds)
+1.12/1.14	['concat', 'concat', 'substr']: SAT (0.426 seconds)
+1.48/1.56	concat('ree ', concat(arg1, substr(arg0, 29, -14)))
