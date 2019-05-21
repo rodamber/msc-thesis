@@ -1,28 +1,27 @@
 \section{Setwise Encoding}
 \label{sec:setwise-encoding}
 
-Because OutSystems expressions are composed of self-contained pure functions,
+Given that OutSystems expressions are composed of self-contained pure functions,
 this synthesis problem fits nicely in the component-based synthesis
-paradigm~(\ref{sec:components}). Therefore, assume we are given a \textit{library}
-of base components $F$ that the synthesizer can use in order to compose the
-programs. These components will be builtin functions drawn from the OutSystems
-library, or combinations of them. Each component can take a finite number of
-inputs and return exactly one output. More formally, a component $f \in F$ is
-represented by an expression $\phi{}_f$ (a specification) that specifies how its
-input parameters $P_f$ relate to its return value $r_f$.
+paradigm~(Section \ref{sec:components}). Therefore, assume we are given a
+\textit{library} of base components $F$ that the synthesizer can use in order to
+compose the programs. These components will be builtin functions drawn from the
+OutSystems library, or combinations of them. Each component can take a finite
+number of inputs and return exactly one output. More formally, a component $f
+\in F$ is represented by an expression $\phi{}_f$ (a specification) that
+specifies how its input parameters $P_f$ relate to its return value $r_f$.
 
 We can see from the previous examples that OutSystems expressions can also
 include constant literals, like \lstinline{" "}, or \lstinline{0}. These could
-have be given as input, but we would like them to be figured out automatically
+have been given as input, but we would like them to be figured out automatically
 by the synthesizer. Ignoring well-typedness, an OutSystems expression is a
 tree-like program whose form can be succintly described using a \gls{cfg}:
 %
 \[S ::= f(S, \ldots, S) \OR x \OR c\]
 
 \noindent
-where $f \in F$, $x \in I$, and $c \in C$, and where $I$ and $C$ are the set of
-inputs of the program, and the set of constant literals in the OutSystems
-language, respectively.
+where $f \in F$, $x \in I$, and $c \in C$, and where $I$ is the set of inputs of
+the program, and $C$ is the set of constant literals in the OutSystems language.
 
 \begin{figure}
   \begin{lstlisting}[frame=tlrb]
@@ -43,14 +42,14 @@ It is useful to reason about OutSystems expressions in another representation,
 called \gls{ssa} form. A program in \gls{ssa} form is a line program where every
 variable is assigned exactly once and defined before it is used. For example,
 the program from Example~\ref{ex:first-name} could be written in \gls{ssa} form
-as shown in Listing~\ref{fig:first-name-ssa}. The body of a program in this
+as shown in Figure~\ref{fig:first-name-ssa}. The body of a program in this
 format can be described succinctly with the following \gls{cfg}:
 %
 \[S ::= ID = c \OR ID = f(x_1, ..., x_n) \OR S;S\]
 
 \noindent
-$ID$ stands for an identifier in the OutSystems language. The non-terminal $S$
-represents a line in the program. A line is an assignment of a variable to a
+where $ID$ stands for an identifier in the OutSystems language. The non-terminal
+$S$ represents a line in the program. A line is an assignment of a variable to a
 constant literal $c$ or to the return value of a component $f$ on inputs $x_1,
 ..., x_n$. As long as the program is well-typed, an input to a component can
 be one of the inputs of the program, or variable defined in a preceding line.
@@ -82,13 +81,13 @@ of examples.
       ([yshift=-.2cm]S.east) edge [<-, bend right] node [swap,align=center] {SAT + Model\\or UNSAT\\or UNKNOWN} ([yshift=-.2cm]V.west);
   \end{tikzpicture}
 
-  \caption{Diagram of the synthesizer.}
+  \caption{Diagram of the setwise synthesizer.}
   \label{fig:synth-setwise}
 \end{figure}
 
 The synthesizer (Figure~\ref{fig:synth-setwise}) follows the \gls{ogis} model,
 described in Section~\ref{sec:ogis}. It has a learner part and an oracle part,
-which will call here the \textit{enumerator} and the \textit{solver},
+which are called here the \textit{enumerator} and the \textit{solver},
 respectively.
 
 The enumerator receives the set of input-output examples as input, and is
@@ -103,24 +102,23 @@ program must use each of the components in the query exactly once.
 The solver works by encoding the query into an \gls{smt} formula, and uses an
 automated \gls{smt} solver to check for satisfiability. The \gls{smt} solver
 might or might not be able to solve the formula. If the formula is satisfiable,
-the solver responds to the enumerator with SAT and a solution (called a
-\textit{model}) to that formula. If not, it responds UNSAT or UNKNOWN, depending
-on whether the formula is unsatisfiable or the \gls{smt} solver could not verify
-its satisfiability, respectively.
+then the solver responds to the enumerator with SAT and a solution (called a
+\textit{model}) to that formula. If not, the solver returns UNSAT or UNKNOWN,
+depending on whether the formula is unsatisfiable or the \gls{smt} solver could
+not, for some reason, verify its satisfiability, respectively.
 
 The procedure keeps going in a loop until the enumerator receives SAT from the
 solver. The enumerator then decodes the model into an actual program, which is
-then returned.
+then returned to the user.
 
 \subsection{Program Formula}
 \label{sec:program-formula}
 
 Let us take the program from Figure~\ref{fig:first-name-ssa} as a running
-example in order to understand how, given the input-output examples and a set of
-components, we can construct a formula whose model can be decoded into a program
-that satisfies the examples. This program is good because it is a small,
-non-trivial program, which uses non-input constant variables (\lstinline{" "}
-and \lstinline{0}), and not every component has the same return type.
+example in order to understand how we can construct a formula whose model can be
+decoded into a program that satisfies the examples. This is a small, non-trivial
+program, which uses non-input constant variables (\lstinline{" "} and
+\lstinline{0}), and not every component has the same return type.
 
 In order to encode the space of valid programs, the solver has to decide
 \begin{enumerate*}[(1)]
@@ -132,7 +130,7 @@ In order to encode the space of valid programs, the solver has to decide
 
 For instance, Figure~\ref{fig:other-valid-programs} shows two other valid
 programs using the components \lstinline{Index}, \lstinline{Substr}, and
-\lstinline{Concat}. The program on the left does actually satisfy the sole
+\lstinline{Concat}. The program on the left actually satisfies the sole
 input-output example of Example~\ref{ex:first-name}, altough it does not
 generalize. It does so by switching the order of the components, and using one
 more variable than program~\ref{fig:first-name-ssa}. The program on the right,
@@ -184,10 +182,10 @@ variables of all components, and a variable $o$, the output variable of the
 program. We will denote the formal parameter variables and return variable of
 component $f$ by $P_f$ and $r_f$ , respectively. Also, we will use $F'$ to refer
 to the components available to the solver (in this case, \lstinline{Index},
-\lstinline{Substr}, and \lstinline{Concat} --- recall that $F$ is used to denote
-the library of all components).
-For program~\ref{fig:first-name-ssa} this would mean $I = \{name, prefix\}$,
-$C = \{c_0, c_1\}$, and $R = \{r_1, r_2, r_3\}$. We would also have
+\lstinline{Substr}, and \lstinline{Concat}) --- recall that $F$ is used to
+denote the library of all components).
+For program~\ref{fig:first-name-ssa} we have $I = \{name, prefix\}$,
+$C = \{c_0, c_1\}$, and $R = \{r_1, r_2, r_3\}$. We also have
 $P = P_{Index} \cup P_{Substr} \cup P_{Concat}$, with
 $P_{Index} = \{p_{11}$, $p_{12}$, $p_{13}\}$,
 $P_{Substr} = \{p_{21}$, $p_{22}$, $p_{23}\}$, and
@@ -217,7 +215,8 @@ $4 \leq l_x \leq 7$ for $x \in R$,
 $1 \leq l_x < 5$ for $x \in P_{Index}$,
 $1 \leq l_x < 6$ for $x \in P_{Substr}$, and
 $1 \leq l_x < 7$ for $x \in P_{Concat}$.
-In general, we can capture these constraints with the following formula:
+In general, we can capture these constraints with the following formula
+$\psi{}_{\mathtt{range}}$:
 %
 \[
   \psi{}_{\mathtt{range}}(I, C, P, R) =
@@ -285,22 +284,24 @@ $\psi{}_{\mathtt{tloc}}$ we get the full program well-formedness constraint:
 The formula we arrived to in the last section encodes the space of all
 \textit{syntactically} well-formed programs. However, in no way does it
 constrain the programs to have the correct \textit{semantics}.
-In particular, it does not
+In particular, it 
 \begin{enumerate*}[(1)]
-\item \label{itm:fc-one} relate the return values to their corresponding components;
-\item \label{itm:fc-two} make sure that variables share the same value if they share the same
-location; nor
-\item \label{itm:fc-three} make sure that the program satisfies the input-output example.
+\item \label{itm:fc-one} does not relate the return values to their
+corresponding components;
+\item \label{itm:fc-two} does not ensure that variables share the same value if they
+share the same location; nor
+\item \label{itm:fc-three} does not ensure that the program satisfies the
+input-output example.
 \end{enumerate*}
-For example, for program~\ref{fig:first-name-ssa} we would like to make sure
+For example, for program~\ref{fig:first-name-ssa} we would like to ensure
 \begin{enumerate*}[(1)]
 \item that the value of $r_1$ is actually equal to \lstinline{Index(name, c0, c1)};
 \item that $p_{21}$, the first formal parameter of \lstinline{Substr}, and $name$
-  share the same value; and that
-\item $r_3$ equals $o$, the output variable.
+  share the same value; and
+\item that $r_3$ equals $o$, the output variable.
 \end{enumerate*}
 
-Constraint~\ref{itm:fc-one} can be guaranteed by the following formula:
+Constraint~\ref{itm:fc-one} can be encoded with the following formula $\psi{}_{spec}$:
 %
 \[
   \psi{}_{spec}(P, R) = \bigwedge_{f \in F'} \phi{}_f (P_f, r_f)
@@ -311,13 +312,13 @@ Recall that $\phi{}_f$ denotes the specification of component $f$, which relates
 its formal parameters to its return value.
 Constraint~\ref{itm:fc-two} refers to
 the dataflow properties of the program. For example, we would like to have the
-constraints $l_{p_{21}} = l_{prefix} \implies p_{21} = prefix$ (because we do
-not know beforehand that
-$p_{21} \neq prefix$), or $l_{r_2} = l_o \implies r_2 = o$
-(because we do not know which component is going to be on the last line), but we
-do not want $l_{p_{21}} = l_{r_1} \implies p_{21} = r_1$ (because $p_{21}$ and
-$r_1$ have different types). In general, these properties can be encoded in the
-following formula:
+either the constraint $l_{p_{21}} = l_{prefix} \implies p_{21} = prefix$
+(because we do not know beforehand that $p_{21} \neq prefix$),
+or the constraint $l_{r_2} = l_o \implies r_2 = o$
+(because we do not know which component is going to be on the last line),
+but we do not want the constraint $l_{p_{21}} = l_{r_1} \implies p_{21} = r_1$
+(because $p_{21}$ and $r_1$ have different types).
+In general, these properties can be encoded in the following formula $\psi{}_{flow}$:
 %
 \[
   \psi{}_{flow}(I, C, P, R) =
@@ -342,7 +343,7 @@ program. For instance, the return value of \lstinline{Concat} could be either
 the output of the program, or one of the actual parameters of the same type of
 \lstinline{Input} or \lstinline{Substr}. Thus, we would have
 $l_{r_3} = l_o \vee l_{r_3} = l_{p_{11}} \vee l_{r_3} = l_{p_{12}} \vee l_{r_3} = l_{p_{21}}$.
-In general, this can be encoded in the formula
+In general, this can be encoded into the formula
 %
 \[
   \psi{}_{out}(o, P, R) =
@@ -353,11 +354,11 @@ In general, this can be encoded in the formula
 \]
 
 \noindent
-Formula $\psi{}_{flow}$ along with $\psi{}_{out}$ guarantee that the generated
+Formula $\psi{}_{flow}$ along with formula $\psi{}_{out}$ guarantee that the generated
 program has the correct output, thus ensuring that constraint~\ref{itm:fc-three}
 is satisfied. Moreover, we would also like to make sure that no program input
 goes ignored, significantly cutting down the search space, which can be
-guaranteed by a formula similar to $\psi{}_{out}$:
+guaranteed by formula $\psi{}_{in}$ (similar to $\psi{}_{out}$):
 %
 \[
   \psi{}_{in}(I, P) = \bigwedge_{i \in I}\bigvee_{p \in P}(l_i = l_p)

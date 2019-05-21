@@ -1,5 +1,5 @@
-\chapter{Conclusion and Future Work}
-\label{chap:conclusion}
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
 
 In this work, we tackle the problem of synthesizing OutSystems expressions from
 examples, focusing on expressions that manipulate integers and text.
@@ -12,11 +12,7 @@ component-based \gls{pbe} synthesizers -- setwise and whole.
 Both synthesizers employ a mixture of constraint solving with basic enumerative
 search, differing on the amount of work they put on the constraint solving
 phase.
-We benchmarked both synthesizers and compared them to SyPet~\cite{Feng:2017:CSC}
-with two different configurations: one where all constants needed to solve the
-instances are given as new components, and another that simulates
-user-provided constants by only allowing the constants needed for each
-particular instance.
+We benchmarked both synthesizers and compared them to SyPet~\cite{Feng:2017:CSC}.
 
 The setwise synthesizer can consistently synthesize programs that satisfy the
 given input-output with up to four lines, but only manages to match the user
@@ -32,10 +28,10 @@ solved and on run time.
 This should allow for more instances to be solved because it is very common for
 programs to use more than one or two constants.
 It would also be interesting to test configurations with user-provided inputs.
-Another interesting scenario, probably involving extensions to the synthesizers
+Another interesting scenario, probably involving extensions to the synthesizers,
 includes trying to figure out from the input-output examples which constants the
 program might use.
-Moreover, it would be interesting to see how our synthesizers, compare to a
+Moreover, it would be interesting to see how our synthesizers compare to a
 synthesizer implemented using the PROSE
 framework.\footnote{\url{https://microsoft.github.io/prose/}}
 

@@ -11,17 +11,12 @@
 \pagenumbering{roman}
 
 \subincludefrom{document/}{FrontCover}
-
-\subincludefrom{document/}{Dedication}
-
+% \subincludefrom{document/}{Dedication}
 \subincludefrom{document/}{Acknowledgements}
-
 \subincludefrom{document/}{Resumo}
 \subincludefrom{document/}{Abstract} % Both in English and Portuguese
-
 \tableofcontents
 \cleardoublepage
-
 \subincludefrom{document/}{Lists}
 
 % Set arabic numbering (1,2,...)
@@ -29,19 +24,15 @@
 \pagenumbering{arabic}
 
 \subincludefrom{document/}{Introduction}
-
 \subincludefrom{document/}{Preliminaries}
-
 \subincludefrom{document/Background/}{Background}
-
 \subincludefrom{document/Synthesis/}{Synthesis}
-
 \subincludefrom{document/}{ExperimentalResults}
-
+\subincludefrom{document/}{Conclusion}
 \printglossaries
 
 \bibliographystyle{abbrvnat}
-\bibliography{References}
+\bibliography{EAReferences}
 \addcontentsline{toc}{chapter}{\bibname}
 
 

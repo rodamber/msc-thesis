@@ -1,0 +1,137 @@
+\section{Background}
+\label{sec:background}
+
+The first part of solving a program synthesis problem is figuring out how the
+user will communicate their intention to the synthesizer. An intention is
+communicated by a \textit{specification}, and may be given in many different
+ways, including:
+logical specifications~\cite{Itzhaky:SIS:2010},
+type signatures~\cite{Osera:2015:TPS,
+  Frankle:2016:EST, Polikarpova:2016:PSP};
+syntax-guided methods~\cite{Alur:sygus:2013} such as
+sketches~\cite{Solar-Lezama:2008}, or components~\cite{Feng:2017:CST,
+Feng:2017:CSC, Feng:2018:PSU}; and
+inductive specifications such as input-output examples~\cite{Frankle:2016:EST,
+Gulwani:2012:SDM, Leung:2015:IPS}, or demonstrations~\cite{Lau2003}.
+The kind of specification should be chosen according to the particular use case
+and to the background of the user, and it might dictate the type of techniques
+used to solve the problem.
+
+\paragraph{Component-Based Synthesis}
+\label{sec:components}
+
+In component-based
+synthesis~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Jha:oracle:2010}
+we are interested in finding a loop-free program made out of a combination of
+fundamental building blocks called \textit{components}. These components could
+be, for example, methods in a library
+\gls{api}~\cite{Feng:2017:CSC}, and the way in which they can be
+combined forms the syntactic specification for the programs we want to find.
+They may also be supplemented by additional constraints in the form of logical
+formulas~\cite{Feng:2018:PSU}.
+
+\paragraph{\gls{pbe}}
+
+Inductive synthesis is an instance of the program synthesis problem where the
+constraints are underspecified.
+Sometimes the domain we want to model is complex enough that a complete
+specification could be as hard to produce as the program itself, or might not
+even exist.
+In other cases, we might want the synthesizer to be as easy and intuitive to use
+as possible for users coming from different backgrounds.
+\gls{pbe} is an instance of inductive synthesis where the specification is given
+by input-output examples that the desired program must satisfy.
+Explicitly giving examples can be preferred due to their ease of use, especially
+by non-programmers, when compared to more technical kinds of specification, such
+as logical formulas.
+The examples may be either \textit{positive}, i.e., an example that the desired
+program must satisfy, or \textit{negative}, i.e., an example that the desired
+should \textit{not} satisfy.
+More generally, given some (implicit) input-output example, we may include asserting
+properties of the output instead of specifying it completely
+\cite{Polozov:2015:FFI}.
+This can be helpful if it is impractical or impossible
+to write the output concretely, e.g., if it is infinite.
+
+
+The second part of solving a program synthesis problem is deciding which search
+technique to apply in order to find the intended program.
+First, we want to ensure that the program satisfies the semantic and syntactic
+specifications.
+Second, we want to leverage the specifications and the knowledge we have from
+the problem domain in order to guide the search.
+Common search techniques are
+% deductive search (Section~\ref{sec:deductive-synthesis}),
+enumerative search~\cite{Phothilimthana:2016:SUS,Alur:2017:SEP},
+stochastic search~\cite{Schkufza:2013:SS,Singh:ranking:2015}, and
+constraint solving~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC}.
+Modern synthesizers usually apply a combination of those, enabling us to
+consider frameworks and techniques for structuring their construction, such as
+\gls{cegis}~\cite{Solar-Lezama:2008},
+\gls{cegis}($\mathcal{T}$)~\cite{Abate:2018:CMT}, and
+\gls{ogis}~\cite{Jha:2017:TFS}.
+
+\paragraph{Enumerative Search}
+\label{sec:enumerative-search}
+
+In the context of program synthesis, enumerative search consists of enumerating
+programs by working the intrinsic structure of the program space to guide the
+search.
+The programs can be ordered using many different program metrics, the simplest
+one being program size, and pruned by means of semantic equivalence checks with
+respect to the specification.
+Perhaps surprisingly, synthesizers based on enumerative search have been some of
+the most effective to synthesize short programs in complex program spaces.
+A reason why is that the search can be precisely tailored for the domain at
+hand, encoding domain-specific heuristics and case-by-case scenarios that
+result in highly effective pruning strategies.
+
+\paragraph{Constraint Solving}
+\label{sec:constraint-solving}
+
+Another approach to program synthesis is to reduce the problem to 
+constraint solving by the use of off-the-shelf automated constraint
+solvers~\cite{Feng:2018:PSU,Feng:2017:CST,Feng:2017:CSC,Solar-Lezama:2008,Jha:oracle:2010}
+(typically SAT or SMT solvers).
+The idea is to encode the specification in a logical constraint whose solution
+corresponds to the desired program.
+
+\subsection{Oracle-Guided Inductive Synthesis}
+\label{sec:ogis}
+
+\textit{\Glsfmtlong{ogis}~(\Gls{ogis})} is an approach to program synthesis
+where the synthesizer is split into two components -- the \textit{learner} and the
+\textit{oracle} -- which communicate in an iterative \textit{query/response}
+cycle.
+The learner implements the search strategy to find the program and is
+parameterized by some form of semantic and/or syntactic specifications.
+The usefulness of the oracle is defined by the type of queries it can handle and
+the properties of its responses. The characteristics of these components are
+typically imposed by the application.
+Typical queries and response types are some of the following~\cite{Jha:2017:TFS}:
+%
+\begin{compactitem}
+\item \textit{Counterexample queries}, where given a candidate program $p$ the
+  oracle responds with a positive input-output counterexample that $p$ does not
+  satisfy, if it can find any, or $\bot$ otherwise.
+\item \textit{Correctness queries}, where given a candidate program $p$ the
+  oracle responds if $p$ is correct or not. If it is not, the oracle responds
+  with a positive input-output counterexample.
+\item \textit{Distinguishing input queries}, where given program $p$ and set $X$
+  of input-output examples that $p$ satisfies the oracle responds with a new
+  program $p'$ and a counterexample $x$ to $p$ that $p'$ satisfies along with
+  all the other examples in $X$.
+\end{compactitem}
+
+In general, the higher the capabilities of the oracles, the more expensive they
+are to run. Distinguishing oracles are (typically) not as strong as
+counterexample or correctness oracles as the returned counterexample is not
+necessarily positive. To understand why they might be effectives tools we can
+turn to the Bounded Observation Hypothesis \cite{Solar-Lezama:2008}, which
+asserts that ``an implementation that works correctly for the common case and
+for all the different corner cases is likely to work correctly for all inputs.''
+
+The concepts of \gls{ogis} was introduced by Jha~et~al.~\cite{Jha:oracle:2010}
+as a generalization of \gls{cegis} when they applied this idea to a \gls{pbe}
+synthesizer based on distinguishing inputs in order to deobfuscate malware and
+to generate bit-manipulating programs.

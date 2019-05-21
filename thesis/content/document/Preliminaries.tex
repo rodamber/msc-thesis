@@ -5,23 +5,69 @@ This chapter introduces some definitions and examples that will be useful later
 on. It might be practical to just skim this chapter at first reading, and then
 come back as needed.
 
-\section{\Glsfmtfull{smt}}
+\section{Terminology and Basic Definitions}
+\label{sec:terminology}
+
+This section covers some essential terminology that is used in the document.
+
+Program synthesis is fundamentally a search problem, hence, for it to be
+well-defined there must be some \textit{search space} that contains the objects
+we are searching for.
+In our case, these objects are programs, so we have a \textit{program space}.
+
+\begin{definition}[Program Space]
+  Program space is the set of all programs in a given programming language.
+\end{definition}
+
+Programming languages are usually defined by means of a grammar.
+For our purposes, we are interested in a particular kind of grammar, called a
+\Glsfmtlong{cfg}~(\Glsfmtshort{cfg}).
+
+\begin{definition}[Context-Free Grammar]
+  A \gls{cfg} is a tuple $(\mathcal{V}, \Sigma{}, R, S)$, where:
+  \begin{itemize}
+  \item $\mathcal{V}$ is a finite set denoting the set of non-terminal symbols.
+  \item $\Sigma{}$ is a finite set denoting the set of terminal symbols.
+  \item $R$ is a finite relation from $\mathcal{V}$ to $(\mathcal{V} \cup
+    \Sigma{})^*$, where * denotes the Kleene star operation.
+  \item $S$ is a non-terminal symbol, corresponding to the start symbol of the
+    grammar.
+  \end{itemize}
+\end{definition}
+
+Definition~\ref{def:terms-and-formulas} in Section~\ref{sec:smt} provides an
+example of a \Glsfmtshort{cfg}.
+
+In our context, we are working in a \gls{pbe} setting, where the user explains
+their intent by means of a set of input-output \textit{examples}.
+
+\begin{definition}[Input-Output Example]
+  An input-output example is a pair $(\mathbf{x}, y)$ where $\mathbf{x}$ is a
+  list of $n$ inputs $<x_0, x_1, \ldots, x_n>$, and $y$ is the output.
+\end{definition}
+
+We say that a program $f$ \textit{satisfies} an input-output example
+$(\mathbf{x}, y)$ if $f(\mathbf{x}) = y$.
+We say that a program satisfies a \textit{set} of input-output examples if it
+satisfies each example in that set.
+
+\section{Satisfiability Modulo Theories}
 \label{sec:smt}
 
 Many problems in the real world can be modeled in the form of logical formulas.
 Thus, it is of great interest to have access to efficient off-the-shelf
 logic engines, usually called \textit{solvers}, for these formulas.
-The satisfiability problem is the problem of checking if a given logical formula
-has a solution.
-\gls{smt} solvers check the satisfiability of first-order logic formulas with
-symbols and operations drawn from \textit{theories}, such as the theory of
-uninterpreted functions, the theory of strings, or the theory of linear integer
-arithmetic.
+The satisfiability problem is the problem of checking if a given boolean logical
+formula has a solution.
+\Glsfmtfull{smt} solvers extend this problem and check the satisfiability of
+first-order logic formulas with symbols and operations drawn from
+\textit{theories}, such as the theory of uninterpreted functions, the theory of
+strings, or the theory of linear integer arithmetic.
 \gls{smt} solvers have seen a multitude of applications, particularly in
 problems from artificial intelligence and formal methods, such as program
 synthesis, or verification.
 This section gives a short introduction to \gls{smt}, and is based on the
-chapter on \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
+chapter about \gls{smt} of the Handbook of Satisfiability~\cite{Biere:2009:HSV}.
 
 \subsection{Syntax of \gls{smt} Formulas}
 \label{sec:smt-syntax}
@@ -39,9 +85,8 @@ composed of symbols and logical connectives over those symbols.
   \textit{propositional} symbol if $x \in \Sigma{}^P$.
 \end{definition}
 
-\begin{definition}[Terms and Formulas]
-  The concepts of \textit{Term} and \textit{formula} are defined in terms of
-  each other. A ($\Sigma{}$-)term $t$ is an expression of the form:
+\begin{definition}[Terms and Formulas]\label{def:terms-and-formulas}
+  A ($\Sigma{}$-)term $t$ is an expression of the form:
   %
   \[t ::= c \OR f(t_1,\ldots,t_n) \OR ite(\phi{}, t_0, t_1)\]
   %
@@ -206,60 +251,3 @@ In this section we explore how \gls{smt} formulas are given meaning.
   \gls{smt} problem is the problem of determining the
   $\mathcal{T}$-satisfiability of $\Sigma{}$-formulas.
 \end{definition}
-
-% ------------------------------------------------------------------------------
-
-% \section{Program Synthesis}
-% \label{sec:program-synthesis}
-
-% Here we define the concrete problem we are trying to solve. In general, program
-% synthesis is the problem of finding a program that meets a given specification.
-% Therefore, we must understand the kind of programs we are trying to find, as
-% well as the kind of specifications that the system understands.
-
-% % TODO
-% Programs are usually defined by means of a \gls{cfg}. ...
-
-% % TODO
-% A specification is a way to convey intent. There are several ways to specify
-% which program we are interested in such as, for example, this and that. In our
-% case we are working in a \gls{pbe} setting, where the user explains their intent
-% by means of a set of input-output \textit{examples}.
-% % Def. of PBE and example follows
-
-% We say that a program $f$ \textit{satisfies} an input-output example
-% $(\mathbf{x}, y)$ if $f(\mathbf{x}) = y$. We say that a program satisfies a set
-% of examples if it satisfies every example in that set.
-
-% % TODO
-% For example, the following set of examples are satisfied by the program f = abc,
-% because ... . However, the program g = xyz also satisfies the examples. These
-% examples are, therefore, \textit{ambiguous}, and further examples are required
-% to disambiguate between the two programs. Ambiguity is a characteristic inherent
-% to the \gls{pbe} synthesis setting.
-
-% \section{Constraint Solving}
-% \label{sec:preliminaries-constraint-solving}
-
-% Our work includes the modeling of programs as constraints. We make use of
-% off-the-shelf automated constraint solvers in order to solve these constraints.
-% To understand how we can model our problem domain as constraints, it is useful
-% to know about the concepts of \gls{sat} and \gls{smt}.
-
-% % TODO Explain how these solvers are good and we leverage improvements made in
-% % the last decades, blah, blah, blah
-
-% % TODO Quintessential examples are n-queens and sudoku
-% \todo{<Insert here the definition of sat, and examples of encodings>}{}
-
-% % TODO Explain how it fits in the frame of theoretical computer science
-
-% Encoding programs in \gls{sat} can be a bit too low-level. We are encoding
-% domain knowledge into the domain of boolean formulas. In can be both hard for a
-% human to model a problem this way, ...
-
-% % TODO Encodings using strings and numbers.
-% % TODO Check examples in the puzzles directory of the SBV Haskell library
-% % https://en.wikipedia.org/wiki/Satisfiability_modulo_theories
-% \todo{<Insert here the definition of smt, and examples of encodings>}{}
-

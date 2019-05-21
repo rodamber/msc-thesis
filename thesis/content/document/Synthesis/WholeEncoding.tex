@@ -5,9 +5,9 @@ In the previous approach the workload was split between the enumerator and the
 solver: the enumerator would exhaustively search for all combinations (with
 replacement) of the library of components in increasing order of size, while
 passing them one by one to the solver. In turn, the solver would then verify if
-there was any way to make a satisfying program using the given components each
-exactly once. However, the number of combinations of a given size grows
-exponentially. One wonders if it is possible to absolve the enumerator by
+there was any way to make a satisfying program using the given components (each
+component exactly once). However, the number of combinations of a given size
+grows exponentially. One wonders if it is possible to free the enumerator by
 pushing as much workload as possible to the solver.
 
 In this next approach we reduce the enumerator to query the solver with a single
@@ -20,9 +20,9 @@ repeated for increasing values of $n$ until a program is found.
 \subsection{Program Formula}
 \label{sec:program-formula-whole}
 
-Here, we adapt the location-based encoding from the previous section in order to
-have a solver that finds a program with the exact number of allowed components,
-$n$. 
+In this section, we adapt the location-based encoding from the previous section
+in order to have a solver that finds a program with the exact number of allowed
+components, $n$.
 Just as before, we will have a set $I$ of input variables, an output variable
 $o$, a set $C$ of constant variables, a set $L$ of location variables, a set $R$
 of return variables, and a set $P$ of formal parameter variables, with some
@@ -37,13 +37,13 @@ For this we introduce a new set of integer-valued variables $A = \{a_1, a_2,
 The activation variables have values in the set $\{1, 2, \ldots, |F|\}$, with
 the interpretation that if we have $a_i = k$, then component $f_k$ will be the
 $i$-th component in the program (the one appearing in line $|I| + |C| + i$).
-For the same reason this time we do not assign return variables to each
+For the same reason, this time we do not assign return variables to each
 component.
 Instead, as we know the number $n$ of components we are aiming for, we have one
 return variable $r_i$, associated with each $a_i$ in the obvious way, for
 $i = 1, \ldots, n$.
-These will have their locations fixed beforehand: variable $r_i \in R$ will be
-assigned to location $l_{r_i} = |I| + |C| + i$.
+These components will have their locations fixed beforehand: variable $r_i \in
+R$ will be assigned to location $l_{r_i} = |I| + |C| + i$.
 
 \begin{example}
   Consider program~\ref{fig:first-name-ssa}.
@@ -56,28 +56,28 @@ assigned to location $l_{r_i} = |I| + |C| + i$.
 As the values of the activation variables $x \in A$ will be found by the solver
 at constraint-solving time, we also do not know apriori the concrete types of
 the return variables $x \in R$.
-Lacking this information, we circumvent the problem by augmenting the type of
-each return variable to be the union of all possible return types.
-In our case, this would mean that all return variables may be either of type
+With the lack of this information, we circumvent the problem by augmenting the
+type of each return variable to be the union of all possible return types. In
+our case, this implies that all return variables are either of type
 \lstinline{Text}, or of type \lstinline{Integer}.
 
-That is also the case for the types of the formal parameter variables $x \in P$.
+The same happens for the types of the formal parameter variables $x \in P$.
 Moreover, we do not know exactly how many formal parameter variables to create
 because we do not know the arities of the components that are going to be picked.
-We know, however, the maximum arity $m$ of all components, so we have an upper
-bound on the number of formal parameter variables we might need, namely
-$n * m$.
+We know, however, the maximum arity $m$ of all components.
+Hence, there is an upper bound on the number of formal parameter variables we
+might need, namely $n * m$.
 Thus, we introduce variables $p_{ij} \in P$, for $i = 1, 2, \ldots, n$, and
-$j = 1, 2, \ldots, m$, with the interpretation that $p_{ij}$ is the $j$-th
+$j = 1, 2, \ldots, m$, meaning that $p_{ij}$ is the $j$-th
 parameter of $f_{a_i}$, the component activated by $a_i$.
 We also augment their type to be the union of all possible formal parameter
 types, plus a \lstinline{Null} type, inhabited by a single value,
 \lstinline{null}, to indicate the absence of value.
 A variable $p_{ij} \in P$ will be \lstinline{null} if and only if the arity of
-component $f_{a_i}$ is less than $j$, and will be ignored by $f_{a_i}$ if that
-is the case.
+component $f_{a_i}$ is less than $j$, and consequently will be ignored by
+$f_{a_i}$ if that is the case.
 Finally, we perform the same \lstinline{Null} type augmentation to the location
-variables $x \in L$, because there is no sense in having a location number if a
+variables $x \in L$, because it makes no sense in having a location number if a
 variable is null.
 
 \begin{figure}
@@ -89,11 +89,11 @@ variable is null.
       $r_2$ = $f_{a_2}$($p_{21}$, $p_{22}$, $p_{23}$)
       $r_3$ = $f_{a_2}$($p_{31}$, $p_{32}$, $p_{33}$)
   \end{lstlisting}
-\caption{Symbolic representation of a program with two inputs, $i_0, i_1 \in I$
+\caption{Symbolic representation of a program with two inputs, $i_0, i_1 \in I$,
   two constant variables $c_0, c_1 \in C$, three return value variables $r_i \in
   R$, for $i = 1, \ldots, n$, and nine formal parameter variables $p_{ij} \in
   P$, for $i = 1, \ldots, n$, $j = 1, \ldots, m$, with $n = m = 3$.
-  The question marks '?' are values that will be found by the solver.}
+  The question marks '?' are values to be found by the solver.}
 \label{fig:whole-encoding-prog}
 \end{figure}
 
@@ -102,8 +102,8 @@ variable is null.
   skeleton from Figure~\ref{fig:whole-encoding-prog}.
   We have three components: \lstinline{Concat}, \lstinline{Index}, and
   \lstinline{Substr}.
-  Components \lstinline{Index} and \lstinline{Substr} have the arity equal to 3,
-  which are the largest among the three components.
+  Components \lstinline{Index} and \lstinline{Substr} have arity 3,
+  which is the largest among the three components.
   Thus, we have $n = m = 3$. This means we have nine variables $p_{ij} \in P$.
   Variables $p_{1j}$, with $j = 1, \ldots, 3$ are the formal parameters of
   $f_{a_1}$, which is component \lstinline{Concat}.
@@ -116,7 +116,7 @@ variable is null.
 \label{sec:whole-well-formedness-constraint}
 
 As with the last encoding, each input variable $x \in I$ is assigned a distinct
-location $l_x$ from 1 to $|I|$, and each constant variable $x \in C$ is assigned
+location $l_x \in L$ from 1 to $|I|$, and each constant variable $x \in C$ is assigned
 a distinct location from $|I| + 1$ to $|I| + |C|$.
 As said in the previous section, this time we do the same for each return
 variable $x \in R$, assigning to each a location from $|I| + |C| + 1$ to
@@ -132,9 +132,9 @@ constraint is just:
 \]
 
 \noindent
-Compared to the well-formedness constraint of the setwise encoding, this one is
-arguably made simpler by the fact that the lines of the return variables are
-fixed apriori, and because we are not doing any type checking.
+Compared to the well-formedness constraint of the setwise encoding, this
+constraint is arguably made simpler by the fact that the lines of the return
+variables are fixed apriori, and because we are not doing any type checking.
 
 \begin{example}
   Consider the symbolic skeleton from Figure~\ref{fig:whole-encoding-prog}.
@@ -165,7 +165,7 @@ fixed apriori, and because we are not doing any type checking.
 %
 \subsubsection{Functional Constraint}
 
-Just as with the last encoding, we have the following concerns regarding the
+Similarly to the last encoding, we have the following concerns regarding the
 semantics of the program:
 \begin{enumerate*}[(1)]
 \item \label{itm:whole-fc-one} relating return variables to the values of their
@@ -181,9 +181,9 @@ constraint~\ref{itm:whole-fc-one}, should be similar to the one from
 section~\ref{sec:functional-constraint}, but we will have to pay attention to
 some special points.
 First, we have to make sure that, for every component, we relate the correct
-number of formal parameters to the return value (recall that we may have more
-formal parameter variables than we may need because we do not know apriori which
-component goes on which line):
+number of formal parameters to the return value:\footnote{Recall that we may
+have more formal parameter variables than we may need because we do not know
+apriori which component goes on which line}
 %
 \[
   \psi{}_{pnum}(A, P, R) =
@@ -215,7 +215,7 @@ will call $\psi{}_{type}$, can be materialized.
   $f_1 = \mathtt{Concat}$, $f_2 = \mathtt{Index}$, and $f_3 = \mathtt{Substr}$.
   We will use the predicates $isstring$ and $isint$ to mean that a variable must
   be of type \lstinline{Text}, or \lstinline{Integer}, respectively.
-  For this concrete case, we would the constraint to ensure that the type
+  For this concrete case, we add the constraint to ensure that the type
   signatures of these components are satisfied:
   % 
   \begin{align*}
@@ -240,8 +240,8 @@ previous constraints:
 
 The dataflow properties of constraint~\ref{itm:whole-fc-two} are encoded in a
 similar way to what we did in section~\ref{sec:functional-constraint}, with the
-added constraint that every formal parameter variable whose value is
-\lstinline{null} must also have a \lstinline{null} location:
+added constraint that every formal parameter variable with \lstinline{null}
+value must also have a \lstinline{null} location:
 %
 \begin{align*}
   \psi{}_{flow}(C,I,P,R)
@@ -256,7 +256,7 @@ added constraint that every formal parameter variable whose value is
 %
 \noindent
 Just as last time, we would like to ensure that every return variable is used
-(as an actual parameter or as the output of the program), a property that be
+(as an actual parameter or as the output of the program). This property is
 encoded in the following way:
 %
 \begin{align*}
@@ -308,6 +308,6 @@ conjuction over the set $E$:
   \Psi{}=\exists{A,L,C}\ldotp\bigwedge_{(I, o) \in E}\psi{}_{prog}(A,L,C,I,o)
 \]
 
-A model of this formula is a valuation of the variables $x \in A \cup L \cup C$,
+A model of this formula is an assignment to the variables $x \in A \cup L \cup C$,
 which can then be used to reconstruct a program that satisfies the input-output
 examples $E$ using only $n$ components.

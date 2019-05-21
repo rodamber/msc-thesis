@@ -1,46 +1,21 @@
-* Chapters
-** ONGOING Introduction
+* Thesis
+** REVIEW Introduction
 :PROPERTIES:
-:CONTENT:  ONGOING
+:CONTENT:  REVIEW
 :EXAMPLES: REVIEW
-:RELWORK:  TODO
+:RELWORK:  REVIEW
 :END:
-
-$\exists P \ldotp \phi(P) $
 
 This chapter should:
 
-- open the thesis with a page or two that sells the work to a general audience
+- [X] open the thesis with a page or two that sells the work to a general audience
 (e.g., a science reporter);
 - tie the work together and highlight the novel contributions;
 - advertise the organization of the rest of the document.
 
-Things to (maybe) talk about:
-
-# Overview: ch.1, pages 7-13
-- user intent
-- search space
-- search technique
-# DSL design
-- expressiveness
-- choice of operators
-- naturalness
-- efficiency
-# Program ranking
-- Program speed - superopt
-- Robustness - pbe
-- Naturalness and readability
-# Artificial intelligence
-- Machine Learning (check Jha:2017:TFS)
-- Explainable AI
-- Reverse engineering of black-box models
-
-Missing an explanation of why the search space is big.
-
-Maybe rewrite the example in haskell or a similar language to improve the
-typography?
-
-
+- [ ] There should be a bridge to constraint solving. Right now it appears out
+  of nowhere in the preliminaries.
+$\exists P \ldotp \phi(P) $
 Synthesis as a next-step from verification:
  - \phi{}(input, program, output)
    - fix program and input: interpretation
@@ -48,59 +23,33 @@ Synthesis as a next-step from verification:
    - fix program: verification
    - fix input and output: synthesis
 
-# Introduction, maybe?
-In this context, the synthesis process should be \todo{reasonably fast}{explain}
-in order to be useful. The synthesized programs should also be ``natural'' in
-the sense that it seems like it was written by a human programmer. We also want
-our programs to be readable in order for the users to able to verify it
-themselves. 
+- How does PBE compare to other kinds of automatic programming? In
+particular, how does it compare to Machine Learning?
 
-% ------------------------------------------------------------------------------
-% Questions left to answer?
-% - Extend the motivation.
-% - In practice where can this be applied (present/future)?
-% - How does prog. synth. compare to other kinds of automatic programming? In
-% particular, how does it compare to ML?
-% - Can you give an example?
-% - What does this thesis introduce? Give a summary of the work done in the rest
-% of the thesis.
+Compromise:
+- reducing the scope or domain of application
+- make the synthesizers domain-specific and less general (embed the insights
+  directly into the synthesizers)
 
-% Other questions that will be answered in the following sections include:
-% - How to provide user intent?
-% - How to solve the problem efficiently?
+Solutions are:
+- solver-aided programming: human provides high-level insights while the
+synthesizer takes care of the low-level details.
+- human-computer working together (interaction through active learning)
 
-% ------------------------------------------------------------------------------
-% Compromise:
-% - reducing the scope or domain of application
-% - make the synthesizers domain-specific and less general (embed the insights
-%   directly into the synthesizers)
+Automating this work is good because:
+- code is correct by construction
 
-% Solutions are:
-% - solver-aided programming: human provides high-level insights while the
-% synthesizer takes care of the low-level details.
-% - human-computer working together (interaction through active learning)
+- sintetizadores altamente especializados e calibrados para dominios particulares
+- bugs enviados para a camada de abstraccao acima
 
-% Automating this work is good because:
-% - code is correct by construction
-
-% - sintetizadores altamente especializados e calibrados para dominios particulares
-% - bugs enviados para a camada de abstraccao acima
-
-** ONGOING Preliminaries
+** REVIEW Preliminaries
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
-Missing definitions:
-- Program space
-- What does it mean for a program to satisfy a specification
-- Example, a set of examples, etc
-- Context-free grammars
-- DSL
-
-Some background on how SMT solvers work, e.g., describe DPLL(T).
+- Some background on how SMT solvers work, e.g., describe DPLL(T).
 
 ** REVIEW Background
   DEADLINE: <2019-03-13 Wed>
@@ -110,8 +59,8 @@ Some background on how SMT solvers work, e.g., describe DPLL(T).
 :RELWORK:  REVIEW
 :END:
 
-I guess, at the end of this section there should probably be a discussion
-comparing the different approaches to the problem.
+- [ ] Synthesis of string-manipulating program
+- [ ] Missing an explanation of why the search space is big
 
 *** REVIEW Specifications
 :PROPERTIES:
@@ -215,9 +164,9 @@ Missing example (take one from the papers).
 
 **** TODO Deductive Search
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 Expand on this.
@@ -227,9 +176,9 @@ References: Polikarpova:2019:SSH, Manna:1971:TAP, Green:1969:ATP
 
 **** TODO Representation-Based Search
 :PROPERTIES:
-:CONTENT:  TODO
-:EXAMPLES: TODO
-:RELWORK:  TODO
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 - VSAs: motivated by inductive learning; particularly suited to pbe
   - put simply, just a DAG where every part corresponds to a valid program
@@ -308,18 +257,35 @@ Missing pseudocode.
 
 ** ONGOING Synthesis
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 
+- [ ] Explain that both encodings are independent of the components used as long
+  as they can be specified in SMT
+
+- [ ] Comparison to Jha's et al. approach:
+  - [ ] We use a lot more components.
+  - [ ] More than just one type. Also, larger search space with strings that
+    with bitvectors.
+  - [ ] We synthesize arbitrary constants that are not given as user input.
+  - [ ] Their program must use all components from the library exactly once.
+  - [ ] Our components are more complex.
+  - [ ] We prevent the addition of dead-code by asserting that every variable
+    should be used at least once.
+
+- [ ] Why does a component-based approach lend itself well? (direct mapping
+  between components and DSL constructs; compare this with FlashFill's
+  approach).
+
 *** ONGOING Problem Description
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 - [ ] Mention that we are using _positive_ examples.
@@ -327,106 +293,91 @@ Check Brahma's contributions/limitations on Nadia's lecture 07 (page 17).
 
 *** ONGOING Setwise Encoding
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 - [ ] Synthesizer program listing
 
 **** Program Formula
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
 *** ONGOING Whole Encoding
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
 
-** ONGOING Experimental Results
+** REVIEW Experimental Results
 :PROPERTIES:
-:CONTENT:  ONGOING
-:EXAMPLES: ONGOING
-:RELWORK:  ONGOING
+:CONTENT:  REVIEW
+:EXAMPLES: REVIEW
+:RELWORK:  REVIEW
 :END:
+
+- Why did we choose SyPet? There is Brahma, Blaze, FlashFill, ...
+- Missing computer specifications.
 
 *** REVIEW Benchmark Description
+*** REVIEW Results
+*** REVIEW Discussion
+- [ ] For one example, without a ranking function for programs, the synthesizers
+  returns overfitted programs
+  - far fetched constants and "identity components" make everything possible
+  - tricks like (Length(''), or Concat(''), etc)
+  - a common theme is to combine Length and Substr plus a string constant
+    containing the expected output prefixed by garbage with the length of the
+    input: Substr(c0, Length(x0), Length(x0))
 
-Missing computer specifications.
+- [ ] Need to apply restrictions:
+  - on the domain of constants: constants should not contain the output
+  - on the domain of formal param,ters: index arguments to substr should
+    not be the same, concat should not be applied to the empty string, length
+    with constants, etc
 
-*** TODO Results and Comparison
+- [X] would be interesting to check the configurations for Setwise and Whole
+  where constants are provided by the user, in order to better compare with
+  SyPet-User.
+  - Or trying to infer the constants from the input-output examples.
+  - Or separating the sketch phase from constant search phase (similar to cegis(t))
 
-- calls to solvers (timeout, numero de conflictos)
-- replace e undecidable
-- versao em que se fixa o set de constantes
-
-- user intent
-- time
-- comparing size of encodings
--- later: number of constants needed of each type
-
-- ranking needed, especially for few examples: far fetched constants and
-  "identity components" make everything possible
-- substring indexes should not be the same
-- constants should not contain the output
-- would be interesting to check the case where constants are limited, or
-  provided by the user
-
-- we're counting the solution as 'expected' even if it's not the same program
-  from the benchmark: the reasoning is that if it captures the same idea and
-  generalizes, even if it is not natural, then we consider it correct.
-
-- setwise, nonrec, e2c1, results much closer to the expected solution, although
-  many times 2 examples are not enough to generalize
-
-- we could try adding more examples (and refine them)
-
-- there seems to be some sweet spot at 3 lines where the synth. is able to find
-  programs that satisfy three examples 
-
-- mention that while we tried to make the examples "as good as possible" ...
-
-- [ ] Analysis of the size of the problem in function of the number of constants,
-  components, arity of the components, number of examples, number of inputs,
-  etc.
-
-*** TODO Other
-
-We tried encoding more complex functions (recursive), but...
-
-** TODO Concluding Remarks
-- [ ] At some point we have to explain which components we are considering and
-  how they map to SMT. Particularly, we should explain the logics that we need,
-  and whether they are decidable (preliminaries) or not.
-  (https://anthonywlin.github.io/papers/popl18-replace.pdf)
-
-- [ ] Why does a component-based approach lend itself well? (direct mapping
-  between components and DSL constructs; compare this with FlashFill's
-  approach).
+- [ ] Note that the times for the solved benchmarks are reasonably fast,
+  allowing for reasonable interaction times with the user. 
+- [ ] On the other hand, we do not manage to synthesize programs with many
+  lines, which means.
 
 
-- [ ] Explain that both encodings are independent of the components used as long
-  as they can be specified in SMT
+- [ ] FlashFill, blaze, etc
 
-Comparison to Jha's et al. approach:
+** REVIEW Concluding Remarks
+*** REVIEW Related Work
+*** REVIEW Future Work
+*** REVIEW Conclusion
+* Extended Abstract
+** Structure
+10 pages, references included
 
-- [ ] We use a lot more components.
-- [ ] More than just one type. Also, larger search space with strings that
-  with bitvectors.
-- [ ] We synthesize arbitrary constants that are not given as user input.
-- [ ] Their program must use all components from the library exactly once.
-- [ ] Our components are more complex.
-- [ ] We prevent the addition of dead-code by asserting that every variable
-  should be used at least once.
+|---------------+---------+-----------------|
+| Section       | # pages | current # pages |
+|---------------+---------+-----------------|
+| Abstract      |     0.5 |             0.5 |
+| Intro         |       1 |               1 |
+| Preliminaries |       1 |               1 |
+| Background    |       2 |               2 |
+| Synthesis     |       4 |             4.3 |
+| Results       |       1 |               4 |
+| Conclusion    |     0.5 |             1.5 |
+| References    |     0.5 |               2 |
+|---------------+---------+-----------------|
+| Total         |    10.5 |             16.3|
+|---------------+---------+-----------------|
 
-*** TODO Related Work
-*** TODO Future Work
-*** TODO Conclusion
 * config :noexport:
 #+TODO: TODO ONGOING REVIEW | DONE
 #+COLUMNS: %36ITEM %7CONTENT %7RELWORK %7EXAMPLES

@@ -1,15 +1,17 @@
 \subsection{Oracle-Guided Inductive Synthesis}
 \label{sec:ogis}
 
-\textit{\Gls{ogis}} is an approach to program synthesis where the synthesizer is
-split into two components: the \textit{learner} and the \textit{oracle}. The two
-components communicate in an iterative \textit{query/response} cycle, as shown
-in Figure~\ref{fig:ogis}. The learner implements the search strategy to find the
-program and is parameterized by some form of semantic and/or syntactic
-specifications (see~\ref{sec:specifications}). The usefulness of the oracle is
-defined by the type of queries it can handle and the properties of its
-responses. The characteristics of these components are typically imposed by the
-application.
+\textit{\Glsfmtlong{ogis}~(\Gls{ogis})} is an approach to program synthesis
+where the synthesizer is split into two components: the \textit{learner} and the
+\textit{oracle}.
+The two components communicate in an iterative \textit{query/response} cycle, as
+shown in Figure~\ref{fig:ogis}.
+The learner implements the search strategy to find the program and is
+parameterized by some form of semantic and/or syntactic specifications
+(see~\ref{sec:specifications}).
+The usefulness of the oracle is defined by the type of queries it can handle and
+the properties of its responses. The characteristics of these components are
+typically imposed by the application.
 
 \begin{figure}[htb]
   \centering
@@ -36,24 +38,24 @@ application.
 Typical queries and response types are some of the following~\cite{Jha:2017:TFS}:
 
 \begin{itemize}
-\item \textit{Membership queries}, where given an I/O example $x$ the oracle
+\item \textit{Membership queries}, where given an input-output example $x$ the oracle
   responds with the answer to whether $x$ is positive or not.
 \item \textit{Positive (resp. negative) witness queries}, where the oracle
-  responds with a positive (resp. negative) I/O example, if it can find any, or
-  $\bot$ otherwise.
+  responds with a positive (resp. negative) input-output example, if it can find
+  any, or $\bot$ otherwise.
 \item \textit{Counterexample queries}, where given a candidate program $p$ the
-  oracle responds with a positive I/O counterexample that $p$ does not satisfy,
-  if it can find any, or $\bot$ otherwise.
+  oracle responds with a positive input-output counterexample that $p$ does not
+  satisfy, if it can find any, or $\bot$ otherwise.
 \item \textit{Correctness queries}, where given a candidate program $p$ the
   oracle responds with the answer to whether $p$ is correct or not. If it is not,
-  the oracle responds with a positive I/O counterexample.
+  the oracle responds with a positive input-output counterexample.
 \item \textit{Verification queries}, where given program $p$ and specification
   $\phi$ the oracle responds with the answer to whether $p$ satisfies $\phi$ or
   not, or $\bot$ if it cannot find the answer.
 \item \textit{Distinguishing input queries}, where given program $p$ and set $X$
-  of I/O examples that $p$ satisfies the oracle responds with a new program $p'$
-  and a counterexample $x$ to $p$ that $p'$ satisfies along with all the other
-  examples in $X$.
+  of input-output examples that $p$ satisfies the oracle responds with a new
+  program $p'$ and a counterexample $x$ to $p$ that $p'$ satisfies along with all
+  the other examples in $X$.
 \end{itemize}
 
 An \gls{ogis} system responding to counterexample queries corresponds to the
@@ -64,17 +66,18 @@ oracles because they are guaranteed to return a counterexample if the program is
 not correct, where the counterexample oracles might not.
 
 The concepts of \gls{ogis} was introduced by
-\citeauthor{Jha:2017:TFS}~\cite{Jha:2017:TFS} as a generalization of \gls{cegis}
-when they applied this idea to a \gls{pbe} synthesizer based on distinguishing
-inputs in order to deobfuscate malware and to generate bit-manipulating
-programs. Jha et al. further developed this idea by presenting a new theoretical
-framework for inductive synthesis \cite{Jha:2017:TFS}.
+\citeauthor{Jha:oracle:2010}~\cite{Jha:oracle:2010} as a generalization of
+\gls{cegis} when they applied this idea to a \gls{pbe} synthesizer based on
+distinguishing inputs in order to deobfuscate malware and to generate
+bit-manipulating programs.
+Jha et al. further developed this idea by presenting a new theoretical framework
+for inductive synthesis~\cite{Jha:2017:TFS}.
 
 In general, the higher the capabilities of the oracles, the more expensive they
 are to run. Distinguishing oracles are (typically) not as strong as
 counterexample or correctness oracles as the returned counterexample is not
 necessarily positive. To understand why they might be effectives tools we can
-turn to the Bounded Observation Hypothesis \cite{Solar-Lezama:2008}, which
+turn to the Bounded Observation Hypothesis~\cite{Solar-Lezama:2008}, which
 asserts that ``an implementation that works correctly for the common case and
 for all the different corner cases is likely to work correctly for all inputs.''
 
@@ -82,8 +85,8 @@ In a setting where the synthesizer is allowed to interact with the user, we
 could see the users take the role of the oracles.
 However, the interesting cases are the ones where the ratio between the amount
 of work the users are given and the information given to the synthesizer is
-maximized.
-A system that frequently queries the usrs for correctness checks would probably
+minimized.
+A system that frequently queries the users for correctness checks would probably
 feel very cumbersome.
 On the other hand, a system that queries for membership or positiveness checks
 might be more realistic, as usually the user has an idea of what sort of

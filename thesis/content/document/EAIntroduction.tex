@@ -1,0 +1,78 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Program synthesis is the problem of automatically generating program
+\textit{implementations} from high-level \textit{specifications}.
+Amir Pnuelli, former computer scientist and Turing Award winner, described it as
+``one of the most central problems in the theory of
+programming''~\cite{Pnueli:1989:ARM}, and it has been portrayed as one of the
+holy grails of computer science~\cite{Solar-Lezama:2008,Gulwani2017}.
+It is easy to understand why: if only we could tell the computer \textit{what you
+want} and let it figure out \textit{how to do} it, the task of programming would
+be much easier.
+However, program synthesis is a very hard problem.
+Programming is a task that is hard for humans and, given its generality,
+there is no reason to believe it should be any easier for computers.
+Computers lack algorithmic insight and domain expertise.
+Hence, the challenge is twofold: we need to find out both how to tackle the
+intractability of the program space, and how to accurately capture user
+intent~\cite{Gulwani2017}.
+
+It is important to keep in mind that program synthesis is not a panacea for
+solving problems in computer programming.
+For example, we might be interested in other properties besides functional
+correctness, such as efficiency or succinctness of the generated program.
+Also, in the general case, it is impossible for program synthesis to eliminate
+all sources of bugs.
+Particularly, it cannot solve problems originating from bad specifications
+that come from a poor understanding of the problem domain.
+
+\subsection{OutSystems and \Glsfmtlong{pbe}}
+\label{sec:outsystems-pbe}
+
+This work was done during an internship at
+OutSystems.\footnote{\url{https://www.outsystems.com}} 
+OutSystems is also the name of a low-code platform that features visual
+application development, easy integration with existing systems, and the
+possibility for the user to add their own code when needed.
+With OutSystems one should be able to build enterprise-grade applications
+swiftly and with a great degree of
+automation.
+To that effect, the kind of programs we are interested in are expressions in the
+OutSystems language.
+Thus, we are interested in building a synthesizer for OutSystems expressions
+that is \textit{performant} and \textit{easy to use}.
+This implies that the synthesis process finishes in a matter of seconds
+(instead of hours or days), and the synthesizer has a ``push-button''-style
+interface that does not force the user to acquire new skills.
+The paradigm in program synthesis that best fits this scenario is called
+\gls{pbe}.
+In \gls{pbe}, the synthesizer should be able to synthesize \textit{correct}
+programs merely from a small set of input-output examples.
+% For instance, one possible input-output example for the program from
+% example~\ref{ex:intro:first-name} is, for example, (<``John Michael Doe'', ``Dr.
+% ''>, ``Dr. John'').
+By correct we mean that the program matches the user intent.
+
+The most notable success in the area of program synthesis is incorporated in a
+tool called FlashFill~\cite{Gulwani:2011}.
+FlashFill employs \gls{pbe} technology and is currently integrated in Microsoft
+Excel.
+FlashFill is able to synthesize programs that manipulate strings very fast,
+typically under 10 seconds.
+Another notable \gls{pbe} synthesizer is SyPet~\cite{Feng:2017:CSC}, which has
+been applied in the domain of Java programs.
+
+\subsection{Contributions}
+
+In this work, we survey the state of the art in program synthesis, and
+implement two component-based \gls{pbe} synthesizers based on an \gls{ogis}
+architecture.
+Both synthesizers employ a mixture of constraint solving with basic enumerative
+search, differing on the amount of work they put on the constraint solving
+phase, for which they make use of an \Glsfmtfull{smt} solver.
+The components that we use correspond to a small subset of expressions of the
+OutSystems API that manipulate integers and text.
+However, the synthesizers are not specific to OutSystems expressions and could
+be instantiated in other domains.
+We benchmark both synthesizers and compare them to SyPet~\cite{Feng:2017:CSC}.
