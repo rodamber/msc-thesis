@@ -1,0 +1,13 @@
+599.98/600.04	=== Examples (examples-37.json)
+599.98/600.04	(["Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."],"/ Nulla eu")
+599.98/600.04	(["Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus."],"/ Vestibul")
+599.98/600.04	=== Library
+599.98/600.04	Add
+599.98/600.04	Concat
+599.98/600.04	Index
+599.98/600.04	Length
+599.98/600.04	Sub
+599.98/600.04	Substr
+599.98/600.04	=== Synthesis
+599.98/600.04	Size: 1
+599.98/600.04	Size: 2

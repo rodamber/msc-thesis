@@ -1,0 +1,19 @@
+0.00/0.13	=== Examples (examples-24.json)
+0.00/0.13	(["Nulla sapien nisi, auctor sed."],"Nulla sapien nisi, auctor sed....")
+0.00/0.13	=== Library
+0.00/0.13	Add
+0.00/0.13	Concat
+0.00/0.13	Index
+0.00/0.13	Length
+0.00/0.13	Sub
+0.00/0.13	Substr
+0.00/0.13	=== Synthesis
+0.00/0.13	Size: 1
+0.00/0.13	=== Program
+0.00/0.13	prog(x0):
+0.00/0.13	  c0 = "..."
+0.00/0.13	  c1 = "0"
+0.00/0.13	  c2 = "0"
+0.00/0.13	  c3 = "0"
+0.00/0.13	  r0 = Concat(x0, c0)
+0.00/0.13	

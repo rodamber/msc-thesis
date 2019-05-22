@@ -1,0 +1,21 @@
+0.65/0.73	=== Examples (examples-75.json)
+0.65/0.73	(["Fusce sapien eros volutpat."],"Fusce...tpat.")
+0.65/0.73	=== Library
+0.65/0.73	Add
+0.65/0.73	Concat
+0.65/0.73	Index
+0.65/0.73	Length
+0.65/0.73	Sub
+0.65/0.73	Substr
+0.65/0.73	=== Synthesis
+0.65/0.73	Size: 1
+0.65/0.73	Size: 2
+0.65/0.73	=== Program
+0.65/0.73	prog(x0):
+0.65/0.73	  c0 = "Fusce...tpat."
+0.65/0.73	  c1 = "-2"
+0.65/0.73	  c2 = "32"
+0.65/0.73	  c3 = "0"
+0.65/0.73	  r0 = Substr(x0, c2, c1)
+0.65/0.73	  r1 = Concat(c0, r0)
+0.65/0.73	

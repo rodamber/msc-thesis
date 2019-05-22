@@ -1,0 +1,21 @@
+0.89/0.98	=== Examples (examples-11.json)
+0.89/0.98	(["Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam."],"Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis ")
+0.89/0.98	(["Curabitur commodo pellentesque erat. Fusce efficitur tincidunt tincidunt. Proin velit elit, sodales at tincidunt nullam."],"Curabitur commodo pellentesque erat. Fusce efficitur tincidunt tincidunt. Proin velit elit, sodales ")
+0.89/0.98	(["Sed eleifend posuere dui sed hendrerit. Mauris egestas iaculis ultrices. Mauris at ipsum ornare, accumsan diam eget viverra fusce."],"Sed eleifend posuere dui sed hendrerit. Mauris egestas iaculis ultrices. Mauris at ipsum ornare, acc")
+0.89/0.98	=== Library
+0.89/0.98	Add
+0.89/0.98	Concat
+0.89/0.98	Index
+0.89/0.98	Length
+0.89/0.98	Sub
+0.89/0.98	Substr
+0.89/0.98	=== Synthesis
+0.89/0.98	Size: 1
+0.89/0.98	=== Program
+0.89/0.98	prog(x0):
+0.89/0.98	  c0 = "100"
+0.89/0.98	  c1 = "0"
+0.89/0.98	  c2 = "0"
+0.89/0.98	  c3 = "0"
+0.89/0.98	  r0 = Substr(x0, c2, c0)
+0.89/0.98	

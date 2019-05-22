@@ -1,0 +1,21 @@
+1.61/1.63	=== Examples (examples-73.json)
+1.61/1.63	(["Sed metus urna turpis duis."],"...rpis duis.")
+1.61/1.63	=== Library
+1.61/1.63	Add
+1.61/1.63	Concat
+1.61/1.63	Index
+1.61/1.63	Length
+1.61/1.63	Sub
+1.61/1.63	Substr
+1.61/1.63	=== Synthesis
+1.61/1.63	Size: 1
+1.61/1.63	Size: 2
+1.61/1.63	=== Program
+1.61/1.63	prog(x0):
+1.61/1.63	  c0 = "...rpis duis."
+1.61/1.63	  c1 = "-2"
+1.61/1.63	  c2 = "30"
+1.61/1.63	  c3 = "0"
+1.61/1.63	  r0 = Substr(x0, c2, c1)
+1.61/1.63	  r1 = Concat(r0, c0)
+1.61/1.63	

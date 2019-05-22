@@ -1,0 +1,23 @@
+0.90/1.04	=== Examples (examples-83.json)
+0.90/1.04	(["george","conchichina xy"],"george At:conchichina")
+0.90/1.04	=== Library
+0.90/1.04	Add
+0.90/1.04	Concat
+0.90/1.04	Index
+0.90/1.04	Length
+0.90/1.04	Sub
+0.90/1.04	Substr
+0.90/1.04	=== Synthesis
+0.90/1.04	Size: 1
+0.90/1.04	Size: 2
+0.90/1.04	Size: 3
+0.90/1.04	=== Program
+0.90/1.04	prog(x0, x1):
+0.90/1.04	  c0 = "0"
+0.90/1.04	  c1 = "orge At:conchichina"
+0.90/1.04	  c2 = "0"
+0.90/1.04	  c3 = "4"
+0.90/1.04	  r0 = Length(x1)
+0.90/1.04	  r1 = Substr(x0, c3, r0)
+0.90/1.04	  r2 = Concat(r1, c1)
+0.90/1.04	

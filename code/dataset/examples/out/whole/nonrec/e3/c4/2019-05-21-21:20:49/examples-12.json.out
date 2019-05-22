@@ -1,0 +1,21 @@
+0.12/0.30	=== Examples (examples-12.json)
+0.12/0.30	(["hello word",5],"hello")
+0.12/0.30	(["hi my name is",10],"hi my name")
+0.12/0.30	(["Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis neque vestibulum efficitur. Maecenas orci aliquam.",100],"Praesent sollicitudin varius neque, ut scelerisque justo venenatis nec. Maecenas sodales justo quis ")
+0.12/0.30	=== Library
+0.12/0.30	Add
+0.12/0.30	Concat
+0.12/0.30	Index
+0.12/0.30	Length
+0.12/0.30	Sub
+0.12/0.30	Substr
+0.12/0.30	=== Synthesis
+0.12/0.30	Size: 1
+0.12/0.30	=== Program
+0.12/0.30	prog(x0, x1):
+0.12/0.30	  c0 = "0"
+0.12/0.30	  c1 = "0"
+0.12/0.30	  c2 = "0"
+0.12/0.30	  c3 = "0"
+0.12/0.30	  r0 = Substr(x0, c1, x1)
+0.12/0.30	

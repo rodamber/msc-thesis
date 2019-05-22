@@ -1,0 +1,21 @@
+19.47/19.52	=== Examples (examples-26.json)
+19.47/19.52	(["Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci aliquam."],"Nullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci ali...")
+19.47/19.52	=== Library
+19.47/19.52	Add
+19.47/19.52	Concat
+19.47/19.52	Index
+19.47/19.52	Length
+19.47/19.52	Sub
+19.47/19.52	Substr
+19.47/19.52	=== Synthesis
+19.47/19.52	Size: 1
+19.47/19.52	Size: 2
+19.47/19.52	=== Program
+19.47/19.52	prog(x0):
+19.47/19.52	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULNullam elementum, nisi ut pharetra molestie, mauris nisl accumsan magna orci ali..."
+19.47/19.52	  c1 = "0"
+19.47/19.52	  c2 = "0"
+19.47/19.52	  c3 = "48"
+19.47/19.52	  r0 = Length(x0)
+19.47/19.52	  r1 = Substr(c0, c3, r0)
+19.47/19.52	

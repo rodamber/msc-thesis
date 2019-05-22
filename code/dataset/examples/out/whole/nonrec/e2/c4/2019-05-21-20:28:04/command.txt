@@ -1,0 +1,1 @@
+runbench_nonrec -t 600 -m 16 -d out/outsynth2/2019-05-21-20:28:04 -e 2 -c 4

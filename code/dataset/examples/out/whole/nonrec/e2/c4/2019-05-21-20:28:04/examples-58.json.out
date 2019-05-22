@@ -1,0 +1,14 @@
+600.01/600.04	=== Examples (examples-58.json)
+600.01/600.04	(["who cares about the last one."],"who cares about the last one")
+600.01/600.04	(["just let them die!"],"just let them die")
+600.01/600.04	=== Library
+600.01/600.04	Add
+600.01/600.04	Concat
+600.01/600.04	Index
+600.01/600.04	Length
+600.01/600.04	Sub
+600.01/600.04	Substr
+600.01/600.04	=== Synthesis
+600.01/600.04	Size: 1
+600.01/600.04	Size: 2
+600.01/600.04	outsynth2: 

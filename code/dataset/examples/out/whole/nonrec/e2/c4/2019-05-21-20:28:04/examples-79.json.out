@@ -1,0 +1,21 @@
+599.99/600.04	=== Examples (examples-79.json)
+599.99/600.04	(["outsystems.com"],"com")
+599.99/600.04	(["cmu.edu"],"edu")
+599.99/600.04	=== Library
+599.99/600.04	Add
+599.99/600.04	Concat
+599.99/600.04	Index
+599.99/600.04	Length
+599.99/600.04	Sub
+599.99/600.04	Substr
+599.99/600.04	=== Synthesis
+599.99/600.04	Size: 1
+599.99/600.04	Size: 2
+599.99/600.04	outsynth2: 
+599.99/600.04	*** Data.SBV: fd:6: hGetLine: end of file:
+599.99/600.04	***
+599.99/600.04	***    Sent      : (check-sat)
+599.99/600.04	***
+599.99/600.04	***    Executable: /home/rodrigo/bin/z3
+599.99/600.04	***    Options   : -nw -in -smt2
+599.99/600.04	

@@ -1,0 +1,21 @@
+5.18/5.27	=== Examples (examples-39.json)
+5.18/5.27	(["who cares about when"],"Created on who cares about ")
+5.18/5.27	=== Library
+5.18/5.27	Add
+5.18/5.27	Concat
+5.18/5.27	Index
+5.18/5.27	Length
+5.18/5.27	Sub
+5.18/5.27	Substr
+5.18/5.27	=== Synthesis
+5.18/5.27	Size: 1
+5.18/5.27	Size: 2
+5.18/5.27	=== Program
+5.18/5.27	prog(x0):
+5.18/5.27	  c0 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULCreated on who cares about "
+5.18/5.27	  c1 = "1091"
+5.18/5.27	  c2 = "0"
+5.18/5.27	  c3 = "0"
+5.18/5.27	  r0 = Length(x0)
+5.18/5.27	  r1 = Substr(c0, r0, c1)
+5.18/5.27	

@@ -1,0 +1,22 @@
+5.39/5.43	=== Examples (examples-39.json)
+5.39/5.43	(["who cares about when"],"Created on who cares about ")
+5.39/5.43	(["maybe someone will care"],"Created on maybe someone wi")
+5.39/5.43	=== Library
+5.39/5.43	Add
+5.39/5.43	Concat
+5.39/5.43	Index
+5.39/5.43	Length
+5.39/5.43	Sub
+5.39/5.43	Substr
+5.39/5.43	=== Synthesis
+5.39/5.43	Size: 1
+5.39/5.43	Size: 2
+5.39/5.43	=== Program
+5.39/5.43	prog(x0):
+5.39/5.43	  c0 = "16"
+5.39/5.43	  c1 = "0"
+5.39/5.43	  c2 = "0"
+5.39/5.43	  c3 = "Created on "
+5.39/5.43	  r0 = Substr(x0, c1, c0)
+5.39/5.43	  r1 = Concat(c3, r0)
+5.39/5.43	

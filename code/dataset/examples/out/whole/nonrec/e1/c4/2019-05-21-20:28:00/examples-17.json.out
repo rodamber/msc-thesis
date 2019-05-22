@@ -1,0 +1,21 @@
+1.09/1.14	=== Examples (examples-17.json)
+1.09/1.14	(["Quisque sollicitudin volutpat."],"Quisque sollicitudin...")
+1.09/1.14	=== Library
+1.09/1.14	Add
+1.09/1.14	Concat
+1.09/1.14	Index
+1.09/1.14	Length
+1.09/1.14	Sub
+1.09/1.14	Substr
+1.09/1.14	=== Synthesis
+1.09/1.14	Size: 1
+1.09/1.14	Size: 2
+1.09/1.14	=== Program
+1.09/1.14	prog(x0):
+1.09/1.14	  c0 = "-3"
+1.09/1.14	  c1 = "-4"
+1.09/1.14	  c2 = "0"
+1.09/1.14	  c3 = "Quisque sollicitudin..."
+1.09/1.14	  r0 = Substr(x0, c1, c0)
+1.09/1.14	  r1 = Concat(r0, c3)
+1.09/1.14	

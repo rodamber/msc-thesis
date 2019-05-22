@@ -1,0 +1,19 @@
+0.17/0.24	=== Examples (examples-37.json)
+0.17/0.24	(["Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus."],"/ Nulla eu")
+0.17/0.24	=== Library
+0.17/0.24	Add
+0.17/0.24	Concat
+0.17/0.24	Index
+0.17/0.24	Length
+0.17/0.24	Sub
+0.17/0.24	Substr
+0.17/0.24	=== Synthesis
+0.17/0.24	Size: 1
+0.17/0.24	=== Program
+0.17/0.24	prog(x0):
+0.17/0.24	  c0 = "27"
+0.17/0.24	  c1 = "0"
+0.17/0.24	  c2 = "10"
+0.17/0.24	  c3 = "0"
+0.17/0.24	  r0 = Substr(x0, c0, c2)
+0.17/0.24	

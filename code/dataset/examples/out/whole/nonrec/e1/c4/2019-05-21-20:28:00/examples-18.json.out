@@ -1,0 +1,21 @@
+1.11/1.19	=== Examples (examples-18.json)
+1.11/1.19	(["Lorem ipsum dolor sit amet cras amet."],"Lorem ipsum dolor sit amet cra...")
+1.11/1.19	=== Library
+1.11/1.19	Add
+1.11/1.19	Concat
+1.11/1.19	Index
+1.11/1.19	Length
+1.11/1.19	Sub
+1.11/1.19	Substr
+1.11/1.19	=== Synthesis
+1.11/1.19	Size: 1
+1.11/1.19	Size: 2
+1.11/1.19	=== Program
+1.11/1.19	prog(x0):
+1.11/1.19	  c0 = "37"
+1.11/1.19	  c1 = "18"
+1.11/1.19	  c2 = "0"
+1.11/1.19	  c3 = "Lorem ipsum dolor sit amet cra..."
+1.11/1.19	  r0 = Substr(x0, c0, c1)
+1.11/1.19	  r1 = Concat(c3, r0)
+1.11/1.19	

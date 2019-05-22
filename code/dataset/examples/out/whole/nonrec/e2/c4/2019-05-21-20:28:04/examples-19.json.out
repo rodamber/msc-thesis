@@ -1,0 +1,22 @@
+17.69/17.78	=== Examples (examples-19.json)
+17.69/17.78	(["Praesent sed diam vel amet."],"Praesent sed diam vel amet....")
+17.69/17.78	(["Donec ultrices finibus ultrices. Quisque lacus posuere."],"Donec ultrices finibus ultrices. Quisque lacus pos...")
+17.69/17.78	=== Library
+17.69/17.78	Add
+17.69/17.78	Concat
+17.69/17.78	Index
+17.69/17.78	Length
+17.69/17.78	Sub
+17.69/17.78	Substr
+17.69/17.78	=== Synthesis
+17.69/17.78	Size: 1
+17.69/17.78	Size: 2
+17.69/17.78	=== Program
+17.69/17.78	prog(x0):
+17.69/17.78	  c0 = "50"
+17.69/17.78	  c1 = "..."
+17.69/17.78	  c2 = "0"
+17.69/17.78	  c3 = "0"
+17.69/17.78	  r0 = Substr(x0, c2, c0)
+17.69/17.78	  r1 = Concat(r0, c1)
+17.69/17.78	

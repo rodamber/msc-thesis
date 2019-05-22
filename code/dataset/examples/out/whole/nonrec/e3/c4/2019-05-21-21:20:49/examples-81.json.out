@@ -1,0 +1,22 @@
+599.98/600.00	=== Examples (examples-81.json)
+599.98/600.00	(["abc\\xyz"],"xyz")
+599.98/600.00	(["012asdf\\abcd"],"abcd")
+599.98/600.00	(["asdfa\\asdfas"],"asdfas")
+599.98/600.00	=== Library
+599.98/600.00	Add
+599.98/600.00	Concat
+599.98/600.00	Index
+599.98/600.00	Length
+599.98/600.00	Sub
+599.98/600.00	Substr
+599.98/600.00	=== Synthesis
+599.98/600.00	Size: 1
+599.98/600.00	Size: 2
+599.98/600.00	outsynth2: 
+599.98/600.00	*** Data.SBV: fd:6: hGetLine: end of file:
+599.98/600.00	***
+599.98/600.00	***    Sent      : (check-sat)
+599.98/600.00	***
+599.98/600.00	***    Executable: /home/rodrigo/bin/z3
+599.98/600.00	***    Options   : -nw -in -smt2
+599.98/600.00	

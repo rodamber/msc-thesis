@@ -1,0 +1,21 @@
+0.98/1.06	=== Examples (examples-23.json)
+0.98/1.06	(["Nam quis purus massa metus."],"Nam q...")
+0.98/1.06	=== Library
+0.98/1.06	Add
+0.98/1.06	Concat
+0.98/1.06	Index
+0.98/1.06	Length
+0.98/1.06	Sub
+0.98/1.06	Substr
+0.98/1.06	=== Synthesis
+0.98/1.06	Size: 1
+0.98/1.06	Size: 2
+0.98/1.06	=== Program
+0.98/1.06	prog(x0):
+0.98/1.06	  c0 = "-1"
+0.98/1.06	  c1 = "Nam q..."
+0.98/1.06	  c2 = "0"
+0.98/1.06	  c3 = "30"
+0.98/1.06	  r0 = Substr(x0, c3, c0)
+0.98/1.06	  r1 = Concat(r0, c1)
+0.98/1.06	

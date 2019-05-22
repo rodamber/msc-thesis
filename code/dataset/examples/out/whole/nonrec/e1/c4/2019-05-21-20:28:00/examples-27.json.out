@@ -1,0 +1,19 @@
+0.14/0.23	=== Examples (examples-27.json)
+0.14/0.23	(["Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet."],"Maecenas sollicitudin tempus odio et imperdiet. Morbi sit amet mi fermentum, facilisis tellus amet....")
+0.14/0.23	=== Library
+0.14/0.23	Add
+0.14/0.23	Concat
+0.14/0.23	Index
+0.14/0.23	Length
+0.14/0.23	Sub
+0.14/0.23	Substr
+0.14/0.23	=== Synthesis
+0.14/0.23	Size: 1
+0.14/0.23	=== Program
+0.14/0.23	prog(x0):
+0.14/0.23	  c0 = "..."
+0.14/0.23	  c1 = "0"
+0.14/0.23	  c2 = "0"
+0.14/0.23	  c3 = "0"
+0.14/0.23	  r0 = Concat(x0, c0)
+0.14/0.23	

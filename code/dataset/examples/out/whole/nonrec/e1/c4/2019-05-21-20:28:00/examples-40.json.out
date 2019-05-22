@@ -1,0 +1,21 @@
+98.37/98.44	=== Examples (examples-40.json)
+98.37/98.44	(["who cares about when"],"updated on who cares about ")
+98.37/98.44	=== Library
+98.37/98.44	Add
+98.37/98.44	Concat
+98.37/98.44	Index
+98.37/98.44	Length
+98.37/98.44	Sub
+98.37/98.44	Substr
+98.37/98.44	=== Synthesis
+98.37/98.44	Size: 1
+98.37/98.44	Size: 2
+98.37/98.44	=== Program
+98.37/98.44	prog(x0):
+98.37/98.44	  c0 = "0"
+98.37/98.44	  c1 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULupdated on who cares about \NUL\NUL"
+98.37/98.44	  c2 = "27"
+98.37/98.44	  c3 = "0"
+98.37/98.44	  r0 = Length(x0)
+98.37/98.44	  r1 = Substr(c1, r0, c2)
+98.37/98.44	

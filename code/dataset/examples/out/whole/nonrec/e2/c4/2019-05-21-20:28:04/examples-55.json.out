@@ -1,0 +1,22 @@
+24.46/24.64	=== Examples (examples-55.json)
+24.46/24.64	(["what is this even supposed to?"],"")
+24.46/24.64	(["short one"],"s")
+24.46/24.64	=== Library
+24.46/24.64	Add
+24.46/24.64	Concat
+24.46/24.64	Index
+24.46/24.64	Length
+24.46/24.64	Sub
+24.46/24.64	Substr
+24.46/24.64	=== Synthesis
+24.46/24.64	Size: 1
+24.46/24.64	Size: 2
+24.46/24.64	=== Program
+24.46/24.64	prog(x0):
+24.46/24.64	  c0 = "0"
+24.46/24.64	  c1 = "0"
+24.46/24.64	  c2 = "0"
+24.46/24.64	  c3 = "\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NUL\NULs"
+24.46/24.64	  r0 = Length(x0)
+24.46/24.64	  r1 = Substr(c3, r0, r0)
+24.46/24.64	
