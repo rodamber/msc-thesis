@@ -1,0 +1,14 @@
+#!/bin/bash
+TIMESTAMP=$(date '+%F-%T')
+OUTDIR=out/outsynth2/$TIMESTAMP
+EXAMPLES=$1
+CONSTS=$2
+
+mkdir -p $OUTDIR
+touch $OUTDIR/command.txt
+printf '%s\n' "runbench_nonrec -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS" > $OUTDIR/command.txt
+
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{9,10,11,12,13,17,18,19,23,24,25,26,27}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{28,29,30,31,32,33,34,35,36,37,39,40,55}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{56,57,58,59,60,61,62,63,64,65,66,73,74}.json &
+runbench -t 600 -m 16 -d $OUTDIR -e $EXAMPLES -c $CONSTS examples-{75,76,77,78,79,80,81,82,83,87,88,94}.json &
