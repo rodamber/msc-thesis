@@ -1,0 +1,55 @@
+0.15/0.19	=== Examples (../../dataset/examples/examples-65.json)
+0.15/0.19	IO(inputs=('take out the last 3 chars',), output='ars')
+0.15/0.19	IO(inputs=('abc',), output='abc')
+0.15/0.19	IO(inputs=('outsystems.com',), output='com')
+0.15/0.19	=== Library
+0.15/0.19	concat
+0.15/0.19	index
+0.15/0.19	length
+0.15/0.19	substr
+0.15/0.19	add
+0.15/0.19	sub
+0.15/0.19	=== Synthesis
+0.15/0.19	['concat']: UNSAT (0.035 seconds)
+0.15/0.23	['index']: UNSAT (0.035 seconds)
+0.15/0.27	['length']: UNSAT (0.024 seconds)
+0.15/0.29	['substr']: UNSAT (0.051 seconds)
+0.30/0.34	['add']: UNSAT (0.030 seconds)
+0.36/0.37	['sub']: UNSAT (0.031 seconds)
+0.36/0.41	['concat', 'concat']: UNSAT (0.062 seconds)
+0.36/0.47	['concat', 'index']: UNSAT (0.059 seconds)
+0.46/0.53	['concat', 'length']: UNSAT (0.039 seconds)
+0.46/0.57	['concat', 'substr']: UNSAT (0.332 seconds)
+0.89/0.90	['concat', 'add']: UNSAT (0.042 seconds)
+0.89/0.94	['concat', 'sub']: UNSAT (0.042 seconds)
+0.89/0.99	['index', 'index']: UNSAT (0.058 seconds)
+1.02/1.05	['index', 'length']: UNSAT (0.040 seconds)
+1.02/1.09	['index', 'substr']: UNSAT (5.648 seconds)
+6.69/6.74	['index', 'add']: UNSAT (0.046 seconds)
+6.69/6.78	['index', 'sub']: UNSAT (0.046 seconds)
+6.79/6.83	['length', 'length']: UNSAT (0.026 seconds)
+6.79/6.86	['length', 'substr']: UNSAT (0.056 seconds)
+6.89/6.91	['length', 'add']: UNSAT (0.032 seconds)
+6.89/6.95	['length', 'sub']: UNSAT (0.031 seconds)
+6.89/6.98	['substr', 'substr']: UNSAT (0.088 seconds)
+7.02/7.07	['substr', 'add']: UNSAT (0.068 seconds)
+7.02/7.14	['substr', 'sub']: UNSAT (0.067 seconds)
+7.19/7.20	['add', 'add']: UNSAT (0.043 seconds)
+7.19/7.25	['add', 'sub']: UNSAT (0.043 seconds)
+7.19/7.29	['sub', 'sub']: UNSAT (0.042 seconds)
+7.29/7.33	['concat', 'concat', 'concat']: UNSAT (0.129 seconds)
+7.39/7.46	['concat', 'concat', 'index']: UNSAT (0.082 seconds)
+7.49/7.55	['concat', 'concat', 'length']: UNSAT (0.061 seconds)
+7.59/7.61	['concat', 'concat', 'substr']: UNSAT (10.611 seconds)
+17.88/18.22	['concat', 'concat', 'add']: UNSAT (0.123 seconds)
+18.31/18.35	['concat', 'concat', 'sub']: UNSAT (0.087 seconds)
+18.38/18.43	['concat', 'index', 'index']: UNSAT (0.143 seconds)
+18.48/18.58	['concat', 'index', 'length']: UNSAT (0.098 seconds)
+18.58/18.68	['concat', 'index', 'substr']: UNKNOWN (290.764 seconds)
+309.38/309.45	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+309.38/309.45	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+309.38/309.45	['concat', 'index', 'add']: UNSAT (0.079 seconds)
+309.48/309.53	['concat', 'index', 'sub']: UNSAT (0.074 seconds)
+309.57/309.60	['concat', 'length', 'length']: UNSAT (0.051 seconds)
+309.57/309.65	['concat', 'length', 'substr']: SAT (0.667 seconds)
+310.27/310.32	substr(concat('\\x00\\x04\\x00', arg0), length(arg0), 3)

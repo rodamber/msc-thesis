@@ -1,0 +1,27 @@
+0.10/0.18	=== Examples (../../dataset/examples/examples-80.json)
+0.10/0.18	IO(inputs=('george.bluth@outsystems.com',), output='@outsystems.com')
+0.10/0.18	IO(inputs=('maebe@cmu.edu',), output='@cmu.edu')
+0.10/0.18	=== Library
+0.10/0.18	concat
+0.10/0.18	index
+0.10/0.18	length
+0.10/0.18	substr
+0.10/0.18	add
+0.10/0.18	sub
+0.10/0.18	=== Synthesis
+0.10/0.18	['concat']: UNSAT (0.029 seconds)
+0.10/0.21	['index']: UNSAT (0.029 seconds)
+0.10/0.24	['length']: UNSAT (0.021 seconds)
+0.10/0.27	['substr']: UNSAT (0.037 seconds)
+0.24/0.30	['add']: UNSAT (0.027 seconds)
+0.24/0.33	['sub']: UNSAT (0.026 seconds)
+0.24/0.36	['concat', 'concat']: UNSAT (0.049 seconds)
+0.34/0.41	['concat', 'index']: UNSAT (0.044 seconds)
+0.34/0.45	['concat', 'length']: UNSAT (0.029 seconds)
+0.43/0.48	['concat', 'substr']: UNSAT (0.274 seconds)
+0.70/0.76	['concat', 'add']: UNSAT (0.030 seconds)
+0.70/0.79	['concat', 'sub']: UNSAT (0.030 seconds)
+0.79/0.82	['index', 'index']: UNSAT (0.040 seconds)
+0.79/0.86	['index', 'length']: UNSAT (0.029 seconds)
+0.79/0.89	['index', 'substr']: SAT (4.358 seconds)
+5.19/5.25	substr(arg0, index(arg0, '@', 3), 8936)

@@ -1,0 +1,66 @@
+0.12/0.20	=== Examples (../../dataset/examples/examples-59.json)
+0.12/0.20	IO(inputs=('who cares about the last ones...',), output='who cares about the last ones.')
+0.12/0.20	IO(inputs=('just let them die!!!',), output='just let them die!')
+0.12/0.20	=== Library
+0.12/0.20	concat
+0.12/0.20	index
+0.12/0.20	length
+0.12/0.20	substr
+0.12/0.20	add
+0.12/0.20	sub
+0.12/0.20	=== Synthesis
+0.12/0.20	['concat']: UNSAT (0.025 seconds)
+0.12/0.23	['index']: UNSAT (0.024 seconds)
+0.12/0.25	['length']: UNSAT (0.027 seconds)
+0.12/0.28	['substr']: UNSAT (0.041 seconds)
+0.28/0.32	['add']: UNSAT (0.027 seconds)
+0.28/0.35	['sub']: UNSAT (0.032 seconds)
+0.36/0.38	['concat', 'concat']: UNSAT (0.042 seconds)
+0.36/0.43	['concat', 'index']: UNSAT (0.068 seconds)
+0.36/0.50	['concat', 'length']: UNSAT (0.039 seconds)
+0.50/0.54	['concat', 'substr']: UNSAT (0.413 seconds)
+0.89/0.95	['concat', 'add']: UNSAT (0.034 seconds)
+0.89/0.98	['concat', 'sub']: UNSAT (0.050 seconds)
+1.02/1.04	['index', 'index']: UNSAT (0.045 seconds)
+1.02/1.08	['index', 'length']: UNSAT (0.032 seconds)
+1.02/1.11	['index', 'substr']: UNKNOWN (113.457 seconds)
+114.48/114.57	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+114.48/114.57	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+114.48/114.57	['index', 'add']: UNSAT (0.039 seconds)
+114.58/114.61	['index', 'sub']: UNSAT (0.036 seconds)
+114.58/114.65	['length', 'length']: UNSAT (0.022 seconds)
+114.58/114.67	['length', 'substr']: UNSAT (0.046 seconds)
+114.68/114.72	['length', 'add']: UNSAT (0.026 seconds)
+114.68/114.75	['length', 'sub']: UNSAT (0.026 seconds)
+114.68/114.77	['substr', 'substr']: UNSAT (0.087 seconds)
+114.78/114.86	['substr', 'add']: UNSAT (0.052 seconds)
+114.88/114.91	['substr', 'sub']: UNSAT (0.051 seconds)
+114.88/114.96	['add', 'add']: UNSAT (0.033 seconds)
+114.88/115.00	['add', 'sub']: UNSAT (0.032 seconds)
+114.88/115.03	['sub', 'sub']: UNSAT (0.032 seconds)
+115.01/115.06	['concat', 'concat', 'concat']: UNSAT (0.118 seconds)
+115.13/115.18	['concat', 'concat', 'index']: UNSAT (0.060 seconds)
+115.18/115.24	['concat', 'concat', 'length']: UNSAT (0.046 seconds)
+115.18/115.29	['concat', 'concat', 'substr']: UNSAT (8.408 seconds)
+123.69/123.70	['concat', 'concat', 'add']: UNSAT (0.047 seconds)
+123.69/123.75	['concat', 'concat', 'sub']: UNSAT (0.048 seconds)
+123.69/123.80	['concat', 'index', 'index']: UNSAT (0.064 seconds)
+123.79/123.86	['concat', 'index', 'length']: UNSAT (0.047 seconds)
+123.88/123.91	['concat', 'index', 'substr']: UNKNOWN (252.385 seconds)
+376.17/376.29	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+376.17/376.29	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+376.17/376.29	['concat', 'index', 'add']: UNSAT (0.048 seconds)
+376.27/376.34	['concat', 'index', 'sub']: UNSAT (0.051 seconds)
+376.27/376.39	['concat', 'length', 'length']: UNSAT (0.038 seconds)
+376.37/376.43	['concat', 'length', 'substr']: UNSAT (0.526 seconds)
+376.87/376.96	['concat', 'length', 'add']: UNSAT (0.043 seconds)
+376.87/377.01	['concat', 'length', 'sub']: UNSAT (0.037 seconds)
+377.00/377.04	['concat', 'substr', 'substr']: UNSAT (1.265 seconds)
+378.27/378.31	['concat', 'substr', 'add']: UNSAT (0.421 seconds)
+378.67/378.73	['concat', 'substr', 'sub']: UNSAT (0.409 seconds)
+379.00/379.14	['concat', 'add', 'add']: UNSAT (0.048 seconds)
+379.13/379.19	['concat', 'add', 'sub']: UNSAT (0.045 seconds)
+379.17/379.24	['concat', 'sub', 'sub']: UNSAT (0.044 seconds)
+379.17/379.28	['index', 'index', 'index']: UNSAT (0.066 seconds)
+379.27/379.35	['index', 'index', 'length']: UNSAT (0.050 seconds)
+379.37/379.40	['index', 'index', 'substr']: 

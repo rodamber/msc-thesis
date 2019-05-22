@@ -1,0 +1,27 @@
+0.00/0.20	=== Examples (../../dataset/examples/examples-37.json)
+0.00/0.20	IO(inputs=('Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus.',), output='/ Nulla eu')
+0.00/0.20	IO(inputs=('Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus.',), output='/ Vestibul')
+0.00/0.20	IO(inputs=('Praesent in pulvinar sapien. / Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. / Aliquam cursus est in massa metus.',), output='/ Orci var')
+0.00/0.20	=== Library
+0.00/0.20	concat
+0.00/0.20	index
+0.00/0.20	length
+0.00/0.20	substr
+0.00/0.20	add
+0.00/0.20	sub
+0.00/0.20	=== Synthesis
+0.00/0.20	['concat']: UNSAT (0.035 seconds)
+0.00/0.23	['index']: UNSAT (0.035 seconds)
+0.00/0.27	['length']: UNSAT (0.023 seconds)
+0.00/0.29	['substr']: UNSAT (0.408 seconds)
+0.28/0.70	['add']: UNSAT (0.028 seconds)
+0.28/0.73	['sub']: UNSAT (0.029 seconds)
+0.28/0.76	['concat', 'concat']: UNSAT (0.066 seconds)
+0.65/0.83	['concat', 'index']: UNSAT (0.050 seconds)
+0.65/0.88	['concat', 'length']: UNSAT (0.037 seconds)
+0.65/0.92	['concat', 'substr']: UNSAT (12.346 seconds)
+13.20/13.26	['concat', 'add']: UNSAT (0.045 seconds)
+13.29/13.31	['concat', 'sub']: UNSAT (0.046 seconds)
+13.29/13.36	['index', 'index']: UNSAT (0.059 seconds)
+13.39/13.42	['index', 'length']: UNSAT (0.042 seconds)
+13.39/13.46	['index', 'substr']: 

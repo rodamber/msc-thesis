@@ -1,0 +1,17 @@
+0.00/0.23	=== Examples (../../dataset/examples/examples-61.json)
+0.00/0.23	IO(inputs=('?01-01-1999',), output='01-01-1999')
+0.00/0.23	IO(inputs=('?table cell',), output='table cell')
+0.00/0.23	IO(inputs=('Xprobably this',), output='probably this')
+0.00/0.23	=== Library
+0.00/0.23	concat
+0.00/0.23	index
+0.00/0.23	length
+0.00/0.23	substr
+0.00/0.23	add
+0.00/0.23	sub
+0.00/0.23	=== Synthesis
+0.00/0.23	['concat']: UNSAT (0.034 seconds)
+0.00/0.27	['index']: UNSAT (0.035 seconds)
+0.00/0.30	['length']: UNSAT (0.024 seconds)
+0.00/0.33	['substr']: SAT (0.061 seconds)
+0.00/0.39	substr(arg0, 1, 7733)

@@ -1,0 +1,15 @@
+0.15/0.22	=== Examples (../../dataset/examples/examples-60.json)
+0.15/0.22	IO(inputs=('who cares about the last ones...',), output='who cares about the last ones')
+0.15/0.22	=== Library
+0.15/0.22	concat
+0.15/0.22	index
+0.15/0.22	length
+0.15/0.22	substr
+0.15/0.22	add
+0.15/0.22	sub
+0.15/0.22	=== Synthesis
+0.15/0.22	['concat']: UNSAT (0.023 seconds)
+0.15/0.24	['index']: UNSAT (0.021 seconds)
+0.15/0.26	['length']: UNSAT (0.018 seconds)
+0.15/0.28	['substr']: SAT (0.030 seconds)
+0.15/0.31	substr(arg0, 0, 29)

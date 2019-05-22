@@ -1,0 +1,21 @@
+0.10/0.23	=== Examples (../../dataset/examples/examples-90.json)
+0.10/0.23	IO(inputs=('george',), output='George')
+0.10/0.23	=== Library
+0.10/0.23	concat
+0.10/0.23	index
+0.10/0.23	length
+0.10/0.23	substr
+0.10/0.23	add
+0.10/0.23	sub
+0.10/0.23	=== Synthesis
+0.10/0.23	['concat']: UNSAT (0.035 seconds)
+0.10/0.27	['index']: UNSAT (0.028 seconds)
+0.10/0.29	['length']: UNSAT (0.020 seconds)
+0.22/0.32	['substr']: UNSAT (0.024 seconds)
+0.22/0.34	['add']: UNSAT (0.020 seconds)
+0.22/0.36	['sub']: UNSAT (0.020 seconds)
+0.22/0.38	['concat', 'concat']: UNSAT (0.032 seconds)
+0.22/0.42	['concat', 'index']: UNSAT (0.032 seconds)
+0.35/0.45	['concat', 'length']: UNSAT (0.026 seconds)
+0.35/0.48	['concat', 'substr']: SAT (0.057 seconds)
+0.43/0.53	substr(concat('Geor', arg0), 0, 6)

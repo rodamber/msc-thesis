@@ -1,0 +1,27 @@
+0.11/0.18	=== Examples (../../dataset/examples/examples-55.json)
+0.11/0.18	IO(inputs=('what is this even supposed to?',), output='')
+0.11/0.18	IO(inputs=('short one',), output='s')
+0.11/0.18	=== Library
+0.11/0.18	concat
+0.11/0.18	index
+0.11/0.18	length
+0.11/0.18	substr
+0.11/0.18	add
+0.11/0.18	sub
+0.11/0.18	=== Synthesis
+0.11/0.18	['concat']: UNSAT (0.022 seconds)
+0.11/0.21	['index']: UNSAT (0.025 seconds)
+0.11/0.23	['length']: UNSAT (0.028 seconds)
+0.11/0.26	['substr']: UNSAT (0.043 seconds)
+0.27/0.31	['add']: UNSAT (0.019 seconds)
+0.27/0.32	['sub']: UNSAT (0.018 seconds)
+0.27/0.34	['concat', 'concat']: UNSAT (0.063 seconds)
+0.27/0.41	['concat', 'index']: UNSAT (0.048 seconds)
+0.40/0.46	['concat', 'length']: UNSAT (0.050 seconds)
+0.40/0.51	['concat', 'substr']: UNSAT (0.072 seconds)
+0.49/0.58	['concat', 'add']: UNSAT (0.043 seconds)
+0.58/0.63	['concat', 'sub']: UNSAT (0.032 seconds)
+0.63/0.66	['index', 'index']: UNSAT (0.041 seconds)
+0.69/0.70	['index', 'length']: UNSAT (0.031 seconds)
+0.69/0.73	['index', 'substr']: SAT (7.369 seconds)
+8.01/8.10	substr('@ss\\x00r', index(arg0, 'ort ', 0), 1)

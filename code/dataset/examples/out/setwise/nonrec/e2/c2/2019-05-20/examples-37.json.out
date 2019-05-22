@@ -1,0 +1,45 @@
+0.13/0.20	=== Examples (../../dataset/examples/examples-37.json)
+0.13/0.20	IO(inputs=('Duis eget ultrices sapien. / Nulla eu vehicula enim, in metus.',), output='/ Nulla eu')
+0.13/0.20	IO(inputs=('Sed imperdiet lectus vel amet. / Vestibulum ut ligula metus.',), output='/ Vestibul')
+0.13/0.20	=== Library
+0.13/0.20	concat
+0.13/0.20	index
+0.13/0.20	length
+0.13/0.20	substr
+0.13/0.20	add
+0.13/0.20	sub
+0.13/0.20	=== Synthesis
+0.13/0.20	['concat']: UNSAT (0.029 seconds)
+0.13/0.23	['index']: UNSAT (0.029 seconds)
+0.13/0.26	['length']: UNSAT (0.020 seconds)
+0.13/0.28	['substr']: UNSAT (0.236 seconds)
+0.46/0.52	['add']: UNSAT (0.024 seconds)
+0.46/0.54	['sub']: UNSAT (0.024 seconds)
+0.46/0.57	['concat', 'concat']: UNSAT (0.051 seconds)
+0.56/0.62	['concat', 'index']: UNSAT (0.040 seconds)
+0.63/0.66	['concat', 'length']: UNSAT (0.029 seconds)
+0.63/0.69	['concat', 'substr']: UNSAT (8.125 seconds)
+8.79/8.81	['concat', 'add']: UNSAT (0.034 seconds)
+8.79/8.85	['concat', 'sub']: UNSAT (0.032 seconds)
+8.79/8.88	['index', 'index']: UNSAT (0.042 seconds)
+8.89/8.93	['index', 'length']: UNSAT (0.031 seconds)
+8.89/8.96	['index', 'substr']: UNKNOWN (279.761 seconds)
+288.66/288.72	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+288.66/288.72	Reason: smt tactic failed to show goal to be sat/unsat max-conflicts-reached
+288.66/288.72	['index', 'add']: UNSAT (0.062 seconds)
+288.66/288.78	['index', 'sub']: UNSAT (0.049 seconds)
+288.76/288.83	['length', 'length']: UNSAT (0.031 seconds)
+288.76/288.86	['length', 'substr']: UNSAT (0.103 seconds)
+288.86/288.97	['length', 'add']: UNSAT (0.034 seconds)
+288.96/289.00	['length', 'sub']: UNSAT (0.035 seconds)
+288.96/289.04	['substr', 'substr']: UNSAT (3.547 seconds)
+292.46/292.59	['substr', 'add']: UNSAT (0.512 seconds)
+292.96/293.10	['substr', 'sub']: UNSAT (0.301 seconds)
+293.35/293.41	['add', 'add']: UNSAT (0.039 seconds)
+293.35/293.45	['add', 'sub']: UNSAT (0.037 seconds)
+293.35/293.48	['sub', 'sub']: UNSAT (0.036 seconds)
+293.45/293.52	['concat', 'concat', 'concat']: UNSAT (0.196 seconds)
+293.65/293.72	['concat', 'concat', 'index']: UNSAT (0.064 seconds)
+293.65/293.78	['concat', 'concat', 'length']: UNSAT (0.053 seconds)
+293.75/293.84	['concat', 'concat', 'substr']: SAT (64.995 seconds)
+358.75/358.83	substr(concat(arg0, concat(arg0, arg0)), 151, 10)

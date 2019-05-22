@@ -1,0 +1,21 @@
+0.17/0.18	=== Examples (../../dataset/examples/examples-67.json)
+0.17/0.18	IO(inputs=(' trim me ',), output='trim me xyz')
+0.17/0.18	=== Library
+0.17/0.18	concat
+0.17/0.18	index
+0.17/0.18	length
+0.17/0.18	substr
+0.17/0.18	add
+0.17/0.18	sub
+0.17/0.18	=== Synthesis
+0.17/0.18	['concat']: UNSAT (0.023 seconds)
+0.17/0.21	['index']: UNSAT (0.022 seconds)
+0.17/0.23	['length']: UNSAT (0.018 seconds)
+0.17/0.25	['substr']: UNSAT (0.024 seconds)
+0.17/0.27	['add']: UNSAT (0.020 seconds)
+0.17/0.29	['sub']: UNSAT (0.019 seconds)
+0.30/0.31	['concat', 'concat']: UNSAT (0.054 seconds)
+0.30/0.37	['concat', 'index']: UNSAT (0.034 seconds)
+0.38/0.40	['concat', 'length']: UNSAT (0.026 seconds)
+0.38/0.43	['concat', 'substr']: SAT (0.041 seconds)
+0.38/0.47	substr(concat(arg0, 'xyz'), 1, 12)

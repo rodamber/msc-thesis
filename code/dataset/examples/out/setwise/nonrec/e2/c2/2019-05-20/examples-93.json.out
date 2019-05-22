@@ -1,0 +1,43 @@
+0.15/0.20	=== Examples (../../dataset/examples/examples-93.json)
+0.15/0.20	IO(inputs=('no - he said',), output='he said')
+0.15/0.20	IO(inputs=('but but why - she said',), output='she said')
+0.15/0.20	=== Library
+0.15/0.20	concat
+0.15/0.20	index
+0.15/0.20	length
+0.15/0.20	substr
+0.15/0.20	add
+0.15/0.20	sub
+0.15/0.20	=== Synthesis
+0.15/0.20	['concat']: UNSAT (0.029 seconds)
+0.15/0.23	['index']: UNSAT (0.028 seconds)
+0.15/0.26	['length']: UNSAT (0.020 seconds)
+0.15/0.28	['substr']: UNSAT (0.045 seconds)
+0.28/0.32	['add']: UNSAT (0.025 seconds)
+0.28/0.35	['sub']: UNSAT (0.025 seconds)
+0.36/0.38	['concat', 'concat']: UNSAT (0.049 seconds)
+0.36/0.43	['concat', 'index']: UNSAT (0.048 seconds)
+0.46/0.48	['concat', 'length']: UNSAT (0.035 seconds)
+0.46/0.51	['concat', 'substr']: UNSAT (0.236 seconds)
+0.68/0.75	['concat', 'add']: UNSAT (0.030 seconds)
+0.68/0.78	['concat', 'sub']: UNSAT (0.030 seconds)
+0.78/0.81	['index', 'index']: UNSAT (0.040 seconds)
+0.78/0.85	['index', 'length']: UNSAT (0.029 seconds)
+0.78/0.88	['index', 'substr']: UNSAT (43.564 seconds)
+44.39/44.44	['index', 'add']: UNSAT (0.035 seconds)
+44.39/44.48	['index', 'sub']: UNSAT (0.036 seconds)
+44.49/44.52	['length', 'length']: UNSAT (0.023 seconds)
+44.49/44.54	['length', 'substr']: UNSAT (0.039 seconds)
+44.49/44.58	['length', 'add']: UNSAT (0.025 seconds)
+44.59/44.61	['length', 'sub']: UNSAT (0.025 seconds)
+44.59/44.63	['substr', 'substr']: UNSAT (0.064 seconds)
+44.69/44.70	['substr', 'add']: UNSAT (0.055 seconds)
+44.69/44.75	['substr', 'sub']: UNSAT (0.051 seconds)
+44.79/44.80	['add', 'add']: UNSAT (0.032 seconds)
+44.79/44.84	['add', 'sub']: UNSAT (0.032 seconds)
+44.79/44.87	['sub', 'sub']: UNSAT (0.032 seconds)
+44.89/44.90	['concat', 'concat', 'concat']: UNSAT (0.101 seconds)
+44.89/45.00	['concat', 'concat', 'index']: UNSAT (0.055 seconds)
+45.02/45.06	['concat', 'concat', 'length']: UNSAT (0.044 seconds)
+45.02/45.10	['concat', 'concat', 'substr']: SAT (0.218 seconds)
+45.29/45.32	concat(substr(arg0, 14, 1), concat('he', ' said'))

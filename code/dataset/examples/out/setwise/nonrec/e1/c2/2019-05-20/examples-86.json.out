@@ -1,0 +1,41 @@
+0.11/0.20	=== Examples (../../dataset/examples/examples-86.json)
+0.11/0.20	IO(inputs=('Sed euismod congue porta. Phasellus posuere rutrum porttitor. Curabitur nec pellentesque sem, luctus volutpat.',), output='Sed euismod congue porta. phasellus posuere rutrum porttitor. curabitur nec pellentesque sem, luctus')
+0.11/0.20	=== Library
+0.11/0.20	concat
+0.11/0.20	index
+0.11/0.20	length
+0.11/0.20	substr
+0.11/0.20	add
+0.11/0.20	sub
+0.11/0.20	=== Synthesis
+0.11/0.20	['concat']: UNSAT (0.026 seconds)
+0.11/0.23	['index']: UNSAT (0.023 seconds)
+0.11/0.25	['length']: UNSAT (0.019 seconds)
+0.25/0.27	['substr']: UNSAT (0.050 seconds)
+0.25/0.32	['add']: UNSAT (0.020 seconds)
+0.25/0.34	['sub']: UNSAT (0.020 seconds)
+0.25/0.36	['concat', 'concat']: UNSAT (0.040 seconds)
+0.35/0.40	['concat', 'index']: UNSAT (0.035 seconds)
+0.35/0.44	['concat', 'length']: UNSAT (0.028 seconds)
+0.35/0.47	['concat', 'substr']: UNSAT (13.439 seconds)
+13.89/13.91	['concat', 'add']: UNSAT (0.024 seconds)
+13.89/13.93	['concat', 'sub']: UNSAT (0.024 seconds)
+13.89/13.96	['index', 'index']: UNSAT (0.029 seconds)
+13.89/13.99	['index', 'length']: UNSAT (0.022 seconds)
+13.89/14.01	['index', 'substr']: UNSAT (0.377 seconds)
+14.31/14.39	['index', 'add']: UNSAT (0.027 seconds)
+14.39/14.41	['index', 'sub']: UNSAT (0.028 seconds)
+14.39/14.44	['length', 'length']: UNSAT (0.020 seconds)
+14.39/14.46	['length', 'substr']: UNSAT (0.076 seconds)
+14.49/14.54	['length', 'add']: UNSAT (0.020 seconds)
+14.49/14.56	['length', 'sub']: UNSAT (0.021 seconds)
+14.49/14.58	['substr', 'substr']: UNSAT (0.217 seconds)
+14.79/14.80	['substr', 'add']: UNSAT (0.051 seconds)
+14.79/14.85	['substr', 'sub']: UNSAT (0.050 seconds)
+14.89/14.90	['add', 'add']: UNSAT (0.023 seconds)
+14.89/14.93	['add', 'sub']: UNSAT (0.023 seconds)
+14.89/14.95	['sub', 'sub']: UNSAT (0.023 seconds)
+14.89/14.97	['concat', 'concat', 'concat']: UNSAT (0.129 seconds)
+15.01/15.10	['concat', 'concat', 'index']: UNSAT (0.040 seconds)
+15.13/15.15	['concat', 'concat', 'length']: UNSAT (0.033 seconds)
+15.13/15.18	['concat', 'concat', 'substr']: 
