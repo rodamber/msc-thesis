@@ -2,8 +2,8 @@
 \label{sec:enumerative-search}
 
 In the context of program synthesis, enumerative search consists of enumerating
-programs by working the intrinsic structure of the program space to guide the
-search.
+programs by working the intrinsic structure of the program space in order to to
+guide the search.
 The programs can be ordered using many different program metrics, the simplest
 one being program size, and pruned by means of semantic equivalence checks with
 respect to the specification.
@@ -15,10 +15,9 @@ result in highly effective pruning strategies.
 
 In their overview of the field of program synthesis~\cite{Gulwani2017},
 \citeauthor{Gulwani2017} describe some enumerative search algorithms for finding
-programs in program spaces defined by a \glsfmtfull{cfg}, which we describe
-next.
-The algorithms can be generalized to other types of program spaces such as,
-e.g., sketches.
+programs in program spaces defined by a \Gls{cfg}, which we describe next.
+% The algorithms can be generalized to other types of program spaces such as,
+% e.g., sketches.
 
 \subsubsection{Top-Down Tree Search}
 \label{sec:top-down-tree-search}
@@ -73,8 +72,8 @@ all the programs found so far in the set $P'$.
 Both $P$ and $P'$ are initialized with the partial program that corresponds to
 the start symbol $S$ of $G$.
 The algorithm runs until it finds a program $p$ that matches the specification
-$\phi{}$ or there are no more programs waiting in the queue (meaning that the
-algorithm fails).
+$\phi{}$, or until there are no more programs waiting in the queue (meaning that
+the algorithm fails).
 At every iteration, we take the program $p$ with the highest priority from the
 queue and check whether it satisfies $\phi{}$.
 If yes, we return $p$.
@@ -120,8 +119,8 @@ considered in the past (i.e., subsumed within $P'$).
   \label{alg:enum-bottom-up}
 \end{algorithm}
 
-The bottom-up tree search algorithm (Algorithm~\ref{alg:enum-bottom-up}) is the
-dual to top-down tree search algorithm.
+The bottom-up tree search algorithm (Algorithm~\ref{alg:enum-bottom-up}) is dual
+to the top-down tree search algorithm.
 It also takes a \gls{cfg} $G = (V, \Sigma{}, R, S)$ and a specification
 $\phi{}$, and works by exploring the derivations of the grammar in a bottom-up
 dynamic programming fashion.
@@ -137,8 +136,8 @@ essentially applying the rules of the grammar in the opposite direction.
 
 We can see that a top-down tree search starts from a set of input states, while
 a bottom-up tree search starts from a set of output states.
-In both approaches the size of the search space grows exponentially with size of
-the programs.
+In both approaches the size of the search space grows exponentially with the
+size of the programs.
 The bidirectional tree search algorithm tries to attenuate this problem by
 combining the previous two approaches, starting from both a set of input states
 and a set of output states.

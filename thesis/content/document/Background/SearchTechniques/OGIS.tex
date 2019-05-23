@@ -52,10 +52,10 @@ Typical queries and response types are some of the following~\cite{Jha:2017:TFS}
 \item \textit{Verification queries}, where given program $p$ and specification
   $\phi$ the oracle responds with the answer to whether $p$ satisfies $\phi$ or
   not, or $\bot$ if it cannot find the answer.
-\item \textit{Distinguishing input queries}, where given program $p$ and set $X$
-  of input-output examples that $p$ satisfies the oracle responds with a new
-  program $p'$ and a counterexample $x$ to $p$ that $p'$ satisfies along with all
-  the other examples in $X$.
+\item \textit{Distinguishing input queries}, where given program $p$ and a set
+  $X$ of input-output examples that $p$ satisfies, the oracle responds with a
+  new counterexample $x$ to $p$ such that another program $p'$ exists that
+  satisfies both $x$ and all the other examples in $X$.
 \end{itemize}
 
 An \gls{ogis} system responding to counterexample queries corresponds to the
@@ -65,7 +65,7 @@ SKETCH synthesizer. Correctness oracles are more powerful than counterexample
 oracles because they are guaranteed to return a counterexample if the program is
 not correct, where the counterexample oracles might not.
 
-The concepts of \gls{ogis} was introduced by
+The concept of \gls{ogis} was introduced by
 \citeauthor{Jha:oracle:2010}~\cite{Jha:oracle:2010} as a generalization of
 \gls{cegis} when they applied this idea to a \gls{pbe} synthesizer based on
 distinguishing inputs in order to deobfuscate malware and to generate
@@ -75,8 +75,8 @@ for inductive synthesis~\cite{Jha:2017:TFS}.
 
 In general, the higher the capabilities of the oracles, the more expensive they
 are to run. Distinguishing oracles are (typically) not as strong as
-counterexample or correctness oracles as the returned counterexample is not
-necessarily positive. To understand why they might be effectives tools we can
+counterexample or correctness oracles because the returned counterexample is not
+necessarily positive. To understand why they might be effective tools we can
 turn to the Bounded Observation Hypothesis~\cite{Solar-Lezama:2008}, which
 asserts that ``an implementation that works correctly for the common case and
 for all the different corner cases is likely to work correctly for all inputs.''

@@ -7,14 +7,14 @@ probabilistic reasoning to learn a program conditioned by the specification
 space).
 
 Typical stochastic synthesis approaches include, for example:
-genetic programming~\cite{Weimer:2009:AFP} where a population of programs is
+genetic programming~\cite{Weimer:2009:AFP}, where a population of programs is
 repeatedly evolved by application of biological principles (such as natural
 selection) while optimizing for a given \textit{fitness} function (e.g., the
 number of input-output examples that are satisfied);
 neural networks that learn how to reproduce the intended
 behavior% ~\cite{Joulin:2015:IAP}
 , or that learn actually interpretable
-programs~\cite{Parisotto:2016:NPS};
+programs~\cite{Parisotto:2016:NPS}; or
 learning a distribution (a \textit{guiding function}) over the components of
 the underlying \gls{dsl} in order to guide a weighted enumerative search in the
 direction of a program that is most likely to meet the desired
@@ -36,7 +36,7 @@ Then they perform a probabilistic walk over the search space while maximizing
 this score function.
 The algorithm works by first picking a program $p$ of fixed size $n$ uniformly
 at random.
-They then pick a node from its parse tree uniformly at random and consider the
+They then pick a node from its parse tree uniformly at random, and consider the
 subprogram rooted at that node.
 They then substitute it with another subprogram of same size and type, chosen
 uniformly at random, obtaining a new program $p'$.
@@ -44,6 +44,8 @@ The probability of discarding $p$ for $p'$ is given by the formula $min(1,
 Score(p')/Score(p))$.
 It remains to say how to pick the value of $n$.
 Typically we do not know the size of the desired program from the start.
-In order to tackle this problem, they start by fixing its value at $n = 1$ and
-at each iteration change its value to $min(1, n\pm{}1)$ with with some small
-probability (default is 0.01).
+They tackle this by running multiple concurrent searches for different values of
+$n$.
+The first search has $n$ fixed at value $1$, and at each iteration they switch
+to the search with size $max(1, n\pm{}1)$ with some small probability (default
+is 0.01).

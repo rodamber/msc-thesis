@@ -10,9 +10,9 @@ corresponds to the desired program.
 \citeauthor{Gulwani2017}~\cite{Gulwani2017} illustrate this in a simple way with
 an example which we show here.
 This example also serves as a short introduction to the SMT-LIB
-language~\cite{BarFT-RR-17}, a standard language for SMT solvers.
-Suppose our programs are composed of operations over two input bitvectors, $x$
-and $y$, of length eight:
+language~\cite{BarFT-RR-17}, a standard language for describing \gls{smt}
+problems.
+Suppose our programs are composed of operations over two bitvectors of length 8:
 %
 \begin{align*}
   \text{program }P    &::= plus(E,E) \OR mul(E,E) \OR shl(E,C) \OR shr(E,C)    \\
@@ -21,7 +21,7 @@ and $y$, of length eight:
 \end{align*}
 %
 \noindent
-We consider an expression to be either the input variable $x$ or an 8-bit
+We consider an expression to be either an input variable $x$, or an 8-bit
 constant.
 A program consists of additions and multiplications between expressions, or of
 shift left/right operations over an expression by a constant.
@@ -61,7 +61,7 @@ constant symbols \texttt{hP}, \texttt{hE0}, \texttt{hE1}, \texttt{c0} and
 %
 The symbol \texttt{hP} encodes the choice of which language construct to pick,
 while the symbols \texttt{hE0}, \texttt{hE1} encode the choice of whether
-\texttt{left} and \texttt{right} are assigned the values of constants
+\texttt{left} or \texttt{right} are assigned the values of constants
 (\texttt{c0}, \texttt{c1}) or the value of the input (\texttt{x}).
 An assignment to these constant symbols corresponds to a valid program in our
 grammar, if we ensure that \texttt{hP} is in a valid range.
@@ -90,7 +90,7 @@ In SMT-LIB that can be written as:
 \end{lstlisting}
  
 This example shows an end-to-end constraint solving approach to program
-synthesis. However, encoding the problem this way can sometimes be non-trivial
+synthesis. However, encoding the problem this way can sometimes be non-trivial,
 or time-consuming.
 This led to the appearance of the concept of \textit{solver-aided programming},
 where programming languages are enlarged with high-level constructs that give

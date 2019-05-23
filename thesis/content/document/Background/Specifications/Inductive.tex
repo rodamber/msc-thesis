@@ -7,7 +7,7 @@ Sometimes the domain we want to model is complex enough that a complete
 specification could be as hard to produce as the program itself, or might not
 even exist.
 In other cases, we might want the synthesizer to be as easy and intuitive to use
-as possible for users coming from different backgrounds.
+as possible, e.g., for users coming from non-technical backgrounds.
 
 \subsubsection{\Glsfmtfull{pbe}}
 
@@ -63,7 +63,7 @@ but also generalize, effectively trying to figure out the user's intention.
 Typically, two approaches have been used to solve this problem.
 
 The first approach works by \textit{ranking} the set of programs consistent with
-examples according to their likelihood of being the desired program.
+the examples according to their likelihood of being the desired program.
 This ranking function should allow for the efficient identification of the
 top-ranked program without having to perform costly enumeration.
 There have been manual approaches to create such functions, but it is a
@@ -79,11 +79,11 @@ The second approach is called \textit{active learning}, and (usually) relies
 on interaction between the user and the synthesizer.
 Typically, this happens by asking the user for (a small set of) additional
 input-output examples.
-Another idea, (similar to the one) introduced by
-\citeauthor{Jha:oracle:2010}~\cite{Jha:oracle:2010}, works by finding a
-\textit{distinguishing input}, an input on which two candidate programs differ,
-and query the user what the expected output should be for the intended program.
+Another idea, introduced by \citeauthor{Jha:oracle:2010}~\cite{Jha:oracle:2010},
+works by finding a \textit{distinguishing input}, an input on which two
+candidate programs differ, and query the user what the expected output should be
+for the intended program.
 Other types of active learning exist such as rephrasing the program in natural
-language, and accepting negative examples~\cite{Frankle:2016:EST}.
+language, or accepting negative examples~\cite{Frankle:2016:EST}.
 
 

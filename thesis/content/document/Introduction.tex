@@ -8,7 +8,7 @@ Amir Pnuelli, former computer scientist and Turing Award winner, described it as
 programming''~\cite{Pnueli:1989:ARM}, and it has been portrayed as one of the
 holy grails of computer science~\cite{Solar-Lezama:2008,Gulwani2017}.
 It is easy to understand why: if only we could tell the computer \textit{what you
-want} and let it figure out \textit{how to do} it, the task of programming would
+want} and let it figure out \textit{how to do it}, the task of programming would
 be much easier.
 However, program synthesis is a very hard problem.
 Programming is a task that is hard for humans and, given its generality,
@@ -25,9 +25,9 @@ correctness, such as efficiency or succinctness of the generated program.
 Also, in the general case, it is impossible for program synthesis to eliminate
 all sources of bugs.
 Particularly, it cannot solve problems originating from bad specifications
-that come from a poor understanding of the problem domain.
+that arise from a poor understanding of the problem domain.
 
-Writing specifications is, indeed, a delicate process.
+Indeed, writing specifications is a delicate process.
 This might be better understood with a simple, yet non-trivial, motivating
 example.
 
@@ -52,7 +52,9 @@ integers:
 
 \noindent
 The function \lstinline{sort} takes a list of integers as input and returns
-it sorted in ascending order (\lstinline{::} represents list concatenation).
+it sorted in ascending order (\lstinline{[]} represents the empty list, and
+\lstinline{y::ys} means that element \lstinline{y} is prepended to the list
+\lstinline{ys}).
 One approach to implement \lstinline{sort} is to resort to an auxiliary
 function, \lstinline{insert}, taking an element \lstinline{x} and a list
 \lstinline{xs} as inputs, and returning a new list \lstinline{xs'}.
@@ -106,12 +108,12 @@ over lists (here the implementation is omitted) and add it to the specification:
     isSorted(xs') and sameContents(xs', x::xs)
 \end{lstlisting}
 
-It should be clear by now why writing specifications can be tricky, even in
-simple cases.
+From this example we can infer that writing specifications is prone to
+oversimplification by omitting details that might seem obvious at first.
 What might be less clear is that the specification as it is might still not be
 precise enough.
 There are countless other properties that we might want our sorting procedure to
-satisfy, such as, for example, stability, complexity, and/or adaptability.
+satisfy, such as, for example, stability, complexity and/or adaptability.
 
 \section{OutSystems and \Glsfmtfull{pbe}}
 \label{sec:outsystems-pbe}
@@ -137,7 +139,7 @@ OutSystems is also the name of a low-code platform that features visual
 application development, easy integration with existing systems, and the
 possibility for the user to add their own code when needed (see
 Figures~\ref{fig:outsystems-app} and~\ref{fig:outsystems-platform}).\footnote{\url{https://www.outsystems.com/platform/}}
-OutSystems developed with the goal of cutting down web and mobile app
+OutSystems was developed with the goal of cutting down web and mobile app
 development time from several months to a few weeks.
 Recently, the OutSystems.AI team was created to research and implement more
 degrees of automation into the platform.
@@ -166,7 +168,7 @@ interface that does not force the user to acquire new skills.
 The paradigm in program synthesis that best fits this scenario is called
 \gls{pbe}.
 In \gls{pbe}, the synthesizer should be able to synthesize \textit{correct}
-programs merely from a small set of input-output examples.
+programs merely from a (small) set of input-output examples.
 For instance, one possible input-output example for the program from
 example~\ref{ex:intro:first-name} is, for example, ($<$``John Michael Doe'', ``Dr.
 ''$>$, ``Dr. John'').
@@ -192,7 +194,7 @@ implement two component-based \gls{pbe} synthesizers based on an \gls{ogis}
 architecture.
 Both synthesizers employ a mixture of constraint solving with basic enumerative
 search, differing in the amount of work they put in the constraint solving
-phase, for which they make use of a \Glsfmtfull{smt} solver.
+phase, for which they make use of a \glsfmtfull{smt} solver.
 The components that we use correspond to a small subset of expressions of the
 OutSystems API that manipulate integers and text.
 However, the synthesizers are not specific to OutSystems expressions and could
@@ -204,11 +206,11 @@ We benchmark both synthesizers and compare them to SyPet~\cite{Feng:2017:CSC}.
 
 Chapter~\ref{chapter:preliminaries} introduces some basic definitions and examples
 that will be useful later on.
-Chapter~\ref{chapter:background} surveys the related work and provides a brief
+Chapter~\ref{chapter:background} surveys related work and provides a brief
 introduction to the most common techniques in program synthesis, not only in
 \gls{pbe}, but in general.
 Chapter~\ref{chap:synthesis} details the implementation of our contributions.
-Namely, we implemented two synthesizers for OutSystems expressions based on
+Namely, we implement two synthesizers for OutSystems expressions based on
 constraint solving, a concept that we introduce in
 Chapter~\ref{chapter:background}.
 In Chapter~\ref{chap:experimental-results} we evaluate and compare the

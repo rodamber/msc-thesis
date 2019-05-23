@@ -7,15 +7,16 @@ paradigm~(Section \ref{sec:components}). Therefore, assume we are given a
 \textit{library} of base components $F$ that the synthesizer can use in order to
 compose the programs. These components will be builtin functions drawn from the
 OutSystems library, or combinations of them. Each component can take a finite
-number of inputs and return exactly one output. More formally, a component $f
-\in F$ is represented by an expression $\phi{}_f$ (a specification) that
-specifies how its input parameters $P_f$ relate to its return value $r_f$.
+number of inputs and return exactly one output.
+More formally, a component $f \in F$ is specified by a first-order formula
+$\phi{}_f$ that relates its input parameters $P_f$ to its return value $r_f$
+(see Section~\ref{sec:smt-interlude}).
 
 We can see from the previous examples that OutSystems expressions can also
 include constant literals, like \lstinline{" "}, or \lstinline{0}. These could
-have been given as input, but we would like them to be figured out automatically
+been given as input, but we would like them to be computed automatically
 by the synthesizer. Ignoring well-typedness, an OutSystems expression is a
-tree-like program whose form can be succintly described using a \gls{cfg}:
+tree-like program whose syntax can be succintly described using a \gls{cfg}:
 %
 \[S ::= f(S, \ldots, S) \OR x \OR c\]
 
@@ -32,18 +33,20 @@ the program, and $C$ is the set of constant literals in the OutSystems language.
       r2 = Substr(name, c1, r1)
       r3 = Concat(prefix, r2)
   \end{lstlisting}
-\caption{\gls{ssa} representation of the program from
+\caption{\Gls{ssa} representation of the program from
     Example~\ref{ex:first-name}. The last variable, \lstinline{r3}, is assumed
     here to be the return value of the program.}
 \label{fig:first-name-ssa}
 \end{figure}
 
 It is useful to reason about OutSystems expressions in another representation,
-called \gls{ssa} form. A program in \gls{ssa} form is a line program where every
-variable is assigned exactly once and defined before it is used. For example,
-the program from Example~\ref{ex:first-name} could be written in \gls{ssa} form
-as shown in Figure~\ref{fig:first-name-ssa}. The body of a program in this
-format can be described succinctly with the following \gls{cfg}:
+called \glsfmtfull{ssa} form.
+A program in \gls{ssa} form is a line program where every variable is assigned
+exactly once and defined before it is used.
+For example, the program from Example~\ref{ex:first-name} could be written in
+\gls{ssa} form as shown in Figure~\ref{fig:first-name-ssa}.
+The body of a program in this format can be described succinctly with the
+following \gls{cfg}:
 %
 \[S ::= ID = c \OR ID = f(x_1, ..., x_n) \OR S;S\]
 
@@ -52,16 +55,17 @@ where $ID$ stands for an identifier in the OutSystems language. The non-terminal
 $S$ represents a line in the program. A line is an assignment of a variable to a
 constant literal $c$ or to the return value of a component $f$ on inputs $x_1,
 ..., x_n$. As long as the program is well-typed, an input to a component can
-be one of the inputs of the program, or variable defined in a preceding line.
+be one of the inputs of the program, or a variable defined in a preceding line.
 Thus, the general structure of a program in \gls{ssa} form is a sequence of
 assignments.
 
 The approach described in this section is based on
-\citeauthor{Jha:oracle:2010}'s program encoding. The idea is to encode the
-program space in a formula. The formula is then constrained further in order to
-encode only those programs that satisfy the input-output examples. A solution to
-the formula can then be decoded back yielding a program that satisfies the set
-of examples.
+\citeauthor{Jha:oracle:2010}'s program encoding~\cite{Jha:oracle:2010}.
+The idea is to encode the program space in a formula.
+The formula is then constrained further in order to encode only those programs
+that satisfy the input-output examples.
+A solution to the formula can then be decoded back yielding a program that
+satisfies the set of examples.
 
 \begin{figure}
   \centering
@@ -87,7 +91,7 @@ of examples.
 
 The synthesizer (Figure~\ref{fig:synth-setwise}) follows the \gls{ogis} model,
 described in Section~\ref{sec:ogis}. It has a learner part and an oracle part,
-which are called here the \textit{enumerator} and the \textit{solver},
+which we will refer to as the \textit{enumerator} and the \textit{solver},
 respectively.
 
 The enumerator receives the set of input-output examples as input, and is
@@ -95,16 +99,16 @@ parameterized by the library of components. The enumerator is responsible for
 drawing a subset of components from the library. The components are drawn by
 trying all sets of combinations (with replacement) in order of increasing size.
 It then passes these components to the solver, along with the input-output
-examples, and queries whether there is any program made only of those components
-that satisfies the examples. There is the additional restriction that the
-program must use each of the components in the query exactly once.
+examples, and queries whether there exists a program composed only of those
+components that satisfies the examples. There is the additional restriction that
+the program must use each of the components in the query exactly once.
 
 The solver works by encoding the query into an \gls{smt} formula, and uses an
 automated \gls{smt} solver to check for satisfiability. The \gls{smt} solver
 might or might not be able to solve the formula. If the formula is satisfiable,
 then the solver responds to the enumerator with SAT and a solution (called a
 \textit{model}) to that formula. If not, the solver returns UNSAT or UNKNOWN,
-depending on whether the formula is unsatisfiable or the \gls{smt} solver could
+depending on whether the formula is unsatisfiable, or the \gls{smt} solver could
 not, for some reason, verify its satisfiability, respectively.
 
 The procedure keeps going in a loop until the enumerator receives SAT from the
@@ -114,7 +118,7 @@ then returned to the user.
 \subsection{Program Formula}
 \label{sec:program-formula}
 
-Let us take the program from Figure~\ref{fig:first-name-ssa} as a running
+Consider the program from Figure~\ref{fig:first-name-ssa} as a running
 example in order to understand how we can construct a formula whose model can be
 decoded into a program that satisfies the examples. This is a small, non-trivial
 program, which uses non-input constant variables (\lstinline{" "} and
@@ -130,7 +134,7 @@ In order to encode the space of valid programs, the solver has to decide
 
 For instance, Figure~\ref{fig:other-valid-programs} shows two other valid
 programs using the components \lstinline{Index}, \lstinline{Substr}, and
-\lstinline{Concat}. The program on the left actually satisfies the sole
+\lstinline{Concat}. The program on the left satisfies the sole
 input-output example of Example~\ref{ex:first-name}, altough it does not
 generalize. It does so by switching the order of the components, and using one
 more variable than program~\ref{fig:first-name-ssa}. The program on the right,
@@ -147,7 +151,7 @@ however, does not satisfy the example because the values passed to
       c2 = 0
       r1 = Concat(prefix, name)
       r2 = Index(r1, c0, c1)
-      r3 = Substr(r2, r1, c1)
+      r3 = Substr(r1, r2, c1)
   \end{lstlisting}
 \end{minipage}\hfill
 \begin{minipage}{.45\textwidth}
@@ -180,7 +184,7 @@ Thus, we have a set $I$ of input variables, a set $C$ of constant variables, a
 set $P$ of the formal parameters of all components, a set $R$ of the return
 variables of all components, and a variable $o$, the output variable of the
 program. We will denote the formal parameter variables and return variable of
-component $f$ by $P_f$ and $r_f$ , respectively. Also, we will use $F'$ to refer
+component $f$ by $P_f$ and $r_f$, respectively. Also, we will use $F'$ to refer
 to the components available to the solver (in this case, \lstinline{Index},
 \lstinline{Substr}, and \lstinline{Concat}) --- recall that $F$ is used to
 denote the library of all components).
@@ -200,21 +204,21 @@ R \cup \{o\}$. Intuitively, if $x$ is the return variable of component $f$, then
 $l_x$ is the line number where $f$ appears in the program. If $x$ is a formal
 parameter of some component, then $l_x$ is the line number where the actual
 parameter is defined. In practice, each variable in $I$ is assigned a line
-number from $1$ to $|I|$ (in the obvious way), variables in $C$ are assigned
-a number from $|I| + 1$ to $C$, and the output variable $\{o\}$ is assigned the
+number from $1$ to $|I|$ sequentially, variables in $C$ are assigned
+a number from $|I| + 1$ to $|I| + |C|$, and the output variable $\{o\}$ is assigned the
 line number $|I| + |C| + |R|$ (the last line). The locations of variables in $R$
 range from $|I| + |C| + 1$ to $|I| + |C| + |R|$. The location of each formal
 parameter $x \in P$ ranges from $1$ up to the location of its corresponding
 component.
 For program~\ref{fig:first-name-ssa} we would have
-$l_{name} = 1$, $l_{prefix} = 2$,
+$l_{\mathtt{name}} = 1$, $l_{\mathtt{prefix}} = 2$,
 $l_{c_0} = 3$, $l_{c_1} = 4$,
 and $l_o = 7$.
 The range constraints are
 $4 \leq l_x \leq 7$ for $x \in R$,
-$1 \leq l_x < 5$ for $x \in P_{Index}$,
-$1 \leq l_x < 6$ for $x \in P_{Substr}$, and
-$1 \leq l_x < 7$ for $x \in P_{Concat}$.
+$1 \leq l_x < l_{r_{Index}}$ for $x \in P_{Index}$,
+$1 \leq l_x < l_{r_{Substr}}$ for $x \in P_{Substr}$, and
+$1 \leq l_x < l_{r_{Concat}}$ for $x \in P_{Concat}$.
 In general, we can capture these constraints with the following formula
 $\psi{}_{\mathtt{range}}$:
 %

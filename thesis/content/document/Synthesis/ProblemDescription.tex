@@ -5,16 +5,17 @@ We are working in the context of the OutSystems platform. OutSystems is a
 low-code platform that features visual application development, easy integration
 with existing systems, and the possibility to add own code when needed. To that
 effect, the kind of programs we are interested in are expressions in the
-OutSystems language\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}.
+OutSystems language.
+\footnote{\url{https://success.outsystems.com/Documentation/11/Reference/OutSystems_Language/Logic/Expressions}}
 
 We can think of OutSystems expressions as a simple functional language of
-operands and operators that compose themselves to create pure, stateless,
-loopless programs. This means that OutSystems expressions do not have
+operands and operators that one may combine in order to create pure, stateless,
+and loopless programs. This means that OutSystems expressions do not have
 side-effects, like printing to the screen, or writing to a database, and do not
-allow any variables or (for/while) loops. They do, however, have conditional
-expressions in the form of ``if'' statements. The library of builtin expressions
-includes functions that manipulate builtin data types such a text strings,
-numbers, or dates.%
+allow variable declarations, or (for/while) loops.\footnote{Strictly speaking, it is possible to have expressions that produce side effects, but these are not the focus of this work.}
+They do, however, have conditional expressions in the form of ``if'' statements.
+The library of builtin expressions includes functions that manipulate builtin
+data types such a text strings, numbers, or dates.
 \footnote{\url{https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Data/Data_Types/Available_Data_Types}}%
 \footnote{\url{https://success.outsystems.com/Documentation/10/Reference/OutSystems_Language/Logic/Built-in_Functions}}
 
@@ -98,14 +99,18 @@ numbers, or dates.%
 
 In this work we are mainly interested in synthesizing expressions that
 manipulate text strings, like concatenation, substring slicing or whitespace
-trimming. As some of these operations involve indexing, we are also interested
+trimming.
+The reason for this focus is that text manipulation is a tedious and error prone
+task, and it's often easier to provide examples than it is to describe them in
+terms of programming language primitives.
+As some of these operations involve indexing, we are also interested
 in synthesizing simple arithmetic expressions involving addition and
-subtraction. Therefore, the data types we are working with are text strings and
-integers. In particular, we are not dealing neither with boolean, nor conditional
-expressions. Table~\ref{table:builtin-description} describes the builtin
-expressions that our synthesized programs can be composed of.
-Table~\ref{table:builtin-examples} shows input-output examples for each of the
-functions in Table~\ref{table:builtin-description}.
+subtraction.
+Therefore, the data types we are working with are text strings and integers.
+In particular, we are not dealing neither with booleans, nor conditional
+expressions.
+Table~\ref{table:builtin-description} describes the builtin expressions that our
+synthesized programs can be composed of, i.e., the components of our \gls{dsl}.
 
 \begin{example}
   Suppose that, given a text representing an email, we are interested in
@@ -147,9 +152,11 @@ expression satisfies the specification.
 In our context, we are working in a \gls{pbe} setting, so we are interested in
 synthesizing an OutSystems expression from a set of input-output examples.
 For example, \lstinline|{(<"John Michael Doe">, "Michael")}|
-is a set of input-output examples that are satisfied by the previous program.
-However, in this case, the program \lstinline|prog(name) = Substr(name, 5, 7)|
-would have done just fine.
+is a set of input-output examples that are satisfied by the program in
+Example~\ref{ex:second-name}.
+However, the program \lstinline|prog(name) = Substr(name, 5, 7)|
+also satisfies the examples, but does not capture the user's intent.
 In order to rule out this program, we could extend the input-output examples
-with a second example, for instance, \lstinline|(<"Anne Marie Joe">, "Marie")|.
+with a second example, for instance,
+\lstinline|(<"Catherine Marie Joe">, "Marie")|.
 
