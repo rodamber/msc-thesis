@@ -15,13 +15,15 @@ experiments and a comparison between the setwise synthesizer
 \label{sec:bench-desc}
 
 A set of 285,522 expressions were provided by OutSystems.
-We conducted an analysis to determine which builtin functions and which
-combinations were the most common in that set.
+We conducted an analysis to determine which builtin functions and combinations
+of functions were the most common in that set.
 We picked 51 expressions containing only functions from
-Table~\ref{table:builtin-description}, and sizes (number of components) ranging
+Table~\ref{table:builtin-description}, with sizes (number of components) ranging
 from 1 to 7.
 The size distribution of these 51 expressions is shown in
 Figure~\ref{fig:bar-chart-sizes-51}.
+Figure~\ref{fig:bar-chart-components-freq-51} shows the number of expressions in
+which each component occurs.
 
 \begin{figure}
   \centering
@@ -35,10 +37,8 @@ Figure~\ref{fig:bar-chart-sizes-51}.
 
 The hardness of a benchmark may depend on the size of the solution, the number
 of input-output examples, and the library of components.
-Typically, the higher the size and the number of components, the harder it is to
-synthesize a program.
-Figure~\ref{fig:bar-chart-components-freq-51} shows the number of expressions in
-which each component occurs.
+Typically, the higher the size of the intended solution and the number of
+components in the library, the harder it is to synthesize a program.
 
 \begin{figure}
   \centering
@@ -62,13 +62,13 @@ generated examples were not natural.
 As a result, we resorted to the manual approach.
 
 The \gls{smt} solver used to solve the formulas generated in the synthesis
-process was version 4.8.5 of Microsoft's Z3 solver~\cite{DeMoura:2008:ZES}.
+process was Microsoft's Z3 solver~\cite{DeMoura:2008:ZES} (version 4.8.5).
 Each benchmark was monitored by the \textit{runsolver}
 tool~\cite{Roussel:2011:JSAT}, typically used in
 SAT\footnote{\url{http://satcompetition.org/}},
 MaxSAT\footnote{\url{http://www.maxsat.udl.cat}} and
 PB\footnote{\url{http://www.cril.univ-artois.fr/PB16/}}
-competitions, and restricted to a wall-clock time limit of 600 seconds, and a
+competitions, and restricted to a wall-clock time limit of 600 seconds and a
 memory limit of 16 GB.
 We ran the experiments in an computer with Intel(R) Xeon(R) CPU E5-2620 v4 @
 2.10GHz processors running Ubuntu 16.04.5 LTS.

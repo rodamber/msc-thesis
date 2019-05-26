@@ -18,9 +18,9 @@ instances are given as new components, and another that simulates
 user-provided constants by only allowing the constants needed for each
 particular instance.
 
-The setwise synthesizer can consistently synthesize programs that satisfy the
-given input-output with up to four lines, but only manages to match the user
-intent on programs with up to three lines.
+The setwise synthesizer can consistently synthesize programs up to four lines
+that satisfy the given input-output examples, but only manages to match the user
+intent on programs with size up to three lines.
 Still, it manages to be competitive with SyPet, even when we configured the
 latter for a scenario simulating user-provided constants.
 On the other hand, the whole synthesizer fails to produce good results on both
@@ -35,7 +35,7 @@ It would also be interesting to test configurations with user-provided inputs.
 Another interesting scenario, probably involving extensions to the synthesizers
 includes trying to figure out from the input-output examples which constants the
 program might use.
-Moreover, it would be interesting to see how our synthesizers, compare to a
+Moreover, it would be interesting to see how our synthesizers compare to a
 synthesizer implemented using the PROSE
 framework.\footnote{\url{https://microsoft.github.io/prose/}}
 

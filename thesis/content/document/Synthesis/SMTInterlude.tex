@@ -8,14 +8,14 @@ However, it should be noted that the encoding is independent of the particular
 components used, and works as long as their semantics can be fully encoded in
 \gls{smt}.
 
-In section~\ref{sec:smt} we introduced the necessary concepts of \gls{smt} for
-the purposes of this thesis.
+In section~\ref{sec:smt} we introduced the concepts of \gls{smt} necessary for
+the purpose of this thesis.
 One in particular, was the concept of theory (Definition~\ref{def:theory}).
 Theories constrain the interpretation given to certain symbols.
-Because we are dealing with text and integers data types, we make use of the
-\gls{smt} theory of strings with linear integer arithmetic.
-This theory gives a way to reason with symbols representing operations such as
-integer addition, string length, or substring extraction.
+Because we are dealing with text and integers, we make use of the \gls{smt}
+theory of strings with linear integer arithmetic.
+This theory allows one to reason about operations such as integer addition,
+string length, or substring extraction.
 The symbols we are interested in are represented in
 Table~\ref{table:slia-symbols}.
 
@@ -63,7 +63,7 @@ Table~\ref{table:slia-symbols}.
       $x - y$
       & Function symbol.
         The terms $x$ and $y$ are integers.
-        Its value, an integer, is the subtraction of $x$ and $y$.
+        Its value, an integer, is the result of subtracting $y$ from $x$.
       \\ \bottomrule
     \end{tabular}}
   \caption{Some symbols constrained by the theory of strings with linear integer
@@ -76,7 +76,7 @@ The semantics of the components \lstinline{Concat}, \lstinline{IndexOf},
 \lstinline{Length}, \lstinline{Substr}, \lstinline{Add}, and \lstinline{Sub} are
 directly captured by their \gls{smt} counterparts $\strconcat$, $IndexOf$,
 $Length$, $Substr$, $+$, and $-$, respectively. Concretely, their specifications
-are the following:
+are as follows:
 %
 \begin{align*}
   \phi{}_{\text{\lstinline{Concat}}}(x, y, r)     &= (x \strconcat y   = r) \\
