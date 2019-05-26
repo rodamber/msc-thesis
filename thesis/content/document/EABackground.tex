@@ -117,10 +117,10 @@ Typical queries and response types are some of the following~\cite{Jha:2017:TFS}
 \item \textit{Correctness queries}, where given a candidate program $p$ the
   oracle responds if $p$ is correct or not. If it is not, the oracle responds
   with a positive input-output counterexample.
-\item \textit{Distinguishing input queries}, where given program $p$ and set $X$
-  of input-output examples that $p$ satisfies the oracle responds with a new
-  program $p'$ and a counterexample $x$ to $p$ that $p'$ satisfies along with
-  all the other examples in $X$.
+\item \textit{Distinguishing input queries}, where given program $p$ and a set
+  $X$ of input-output examples that $p$ satisfies, the oracle responds with a
+  new counterexample $x$ to $p$ such that another program $p'$ exists that
+  satisfies both $x$ and all the other examples in $X$.
 \end{compactitem}
 
 In general, the higher the capabilities of the oracles, the more expensive they
@@ -131,7 +131,7 @@ turn to the Bounded Observation Hypothesis \cite{Solar-Lezama:2008}, which
 asserts that ``an implementation that works correctly for the common case and
 for all the different corner cases is likely to work correctly for all inputs.''
 
-The concepts of \gls{ogis} was introduced by Jha~et~al.~\cite{Jha:oracle:2010}
+The concept of \gls{ogis} was introduced by Jha~et~al.~\cite{Jha:oracle:2010}
 as a generalization of \gls{cegis} when they applied this idea to a \gls{pbe}
 synthesizer based on distinguishing inputs in order to deobfuscate malware and
 to generate bit-manipulating programs.

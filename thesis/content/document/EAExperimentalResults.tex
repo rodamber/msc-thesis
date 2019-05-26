@@ -15,11 +15,17 @@
       \\ \midrule
 
       S-e1:c1    & 48 & 3  & 4.62  & 0.48 \\ \midrule 
+      S-e1:c2    & 49 & 6  & 0.67  & 0.29 \\ \midrule 
       S-e2:c1    & 39 & 21 & 51.28 & 3.21 \\ \midrule
+      S-e2:c2    & 42 & 13 & 46.30 & 1.12 \\ \midrule
       S-e3:c1    & 34 & 23 & 51.38 & 4.47 \\ \midrule
+      S-e3:c2    & 34 & 19 & 39.97 & 1.34 \\ \midrule
       W-e1:c1    & 47 & 2  & 6.76  & 0.65 \\ \midrule
+      W-e1:c4    & 50 & 4  & 2.69  & 0.09 \\ \midrule
       W-e2:c1    & 13 & 4  & 11.14 & 2.24 \\ \midrule
+      W-e2:c4    & 17 & 7  & 50.37 & 0.15 \\ \midrule
       W-e3:c1    & 9  & 5  & 21.45 & 7.48 \\ \midrule
+      W-e3:c4    & 10 & 5  & 0.27  & 0.17 \\ \midrule
       SyPet-All  & 11 & 6  & 31.27 & 3.00 \\ \midrule
       SyPet-User & 32 & 30 & 52.75 & 5.00 \\ \bottomrule
 
@@ -69,20 +75,22 @@ examples.
 We present the results for both synthesizers with the following configurations.
 For each instance of 3 input-output examples we ran both synthesizers using 1,
 2, or all 3 of the input-output examples.
-We ran the Setwise synthesizer configured
-to synthesize programs with a maximum of one integer and one string constants
-(configurations S-e1:c1, S-e2:c1, and S-e3:c1, for 1, 2, and 3 input-output
+We ran the setwise synthesizer configured to synthesize programs with a maximum
+of one integer and one string constants (we refer to these configurations as
+S-e1:c1, S-e2:c1, and S-e3:c1, for 1, 2, and 3 input-output examples,
+respectively), and also with a maximum of two integer and two string constants
+(configurations S-e1:c2, S-e2:c2, and S-e3:c2).
+We ran the whole synthesizer configured to synthesize programs with a maximum of
+one constant.
+The synthesizer can choose whether this constant is an integer or a string
+(configurations W-e1:c1, W-e2:c1, and W-e3:c1, for 1, 2, and 3 input-output
 examples, respectively).
-We ran the Whole synthesizer configured to
-synthesize programs with a maximum of one constant, which the synthesizer can
-choose whether it is a an integer or a string (configurations W-e1:c1, W-e2:c1,
-and W-e3:c1, for for 1, 2, and 3 input-output examples, respectively).
-Ideally, we would also have tried other configurations to see the impact of
-using a different number of constants.
-For comparison, we also instantiated SyPet~\cite{Feng:2017:CSC}, a
-\gls{pbe} component-based synthesizer for Java programs that employs a
-type-directed search together with a constraint-based technique, with our
-library of components.
+Similarly, we also run the whole synthesizer configured to use a maximum of four
+constants (configurations W-e1:c4, W-e2:c4, and W-e3:c4).
+For comparison, we also instantiated SyPet~\cite{Feng:2017:CSC}, a \gls{pbe}
+component-based synthesizer for Java programs that employs a type-directed
+search together with a constraint-based technique, with our library of
+components.
 However, SyPet does not support guessing the value of constants.
 With this in mind, we set up two configurations for SyPet.
 For the first configuration (SyPet-All), we introduced a new 0-arity component
@@ -109,8 +117,8 @@ original intent and generalizes to more examples.
   \centering
   \includegraphics[scale=0.7]{assets/comparison-expected-sypet-small.pdf}
   \caption{Number of solved instances matching the expected solution per size of
-    the expected solution for the Setwise (one integer constant and one string
-    constant) and Whole synthesizers (one constant) with three examples, and
+    the expected solution for the setwise (one integer constant and one string
+    constant) and whole synthesizers (one constant) with three examples, and
     both SyPet configurations (user-provided constants and pool of constants).}
   \label{fig:comparison-expected-sypet}
 \end{figure*}
@@ -120,23 +128,26 @@ original intent and generalizes to more examples.
 
 Figure~\ref{fig:comparison-expected-sypet} shows a comparison between all
 configurations on three input-output examples.
-In Figure~\ref{fig:comparison-expected-sypet} we can see that SyPet-All has
-similar results to W-e3:c1.
+We can see that SyPet-All has similar results to W-e3:c1.
 The large number of components makes the search space intractable.
 Besides, SyPet cannot take advantage of its type-directed algorithm because
 we are dealing with only two types (integers and strings).
 This last point also applies to SyPet-User, but the advantage given by the
 user-provided constants proves crucial for its fairly good results, which are
 actually better than S-e3:c1 (Table~\ref{table:comparison-configs}).
+
 Many expected solutions require more than one constant, with some requiring more
 than one constant of each type.
-This helps explain the poor performance of the Whole synthesizer.
-However, it could be speculated from the start that the Whole synthesizer would
-be less efficient than the Setwise synthesizer.
-Typically, solving one large constraint is more expensive than solving multiple
-smaller constraints.
-Still, it would be interesting to benchmark configurations with more
-constants, or with user-provided constants.
+This could lead one to think that that is the origin of the poor performance of
+the whole encoding.
+However, we can see that increasing the number of available constants leads to
+even worse results in both synthesizers (on these instances).
+The configurations with more constants available lead to more instances solved
+and in less time, but also lead to less intended solutions.
+It could also be speculated from the start that the whole synthesizer would
+perform worse than the setwise synthesizer.
+Typically, one would expect that solving one large constraint is more expensive
+than solving multiple smaller constraints.
 
 The running times for the solved benchmarks are reasonably fast, allowing for
 tolerable interaction times with the user.

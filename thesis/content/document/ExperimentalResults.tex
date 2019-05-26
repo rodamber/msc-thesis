@@ -118,7 +118,7 @@ We ran the setwise synthesizer (Section~\ref{sec:setwise-encoding}) configured
 to synthesize programs with a maximum of one integer and one string constants
 (we refer to these configurations as S-e1:c1, S-e2:c1, and S-e3:c1, for 1, 2,
 and 3 input-output examples, respectively), and also with a maximum of two
-integer and two string constants (configurations S-e1:c4, S-e2:c4, and S-e3:c4).
+integer and two string constants (configurations S-e1:c2, S-e2:c2, and S-e3:c2).
 We ran the whole synthesizer (Section~\ref{sec:whole-encoding}) configured to
 synthesize programs with a maximum of one constant. The synthesizer can
 choose whether this constant is an integer or a string (configurations W-e1:c1,
@@ -208,9 +208,10 @@ it computes the constants itself.
 
 Many expected solutions require more than one constant, with some requiring more
 than one constant of each type.
-This helps to explain the poor performance of configuration W-e3:c1.
+This could lead one to think that that is the origin of the poor performance of
+the whole encoding.
 However, we can see that increasing the number of available constants leads to
-even worse results (on these instances).
+even worse results in both synthesizers (on these instances).
 The configurations with more constants available lead to more instances solved
 and in less time, but also lead to less intended solutions.
 It could also be speculated from the start that the whole synthesizer would
