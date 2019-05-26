@@ -28,6 +28,34 @@ which each component occurs.
 \begin{figure}
   \centering
   \includegraphics[width=0.5\textwidth]{assets/bar-chart-sizes-51.pdf}
+  % \begin{tikzpicture}
+  %   \begin{axis}[
+  %     x tick label style={/pgf/number format/1000 sep=},
+  %     %
+  %     xlabel=Size of the intended solution,
+  %     ylabel=Number of expressions,
+  %     %
+  %     enlargelimits=0.05,
+  %     legend style={
+  %       at={(0.5,-0.1)},
+  %       anchor=north,
+  %       legend columns=-1},
+  %     ybar interval=0.7,
+  %     ]
+  %     % 
+  %     \addplot 
+  %     coordinates {
+  %       (1,5)
+  %       (2,19)
+  %       (3,12)
+  %       (4,8)
+  %       (5,5)
+  %       (6,1)
+  %       (7,1)
+  %     };
+  %   \end{axis}
+  % \end{tikzpicture}
+
   \caption{Number of expressions per size, out of 51 expressions.
     For example, there are 31 expressions of size 2, and 16 expressions of size
     1.
@@ -55,8 +83,8 @@ The inputs were carefully crafted in order to try to eliminate as much ambiguity
 as possible.
 Then we interpreted the expressions over their set of inputs in order to
 obtain the corresponding outputs.
-A first approach was tried, where we encoded the expressions in \gls{smt} in
-such a way that a solution to the formulas yielded valid input-output examples.
+A first approach was tried where we encoded the expressions in \gls{smt} in such
+a way that a solution to the formulas yielded valid input-output examples.
 Although the approach worked, it was ultimately too slow, and the automatically
 generated examples were not natural.
 As a result, we resorted to the manual approach.
@@ -89,13 +117,14 @@ For each instance with 3 input-output examples we ran both synthesizers using 1,
 We ran the setwise synthesizer (Section~\ref{sec:setwise-encoding}) configured
 to synthesize programs with a maximum of one integer and one string constants
 (we refer to these configurations as S-e1:c1, S-e2:c1, and S-e3:c1, for 1, 2,
-and 3 input-output examples, respectively).
-We ran the Whole synthesizer (Section~\ref{sec:whole-encoding}) configured to
+and 3 input-output examples, respectively), and also with a maximum of two
+integer and two string constants (configurations S-e1:c4, S-e2:c4, and S-e3:c4).
+We ran the whole synthesizer (Section~\ref{sec:whole-encoding}) configured to
 synthesize programs with a maximum of one constant. The synthesizer can
 choose whether this constant is an integer or a string (configurations W-e1:c1,
 W-e2:c1, and W-e3:c1, for 1, 2, and 3 input-output examples, respectively).
-Due to the lack of time, we have not tried other configurations to evaluate the
-impact of increasing the number of constants.
+Similarly, we also run the whole synthesizer configured to use a maximum of four
+constants (configurations W-e1:c4, W-e2:c4, and W-e3:c4).
 
 In addition, we also instantiated SyPet~\cite{Feng:2017:CSC}, a
 \gls{pbe} component-based synthesizer for Java programs that employs a
@@ -128,19 +157,72 @@ Matching the expected solution means, that the synthesizer outputs a program
 that, not only satisfies the input-output examples, but also captures the
 original intent and generalizes to more examples (this is checked by manual
 inspection).
-Figure~\ref{fig:bar-chart-solved-setwise}, shows the number of solved instances
-per size of the expected solution for the configurations S-e1:c1, S-e2:c1, and
-S-e3:c1.
-Figure~\ref{fig:bar-chart-solved-whole} shows the same for configurations
-W-e1:c1, W-e2:c1, and W-e3:c1.
-Figure~\ref{fig:bar-chart-expected-setwise} shows the number of solved instances
+Figures~\ref{fig:bar-chart-solved-setwise-c1}
+and~\ref{fig:bar-chart-solved-setwise-c2} show the number of solved instances
+per size of the expected solution for the configurations S-e1:c1, S-e2:c1 and
+S-e3:c1, and for configurations S-e1:c4, S-e2:c4 and S-e3:c4, respectively.
+Figures~\ref{fig:bar-chart-solved-whole-c1}
+and~\ref{fig:bar-chart-solved-whole-c4} show the same for configurations
+W-e1:c1, W-e2:c1 and W-e3:c1, and for configurations W-e1:c4, W-e2:c4 and
+W-e3:c4, respectively.
+Figures~\ref{fig:bar-chart-expected-setwise-c1}
+and~\ref{fig:bar-chart-expected-setwise-c2} show the number of solved instances
 matching the expected solution per size of the expected solution for
-configurations S-e1:c1, S-e2:c1, and S-e3:c1.
-Figure~\ref{fig:bar-chart-expected-whole} shows the same for configurations
-W-e1:c1, W-e2:c1, and W-e3:c1.
+configurations S-e1:c1, S-e2:c1 and S-e3:c1, and for configurations
+S-e1:c4, S-e2:c4 and S-e3:c4, respectively.
+Figures~\ref{fig:bar-chart-solved-whole-c1}
+and~\ref{fig:bar-chart-expected-whole-c4} show the same for configurations
+W-e1:c1, W-e2:c1 and W-e3:c1, and for configurations W-e1:c4, W-e2:c4 and
+W-e3:c4, respectively.
 Figures~\ref{fig:comparison-solved-sypet} and
 \ref{fig:comparison-expected-sypet} show a comparison between all configurations
 on three input-output examples.
+
+\section{Discussion}
+\label{sec:discussion}
+
+The sizes of both encodings grow linearly with the number of input-output
+examples. Indeed, we can verify that the hardness of the problem increases with
+the number of examples (Figures~\ref{fig:bar-chart-solved-setwise-c1},
+\ref{fig:bar-chart-solved-setwise-c2}, \ref{fig:bar-chart-solved-whole-c4}
+and~\ref{fig:bar-chart-solved-whole-c4}).
+This effect becomes more significant as we increase the size of the expected
+solution.
+On the other hand, the number of programs matching the expected solution should
+increase with the number of input-output examples, which we can also verify from
+the results in Figures~\ref{fig:bar-chart-expected-setwise-c1},
+\ref{fig:bar-chart-expected-setwise-c2}, \ref{fig:bar-chart-expected-whole-c4}
+and~\ref{fig:bar-chart-expected-whole-c4}.
+In Figures~\ref{fig:comparison-solved-sypet}
+and~\ref{fig:comparison-expected-sypet} we can see that SyPet-All has similar
+results to the whole synthesizer.
+The large number of components makes the search space intractable.
+Besides, it cannot take advantage of its type-directed algorithm because we are
+dealing with only two types (integers and strings).
+This last point also applies to SyPet-User, but the advantage given by the
+user-provided constants proves crucial for its fairly good results, which are
+actually better than the ones obtained for the setwise synthesizer
+(Table~\ref{table:comparison-configs}).
+However, recall that the setwise synthesizer is solving a harder problem because
+it computes the constants itself.
+
+Many expected solutions require more than one constant, with some requiring more
+than one constant of each type.
+This helps to explain the poor performance of configuration W-e3:c1.
+However, we can see that increasing the number of available constants leads to
+even worse results (on these instances).
+The configurations with more constants available lead to more instances solved
+and in less time, but also lead to less intended solutions.
+It could also be speculated from the start that the whole synthesizer would
+perform worse than the setwise synthesizer.
+Typically, one would expect that solving one large constraint is more expensive
+than solving multiple smaller constraints.\footnote{Note that the \gls{smt}
+problem with the theory of strings and linear arithmetic is undecidable.}
+
+The running times for the solved benchmarks are reasonably fast, allowing for
+tolerable interaction times with the user.
+However, synthesizing programs with 4 or more lines seems to be out of reach for
+these configurations (Figure~\ref{fig:comparison-expected-sypet}).
 
 \begin{table}[]
   \noindent\makebox[\textwidth]{
@@ -155,11 +237,17 @@ on three input-output examples.
       \\ \midrule
 
       S-e1:c1    & 48 & 3  & 4.62  & 0.48 \\ \midrule 
+      S-e1:c2    & 49 & 6  & 0.67  & 0.29 \\ \midrule 
       S-e2:c1    & 39 & 21 & 51.28 & 3.21 \\ \midrule
+      S-e2:c2    & 42 & 13 & 46.30 & 1.12 \\ \midrule
       S-e3:c1    & 34 & 23 & 51.38 & 4.47 \\ \midrule
+      S-e3:c2    & 34 & 19 & 39.97 & 1.34 \\ \midrule
       W-e1:c1    & 47 & 2  & 6.76  & 0.65 \\ \midrule
+      W-e1:c4    & 50 & 4  & 2.69  & 0.09 \\ \midrule
       W-e2:c1    & 13 & 4  & 11.14 & 2.24 \\ \midrule
+      W-e2:c4    & 17 & 7  & 50.37 & 0.15 \\ \midrule
       W-e3:c1    & 9  & 5  & 21.45 & 7.48 \\ \midrule
+      W-e3:c4    & 10 & 5  & 0.27  & 0.17 \\ \midrule
       SyPet-All  & 11 & 6  & 31.27 & 3.00 \\ \midrule
       SyPet-User & 32 & 30 & 52.75 & 5.00 \\ \bottomrule
 
@@ -173,105 +261,98 @@ on three input-output examples.
 % Solved setwise
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{assets/bar-chart-solved-setwise.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-solved-setwise-c1.pdf}
   \caption{Number of solved instances per size of the expected solution for
     the setwise synthesizer with one, two, and three examples, one integer
     constant, and one string constant (S-e1:c1, S-e2:c1, S-e3:c1, respectively).}
-  \label{fig:bar-chart-solved-setwise}
+  \label{fig:bar-chart-solved-setwise-c1}
 \end{figure}
 
-% Solved Whole
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{assets/bar-chart-solved-whole.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-solved-setwise-c2.pdf}
   \caption{Number of solved instances per size of the expected solution for
-    the Whole synthesizer with one, two, and three examples, and one constant
+    the setwise synthesizer with one, two, and three examples, two integer
+    constants, and two string constants (S-e1:c2, S-e2:c2, S-e3:c2,
+    respectively).}
+  \label{fig:bar-chart-solved-setwise-c2}
+\end{figure}
+
+% Solved whole
+\begin{figure}
+  \centering
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-solved-whole-c1.pdf}
+  \caption{Number of solved instances per size of the expected solution for
+    the whole synthesizer with one, two, and three examples, and one constant
     (W-e1:c1, W-e2:c1, W-e3:c1, respectively).}
-  \label{fig:bar-chart-solved-whole}
+  \label{fig:bar-chart-solved-whole-c1}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-solved-whole-c4.pdf}
+  \caption{Number of solved instances per size of the expected solution for
+    the whole synthesizer with one, two, and three examples, and four constants
+    (W-e1:c4, W-e2:c4, W-e3:c4, respectively).}
+  \label{fig:bar-chart-solved-whole-c4}
 \end{figure}
 
 % Expected setwise
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{assets/bar-chart-expected-setwise.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-expected-setwise-c1.pdf}
   \caption{Number of solved instances matching the expected solution per size of
     the expected solution for the setwise synthesizer with one, two, and three
     examples, one integer constant, and one string constant (S-e1:c1, S-e2:c1,
     S-e3:c1, respectively).}
-  \label{fig:bar-chart-expected-setwise}
+  \label{fig:bar-chart-expected-setwise-c1}
 \end{figure}
 
-% Expected Whole
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{assets/bar-chart-expected-whole.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-expected-setwise-c2.pdf}
   \caption{Number of solved instances matching the expected solution per size of
-    the expected solution for the Whole synthesizer with one, two, and three
+    the expected solution for the setwise synthesizer with one, two, and three
+    examples, two integer constants, and two string constants (S-e1:c2, S-e2:c2,
+    S-e3:c2, respectively).}
+  \label{fig:bar-chart-expected-setwise-c2}
+\end{figure}
+
+% Expected whole
+\begin{figure}
+  \centering
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-expected-whole-c1.pdf}
+  \caption{Number of solved instances matching the expected solution per size of
+    the expected solution for the whole synthesizer with one, two, and three
     examples, and one constant (W-e1:c1, W-e2:c1, W-e3:c1, respectively).}
-  \label{fig:bar-chart-expected-whole}
+  \label{fig:bar-chart-expected-whole-c1}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.0\textwidth]{assets/bar-chart-expected-whole-c4.pdf}
+  \caption{Number of solved instances matching the expected solution per size of
+    the expected solution for the whole synthesizer with one, two, and three
+    examples, and four constants (W-e1:c4, W-e2:c4, W-e3:c4, respectively).}
+  \label{fig:bar-chart-expected-whole-c4}
 \end{figure}
 
 % Solved comparison
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{assets/comparison-solved-sypet.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/comparison-solved-sypet-new.pdf}
   \caption{Number of solved instances per size of the expected solution for the
-    setwise (one integer constant and one string constant) and Whole
-    synthesizers (one constant) with three examples, and both SyPet
-    configurations (user-provided constants and pool of constants).}
+    setwise and whole synthesizers with three examples, and both SyPet
+    configurations.}
   \label{fig:comparison-solved-sypet}
 \end{figure}
 
 % Expected comparison
 \begin{figure}
   \centering
-  \includegraphics[width=1.0\textwidth]{assets/comparison-expected-sypet.pdf}
+  \includegraphics[width=1.0\textwidth]{assets/comparison-expected-sypet-new.pdf}
   \caption{Number of solved instances matching the expected solution per size of
-    the expected solution for the setwise (one integer constant and one string
-    constant) and Whole synthesizers (one constant) with three examples, and
-    both SyPet configurations (user-provided constants and pool of constants).}
+    the expected solution for the setwise and whole synthesizers with three
+    examples, and both SyPet configurations.}
   \label{fig:comparison-expected-sypet}
 \end{figure}
-
-\section{Discussion}
-\label{sec:discussion}
-
-The sizes of both encodings grow linearly with the number of input-output
-examples. Indeed, we can verify that the hardness of the problem increases with
-the number of examples (Figures~\ref{fig:bar-chart-solved-setwise},
-and~\ref{fig:bar-chart-solved-whole}).
-This effect becomes more significant as we increase the size of the expected
-solution.
-On the other hand, the number of programs matching the expected solution should
-increase with the number of input-output examples, which we can also verify from
-the results in
-Figures~\ref{fig:bar-chart-expected-setwise}
-and~\ref{fig:bar-chart-expected-whole}.
-In Figures~\ref{fig:comparison-solved-sypet}
-and~\ref{fig:comparison-expected-sypet} we can see that SyPet-All has similar
-results to W-e3:c1.
-The large number of components makes the search space intractable.
-Besides, it cannot take advantage of its type-directed algorithm because we are
-dealing with only two types (integers and strings).
-This last point also applies to SyPet-User, but the advantage given by the
-user-provided constants proves crucial for its fairly good results, which are
-actually better than the ones obtained for S-e3:c1
-(Table~\ref{table:comparison-configs}).
-However, recall that the setwise synthesizer is solving a harder problem because
-it computes the constants itself.
-
-Many expected solutions require more than one constant, with some requiring more
-than one constant of each type.
-This helps to explain the poor performance of the Whole synthesizer.
-However, it could be speculated from the start that the Whole synthesizer would
-perform worse than the setwise synthesizer.
-Typically, one would expect that solving one large constraint is more expensive
-than solving multiple smaller constraints.\footnote{Note that the \gls{smt}
-problem with the theory of strings and linear arithmetic is undecidable.}
-Still, it would be interesting to benchmark configurations with more
-constants, or with user-provided constants.
-
-The running times for the solved benchmarks are reasonably fast, allowing for
-tolerable interaction times with the user.
-However, synthesizing programs with 4 or more lines seems to be out of reach for
-these configurations (Figure~\ref{fig:comparison-expected-sypet}).
