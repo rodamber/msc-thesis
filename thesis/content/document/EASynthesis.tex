@@ -350,14 +350,15 @@ the final output of the program. This makes sense because of the way that the
 enumerator draws components from the library (combinations with replacement in
 order of increasing size), as every subset of $F'$ would have already been
 passed to the solver and deemed insufficient in order to build a satisfying
-program. In general, this can be encoded in the formula
+program. In general, this can be encoded in the following formula
+$\psi{}_{out}$:\footnote{The equality $l_{r_f} = l_o$ is only included in the
+  disjunction if $type(r_f) = type(o)$.}
 %
 \begin{align*}
   \psi{}_{out}(o, P, R) &=
   \bigwedge_{f \in F}
-  \bigvee_{\substack{p \in P - P_f \\ type(p) = type(r_f)}}(l_{r_f} = l_p)\\
-  %
-  &\vee \bigwedge_{\substack{r \in R \\ type(r) = type(o)}} (l_{r} = l_o)
+  \bigvee_{\substack{p \in P - P_f \\ type(p) = type(r_f)}}(l_{r_f} = l_p)
+  \vee l_{r_f} = l_o
 \end{align*}
 
 \noindent

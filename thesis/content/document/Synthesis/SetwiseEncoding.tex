@@ -354,14 +354,15 @@ program. For instance, the return value of \lstinline{Concat} could be either
 the output of the program, or one of the actual parameters of the same type of
 \lstinline{Index} or \lstinline{Substr}. Thus, we would have
 $l_{r_3} = l_o \vee l_{r_3} = l_{p_{11}} \vee l_{r_3} = l_{p_{12}} \vee l_{r_3} = l_{p_{21}}$.
-In general, this is encoded in the following formula $\psi{}_{out}$:
+In general, this is encoded in the following formula
+$\psi{}_{out}$:\footnote{The equality $l_{r_f} = l_o$ is only included in the
+  disjunction if $type(r_f) = type(o)$.}
 %
 \[
   \psi{}_{out}(o, P, R) =
   \bigwedge_{f \in F}
   \bigvee_{\substack{p \in P - P_f \\ type(p) = type(r_f)}}(l_{r_f} = l_p)
-  %
-  \quad \vee \bigwedge_{\substack{r \in R \\ type(r) = type(o)}} (l_{r} = l_o)
+  \vee l_{r_f} = l_o
 \]
 
 \noindent
