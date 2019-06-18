@@ -18,8 +18,9 @@ A set of 285,522 expressions were provided by OutSystems.
 We conducted an analysis to determine which builtin functions and combinations
 of functions were the most common in that set.
 We picked 51 expressions containing only functions from
-Table~\ref{table:builtin-description}, with sizes (number of components) ranging
-from 1 to 7.
+Table~\ref{table:builtin-description}, with sizes (number of components, i.e.,
+the number of lines of the program in \gls{ssa} form minus the number of
+constants in the expression) ranging from 1 to 7.
 The size distribution of these 51 expressions is shown in
 Figure~\ref{fig:bar-chart-sizes-51}.
 Figure~\ref{fig:bar-chart-components-freq-51} shows the number of expressions in
@@ -79,10 +80,11 @@ We obtained a set of 3 input-output examples for each of these 51 expressions.
 In order to do that, we developed an \textit{interpreter} for OutSystems
 expressions, and manually created a set of 3 different inputs for each
 expression.
-The inputs were carefully crafted in order to try to eliminate as much ambiguity
-as possible.
 Then we interpreted the expressions over their set of inputs in order to
 obtain the corresponding outputs.
+The inputs were created in order to try to eliminate as much ambiguity as
+possible, i.e., seeking to make the set of expressions matching the examples as
+small as possible.
 A first approach was tried where we encoded the expressions in \gls{smt} in such
 a way that a solution to the formulas yielded valid input-output examples.
 Although the approach worked, it was ultimately too slow, and the automatically
