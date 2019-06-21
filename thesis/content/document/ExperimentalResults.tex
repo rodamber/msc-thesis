@@ -128,10 +128,10 @@ W-e2:c1, and W-e3:c1, for 1, 2, and 3 input-output examples, respectively).
 Similarly, we also run the whole synthesizer configured to use a maximum of four
 constants (configurations W-e1:c4, W-e2:c4, and W-e3:c4).
 
-In addition, we also instantiated SyPet~\cite{Feng:2017:CSC}, a
-\gls{pbe} component-based synthesizer for Java programs that employs a
-type-directed search together with a constraint-based technique, with our
-library of components.
+In addition, we also instantiated SyPet~\cite{Feng:2017:CSC}, a \gls{pbe}
+component-based synthesizer for Java programs, with our library of components.
+SyPet employs a search technique that is guided by the type signatures of Java
+methods, together with constraint-solving techniques.
 However, SyPet does not support guessing the value of constants.
 With this in mind, we set up two configurations for SyPet.
 For the first configuration (SyPet-All), we introduced a new 0-arity component
