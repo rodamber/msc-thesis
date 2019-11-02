@@ -1,2 +1,0 @@
-* Other cool presentations
-- [[https://www.destroyallsoftware.com/talks/boundaries][Really nice diagrams]]
