@@ -1,0 +1,43 @@
+{
+    "examples": [
+        {
+            "inputs": [
+                {
+                    "Left": "John Michael Doe"
+                },
+                {
+                    "Left": "Dr. "
+                }
+            ],
+            "output": {
+                "Left": "Dr. John"
+            }
+        },
+        {
+            "inputs": [
+                {
+                    "Left": "Catherine Marie Joe"
+                },
+                {
+                    "Left": "Dr. "
+                }
+            ],
+            "output": {
+                "Left": "Dr. Catherine"
+            }
+        },
+        {
+            "inputs": [
+                {
+                    "Left": "John Michael Doe"
+                },
+                {
+                    "Left": "Mr. "
+                }
+            ],
+            "output": {
+                "Left": "Mr. John"
+            }
+        }
+    ]
+}
