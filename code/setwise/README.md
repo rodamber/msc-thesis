@@ -5,8 +5,7 @@ This has been tested with python 3.7.4 and 3.7.5.
 ## Setup virtualenv
 
 ```
-pip3 install virtualenv
-virtualenv venv
+python -m venv venv
 source venv/bin/activate
 ```
 
